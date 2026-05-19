@@ -1,7 +1,13 @@
-"""CV 相關端點"""
-from fastapi import APIRouter, UploadFile, File, HTTPException
+"""CV API endpoints"""
+import aiofiles
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
+from datetime import datetime
 from typing import Optional
+
+from app.models.database import get_db, CV
+from app.utils.storage import generate_file_path, ALLOWED_CONTENT_TYPES
 
 router = APIRouter()
 
@@ -9,45 +15,83 @@ router = APIRouter()
 class CVResponse(BaseModel):
     id: int
     user_id: int
+    file_name: str
     file_path: str
-    analyzed_at: Optional[str] = None
-    score: Optional[float] = None
+    file_size: int
+    content_type: str
+    analyzed_at: Optional[datetime] = None
+    score: Optional[int] = None
     feedback: Optional[str] = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class CVUploadResponse(BaseModel):
+    file_id: int
+    user_id: int
+    file_name: str
+    file_path: str
+    file_size: int
+    content_type: str
+    message: str
 
 
 class CVAnalysisRequest(BaseModel):
     job_description: Optional[str] = None
 
 
-@router.post("/upload")
-async def upload_cv(user_id: int = 1, file: UploadFile = File(...)):
-    # TODO: 實現真實的檔案上傳和存儲
-    if file.content_type not in ["application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "image/jpeg", "image/png"]:
+@router.post("/upload", response_model=CVUploadResponse)
+async def upload_cv(
+    user_id: int,
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(status_code=400, detail="Invalid file type")
-    
-    return {
-        "id": 1,
-        "user_id": user_id,
-        "file_path": f"/uploads/cvs/{file.filename}",
-        "message": "CV uploaded successfully"
-    }
+
+    file_path, filename = generate_file_path(file.content_type)
+
+    contents = await file.read()
+    file_size = len(contents)
+
+    async with aiofiles.open(file_path, "wb") as f:
+        await f.write(contents)
+
+    cv = CV(
+        user_id=user_id,
+        file_name=file.filename or filename,
+        file_path=file_path,
+        file_size=file_size,
+        content_type=file.content_type,
+        created_at=datetime.utcnow()
+    )
+    db.add(cv)
+    db.commit()
+    db.refresh(cv)
+
+    return CVUploadResponse(
+        file_id=cv.id,
+        user_id=cv.user_id,
+        file_name=cv.file_name,
+        file_path=cv.file_path,
+        file_size=cv.file_size,
+        content_type=cv.content_type,
+        message="CV uploaded successfully"
+    )
 
 
 @router.get("/{cv_id}", response_model=CVResponse)
-async def get_cv(cv_id: int):
-    # TODO: 實現真實的 CV 查詢
-    return CVResponse(
-        id=cv_id,
-        user_id=1,
-        file_path="/uploads/cvs/sample.pdf",
-        score=7.5,
-        feedback="CV 結構清晰，但缺乏量化數據"
-    )
+async def get_cv(cv_id: int, db: Session = Depends(get_db)):
+    cv = db.query(CV).filter(CV.id == cv_id).first()
+    if not cv:
+        raise HTTPException(status_code=404, detail="CV not found")
+    return cv
 
 
 @router.post("/analyze/{cv_id}")
 async def analyze_cv(cv_id: int, request: CVAnalysisRequest = None):
-    # TODO: 實現真實的 AI CV 分析
     return {
         "id": cv_id,
         "score": 7.5,
@@ -67,15 +111,18 @@ async def analyze_cv(cv_id: int, request: CVAnalysisRequest = None):
 
 
 @router.get("/")
-async def list_cvs(user_id: int = 1):
-    # TODO: 實現真實的 CV 列表查詢
+async def list_cvs(user_id: int = 1, db: Session = Depends(get_db)):
+    cvs = db.query(CV).filter(CV.user_id == user_id).all()
     return {
         "cvs": [
             {
-                "id": 1,
-                "file_path": "/uploads/cvs/sample.pdf",
-                "analyzed_at": "2026-05-18",
-                "score": 7.5
+                "id": cv.id,
+                "file_name": cv.file_name,
+                "file_path": cv.file_path,
+                "analyzed_at": cv.analyzed_at.isoformat() if cv.analyzed_at else None,
+                "score": cv.score,
+                "created_at": cv.created_at.isoformat()
             }
+            for cv in cvs
         ]
     }

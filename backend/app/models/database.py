@@ -1,9 +1,9 @@
 """
 數據庫連接和模型
 """
-from sqlalchemy import create_engine, Column, Integer, String, DateTime
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
 
@@ -33,6 +33,25 @@ class User(Base):
     subscription_tier = Column(String, default="free")  # free, trial, premium
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    cvs = relationship("CV", back_populates="user")
+
+
+class CV(Base):
+    """CV 文件模型"""
+    __tablename__ = "cvs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    file_name = Column(String, nullable=False)
+    file_path = Column(String, nullable=False)
+    file_size = Column(Integer, nullable=False)
+    content_type = Column(String, nullable=False)
+    analyzed_at = Column(DateTime, nullable=True)
+    score = Column(Integer, nullable=True)
+    feedback = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User", back_populates="cvs")
 
 
 def get_db():

@@ -64,9 +64,9 @@
 ## 4. Milestones
 
 ### M1: 基礎建設
-- [ ] React Native 項目初始化
-- [ ] FastAPI 後端初始化
-- [ ] 數據庫設計
+- [x] React Native 項目初始化
+- [x] FastAPI 後端初始化
+- [x] 數據庫設計
 - [ ] 用戶系統（登入/訂閱）
 
 ### M2: 履歷模块

@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/hooks/useAuth';
+import { useCVUpload } from '@/hooks/useCVUpload';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
@@ -18,6 +20,7 @@ import { Spacing } from '@/constants/theme';
 export default function ProfileScreen() {
   const router = useRouter();
   const { user, logout, isAuthenticated } = useAuth();
+  const { progress, status, result, error, pickFile } = useCVUpload(user?.id);
 
   const handleLogout = () => {
     Alert.alert(
@@ -94,6 +97,40 @@ export default function ProfileScreen() {
             <Text style={styles.infoLabel}>用戶 ID</Text>
             <Text style={styles.infoValue}>#{user?.id}</Text>
           </View>
+        </View>
+
+        <View style={styles.cvSection}>
+          <TouchableOpacity
+            style={[styles.uploadButton, status === 'uploading' && styles.uploadButtonDisabled]}
+            onPress={pickFile}
+            disabled={status === 'uploading'}
+          >
+            {status === 'uploading' ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <Text style={styles.uploadButtonText}>上傳 CV</Text>
+            )}
+          </TouchableOpacity>
+
+          {status === 'uploading' && (
+            <View style={styles.progressContainer}>
+              <View style={styles.progressBar}>
+                <View style={[styles.progressFill, { width: `${progress}%` }]} />
+              </View>
+              <Text style={styles.progressText}>{progress}%</Text>
+            </View>
+          )}
+
+          {status === 'success' && result && (
+            <View style={styles.successContainer}>
+              <Text style={styles.successText}>上傳成功</Text>
+              <Text style={styles.fileIdText}>File ID: {result.file_id}</Text>
+            </View>
+          )}
+
+          {status === 'error' && error && (
+            <Text style={styles.errorText}>{error}</Text>
+          )}
         </View>
 
         <TouchableOpacity
@@ -204,5 +241,68 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
+  },
+  cvSection: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: Spacing.five,
+  },
+  uploadButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 12,
+    paddingVertical: Spacing.three,
+    paddingHorizontal: Spacing.five,
+    minWidth: 150,
+    alignItems: 'center',
+  },
+  uploadButtonDisabled: {
+    opacity: 0.7,
+  },
+  uploadButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  progressContainer: {
+    width: '100%',
+    marginTop: Spacing.three,
+    alignItems: 'center',
+  },
+  progressBar: {
+    width: '80%',
+    height: 8,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: '#007AFF',
+    borderRadius: 4,
+  },
+  progressText: {
+    marginTop: Spacing.one,
+    fontSize: 14,
+    color: '#666',
+  },
+  successContainer: {
+    marginTop: Spacing.three,
+    alignItems: 'center',
+  },
+  successText: {
+    fontSize: 16,
+    color: '#34C759',
+    fontWeight: '600',
+  },
+  fileIdText: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: Spacing.one,
+  },
+  errorText: {
+    marginTop: Spacing.three,
+    fontSize: 14,
+    color: '#FF3B30',
+    textAlign: 'center',
   },
 });

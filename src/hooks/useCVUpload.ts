@@ -19,19 +19,37 @@ interface UseCVUploadReturn {
   status: UploadStatus;
   result: CVUploadResponse | null;
   error: string | null;
+  cvs: CVListItem[];
+  isLoadingCVs: boolean;
   pickFile: () => void;
   uploadFile: (file: File) => void;
+  fetchCVList: () => Promise<void>;
 }
 
 const API_BASE_URL = 'http://localhost:8000/api/v1';
 const ACCEPTED_TYPES = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 const ACCEPTED_EXTENSIONS = '.pdf,.docx';
 
+export interface CVListItem {
+  id: number;
+  file_name: string;
+  file_path: string;
+  analyzed_at: string | null;
+  score: number | null;
+  created_at: string;
+}
+
+export interface CVListResponse {
+  cvs: CVListItem[];
+}
+
 export function useCVUpload(userId: number | undefined): UseCVUploadReturn {
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState<UploadStatus>('idle');
   const [result, setResult] = useState<CVUploadResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [cvs, setCvs] = useState<CVListItem[]>([]);
+  const [isLoadingCVs, setIsLoadingCVs] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -155,12 +173,31 @@ export function useCVUpload(userId: number | undefined): UseCVUploadReturn {
     xhr.send(formData);
   }, [userId]);
 
+  const fetchCVList = useCallback(async () => {
+    if (!userId) return;
+    setIsLoadingCVs(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/cvs/?user_id=${userId}`);
+      if (response.ok) {
+        const data: CVListResponse = await response.json();
+        setCvs(data.cvs);
+      }
+    } catch {
+      // silent fail on list load
+    } finally {
+      setIsLoadingCVs(false);
+    }
+  }, [userId]);
+
   return {
     progress,
     status,
     result,
     error,
+    cvs,
+    isLoadingCVs,
     pickFile,
     uploadFile,
+    fetchCVList,
   };
 }

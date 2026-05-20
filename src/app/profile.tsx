@@ -1,7 +1,7 @@
 /**
  * 個人資料畫面
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Alert,
   ActivityIndicator,
+  FlatList,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/hooks/useAuth';
@@ -20,7 +21,19 @@ import { Spacing } from '@/constants/theme';
 export default function ProfileScreen() {
   const router = useRouter();
   const { user, logout, isAuthenticated } = useAuth();
-  const { progress, status, result, error, pickFile } = useCVUpload(user?.id);
+  const { progress, status, result, error, cvs, isLoadingCVs, pickFile, fetchCVList } = useCVUpload(user?.id);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchCVList();
+    }
+  }, [isAuthenticated, fetchCVList]);
+
+  useEffect(() => {
+    if (status === 'success') {
+      fetchCVList();
+    }
+  }, [status, fetchCVList]);
 
   const handleLogout = () => {
     Alert.alert(
@@ -130,6 +143,39 @@ export default function ProfileScreen() {
 
           {status === 'error' && error && (
             <Text style={styles.errorText}>{error}</Text>
+          )}
+        </View>
+
+        <View style={styles.cvListSection}>
+          <Text style={styles.cvListTitle}>已上傳的 CV</Text>
+          {isLoadingCVs ? (
+            <ActivityIndicator size="small" color="#007AFF" />
+          ) : cvs.length === 0 ? (
+            <Text style={styles.cvListEmpty}>尚無上傳的 CV</Text>
+          ) : (
+            <FlatList
+              data={cvs}
+              keyExtractor={(item) => String(item.id)}
+              scrollEnabled={false}
+              style={styles.cvList}
+              renderItem={({ item }) => (
+                <View style={styles.cvListItem}>
+                  <View style={styles.cvListItemInfo}>
+                    <Text style={styles.cvListFileName} numberOfLines={1}>
+                      {item.file_name}
+                    </Text>
+                    <Text style={styles.cvListDate}>
+                      {new Date(item.created_at).toLocaleDateString('zh-HK')}
+                    </Text>
+                  </View>
+                  {item.score != null && (
+                    <View style={styles.cvScoreBadge}>
+                      <Text style={styles.cvScoreText}>{item.score}</Text>
+                    </View>
+                  )}
+                </View>
+              )}
+            />
           )}
         </View>
 
@@ -304,5 +350,57 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#FF3B30',
     textAlign: 'center',
+  },
+  cvListSection: {
+    width: '100%',
+    marginBottom: Spacing.five,
+  },
+  cvListTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: Spacing.two,
+  },
+  cvListEmpty: {
+    fontSize: 14,
+    color: '#999',
+    textAlign: 'center',
+    paddingVertical: Spacing.three,
+  },
+  cvList: {
+    maxHeight: 200,
+  },
+  cvListItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#f5f5f5',
+    borderRadius: 8,
+    padding: Spacing.three,
+    marginBottom: Spacing.two,
+  },
+  cvListItemInfo: {
+    flex: 1,
+    marginRight: Spacing.two,
+  },
+  cvListFileName: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#333',
+  },
+  cvListDate: {
+    fontSize: 12,
+    color: '#999',
+    marginTop: 2,
+  },
+  cvScoreBadge: {
+    backgroundColor: '#007AFF',
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  cvScoreText: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: '600',
   },
 });

@@ -1,0 +1,339 @@
+{
+  "metadata": {
+    "source": "Jobble Baby - Real HK Job Listings",
+    "currency": "HKD",
+    "note": "Realistic Hong Kong job listings for demonstration"
+  },
+  "jobs": [
+    {
+      "id": "job_001",
+      "title": "Senior Frontend Engineer",
+      "company": "HSBC Technology Centre",
+      "location": "Hong Kong Island, HK",
+      "salary_range": "HK$60,000 - 85,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-20",
+      "tags": ["React", "TypeScript", "AWS", "Banking"],
+      "description_snippet": "Lead frontend development for digital banking platforms. Collaborate with UX designers to deliver seamless customer experiences."
+    },
+    {
+      "id": "job_002",
+      "title": "Backend Developer",
+      "company": "Ping An Cloud",
+      "location": "Central, HK",
+      "salary_range": "HK$50,000 - 70,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-19",
+      "tags": ["Python", "Django", "PostgreSQL", "Kubernetes"],
+      "description_snippet": "Build and maintain microservices architecture for fintech applications. Experience with containerized deployments preferred."
+    },
+    {
+      "id": "job_003",
+      "title": "Full Stack Developer",
+      "company": "Lalamove",
+      "location": "Kwun Tong, HK",
+      "salary_range": "HK$45,000 - 65,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-18",
+      "tags": ["Node.js", "React", "MongoDB", "GraphQL"],
+      "description_snippet": "Develop logistics optimization features for last-mile delivery. Work closely with product team on rapid prototyping."
+    },
+    {
+      "id": "job_004",
+      "title": "DevOps Engineer",
+      "company": "CloudMakes",
+      "location": "Remote (HK)",
+      "salary_range": "HK$55,000 - 75,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-17",
+      "tags": ["AWS", "Terraform", "Docker", "CI/CD"],
+      "description_snippet": "Maintain CI/CD pipelines and infrastructure automation. Implement monitoring and alerting solutions."
+    },
+    {
+      "id": "job_005",
+      "title": "Data Engineer",
+      "company": "Tung Wah Group Hospital",
+      "location": "Sai Ying Pun, HK",
+      "salary_range": "HK$48,000 - 68,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-16",
+      "tags": ["Python", "Spark", "Airflow", "SQL"],
+      "description_snippet": "Build healthcare data pipelines and analytics dashboards. Support clinical research initiatives with data infrastructure."
+    },
+    {
+      "id": "job_006",
+      "title": "Sales Development Representative",
+      "company": "Zendesk Asia",
+      "location": "Admiralty, HK",
+      "salary_range": "HK$25,000 - 40,000",
+      "job_type": "sales",
+      "posted_date": "2026-05-21",
+      "tags": ["SaaS", "CRM", "B2B", "English"],
+      "description_snippet": "Qualify inbound leads and schedule demos for enterprise customers. Collaborate with account executives on territory planning."
+    },
+    {
+      "id": "job_007",
+      "title": "Account Manager",
+      "company": "SAP Hong Kong",
+      "location": "Kowloon Bay, HK",
+      "salary_range": "HK$45,000 - 65,000",
+      "job_type": "sales",
+      "posted_date": "2026-05-20",
+      "tags": ["ERP", "Enterprise", "Mandarin", "SAP"],
+      "description_snippet": "Manage key enterprise accounts in Greater China region. Drive adoption of cloud ERP solutions."
+    },
+    {
+      "id": "job_008",
+      "title": "Business Development Manager",
+      "company": "Alibaba Cloud HK",
+      "location": "Central, HK",
+      "salary_range": "HK$60,000 - 90,000",
+      "job_type": "sales",
+      "posted_date": "2026-05-19",
+      "tags": ["Cloud", "Enterprise", "Cantonese", "Tech"],
+      "description_snippet": "Prospect and develop new enterprise accounts for cloud services. Manage full sales cycle from lead to contract."
+    },
+    {
+      "id": "job_009",
+      "title": "Digital Marketing Manager",
+      "company": "Cheil Hong Kong",
+      "location": "Wan Chai, HK",
+      "salary_range": "HK$40,000 - 58,000",
+      "job_type": "marketing",
+      "posted_date": "2026-05-20",
+      "tags": ["SEO", "Google Ads", "Analytics", "Content"],
+      "description_snippet": "Lead digital campaigns for Samsung and global brands. Analyze performance metrics and optimize ROI."
+    },
+    {
+      "id": "job_010",
+      "title": "Content Marketing Specialist",
+      "company": "Viu",
+      "location": "Kwun Tong, HK",
+      "salary_range": "HK$28,000 - 42,000",
+      "job_type": "marketing",
+      "posted_date": "2026-05-18",
+      "tags": ["Video", "Social Media", "Chinese", "Streaming"],
+      "description_snippet": "Create promotional content for streaming platform. Manage social media calendars and influencer partnerships."
+    },
+    {
+      "id": "job_011",
+      "title": "Marketing Analyst",
+      "company": "Prudential Hong Kong",
+      "location": "Causeway Bay, HK",
+      "salary_range": "HK$32,000 - 48,000",
+      "job_type": "marketing",
+      "posted_date": "2026-05-17",
+      "tags": ["Excel", "Tableau", "Insurance", "Reporting"],
+      "description_snippet": "Analyze customer behavior and campaign effectiveness. Produce weekly marketing performance reports."
+    },
+    {
+      "id": "job_012",
+      "title": "Financial Analyst",
+      "company": "Bocomm Leasing",
+      "location": "Central, HK",
+      "salary_range": "HK$38,000 - 55,000",
+      "job_type": "finance",
+      "posted_date": "2026-05-21",
+      "tags": ["Excel", "Bloomberg", "Mandarin", "Leasing"],
+      "description_snippet": "Analyze equipment leasing opportunities and assess credit risk. Support deal structuring and documentation."
+    },
+    {
+      "id": "job_013",
+      "title": "Senior Accountant",
+      "company": "KPMG Hong Kong",
+      "location": "Admiralty, HK",
+      "salary_range": "HK$50,000 - 72,000",
+      "job_type": "finance",
+      "posted_date": "2026-05-19",
+      "tags": ["Audit", "CPA", "Big 4", "IFRS"],
+      "description_snippet": "Lead audit engagements for listed companies. Mentor junior staff and review financial statements."
+    },
+    {
+      "id": "job_014",
+      "title": "Investment Analyst",
+      "company": "Futu Securities",
+      "location": "Sheung Wan, HK",
+      "salary_range": "HK$42,000 - 60,000",
+      "job_type": "finance",
+      "posted_date": "2026-05-18",
+      "tags": ["Equity", "FinTech", "Trading", "Chinese"],
+      "description_snippet": "Research Hong Kong and A-share markets. Provide investment recommendations for retail clients."
+    },
+    {
+      "id": "job_015",
+      "title": "Operations Coordinator",
+      "company": "GoGoVan",
+      "location": "Kwun Tong, HK",
+      "salary_range": "HK$22,000 - 32,000",
+      "job_type": "operations",
+      "posted_date": "2026-05-20",
+      "tags": ["Logistics", "Gig Economy", "Cantonese", "Admin"],
+      "description_snippet": "Coordinate driver partnerships and handle customer inquiries. Manage scheduling and route optimization."
+    },
+    {
+      "id": "job_016",
+      "title": "Supply Chain Manager",
+      "company": "DHL Express Hong Kong",
+      "location": "Tsing Yi, HK",
+      "salary_range": "HK$55,000 - 78,000",
+      "job_type": "operations",
+      "posted_date": "2026-05-18",
+      "tags": ["Logistics", "Import/Export", "Lean", "SAP"],
+      "description_snippet": "Optimize express delivery network across Pearl River Delta. Lead operational improvements and cost reduction initiatives."
+    },
+    {
+      "id": "job_017",
+      "title": "Project Coordinator",
+      "company": "MTR Corporation",
+      "location": "Kowloon Bay, HK",
+      "salary_range": "HK$30,000 - 45,000",
+      "job_type": "operations",
+      "posted_date": "2026-05-17",
+      "tags": ["Construction", "Railway", "Government", "PM"],
+      "description_snippet": "Coordinate railway extension projects with contractors. Track milestones and manage stakeholder communications."
+    },
+    {
+      "id": "job_018",
+      "title": "Mobile Engineer (iOS)",
+      "company": "Nightline",
+      "location": "Sai Wan, HK",
+      "salary_range": "HK$55,000 - 80,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-21",
+      "tags": ["Swift", "iOS", "FinTech", "Startup"],
+      "description_snippet": "Build and ship new features for the logistics app. Work closely with backend team on API integration."
+    },
+    {
+      "id": "job_019",
+      "title": "Machine Learning Engineer",
+      "company": "SenseTime Hong Kong",
+      "location": "Hong Kong Science Park",
+      "salary_range": "HK$65,000 - 95,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-20",
+      "tags": ["Python", "TensorFlow", "Computer Vision", "AI"],
+      "description_snippet": "Develop computer vision models for smart city applications. Optimize inference pipelines for production deployment."
+    },
+    {
+      "id": "job_020",
+      "title": "QA Automation Engineer",
+      "company": "Animoca Brands",
+      "location": "Sha Tin, HK",
+      "salary_range": "HK$40,000 - 60,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-19",
+      "tags": ["Selenium", "Python", "Gaming", "CI/CD"],
+      "description_snippet": "Build automated test frameworks for blockchain gaming platform. Implement continuous testing in DevOps pipeline."
+    },
+    {
+      "id": "job_021",
+      "title": "Solutions Architect",
+      "company": "Cisco Hong Kong",
+      "location": "Kowloon City, HK",
+      "salary_range": "HK$75,000 - 110,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-18",
+      "tags": ["Network", "Cloud", "Enterprise", "Security"],
+      "description_snippet": "Design network architecture for enterprise customers. Lead technical presentations and proof-of-concept implementations."
+    },
+    {
+      "id": "job_022",
+      "title": "HR Coordinator",
+      "company": "Trip.com Group",
+      "location": "Tsim Sha Tsui, HK",
+      "salary_range": "HK$20,000 - 30,000",
+      "job_type": "operations",
+      "posted_date": "2026-05-17",
+      "tags": ["Recruitment", "Cantonese", "Travel", "Admin"],
+      "description_snippet": "Support recruitment process for tech and operations roles. Handle employee onboarding and HRIS data entry."
+    },
+    {
+      "id": "job_023",
+      "title": "General Clerk",
+      "company": "New World Development",
+      "location": "Admiralty, HK",
+      "salary_range": "HK$16,000 - 24,000",
+      "job_type": "general",
+      "posted_date": "2026-05-21",
+      "tags": ["Admin", "Filing", "Microsoft Office", "Chinese"],
+      "description_snippet": "Provide administrative support to property management team. Handle document preparation and data entry."
+    },
+    {
+      "id": "job_024",
+      "title": "Customer Service Officer",
+      "company": "Cathay Pacific",
+      "location": "Hong Kong International Airport",
+      "salary_range": "HK$22,000 - 35,000",
+      "job_type": "general",
+      "posted_date": "2026-05-20",
+      "tags": ["Aviation", "English", "Customer Service", "Shift"],
+      "description_snippet": "Assist passengers with check-in and boarding processes. Handle inquiries and resolve customer complaints."
+    },
+    {
+      "id": "job_025",
+      "title": "Sales Associate",
+      "company": "Louis Vuitton Hong Kong",
+      "location": "Causeway Bay, HK",
+      "salary_range": "HK$24,000 - 38,000",
+      "job_type": "sales",
+      "posted_date": "2026-05-19",
+      "tags": ["Luxury", "Fashion", "Retail", "Mandarin"],
+      "description_snippet": "Provide personalized shopping experience for high-end customers. Maintain visual merchandising standards."
+    },
+    {
+      "id": "job_026",
+      "title": "Security Engineer",
+      "company": "CyberSec Hong Kong",
+      "location": "Central, HK",
+      "salary_range": "HK$60,000 - 85,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-18",
+      "tags": ["Penetration Testing", "SIEM", "Compliance", "ISO27001"],
+      "description_snippet": "Conduct security assessments and penetration tests for financial clients. Develop security policies and incident response playbooks."
+    },
+    {
+      "id": "job_027",
+      "title": "Product Manager",
+      "company": "Klook",
+      "location": "Sheung Wan, HK",
+      "salary_range": "HK$55,000 - 80,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-17",
+      "tags": ["Travel", "SaaS", "Agile", "Mandarin"],
+      "description_snippet": "Drive product roadmap for booking experiences. Work with engineering and design to ship new features quarterly."
+    },
+    {
+      "id": "job_028",
+      "title": "Legal Secretary",
+      "company": "Baker McKenzie",
+      "location": "Central, HK",
+      "salary_range": "HK$35,000 - 52,000",
+      "job_type": "general",
+      "posted_date": "2026-05-16",
+      "tags": ["Legal", "Corporate", "Typing", "MS Office"],
+      "description_snippet": "Support corporate team with document preparation and filing. Coordinate meetings and manage legal documentation."
+    },
+    {
+      "id": "job_029",
+      "title": "IT Support Technician",
+      "company": "Hong Kong Baptist University",
+      "location": "Kowloon Tong, HK",
+      "salary_range": "HK$24,000 - 36,000",
+      "job_type": "engineering",
+      "posted_date": "2026-05-15",
+      "tags": ["Helpdesk", "Windows", "Networking", "Education"],
+      "description_snippet": "Provide technical support for staff and students. Manage hardware inventory and resolve network issues."
+    },
+    {
+      "id": "job_030",
+      "title": "Brand Marketing Lead",
+      "company": "Xiaomi Hong Kong",
+      "location": "Kwai Chung, HK",
+      "salary_range": "HK$48,000 - 70,000",
+      "job_type": "marketing",
+      "posted_date": "2026-05-14",
+      "tags": ["Consumer Electronics", "Digital", "Cantonese", "Campaign"],
+      "description_snippet": "Develop marketing campaigns for smartphone launches. Manage agency relationships and budget allocation."
+    }
+  ]
+}

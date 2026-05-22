@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TextInput,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -23,78 +24,15 @@ interface Job {
   title: string;
   company: string;
   location: string;
-  salary: string;
-  matchScore: number;
-  postedDate: string;
-  description: string;
-  requirements: string[];
-  category: string;
+  salary_range: string;
+  job_type: string;
+  match_score: number;
+  posted_date: string;
+  tags: string[];
+  description_snippet: string;
 }
 
-const MOCK_JOBS: Job[] = [
-  {
-    id: '1',
-    title: 'Senior Frontend Engineer',
-    company: 'TechCorp HK',
-    location: 'Hong Kong',
-    salary: 'HK$50,000 - 80,000',
-    matchScore: 95,
-    postedDate: '2 days ago',
-    description: 'We are looking for a Senior Frontend Engineer to join our team and help build the next generation of our product.',
-    requirements: ['React', 'TypeScript', '5+ years experience'],
-    category: 'IT',
-  },
-  {
-    id: '2',
-    title: 'Product Manager',
-    company: 'FinServe Ltd',
-    location: 'Central, HK',
-    salary: 'HK$60,000 - 90,000',
-    matchScore: 88,
-    postedDate: '1 week ago',
-    description: 'Lead product strategy and work with engineering teams to deliver innovative financial solutions.',
-    requirements: ['5+ years PM experience', 'FinTech background', 'Mandarin'],
-    category: 'Finance',
-  },
-  {
-    id: '3',
-    title: 'Marketing Specialist',
-    company: 'BrandHouse',
-    location: 'Wan Chai, HK',
-    salary: 'HK$30,000 - 45,000',
-    matchScore: 72,
-    postedDate: '3 days ago',
-    description: 'Execute marketing campaigns across digital channels and analyze performance metrics.',
-    requirements: ['Digital marketing', 'Google Ads', 'Analytics'],
-    category: 'Marketing',
-  },
-  {
-    id: '4',
-    title: 'Backend Developer',
-    company: 'DataFlow Systems',
-    location: 'Kwun Tong, HK',
-    salary: 'HK$45,000 - 70,000',
-    matchScore: 90,
-    postedDate: '5 days ago',
-    description: 'Build scalable backend services and APIs for our data platform.',
-    requirements: ['Node.js', 'Python', 'AWS', 'PostgreSQL'],
-    category: 'IT',
-  },
-  {
-    id: '5',
-    title: 'Financial Analyst',
-    company: 'InvestCo',
-    location: 'Admiralty, HK',
-    salary: 'HK$40,000 - 65,000',
-    matchScore: 78,
-    postedDate: '1 day ago',
-    description: 'Analyze market trends and provide investment recommendations to clients.',
-    requirements: ['CFA', 'Excel', 'Bloomberg', 'Financial modeling'],
-    category: 'Finance',
-  },
-];
-
-const CATEGORIES = ['All', 'IT', 'Finance', 'Marketing', 'Sales', 'HR', 'Design'];
+const CATEGORIES = ['All', 'engineering', 'sales', 'marketing', 'finance', 'operations', 'general'];
 
 export default function ExploreScreen() {
   const safeAreaInsets = useSafeAreaInsets();
@@ -105,8 +43,9 @@ export default function ExploreScreen() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [refreshing, setRefreshing] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
-  const [jobs, setJobs] = useState<Job[]>(MOCK_JOBS);
-  const [isLoadingMatches, setIsLoadingMatches] = useState(false);
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const insets = {
     ...safeAreaInsets,
@@ -126,54 +65,63 @@ export default function ExploreScreen() {
     },
   });
 
-  const fetchMatches = useCallback(async () => {
-    if (!isAuthenticated || !token) return;
+  const fetchJobs = useCallback(async (category?: string) => {
+    if (!isAuthenticated || !token) {
+      setJobs([]);
+      return;
+    }
 
-    setIsLoadingMatches(true);
+    setIsLoading(true);
+    setError(null);
     try {
-      const response = await fetch('https://localhost:8000/api/v1/jobs/matches', {
+      const params = new URLSearchParams();
+      if (category && category !== 'All') {
+        params.append('job_type', category.toLowerCase());
+      }
+      params.append('limit', '50');
+
+      const response = await fetch(`https://localhost:8000/api/v1/jobs/matches?${params.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.jobs && Array.isArray(data.jobs)) {
-          setJobs([...MOCK_JOBS, ...data.jobs]);
-        }
+      if (!response.ok) {
+        throw new Error('Failed to fetch jobs');
       }
-    } catch (error) {
-      console.warn('Failed to fetch matches:', error);
+
+      const data = await response.json();
+      if (data.jobs && Array.isArray(data.jobs)) {
+        setJobs(data.jobs);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      console.warn('Failed to fetch jobs:', err);
     } finally {
-      setIsLoadingMatches(false);
+      setIsLoading(false);
     }
   }, [isAuthenticated, token]);
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchMatches();
+      fetchJobs(selectedCategory);
+    } else {
+      setJobs([]);
     }
-  }, [isAuthenticated, fetchMatches]);
+  }, [isAuthenticated, selectedCategory, fetchJobs]);
 
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchText.toLowerCase()) ||
       job.company.toLowerCase().includes(searchText.toLowerCase());
-    const matchesCategory =
-      selectedCategory === 'All' || job.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    return matchesSearch;
   });
 
   const handleRefresh = useCallback(async () => {
     setRefreshing(true);
-    if (isAuthenticated) {
-      await fetchMatches();
-    } else {
-      setJobs(MOCK_JOBS);
-    }
+    await fetchJobs(selectedCategory);
     setRefreshing(false);
-  }, [isAuthenticated, fetchMatches]);
+  }, [isAuthenticated, selectedCategory, fetchJobs]);
 
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);
@@ -186,6 +134,8 @@ export default function ExploreScreen() {
   const handleCloseModal = () => {
     setSelectedJob(null);
   };
+
+  const formatMatchScore = (score: number) => Math.round(score * 100);
 
   const renderJobCard = ({ item }: { item: Job }) => (
     <Pressable
@@ -207,15 +157,15 @@ export default function ExploreScreen() {
             styles.matchBadge,
             {
               backgroundColor:
-                item.matchScore >= 90
+                formatMatchScore(item.match_score) >= 90
                   ? theme.success || '#4CAF50'
-                  : item.matchScore >= 75
+                  : formatMatchScore(item.match_score) >= 75
                   ? '#2196F3'
                   : theme.textSecondary,
             },
           ]}>
           <ThemedText type="small" style={styles.matchText}>
-            {item.matchScore}%
+            {formatMatchScore(item.match_score)}%
           </ThemedText>
         </View>
       </View>
@@ -227,15 +177,15 @@ export default function ExploreScreen() {
         </View>
         <View style={styles.detailRow}>
           <ThemedText style={styles.detailLabel}>Salary</ThemedText>
-          <ThemedText themeColor="textSecondary">{item.salary}</ThemedText>
+          <ThemedText themeColor="textSecondary">{item.salary_range}</ThemedText>
         </View>
         <View style={styles.detailRow}>
-          <ThemedText style={styles.detailLabel}>Category</ThemedText>
-          <ThemedText themeColor="textSecondary">{item.category}</ThemedText>
+          <ThemedText style={styles.detailLabel}>Type</ThemedText>
+          <ThemedText themeColor="textSecondary">{item.job_type}</ThemedText>
         </View>
         <View style={styles.detailRow}>
           <ThemedText style={styles.detailLabel}>Posted</ThemedText>
-          <ThemedText themeColor="textSecondary">{item.postedDate}</ThemedText>
+          <ThemedText themeColor="textSecondary">{item.posted_date}</ThemedText>
         </View>
       </View>
     </Pressable>
@@ -307,15 +257,28 @@ export default function ExploreScreen() {
             { backgroundColor: theme.backgroundSelected },
           ]}>
           <ThemedText type="small" style={styles.authPlaceholderText}>
-            Sign in to see personalized matches
+            Sign in to see job listings
           </ThemedText>
         </View>
       )}
 
-      {isLoadingMatches && (
+      {isLoading && (
         <View style={styles.loadingContainer}>
-          <ThemedText type="small" themeColor="textSecondary">
-            Loading your matches...
+          <ActivityIndicator size="small" color={theme.text} />
+          <ThemedText type="small" themeColor="textSecondary" style={styles.loadingText}>
+            Loading jobs...
+          </ThemedText>
+        </View>
+      )}
+
+      {error && (
+        <View
+          style={[
+            styles.errorContainer,
+            { backgroundColor: theme.backgroundElement },
+          ]}>
+          <ThemedText type="small" style={styles.errorText}>
+            {error}
           </ThemedText>
         </View>
       )}
@@ -323,7 +286,7 @@ export default function ExploreScreen() {
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <ThemedView style={styles.container}>
       <FlatList
         data={filteredJobs}
         keyExtractor={(item) => item.id}
@@ -342,11 +305,13 @@ export default function ExploreScreen() {
         }
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <ThemedText themeColor="textSecondary">
-              No jobs found matching your criteria
-            </ThemedText>
-          </View>
+          !isLoading ? (
+            <View style={styles.emptyContainer}>
+              <ThemedText themeColor="textSecondary">
+                No jobs found matching your criteria
+              </ThemedText>
+            </View>
+          ) : null
         }
       />
 
@@ -385,13 +350,13 @@ export default function ExploreScreen() {
                   <View style={styles.detailRow}>
                     <ThemedText style={styles.detailLabel}>Salary</ThemedText>
                     <ThemedText themeColor="textSecondary">
-                      {selectedJob.salary}
+                      {selectedJob.salary_range}
                     </ThemedText>
                   </View>
                   <View style={styles.detailRow}>
-                    <ThemedText style={styles.detailLabel}>Category</ThemedText>
+                    <ThemedText style={styles.detailLabel}>Type</ThemedText>
                     <ThemedText themeColor="textSecondary">
-                      {selectedJob.category}
+                      {selectedJob.job_type}
                     </ThemedText>
                   </View>
                   <View style={styles.detailRow}>
@@ -401,22 +366,22 @@ export default function ExploreScreen() {
                         styles.matchBadge,
                         {
                           backgroundColor:
-                            selectedJob.matchScore >= 90
+                            formatMatchScore(selectedJob.match_score) >= 90
                               ? '#4CAF50'
-                              : selectedJob.matchScore >= 75
+                              : formatMatchScore(selectedJob.match_score) >= 75
                               ? '#2196F3'
                               : theme.textSecondary,
                         },
                       ]}>
                       <ThemedText type="small" style={styles.matchText}>
-                        {selectedJob.matchScore}%
+                        {formatMatchScore(selectedJob.match_score)}%
                       </ThemedText>
                     </View>
                   </View>
                   <View style={styles.detailRow}>
                     <ThemedText style={styles.detailLabel}>Posted</ThemedText>
                     <ThemedText themeColor="textSecondary">
-                      {selectedJob.postedDate}
+                      {selectedJob.posted_date}
                     </ThemedText>
                   </View>
                 </View>
@@ -424,24 +389,28 @@ export default function ExploreScreen() {
                 <View style={styles.modalSection}>
                   <ThemedText type="subtitle">Description</ThemedText>
                   <ThemedText style={styles.descriptionText}>
-                    {selectedJob.description}
+                    {selectedJob.description_snippet}
                   </ThemedText>
                 </View>
 
                 <View style={styles.modalSection}>
-                  <ThemedText type="subtitle">Requirements</ThemedText>
-                  {selectedJob.requirements.map((req, index) => (
-                    <View key={index} style={styles.requirementItem}>
-                      <ThemedText themeColor="textSecondary">• {req}</ThemedText>
-                    </View>
-                  ))}
+                  <ThemedText type="subtitle">Skills/Tags</ThemedText>
+                  <View style={styles.tagsContainer}>
+                    {selectedJob.tags.map((tag, index) => (
+                      <View key={index} style={[styles.tag, { backgroundColor: theme.backgroundElement }]}>
+                        <ThemedText type="small" themeColor="textSecondary">
+                          {tag}
+                        </ThemedText>
+                      </View>
+                    ))}
+                  </View>
                 </View>
               </ScrollView>
             )}
           </View>
         </Pressable>
       </Modal>
-    </View>
+    </ThemedView>
   );
 }
 
@@ -499,6 +468,19 @@ const styles = StyleSheet.create({
   loadingContainer: {
     padding: Spacing.two,
     alignItems: 'center',
+    flexDirection: 'row',
+    gap: Spacing.two,
+  },
+  loadingText: {
+    marginLeft: Spacing.two,
+  },
+  errorContainer: {
+    padding: Spacing.three,
+    borderRadius: Spacing.two,
+    alignItems: 'center',
+  },
+  errorText: {
+    color: '#ff5252',
   },
   jobCard: {
     marginHorizontal: Spacing.four,
@@ -580,7 +562,14 @@ const styles = StyleSheet.create({
   descriptionText: {
     lineHeight: 22,
   },
-  requirementItem: {
-    marginVertical: Spacing.half,
+  tagsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.one,
+  },
+  tag: {
+    paddingHorizontal: Spacing.two,
+    paddingVertical: Spacing.half,
+    borderRadius: Spacing.one,
   },
 });

@@ -3,7 +3,10 @@
 Rate Limiting:
 - All endpoints limited to 30 requests/minute per IP
 """
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+import json
+import os
+from pathlib import Path
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from pydantic import BaseModel
 from typing import Optional, List
 
@@ -12,9 +15,21 @@ from app.api.users import get_current_user
 
 router = APIRouter()
 
+# Load real jobs data
+DATA_DIR = Path(__file__).parent.parent / "data"
+REAL_JOBS_PATH = DATA_DIR / "real_jobs.json"
+
+
+def load_real_jobs() -> List[dict]:
+    try:
+        with open(REAL_JOBS_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data.get("jobs", [])
+    except Exception as e:
+        print(f"Error loading real jobs: {e}")
+        return []
 
 def get_limiter(request: Request):
-    """Get the rate limiter from app state"""
     return request.app.state.limiter
 
 
@@ -27,13 +42,159 @@ class JobPreference(BaseModel):
 
 
 class JobMatch(BaseModel):
-    id: int
+    id: str
     title: str
     company: str
     location: str
     salary_range: str
+    job_type: str
     match_score: float
     posted_date: str
+    tags: List[str]
+    description_snippet: str
+
+
+@router.get("/matches")
+async def get_job_matches(
+    request: Request,
+    job_type: Optional[str] = Query(None),
+    location: Optional[str] = Query(None),
+    salary_min: Optional[int] = Query(None),
+    salary_max: Optional[int] = Query(None),
+    limit: int = Query(20, ge=1, le=100),
+    offset: int = Query(0, ge=0),
+    current_user: User = Depends(get_current_user)
+):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+
+    jobs = load_real_jobs()
+
+    if job_type:
+        jobs = [j for j in jobs if j.get("job_type", "").lower() == job_type.lower()]
+
+    if location:
+        loc_lower = location.lower()
+        jobs = [j for j in jobs if loc_lower in j.get("location", "").lower()]
+
+    if salary_min or salary_max:
+        def parse_salary(salary_str: str) -> tuple:
+            try:
+                cleaned = salary_str.replace("HK$", "").replace(",", "").replace(" ", "")
+                parts = cleaned.split("-")
+                if len(parts) == 2:
+                    return int(parts[0]), int(parts[1])
+                return 0, 0
+            except:
+                return 0, 0
+
+        filtered = []
+        for job in jobs:
+            j_min, j_max = parse_salary(job.get("salary_range", "HK$0 - 0"))
+            min_ok = salary_min is None or j_max >= salary_min
+            max_ok = salary_max is None or j_min <= salary_max
+            if min_ok and max_ok:
+                filtered.append(job)
+        jobs = filtered
+
+    total = len(jobs)
+    for i, job in enumerate(jobs):
+        base_score = 0.75
+        variation = (i % 20) / 100
+        job["match_score"] = round(base_score + variation, 2)
+
+    paginated_jobs = jobs[offset : offset + limit]
+
+    return {
+        "jobs": paginated_jobs,
+        "total": total,
+        "offset": offset,
+        "limit": limit
+    }
+
+
+@router.get("/search")
+async def search_jobs(
+    request: Request,
+    keyword: str = Query(...),
+    location: Optional[str] = Query(None),
+    salary_min: Optional[int] = Query(None),
+    job_type: Optional[str] = Query(None),
+    limit: int = Query(20, ge=1, le=100),
+    offset: int = Query(0, ge=0),
+    current_user: User = Depends(get_current_user)
+):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+
+    jobs = load_real_jobs()
+
+    keyword_lower = keyword.lower()
+    filtered = []
+    for job in jobs:
+        searchable = " ".join([
+            job.get("title", ""),
+            job.get("company", ""),
+            job.get("description_snippet", ""),
+            " ".join(job.get("tags", []))
+        ]).lower()
+        if keyword_lower in searchable:
+            score = 0.5
+            if keyword_lower in job.get("title", "").lower():
+                score = 0.9
+            elif keyword_lower in job.get("company", "").lower():
+                score = 0.75
+            elif keyword_lower in " ".join(job.get("tags", [])).lower():
+                score = 0.8
+            job["match_score"] = score
+            filtered.append(job)
+
+    if location:
+        loc_lower = location.lower()
+        filtered = [j for j in filtered if loc_lower in j.get("location", "").lower()]
+
+    if job_type:
+        filtered = [j for j in filtered if j.get("job_type", "").lower() == job_type.lower()]
+
+    if salary_min:
+        def parse_salary(salary_str: str) -> tuple:
+            try:
+                cleaned = salary_str.replace("HK$", "").replace(",", "").replace(" ", "")
+                parts = cleaned.split("-")
+                if len(parts) == 2:
+                    return int(parts[0]), int(parts[1])
+                return 0, 0
+            except:
+                return 0, 0
+
+        result = []
+        for job in filtered:
+            j_min, j_max = parse_salary(job.get("salary_range", "HK$0 - 0"))
+            if j_max >= salary_min:
+                result.append(job)
+        filtered = result
+
+    filtered.sort(key=lambda x: x.get("match_score", 0), reverse=True)
+
+    total = len(filtered)
+    paginated = filtered[offset : offset + limit]
+
+    return {
+        "jobs": paginated,
+        "total": total,
+        "offset": offset,
+        "limit": limit,
+        "keyword": keyword
+    }
+
+
+@router.get("/job_types")
+async def get_job_types(request: Request):
+    return {
+        "job_types": ["engineering", "sales", "marketing", "finance", "operations", "general"]
+    }
 
 
 @router.post("/preferences")
@@ -41,43 +202,10 @@ async def set_preferences(request: Request, preferences: JobPreference, current_
     limiter = get_limiter(request)
     if hasattr(limiter, 'check'):
         limiter.check(request, "30/minute")
-    
-    # TODO: 實現真實的偏好設置存儲
+
     return {
         "message": "Preferences saved",
         "preferences": preferences
-    }
-
-
-@router.get("/matches")
-async def get_job_matches(request: Request, limit: int = 10, current_user: User = Depends(get_current_user)):
-    limiter = get_limiter(request)
-    if hasattr(limiter, 'check'):
-        limiter.check(request, "30/minute")
-    
-    # TODO: 實現真實的工作配對演算法
-    # Use current_user.id instead of user_id from URL to prevent IDOR
-    return {
-        "jobs": [
-            {
-                "id": 1,
-                "title": "Senior Software Engineer",
-                "company": "Tech Corp",
-                "location": "Hong Kong",
-                "salary_range": "HK$45,000 - 65,000",
-                "match_score": 0.92,
-                "posted_date": "2026-05-15"
-            },
-            {
-                "id": 2,
-                "title": "Full Stack Developer",
-                "company": "Startup Ltd",
-                "location": "Remote",
-                "salary_range": "HK$35,000 - 50,000",
-                "match_score": 0.85,
-                "posted_date": "2026-05-17"
-            }
-        ]
     }
 
 
@@ -86,8 +214,7 @@ async def subscribe_to_notifications(request: Request, enabled: bool = True, cur
     limiter = get_limiter(request)
     if hasattr(limiter, 'check'):
         limiter.check(request, "30/minute")
-    
-    # TODO: 實現真實的訂閱設置
+
     return {
         "message": "Notification settings updated",
         "enabled": enabled

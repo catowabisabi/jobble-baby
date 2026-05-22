@@ -1,7 +1,7 @@
 """
 數據庫連接和模型
 """
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, JSON
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
@@ -37,7 +37,6 @@ class User(Base):
 
 
 class CV(Base):
-    """CV 文件模型"""
     __tablename__ = "cvs"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -49,6 +48,8 @@ class CV(Base):
     analyzed_at = Column(DateTime, nullable=True)
     score = Column(Integer, nullable=True)
     feedback = Column(String, nullable=True)
+    score_breakdown = Column(JSON, nullable=True)
+    text_suggestions = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     user = relationship("User", back_populates="cvs")

@@ -1,13 +1,17 @@
-"""CV API endpoints"""
+import json
+
 import aiofiles
 from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
-from app.models.database import get_db, CV
+from app.models.database import get_db, CV, User
+from app.api.users import get_current_user
 from app.utils.storage import generate_file_path, ALLOWED_CONTENT_TYPES
+from app.services.cv_extractor import PDFTextExtractor, ExtractionError
+from app.services.cv_analyzer import CVAnalyzer, AnalysisError
 
 router = APIRouter()
 
@@ -97,6 +101,13 @@ class CVScoreResponse(BaseModel):
     cv_id: int
     score: int
     breakdown: dict
+    role_relevance: int
+    experience_years: int
+    education_quality: int
+    skills_clarity: int
+    quantified_achievements: int
+    overall_professionalism: int
+    text_suggestions: List[str]
 
 
 @router.post("/score", response_model=CVScoreResponse)
@@ -105,44 +116,44 @@ async def score_cv(cv_id: int, db: Session = Depends(get_db)):
     if not cv:
         raise HTTPException(status_code=404, detail="CV not found")
 
-    base_score = 5
-    breakdown = {
-        "conflict_resolution": 0,
-        "navigation_skills": 0,
-        "symbol_proficiency": 0,
-        "technical_clarity": 0,
-        "overall": 0
-    }
+    try:
+        cv_text = PDFTextExtractor.extract_text(cv, db)
+    except FileNotFoundError:
+        raise HTTPException(status_code=422, detail="PDF file not found on disk")
+    except ValueError:
+        raise HTTPException(status_code=422, detail="Unsupported file format - must be PDF")
+    except ExtractionError as e:
+        raise HTTPException(status_code=422, detail=f"Failed to extract text from PDF: {e}")
 
-    file_name_lower = cv.file_name.lower()
-    if "conflict" in file_name_lower:
-        breakdown["conflict_resolution"] = 2
-        base_score += 1
-    if "navigation" in file_name_lower:
-        breakdown["navigation_skills"] = 2
-        base_score += 1
-    if "symbol" in file_name_lower:
-        breakdown["symbol_proficiency"] = 2
-        base_score += 1
+    try:
+        analyzer = CVAnalyzer()
+        result = analyzer.analyze_cv(cv_text)
+    except ValueError as e:
+        raise HTTPException(status_code=502, detail=f"OpenAI API key not configured: {e}")
+    except AnalysisError as e:
+        raise HTTPException(status_code=502, detail=f"AI analysis failed: {e}")
+    except TimeoutError:
+        raise HTTPException(status_code=504, detail="AI analysis timed out")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Unexpected error during analysis: {e}")
 
-    if cv.file_size > 5000:
-        breakdown["technical_clarity"] = 2
-        base_score += 1
-    elif cv.file_size > 1000:
-        breakdown["technical_clarity"] = 1
-        base_score += 0.5
-
-    final_score = min(10, max(1, int(base_score)))
-    breakdown["overall"] = final_score
-
-    cv.score = final_score
+    cv.score = result.overall_professionalism
     cv.analyzed_at = datetime.utcnow()
+    cv.score_breakdown = result.to_dict()
+    cv.text_suggestions = result.text_suggestions
     db.commit()
 
     return CVScoreResponse(
         cv_id=cv_id,
-        score=final_score,
-        breakdown=breakdown
+        score=result.overall_professionalism,
+        breakdown=result.to_dict(),
+        role_relevance=result.role_relevance,
+        experience_years=result.experience_years,
+        education_quality=result.education_quality,
+        skills_clarity=result.skills_clarity,
+        quantified_achievements=result.quantified_achievements,
+        overall_professionalism=result.overall_professionalism,
+        text_suggestions=result.text_suggestions
     )
 
 

@@ -1,0 +1,28 @@
+fix: implement premium subscription paywall + feature gating UI
+
+## Context
+Jobble Baby needs a subscription/paywall system to gate premium features. Free users get basic CV upload + salary query. Premium users (HK$99-299/month) unlock: AI interview simulation, CV optimization, job alerts.
+
+## Task
+Build a subscription paywall screen and wire up feature gating throughout the app.
+
+### Backend (FastAPI):
+1. Add subscription_tier column (free/trial/premium) + subscription_expires_at to users table
+2. Create PATCH /api/v1/users/subscription endpoint to upgrade user tier
+3. Update GET /api/v1/users/me to return subscription_tier and subscription_expires_at
+4. Create GET /api/v1/subscription/plans endpoint returning Free + Premium plans
+
+### Frontend (React Native/Expo):
+1. Create src/app/subscription.tsx - subscription plans screen with Free vs Premium cards, pricing (HK$199/mo), upgrade button, FAQ
+2. Update src/app/profile.tsx - show subscription badge, add Upgrade to Premium button for free users
+3. Update src/app/interview.tsx - add premium gate check, show lock overlay with upgrade CTA for free users
+4. Update src/components/app-tabs.tsx - show crown badge on profile tab for premium users
+
+### Implementation Notes:
+- Backend subscription upgrade is simple toggle for MVP (no real payment yet)
+- Feature gates check user.subscription_tier not equal to premium before allowing access
+- Make it compelling - this is a conversion screen
+
+## Keywords
+subscription paywall premium-gating
+ULW

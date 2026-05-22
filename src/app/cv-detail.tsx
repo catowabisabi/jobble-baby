@@ -9,39 +9,21 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
+import { useCVAnalysis } from '@/hooks/useCVAnalysis';
 
-// Mock CV analysis data (replace with actual API data when backend is ready)
-const MOCK_CV_ANALYSIS = {
-  overall: 7.5,
-  categories: [
-    {
-      name: 'Experience',
-      score: 8,
-      feedback: 'Strong work history with relevant experience. Consider quantifying achievements.',
-    },
-    {
-      name: 'Skills',
-      score: 7,
-      feedback: 'Good technical skill set. Add more specific tool/technology keywords.',
-    },
-    {
-      name: 'Education',
-      score: 7,
-      feedback: 'Adequate educational background. Consider reordering for relevance.',
-    },
-    {
-      name: 'Formatting',
-      score: 6,
-      feedback: 'Consider improving layout and visual hierarchy. Use consistent formatting.',
-    },
-  ],
-  overall_feedback:
-    'Your CV is above average. Focus on quantifying achievements and tailoring keywords for each application to maximize interview chances.',
+// Category display names + feedback text per backend breakdown
+const CATEGORY_META: Record<string, { label: string; feedback: string }> = {
+  role_relevance: { label: 'Role Relevance', feedback: 'How well your experience matches target roles.' },
+  experience_years: { label: 'Experience', feedback: 'Years of relevant work experience.' },
+  education_quality: { label: 'Education', feedback: 'Quality and relevance of educational background.' },
+  skills_clarity: { label: 'Skills', feedback: 'Clarity and specificity of listed skills.' },
+  quantified_achievements: { label: 'Achievements', feedback: 'Use of quantified results and metrics.' },
 };
 
 function getScoreColor(score: number): string {
@@ -52,14 +34,14 @@ function getScoreColor(score: number): string {
 }
 
 function ScoreBar({ label, score }: { label: string; score: number }) {
-  const percentage = score * 10;
+  const percentage = Math.min(100, score * 10);
   const color = getScoreColor(score);
 
   return (
     <View style={styles.scoreBarContainer}>
       <View style={styles.scoreBarHeader}>
         <Text style={styles.scoreBarLabel}>{label}</Text>
-        <Text style={[styles.scoreBarValue, { color }]}>{score}/10</Text>
+        <Text style={[styles.scoreBarValue, { color }]}>{score.toFixed(1)}/10</Text>
       </View>
       <View style={styles.scoreBarTrack}>
         <View
@@ -79,12 +61,45 @@ function getOverallBadgeColor(score: number): string {
   return '#FF9500';
 }
 
+function LoadingView() {
+  return (
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator size="large" color="#007AFF" />
+      <Text style={styles.loadingText}>分析中...</Text>
+    </View>
+  );
+}
+
+function ErrorView({ message }: { message: string }) {
+  return (
+    <View style={styles.errorContainer}>
+      <Text style={styles.errorText}>載入失敗：{message}</Text>
+    </View>
+  );
+}
+
 export default function CVDetailScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const cvId = id ? parseInt(id, 10) : null;
 
-  const analysis = MOCK_CV_ANALYSIS;
-  const badgeColor = getOverallBadgeColor(analysis.overall);
+  const { analysis, status, error } = useCVAnalysis(cvId);
+
+  if (!cvId) {
+    return (
+      <ThemedView style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+            <Text style={styles.backButtonText}>← 返回</Text>
+          </TouchableOpacity>
+          <ThemedText type="title" style={styles.headerTitle}>CV 分析報告</ThemedText>
+        </View>
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>無法獲得 CV ID</Text>
+        </View>
+      </ThemedView>
+    );
+  }
 
   return (
     <ThemedView style={styles.container}>
@@ -101,48 +116,72 @@ export default function CVDetailScreen() {
         </ThemedText>
       </View>
 
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
-        {/* Overall Score */}
-        <View style={styles.overallSection}>
-          <View style={[styles.overallBadge, { backgroundColor: badgeColor }]}>
-            <Text style={styles.overallScore}>{analysis.overall}</Text>
-            <Text style={styles.overallMax}>/10</Text>
-          </View>
-          <Text style={styles.overallLabel}>整體評分</Text>
-        </View>
+      {status === 'loading' && <LoadingView />}
 
-        {/* Category Breakdown */}
-        <View style={styles.categoriesSection}>
-          <Text style={styles.sectionTitle}>各項評分</Text>
-          {analysis.categories.map((cat) => (
-            <ScoreBar key={cat.name} label={cat.name} score={cat.score} />
-          ))}
-        </View>
+      {status === 'error' && <ErrorView message={error || '未知錯誤'} />}
 
-        {/* Category Feedback */}
-        <View style={styles.feedbackSection}>
-          <Text style={styles.sectionTitle}>改進建議</Text>
-          {analysis.categories.map((cat) => (
-            <View key={cat.name} style={styles.feedbackItem}>
-              <View style={styles.feedbackHeader}>
-                <Text style={styles.feedbackCategory}>{cat.name}</Text>
-                <Text style={[styles.feedbackScore, { color: getScoreColor(cat.score) }]}>
-                  {cat.score}/10
-                </Text>
+      {status === 'success' && analysis && (() => {
+        const overallScore = analysis.overall_professionalism;
+        const badgeColor = getOverallBadgeColor(overallScore);
+        const categories = Object.entries(CATEGORY_META).map(([key, meta]) => ({
+          name: meta.label,
+          score: (analysis[key as keyof typeof analysis] as number) ?? 0,
+          feedback: meta.feedback,
+        }));
+
+        return (
+          <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+            {/* Overall Score */}
+            <View style={styles.overallSection}>
+              <View style={[styles.overallBadge, { backgroundColor: badgeColor }]}>
+                <Text style={styles.overallScore}>{overallScore.toFixed(1)}</Text>
+                <Text style={styles.overallMax}>/10</Text>
               </View>
-              <Text style={styles.feedbackText}>{cat.feedback}</Text>
+              <Text style={styles.overallLabel}>整體評分</Text>
             </View>
-          ))}
-        </View>
 
-        {/* Overall Feedback */}
-        <View style={styles.overallFeedbackSection}>
-          <Text style={styles.sectionTitle}>總結</Text>
-          <View style={styles.overallFeedbackCard}>
-            <Text style={styles.overallFeedbackText}>{analysis.overall_feedback}</Text>
-          </View>
-        </View>
-      </ScrollView>
+            {/* Category Breakdown */}
+            <View style={styles.categoriesSection}>
+              <Text style={styles.sectionTitle}>各項評分</Text>
+              {categories.map((cat) => (
+                <ScoreBar key={cat.name} label={cat.name} score={cat.score} />
+              ))}
+            </View>
+
+            {/* Category Feedback */}
+            <View style={styles.feedbackSection}>
+              <Text style={styles.sectionTitle}>改進建議</Text>
+              {categories.map((cat) => (
+                <View key={cat.name} style={styles.feedbackItem}>
+                  <View style={styles.feedbackHeader}>
+                    <Text style={styles.feedbackCategory}>{cat.name}</Text>
+                    <Text style={[styles.feedbackScore, { color: getScoreColor(cat.score) }]}>
+                      {cat.score.toFixed(1)}/10
+                    </Text>
+                  </View>
+                  <Text style={styles.feedbackText}>{cat.feedback}</Text>
+                </View>
+              ))}
+            </View>
+
+            {/* Overall Feedback */}
+            <View style={styles.overallFeedbackSection}>
+              <Text style={styles.sectionTitle}>總結</Text>
+              <View style={styles.overallFeedbackCard}>
+                {analysis.text_suggestions && analysis.text_suggestions.length > 0 ? (
+                  analysis.text_suggestions.map((suggestion, i) => (
+                    <Text key={i} style={styles.overallFeedbackText}>• {suggestion}</Text>
+                  ))
+                ) : (
+                  <Text style={styles.overallFeedbackText}>
+                    繼續優化你的 CV，提升各項評分以增加面試機會。
+                  </Text>
+                )}
+              </View>
+            </View>
+          </ScrollView>
+        );
+      })()}
     </ThemedView>
   );
 }
@@ -279,5 +318,27 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
     lineHeight: 22,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: Spacing.five,
+  },
+  loadingText: {
+    marginTop: Spacing.three,
+    fontSize: 14,
+    color: '#666',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: Spacing.five,
+  },
+  errorText: {
+    fontSize: 14,
+    color: '#FF3B30',
+    textAlign: 'center',
   },
 });

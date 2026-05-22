@@ -90,6 +90,59 @@ async def get_cv(cv_id: int, db: Session = Depends(get_db)):
     return cv
 
 
+class CVScoreResponse(BaseModel):
+    cv_id: int
+    score: int
+    breakdown: dict
+
+
+@router.post("/score", response_model=CVScoreResponse)
+async def score_cv(cv_id: int, db: Session = Depends(get_db)):
+    cv = db.query(CV).filter(CV.id == cv_id).first()
+    if not cv:
+        raise HTTPException(status_code=404, detail="CV not found")
+
+    base_score = 5
+    breakdown = {
+        "conflict_resolution": 0,
+        "navigation_skills": 0,
+        "symbol_proficiency": 0,
+        "technical_clarity": 0,
+        "overall": 0
+    }
+
+    file_name_lower = cv.file_name.lower()
+    if "conflict" in file_name_lower:
+        breakdown["conflict_resolution"] = 2
+        base_score += 1
+    if "navigation" in file_name_lower:
+        breakdown["navigation_skills"] = 2
+        base_score += 1
+    if "symbol" in file_name_lower:
+        breakdown["symbol_proficiency"] = 2
+        base_score += 1
+
+    if cv.file_size > 5000:
+        breakdown["technical_clarity"] = 2
+        base_score += 1
+    elif cv.file_size > 1000:
+        breakdown["technical_clarity"] = 1
+        base_score += 0.5
+
+    final_score = min(10, max(1, int(base_score)))
+    breakdown["overall"] = final_score
+
+    cv.score = final_score
+    cv.analyzed_at = datetime.utcnow()
+    db.commit()
+
+    return CVScoreResponse(
+        cv_id=cv_id,
+        score=final_score,
+        breakdown=breakdown
+    )
+
+
 @router.post("/analyze/{cv_id}")
 async def analyze_cv(cv_id: int, request: CVAnalysisRequest = None):
     return {

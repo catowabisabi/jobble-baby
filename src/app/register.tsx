@@ -31,6 +31,12 @@ export default function RegisterScreen() {
       return;
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert('錯誤', '請輸入有效的 Email 地址');
+      return;
+    }
+
     if (password.length < 6) {
       Alert.alert('錯誤', '密碼至少需要 6 個字符');
       return;

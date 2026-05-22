@@ -100,10 +100,23 @@ def get_current_user(
 init_db()
 
 
+def validate_password(password: str) -> bool:
+    if len(password) < 8:
+        return False
+    has_upper = any(c.isupper() for c in password)
+    has_lower = any(c.islower() for c in password)
+    has_digit = any(c.isdigit() for c in password)
+    return has_upper and has_lower and has_digit
+
+
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
 async def register(user: UserCreate, db: Session = Depends(get_db)):
-    """用戶註冊"""
-    # 檢查 Email 是否已存在
+    if not validate_password(user.password):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="密碼至少需要 8 個字符，包括大小寫字母和數字"
+        )
+
     existing_user = db.query(User).filter(User.email == user.email).first()
     if existing_user:
         raise HTTPException(

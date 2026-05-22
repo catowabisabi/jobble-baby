@@ -31,6 +31,12 @@ export default function LoginScreen() {
       return;
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert('錯誤', '請輸入有效的 Email 地址');
+      return;
+    }
+
     try {
       await login(email, password);
       router.replace('/');

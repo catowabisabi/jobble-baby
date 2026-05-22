@@ -1,7 +1,13 @@
+"""
+CV 相關端點
+
+Rate Limiting:
+- All endpoints limited to 30 requests/minute per IP
+"""
 import json
 
 import aiofiles
-from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends, Request
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from datetime import datetime
@@ -14,6 +20,11 @@ from app.services.cv_extractor import PDFTextExtractor, ExtractionError
 from app.services.cv_analyzer import CVAnalyzer, AnalysisError
 
 router = APIRouter()
+
+
+def get_limiter(request: Request):
+    """Get the rate limiter from app state"""
+    return request.app.state.limiter
 
 
 class CVResponse(BaseModel):
@@ -48,10 +59,15 @@ class CVAnalysisRequest(BaseModel):
 
 @router.post("/upload", response_model=CVUploadResponse)
 async def upload_cv(
+    request: Request,
     file: UploadFile = File(...),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(status_code=400, detail="Invalid file type")
 
@@ -90,7 +106,11 @@ async def upload_cv(
 
 
 @router.get("/{cv_id}", response_model=CVResponse)
-async def get_cv(cv_id: int, db: Session = Depends(get_db)):
+async def get_cv(request: Request, cv_id: int, db: Session = Depends(get_db)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     cv = db.query(CV).filter(CV.id == cv_id).first()
     if not cv:
         raise HTTPException(status_code=404, detail="CV not found")
@@ -111,7 +131,11 @@ class CVScoreResponse(BaseModel):
 
 
 @router.post("/score", response_model=CVScoreResponse)
-async def score_cv(cv_id: int, db: Session = Depends(get_db)):
+async def score_cv(request: Request, cv_id: int, db: Session = Depends(get_db)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     cv = db.query(CV).filter(CV.id == cv_id).first()
     if not cv:
         raise HTTPException(status_code=404, detail="CV not found")
@@ -158,7 +182,11 @@ async def score_cv(cv_id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/analyze/{cv_id}")
-async def analyze_cv(cv_id: int, request: CVAnalysisRequest = None):
+async def analyze_cv(request: Request, cv_id: int, req: CVAnalysisRequest = None):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     return {
         "id": cv_id,
         "score": 7.5,
@@ -178,7 +206,11 @@ async def analyze_cv(cv_id: int, request: CVAnalysisRequest = None):
 
 
 @router.get("/")
-async def list_cvs(user_id: int = 1, db: Session = Depends(get_db)):
+async def list_cvs(request: Request, user_id: int = 1, db: Session = Depends(get_db)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     cvs = db.query(CV).filter(CV.user_id == user_id).all()
     return {
         "cvs": [

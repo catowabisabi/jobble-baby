@@ -1,4 +1,9 @@
-"""健康檢查端點"""
+"""健康檢查端點
+
+Rate Limiting:
+- Health check endpoints are EXEMPT from rate limiting
+- These endpoints must always be available for monitoring and load balancers
+"""
 from fastapi import APIRouter
 
 router = APIRouter()

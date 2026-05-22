@@ -1,5 +1,9 @@
-"""薪酬查詢端點"""
-from fastapi import APIRouter, Depends
+"""薪酬查詢端點
+
+Rate Limiting:
+- All endpoints limited to 30 requests/minute per IP
+"""
+from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel
 from typing import Optional
 
@@ -7,6 +11,11 @@ from app.models.database import User, get_db
 from app.api.users import get_current_user
 
 router = APIRouter()
+
+
+def get_limiter(request: Request):
+    """Get the rate limiter from app state"""
+    return request.app.state.limiter
 
 
 class SalaryQuery(BaseModel):
@@ -26,7 +35,11 @@ class SalaryResult(BaseModel):
 
 
 @router.post("/query", response_model=SalaryResult)
-async def query_salary(query: SalaryQuery, current_user: User = Depends(get_current_user)):
+async def query_salary(request: Request, query: SalaryQuery, current_user: User = Depends(get_current_user)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     # TODO: 實現真實的匿名薪酬數據查詢
     # 模擬數據
     base_salary = 25000 + (query.experience_years * 5000)
@@ -41,7 +54,11 @@ async def query_salary(query: SalaryQuery, current_user: User = Depends(get_curr
 
 
 @router.get("/market-range/{job_title}")
-async def get_market_range(job_title: str, experience_years: int = 5, current_user: User = Depends(get_current_user)):
+async def get_market_range(request: Request, job_title: str, experience_years: int = 5, current_user: User = Depends(get_current_user)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     # TODO: 實現真實的市場薪酬範圍查詢
     base = 30000 + (experience_years * 4000)
     return {

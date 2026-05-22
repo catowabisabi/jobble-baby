@@ -1,5 +1,9 @@
-"""行情分析端點"""
-from fastapi import APIRouter, Depends
+"""行情分析端點
+
+Rate Limiting:
+- All endpoints limited to 30 requests/minute per IP
+"""
+from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel
 from typing import List, Optional
 
@@ -7,6 +11,11 @@ from app.models.database import User, get_db
 from app.api.users import get_current_user
 
 router = APIRouter()
+
+
+def get_limiter(request: Request):
+    """Get the rate limiter from app state"""
+    return request.app.state.limiter
 
 
 class SkillDemand(BaseModel):
@@ -24,7 +33,11 @@ class MarketAnalysis(BaseModel):
 
 
 @router.post("/analyze")
-async def analyze_skills(skills: List[str], industry: Optional[str] = None, current_user: User = Depends(get_current_user)):
+async def analyze_skills(request: Request, skills: List[str], industry: Optional[str] = None, current_user: User = Depends(get_current_user)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     # TODO: 實現真實的技能市場分析
     return {
         "overall_demand": "moderate",
@@ -45,7 +58,11 @@ async def analyze_skills(skills: List[str], industry: Optional[str] = None, curr
 
 
 @router.get("/trends")
-async def get_market_trends(industry: Optional[str] = None, current_user: User = Depends(get_current_user)):
+async def get_market_trends(request: Request, industry: Optional[str] = None, current_user: User = Depends(get_current_user)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     # TODO: 實現真實的市場趨勢數據
     return {
         "trends": [
@@ -72,7 +89,11 @@ async def get_market_trends(industry: Optional[str] = None, current_user: User =
 
 
 @router.get("/salary-insights")
-async def get_salary_insights(skill: str, current_user: User = Depends(get_current_user)):
+async def get_salary_insights(request: Request, skill: str, current_user: User = Depends(get_current_user)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     # TODO: 實現真實的技能薪資洞察
     return {
         "skill": skill,

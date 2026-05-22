@@ -1,5 +1,8 @@
 """
 用戶相關端點 - 完整的註冊/登入/JWT 認證系統
+
+Rate Limiting:
+- /register and /login endpoints: 10 requests/minute per IP (strict to prevent brute force)
 """
 from fastapi import APIRouter, HTTPException, Depends, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -11,9 +14,10 @@ from typing import Optional
 
 from app.models.database import User, get_db, init_db
 from app.models.schemas import (
-    UserCreate, UserLogin, UserResponse, 
+    UserCreate, UserLogin, UserResponse,
     TokenResponse, SubscriptionStatus
 )
+from app.api.limiter import limiter, AUTH_RATE
 
 router = APIRouter()
 
@@ -110,7 +114,9 @@ def validate_password(password: str) -> bool:
 
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(AUTH_RATE)
 async def register(user: UserCreate, db: Session = Depends(get_db)):
+    
     if not validate_password(user.password):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -154,8 +160,9 @@ async def register(user: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/login", response_model=TokenResponse)
+@limiter.limit(AUTH_RATE)
 async def login(user_login: UserLogin, db: Session = Depends(get_db)):
-    """用戶登入"""
+    
     user = db.query(User).filter(User.email == user_login.email).first()
     
     if not user or not verify_password(user_login.password, user.password_hash):

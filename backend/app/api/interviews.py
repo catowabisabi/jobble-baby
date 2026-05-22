@@ -1,5 +1,9 @@
-"""模擬面試端點"""
-from fastapi import APIRouter, Depends
+"""模擬面試端點
+
+Rate Limiting:
+- All endpoints limited to 30 requests/minute per IP
+"""
+from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel
 from typing import Optional, List
 
@@ -7,6 +11,11 @@ from app.models.database import User, get_db
 from app.api.users import get_current_user
 
 router = APIRouter()
+
+
+def get_limiter(request: Request):
+    """Get the rate limiter from app state"""
+    return request.app.state.limiter
 
 
 class InterviewConfig(BaseModel):
@@ -35,7 +44,11 @@ class InterviewFeedback(BaseModel):
 
 
 @router.post("/start")
-async def start_interview(config: InterviewConfig, current_user: User = Depends(get_current_user)):
+async def start_interview(request: Request, config: InterviewConfig, current_user: User = Depends(get_current_user)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     # TODO: 實現真實的面試問題生成
     return {
         "session_id": "mock_session_123",
@@ -63,7 +76,11 @@ async def start_interview(config: InterviewConfig, current_user: User = Depends(
 
 
 @router.post("/submit/{session_id}")
-async def submit_answer(session_id: str, answers: List[InterviewAnswer], current_user: User = Depends(get_current_user)):
+async def submit_answer(request: Request, session_id: str, answers: List[InterviewAnswer], current_user: User = Depends(get_current_user)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     # TODO: 實現真實的答案評估和反饋生成
     return {
         "session_id": session_id,
@@ -82,7 +99,11 @@ async def submit_answer(session_id: str, answers: List[InterviewAnswer], current
 
 
 @router.get("/history")
-async def get_interview_history(current_user: User = Depends(get_current_user)):
+async def get_interview_history(request: Request, current_user: User = Depends(get_current_user)):
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
     # TODO: 實現真實的面試歷史查詢
     return {
         "sessions": [

@@ -1,7 +1,7 @@
 /**
  * 個人資料畫面
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -22,12 +22,31 @@ export default function ProfileScreen() {
   const router = useRouter();
   const { user, logout, isAuthenticated } = useAuth();
   const { progress, status, result, error, cvs, isLoadingCVs, pickFile, fetchCVList } = useCVUpload(user?.id);
+  const [matchCount, setMatchCount] = useState<number | null>(null);
 
   useEffect(() => {
+    const fetchAlertPreferences = async () => {
+      try {
+        const response = await fetch('/api/v1/users/alert-preferences');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.notifications_enabled) {
+            const matchResponse = await fetch('/api/v1/jobs/matches');
+            if (matchResponse.ok) {
+              const matchData = await matchResponse.json();
+              setMatchCount(matchData.count ?? matchData.total ?? 0);
+            }
+          }
+        }
+      } catch (err) {
+        // Silently fail - job alerts are optional
+      }
+    };
+
     if (isAuthenticated) {
-      fetchCVList();
+      fetchAlertPreferences();
     }
-  }, [isAuthenticated, fetchCVList]);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (status === 'success') {
@@ -119,6 +138,18 @@ export default function ProfileScreen() {
             <Text style={styles.infoValue}>#{user?.id}</Text>
           </View>
         </View>
+
+        <TouchableOpacity
+          style={styles.jobAlertsButton}
+          onPress={() => router.push('/job-alerts')}
+          accessibilityLabel="Job Alerts button"
+        >
+          <Text style={styles.jobAlertsButtonText}>工作提示</Text>
+        </TouchableOpacity>
+
+        {matchCount !== null && (
+          <Text style={styles.matchCountText}>{matchCount} 個工作適合你</Text>
+        )}
 
         {user?.subscription_tier !== 'premium' && (
           <TouchableOpacity
@@ -451,5 +482,24 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
+  },
+  jobAlertsButton: {
+    backgroundColor: '#5856D6',
+    borderRadius: 12,
+    paddingVertical: Spacing.three,
+    paddingHorizontal: Spacing.five * 2,
+    marginBottom: Spacing.two,
+    alignItems: 'center',
+  },
+  jobAlertsButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  matchCountText: {
+    fontSize: 14,
+    color: '#34C759',
+    fontWeight: '600',
+    marginBottom: Spacing.five,
   },
 });

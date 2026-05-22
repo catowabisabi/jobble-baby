@@ -59,3 +59,24 @@ class SubscriptionPlan(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class AlertPreferencesUpdate(BaseModel):
+    """職位提醒偏好更新請求"""
+    job_types: Optional[list[str]] = None
+    salary_min: Optional[int] = None
+    locations: Optional[list[str]] = None
+    keywords: Optional[list[str]] = None
+    notifications_enabled: Optional[bool] = None
+
+
+class AlertPreferencesResponse(BaseModel):
+    """職位提醒偏好響應"""
+    job_types: list[str] = []
+    salary_min: Optional[int] = None
+    locations: list[str] = []
+    keywords: list[str] = []
+    notifications_enabled: bool = True
+
+    class Config:
+        from_attributes = True

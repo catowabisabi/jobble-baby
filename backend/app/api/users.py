@@ -12,11 +12,11 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from typing import Optional
 
-from app.models.database import User, get_db, init_db
+from app.models.database import User, JobAlert, get_db, init_db
 from app.models.schemas import (
     UserCreate, UserLogin, UserResponse,
     TokenResponse, SubscriptionStatus, SubscriptionUpgrade,
-    SubscriptionPlan
+    SubscriptionPlan, AlertPreferencesUpdate, AlertPreferencesResponse
 )
 from app.api.limiter import limiter, AUTH_RATE, DEFAULT_RATE
 
@@ -241,4 +241,51 @@ async def upgrade_subscription(
         tier=current_user.subscription_tier,
         status="premium",
         subscription_ends_at=None
+    )
+
+
+@router.get("/alert-preferences", response_model=AlertPreferencesResponse)
+async def get_alert_preferences(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    alert = db.query(JobAlert).filter(JobAlert.user_id == current_user.id).first()
+    if not alert:
+        return AlertPreferencesResponse()
+    return AlertPreferencesResponse(
+        job_types=alert.job_types or [],
+        salary_min=alert.salary_min,
+        locations=alert.locations or [],
+        keywords=alert.keywords or [],
+        notifications_enabled=alert.notifications_enabled
+    )
+
+
+@router.patch("/alert-preferences", response_model=AlertPreferencesResponse)
+@limiter.limit(DEFAULT_RATE)
+async def update_alert_preferences(
+    preferences: AlertPreferencesUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    alert = db.query(JobAlert).filter(JobAlert.user_id == current_user.id).first()
+    
+    update_data = preferences.model_dump(exclude_unset=True)
+    
+    if alert:
+        for key, value in update_data.items():
+            setattr(alert, key, value)
+    else:
+        alert = JobAlert(user_id=current_user.id, **update_data)
+        db.add(alert)
+    
+    db.commit()
+    db.refresh(alert)
+    
+    return AlertPreferencesResponse(
+        job_types=alert.job_types or [],
+        salary_min=alert.salary_min,
+        locations=alert.locations or [],
+        keywords=alert.keywords or [],
+        notifications_enabled=alert.notifications_enabled
     )

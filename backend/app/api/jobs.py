@@ -10,7 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from pydantic import BaseModel
 from typing import Optional, List
 
-from app.models.database import User, get_db
+from app.models.database import User, JobAlert, get_db
 from app.api.users import get_current_user
 
 router = APIRouter()
@@ -54,6 +54,89 @@ class JobMatch(BaseModel):
     description_snippet: str
 
 
+@router.get("/matches/user/{user_id}")
+async def get_personalized_job_matches(
+    request: Request,
+    user_id: int,
+    limit: int = Query(20, ge=1, le=100),
+    db=Depends(get_db)
+):
+    job_alert = db.query(JobAlert).filter(JobAlert.user_id == user_id).first()
+    
+    if not job_alert:
+        return {
+            "jobs": [],
+            "total": 0,
+            "message": "No job alert preferences found for user"
+        }
+    
+    jobs = load_real_jobs()
+    matched_jobs = []
+    
+    for job in jobs:
+        score = compute_match_score(job, job_alert)
+        if score > 0:
+            job["match_score"] = score
+            matched_jobs.append(job)
+    
+    matched_jobs.sort(key=lambda x: x.get("match_score", 0), reverse=True)
+    
+    total = len(matched_jobs)
+    paginated_jobs = matched_jobs[:limit]
+    
+    return {
+        "jobs": paginated_jobs,
+        "total": total,
+        "limit": limit,
+        "preferences": {
+            "job_types": job_alert.job_types,
+            "salary_min": job_alert.salary_min,
+            "locations": job_alert.locations,
+            "keywords": job_alert.keywords
+        }
+    }
+
+
+def compute_match_score(job: dict, preferences: JobAlert) -> float:
+    score = 0.0
+    
+    if preferences.job_types and job.get("job_type") in preferences.job_types:
+        score += 0.30
+    
+    if preferences.keywords:
+        job_text = f"{job.get('title', '')} {job.get('description_snippet', '')} {' '.join(job.get('tags', []))}".lower()
+        for kw in preferences.keywords:
+            if kw.lower() in job_text:
+                if kw.lower() in job.get("title", "").lower():
+                    score += 0.25
+                elif kw.lower() in " ".join(job.get("tags", [])).lower():
+                    score += 0.20
+    
+    if preferences.locations:
+        for loc in preferences.locations:
+            if loc.lower() in job.get("location", "").lower():
+                score += 0.15
+                break
+    
+    if preferences.salary_min:
+        job_min, job_max = parse_salary(job.get("salary_range", "HK$0 - 0"))
+        if job_max >= preferences.salary_min:
+            score += 0.10
+    
+    return round(score * 100, 1)
+
+
+def parse_salary(salary_str: str) -> tuple:
+    try:
+        cleaned = salary_str.replace("HK$", "").replace(",", "").replace(" ", "")
+        parts = cleaned.split("-")
+        if len(parts) == 2:
+            return int(parts[0]), int(parts[1])
+        return 0, 0
+    except:
+        return 0, 0
+
+
 @router.get("/matches")
 async def get_job_matches(
     request: Request,
@@ -79,16 +162,6 @@ async def get_job_matches(
         jobs = [j for j in jobs if loc_lower in j.get("location", "").lower()]
 
     if salary_min or salary_max:
-        def parse_salary(salary_str: str) -> tuple:
-            try:
-                cleaned = salary_str.replace("HK$", "").replace(",", "").replace(" ", "")
-                parts = cleaned.split("-")
-                if len(parts) == 2:
-                    return int(parts[0]), int(parts[1])
-                return 0, 0
-            except:
-                return 0, 0
-
         filtered = []
         for job in jobs:
             j_min, j_max = parse_salary(job.get("salary_range", "HK$0 - 0"))

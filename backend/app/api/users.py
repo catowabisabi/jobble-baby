@@ -15,9 +15,10 @@ from typing import Optional
 from app.models.database import User, get_db, init_db
 from app.models.schemas import (
     UserCreate, UserLogin, UserResponse,
-    TokenResponse, SubscriptionStatus
+    TokenResponse, SubscriptionStatus, SubscriptionUpgrade,
+    SubscriptionPlan
 )
-from app.api.limiter import limiter, AUTH_RATE
+from app.api.limiter import limiter, AUTH_RATE, DEFAULT_RATE
 
 router = APIRouter()
 
@@ -203,14 +204,12 @@ async def get_me(current_user: User = Depends(get_current_user)):
 @router.get("/subscription", response_model=SubscriptionStatus)
 async def get_subscription(current_user: User = Depends(get_current_user)):
     """獲取訂閱狀態"""
-    # 根據訂閱類型返回不同狀態
     if current_user.subscription_tier == "premium":
         return SubscriptionStatus(
             status="premium",
-            subscription_ends_at=None  # 永久 premium
+            subscription_ends_at=None
         )
     elif current_user.subscription_tier == "trial":
-        # 試用期 30 天
         trial_end = current_user.created_at + timedelta(days=30)
         return SubscriptionStatus(
             status="trial",
@@ -218,3 +217,28 @@ async def get_subscription(current_user: User = Depends(get_current_user)):
         )
     else:
         return SubscriptionStatus(status="free")
+
+
+@router.patch("/subscription", response_model=SubscriptionPlan)
+@limiter.limit(DEFAULT_RATE)
+async def upgrade_subscription(
+    upgrade: SubscriptionUpgrade,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """升級訂閱"""
+    if upgrade.tier != "premium":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="目前只支援升級到 premium 訂閱"
+        )
+    
+    current_user.subscription_tier = "premium"
+    db.commit()
+    db.refresh(current_user)
+    
+    return SubscriptionPlan(
+        tier=current_user.subscription_tier,
+        status="premium",
+        subscription_ends_at=None
+    )

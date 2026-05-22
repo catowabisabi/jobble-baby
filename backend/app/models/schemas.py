@@ -43,3 +43,19 @@ class SubscriptionStatus(BaseModel):
     status: str  # free, trial, premium
     trial_ends_at: Optional[str] = None
     subscription_ends_at: Optional[str] = None
+
+
+class SubscriptionUpgrade(BaseModel):
+    """訂閱升級請求"""
+    tier: str  # Only "premium" allowed for MVP
+
+
+class SubscriptionPlan(BaseModel):
+    """訂閱計劃響應"""
+    tier: str
+    status: str
+    trial_ends_at: Optional[str] = None
+    subscription_ends_at: Optional[str] = None
+
+    class Config:
+        from_attributes = True

@@ -11,9 +11,11 @@ import {
   Alert,
 } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
+import { useRouter } from 'expo-router';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
+import { useAuth } from '@/hooks/useAuth';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
 
@@ -84,9 +86,15 @@ const DIFFICULTY_LABELS: Record<string, string> = {
 };
 
 export default function InterviewScreen() {
+  const { user } = useAuth();
+  const router = useRouter();
+
   const [step, setStep] = useState<Step>('config');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const isPremium = user?.subscription_tier === 'premium';
+  const showPremiumOverlay = !isPremium;
 
   const [jobType, setJobType] = useState('engineering');
   const [companySize, setCompanySize] = useState('startup');
@@ -427,14 +435,45 @@ export default function InterviewScreen() {
     );
   };
 
-  return (
-    <ThemedView style={styles.container}>
-      {step === 'config' && renderConfig()}
-      {step === 'interview' && renderInterview()}
-      {step === 'results' && renderResults()}
-    </ThemedView>
-  );
-}
+  const PremiumGateOverlay = () => (
+  <View style={styles.overlayContainer}>
+    <View style={styles.overlayContent}>
+      <View style={styles.lockIconContainer}>
+        <ThemedText type="largeTitle" style={styles.lockIcon}>🔒</ThemedText>
+      </View>
+      <ThemedText type="title" style={styles.overlayTitle}>Premium Feature</ThemedText>
+      <ThemedText type="default" style={styles.overlaySubtitle}>
+        AI Interview Simulation is available for Premium members
+      </ThemedText>
+      <TouchableOpacity
+        style={styles.upgradeButton}
+        onPress={() => router.push('/subscription')}
+      >
+        <ThemedText type="default" style={styles.upgradeButtonText}>Upgrade to Premium</ThemedText>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.maybeLaterButton}
+        onPress={() => router.back()}
+      >
+        <ThemedText type="small" style={styles.maybeLaterText}>Maybe Later</ThemedText>
+      </TouchableOpacity>
+    </View>
+  </View>
+);
+
+return (
+  <ThemedView style={styles.container}>
+    {showPremiumOverlay ? (
+      <PremiumGateOverlay />
+    ) : (
+      <>
+        {step === 'config' && renderConfig()}
+        {step === 'interview' && renderInterview()}
+        {step === 'results' && renderResults()}
+      </>
+    )}
+  </ThemedView>
+);
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
@@ -552,4 +591,66 @@ const styles = StyleSheet.create({
   },
   nextStepsTitle: { marginBottom: Spacing.half },
   nextStepItem: { marginBottom: Spacing.half },
+  // Premium Gate Overlay styles
+  overlayContainer: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 999,
+  },
+  overlayContent: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 32,
+    alignItems: 'center',
+    marginHorizontal: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+  lockIconContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#fef3c7',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  lockIcon: { fontSize: 40 },
+  overlayTitle: {
+    marginBottom: 8,
+    fontWeight: 'bold',
+    color: '#1f2937',
+  },
+  overlaySubtitle: {
+    textAlign: 'center',
+    color: '#6b7280',
+    marginBottom: 24,
+    lineHeight: 22,
+    paddingHorizontal: 8,
+  },
+  upgradeButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    alignItems: 'center',
+    width: '100%',
+  },
+  upgradeButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  maybeLaterButton: {
+    marginTop: 12,
+    padding: 8,
+  },
+  maybeLaterText: {
+    color: '#9ca3af',
+  },
 });

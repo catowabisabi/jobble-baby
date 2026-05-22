@@ -73,7 +73,7 @@ export default function ProfileScreen() {
   const getSubscriptionBadge = (tier: string) => {
     switch (tier) {
       case 'premium':
-        return { text: 'Premium', color: '#FFD700' };
+        return { text: '👑 Premium', color: '#FFD700' };
       case 'trial':
         return { text: '試用中', color: '#34C759' };
       default:
@@ -119,6 +119,16 @@ export default function ProfileScreen() {
             <Text style={styles.infoValue}>#{user?.id}</Text>
           </View>
         </View>
+
+        {user?.subscription_tier !== 'premium' && (
+          <TouchableOpacity
+            style={styles.upgradeButton}
+            onPress={() => router.push('/subscription')}
+            accessibilityLabel="Upgrade to Premium button"
+          >
+            <Text style={styles.upgradeButtonText}>升級到 Premium</Text>
+          </TouchableOpacity>
+        )}
 
         <View style={styles.cvSection}>
           <TouchableOpacity
@@ -428,5 +438,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#ccc',
     marginLeft: Spacing.two,
+  },
+  upgradeButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 12,
+    paddingVertical: Spacing.three,
+    paddingHorizontal: Spacing.five * 2,
+    marginBottom: Spacing.five,
+    alignItems: 'center',
+  },
+  upgradeButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

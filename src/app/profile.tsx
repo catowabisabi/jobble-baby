@@ -81,6 +81,13 @@ export default function ProfileScreen() {
     }
   };
 
+  const getScoreBadgeStyle = (score: number) => {
+    if (score >= 8) return { backgroundColor: '#34C759' };
+    if (score >= 6) return { backgroundColor: '#007AFF' };
+    if (score >= 4) return { backgroundColor: '#FF9500' };
+    return { backgroundColor: '#FF3B30' };
+  };
+
   const badge = getSubscriptionBadge(user?.subscription_tier || 'free');
 
   return (
@@ -185,8 +192,6 @@ export default function ProfileScreen() {
                       <Text style={styles.cvScoreText}>{item.score}/10</Text>
                     </View>
                   )}
-                </TouchableOpacity>
-              )}
                   <Text style={styles.cvListArrow}>›</Text>
                 </TouchableOpacity>
               )}

@@ -42,6 +42,29 @@ function safeParseUser(json: string): User | null {
   }
 }
 
+// Helper: decode JWT payload (base64url, no signature verification)
+function decodeJWTPayload(token: string): Record<string, unknown> | null {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+    // Base64url → base64 (replace - with +, _ with /, add padding)
+    let payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+    while (payload.length % 4) payload += '=';
+    const decoded = Buffer.from(payload, 'base64').toString('utf8');
+    return JSON.parse(decoded);
+  } catch {
+    return null;
+  }
+}
+
+// Helper: check if JWT is expired (exp claim)
+function isTokenExpired(token: string): boolean {
+  const payload = decodeJWTPayload(token);
+  if (!payload || !payload.exp) return false;
+  const expMs = (payload.exp as number) * 1000;
+  return Date.now() >= expMs;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -59,10 +82,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const storedUserRaw = await SecureStore.getItemAsync(USER_KEY);
 
       if (storedToken && storedUserRaw) {
-        const storedUser = safeParseUser(storedUserRaw);
-        if (storedUser) {
-          setToken(storedToken);
-          setUser(storedUser);
+        // Check if token is expired
+        if (isTokenExpired(storedToken)) {
+          // Clear expired credentials
+          await SecureStore.deleteItemAsync(TOKEN_KEY);
+          await SecureStore.deleteItemAsync(USER_KEY);
+          setToken(null);
+          setUser(null);
+        } else {
+          const storedUser = safeParseUser(storedUserRaw);
+          if (storedUser) {
+            setToken(storedToken);
+            setUser(storedUser);
+          }
         }
       }
     } catch (e) {

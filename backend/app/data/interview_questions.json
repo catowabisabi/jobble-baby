@@ -1,0 +1,634 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "hr",
+      "difficulty": "easy",
+      "question": "請自我介紹一下你自己，包括你的工作經驗和核心技能。",
+      "tips": "控制在2-3分鐘內，突出與應徵職位相關的經驗，使用具體數據量化成果。",
+      "good_answer_bullets": ["簡潔有力的開場白", "重點強調相關技能", "用數據展示成就", "展現對崗位的熱情"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 2,
+      "category": "hr",
+      "difficulty": "easy",
+      "question": "你最大的弱點是什麼？你如何改善它？",
+      "tips": "選擇真實但不影響核心能力的弱點，展示自我覺察和改進行動。",
+      "good_answer_bullets": ["誠實但策略性回答", "展示改善方法", "強調正面影響", "避免陳腔濫調"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 3,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "為什麼你想離開現在的公司？",
+      "tips": "保持正面，避免負面批評前公司，強調尋求新機會的動機。",
+      "good_answer_bullets": ["正向表述原因", "聚焦未來發展", "避免抱怨前公司", "強調新崗位的吸引力"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 4,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你未來5年的職業規劃是什麼？",
+      "tips": "展現野心但務實，與公司發展方向結合，顯示長期投入意願。",
+      "good_answer_bullets": ["具體可行的目標", "與公司發展契合", "展現持續學習意願", "階段性里程碑"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 5,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你如何處理工作壓力大或時間緊迫的情況？",
+      "tips": "分享具體策略和方法，展示時間管理和優先排序能力。",
+      "good_answer_bullets": ["具體應對策略", "優先排序方法", "保持工作效率", "健康的工作態度"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 6,
+      "category": "hr",
+      "difficulty": "easy",
+      "question": "你對我們公司有多少了解？為什麼想加入我們？",
+      "tips": "面試前做好功課，了解公司業務、文化和最近動態。",
+      "good_answer_bullets": ["展示事前準備", "了解公司使命價值", "具體說明吸引之處", "崗位與個人目標結合"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 7,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "描述一次你需要同時處理多個項目的經歷。",
+      "tips": "使用STAR法回答，突出時間管理和組織能力，具體說明成果。",
+      "good_answer_bullets": ["情境具體明確", "任務分配清晰", "行動有效", "成果可量化"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 8,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你認為自己最大的優點是什麼？如何在工作上運用它？",
+      "tips": "選擇與崗位核心要求相關的優點，舉例說明實際應用。",
+      "good_answer_bullets": ["與崗位相關", "具體例子支持", "量化成果", "持續發揮優點"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 9,
+      "category": "hr",
+      "difficulty": "hard",
+      "question": "如果你的工作方式與上司不一致，你會怎麼辦？",
+      "tips": "展示靈活性和溝通能力，同時保持專業原則。",
+      "good_answer_bullets": ["開放溝通態度", "理解對方觀點", "尋找共同點", "保持專業尊重"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 10,
+      "category": "hr",
+      "difficulty": "hard",
+      "question": "你有沒有曾經需要向上級報告壞消息的經歷？你是如何處理的？",
+      "tips": "展示誠信、勇氣和問題解決能力，而非掩蓋問題。",
+      "good_answer_bullets": ["不及時掩蓋問題", "選擇合適時機", "提供解決方案", "從錯誤中學習"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 11,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你如何保持自己技能的更新？有哪些學習方式？",
+      "tips": "展示持續學習的態度和具體行動，與行業趨勢接軌。",
+      "good_answer_bullets": ["多元學習方式", "關注行業趨勢", "實際應用所學", "分享知識"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 12,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你如何定義工作上的成功？",
+      "tips": "展示價值觀和驅動因素，平衡個人和團隊成就。",
+      "good_answer_bullets": ["目標導向", "團隊成功", "持續成長", "可衡量標準"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 13,
+      "category": "hr",
+      "difficulty": "easy",
+      "question": "你期望的薪酬範圍是多少？有什麼福利期望？",
+      "tips": "事先做好市場調查，給出合理範圍，保持彈性。",
+      "good_answer_bullets": ["市場行情了解", "合理範圍設定", "開放討論", "整體薪酬考量"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 14,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你最有成就感的工作經歷是什麼？為什麼？",
+      "tips": "選擇具體且可量化的例子，展示你的價值觀。",
+      "good_answer_bullets": ["具體情境", "個人貢獻", "克服挑戰", "深遠影響"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 15,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你如何確保工作符合公司目標和期望？",
+      "tips": "展示主動溝通和對齊意識，避免只埋頭苦幹。",
+      "good_answer_bullets": ["主動對齊", "定期回饋", "適時調整", "結果導向"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 16,
+      "category": "hr",
+      "difficulty": "hard",
+      "question": "描述一次你失敗的經歷。你從中學到了什麼？",
+      "tips": "真誠面對失敗，展示從錯誤中學習的能力。",
+      "good_answer_bullets": ["勇於承擔", "分析原因", "具體學到", "應用到未來"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 17,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你認為團隊合作中最重要的元素是什麼？",
+      "tips": "展示合作意識和具體實踐方法。",
+      "good_answer_bullets": ["有效溝通", "互相尊重", "責任分擔", "共同目標"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 18,
+      "category": "hr",
+      "difficulty": "easy",
+      "question": "你有什麼問題想問我們的嗎？",
+      "tips": "準備有深度的問題，展示對崗位和公司的真正興趣。",
+      "good_answer_bullets": ["崗位發展", "團隊文化", "成功標準", "下一步流程"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 19,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你如何回應同事或客戶的負面批評？",
+      "tips": "展示開放態度和改進意願，不防禦過度。",
+      "good_answer_bullets": ["虛心傾聽", "客觀分析", "尋求具體例子", "感激提出"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 20,
+      "category": "hr",
+      "difficulty": "hard",
+      "question": "如果被錄用，你預計多久能開始為公司創造價值？",
+      "tips": "務實評估，同時展示盡快上手的決心和計劃。",
+      "good_answer_bullets": ["學習曲線認知", "快速融入計劃", "價值貢獻時間表", "持續證明"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 21,
+      "category": "technical",
+      "difficulty": "easy",
+      "question": "請描述你最近完成的一個項目，你在其中擔任什麼角色？",
+      "tips": "選擇相關項目，清晰描述職責和技術貢獻。",
+      "good_answer_bullets": ["項目背景", "個人角色", "技術選擇", "成果衡量"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 22,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "你最擅長的程式語言是什麼？舉例說明你用它解決過什麼問題。",
+      "tips": "展示深度理解，不只是語法，要談設計決策。",
+      "good_answer_bullets": ["語言熟練度", "實際應用場景", "問題解決思路", "代碼質量意識"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 23,
+      "category": "technical",
+      "difficulty": "hard",
+      "question": "如何設計一個高並發系統？能說說你的架構思路嗎？",
+      "tips": "展示系統設計能力，考慮可擴展性、可靠性和性能。",
+      "good_answer_bullets": ["負載均衡", "緩存策略", "資料庫設計", "監控運維"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 24,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "你如何進行代碼審查？有哪些你會注意的重點？",
+      "tips": "展示團隊合作意識和代碼質量標準。",
+      "good_answer_bullets": ["邏輯正確性", "代碼可讀性", "效能考量", "測試覆蓋"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 25,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "描述一次你解決技術難題的經歷。",
+      "tips": "展示問題分析和解決過程，而非只說結果。",
+      "good_answer_bullets": ["問題識別", "研究方法", "解決方案", "驗證結果"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 26,
+      "category": "technical",
+      "difficulty": "easy",
+      "question": "你使用什麼版本控制系統？有哪些你認為最佳實踐？",
+      "tips": "展示協作經驗和工程素養。",
+      "good_answer_bullets": ["分支策略", "提交規範", "Code Review", "衝突處理"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 27,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "你有沒有接觸過雲服務？如何選擇AWS、Azure或GCP？",
+      "tips": "展示雲端經驗和架構思維。",
+      "good_answer_bullets": ["服務類型", "選型考量", "成本優化", "安全實踐"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 28,
+      "category": "technical",
+      "difficulty": "hard",
+      "question": "如何確保代碼的安全性和性能優化？",
+      "tips": "展示全面認識，包括常見漏洞和優化策略。",
+      "good_answer_bullets": ["安全意識", "SQL注入/XSS防護", "性能瓶頸", "監控優化"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 29,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "你如何對新技術進行評估和選型？",
+      "tips": "展示技術判斷力和務實態度。",
+      "good_answer_bullets": ["需求匹配", "社群生態", "學習成本", "長期維護"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 30,
+      "category": "technical",
+      "difficulty": "easy",
+      "question": "你有寫測試的習慣嗎？測試覆蓋率通常是多少？",
+      "tips": "展示質量意識，不只是談覆蓋率數字。",
+      "good_answer_bullets": ["測試金字塔", "單元/整合測試", "Mock使用", "持續改進"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 31,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "描述你使用過的其中一個框架或庫，它的優缺點是什麼？",
+      "tips": "展示深度使用經驗，不只是表面功能。",
+      "good_answer_bullets": ["使用場景", "核心功能", "優點限制", "替代方案"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 32,
+      "category": "technical",
+      "difficulty": "hard",
+      "question": "你有沒有遇過系統故障？如何排查和修復的？",
+      "tips": "展示故障處理能力和冷靜態度。",
+      "good_answer_bullets": ["快速定位", "日誌分析", "逐步排除", "預防措施"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 33,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "RESTful API設計有哪些最佳實踐？",
+      "tips": "展示API設計能力和標準認識。",
+      "good_answer_bullets": ["資源命名", "HTTP方法", "狀態碼", "版本控制"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 34,
+      "category": "technical",
+      "difficulty": "easy",
+      "question": "你如何進行資料庫設計？有什麼原則？",
+      "tips": "展示資料庫設計基礎和正規化概念。",
+      "good_answer_bullets": ["正規化", "索引設計", "關係映射", "查詢優化"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 35,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "你有使用過Agile或Scrum開發方法嗎？體會如何？",
+      "tips": "展示團隊協作經驗和方法論理解。",
+      "good_answer_bullets": ["迭代開發", "Daily Standup", "Sprint Planning", "Retrospective"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 36,
+      "category": "technical",
+      "difficulty": "hard",
+      "question": "如何處理系統中的技術債務？什麼時候應該重構？",
+      "tips": "展示長期維護意識和權衡能力。",
+      "good_answer_bullets": ["識別優先順序", "逐步改善", "重構時機", "測試保障"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 37,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "你有沒有參與過系統遷移或升級？要注意什麼？",
+      "tips": "展示大型項目經驗和風險意識。",
+      "good_answer_bullets": ["規劃階段", "兼容性", "數據遷移", "回滾方案"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 38,
+      "category": "technical",
+      "difficulty": "easy",
+      "question": "你如何保持開發環境和生產環境的一致性？",
+      "tips": "展示DevOps意識和工具使用經驗。",
+      "good_answer_bullets": ["容器化", "Infrastructure as Code", "環境變量", "自動化部署"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 39,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "你有沒有使用過快取技術？如何選擇Redis或Memcached？",
+      "tips": "展示快取策略設計能力。",
+      "good_answer_bullets": ["使用場景", "數據結構", "過期策略", "一致性"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 40,
+      "category": "technical",
+      "difficulty": "hard",
+      "question": "如何設計一個可擴展的微服務架構？",
+      "tips": "展示分散式系統設計能力。",
+      "good_answer_bullets": ["服務拆分", "通訊機制", "服務發現", "容錯設計"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 41,
+      "category": "situational",
+      "difficulty": "easy",
+      "question": "如果明天有一個重要面試，但今天的工作還沒完成，你會怎麼做？",
+      "tips": "展示優先排序和時間管理能力。",
+      "good_answer_bullets": ["評估緊急性", "尋求延期可能", "高效完成", "展現責任心"],
+      "job_type_tags": ["general"]
+    },
+    {
+      "id": 42,
+      "category": "situational",
+      "difficulty": "medium",
+      "question": "如果同事不同意你的方案，但你相信自己是對的，你會怎麼處理？",
+      "tips": "展示溝通說服能力和團隊合作精神。",
+      "good_answer_bullets": ["理解對方觀點", "用數據支持", "尋求共識", "適時讓步"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 43,
+      "category": "situational",
+      "difficulty": "hard",
+      "question": "如果公司決定採用一個你認為有問題的技術決策，你會怎麼做？",
+      "tips": "展示建設性反饋能力和執行紀律。",
+      "good_answer_bullets": ["表達關切", "提供替代", "執行決定", "記錄風險"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 44,
+      "category": "situational",
+      "difficulty": "medium",
+      "question": "如果你發現團隊成員的代碼有安全漏洞，你會怎麼處理？",
+      "tips": "展示安全意識和負責任的溝通方式。",
+      "good_answer_bullets": ["私下溝通", "解釋風險", "協助修復", "預防教育"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 45,
+      "category": "situational",
+      "difficulty": "medium",
+      "question": "如果客戶提出一個不在合同範圍內的緊急需求，你會怎麼辦？",
+      "tips": "展示客戶服務意識和界限管理能力。",
+      "good_answer_bullets": ["評估緊急性", "說明範圍", "提出方案", "適當收費"],
+      "job_type_tags": ["general", "sales", "operations"]
+    },
+    {
+      "id": 46,
+      "category": "situational",
+      "difficulty": "easy",
+      "question": "如果老闆給你的任務指示不清楚，你會怎麼處理？",
+      "tips": "展示主動溝通和確認理解的態度。",
+      "good_answer_bullets": ["主動提問", "確認理解", "假設後驗證", "定期回報"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 47,
+      "category": "situational",
+      "difficulty": "medium",
+      "question": "如果你的下屬表現不佳，但項目截止日期臨近，你會怎麼辦？",
+      "tips": "展示領導力和壓力下的決策能力。",
+      "good_answer_bullets": ["及時溝通", "提供支持", "調整分工", "考慮外部資源"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 48,
+      "category": "situational",
+      "difficulty": "hard",
+      "question": "如果公司出現裁員風聲，團隊士氣低落，你會如何應對？",
+      "tips": "展示危機處理和穩定團隊的能力。",
+      "good_answer_bullets": ["保持透明", "專注可控", "支持同事", "展現韌性"],
+      "job_type_tags": ["general"]
+    },
+    {
+      "id": 49,
+      "category": "situational",
+      "difficulty": "medium",
+      "question": "如果你的工作被打斷，需要處理一個緊急問題，你會怎麼做？",
+      "tips": "展示優先排序和任務切換能力。",
+      "good_answer_bullets": ["評估優先", "告知預期", "快速切換", "事後跟進"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 50,
+      "category": "situational",
+      "difficulty": "medium",
+      "question": "如果你與跨部門同事在工作方式上有衝突，該如何解決？",
+      "tips": "展示跨團隊協作和衝突解決能力。",
+      "good_answer_bullets": ["理解差異", "尋找共識", "建立流程", "尊重專業"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 51,
+      "category": "final",
+      "difficulty": "easy",
+      "question": "你對這個職位最感興趣的是什麼？為什麼現在是加入的好時機？",
+      "tips": "展示對公司和崗位的熱情以及時機判斷。",
+      "good_answer_bullets": ["崗位吸引力", "公司發展", "個人匹配", "時機恰當"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 52,
+      "category": "final",
+      "difficulty": "medium",
+      "question": "如果我們錄用你，你預計第一個月會做什麼？",
+      "tips": "展示快速融入和產生價值的計劃。",
+      "good_answer_bullets": ["熟悉環境", "建立關係", "了解業務", "交付價值"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 53,
+      "category": "final",
+      "difficulty": "medium",
+      "question": "你認為自己能在這裡創造什麼價值？有哪些獨特之處？",
+      "tips": "展示自信但務實的價值觀。",
+      "good_answer_bullets": ["核心能力", "獨特經驗", "具體貢獻", "可衡量成果"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 54,
+      "category": "final",
+      "difficulty": "hard",
+      "question": "你還有其他公司的面試嗎？你如何選擇？",
+      "tips": "誠實但策略性地回答，展示你對機會的慎重態度。",
+      "good_answer_bullets": ["坦誠回應", "選擇標準", "優先順序", "決策考量"],
+      "job_type_tags": ["general"]
+    },
+    {
+      "id": 55,
+      "category": "final",
+      "difficulty": "medium",
+      "question": "你最快什麼時候可以入職？需要提前通知現公司嗎？",
+      "tips": "展示專業態度和離職規劃成熟度。",
+      "good_answer_bullets": ["合理時間", "現公司通知", "交接計劃", "靈活協調"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 56,
+      "category": "final",
+      "difficulty": "easy",
+      "question": "你有什麼疑問想了解這個崗位或團隊的嗎？",
+      "tips": "準備有深度的問題，展示真正的興趣。",
+      "good_answer_bullets": ["團隊文化", "成功標準", "發展機會", "挑戰預期"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 57,
+      "category": "final",
+      "difficulty": "medium",
+      "question": "你如何適應遠程或混合工作模式？有哪些經驗？",
+      "tips": "展示適應能力和自我管理經驗。",
+      "good_answer_bullets": ["時間管理", "溝通工具", "工作環境", "保持效率"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 58,
+      "category": "final",
+      "difficulty": "medium",
+      "question": "你認為5年後這個行業會有什麼變化？你如何準備？",
+      "tips": "展示行業洞察和前瞻性思維。",
+      "good_answer_bullets": ["趨勢了解", "技能準備", "持續學習", "靈活適應"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 59,
+      "category": "final",
+      "difficulty": "hard",
+      "question": "如果用三個詞形容自己，你會用什麼？為什麼？",
+      "tips": "選擇與崗位相關且真實的特質。",
+      "good_answer_bullets": ["真實反映", "崗位相關", "具體例證", "避免陳腔濫調"],
+      "job_type_tags": ["general"]
+    },
+    {
+      "id": 60,
+      "category": "final",
+      "difficulty": "medium",
+      "question": "最後，你想讓面試官記住你什麼？",
+      "tips": "總結核心價值和讓人印象深刻的亮點。",
+      "good_answer_bullets": ["核心價值", "獨特亮點", "熱情所在", "未來貢獻"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 61,
+      "category": "hr",
+      "difficulty": "hard",
+      "question": "描述一次你需要快速學習新技能以完成任務的經歷。",
+      "tips": "展示學習能力和適應能力。",
+      "good_answer_bullets": ["學習動機", "方法策略", "時間管理", "成果展示"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 62,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你有沒有領導過團隊完成一個困難的項目？如何激勵團隊？",
+      "tips": "展示領導力和團隊激勵能力。",
+      "good_answer_bullets": ["目標設定", "分工合理", "定期溝通", "認可獎勵"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 63,
+      "category": "technical",
+      "difficulty": "medium",
+      "question": "你有沒有參與過開源項目或技術社群？學到了什麼？",
+      "tips": "展示技術熱情和社群參與。",
+      "good_answer_bullets": ["參與經驗", "貢獻內容", "社群互動", "持續學習"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 64,
+      "category": "situational",
+      "difficulty": "hard",
+      "question": "如果你的項目因為外部因素延期，但老闆要求如期交付，你會怎麼做？",
+      "tips": "展示談判技巧和務實解決問題的能力。",
+      "good_answer_bullets": ["分析延期原因", "評估選項", "主動溝通", "尋求共識"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 65,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你如何平衡工作和生活？有什麼方法保持身心健康？",
+      "tips": "展示自我管理意識和生活態度。",
+      "good_answer_bullets": ["時間界限", "有效休息", "興趣培養", "身體健康"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 66,
+      "category": "situational",
+      "difficulty": "medium",
+      "question": "如果一個重要的利益相關者提出不合理的要求，你會如何處理？",
+      "tips": "展示談判技巧和維護原則的能力。",
+      "good_answer_bullets": ["理解需求", "解釋限制", "提出替代", "適當讓步"],
+      "job_type_tags": ["general", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 67,
+      "category": "technical",
+      "difficulty": "easy",
+      "question": "你有沒有自己學習或實驗過的技術項目？可以分享一下嗎？",
+      "tips": "展示技術熱情和自學能力。",
+      "good_answer_bullets": ["項目動機", "技術棧選擇", "克服挑戰", "收穫學習"],
+      "job_type_tags": ["engineering"]
+    },
+    {
+      "id": 68,
+      "category": "final",
+      "difficulty": "hard",
+      "question": "你認為成功和成就的定義是什麼？兩者有何不同？",
+      "tips": "展示價值觀和成熟度。",
+      "good_answer_bullets": ["成功定義", "成就含義", "價值觀反映", "平衡追求"],
+      "job_type_tags": ["general"]
+    },
+    {
+      "id": 69,
+      "category": "hr",
+      "difficulty": "medium",
+      "question": "你如何對待失敗和挫折？恢復的過程是怎樣的？",
+      "tips": "展示韌性和從逆境中恢復的能力。",
+      "good_answer_bullets": ["接受情緒", "分析原因", "尋求支持", "重新出發"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    },
+    {
+      "id": 70,
+      "category": "situational",
+      "difficulty": "medium",
+      "question": "如果你的團隊成員拒絕改變或接受新方法，你會怎麼處理？",
+      "tips": "展示變革管理和影響力能力。",
+      "good_answer_bullets": ["理解顧慮", "展示價值", "試點推行", "持續溝通"],
+      "job_type_tags": ["general", "engineering", "sales", "marketing", "finance", "operations"]
+    }
+  ]
+}

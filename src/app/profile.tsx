@@ -161,7 +161,17 @@ export default function ProfileScreen() {
               scrollEnabled={false}
               style={styles.cvList}
               renderItem={({ item }) => (
-                <View style={styles.cvListItem}>
+                <TouchableOpacity
+                  style={styles.cvListItem}
+                  onPress={() =>
+                    router.push({
+                      pathname: '/cv-detail',
+                      params: { id: String(item.id), fileName: item.file_name },
+                    })
+                  }
+                  activeOpacity={0.7}
+                  accessibilityLabel={`View CV analysis for ${item.file_name}`}
+                >
                   <View style={styles.cvListItemInfo}>
                     <Text style={styles.cvListFileName} numberOfLines={1}>
                       {item.file_name}
@@ -171,11 +181,14 @@ export default function ProfileScreen() {
                     </Text>
                   </View>
                   {item.score != null && (
-                    <View style={styles.cvScoreBadge}>
-                      <Text style={styles.cvScoreText}>{item.score}</Text>
+                    <View style={[styles.cvScoreBadge, getScoreBadgeStyle(item.score)]}>
+                      <Text style={styles.cvScoreText}>{item.score}/10</Text>
                     </View>
                   )}
-                </View>
+                </TouchableOpacity>
+              )}
+                  <Text style={styles.cvListArrow}>›</Text>
+                </TouchableOpacity>
               )}
             />
           )}
@@ -405,5 +418,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 12,
     fontWeight: '600',
+  },
+  cvListArrow: {
+    fontSize: 20,
+    color: '#ccc',
+    marginLeft: Spacing.two,
   },
 });

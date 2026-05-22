@@ -296,6 +296,19 @@ async def score_cv(request: Request, cv_id: int, db: Session = Depends(get_db)):
     cv.text_suggestions = result.text_suggestions
     db.commit()
 
+    # Record score history and check achievements
+    history_record = CVScoreHistory(
+        user_id=cv.user_id,
+        cv_id=cv_id,
+        score=result.overall_professionalism,
+        category_scores=result.to_dict()
+    )
+    db.add(history_record)
+    db.commit()
+
+    # Check and award achievements
+    new_achievements = check_and_award_achievements(db, cv.user_id, result.overall_professionalism, result.to_dict())
+
     return CVScoreResponse(
         cv_id=cv_id,
         score=result.overall_professionalism,

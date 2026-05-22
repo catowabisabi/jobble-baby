@@ -10,6 +10,7 @@ import {
   Alert,
   ActivityIndicator,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/hooks/useAuth';
@@ -17,12 +18,21 @@ import { useCVUpload } from '@/hooks/useCVUpload';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
+import CVScoreBadge from '../components/cv-score-badge';
+import AchievementBadge from '../components/achievement-badge';
+import CVCategoryBars from '../components/cv-category-bars';
+import MilestoneHint from '../components/milestone-hint';
+import ConfettiBurst from '../components/confetti-burst';
 
 export default function ProfileScreen() {
   const router = useRouter();
   const { user, logout, isAuthenticated } = useAuth();
   const { progress, status, result, error, cvs, isLoadingCVs, pickFile, fetchCVList } = useCVUpload(user?.id);
   const [matchCount, setMatchCount] = useState<number | null>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [achievements, setAchievements] = useState<any[]>([]);
+  const [milestone, setMilestone] = useState<any>(null);
+  const [scoreHistory, setScoreHistory] = useState<any>(null);
 
   useEffect(() => {
     const fetchAlertPreferences = async () => {
@@ -53,6 +63,26 @@ export default function ProfileScreen() {
       fetchCVList();
     }
   }, [status, fetchCVList]);
+
+  useEffect(() => {
+    if (!user) return;
+    
+    const fetchGamification = async () => {
+      try {
+        const [achRes, msRes, histRes] = await Promise.all([
+          fetch(`/api/v1/cvs/${user.id}/achievements`),
+          fetch(`/api/v1/cvs/${user.id}/milestones`),
+          fetch(`/api/v1/cvs/${user.id}/score-history`)
+        ]);
+        
+        if (achRes.ok) setAchievements((await achRes.json()).achievements || []);
+        if (msRes.ok) setMilestone((await msRes.json()).next_milestone || null);
+        if (histRes.ok) setScoreHistory(await histRes.json());
+      } catch (e) { console.log('Gamification fetch failed:', e); }
+    };
+    
+    fetchGamification();
+  }, [user]);
 
   const handleLogout = () => {
     Alert.alert(
@@ -239,6 +269,18 @@ export default function ProfileScreen() {
             />
           )}
         </View>
+
+        {user && (
+          <>
+            <CVScoreBadge score={scoreHistory?.best_score || 0} />
+            <CVCategoryBars categoryScores={scoreHistory?.history?.[0]?.category_scores || {}} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{flexDirection: 'row', marginVertical: 8}}>
+                {achievements.map((a, i) => <AchievementBadge key={i} achievement={a} />)}
+            </ScrollView>
+            {milestone && <MilestoneHint milestone={milestone} />}
+            {showConfetti && <ConfettiBurst onComplete={() => setShowConfetti(false)} />}
+          </>
+        )}
 
         <TouchableOpacity
           style={styles.logoutButton}

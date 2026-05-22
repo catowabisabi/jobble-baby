@@ -19,6 +19,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'expo-router';
+import PremiumGate from '@/components/premium-gate';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
 
@@ -218,6 +219,7 @@ export default function JobAlertsScreen() {
   }
 
   return (
+    <PremiumGate featureName="求職警報設定">
     <ThemedView style={styles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -469,3 +471,6 @@ const styles = StyleSheet.create({
     color: '#666',
   },
 });
+    </PremiumGate>
+  );
+}

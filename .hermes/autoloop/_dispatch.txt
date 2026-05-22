@@ -1,40 +1,173 @@
-fix: implement salary nudge comparator with visual anchor
+fix: implement premium feature gating on frontend screens
 
 ## Context
-#15 is a new P3 task. Build salary nudge comparator that shows users where they stand vs market range for their role/experience, with clear visual indicator if they are below/above median. Based on idea #2 (Nudge-based salary comparator).
+Subscription paywall (#11) and job alert system (#12) are complete, but the paywall is not actually blocking access to premium features. Users can navigate to interview, cv-optimization, and job-alerts screens without subscribing. Need to gate these behind a premium check.
 
 ## Task
 
-### Step 1: Read existing salary query
-Look at:
-- src/app/salary-query.tsx
-- backend/app/api/salary.py (if exists)
+### Step 1: Audit Premium Feature Screens
+Check these screens for existing subscription checks:
+- src/app/interview.tsx
+- src/app/interview-readiness.tsx
+- src/app/job-alerts.tsx
+- src/app/cv-detail.tsx
 
-Understand current salary query UI and data model.
+For each screen, determine:
+- Is there a useAuth() or subscription check?
+- What happens when a free user tries to access premium features?
+- Is the paywall modal shown?
 
-### Step 2: Design backend
-Create or extend salary API to return:
-- Market range (low, median, high) for user's role/experience/location
-- User's target salary position relative to market
-- Visual anchor data for frontend
+### Step 2: Implement useSubscription Hook
+Create: src/hooks/useSubscription.ts
+```typescript
+import { useState, useEffect } from 'react';
+import { SecureStore } from 'expo-secure-store';
+import { useAuth } from './useAuth';
 
-If no salary API exists, create one with anonymized market data.
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
 
-### Step 3: Build salary comparator component
-Enhance or create salary comparator UI:
-- Visual bar showing market range (low → median → high)
-- User's target salary marked on the bar with color indicator
-- Green if above median, yellow if near median, red if significantly below
-- "Ask for more" CTA that suggests negotiation talking points
-- Comparison context: "You are X% below market median for this role"
+interface SubscriptionStatus {
+  is_premium: boolean;
+  plan: 'free' | 'monthly' | 'yearly' | null;
+  expires_at: string | null;
+}
 
-### Step 4: Integrate with salary-query.tsx
-- Show comparator after salary query results
-- Make it actionable - links to negotiation tips or CV improvement
+export function useSubscription() {
+  const { user, isAuthenticated } = useAuth();
+  const [status, setStatus] = useState<SubscriptionStatus>({
+    is_premium: false,
+    plan: null,
+    expires_at: null,
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
-### Step 5: Update progress DB
-Mark #15 in_progress when you start, completed when done.
+  useEffect(() => {
+    if (!isAuthenticated || !user) {
+      setStatus({ is_premium: false, plan: null, expires_at: null });
+      return;
+    }
+
+    const fetchSubscription = async () => {
+      setIsLoading(true);
+      try {
+        const token = await SecureStore.getItemAsync('auth_token');
+        const response = await fetch(`${API_BASE_URL}/users/subscription`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setStatus({
+            is_premium: data.plan !== 'free' && data.plan !== null,
+            plan: data.plan,
+            expires_at: data.expires_at,
+          });
+        }
+      } catch (e) {
+        console.warn('Failed to fetch subscription status:', e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSubscription();
+  }, [isAuthenticated, user]);
+
+  return { ...status, isLoading };
+}
+```
+
+### Step 3: Create PremiumGate Component
+Create: src/components/premium-gate.tsx
+
+```typescript
+import React from 'react';
+import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { useRouter } from 'expo-router';
+import { ThemedText } from '@/components/themed-text';
+import { Spacing } from '@/constants/theme';
+import { useSubscription } from '@/hooks/useSubscription';
+
+interface PremiumGateProps {
+  children: React.ReactNode;
+  featureName?: string;
+}
+
+export default function PremiumGate({ children, featureName = '此功能' }: PremiumGateProps) {
+  const router = useRouter();
+  const { is_premium, isLoading } = useSubscription();
+
+  if (isLoading) return null;
+  if (is_premium) return <>{children}</>;
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.lockedContent}>
+        <Text style={styles.lockEmoji}>🔒</Text>
+        <ThemedText type="subtitle" style={styles.title}>
+          Premium 功能
+        </ThemedText>
+        <ThemedText themeColor="textSecondary" style={styles.description}>
+          {featureName}需要 Premium 訂閱才能使用
+        </ThemedText>
+        <TouchableOpacity
+          style={styles.upgradeButton}
+          onPress={() => router.push('/subscription')}
+        >
+          <ThemedText style={styles.upgradeButtonText}>升級 Premium</ThemedText>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: Spacing.four,
+  },
+  lockedContent: {
+    alignItems: 'center',
+    gap: Spacing.three,
+    maxWidth: 300,
+  },
+  lockEmoji: {
+    fontSize: 48,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  description: {
+    textAlign: 'center',
+    lineHeight: 22,
+  },
+  upgradeButton: {
+    backgroundColor: '#fbbf24',
+    paddingHorizontal: Spacing.four,
+    paddingVertical: Spacing.two,
+    borderRadius: Spacing.two,
+    marginTop: Spacing.two,
+  },
+  upgradeButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#000',
+  },
+});
+```
+
+### Step 4: Update Premium Screens
+Add PremiumGate to:
+- interview.tsx - wrap main interview content
+- job-alerts.tsx - wrap the alert setup/listing
+
+Do NOT add to interview-readiness.tsx (dashboard is free tier)
+
+### Step 5: Update progress.db
+No new todos - just fix the bug.
 
 ## Keywords
-anchor, negotiation, parity
+monetization, subscription, paywall, premium gate, access control
 ULW

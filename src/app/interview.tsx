@@ -207,6 +207,28 @@ export default function InterviewScreen() {
 
       setSubmitResult(data);
       setStep('results');
+
+      // Record session to database for dashboard tracking
+      try {
+        await fetch(`${API_BASE_URL}/interviews/sessions`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            session_id: sessionId,
+            job_type: jobType,
+            interview_type: interviewType,
+            level: level,
+            overall_score: data.overall_score,
+            per_question_feedback: data.per_question_feedback,
+          }),
+        });
+      } catch (recordError) {
+        // Silent fail for recording - don't interrupt user experience
+        console.log('Session recording skipped');
+      }
     } catch (e: any) {
       setError(e.message || '網絡錯誤');
     } finally {

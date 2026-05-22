@@ -134,6 +134,23 @@ class MilestoneAchievement(Base):
     user = relationship("User", back_populates="milestone_achievements")
 
 
+class InterviewSession(Base):
+    """Interview practice session model"""
+    __tablename__ = "interview_sessions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    session_id = Column(String, nullable=False)
+    job_type = Column(String, nullable=True)
+    interview_type = Column(String, nullable=True)
+    level = Column(String, nullable=True)
+    overall_score = Column(Integer, nullable=True)
+    feedback_categories = Column(JSON, nullable=True)
+    completed_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User")
+
+
 def get_db():
     """獲取數據庫會話"""
     db = SessionLocal()

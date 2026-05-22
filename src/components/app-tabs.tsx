@@ -36,6 +36,14 @@ export default function AppTabs() {
           renderingMode="template"
         />
       </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="interview-readiness">
+        <NativeTabs.Trigger.Label>Readiness</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon
+          src={require('@/assets/images/tabIcons/interview-readiness.png')}
+          renderingMode="template"
+        />
+      </NativeTabs.Trigger>
     </NativeTabs>
   );
 }

@@ -9,11 +9,11 @@ import random
 import uuid
 from datetime import datetime
 from typing import Optional, List, Dict, Any
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 import openai
 
-from app.models.database import User, get_db
+from app.models.database import User, InterviewSession, get_db
 from app.api.users import get_current_user
 
 router = APIRouter()
@@ -305,3 +305,204 @@ async def get_interview_history(request: Request, current_user: User = Depends(g
     return {
         "sessions": user_sessions
     }
+
+
+class SessionRecord(BaseModel):
+    session_id: str
+    job_type: str
+    interview_type: str
+    level: str
+    overall_score: float
+    feedback_categories: Optional[Dict[str, float]] = None
+
+
+class RecordSessionRequest(BaseModel):
+    session_id: str
+    job_type: str
+    interview_type: str
+    level: str
+    overall_score: float
+    per_question_feedback: List[dict]
+
+
+@router.post("/sessions")
+async def record_interview_session(
+    request: Request,
+    session_data: RecordSessionRequest,
+    current_user: User = Depends(get_current_user)
+):
+    """Record a completed interview session to database"""
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
+    # Extract category scores from feedback
+    feedback_categories = {}
+    for fb in session_data.per_question_feedback:
+        category = fb.get("category", "general")
+        if category not in feedback_categories:
+            feedback_categories[category] = []
+        feedback_categories[category].append(fb.get("score", 7.0))
+    
+    # Average scores per category
+    avg_categories = {
+        cat: sum(scores) / len(scores) 
+        for cat, scores in feedback_categories.items()
+    }
+    
+    # Save to database
+    db = next(get_db())
+    try:
+        interview_session = InterviewSession(
+            user_id=current_user.id,
+            session_id=session_data.session_id,
+            job_type=session_data.job_type,
+            interview_type=session_data.interview_type,
+            level=session_data.level,
+            overall_score=int(session_data.overall_score * 10),
+            feedback_categories=avg_categories,
+            completed_at=datetime.utcnow()
+        )
+        db.add(interview_session)
+        db.commit()
+        
+        return {"status": "recorded", "session_id": session_data.session_id}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        db.close()
+
+
+@router.get("/sessions")
+async def get_interview_sessions(
+    request: Request,
+    current_user: User = Depends(get_current_user),
+    limit: int = 20
+):
+    """Get interview session history for dashboard"""
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
+    db = next(get_db())
+    try:
+        sessions = db.query(InterviewSession).filter(
+            InterviewSession.user_id == current_user.id
+        ).order_by(InterviewSession.completed_at.desc()).limit(limit).all()
+        
+        return {
+            "sessions": [
+                {
+                    "session_id": s.session_id,
+                    "date": s.completed_at.isoformat()[:10] if s.completed_at else "",
+                    "job_type": s.job_type or "",
+                    "interview_type": s.interview_type or "",
+                    "level": s.level or "",
+                    "score": s.overall_score / 10.0 if s.overall_score else None,
+                    "feedback_categories": s.feedback_categories or {}
+                }
+                for s in sessions
+            ]
+        }
+    finally:
+        db.close()
+
+
+@router.get("/readiness")
+async def get_interview_readiness(
+    request: Request,
+    current_user: User = Depends(get_current_user)
+):
+    """Get interview readiness dashboard data"""
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
+    db = next(get_db())
+    try:
+        # Get last 10 sessions for analysis
+        sessions = db.query(InterviewSession).filter(
+            InterviewSession.user_id == current_user.id
+        ).order_by(InterviewSession.completed_at.desc()).limit(10).all()
+        
+        if not sessions:
+            return {
+                "total_sessions": 0,
+                "average_score": None,
+                "readiness_level": "no_data",
+                "recent_trend": [],
+                "focus_areas": [],
+                "sessions": []
+            }
+        
+        # Calculate average score
+        scores = [s.overall_score / 10.0 for s in sessions if s.overall_score]
+        avg_score = sum(scores) / len(scores) if scores else 0
+        
+        # Determine readiness level
+        if avg_score >= 8:
+            readiness_level = "expert"
+        elif avg_score >= 6:
+            readiness_level = "ready"
+        else:
+            readiness_level = "building"
+        
+        # Calculate trend (last 5 vs previous 5)
+        recent_scores = scores[:5] if len(scores) >= 5 else scores
+        older_scores = scores[5:10] if len(scores) > 5 else []
+        
+        trend = []
+        if len(recent_scores) >= 3:
+            trend = recent_scores
+        
+        # Find focus areas (weakest categories)
+        all_categories: Dict[str, List[float]] = {}
+        for session in sessions:
+            if session.feedback_categories:
+                for cat, score in session.feedback_categories.items():
+                    if cat not in all_categories:
+                        all_categories[cat] = []
+                    all_categories[cat].append(score)
+        
+        focus_areas = []
+        if all_categories:
+            cat_averages = {
+                cat: sum(scores) / len(scores) 
+                for cat, scores in all_categories.items()
+            }
+            # Sort by lowest score first
+            sorted_cats = sorted(cat_averages.items(), key=lambda x: x[1])
+            for cat, avg in sorted_cats[:3]:
+                if avg < 7:
+                    focus_areas.append({
+                        "category": cat,
+                        "average_score": round(avg, 1),
+                        "suggestion": f"需要加強{cat}方面的練習"
+                    })
+        
+        return {
+            "total_sessions": len(sessions),
+            "average_score": round(avg_score, 1),
+            "readiness_level": readiness_level,
+            "readiness_badge": {
+                "building": "🏗️ 建設中",
+                "ready": "✅ 準備就緒",
+                "expert": "🎯 面試高手"
+            }.get(readiness_level, "❓ 開始練習"),
+            "recent_trend": trend,
+            "focus_areas": focus_areas,
+            "sessions": [
+                {
+                    "session_id": s.session_id,
+                    "date": s.completed_at.isoformat()[:10] if s.completed_at else "",
+                    "job_type": s.job_type or "",
+                    "interview_type": s.interview_type or "",
+                    "level": s.level or "",
+                    "score": s.overall_score / 10.0 if s.overall_score else None
+                }
+                for s in sessions
+            ]
+        }
+    finally:
+        db.close()

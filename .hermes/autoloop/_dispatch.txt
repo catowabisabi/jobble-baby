@@ -1,28 +1,36 @@
-fix: implement premium subscription paywall + feature gating UI
+fix: implement job alert / recruiter radar system (M5)
 
 ## Context
-Jobble Baby needs a subscription/paywall system to gate premium features. Free users get basic CV upload + salary query. Premium users (HK$99-299/month) unlock: AI interview simulation, CV optimization, job alerts.
+Jobble Baby - subscription paywall (#11) just completed. Now implementing M5: recruiter radar + job alert system. Previous milestones: M1 auth, M2 CV analysis, M3 salary query, M4 interview simulation, M6 subscription paywall all done.
 
 ## Task
-Build a subscription paywall screen and wire up feature gating throughout the app.
+Build job alert / recruiter radar system:
 
 ### Backend (FastAPI):
-1. Add subscription_tier column (free/trial/premium) + subscription_expires_at to users table
-2. Create PATCH /api/v1/users/subscription endpoint to upgrade user tier
-3. Update GET /api/v1/users/me to return subscription_tier and subscription_expires_at
-4. Create GET /api/v1/subscription/plans endpoint returning Free + Premium plans
+1. Create PATCH /api/v1/users/alert-preferences to save user notification preferences (job_types[], salary_min, locations[], keywords[])
+2. Create GET /api/v1/users/alert-preferences to retrieve saved preferences
+3. Create GET /api/v1/jobs/matches?user_id=X - return matching jobs based on user preferences from real_jobs.json (reuse existing job data). Match on: job_type, salary >= salary_min, location, keywords in job title/description
+4. Create POST /api/v1/notifications/send - trigger push notification (store in DB for now, Expo Push later)
+5. Add last_alert_sent_at to user preferences tracking
 
 ### Frontend (React Native/Expo):
-1. Create src/app/subscription.tsx - subscription plans screen with Free vs Premium cards, pricing (HK$199/mo), upgrade button, FAQ
-2. Update src/app/profile.tsx - show subscription badge, add Upgrade to Premium button for free users
-3. Update src/app/interview.tsx - add premium gate check, show lock overlay with upgrade CTA for free users
-4. Update src/components/app-tabs.tsx - show crown badge on profile tab for premium users
+1. Create src/app/job-alerts.tsx - settings screen where user configures:
+   - Job types (multi-select chips): Backend, Frontend, Full Stack, DevOps, Data, Mobile, PM, Design
+   - Minimum salary (numeric input with HKD prefix)
+   - Locations (multi-select): Hong Kong, Remote, Kowloon, New Territories
+   - Keywords (text input, comma-separated)
+   - Notification toggle (enable/disable alerts)
+   - Save button → PATCH alert-preferences
 
-### Implementation Notes:
-- Backend subscription upgrade is simple toggle for MVP (no real payment yet)
-- Feature gates check user.subscription_tier not equal to premium before allowing access
-- Make it compelling - this is a conversion screen
+2. Update src/app/profile.tsx - add "Job Alerts" button navigating to /job-alerts, show match count badge if preferences saved
+
+3. Add src/components/job-match-card.tsx - display matched job with company, title, salary, match score percentage
+
+4. Add alert badge on tab bar (Bell icon) when alerts configured
+
+### Data Flow:
+User sets preferences → stored in DB → matches computed against real_jobs.json → displayed on profile as "X jobs match you" → Expo Push notification when new matching job appears
 
 ## Keywords
-subscription paywall premium-gating
+job alert, recruiter radar, push notification
 ULW

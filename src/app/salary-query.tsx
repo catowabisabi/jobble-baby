@@ -17,6 +17,7 @@ import { useRouter } from 'expo-router';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
+import SalaryComparator from '@/components/salary-comparator';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
 
@@ -41,6 +42,25 @@ interface MarketRangeResponse {
   currency: string;
 }
 
+interface SalaryCompareResponse {
+  job_title: string;
+  level: string;
+  market: {
+    low: number;
+    median: number;
+    high: number;
+    currency: string;
+  };
+  user_target: number;
+  position_percent: number;
+  status: string;
+  status_label: string;
+  status_color: string;
+  comparison_text: string;
+  recommendation: string;
+  negotiation_tips: string[];
+}
+
 export default function SalaryQueryScreen() {
   const router = useRouter();
 
@@ -53,9 +73,12 @@ export default function SalaryQueryScreen() {
   // UI 狀態
   const [isLoading, setIsLoading] = useState(false);
   const [isMarketRangeLoading, setIsMarketRangeLoading] = useState(false);
+  const [isCompareLoading, setIsCompareLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<SalaryQueryResponse | null>(null);
   const [marketResult, setMarketResult] = useState<MarketRangeResponse | null>(null);
+  const [compareResult, setCompareResult] = useState<SalaryCompareResponse | null>(null);
+  const [targetSalary, setTargetSalary] = useState('');
 
   const handleSubmit = async () => {
     // 驗證必填欄位
@@ -151,6 +174,56 @@ export default function SalaryQueryScreen() {
       setError(e.message || '網絡錯誤');
     } finally {
       setIsMarketRangeLoading(false);
+    }
+  };
+
+  const handleCompareSalary = async () => {
+    if (!jobTitle.trim()) {
+      Alert.alert('錯誤', '請輸入職位名稱');
+      return;
+    }
+    if (!targetSalary.trim()) {
+      Alert.alert('錯誤', '請輸入你的期望薪資');
+      return;
+    }
+
+    const salary = parseInt(targetSalary.replace(/[^0-9]/g, ''), 10);
+    if (isNaN(salary) || salary < 5000) {
+      Alert.alert('錯誤', '請輸入有效的期望薪資');
+      return;
+    }
+
+    const years = experienceYears.trim() ? parseInt(experienceYears, 10) : 5;
+
+    setIsCompareLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/salary/compare`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          job_title: jobTitle.trim(),
+          experience_years: years,
+          target_salary: salary,
+          industry: industry.trim() || undefined,
+          location: location.trim() || undefined,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || '比較失敗');
+      }
+
+      setCompareResult(data);
+    } catch (e: any) {
+      setError(e.message || '網絡錯誤');
+    } finally {
+      setIsCompareLoading(false);
     }
   };
 
@@ -303,6 +376,26 @@ export default function SalaryQueryScreen() {
     );
   };
 
+  const renderCompareResult = () => {
+    if (!compareResult) return null;
+
+    return (
+      <SalaryComparator
+        jobTitle={compareResult.job_title}
+        level={compareResult.level}
+        userTarget={compareResult.user_target}
+        market={compareResult.market}
+        positionPercent={compareResult.position_percent}
+        status={compareResult.status}
+        statusLabel={compareResult.status_label}
+        statusColor={compareResult.status_color}
+        comparisonText={compareResult.comparison_text}
+        recommendation={compareResult.recommendation}
+        negotiationTips={compareResult.negotiation_tips}
+      />
+    );
+  };
+
   return (
     <ThemedView style={styles.container}>
       <KeyboardAvoidingView
@@ -385,6 +478,22 @@ export default function SalaryQueryScreen() {
               />
             </View>
 
+            <View style={styles.inputGroup}>
+              <ThemedText type="smallBold" style={styles.label}>
+                期望薪資 (HKD) *
+              </ThemedText>
+              <TextInput
+                style={[styles.input, isLoading && styles.inputDisabled]}
+                placeholder="例如：50000"
+                placeholderTextColor="#999"
+                value={targetSalary}
+                onChangeText={setTargetSalary}
+                keyboardType="number-pad"
+                editable={!isLoading}
+                accessibilityLabel="期望薪資輸入"
+              />
+            </View>
+
             {error && (
               <View style={styles.errorContainer}>
                 <ThemedText type="small" style={styles.errorText}>
@@ -418,10 +527,24 @@ export default function SalaryQueryScreen() {
                 <Text style={styles.secondaryButtonText}>市場薪資範圍</Text>
               )}
             </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.compareButton, isCompareLoading && styles.buttonDisabled]}
+              onPress={handleCompareSalary}
+              disabled={isCompareLoading}
+              accessibilityLabel="薪資比較按鈕"
+            >
+              {isCompareLoading ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.compareButtonText}>比較我的薪資</Text>
+              )}
+            </TouchableOpacity>
           </View>
 
           {renderResult()}
           {renderMarketResult()}
+          {renderCompareResult()}
         </ScrollView>
       </KeyboardAvoidingView>
     </ThemedView>
@@ -495,6 +618,18 @@ const styles = StyleSheet.create({
   },
   secondaryButtonText: {
     color: '#007AFF',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  compareButton: {
+    backgroundColor: '#10b981',
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+    marginTop: Spacing.two,
+  },
+  compareButtonText: {
+    color: '#fff',
     fontSize: 18,
     fontWeight: '600',
   },

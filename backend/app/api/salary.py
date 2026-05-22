@@ -89,6 +89,14 @@ class SalaryQuery(BaseModel):
     location: Optional[str] = None
 
 
+class SalaryCompareRequest(BaseModel):
+    job_title: str
+    experience_years: int
+    target_salary: int
+    industry: Optional[str] = None
+    location: Optional[str] = None
+
+
 class SalaryResult(BaseModel):
     job_title: str
     level: str
@@ -202,4 +210,115 @@ async def get_market_range(request: Request, job_title: str, experience_years: i
         "percentile_75": 45000,
         "percentile_90": 55000,
         "currency": "HKD"
+    }
+
+
+@router.post("/compare")
+async def compare_salary(request: Request, compare_req: SalaryCompareRequest, current_user: User = Depends(get_current_user)):
+    """
+    Compare user's target salary against market range.
+    Returns visual anchor data for frontend comparator.
+    """
+    limiter = get_limiter(request)
+    if hasattr(limiter, 'check'):
+        limiter.check(request, "30/minute")
+    
+    # Determine level from experience years
+    level = get_level(compare_req.experience_years)
+    
+    # Try to find exact or partial match
+    salary_data = find_salary_bands(compare_req.job_title, level)
+    
+    # Fallback to category average if not found
+    if not salary_data:
+        level_jobs = [job for job in SALARY_DATA["jobs"] if job["level"] == level]
+        if level_jobs:
+            categories = {}
+            for job in level_jobs:
+                cat = job["category"]
+                categories[cat] = categories.get(cat, 0) + 1
+            fallback_category = max(categories, key=categories.get)
+            salary_data = get_category_average(fallback_category, level)
+    
+    if salary_data:
+        low = salary_data["low_25th"]
+        median = salary_data["median"]
+        high = salary_data["high_75th"]
+    else:
+        low, median, high = 20000, 30000, 45000
+    
+    # Calculate user's position
+    target = compare_req.target_salary
+    median_position = ((target - low) / (high - low)) * 100 if high > low else 50
+    
+    # Determine status and recommendation
+    if target >= median:
+        # User is at or above median
+        if target >= high:
+            status = "above_high"
+            status_label = "高於市場"
+            status_color = "#10b981"  # green
+            gap_percent = ((target - high) / high) * 100
+            comparison_text = f"你的期望薪資比市場最高值高出 {gap_percent:.0f}%"
+            recommendation = "你可以大膽提出這個薪資要求"
+            negotiation_tips = [
+                "強調你的獨特價值主張",
+                "準備好justify你的薪資期望",
+                "考虑整體薪酬包（含獎金、股份等）"
+            ]
+        else:
+            status = "above_median"
+            status_label = "高於中位數"
+            status_color = "#10b981"  # green
+            gap_percent = ((median - target) / median) * 100 if target < median else ((target - median) / median) * 100
+            comparison_text = f"你的期望薪資比市場中位數高出 {((target - median) / median) * 100:.0f}%"
+            recommendation = "這個薪資要求合理，可以嘗試争取"
+            negotiation_tips = [
+                "展示你在這個崗位的獨特優勢",
+                "準備具體的成就數據支持",
+                "考虑非薪酬條件讓整體package更具吸引力"
+            ]
+    else:
+        # User is below median
+        gap_percent = ((median - target) / median) * 100
+        if target >= low:
+            status = "below_median"
+            status_label = "低於中位數"
+            status_color = "#f59e0b"  # yellow/amber
+            comparison_text = f"你的期望薪資比市場中位數低 {gap_percent:.0f}%"
+            recommendation = "你可以要求更高的薪資"
+            negotiation_tips = [
+                "你目前的薪資要求低於市場水平",
+                "根據你的經驗，應該可以要求至少 {median:.0f}".format(median=median),
+                "準備好談論你的價值和成就"
+            ]
+        else:
+            status = "significantly_below"
+            status_label = "顯著低於市場"
+            status_color = "#ef4444"  # red
+            comparison_text = f"你的期望薪資比市場中位數低 {gap_percent:.0f}%，比市場最低值還低"
+            recommendation = "強烈建議提高你的薪資期望"
+            negotiation_tips = [
+                "你目前的薪資要求嚴重偏低",
+                "市場顯示同級別工作薪資至少為 {low:.0f}".format(low=low),
+                "不要低估自己的市場價值"
+            ]
+    
+    return {
+        "job_title": compare_req.job_title,
+        "level": level,
+        "market": {
+            "low": low,
+            "median": median,
+            "high": high,
+            "currency": "HKD"
+        },
+        "user_target": target,
+        "position_percent": round(median_position, 1),
+        "status": status,
+        "status_label": status_label,
+        "status_color": status_color,
+        "comparison_text": comparison_text,
+        "recommendation": recommendation,
+        "negotiation_tips": negotiation_tips
     }

@@ -2,7 +2,7 @@
  * 認證 Context - 管理全局用戶登入狀態
  */
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
 const FETCH_TIMEOUT_MS = 15000;
@@ -33,28 +33,40 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const TOKEN_KEY = 'auth_token';
 const USER_KEY = 'auth_user';
 
+// Helper: safe JSON parse for stored user
+function safeParseUser(json: string): User | null {
+  try {
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // 初始化 - 從 AsyncStorage 恢復會話
+  // 初始化 - 從 SecureStore 恢復會話
   useEffect(() => {
     loadStoredAuth();
   }, []);
 
   const loadStoredAuth = async () => {
     try {
-      const storedToken = await AsyncStorage.getItem(TOKEN_KEY);
-      const storedUser = await AsyncStorage.getItem(USER_KEY);
-      
-      if (storedToken && storedUser) {
-        setToken(storedToken);
-        setUser(JSON.parse(storedUser));
+      const storedToken = await SecureStore.getItemAsync(TOKEN_KEY);
+      const storedUserRaw = await SecureStore.getItemAsync(USER_KEY);
+
+      if (storedToken && storedUserRaw) {
+        const storedUser = safeParseUser(storedUserRaw);
+        if (storedUser) {
+          setToken(storedToken);
+          setUser(storedUser);
+        }
       }
     } catch (e) {
-      console.error('Failed to load auth from storage:', e);
+      console.error('Failed to load auth from secure storage:', e);
     } finally {
       setIsLoading(false);
     }
@@ -82,8 +94,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error(data.detail || '登入失敗');
       }
 
-      await AsyncStorage.setItem(TOKEN_KEY, data.access_token);
-      await AsyncStorage.setItem(USER_KEY, JSON.stringify(data.user));
+      await SecureStore.setItemAsync(TOKEN_KEY, data.access_token);
+      await SecureStore.setItemAsync(USER_KEY, JSON.stringify(data.user));
 
       setToken(data.access_token);
       setUser(data.user);
@@ -120,8 +132,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error(data.detail || '註冊失敗');
       }
 
-      await AsyncStorage.setItem(TOKEN_KEY, data.access_token);
-      await AsyncStorage.setItem(USER_KEY, JSON.stringify(data.user));
+      await SecureStore.setItemAsync(TOKEN_KEY, data.access_token);
+      await SecureStore.setItemAsync(USER_KEY, JSON.stringify(data.user));
 
       setToken(data.access_token);
       setUser(data.user);
@@ -138,8 +150,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
-      await AsyncStorage.removeItem(TOKEN_KEY);
-      await AsyncStorage.removeItem(USER_KEY);
+      await SecureStore.deleteItemAsync(TOKEN_KEY);
+      await SecureStore.deleteItemAsync(USER_KEY);
       setToken(null);
       setUser(null);
     } catch (e) {

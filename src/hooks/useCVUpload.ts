@@ -26,7 +26,8 @@ interface UseCVUploadReturn {
   fetchCVList: () => Promise<void>;
 }
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
+const FETCH_TIMEOUT_MS = 30000;
 const ACCEPTED_TYPES = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 const ACCEPTED_EXTENSIONS = '.pdf,.docx';
 

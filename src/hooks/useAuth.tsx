@@ -4,8 +4,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// API 配置
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
+const FETCH_TIMEOUT_MS = 15000;
 
 // 用戶類型
 interface User {
@@ -62,6 +62,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     setError(null);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
     try {
       const response = await fetch(`${API_BASE_URL}/users/login`, {
         method: 'POST',
@@ -69,7 +72,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        signal: controller.signal,
       });
+      clearTimeout(timeoutId);
 
       const data = await response.json();
 
@@ -77,20 +82,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error(data.detail || '登入失敗');
       }
 
-      // 存儲 token 和用戶信息
       await AsyncStorage.setItem(TOKEN_KEY, data.access_token);
       await AsyncStorage.setItem(USER_KEY, JSON.stringify(data.user));
-      
+
       setToken(data.access_token);
       setUser(data.user);
     } catch (e: any) {
-      setError(e.message || '網絡錯誤');
+      clearTimeout(timeoutId);
+      if (e.name === 'AbortError') {
+        setError('請求超時，請稍後再試');
+      } else {
+        setError(e.message || '網絡錯誤');
+      }
       throw e;
     }
   };
 
   const register = async (email: string, password: string, name?: string) => {
     setError(null);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
     try {
       const response = await fetch(`${API_BASE_URL}/users/register`, {
         method: 'POST',
@@ -98,7 +110,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password, name }),
+        signal: controller.signal,
       });
+      clearTimeout(timeoutId);
 
       const data = await response.json();
 
@@ -106,14 +120,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error(data.detail || '註冊失敗');
       }
 
-      // 存儲 token 和用戶信息
       await AsyncStorage.setItem(TOKEN_KEY, data.access_token);
       await AsyncStorage.setItem(USER_KEY, JSON.stringify(data.user));
-      
+
       setToken(data.access_token);
       setUser(data.user);
     } catch (e: any) {
-      setError(e.message || '網絡錯誤');
+      clearTimeout(timeoutId);
+      if (e.name === 'AbortError') {
+        setError('請求超時，請稍後再試');
+      } else {
+        setError(e.message || '網絡錯誤');
+      }
       throw e;
     }
   };

@@ -59,6 +59,7 @@ export default function LoginScreen() {
               autoCapitalize="none"
               keyboardType="email-address"
               editable={!isLoading}
+              accessibilityLabel="Email input"
             />
 
             <TextInput
@@ -69,12 +70,14 @@ export default function LoginScreen() {
               onChangeText={setPassword}
               secureTextEntry
               editable={!isLoading}
+              accessibilityLabel="Password input"
             />
 
             <TouchableOpacity
               style={styles.button}
               onPress={handleLogin}
               disabled={isLoading}
+              accessibilityLabel="Login button"
             >
               {isLoading ? (
                 <ActivityIndicator color="#fff" />

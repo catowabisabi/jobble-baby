@@ -62,6 +62,7 @@ export default function RegisterScreen() {
               value={name}
               onChangeText={setName}
               editable={!isLoading}
+              accessibilityLabel="Name input"
             />
 
             <TextInput
@@ -73,6 +74,7 @@ export default function RegisterScreen() {
               autoCapitalize="none"
               keyboardType="email-address"
               editable={!isLoading}
+              accessibilityLabel="Email input"
             />
 
             <TextInput
@@ -83,12 +85,14 @@ export default function RegisterScreen() {
               onChangeText={setPassword}
               secureTextEntry
               editable={!isLoading}
+              accessibilityLabel="Password input"
             />
 
             <TouchableOpacity
               style={styles.button}
               onPress={handleRegister}
               disabled={isLoading}
+              accessibilityLabel="Register button"
             >
               {isLoading ? (
                 <ActivityIndicator color="#fff" />

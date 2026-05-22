@@ -61,6 +61,7 @@ export default function ProfileScreen() {
           <TouchableOpacity
             style={styles.button}
             onPress={() => router.push('/login')}
+            accessibilityLabel="Go to login button"
           >
             <Text style={styles.buttonText}>前往登入</Text>
           </TouchableOpacity>
@@ -117,6 +118,7 @@ export default function ProfileScreen() {
             style={[styles.uploadButton, status === 'uploading' && styles.uploadButtonDisabled]}
             onPress={pickFile}
             disabled={status === 'uploading'}
+            accessibilityLabel="Upload CV button"
           >
             {status === 'uploading' ? (
               <ActivityIndicator color="#fff" />
@@ -182,6 +184,7 @@ export default function ProfileScreen() {
         <TouchableOpacity
           style={styles.logoutButton}
           onPress={handleLogout}
+          accessibilityLabel="Logout button"
         >
           <Text style={styles.logoutText}>登出</Text>
         </TouchableOpacity>

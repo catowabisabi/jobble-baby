@@ -23,6 +23,7 @@ export function WebBadge() {
             : require('@/assets/images/expo-badge.png')
         }
         style={styles.badgeImage}
+        accessibilityLabel="Expo badge"
       />
     </ThemedView>
   );

@@ -44,23 +44,26 @@ class CVAnalysisRequest(BaseModel):
 
 @router.post("/upload", response_model=CVUploadResponse)
 async def upload_cv(
-    user_id: int,
     file: UploadFile = File(...),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(status_code=400, detail="Invalid file type")
 
-    file_path, filename = generate_file_path(file.content_type)
-
     contents = await file.read()
     file_size = len(contents)
+
+    if file_size > 10 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File size exceeds 10MB limit")
+
+    file_path, filename = generate_file_path(file.content_type)
 
     async with aiofiles.open(file_path, "wb") as f:
         await f.write(contents)
 
     cv = CV(
-        user_id=user_id,
+        user_id=current_user.id,
         file_name=file.filename or filename,
         file_path=file_path,
         file_size=file_size,

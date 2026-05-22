@@ -1,7 +1,10 @@
 """模擬面試端點"""
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from typing import Optional, List
+
+from app.models.database import User, get_db
+from app.api.users import get_current_user
 
 router = APIRouter()
 
@@ -32,7 +35,7 @@ class InterviewFeedback(BaseModel):
 
 
 @router.post("/start")
-async def start_interview(config: InterviewConfig):
+async def start_interview(config: InterviewConfig, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的面試問題生成
     return {
         "session_id": "mock_session_123",
@@ -60,7 +63,7 @@ async def start_interview(config: InterviewConfig):
 
 
 @router.post("/submit/{session_id}")
-async def submit_answer(session_id: str, answers: List[InterviewAnswer]):
+async def submit_answer(session_id: str, answers: List[InterviewAnswer], current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的答案評估和反饋生成
     return {
         "session_id": session_id,
@@ -79,7 +82,7 @@ async def submit_answer(session_id: str, answers: List[InterviewAnswer]):
 
 
 @router.get("/history")
-async def get_interview_history(user_id: int = 1):
+async def get_interview_history(current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的面試歷史查詢
     return {
         "sessions": [

@@ -3,6 +3,7 @@ Jobble Baby - FastAPI Backend
 M1 基礎架構 - 用戶系統和登入
 """
 
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import health, users, cvs, salary, interviews, jobs, market
@@ -14,9 +15,11 @@ app = FastAPI(
 )
 
 # CORS 配置
+allowed_origins = os.environ.get("CORS_ORIGINS", "http://localhost:8081").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 生產環境需要限制
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

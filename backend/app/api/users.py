@@ -21,7 +21,9 @@ router = APIRouter()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # JWT 配置
-SECRET_KEY = "jobble-baby-secret-key-change-in-production-2024"  # 生產環境需要更複雜的密鑰
+import os
+
+SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "jobble-baby-secret-key-fallback-only-for-dev")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_DAYS = 30
 

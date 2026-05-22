@@ -1,7 +1,10 @@
 """行情分析端點"""
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from typing import List, Optional
+
+from app.models.database import User, get_db
+from app.api.users import get_current_user
 
 router = APIRouter()
 
@@ -21,7 +24,7 @@ class MarketAnalysis(BaseModel):
 
 
 @router.post("/analyze")
-async def analyze_skills(skills: List[str], industry: Optional[str] = None):
+async def analyze_skills(skills: List[str], industry: Optional[str] = None, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的技能市場分析
     return {
         "overall_demand": "moderate",
@@ -42,7 +45,7 @@ async def analyze_skills(skills: List[str], industry: Optional[str] = None):
 
 
 @router.get("/trends")
-async def get_market_trends(industry: Optional[str] = None):
+async def get_market_trends(industry: Optional[str] = None, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的市場趨勢數據
     return {
         "trends": [
@@ -69,7 +72,7 @@ async def get_market_trends(industry: Optional[str] = None):
 
 
 @router.get("/salary-insights")
-async def get_salary_insights(skill: str):
+async def get_salary_insights(skill: str, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的技能薪資洞察
     return {
         "skill": skill,

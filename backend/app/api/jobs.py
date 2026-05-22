@@ -1,7 +1,10 @@
 """獵頭雷達 / 工作配對端點"""
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from typing import Optional, List
+
+from app.models.database import User, get_db
+from app.api.users import get_current_user
 
 router = APIRouter()
 
@@ -25,7 +28,7 @@ class JobMatch(BaseModel):
 
 
 @router.post("/preferences")
-async def set_preferences(user_id: int, preferences: JobPreference):
+async def set_preferences(preferences: JobPreference, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的偏好設置存儲
     return {
         "message": "Preferences saved",
@@ -34,8 +37,9 @@ async def set_preferences(user_id: int, preferences: JobPreference):
 
 
 @router.get("/matches")
-async def get_job_matches(user_id: int = 1, limit: int = 10):
+async def get_job_matches(limit: int = 10, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的工作配對演算法
+    # Use current_user.id instead of user_id from URL to prevent IDOR
     return {
         "jobs": [
             {
@@ -61,7 +65,7 @@ async def get_job_matches(user_id: int = 1, limit: int = 10):
 
 
 @router.post("/subscribe")
-async def subscribe_to_notifications(user_id: int, enabled: bool = True):
+async def subscribe_to_notifications(enabled: bool = True, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的訂閱設置
     return {
         "message": "Notification settings updated",

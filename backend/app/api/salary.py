@@ -1,7 +1,10 @@
 """薪酬查詢端點"""
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from typing import Optional
+
+from app.models.database import User, get_db
+from app.api.users import get_current_user
 
 router = APIRouter()
 
@@ -23,7 +26,7 @@ class SalaryResult(BaseModel):
 
 
 @router.post("/query", response_model=SalaryResult)
-async def query_salary(query: SalaryQuery):
+async def query_salary(query: SalaryQuery, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的匿名薪酬數據查詢
     # 模擬數據
     base_salary = 25000 + (query.experience_years * 5000)
@@ -38,7 +41,7 @@ async def query_salary(query: SalaryQuery):
 
 
 @router.get("/market-range/{job_title}")
-async def get_market_range(job_title: str, experience_years: int = 5):
+async def get_market_range(job_title: str, experience_years: int = 5, current_user: User = Depends(get_current_user)):
     # TODO: 實現真實的市場薪酬範圍查詢
     base = 30000 + (experience_years * 4000)
     return {

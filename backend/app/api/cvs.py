@@ -40,7 +40,7 @@ def check_and_award_achievements(db: Session, user_id: int, score: int, category
                     award = MilestoneAchievement(
                         user_id=user_id,
                         achievement_type=atype,
-                        metadata={"score_value": score}
+                        achievement_metadata={"score_value": score}
                     )
                     db.add(award)
                     new_awards.append(atype)
@@ -57,7 +57,7 @@ def check_and_award_achievements(db: Session, user_id: int, score: int, category
                     award = MilestoneAchievement(
                         user_id=user_id,
                         achievement_type=atype,
-                        metadata={"category": cat, "score_value": cat_score}
+                        achievement_metadata={"category": cat, "score_value": cat_score}
                     )
                     db.add(award)
                     new_awards.append(atype)
@@ -77,6 +77,78 @@ def check_and_award_achievements(db: Session, user_id: int, score: int, category
             new_awards.append("FIRST_CV_UPLOAD")
     
     return new_awards
+
+
+@router.post("/{user_id}/score-history", response_model=dict)
+async def record_score_history(
+    request: Request,
+    user_id: int,
+    req: RecordScoreRequest,
+    db: Session = Depends(get_db)
+):
+    """Record a CV score to history and check for new achievements."""
+    record = CVScoreHistory(
+        user_id=user_id,
+        cv_id=req.cv_id,
+        score=req.score,
+        category_scores=req.category_scores
+    )
+    db.add(record)
+    db.commit()
+
+    new_achievements = check_and_award_achievements(db, user_id, req.score, req.category_scores)
+
+    return {"recorded": True, "new_achievements": new_achievements}
+
+
+@router.get("/{user_id}/score-history", response_model=ScoreHistoryResponse)
+async def get_score_history(request: Request, user_id: int, db: Session = Depends(get_db)):
+    """Get score history for a user."""
+    records = db.query(CVScoreHistory).filter(
+        CVScoreHistory.user_id == user_id
+    ).order_by(CVScoreHistory.recorded_at.desc()).limit(50).all()
+
+    if not records:
+        return ScoreHistoryResponse(history=[], total_count=0, best_score=None, improvement_trend=None)
+
+    scores = [r.score for r in records]
+    best = max(scores) if scores else None
+    trend = "improving" if len(scores) >= 2 and scores[0] > scores[-1] else "stable"
+
+    return ScoreHistoryResponse(
+        history=records,
+        total_count=len(records),
+        best_score=best,
+        improvement_trend=trend
+    )
+
+
+@router.get("/{user_id}/achievements", response_model=AchievementsListResponse)
+async def get_achievements(request: Request, user_id: int, db: Session = Depends(get_db)):
+    """Get all earned achievements for a user."""
+    from app.models.database import ACHIEVEMENT_TYPES
+
+    achievements = db.query(MilestoneAchievement).filter(
+        MilestoneAchievement.user_id == user_id
+    ).order_by(MilestoneAchievement.earned_at.desc()).all()
+
+    enriched = []
+    for a in achievements:
+        tier_info = ACHIEVEMENT_TYPES.get(a.achievement_type, {"tier": "bronze", "description": a.achievement_type})
+        enriched.append(AchievementResponse(
+            id=a.id,
+            achievement_type=a.achievement_type,
+            tier=tier_info["tier"],
+            description=tier_info["description"],
+            earned_at=a.earned_at,
+            metadata=a.achievement_metadata
+        ))
+
+    return AchievementsListResponse(
+        achievements=enriched,
+        total_count=len(enriched),
+        recent_achievements=enriched[:5]
+    )
 
 
 def get_limiter(request: Request):

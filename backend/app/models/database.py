@@ -78,11 +78,43 @@ class CV(Base):
     user = relationship("User", back_populates="cvs")
 
 
+class JobAlert(Base):
+    """職位提醒模型"""
+    __tablename__ = "job_alerts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    job_types = Column(JSON, nullable=True)
+    salary_min = Column(Integer, nullable=True)
+    locations = Column(JSON, nullable=True)
+    keywords = Column(JSON, nullable=True)
+    notifications_enabled = Column(Boolean, default=True)
+    last_alert_sent_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User", back_populates="job_alerts")
+
+
+class Notification(Base):
+    """通知模型"""
+    __tablename__ = "notifications"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    title = Column(String, nullable=False)
+    body = Column(String, nullable=False)
+    is_read = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User", back_populates="notifications")
+
+
 class CVScoreHistory(Base):
     __tablename__ = "cv_score_history"
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    cv_id = Column(Integer, nullable=True)
     score = Column(Integer, nullable=False)
     category_scores = Column(JSON, nullable=True)
     recorded_at = Column(DateTime, default=datetime.utcnow)
@@ -97,7 +129,7 @@ class MilestoneAchievement(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     achievement_type = Column(String, nullable=False)
     earned_at = Column(DateTime, default=datetime.utcnow)
-    metadata = Column(JSON, nullable=True)
+    achievement_metadata = Column("metadata", JSON, nullable=True)
 
     user = relationship("User", back_populates="milestone_achievements")
 

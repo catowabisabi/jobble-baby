@@ -1,55 +1,40 @@
-fix: complete gamification system integration - backend endpoints + profile wiring
+fix: implement salary nudge comparator with visual anchor
 
 ## Context
-#13 is marked completed but the gamification components (CVScoreBadge, AchievementBadge, CVCategoryBars, MilestoneHint, ConfettiBurst) are NOT wired in profile.tsx. Backend has the endpoints but profile.tsx doesn't fetch or display the data. Also score_cv endpoint doesn't record to CVScoreHistory or call check_and_award_achievements().
-
-## Critical DB Issue
-database.py defines 5 tables: users, cvs, job_alerts, notifications, cv_score_history, milestone_achievements. JobAlert/Notification tables exist and are correct (restored in dfae367). No DB issue now.
+#15 is a new P3 task. Build salary nudge comparator that shows users where they stand vs market range for their role/experience, with clear visual indicator if they are below/above median. Based on idea #2 (Nudge-based salary comparator).
 
 ## Task
 
-### Step 1: Audit
-- Check what gamification components exist in src/components/ (they exist - confirmed)
-- Check profile.tsx: does NOT import or use any gamification components
-- Check backend score_cv (line 263 in cvs.py): does NOT record CVScoreHistory or call check_and_award_achievements()
+### Step 1: Read existing salary query
+Look at:
+- src/app/salary-query.tsx
+- backend/app/api/salary.py (if exists)
 
-### Step 2: Fix score_cv endpoint (backend/app/api/cvs.py)
-After `db.commit()` at line 297, add:
-# Record score history and check achievements
-history_record = CVScoreHistory(
-    user_id=cv.user_id,
-    cv_id=cv_id,
-    score=result.overall_professionalism,
-    category_scores=result.to_dict()
-)
-db.add(history_record)
-db.commit()
+Understand current salary query UI and data model.
 
-# Check and award achievements
-new_achievements = check_and_award_achievements(db, cv.user_id, result.overall_professionalism, result.to_dict())
+### Step 2: Design backend
+Create or extend salary API to return:
+- Market range (low, median, high) for user's role/experience/location
+- User's target salary position relative to market
+- Visual anchor data for frontend
 
-### Step 3: Wire Frontend in src/app/profile.tsx
-Add to imports at top:
-import CVScoreBadge from '../components/cv-score-badge';
-import AchievementBadge from '../components/achievement-badge';
-import CVCategoryBars from '../components/cv-category-bars';
-import MilestoneHint from '../components/milestone-hint';
-import ConfettiBurst from '../components/confetti-burst';
+If no salary API exists, create one with anonymized market data.
 
-Add state after other useState calls:
-const [showConfetti, setShowConfetti] = useState(false);
-const [achievements, setAchievements] = useState<any[]>([]);
-const [milestone, setMilestone] = useState<any>(null);
-const [scoreHistory, setScoreHistory] = useState<any>(null);
+### Step 3: Build salary comparator component
+Enhance or create salary comparator UI:
+- Visual bar showing market range (low → median → high)
+- User's target salary marked on the bar with color indicator
+- Green if above median, yellow if near median, red if significantly below
+- "Ask for more" CTA that suggests negotiation talking points
+- Comparison context: "You are X% below market median for this role"
 
-Add useEffect to fetch gamification data on mount. After fetchCVList useEffect, add another useEffect that fetches achievements/milestones/score-history from /api/v1/cvs/${user.id}/achievements, /milestones, /score-history.
-
-### Step 4: Add in CV section (after score display)
-In the CV section where score is shown, add the gamification components after the score display.
+### Step 4: Integrate with salary-query.tsx
+- Show comparator after salary query results
+- Make it actionable - links to negotiation tips or CV improvement
 
 ### Step 5: Update progress DB
-Mark #13 in_progress when you start, completed when done.
+Mark #15 in_progress when you start, completed when done.
 
 ## Keywords
-transparency, bid-ask spread, cascade failure
+anchor, negotiation, parity
 ULW

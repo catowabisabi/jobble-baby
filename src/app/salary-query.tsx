@@ -22,18 +22,22 @@ const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/
 
 // 薪資回應類型
 interface SalaryQueryResponse {
+  job_title: string;
+  level: string;
   low: number;
   median: number;
   high: number;
   currency: string;
+  sample_size: number;
 }
 
 interface MarketRangeResponse {
   job_title: string;
-  experience_years: number;
-  low: number;
-  median: number;
-  high: number;
+  level: string;
+  percentile_25: number;
+  percentile_50: number;
+  percentile_75: number;
+  percentile_90: number;
   currency: string;
 }
 
@@ -190,37 +194,44 @@ export default function SalaryQueryScreen() {
   const renderResult = () => {
     if (!result) return null;
 
+    const levelLabels: Record<string, string> = {
+      junior: '初級 (0-3年)',
+      mid: '中級 (4-7年)',
+      senior: '高級 (8+年)',
+    };
+
     return (
       <View style={styles.resultCard}>
         <ThemedText type="title" style={styles.resultTitle}>
           薪資查詢結果
         </ThemedText>
         <ThemedText type="subtitle" style={styles.resultSubtitle}>
-          {jobTitle}
+          {result.job_title}
+          {result.level && ` (${levelLabels[result.level] || result.level})`}
         </ThemedText>
 
-        <View style={styles.salaryNumbers}>
-          <View style={styles.salaryItem}>
-            <ThemedText type="small" style={styles.salaryLabel}>
-              低位
+        <View style={styles.percentileRow}>
+          <View style={styles.percentileItem}>
+            <ThemedText type="small" style={styles.percentileLabel}>
+              25th
             </ThemedText>
-            <ThemedText type="default" style={styles.salaryValue}>
+            <ThemedText type="default" style={styles.percentileValue}>
               {formatCurrency(result.low)}
             </ThemedText>
           </View>
-          <View style={styles.salaryItem}>
-            <ThemedText type="small" style={styles.salaryLabel}>
-              中位
+          <View style={styles.percentileItem}>
+            <ThemedText type="small" style={styles.percentileLabel}>
+              50th
             </ThemedText>
-            <ThemedText type="default" style={[styles.salaryValue, styles.salaryMedian]}>
+            <ThemedText type="default" style={[styles.percentileValue, styles.salaryMedian]}>
               {formatCurrency(result.median)}
             </ThemedText>
           </View>
-          <View style={styles.salaryItem}>
-            <ThemedText type="small" style={styles.salaryLabel}>
-              高位
+          <View style={styles.percentileItem}>
+            <ThemedText type="small" style={styles.percentileLabel}>
+              75th
             </ThemedText>
-            <ThemedText type="default" style={styles.salaryValue}>
+            <ThemedText type="default" style={styles.percentileValue}>
               {formatCurrency(result.high)}
             </ThemedText>
           </View>
@@ -234,6 +245,12 @@ export default function SalaryQueryScreen() {
   const renderMarketResult = () => {
     if (!marketResult) return null;
 
+    const levelLabels: Record<string, string> = {
+      junior: '初級 (0-3年)',
+      mid: '中級 (4-7年)',
+      senior: '高級 (8+年)',
+    };
+
     return (
       <View style={styles.resultCard}>
         <ThemedText type="title" style={styles.resultTitle}>
@@ -241,37 +258,47 @@ export default function SalaryQueryScreen() {
         </ThemedText>
         <ThemedText type="subtitle" style={styles.resultSubtitle}>
           {marketResult.job_title}
-          {marketResult.experience_years > 0 && ` (${marketResult.experience_years}年經驗)`}
+          {marketResult.level && ` (${levelLabels[marketResult.level] || marketResult.level})`}
         </ThemedText>
 
-        <View style={styles.salaryNumbers}>
-          <View style={styles.salaryItem}>
-            <ThemedText type="small" style={styles.salaryLabel}>
-              低位
+        <View style={styles.percentileRow}>
+          <View style={styles.percentileItem}>
+            <ThemedText type="small" style={styles.percentileLabel}>
+              25th
             </ThemedText>
-            <ThemedText type="default" style={styles.salaryValue}>
-              {formatCurrency(marketResult.low)}
-            </ThemedText>
-          </View>
-          <View style={styles.salaryItem}>
-            <ThemedText type="small" style={styles.salaryLabel}>
-              中位
-            </ThemedText>
-            <ThemedText type="default" style={[styles.salaryValue, styles.salaryMedian]}>
-              {formatCurrency(marketResult.median)}
+            <ThemedText type="default" style={styles.percentileValue}>
+              {formatCurrency(marketResult.percentile_25)}
             </ThemedText>
           </View>
-          <View style={styles.salaryItem}>
-            <ThemedText type="small" style={styles.salaryLabel}>
-              高位
+          <View style={styles.percentileItem}>
+            <ThemedText type="small" style={styles.percentileLabel}>
+              50th
             </ThemedText>
-            <ThemedText type="default" style={styles.salaryValue}>
-              {formatCurrency(marketResult.high)}
+            <ThemedText type="default" style={[styles.percentileValue, styles.salaryMedian]}>
+              {formatCurrency(marketResult.percentile_50)}
+            </ThemedText>
+          </View>
+          <View style={styles.percentileItem}>
+            <ThemedText type="small" style={styles.percentileLabel}>
+              75th
+            </ThemedText>
+            <ThemedText type="default" style={styles.percentileValue}>
+              {formatCurrency(marketResult.percentile_75)}
             </ThemedText>
           </View>
         </View>
 
-        {renderSalaryRangeBar(marketResult.low, marketResult.median, marketResult.high)}
+        {renderSalaryRangeBar(
+          marketResult.percentile_25,
+          marketResult.percentile_50,
+          marketResult.percentile_75
+        )}
+
+        <View style={styles.percentileNote}>
+          <ThemedText type="small" style={styles.noteText}>
+            90th percentile: {formatCurrency(marketResult.percentile_90)}
+          </ThemedText>
+        </View>
       </View>
     );
   };
@@ -522,6 +549,35 @@ const styles = StyleSheet.create({
   salaryMedian: {
     color: '#007AFF',
     fontSize: 22,
+  },
+  percentileRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: Spacing.four,
+  },
+  percentileItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  percentileLabel: {
+    color: '#666',
+    marginBottom: Spacing.half,
+  },
+  percentileValue: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+  },
+  percentileNote: {
+    marginTop: Spacing.three,
+    paddingTop: Spacing.three,
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    alignItems: 'center',
+  },
+  noteText: {
+    color: '#888',
+    fontSize: 13,
   },
   rangeBarContainer: {
     marginTop: Spacing.two,

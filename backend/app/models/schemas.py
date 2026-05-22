@@ -2,7 +2,7 @@
 Pydantic 模型 - 用於 API 請求和響應
 """
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 
@@ -80,3 +80,62 @@ class AlertPreferencesResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class ScoreHistoryEntry(BaseModel):
+    id: int
+    score: int
+    category_scores: Optional[dict] = None
+    recorded_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class ScoreHistoryResponse(BaseModel):
+    history: List[ScoreHistoryEntry]
+    total_count: int
+    best_score: Optional[int] = None
+    improvement_trend: Optional[str] = None
+
+
+class RecordScoreRequest(BaseModel):
+    cv_id: int
+    score: int
+    category_scores: dict
+
+
+class AchievementResponse(BaseModel):
+    id: int
+    achievement_type: str
+    tier: str
+    description: str
+    earned_at: datetime
+    metadata: Optional[dict] = None
+
+    class Config:
+        from_attributes = True
+
+
+class AchievementsListResponse(BaseModel):
+    achievements: List[AchievementResponse]
+    total_count: int
+    recent_achievements: List[AchievementResponse]
+
+
+class MilestoneResponse(BaseModel):
+    achievement_type: str
+    title: str
+    description: str
+    tier: str
+    progress_current: int
+    progress_target: int
+    hint: str
+    is_earned: bool
+
+
+class MilestonesListResponse(BaseModel):
+    next_milestone: Optional[MilestoneResponse] = None
+    all_milestones: List[MilestoneResponse]
+    earned_count: int
+    total_count: int

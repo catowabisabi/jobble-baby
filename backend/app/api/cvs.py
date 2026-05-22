@@ -13,13 +13,70 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 from typing import Optional, List
 
-from app.models.database import get_db, CV, User
+from app.models.database import get_db, CV, User, CVScoreHistory, MilestoneAchievement
+from app.models.schemas import ScoreHistoryEntry, ScoreHistoryResponse, RecordScoreRequest, AchievementResponse, AchievementsListResponse, MilestoneResponse, MilestonesListResponse
 from app.api.users import get_current_user
 from app.utils.storage import generate_file_path, ALLOWED_CONTENT_TYPES
 from app.services.cv_extractor import PDFTextExtractor, ExtractionError
 from app.services.cv_analyzer import CVAnalyzer, AnalysisError
 
 router = APIRouter()
+
+
+def check_and_award_achievements(db: Session, user_id: int, score: int, category_scores: dict) -> List[str]:
+    from app.models.database import ACHIEVEMENT_TYPES
+    
+    new_awards = []
+    
+    for atype, meta in ACHIEVEMENT_TYPES.items():
+        if atype.startswith("SCORE_MILESTONE_"):
+            target = int(atype.split("_")[-1])
+            if score >= target:
+                existing = db.query(MilestoneAchievement).filter(
+                    MilestoneAchievement.user_id == user_id,
+                    MilestoneAchievement.achievement_type == atype
+                ).first()
+                if not existing:
+                    award = MilestoneAchievement(
+                        user_id=user_id,
+                        achievement_type=atype,
+                        metadata={"score_value": score}
+                    )
+                    db.add(award)
+                    new_awards.append(atype)
+    
+    if category_scores:
+        for cat, cat_score in category_scores.items():
+            if cat_score >= 9:
+                atype = f"CATEGORY_MASTER_{cat}"
+                existing = db.query(MilestoneAchievement).filter(
+                    MilestoneAchievement.user_id == user_id,
+                    MilestoneAchievement.achievement_type == atype
+                ).first()
+                if not existing:
+                    award = MilestoneAchievement(
+                        user_id=user_id,
+                        achievement_type=atype,
+                        metadata={"category": cat, "score_value": cat_score}
+                    )
+                    db.add(award)
+                    new_awards.append(atype)
+    
+    cv_count = db.query(CV).filter(CV.user_id == user_id).count()
+    if cv_count == 1:
+        existing = db.query(MilestoneAchievement).filter(
+            MilestoneAchievement.user_id == user_id,
+            MilestoneAchievement.achievement_type == "FIRST_CV_UPLOAD"
+        ).first()
+        if not existing:
+            award = MilestoneAchievement(
+                user_id=user_id,
+                achievement_type="FIRST_CV_UPLOAD"
+            )
+            db.add(award)
+            new_awards.append("FIRST_CV_UPLOAD")
+    
+    return new_awards
 
 
 def get_limiter(request: Request):

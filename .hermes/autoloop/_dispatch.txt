@@ -1,36 +1,285 @@
-fix: implement job alert / recruiter radar system (M5)
+fix: complete gamification system integration - backend endpoints + profile wiring
 
 ## Context
-Jobble Baby - subscription paywall (#11) just completed. Now implementing M5: recruiter radar + job alert system. Previous milestones: M1 auth, M2 CV analysis, M3 salary query, M4 interview simulation, M6 subscription paywall all done.
+Sisyphus built frontend components (#13) but they are NOT wired up. Backend also has the check_and_award_achievements() function but the new DB tables (cv_score_history, milestone_achievements) are missing JobAlert and Notification tables that were renamed/replaced. This needs fixing before anything works.
+
+## Critical DB Issue
+database.py replaced JobAlert+Notification tables with CVScoreHistory+MilestoneAchievement. But the job_alert system (M5) was already completed in commit b2d72f8. Check if those tables still exist or if they were accidentally dropped.
 
 ## Task
-Build job alert / recruiter radar system:
 
-### Backend (FastAPI):
-1. Create PATCH /api/v1/users/alert-preferences to save user notification preferences (job_types[], salary_min, locations[], keywords[])
-2. Create GET /api/v1/users/alert-preferences to retrieve saved preferences
-3. Create GET /api/v1/jobs/matches?user_id=X - return matching jobs based on user preferences from real_jobs.json (reuse existing job data). Match on: job_type, salary >= salary_min, location, keywords in job title/description
-4. Create POST /api/v1/notifications/send - trigger push notification (store in DB for now, Expo Push later)
-5. Add last_alert_sent_at to user preferences tracking
+### Step 1: Audit DB Schema
+Run on backend: `python3 -c "from app.models.database import engine; from sqlalchemy import inspect; print([r['name'] for r in inspect(engine).get_table_names()])"`
+If JobAlert/Notification are missing, re-add them alongside CVScoreHistory+MilestoneAchievement. The job alert feature is already live and cannot be broken.
 
-### Frontend (React Native/Expo):
-1. Create src/app/job-alerts.tsx - settings screen where user configures:
-   - Job types (multi-select chips): Backend, Frontend, Full Stack, DevOps, Data, Mobile, PM, Design
-   - Minimum salary (numeric input with HKD prefix)
-   - Locations (multi-select): Hong Kong, Remote, Kowloon, New Territories
-   - Keywords (text input, comma-separated)
-   - Notification toggle (enable/disable alerts)
-   - Save button → PATCH alert-preferences
+### Step 2: Backend - Add Missing Routes to cvs.py
+Add these routes AFTER check_and_award_achievements() function and BEFORE get_limiter():
 
-2. Update src/app/profile.tsx - add "Job Alerts" button navigating to /job-alerts, show match count badge if preferences saved
+```python
+@router.post("/{user_id}/score-history", response_model=ScoreHistoryResponse)
+async def record_score_history(
+    request: Request,
+    user_id: int,
+    req: RecordScoreRequest,
+    db: Session = Depends(get_db)
+):
+    """Record a CV score to history and check for new achievements."""
+    record = CVScoreHistory(
+        user_id=user_id,
+        cv_id=req.cv_id,
+        score=req.score,
+        category_scores=req.category_scores
+    )
+    db.add(record)
+    db.commit()
+    
+    new_achievements = check_and_award_achievements(db, user_id, req.score, req.category_scores)
+    
+    return {"recorded": True, "new_achievements": new_achievements}
 
-3. Add src/components/job-match-card.tsx - display matched job with company, title, salary, match score percentage
 
-4. Add alert badge on tab bar (Bell icon) when alerts configured
+@router.get("/{user_id}/score-history", response_model=ScoreHistoryResponse)
+async def get_score_history(request: Request, user_id: int, db: Session = Depends(get_db)):
+    """Get score history for a user."""
+    records = db.query(CVScoreHistory).filter(
+        CVScoreHistory.user_id == user_id
+    ).order_by(CVScoreHistory.recorded_at.desc()).limit(50).all()
+    
+    if not records:
+        return ScoreHistoryResponse(history=[], total_count=0, best_score=None, improvement_trend=None)
+    
+    scores = [r.score for r in records]
+    best = max(scores) if scores else None
+    trend = "improving" if len(scores) >= 2 and scores[0] > scores[-1] else "stable"
+    
+    return ScoreHistoryResponse(
+        history=records,
+        total_count=len(records),
+        best_score=best,
+        improvement_trend=trend
+    )
 
-### Data Flow:
-User sets preferences → stored in DB → matches computed against real_jobs.json → displayed on profile as "X jobs match you" → Expo Push notification when new matching job appears
+
+@router.get("/{user_id}/achievements", response_model=AchievementsListResponse)
+async def get_achievements(request: Request, user_id: int, db: Session = Depends(get_db)):
+    """Get all earned achievements for a user."""
+    achievements = db.query(MilestoneAchievement).filter(
+        MilestoneAchievement.user_id == user_id
+    ).order_by(MilestoneAchievement.earned_at.desc()).all()
+    
+    enriched = []
+    for a in achievements:
+        tier_info = ACHIEVEMENT_TYPES.get(a.achievement_type, {"tier": "bronze", "description": a.achievement_type})
+        enriched.append(AchievementResponse(
+            id=a.id,
+            achievement_type=a.achievement_type,
+            tier=tier_info["tier"],
+            description=tier_info["description"],
+            earned_at=a.earned_at,
+            metadata=a.metadata
+        ))
+    
+    return AchievementsListResponse(
+        achievements=enriched,
+        total_count=len(enriched),
+        recent_achievements=enriched[:3]
+    )
+
+
+@router.get("/{user_id}/milestones", response_model=MilestonesListResponse)
+async def get_milestones(request: Request, user_id: int, db: Session = Depends(get_db)):
+    """Get user's milestone progress and next targets."""
+    earned = {a.achievement_type for a in db.query(MilestoneAchievement).filter(
+        MilestoneAchievement.user_id == user_id
+    ).all()}
+    
+    latest_score = db.query(CVScoreHistory).filter(
+        CVScoreHistory.user_id == user_id
+    ).order_by(CVScoreHistory.recorded_at.desc()).first()
+    
+    current_score = latest_score.score if latest_score else 0
+    
+    all_milestones = []
+    for atype, meta in ACHIEVEMENT_TYPES.items():
+        if atype == "FIVE_CVS_UPLOAD":
+            cv_count = db.query(CV).filter(CV.user_id == user_id).count()
+            progress = min(cv_count, 5)
+            is_earned = atype in earned
+            all_milestones.append(MilestoneResponse(
+                achievement_type=atype,
+                title=atype.replace("_", " ").title(),
+                description=meta["description"],
+                tier=meta["tier"],
+                progress_current=progress,
+                progress_target=5,
+                hint=f"{5 - progress} more CVs to go" if not is_earned else "Achieved!",
+                is_earned=is_earned
+            ))
+        elif atype.startswith("SCORE_MILESTONE_"):
+            target = int(atype.split("_")[-1])
+            progress = min(current_score, target)
+            is_earned = atype in earned
+            all_milestones.append(MilestoneResponse(
+                achievement_type=atype,
+                title=f"Score {target}+",
+                description=meta["description"],
+                tier=meta["tier"],
+                progress_current=progress,
+                progress_target=target,
+                hint=f"Reach score {target} to unlock" if not is_earned else "Achieved!",
+                is_earned=is_earned
+            ))
+        elif atype.startswith("CATEGORY_MASTER_"):
+            cat = atype.split("_", 2)[-1]
+            cat_score = latest_score.category_scores.get(cat, 0) if latest_score and latest_score.category_scores else 0
+            progress = min(cat_score, 9)
+            is_earned = atype in earned
+            all_milestones.append(MilestoneResponse(
+                achievement_type=atype,
+                title=f"{cat.replace('_', ' ').title()} Master",
+                description=meta["description"],
+                tier=meta["tier"],
+                progress_current=progress,
+                progress_target=9,
+                hint=f"Score 9+ in {cat.replace('_', ' ')}" if not is_earned else "Achieved!",
+                is_earned=is_earned
+            ))
+        elif atype == "FIRST_CV_UPLOAD":
+            cv_count = db.query(CV).filter(CV.user_id == user_id).count()
+            progress = 1 if cv_count > 0 else 0
+            is_earned = atype in earned
+            all_milestones.append(MilestoneResponse(
+                achievement_type=atype,
+                title="First CV",
+                description=meta["description"],
+                tier=meta["tier"],
+                progress_current=progress,
+                progress_target=1,
+                hint="Upload your first CV" if not is_earned else "Achieved!",
+                is_earned=is_earned
+            ))
+    
+    next_milestone = next((m for m in all_milestones if not m.is_earned), None)
+    
+    return MilestonesListResponse(
+        next_milestone=next_milestone,
+        all_milestones=all_milestones,
+        earned_count=len([m for m in all_milestones if m.is_earned]),
+        total_count=len(all_milestones)
+    )
+```
+
+Also update score_cv endpoint to call check_and_award_achievements() after recording the score:
+After `db.commit()` in score_cv(), add:
+```python
+# Check and award achievements
+check_and_award_achievements(db, cv.user_id, result.overall_professionalism, result.to_dict())
+```
+
+And add CVScoreHistory record in score_cv:
+```python
+# Record score history
+history_record = CVScoreHistory(
+    user_id=cv.user_id,
+    cv_id=cv_id,
+    score=result.overall_professionalism,
+    category_scores=result.to_dict()
+)
+db.add(history_record)
+db.commit()
+```
+
+### Step 3: Wire Frontend in profile.tsx
+Import at top:
+```typescript
+import CVScoreBadge from '../components/cv-score-badge';
+import AchievementBadge from '../components/achievement-badge';
+import CVCategoryBars from '../components/cv-category-bars';
+import MilestoneHint from '../components/milestone-hint';
+import ConfettiBurst from '../components/confetti-burst';
+```
+
+Add state:
+```typescript
+const [showConfetti, setShowConfetti] = useState(false);
+const [achievements, setAchievements] = useState<any[]>([]);
+const [milestone, setMilestone] = useState<any>(null);
+const [scoreHistory, setScoreHistory] = useState<any>(null);
+```
+
+Add useEffect to fetch gamification data on mount (after getting user data):
+```typescript
+useEffect(() => {
+    if (!user) return;
+    
+    const fetchGamification = async () => {
+        try {
+            const [achRes, msRes, histRes] = await Promise.all([
+                fetch(`${API_URL}/api/v1/cvs/${user.id}/achievements`),
+                fetch(`${API_URL}/api/v1/cvs/${user.id}/milestones`),
+                fetch(`${API_URL}/api/v1/cvs/${user.id}/score-history`)
+            ]);
+            
+            if (achRes.ok) {
+                const achData = await achRes.json();
+                setAchievements(achData.achievements || []);
+            }
+            if (msRes.ok) {
+                const msData = await msRes.json();
+                setMilestone(msData.next_milestone || null);
+            }
+            if (histRes.ok) {
+                const histData = await histRes.json();
+                setScoreHistory(histData);
+            }
+        } catch (e) {
+            console.log('Gamification data fetch failed:', e);
+        }
+    };
+    
+    fetchGamification();
+}, [user]);
+```
+
+In the CV section of profile, add after score display:
+```typescript
+<CVScoreBadge score={cv.score || 0} />
+<CVCategoryBars categoryScores={cv.score_breakdown || {}} />
+<ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.achievementRow}>
+    {achievements.map((a, i) => (
+        <AchievementBadge key={i} achievement={a} />
+    ))}
+</ScrollView>
+{milestone && <MilestoneHint milestone={milestone} />}
+{showConfetti && <ConfettiBurst onComplete={() => setShowConfetti(false)} />}
+```
+
+Also update the CV score section to trigger confetti on improvement:
+```typescript
+const handleScoreUpdate = (newScore: number) => {
+    if (scoreHistory && scoreHistory.best_score && newScore > scoreHistory.best_score) {
+        setShowConfetti(true);
+    }
+};
+```
+
+### Step 4: Add CVScoreHistory import to cvs.py
+Add to the imports at top:
+```python
+from app.models.database import get_db, CV, User, CVScoreHistory, MilestoneAchievement
+```
+Also add missing fields to CVScoreHistory model - needs cv_id field:
+```python
+class CVScoreHistory(Base):
+    __tablename__ = "cv_score_history"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    cv_id = Column(Integer, ForeignKey("cvs.id"), nullable=True)  # ADD THIS
+    score = Column(Integer, nullable=False)
+    category_scores = Column(JSON, nullable=True)
+    recorded_at = Column(DateTime, default=datetime.utcnow)
+```
 
 ## Keywords
-job alert, recruiter radar, push notification
+resonance, precomputed, edge cache
 ULW

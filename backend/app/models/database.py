@@ -21,6 +21,25 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+ACHIEVEMENT_TYPES = {
+    # Score milestones
+    "SCORE_MILESTONE_5": {"tier": "silver", "description": "Reach overall score 5"},
+    "SCORE_MILESTONE_7": {"tier": "silver", "description": "Reach overall score 7"},
+    "SCORE_MILESTONE_8": {"tier": "gold", "description": "Reach overall score 8"},
+    "SCORE_MILESTONE_9": {"tier": "gold", "description": "Reach overall score 9"},
+    "SCORE_MILESTONE_10": {"tier": "gold", "description": "Reach overall score 10"},
+    # Category masters
+    "CATEGORY_MASTER_role_relevance": {"tier": "silver", "description": "Score 9+ in role relevance"},
+    "CATEGORY_MASTER_experience_years": {"tier": "silver", "description": "Score 9+ in experience years"},
+    "CATEGORY_MASTER_education_quality": {"tier": "silver", "description": "Score 9+ in education quality"},
+    "CATEGORY_MASTER_skills_clarity": {"tier": "silver", "description": "Score 9+ in skills clarity"},
+    "CATEGORY_MASTER_quantified_achievements": {"tier": "silver", "description": "Score 9+ in quantified achievements"},
+    "CATEGORY_MASTER_overall_professionalism": {"tier": "silver", "description": "Score 9+ in overall professionalism"},
+    # Upload milestones
+    "FIRST_CV_UPLOAD": {"tier": "bronze", "description": "Upload your first CV"},
+    "FIVE_CVS_UPLOAD": {"tier": "silver", "description": "Upload 5 CVs"},
+}
+
 
 class User(Base):
     """用戶模型"""
@@ -36,6 +55,8 @@ class User(Base):
     cvs = relationship("CV", back_populates="user")
     job_alerts = relationship("JobAlert", back_populates="user")
     notifications = relationship("Notification", back_populates="user")
+    cv_score_history = relationship("CVScoreHistory", back_populates="user")
+    milestone_achievements = relationship("MilestoneAchievement", back_populates="user")
 
 
 class CV(Base):
@@ -57,35 +78,28 @@ class CV(Base):
     user = relationship("User", back_populates="cvs")
 
 
-class JobAlert(Base):
-    """職位提醒模型"""
-    __tablename__ = "job_alerts"
+class CVScoreHistory(Base):
+    __tablename__ = "cv_score_history"
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    job_types = Column(JSON, nullable=True)
-    salary_min = Column(Integer, nullable=True)
-    locations = Column(JSON, nullable=True)
-    keywords = Column(JSON, nullable=True)
-    notifications_enabled = Column(Boolean, default=True)
-    last_alert_sent_at = Column(DateTime, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    score = Column(Integer, nullable=False)
+    category_scores = Column(JSON, nullable=True)
+    recorded_at = Column(DateTime, default=datetime.utcnow)
 
-    user = relationship("User", back_populates="job_alerts")
+    user = relationship("User", back_populates="cv_score_history")
 
 
-class Notification(Base):
-    """通知模型"""
-    __tablename__ = "notifications"
+class MilestoneAchievement(Base):
+    __tablename__ = "milestone_achievements"
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    title = Column(String, nullable=False)
-    body = Column(String, nullable=False)
-    is_read = Column(Boolean, default=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    achievement_type = Column(String, nullable=False)
+    earned_at = Column(DateTime, default=datetime.utcnow)
+    metadata = Column(JSON, nullable=True)
 
-    user = relationship("User", back_populates="notifications")
+    user = relationship("User", back_populates="milestone_achievements")
 
 
 def get_db():

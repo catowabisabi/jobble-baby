@@ -23,6 +23,7 @@ import { AchievementBadge } from '../components/achievement-badge';
 import { CVCategoryBars } from '../components/cv-category-bars';
 import { MilestoneHint } from '../components/milestone-hint';
 import { ConfettiBurst } from '../components/confetti-burst';
+import { ScoreAnimation } from '../components/score-animation';
 
 export default function ProfileScreen() {
   const router = useRouter();
@@ -272,7 +273,7 @@ export default function ProfileScreen() {
 
         {user && (
           <>
-            <CVScoreBadge score={scoreHistory?.best_score || 0} />
+            <ScoreAnimation score={scoreHistory?.best_score || 0} size="lg" />
             <CVCategoryBars categories={scoreHistory?.history?.[0]?.category_scores || {}} />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{flexDirection: 'row', marginVertical: 8}}>
                 {achievements.map((a, i) => <AchievementBadge key={i} achievement_type={a.achievement_type} tier={a.tier} description={a.description} earned_at={a.earned_at} size="medium" />)}

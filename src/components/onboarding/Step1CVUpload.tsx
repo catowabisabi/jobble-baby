@@ -8,6 +8,7 @@ import { ThemedView } from '@/components/themed-view';
 import { CVScoreBadge } from '@/components/cv-score-badge';
 import { CVCategoryBars } from '@/components/cv-category-bars';
 import { ConfettiBurst } from '@/components/confetti-burst';
+import { ScoreAnimation } from '@/components/score-animation';
 import { Spacing } from '@/constants/theme';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
@@ -225,7 +226,7 @@ export function Step1CVUpload({ onNext }: Step1CVUploadProps) {
 
         {scoreData && (
           <Animated.View entering={FadeIn.delay(300).duration(500)} style={styles.resultContainer}>
-            <CVScoreBadge score={scoreData.score} size={120} animate={true} />
+            <ScoreAnimation score={scoreData.score} size="lg" />
 
             <View style={styles.breakdownContainer}>
               <CVCategoryBars categories={scoreData.breakdown} animate={true} />

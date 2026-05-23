@@ -6,6 +6,7 @@ import { StyleSheet } from 'react-native';
 import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
 import { useTheme } from '@/hooks/use-theme';
+import { Colors } from '@/constants/theme';
 
 import { Spacing } from '@/constants/theme';
 

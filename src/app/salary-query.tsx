@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import {
   View,
+  Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
@@ -246,13 +247,13 @@ export default function SalaryQueryScreen() {
       <View style={styles.rangeBarContainer}>
         <View style={styles.rangeBar}>
           <View style={[styles.rangeSegment, styles.rangeLow, { flex: 50 }]}>
-            <View style={[styles.rangeFill, styles.rangeLowFill, { width: '100%' }]} />
+            <View style={[styles.rangeLowFill, { width: '100%' }]} />
           </View>
           <View style={[styles.rangeSegment, styles.rangeMedian, { flex: 0, width: 8 }]}>
             <View style={styles.medianIndicator} />
           </View>
           <View style={[styles.rangeSegment, styles.rangeHigh, { flex: 50 }]}>
-            <View style={[styles.rangeFill, styles.rangeHighFill, { width: '100%' }]} />
+            <View style={[styles.rangeHighFill, { width: '100%' }]} />
           </View>
         </View>
         <View style={styles.rangeLabels}>

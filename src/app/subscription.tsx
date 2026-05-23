@@ -199,7 +199,7 @@ export default function SubscriptionScreen() {
         <View style={styles.planHeader}>
           <ThemedText type="title" style={styles.planName}>{plan.name}</ThemedText>
           <View style={styles.planPriceRow}>
-            <ThemedText type="largeTitle" style={styles.planPrice}>{plan.price}</ThemedText>
+            <ThemedText type="title" style={styles.planPrice}>{plan.price}</ThemedText>
             <ThemedText type="small" style={styles.planPeriod}>{plan.period}</ThemedText>
           </View>
           <ThemedText type="small" style={styles.planDescription}>{plan.description}</ThemedText>

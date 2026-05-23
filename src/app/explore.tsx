@@ -158,7 +158,7 @@ export default function ExploreScreen() {
             {
               backgroundColor:
                 formatMatchScore(item.match_score) >= 90
-                  ? theme.success || '#4CAF50'
+                  ? '#4CAF50'
                   : formatMatchScore(item.match_score) >= 75
                   ? '#2196F3'
                   : theme.textSecondary,

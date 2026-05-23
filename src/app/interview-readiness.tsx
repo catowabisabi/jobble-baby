@@ -281,7 +281,7 @@ export default function InterviewReadinessScreen() {
         }
       >
         <View style={styles.header}>
-          <ThemedText type="largeTitle" style={styles.title}>
+          <ThemedText type="title" style={styles.title}>
             面試準備度
           </ThemedText>
           <ThemedText type="subtitle" themeColor="textSecondary">

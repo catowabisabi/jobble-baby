@@ -470,4 +470,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing.two,
     color: '#666',
   },
+  keyboardView: {
+    flex: 1,
+  },
 });

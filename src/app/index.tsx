@@ -145,7 +145,7 @@ export default function HomeScreen() {
                   >
                     <Text style={styles.actionEmoji}>{action.icon}</Text>
                   </View>
-                  <ThemedText type="strong" style={styles.actionTitle}>
+                  <ThemedText type="smallBold" style={styles.actionTitle}>
                     {action.title}
                   </ThemedText>
                   <ThemedText
@@ -170,7 +170,7 @@ export default function HomeScreen() {
                 <View key={index} style={styles.featureRow}>
                   <Text style={styles.featureEmoji}>{feature.emoji}</Text>
                   <View style={styles.featureText}>
-                    <ThemedText type="strong">{feature.title}</ThemedText>
+                    <ThemedText type="smallBold">{feature.title}</ThemedText>
                     <ThemedText themeColor="textSecondary" type="small">
                       {feature.description}
                     </ThemedText>
@@ -189,7 +189,7 @@ export default function HomeScreen() {
             <View style={styles.premiumContent}>
               <Text style={styles.premiumEmoji}>👑</Text>
               <View style={styles.premiumText}>
-                <ThemedText type="strong" style={styles.premiumTitle}>
+                <ThemedText type="smallBold" style={styles.premiumTitle}>
                   升級 Premium
                 </ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">

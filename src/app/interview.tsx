@@ -412,7 +412,7 @@ export default function InterviewScreen() {
         <View style={styles.scoreCard}>
           <ThemedText type="small" style={styles.scoreLabel}>總分</ThemedText>
           <ThemedText
-            type="largeTitle"
+            type="title"
             style={[styles.scoreValue, { color: getScoreColor(submitResult.overall_score) }]}
           >
             {submitResult.overall_score.toFixed(1)}
@@ -463,7 +463,7 @@ export default function InterviewScreen() {
   <View style={styles.overlayContainer}>
     <View style={styles.overlayContent}>
       <View style={styles.lockIconContainer}>
-        <ThemedText type="largeTitle" style={styles.lockIcon}>🔒</ThemedText>
+        <ThemedText type="title" style={styles.lockIcon}>🔒</ThemedText>
       </View>
       <ThemedText type="title" style={styles.overlayTitle}>Premium Feature</ThemedText>
       <ThemedText type="default" style={styles.overlaySubtitle}>

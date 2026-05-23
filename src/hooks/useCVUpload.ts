@@ -88,7 +88,7 @@ export function useCVUpload(userId: number | undefined): UseCVUploadReturn {
       try {
         const picked = await DocumentPicker.getDocumentAsync({
           type: ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-          copyTo: 'cachesDirectory',
+          copyToCacheDirectory: true,
         });
 
         if (picked.canceled) {

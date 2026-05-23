@@ -1,30 +1,44 @@
-# Task: Build Subscription Paywall with Feature Gating
+# Task: Build Live CV Score Counter with Milestone Rings
 
 ## Context
-Jobble Baby - AI job-hunting app. Painpoint #10: No premium upsell/subscription UI. Users need to see what they're missing and want to upgrade.
+Jobble Baby - AI job-hunting app. Concept #6 from our brainstorm is "Live CV Score Counter + Milestone Rings" - when user updates CV and triggers re-score, animate the score number counting up with a circular progress ring showing improvement delta. On milestone scores, trigger confetti burst + achievement badge unlock animation.
 
-## Your Tasks
+## Painpoint
+CV score updates feel static and forgettable - no sense of progress momentum. When user re-scores their CV, we want a delightful animated reveal showing score improvement.
 
-### Audit subscription.tsx
-Read src/app/subscription.tsx. Verify it has:
-- Free tier with locked features (padlock icon)
-- Pro (HK$99/mo) and Premium (HK$199/mo) tier comparison
-- "立即訂閱" CTA buttons
-- Premium badge for subscribed users
+## Task
 
-### Feature Gating
-Check these screens for premium gating:
-- src/app/interview.tsx - AI interview should be premium-only
-- src/app/cv-detail.tsx - CV optimization should be premium-only  
-- src/app/job-alerts.tsx - Push notifications should be premium-only
+### 1. Build ScoreAnimation component (src/components/score-animation.tsx)
+Create a reusable animated score counter component:
+- Props: `score` (number), `previousScore?` (number), `size` ('sm'|'md'|'lg')
+- Animated counter: when score prop changes, count from previousScore to new score using spring animation (react-native-reanimated)
+- Circular progress ring around the score: shows progress toward next milestone tier
+- Milestone thresholds: 5 (bronze), 7 (silver), 8.5 (gold)
+- Delta badge: "+X.X" in green or "-X.X" in red, appears below counter
+- Confetti burst: when crossing a milestone threshold (5→7 or 7→8.5), trigger confetti via existing confetti-burst.tsx
 
-For each locked feature:
-- Show content blurred or with padlock overlay
-- Show floating upsell banner: "升級至 Premium 解鎖全部功能 HK$199/月"
+### 2. Integrate into profile.tsx
+In the CV score display area of src/app/profile.tsx:
+- Replace static score number with `<ScoreAnimation score={currentScore} previousScore={previousScore} size="lg" />`
+- The component should handle the case where previousScore is undefined (first load, no animation)
 
-### Verify Backend
-Check backend has POST /api/v1/subscription/create endpoint.
+### 3. Integrate into CV upload flow
+In src/components/onboarding/Step1CVUpload.tsx (after AI returns score):
+- Use `<ScoreAnimation score={newScore} size="lg" />` as the score reveal animation
+- Trigger confetti if score >= 5
+
+### 4. Animation specs
+- Counter animation: 800ms spring, damping 15, stiffness 100
+- Progress ring: SVG circle with stroke-dashoffset animation, 600ms ease-out
+- Delta badge: fade in after counter completes, 200ms
+- Confetti: 2 second burst, gravity-affected particles
+
+### 5. Check for confetti-burst.tsx
+If confetti-burst.tsx doesn't exist in src/components/, create a simple one using react-native-reanimated with particle system.
+
+### 6. Verify TypeScript
+Run `npx tsc --noEmit` to ensure no type errors.
 
 ## Keywords
-freemium model, feature gating, paywall, upgrade CTA, subscription tier
-ULW
+spring animation, animated counter, circular progress, stroke-dashoffset, confetti, milestone threshold, delta badge
+ULWfix: build live CV score counter with animated milestone rings

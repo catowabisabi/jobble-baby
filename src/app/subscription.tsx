@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
@@ -52,8 +53,23 @@ const PLANS: Plan[] = [
     ],
   },
   {
-    id: 'monthly',
-    name: 'Monthly',
+    id: 'pro',
+    name: 'Pro',
+    price: 'HK$99',
+    period: '/月',
+    description: '專業功能',
+    features: [
+      { text: 'CV 上傳', included: true },
+      { text: '基本薪資查詢', included: true },
+      { text: 'AI 面試練習', included: true },
+      { text: 'CV 優化建議', included: true },
+      { text: '職缺提醒', included: false },
+      { text: '優先客服支援', included: false },
+    ],
+  },
+  {
+    id: 'premium',
+    name: 'Premium',
     price: 'HK$199',
     period: '/月',
     description: '完整功能',
@@ -63,44 +79,8 @@ const PLANS: Plan[] = [
       { text: 'AI 面試練習', included: true },
       { text: 'CV 優化建議', included: true },
       { text: '職缺提醒', included: true },
-      { text: '優先客服支援', included: false },
-    ],
-    recommended: true,
-    badge: '推薦',
-  },
-  {
-    id: 'annual',
-    name: 'Annual',
-    price: 'HK$99',
-    period: '/月',
-    description: '節省 50%',
-    features: [
-      { text: 'CV 上傳', included: true },
-      { text: '基本薪資查詢', included: true },
-      { text: 'AI 面試練習', included: true },
-      { text: 'CV 優化建議', included: true },
-      { text: '職缺提醒', included: true },
-      { text: '優先客服支援', included: false },
-    ],
-    recommended: true,
-    badge: '最抵',
-  },
-  {
-    id: 'unlimited',
-    name: 'Unlimited',
-    price: 'HK$299',
-    period: '/月',
-    description: '尊貴體驗',
-    features: [
-      { text: 'CV 上傳', included: true },
-      { text: '基本薪資查詢', included: true },
-      { text: 'AI 面試練習', included: true },
-      { text: 'CV 優化建議', included: true },
-      { text: '職缺提醒', included: true },
       { text: '優先客服支援', included: true },
     ],
-    recommended: true,
-    badge: '尊貴',
   },
 ];
 
@@ -124,6 +104,7 @@ const FAQ_DATA = [
 ];
 
 export default function SubscriptionScreen() {
+  const router = useRouter();
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
@@ -142,6 +123,11 @@ export default function SubscriptionScreen() {
   const handleUpgrade = async (planId: string) => {
     if (isPremiumUser) {
       Alert.alert('提示', '您已是 Premium 用戶');
+      return;
+    }
+
+    if (planId === 'free') {
+      Alert.alert('提示', '您已在使用免費方案');
       return;
     }
 
@@ -208,7 +194,11 @@ export default function SubscriptionScreen() {
         <View style={styles.planFeatures}>
           {plan.features.map((feature, idx) => (
             <View key={idx} style={styles.featureRow}>
-              <Text style={styles.featureIcon}>{feature.included ? '✓' : '✗'}</Text>
+              {plan.id === 'free' && !feature.included ? (
+                <Text style={styles.featureIcon}>🔒</Text>
+              ) : (
+                <Text style={styles.featureIcon}>{feature.included ? '✓' : '✗'}</Text>
+              )}
               <ThemedText
                 type="small"
                 style={[
@@ -221,6 +211,15 @@ export default function SubscriptionScreen() {
             </View>
           ))}
         </View>
+
+        {plan.id === 'free' && !isPremiumUser && (
+          <TouchableOpacity
+            style={styles.unlockButton}
+            onPress={() => router.push('/subscription')}
+          >
+            <Text style={styles.unlockButtonText}>升級解鎖</Text>
+          </TouchableOpacity>
+        )}
 
         {isCurrentPlan || isPremiumUser ? (
           <View style={styles.currentPlanBadge}>
@@ -409,6 +408,17 @@ const styles = StyleSheet.create({
   upgradeButtonText: {
     color: '#fff',
     fontSize: 16,
+    fontWeight: '600',
+  },
+  unlockButton: {
+    backgroundColor: '#fbbf24',
+    borderRadius: 12,
+    padding: Spacing.three,
+    alignItems: 'center',
+  },
+  unlockButtonText: {
+    color: '#000',
+    fontSize: 14,
     fontWeight: '600',
   },
   currentPlanBadge: {

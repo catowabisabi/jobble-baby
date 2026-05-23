@@ -1,40 +1,29 @@
-fix: build onboarding wizard with 4-step activation flow
+fix: build subscription paywall with feature gating
 
 ## Context
-Jobble Baby is an AI job-hunting assistant app. User uploads CV → gets AI help → subscribes. Concept #5 is an Onboarding Wizard that accelerates the Aha Moment from 3-5 days to under 5 minutes.
-
-## Concept
-4-step first-launch wizard:
-1. Upload CV → instant AI score reveal (Aha Moment)
-2. Set job preferences → immediate job matches
-3. Try one interview question → instant AI feedback
-4. Enable notifications → recruiter radar activates
-
-Progress bar + badges per step. Skip available but discouraged.
+Jobble Baby is an AI job-hunting assistant app. User uploads CV → gets AI help → subscribes. Painpoint #10: M5 missing - No premium upsell/subscription UI. Users can see the paywall but features are not properly gated.
 
 ## Task
 
-### Step 1: Create onboarding screen
-Create src/app/onboarding.tsx - full-screen 4-step wizard:
-- Step indicator (1/4, 2/4, 3/4, 4/4) with animated progress line
-- Button-based navigation (Next/Back)
-- Each step has clear CTA + small reward
+### Step 1: Audit subscription.tsx
+Read src/app/subscription.tsx. Verify:
+- Free tier shows locked features with padlock icon + "升級解鎖" CTA
+- Premium tiers show comparison table (Free / Pro HK$99/月 / Premium HK$199/月)
+- "立即訂閱" CTA buttons that call POST /api/v1/subscription/create
 
-### Step 2: Step content
-- Step 1 (Upload CV): File picker for CV → POST /api/v1/cv/upload → score reveal animation (1-10 with category breakdown). Aha Moment - make it magical.
-- Step 2 (Job Preferences): Form - job type (dropdown), location (dropdown), salary expectation (slider). Show "Found X matching jobs" with preview cards.
-- Step 3 (Try Interview): One HR question, text input, POST /api/v1/interviews/submit → show AI feedback.
-- Step 4 (Notifications): Push notification toggle. Request permission. Radar activation animation. "Your recruiter radar is now active."
+### Step 2: Feature gating on existing screens
+- src/app/interview.tsx: Check if user is premium before showing full AI interview
+- src/app/cv-detail.tsx: Check if user is premium before showing CV optimization
+- src/app/job-alerts.tsx: Check if user is premium before enabling push notifications
+- Non-premium users see blurred/locked content + upsell banner
 
-### Step 3: Gate first-launch users
-In src/app/_layout.tsx, check onboarding_complete in SecureStore. If missing, redirect to /onboarding. After step 4 completion, set onboarding_complete=true and redirect to home.
+### Step 3: Backend check
+Verify POST /api/v1/subscription/create endpoint exists and returns plan details.
 
-### Step 4: Backend endpoint
-POST /api/v1/onboarding/complete - Body: { step: 1|2|3|4, preferences?: {...} }. Track completion in user metadata. Update user profile with job_preferences from step 2.
-
-### Step 5: Style
-Use existing theme. Progress bar at top with animated fill. Large touch targets. Celebration micro-animation on step completion.
+### Step 4: Test the flow
+1. Login as free user → go to subscription → see upsell
+2. Login as premium user → go to subscription → see "已訂閱" badge
 
 ## Keywords
-agile sprint, detail-on-demand, fs-permissions
+freemium model, feature gating, paywall, upgrade CTA, subscription tier
 ULW

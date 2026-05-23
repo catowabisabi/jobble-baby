@@ -1,34 +1,30 @@
-# Task: Build Onboarding Wizard
+# Task: Build Subscription Paywall with Feature Gating
 
 ## Context
-Jobble Baby - AI job-hunting app. User uploads CV → AI analysis → subscribes.
-Goal: 4-step onboarding wizard to accelerate Aha Moment from 3-5 days to under 5 minutes.
-
-## 4 Steps
-1. Upload CV → AI score reveal (the Aha Moment)
-2. Job preferences → matching jobs preview
-3. One interview question → instant AI feedback
-4. Enable notifications → recruiter radar activates
+Jobble Baby - AI job-hunting app. Painpoint #10: No premium upsell/subscription UI. Users need to see what they're missing and want to upgrade.
 
 ## Your Tasks
 
-### Frontend (src/app/onboarding.tsx)
-- 4-step wizard with progress bar (1/4 → 4/4)
-- Step 1: File picker → POST /api/v1/cv/upload → animated score reveal (1-10 + category breakdown)
-- Step 2: Form (job_type, location, salary slider) → show Found X jobs preview cards
-- Step 3: One HR question → text input → POST /api/v1/interviews/submit → AI feedback display
-- Step 4: Push notification toggle + permission request → radar activation animation
+### Audit subscription.tsx
+Read src/app/subscription.tsx. Verify it has:
+- Free tier with locked features (padlock icon)
+- Pro (HK$99/mo) and Premium (HK$199/mo) tier comparison
+- "立即訂閱" CTA buttons
+- Premium badge for subscribed users
 
-### Gate (src/app/_layout.tsx)
-- Check SecureStore for onboarding_complete
-- If missing → redirect to /onboarding
-- On completion → set onboarding_complete=true → redirect to home
+### Feature Gating
+Check these screens for premium gating:
+- src/app/interview.tsx - AI interview should be premium-only
+- src/app/cv-detail.tsx - CV optimization should be premium-only  
+- src/app/job-alerts.tsx - Push notifications should be premium-only
 
-### Backend (backend/app/routes/)
-- POST /api/v1/onboarding/complete
-- Body: { step: 1|2|3|4, preferences?: { job_type, location, salary_expectation } }
-- Track completion + update user profile with job_preferences
+For each locked feature:
+- Show content blurred or with padlock overlay
+- Show floating upsell banner: "升級至 Premium 解鎖全部功能 HK$199/月"
+
+### Verify Backend
+Check backend has POST /api/v1/subscription/create endpoint.
 
 ## Keywords
-agile sprint, detail-on-demand, fs-permissions
+freemium model, feature gating, paywall, upgrade CTA, subscription tier
 ULW

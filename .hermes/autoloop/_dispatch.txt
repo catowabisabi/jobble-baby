@@ -1,85 +1,29 @@
-fix: add premium gate to cv-detail.tsx + fix broken JSX in job-alerts.tsx
+verify: validate all TypeScript fixes, confirm npx tsc --noEmit passes
 
 ## Context
-job-alerts.tsx was just updated with PremiumGate but has a JSX syntax issue - the PremiumGate opening tag wraps the component but the closing tag is inside the return statement, which breaks the component structure. Also, cv-detail.tsx has no premium gating at all.
+We just committed 11 files of TypeScript fixes across the codebase. Before proceeding, verify that all TypeScript errors are resolved by running npx tsc --noEmit and confirming zero src/ errors.
 
 ## Task
 
-### Step 1: Fix job-alerts.tsx JSX structure
-The current structure is broken. Fix it so PremiumGate properly wraps the entire return:
-```typescript
-// BEFORE (broken - PremiumGate closing tag inside return)
-return (
-    <PremiumGate featureName="求職警報設定">
-    <ThemedView style={styles.container}>
-      ...
-    </ThemedView>
-);
-    </PremiumGate>  // WRONG - this is outside return
-```
+### Step 1: Run TypeScript check
+Run: `cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby && npx tsc --noEmit 2>&1 | grep "^src/"`
+If any errors remain in src/, report them exactly.
 
-Fix the structure by moving the PremiumGate open tag to wrap the ThemedView and fixing indentation. The component structure should be:
-```typescript
-return (
-    <PremiumGate featureName="求職警報設定">
-      <ThemedView style={styles.container}>
-        ...
-      </ThemedView>
-    </PremiumGate>
-);
-```
+### Step 2: Check that the following fixes are in place
+- job-alerts.tsx: has keyboardView style in styles object
+- cv-detail.tsx: has PremiumGate wrapping the main scrollable content
+- salary-query.tsx: has Text import and uses rangeLowFill/rangeHighFill (not rangeFill)
+- index.tsx: no more type="strong" usages (should be smallBold)
+- interview.tsx, interview-readiness.tsx, subscription.tsx: no more type="largeTitle" (should be title)
 
-Also fix the loading state to show PremiumGate consistently:
-```typescript
-if (isLoading) {
-    return (
-      <PremiumGate featureName="求職警報設定">
-        <ThemedView style={styles.container}>
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#007AFF" />
-            <ThemedText type="small" style={styles.loadingText}>
-              載入設定中...
-            </ThemedText>
-          </View>
-        </ThemedView>
-      </PremiumGate>
-    );
-}
-```
-
-### Step 2: Add PremiumGate to cv-detail.tsx
-cv-detail.tsx shows AI-generated CV optimization/suggestions - this is a premium feature. Add PremiumGate wrapping the main content:
-
-Import at top:
-```typescript
-import PremiumGate from '@/components/premium-gate';
-```
-
-Wrap the content - the main scrollable content showing the CV score breakdown and optimization suggestions should be behind the gate. The PremiumGate should be placed inside the ScrollView content, wrapping the score display and suggestion sections. Something like:
-
-```typescript
-return (
-    <ThemedView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <PremiumGate featureName="CV 評分與優化">
-          {/* existing score bar and feedback content */}
-        </PremiumGate>
-      </ScrollView>
-    </ThemedView>
-);
-```
-
-Keep the header/score badge outside the gate but gate the detailed breakdown and suggestions.
-
-### Step 3: Verify no other screens need gating
-Check if any other app screen shows premium content without gating:
-- salary-query.tsx - this is FREE tier (market salary data), do NOT add gate
-- explore.tsx - this is FREE tier, do NOT add gate
-- interview-readiness.tsx - dashboard is free tier per task spec, do NOT add gate
-- profile.tsx - profile management is free, only specific premium features inside are gated
-
-### Step 4: No DB update needed for this fix
+### Step 3: Verify premium gates
+Check these screens have PremiumGate:
+- src/app/job-alerts.tsx
+- src/app/cv-detail.tsx
+The following should NOT have gates:
+- src/app/salary-query.tsx (market data is FREE)
+- src/app/explore.tsx (job listing is FREE)
 
 ## Keywords
-translucent layer, borderline, evaporation
+audit, validation, typescript, premium-gate
 ULW

@@ -1,25 +1,8 @@
-fix: profile.tsx prop type mismatches after named import fix
+verify: validate all TypeScript fixes
 
 ## Context
-After fixing named imports (CVScoreBadge, AchievementBadge, CVCategoryBars, MilestoneHint, ConfettiBurst), there are remaining TypeScript errors in profile.tsx:
-
-```
-src/app/profile.tsx(276,29): error TS2322: Type '{ categoryScores: any; }' is not assignable to type 'IntrinsicAttributes & CVCategoryBarsProps'.
-src/app/profile.tsx(278,71): error TS2322: Type '{ key: number; achievement: any; }' is not assignable to type 'IntrinsicAttributes & AchievementBadgeProps'.
-src/app/profile.tsx(280,42): error TS2322: Type '{ milestone: any; }' is not assignable to type 'IntrinsicAttributes & MilestoneHintProps'.
-src/app/profile.tsx(281,31): error TS2741: Property 'trigger' is missing in type '{ onComplete: () => void; }' but required in type 'ConfettiBurstProps'.
-```
-
-## Task
-1. Read src/app/profile.tsx around lines 270-285 to see how these components are used
-2. Read the component interfaces to understand expected props:
-   - src/components/cv-category-bars.tsx (CVCategoryBarsProps)
-   - src/components/achievement-badge.tsx (AchievementBadgeProps)
-   - src/components/milestone-hint.tsx (MilestoneHintProps)
-   - src/components/confetti-burst.tsx (ConfettiBurstProps)
-3. Fix the prop passing - either fix the JSX in profile.tsx or add default props to components
-4. Verify with: npx tsc --noEmit 2>&1 | grep profile.tsx
+We just committed 11 files of TypeScript fixes across the codebase. Before proceeding, verify that all TypeScript errors are resolved.
 
 ## Keywords
-props-fix, typescript-errors, component-props
+audit, validation, typescript
 ULW

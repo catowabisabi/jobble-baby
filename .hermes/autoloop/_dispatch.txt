@@ -10,7 +10,7 @@ Read src/app/interview-readiness.tsx fully. Check:
 - Does it display sessions history (list of past sessions)?
 - Does it show score progression chart (visual trend)?
 - Does it show focus areas recommendations?
-- Does it handle readiness_level ("no_data", "beginner", "improving", "ready") with proper UI?
+- Does it handle readiness_level ("building", "ready", "expert", "no_data") with proper UI?
 
 ### Step 2: Fix dashboard display
 The readiness endpoint returns sessions array. Display each session as a card showing:
@@ -19,7 +19,7 @@ The readiness endpoint returns sessions array. Display each session as a card sh
 - Overall score with color coding (red < 5, yellow 5-7, green > 7)
 - Top strength and improvement area from feedback
 
-Add a simple ASCII/text-based score trend chart OR use a View with flexDirection row to show score bars horizontally.
+Add a simple score trend chart using View with flexDirection row to show score bars horizontally.
 
 Show focus_areas as a list of suggested practice topics.
 
@@ -30,5 +30,5 @@ Check the fetch URL is exactly: `${API_BASE_URL}/interviews/readiness` (the back
 Interview readiness data is user-specific. Ensure the fetch includes Authorization header with Bearer token.
 
 ## Keywords
-session history, readiness dashboard, score progression
+focal-point, skeleton, fusion
 ULW

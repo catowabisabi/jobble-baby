@@ -7,6 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
+  Modal,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
@@ -15,6 +16,8 @@ import { ThemedText } from '@/components/themed-text';
 import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from '@/hooks/use-theme';
 import { Spacing } from '@/constants/theme';
+import { StreakBadge } from '@/components/streak-badge';
+import { StreakShareCard } from '@/components/streak-share-card';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
 
@@ -66,6 +69,12 @@ export default function InterviewReadinessScreen() {
   const [error, setError] = useState<string | null>(null);
   const [readinessData, setReadinessData] = useState<ReadinessData | null>(null);
 
+  // Streak state
+  const [streakData, setStreakData] = useState({ current: 0, longest: 0, freeze_tokens: 0, last_practice: null as string | null });
+  const [showStreakModal, setShowStreakModal] = useState(false);
+  const [showShareCard, setShowShareCard] = useState(false);
+  const [latestScore, setLatestScore] = useState(0);
+
   const getAuthToken = async (): Promise<string | null> => {
     try {
       return await SecureStore.getItemAsync('auth_token');
@@ -94,6 +103,9 @@ export default function InterviewReadinessScreen() {
 
       const data: ReadinessData = await response.json();
       setReadinessData(data);
+      if (data.sessions.length > 0 && data.sessions[0].score !== null) {
+        setLatestScore(data.sessions[0].score);
+      }
       setError(null);
     } catch (e: any) {
       setError(e.message || '網絡錯誤');
@@ -102,9 +114,30 @@ export default function InterviewReadinessScreen() {
     }
   }, []);
 
+  const fetchStreakData = useCallback(async () => {
+    try {
+      const token = await getAuthToken();
+      if (!token) return;
+
+      const response = await fetch(`${API_BASE_URL}/streak/status`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setStreakData(data);
+      }
+    } catch (e) {
+      // Silently fail for streak data
+    }
+  }, []);
+
   useEffect(() => {
     fetchReadinessData();
-  }, [fetchReadinessData]);
+    fetchStreakData();
+  }, [fetchReadinessData, fetchStreakData]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -289,6 +322,19 @@ export default function InterviewReadinessScreen() {
           </ThemedText>
         </View>
 
+        {/* Streak Banner */}
+        {streakData.current > 0 && (
+          <TouchableOpacity
+            style={styles.streakBanner}
+            onPress={() => setShowShareCard(true)}
+          >
+            <StreakBadge streakCount={streakData.current} size="md" freezeTokens={streakData.freeze_tokens} />
+            <ThemedText type="small" themeColor="textSecondary">
+              Tap to share your achievement
+            </ThemedText>
+          </TouchableOpacity>
+        )}
+
         {error && (
           <View style={[styles.errorBanner, { backgroundColor: '#fef2f2' }]}>
             <ThemedText type="small" style={styles.errorText}>
@@ -351,6 +397,70 @@ export default function InterviewReadinessScreen() {
           </ThemedText>
         </TouchableOpacity>
       </ScrollView>
+
+      {/* Share Achievement Card Modal */}
+      <Modal
+        visible={showShareCard}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowShareCard(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setShowShareCard(false)}
+            >
+              <Text style={styles.closeButtonText}>✕</Text>
+            </TouchableOpacity>
+            <StreakShareCard streakCount={streakData.current} latestScore={latestScore} />
+          </View>
+        </View>
+      </Modal>
+
+      {/* Streak Break Protection Modal */}
+      <Modal
+        visible={showStreakModal}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowStreakModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContent, styles.protectionModal]}>
+            <Text style={styles.protectionEmoji}>❄️</Text>
+            <ThemedText type="title" style={styles.protectionTitle}>
+              Streak at Risk!
+            </ThemedText>
+            <ThemedText type="default" themeColor="textSecondary" style={styles.protectionText}>
+              You haven't practiced today. Use a freeze token to protect your {streakData.current} day streak?
+            </ThemedText>
+            <View style={styles.protectionButtons}>
+              <TouchableOpacity
+                style={[styles.protectionButton, styles.useFreezeButton]}
+                onPress={async () => {
+                  try {
+                    const token = await getAuthToken();
+                    await fetch(`${API_BASE_URL}/streak/freeze`, {
+                      method: 'POST',
+                      headers: { Authorization: `Bearer ${token}` },
+                    });
+                    fetchStreakData();
+                  } catch (e) {}
+                  setShowStreakModal(false);
+                }}
+              >
+                <Text style={styles.protectionButtonText}>Use Freeze ❄️</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.protectionButton, styles.loseStreakButton]}
+                onPress={() => setShowStreakModal(false)}
+              >
+                <Text style={[styles.protectionButtonText, { color: '#ef4444' }]}>Lose Streak</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </ThemedView>
   );
 }
@@ -375,6 +485,14 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: Spacing.two,
+  },
+  streakBanner: {
+    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+    borderRadius: Spacing.three,
+    padding: Spacing.three,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(245, 158, 11, 0.3)',
   },
   title: {
     marginBottom: Spacing.half,
@@ -498,6 +616,68 @@ const styles = StyleSheet.create({
     marginTop: Spacing.three,
   },
   ctaButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  // Modal styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    alignItems: 'center',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: -40,
+    right: 0,
+    zIndex: 1,
+    padding: 8,
+  },
+  closeButtonText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  protectionModal: {
+    backgroundColor: '#1f2937',
+    borderRadius: 16,
+    padding: 24,
+    width: 300,
+    alignItems: 'center',
+  },
+  protectionEmoji: {
+    fontSize: 48,
+    marginBottom: 16,
+  },
+  protectionTitle: {
+    color: '#f59e0b',
+    marginBottom: 12,
+  },
+  protectionText: {
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  protectionButtons: {
+    gap: 12,
+    width: '100%',
+  },
+  protectionButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  useFreezeButton: {
+    backgroundColor: '#3b82f6',
+  },
+  loseStreakButton: {
+    backgroundColor: 'rgba(255,255,255,0.1)',
+  },
+  protectionButtonText: {
+    color: '#fff',
     fontSize: 16,
     fontWeight: '600',
   },

@@ -54,11 +54,20 @@ class User(Base):
     onboarding_completed_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    # Streak fields
+    streak_current = Column(Integer, default=0)
+    streak_longest = Column(Integer, default=0)
+    streak_freeze_tokens = Column(Integer, default=3)
+    last_practice_date = Column(DateTime, nullable=True)
+    streak_updated_at = Column(DateTime, nullable=True)
+    # Relationships
     cvs = relationship("CV", back_populates="user")
     job_alerts = relationship("JobAlert", back_populates="user")
     notifications = relationship("Notification", back_populates="user")
     cv_score_history = relationship("CVScoreHistory", back_populates="user")
     milestone_achievements = relationship("MilestoneAchievement", back_populates="user")
+    practice_sessions = relationship("PracticeSession", back_populates="user")
+    streak_achievements = relationship("StreakAchievement", back_populates="user")
 
 
 class CV(Base):
@@ -151,6 +160,34 @@ class InterviewSession(Base):
     completed_at = Column(DateTime, default=datetime.utcnow)
 
     user = relationship("User")
+
+
+# === STREAK MODELS ===
+
+class PracticeSession(Base):
+    """Practice session model for streak tracking"""
+    __tablename__ = "practice_sessions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    score = Column(Integer, nullable=False)
+    duration_seconds = Column(Integer, nullable=False)
+    practice_type = Column(String, nullable=False)  # interview, cv_review, etc.
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User", back_populates="practice_sessions")
+
+
+class StreakAchievement(Base):
+    """Streak achievement badges"""
+    __tablename__ = "streak_achievements"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    badge_type = Column(String, nullable=False)  # bronze_3day, silver_7day, gold_30day
+    earned_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User", back_populates="streak_achievements")
 
 
 def get_db():

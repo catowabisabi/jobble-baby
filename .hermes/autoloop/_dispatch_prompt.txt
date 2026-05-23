@@ -1,34 +1,40 @@
-fix: implement interview readiness dashboard frontend wiring
+fix: build onboarding wizard with 4-step activation flow
 
 ## Context
-Backend already has /api/v1/interviews/readiness endpoint returning: total_sessions, average_score, readiness_level, recent_trend[], focus_areas[], sessions[]. Frontend interview-readiness.tsx fetches but painpoint #12 says it's NOT properly wired - no session history tracking, no score progression chart.
+Jobble Baby is an AI job-hunting assistant app (CV upload → AI analysis → subscription). User intention: users upload CV → get AI help → subscribe. Concept #5 from our brainstorm is an Onboarding Wizard that accelerates the Aha Moment from 3-5 days to under 5 minutes.
+
+## Concept
+4-step first-launch wizard:
+1. Upload CV → instant AI score reveal (the Aha Moment)
+2. Set job preferences → immediate job matches shown
+3. Try one interview question → instant AI feedback (variable reward loop starts)
+4. Enable notifications → recruiter radar activates
+
+Progress bar + badges per step. Skip available but discouraged.
 
 ## Task
 
-### Step 1: Audit interview-readiness.tsx
-Read src/app/interview-readiness.tsx fully. Check:
-- Does it display sessions history (list of past sessions)?
-- Does it show score progression chart (visual trend)?
-- Does it show focus areas recommendations?
-- Does it handle readiness_level ("building", "ready", "expert", "no_data") with proper UI?
+### Step 1: Create onboarding screen
+Create src/app/onboarding.tsx - a full-screen 4-step wizard with:
+- Step indicator (1/4, 2/4, 3/4, 4/4) with progress line
+- Swipeable or button-based step navigation
+- Each step has a clear CTA and small reward
 
-### Step 2: Fix dashboard display
-The readiness endpoint returns sessions array. Display each session as a card showing:
-- Date/completed_at
-- Job type (or "General")
-- Overall score with color coding (red < 5, yellow 5-7, green > 7)
-- Top strength and improvement area from feedback
+### Step 2: Step content
+- Step 1 (Upload CV): Photo picker or file picker for CV → calls POST /api/v1/cv/upload → shows score reveal animation (confetti-like score reveal, 1-10 with category breakdown). This is the Aha Moment - make it feel magical.
+- Step 2 (Job Preferences): Simple form - job type (dropdown), location (dropdown), salary expectation (range slider). On submit, show "Found X matching jobs" with 2-3 preview cards.
+- Step 3 (Try Interview): Show one simple HR question. Text input for answer. Submit → POST /api/v1/interviews/submit → show AI feedback. This closes the loop quickly.
+- Step 4 (Notifications): Toggle for push notifications. Call expo-notifications permission. Show radar activation animation. "Your recruiter radar is now active."
 
-Add a simple score trend chart using View with flexDirection row to show score bars horizontally.
+### Step 3: Gate first-launch users
+In src/app/_layout.tsx, check if onboarding_complete flag exists in SecureStore. If not, redirect to /onboarding. After step 4 completion, set onboarding_complete=true and redirect to home.
 
-Show focus_areas as a list of suggested practice topics.
+### Step 4: Backend endpoint
+Create POST /api/v1/onboarding/complete in backend routes. Body: { step: 1|2|3|4 }. Track completion in user metadata. Also update user profile with job_preferences from step 2.
 
-### Step 3: Verify API URL
-Check the fetch URL is exactly: `${API_BASE_URL}/interviews/readiness` (the backend router prefix is /api/v1/interviews)
-
-### Step 4: Check if user auth token is being sent
-Interview readiness data is user-specific. Ensure the fetch includes Authorization header with Bearer token.
+### Step 5: Style
+Use existing theme. Progress bar at top with animated fill. Each step card centered, large touch targets. Celebratory micro-animation on step completion.
 
 ## Keywords
-focal-point, skeleton, fusion
+agile sprint, detail-on-demand, fs-permissions
 ULW

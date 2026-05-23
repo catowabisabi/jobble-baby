@@ -1,28 +1,25 @@
-fix: implement premium subscription paywall + feature gating UI
+fix: profile.tsx prop type mismatches after named import fix
 
 ## Context
-Jobble Baby needs a subscription/paywall system to gate premium features. Free users get basic CV upload + salary query. Premium users (HK$99-299/month) unlock: AI interview simulation, CV optimization, job alerts.
+After fixing named imports (CVScoreBadge, AchievementBadge, CVCategoryBars, MilestoneHint, ConfettiBurst), there are remaining TypeScript errors in profile.tsx:
+
+```
+src/app/profile.tsx(276,29): error TS2322: Type '{ categoryScores: any; }' is not assignable to type 'IntrinsicAttributes & CVCategoryBarsProps'.
+src/app/profile.tsx(278,71): error TS2322: Type '{ key: number; achievement: any; }' is not assignable to type 'IntrinsicAttributes & AchievementBadgeProps'.
+src/app/profile.tsx(280,42): error TS2322: Type '{ milestone: any; }' is not assignable to type 'IntrinsicAttributes & MilestoneHintProps'.
+src/app/profile.tsx(281,31): error TS2741: Property 'trigger' is missing in type '{ onComplete: () => void; }' but required in type 'ConfettiBurstProps'.
+```
 
 ## Task
-Build a subscription paywall screen and wire up feature gating throughout the app.
-
-### Backend (FastAPI):
-1. Add subscription_tier column (free/trial/premium) + subscription_expires_at to users table
-2. Create PATCH /api/v1/users/subscription endpoint to upgrade user tier
-3. Update GET /api/v1/users/me to return subscription_tier and subscription_expires_at
-4. Create GET /api/v1/subscription/plans endpoint returning Free + Premium plans
-
-### Frontend (React Native/Expo):
-1. Create src/app/subscription.tsx - subscription plans screen with Free vs Premium cards, pricing (HK$199/mo), upgrade button, FAQ
-2. Update src/app/profile.tsx - show subscription badge, add "Upgrade to Premium" button for free users
-3. Update src/app/interview.tsx - add premium gate check, show lock overlay with upgrade CTA for free users
-4. Update src/components/app-tabs.tsx - show crown badge on profile tab for premium users
-
-### Implementation Notes:
-- Backend subscription upgrade is simple toggle for MVP (no real payment yet)
-- Feature gates check user.subscription_tier !== 'premium' before allowing access
-- Make it compelling - this is a conversion screen
+1. Read src/app/profile.tsx around lines 270-285 to see how these components are used
+2. Read the component interfaces to understand expected props:
+   - src/components/cv-category-bars.tsx (CVCategoryBarsProps)
+   - src/components/achievement-badge.tsx (AchievementBadgeProps)
+   - src/components/milestone-hint.tsx (MilestoneHintProps)
+   - src/components/confetti-burst.tsx (ConfettiBurstProps)
+3. Fix the prop passing - either fix the JSX in profile.tsx or add default props to components
+4. Verify with: npx tsc --noEmit 2>&1 | grep profile.tsx
 
 ## Keywords
-subscription, paywall, premium-gating
+props-fix, typescript-errors, component-props
 ULW

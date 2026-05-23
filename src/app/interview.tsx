@@ -143,11 +143,12 @@ export default function InterviewScreen() {
         }),
       });
 
-      const data: StartResponse = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.detail || '無法開始面試');
+        const err = await response.json();
+        throw new Error(err.detail || '無法開始面試');
       }
+
+      const data: StartResponse = await response.json();
 
       setSessionId(data.session_id);
       setQuestions(data.questions);
@@ -199,11 +200,12 @@ export default function InterviewScreen() {
         body: JSON.stringify({ answers: finalAnswers }),
       });
 
-      const data: SubmitResponse = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.detail || '無法提交答案');
+        const err = await response.json();
+        throw new Error(err.detail || '無法提交答案');
       }
+
+      const data: SubmitResponse = await response.json();
 
       setSubmitResult(data);
       setStep('results');

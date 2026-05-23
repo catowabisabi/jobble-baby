@@ -1,8 +1,16 @@
-verify: validate all TypeScript fixes
+fix: interview readiness dashboard - wire sessions history + score trend
 
 ## Context
-We just committed 11 files of TypeScript fixes across the codebase. Before proceeding, verify that all TypeScript errors are resolved.
+Painpoint #12: interview-readiness.tsx fetches /interviews/readiness but doesn't properly display sessions history, score progression chart, or focus areas.
+
+## Task
+Read interview-readiness.tsx. Fix the dashboard to:
+1. Display past sessions as cards (date, job type, score with color, top strength/improvement)
+2. Show score trend (horizontal bar chart or list with visual indicator)
+3. Show focus_areas as recommended practice topics
+4. Handle all readiness_level states with appropriate messaging
+5. Ensure Authorization header is sent with Bearer token
 
 ## Keywords
-audit, validation, typescript
+session history, readiness dashboard, score progression
 ULW

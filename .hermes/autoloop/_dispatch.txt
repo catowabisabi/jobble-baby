@@ -1,38 +1,53 @@
-fix: build live CV score counter with animated milestone rings
+# Task: Build Interview Streak Counter with Social Proof Badges
 
 ## Context
-Jobble Baby - AI job-hunting app. When user re-scores their CV, we want a delightful animated reveal showing score improvement. Painpoint: CV score updates feel static and forgettable - no sense of progress momentum.
+Jobble Baby - AI job-hunting app. Gamify interview practice to convert free users to premium via streak addiction + social comparison. This is concept #7 from brainstorm + todo #26.
 
-## Task
+## Painpoint
+No retention mechanic for interview practice. Users try once but don't come back. Streaks create daily habit loop.
 
-### 1. Build ScoreAnimation component (src/components/score-animation.tsx)
-Create a reusable animated score counter component:
-- Props: `score` (number), `previousScore?` (number), `size` ('sm'|'md'|'lg')
-- Animated counter: when score prop changes, count from previousScore to new score using spring animation (react-native-reanimated)
-- Circular progress ring around the score: shows progress toward next milestone tier
-- Milestone thresholds: 5 (bronze), 7 (silver), 8.5 (gold)
-- Delta badge: "+X.X" in green or "-X.X" in red, appears below counter
-- Confetti burst: when crossing a milestone threshold (5→7 or 7→8.5), trigger confetti via existing confetti-burst.tsx
+## Tasks
 
-### 2. Integrate into profile.tsx
-In the CV score display area of src/app/profile.tsx:
-- Replace static score number with `<ScoreAnimation score={currentScore} previousScore={previousScore} size="lg" />`
-- The component should handle the case where previousScore is undefined (first load, no animation)
+### 1. Database: Add streak tracking to users table
+In backend (use existing SQLite or add to FastAPI models):
+- Add to user model: `streak_current` (int, default 0), `streak_longest` (int, default 0), `streak_freeze_tokens` (int, default 3), `last_practice_date` (date nullable), `streak_updated_at` (datetime)
+- Add model: `PracticeSession(id, user_id, score, duration_seconds, practice_type, created_at)`
+- Add model: `StreakAchievement(id, user_id, badge_type, earned_at)`
 
-### 3. Integrate into CV upload flow
-In src/components/onboarding/Step1CVUpload.tsx (after AI returns score):
-- Use `<ScoreAnimation score={newScore} size="lg" />` as the score reveal animation
-- Trigger confetti if score >= 5
+### 2. Backend API endpoints (backend/app/routes/streak.py)
+- GET /api/v1/streak/status → { current, longest, freeze_tokens, last_practice }
+- POST /api/v1/streak/practice-complete → body: { score, duration_seconds, practice_type }
+  - Update streak: if last_practice was yesterday → +1; if today → no change; if >1 day ago → reset to 1
+  - If streak crosses 3/7/30 threshold → award StreakAchievement
+  - Return: { streak_current, streak_longest, badge_earned?, freeze_tokens_remaining }
+- POST /api/v1/streak/freeze → use 1 freeze token to protect streak for 1 missed day
+- GET /api/v1/streak/leaderboard → top 10 anonymous users by streak (names hidden: "Job Seeker #1")
 
-### 4. Animation specs
-- Counter animation: 800ms spring, damping 15, stiffness 100
-- Progress ring: SVG circle with stroke-dashoffset animation, 600ms ease-out
-- Delta badge: fade in after counter completes, 200ms
-- Confetti: 2 second burst, gravity-affected particles
+### 3. Frontend: StreakBadge component (src/components/streak-badge.tsx)
+- Props: streakCount (number), size ('sm'|'md'|'lg')
+- Tier colors: 1-2 (none/gray), 3-6 (bronze), 7-29 (silver), 30+ (gold)
+- Fire emoji 🔥 scales with streak count (1-2: none, 3-6: small, 7-29: medium, 30+: large)
+- Show current streak number prominently
+- Frost emoji ❄️ for freeze tokens remaining
 
-### 5. Verify TypeScript
-Run `npx tsc --noEmit` to ensure no type errors.
+### 4. Frontend: Interview streak integration (src/app/interview-readiness.tsx)
+- Add streak banner at top: "🔥 Day X streak" + freeze tokens remaining
+- After completing a practice session, show streak update animation (+1 streak with celebration)
+- If streak would break (missed day on next open), show "Use ❄️ to protect your streak?" modal
+- Add "Streak Achievements" section showing earned badges
 
-## Keywords
-spring animation, animated counter, circular progress, stroke-dashoffset, confetti, milestone threshold, delta badge
+### 5. Shareable Achievement Card (src/components/streak-share-card.tsx)
+- Canvas-based: generate shareable image (400x300)
+- Shows: "I practiced X days in a row! 🎯 Score: Y.Y", tier badge, date
+- Use react-native-view-shot or canvas to export as image
+- "Share" button → share to social/media
+
+### 6. Keywords
+streak counter, practice session, badge tier, leaderboard, streak freeze, social proof, shareable achievement
+
+## Reference files
+- src/app/interview-readiness.tsx - existing dashboard
+- src/components/achievement-badge.tsx - reference for badge styling
+- src/app/subscription.tsx - for premium gating logic
+
 ULW

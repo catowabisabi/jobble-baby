@@ -1,7 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Share, Platform } from 'react-native';
 import * as FileSystem from 'expo-file-system';
-import * as Sharing from 'expo-sharing';
 
 interface StreakShareCardProps {
   streakCount: number;

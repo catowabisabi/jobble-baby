@@ -205,149 +205,149 @@ export default function JobAlertsScreen() {
     </TouchableOpacity>
   );
 
-  if (isLoading) {
+if (isLoading) {
     return (
-      <ThemedView style={styles.container}>
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007AFF" />
-          <ThemedText type="small" style={styles.loadingText}>
-            載入設定中...
-          </ThemedText>
-        </View>
-      </ThemedView>
+      <PremiumGate featureName="求職警報設定">
+        <ThemedView style={styles.container}>
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#007AFF" />
+            <ThemedText type="small" style={styles.loadingText}>
+              載入設定中...
+            </ThemedText>
+          </View>
+        </ThemedView>
+      </PremiumGate>
     );
   }
 
   return (
     <PremiumGate featureName="求職警報設定">
-    <ThemedView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled"
+      <ThemedView style={styles.container}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardView}
         >
-          <View style={styles.header}>
-            <ThemedText type="title" style={styles.title}>
-              求職警報
-            </ThemedText>
-            <ThemedText type="subtitle" style={styles.subtitle}>
-              設定您的職位偏好以獲得最新招聘資訊
-            </ThemedText>
-          </View>
-
-          {error && (
-            <View style={styles.errorContainer}>
-              <ThemedText type="small" style={styles.errorText}>
-                {error}
+          <ScrollView
+            contentContainerStyle={styles.scrollContent}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View style={styles.header}>
+              <ThemedText type="title" style={styles.title}>
+                求職警報
+              </ThemedText>
+              <ThemedText type="subtitle" style={styles.subtitle}>
+                設定您的職位偏好以獲得最新招聘資訊
               </ThemedText>
             </View>
-          )}
 
-          <View style={styles.form}>
-            <View style={styles.inputGroup}>
-              <ThemedText type="smallBold" style={styles.label}>
-                職位類型
-              </ThemedText>
-              <View style={styles.chipsContainer}>
-                {JOB_TYPES.map((jobType, index) =>
-                  renderChip(jobType, selectedJobTypes.has(jobType), () => toggleJobType(jobType), index)
-                )}
+            {error && (
+              <View style={styles.errorContainer}>
+                <ThemedText type="small" style={styles.errorText}>
+                  {error}
+                </ThemedText>
               </View>
-            </View>
+            )}
 
-            <View style={styles.inputGroup}>
-              <ThemedText type="smallBold" style={styles.label}>
-                地點
-              </ThemedText>
-              <View style={styles.chipsContainer}>
-                {LOCATIONS.map((location, index) =>
-                  renderChip(location, selectedLocations.has(location), () => toggleLocation(location), index)
-                )}
+            <View style={styles.form}>
+              <View style={styles.inputGroup}>
+                <ThemedText type="smallBold" style={styles.label}>
+                  職位類型
+                </ThemedText>
+                <View style={styles.chipsContainer}>
+                  {JOB_TYPES.map((jobType, index) =>
+                    renderChip(jobType, selectedJobTypes.has(jobType), () => toggleJobType(jobType), index)
+                  )}
+                </View>
               </View>
-            </View>
 
-            <View style={styles.inputGroup}>
-              <ThemedText type="smallBold" style={styles.label}>
-                最低薪資 (HK$)
-              </ThemedText>
-              <View style={styles.salaryInputContainer}>
-                <ThemedText type="default" style={styles.currencyPrefix}>
-                  HK$
+              <View style={styles.inputGroup}>
+                <ThemedText type="smallBold" style={styles.label}>
+                  地點
+                </ThemedText>
+                <View style={styles.chipsContainer}>
+                  {LOCATIONS.map((location, index) =>
+                    renderChip(location, selectedLocations.has(location), () => toggleLocation(location), index)
+                  )}
+                </View>
+              </View>
+
+              <View style={styles.inputGroup}>
+                <ThemedText type="smallBold" style={styles.label}>
+                  最低薪資 (HK$)
+                </ThemedText>
+                <View style={styles.salaryInputContainer}>
+                  <ThemedText type="default" style={styles.currencyPrefix}>
+                    HK$
+                  </ThemedText>
+                  <TextInput
+                    style={[styles.input, styles.salaryInput]}
+                    placeholder="例如：30000"
+                    placeholderTextColor="#999"
+                    value={minSalary}
+                    onChangeText={setMinSalary}
+                    keyboardType="number-pad"
+                    accessibilityLabel="最低薪資輸入"
+                  />
+                </View>
+              </View>
+
+              <View style={styles.inputGroup}>
+                <ThemedText type="smallBold" style={styles.label}>
+                  關鍵字 (逗號分隔)
                 </ThemedText>
                 <TextInput
-                  style={[styles.input, styles.salaryInput]}
-                  placeholder="例如：30000"
+                  style={styles.input}
+                  placeholder="例如：React, TypeScript, Senior"
                   placeholderTextColor="#999"
-                  value={minSalary}
-                  onChangeText={setMinSalary}
-                  keyboardType="number-pad"
-                  accessibilityLabel="最低薪資輸入"
+                  value={keywords}
+                  onChangeText={setKeywords}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  accessibilityLabel="關鍵字輸入"
                 />
               </View>
-            </View>
 
-            <View style={styles.inputGroup}>
-              <ThemedText type="smallBold" style={styles.label}>
-                關鍵字 (逗號分隔)
-              </ThemedText>
-              <TextInput
-                style={styles.input}
-                placeholder="例如：React, TypeScript, Senior"
-                placeholderTextColor="#999"
-                value={keywords}
-                onChangeText={setKeywords}
-                autoCapitalize="none"
-                autoCorrect={false}
-                accessibilityLabel="關鍵字輸入"
-              />
-            </View>
-
-            <View style={styles.inputGroup}>
-              <View style={styles.toggleRow}>
-                <View style={styles.toggleLabelContainer}>
-                  <ThemedText type="smallBold" style={styles.label}>
-                    接收通知
-                  </ThemedText>
-                  <ThemedText type="small" themeColor="textSecondary" style={styles.toggleDescription}>
-                    當有新職位符合您的偏好時通知您
-                  </ThemedText>
+              <View style={styles.inputGroup}>
+                <View style={styles.toggleRow}>
+                  <View style={styles.toggleLabelContainer}>
+                    <ThemedText type="smallBold" style={styles.label}>
+                      接收通知
+                    </ThemedText>
+                    <ThemedText type="small" themeColor="textSecondary" style={styles.toggleDescription}>
+                      當有新職位符合您的偏好時通知您
+                    </ThemedText>
+                  </View>
+                  <Switch
+                    value={notificationsEnabled}
+                    onValueChange={setNotificationsEnabled}
+                    trackColor={{ false: '#e0e0e0', true: '#81c784' }}
+                    thumbColor={notificationsEnabled ? '#4CAF50' : '#f4f4f4'}
+                    accessibilityLabel="通知開關"
+                  />
                 </View>
-                <Switch
-                  value={notificationsEnabled}
-                  onValueChange={setNotificationsEnabled}
-                  trackColor={{ false: '#e0e0e0', true: '#81c784' }}
-                  thumbColor={notificationsEnabled ? '#4CAF50' : '#f4f4f4'}
-                  accessibilityLabel="通知開關"
-                />
               </View>
-            </View>
 
-            <TouchableOpacity
-              style={[styles.button, isSaving && styles.buttonDisabled]}
-              onPress={handleSave}
-              disabled={isSaving}
-              accessibilityLabel="儲存設定按鈕"
-            >
-              {isSaving ? (
-                <ActivityIndicator color="#fff" />
-              ) : (
-                <ThemedText type="default" style={styles.buttonText}>
-                  儲存設定
-                </ThemedText>
-              )}
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </ThemedView>
+              <TouchableOpacity
+                style={[styles.button, isSaving && styles.buttonDisabled]}
+                onPress={handleSave}
+                disabled={isSaving}
+                accessibilityLabel="儲存設定按鈕"
+              >
+                {isSaving ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <ThemedText type="default" style={styles.buttonText}>
+                    儲存設定
+                  </ThemedText>
+                )}
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </ThemedView>
+    </PremiumGate>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
     flex: 1,
   },
   keyboardView: {

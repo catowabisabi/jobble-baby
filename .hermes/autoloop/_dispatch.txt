@@ -1,173 +1,85 @@
-fix: implement premium feature gating on frontend screens
+fix: add premium gate to cv-detail.tsx + fix broken JSX in job-alerts.tsx
 
 ## Context
-Subscription paywall (#11) and job alert system (#12) are complete, but the paywall is not actually blocking access to premium features. Users can navigate to interview, cv-optimization, and job-alerts screens without subscribing. Need to gate these behind a premium check.
+job-alerts.tsx was just updated with PremiumGate but has a JSX syntax issue - the PremiumGate opening tag wraps the component but the closing tag is inside the return statement, which breaks the component structure. Also, cv-detail.tsx has no premium gating at all.
 
 ## Task
 
-### Step 1: Audit Premium Feature Screens
-Check these screens for existing subscription checks:
-- src/app/interview.tsx
-- src/app/interview-readiness.tsx
-- src/app/job-alerts.tsx
-- src/app/cv-detail.tsx
-
-For each screen, determine:
-- Is there a useAuth() or subscription check?
-- What happens when a free user tries to access premium features?
-- Is the paywall modal shown?
-
-### Step 2: Implement useSubscription Hook
-Create: src/hooks/useSubscription.ts
+### Step 1: Fix job-alerts.tsx JSX structure
+The current structure is broken. Fix it so PremiumGate properly wraps the entire return:
 ```typescript
-import { useState, useEffect } from 'react';
-import { SecureStore } from 'expo-secure-store';
-import { useAuth } from './useAuth';
+// BEFORE (broken - PremiumGate closing tag inside return)
+return (
+    <PremiumGate featureName="求職警報設定">
+    <ThemedView style={styles.container}>
+      ...
+    </ThemedView>
+);
+    </PremiumGate>  // WRONG - this is outside return
+```
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://localhost:8000/api/v1';
+Fix the structure by moving the PremiumGate open tag to wrap the ThemedView and fixing indentation. The component structure should be:
+```typescript
+return (
+    <PremiumGate featureName="求職警報設定">
+      <ThemedView style={styles.container}>
+        ...
+      </ThemedView>
+    </PremiumGate>
+);
+```
 
-interface SubscriptionStatus {
-  is_premium: boolean;
-  plan: 'free' | 'monthly' | 'yearly' | null;
-  expires_at: string | null;
-}
-
-export function useSubscription() {
-  const { user, isAuthenticated } = useAuth();
-  const [status, setStatus] = useState<SubscriptionStatus>({
-    is_premium: false,
-    plan: null,
-    expires_at: null,
-  });
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!isAuthenticated || !user) {
-      setStatus({ is_premium: false, plan: null, expires_at: null });
-      return;
-    }
-
-    const fetchSubscription = async () => {
-      setIsLoading(true);
-      try {
-        const token = await SecureStore.getItemAsync('auth_token');
-        const response = await fetch(`${API_BASE_URL}/users/subscription`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setStatus({
-            is_premium: data.plan !== 'free' && data.plan !== null,
-            plan: data.plan,
-            expires_at: data.expires_at,
-          });
-        }
-      } catch (e) {
-        console.warn('Failed to fetch subscription status:', e);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchSubscription();
-  }, [isAuthenticated, user]);
-
-  return { ...status, isLoading };
+Also fix the loading state to show PremiumGate consistently:
+```typescript
+if (isLoading) {
+    return (
+      <PremiumGate featureName="求職警報設定">
+        <ThemedView style={styles.container}>
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#007AFF" />
+            <ThemedText type="small" style={styles.loadingText}>
+              載入設定中...
+            </ThemedText>
+          </View>
+        </ThemedView>
+      </PremiumGate>
+    );
 }
 ```
 
-### Step 3: Create PremiumGate Component
-Create: src/components/premium-gate.tsx
+### Step 2: Add PremiumGate to cv-detail.tsx
+cv-detail.tsx shows AI-generated CV optimization/suggestions - this is a premium feature. Add PremiumGate wrapping the main content:
 
+Import at top:
 ```typescript
-import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
-import { useRouter } from 'expo-router';
-import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
-import { useSubscription } from '@/hooks/useSubscription';
-
-interface PremiumGateProps {
-  children: React.ReactNode;
-  featureName?: string;
-}
-
-export default function PremiumGate({ children, featureName = '此功能' }: PremiumGateProps) {
-  const router = useRouter();
-  const { is_premium, isLoading } = useSubscription();
-
-  if (isLoading) return null;
-  if (is_premium) return <>{children}</>;
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.lockedContent}>
-        <Text style={styles.lockEmoji}>🔒</Text>
-        <ThemedText type="subtitle" style={styles.title}>
-          Premium 功能
-        </ThemedText>
-        <ThemedText themeColor="textSecondary" style={styles.description}>
-          {featureName}需要 Premium 訂閱才能使用
-        </ThemedText>
-        <TouchableOpacity
-          style={styles.upgradeButton}
-          onPress={() => router.push('/subscription')}
-        >
-          <ThemedText style={styles.upgradeButtonText}>升級 Premium</ThemedText>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: Spacing.four,
-  },
-  lockedContent: {
-    alignItems: 'center',
-    gap: Spacing.three,
-    maxWidth: 300,
-  },
-  lockEmoji: {
-    fontSize: 48,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '600',
-  },
-  description: {
-    textAlign: 'center',
-    lineHeight: 22,
-  },
-  upgradeButton: {
-    backgroundColor: '#fbbf24',
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.two,
-    borderRadius: Spacing.two,
-    marginTop: Spacing.two,
-  },
-  upgradeButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#000',
-  },
-});
+import PremiumGate from '@/components/premium-gate';
 ```
 
-### Step 4: Update Premium Screens
-Add PremiumGate to:
-- interview.tsx - wrap main interview content
-- job-alerts.tsx - wrap the alert setup/listing
+Wrap the content - the main scrollable content showing the CV score breakdown and optimization suggestions should be behind the gate. The PremiumGate should be placed inside the ScrollView content, wrapping the score display and suggestion sections. Something like:
 
-Do NOT add to interview-readiness.tsx (dashboard is free tier)
+```typescript
+return (
+    <ThemedView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <PremiumGate featureName="CV 評分與優化">
+          {/* existing score bar and feedback content */}
+        </PremiumGate>
+      </ScrollView>
+    </ThemedView>
+);
+```
 
-### Step 5: Update progress.db
-No new todos - just fix the bug.
+Keep the header/score badge outside the gate but gate the detailed breakdown and suggestions.
+
+### Step 3: Verify no other screens need gating
+Check if any other app screen shows premium content without gating:
+- salary-query.tsx - this is FREE tier (market salary data), do NOT add gate
+- explore.tsx - this is FREE tier, do NOT add gate
+- interview-readiness.tsx - dashboard is free tier per task spec, do NOT add gate
+- profile.tsx - profile management is free, only specific premium features inside are gated
+
+### Step 4: No DB update needed for this fix
 
 ## Keywords
-monetization, subscription, paywall, premium gate, access control
+translucent layer, borderline, evaporation
 ULW

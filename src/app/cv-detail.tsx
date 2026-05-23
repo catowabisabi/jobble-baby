@@ -17,7 +17,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useCVAnalysis } from '@/hooks/useCVAnalysis';
 
-// Category display names + feedback text per backend breakdown
+import PremiumGate from '@/components/premium-gate';
 const CATEGORY_META: Record<string, { label: string; feedback: string }> = {
   role_relevance: { label: 'Role Relevance', feedback: 'How well your experience matches target roles.' },
   experience_years: { label: 'Experience', feedback: 'Years of relevant work experience.' },
@@ -130,56 +130,58 @@ export default function CVDetailScreen() {
         }));
 
         return (
-          <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
-            {/* Overall Score */}
-            <View style={styles.overallSection}>
-              <View style={[styles.overallBadge, { backgroundColor: badgeColor }]}>
-                <Text style={styles.overallScore}>{overallScore.toFixed(1)}</Text>
-                <Text style={styles.overallMax}>/10</Text>
-              </View>
-              <Text style={styles.overallLabel}>整體評分</Text>
-            </View>
-
-            {/* Category Breakdown */}
-            <View style={styles.categoriesSection}>
-              <Text style={styles.sectionTitle}>各項評分</Text>
-              {categories.map((cat) => (
-                <ScoreBar key={cat.name} label={cat.name} score={cat.score} />
-              ))}
-            </View>
-
-            {/* Category Feedback */}
-            <View style={styles.feedbackSection}>
-              <Text style={styles.sectionTitle}>改進建議</Text>
-              {categories.map((cat) => (
-                <View key={cat.name} style={styles.feedbackItem}>
-                  <View style={styles.feedbackHeader}>
-                    <Text style={styles.feedbackCategory}>{cat.name}</Text>
-                    <Text style={[styles.feedbackScore, { color: getScoreColor(cat.score) }]}>
-                      {cat.score.toFixed(1)}/10
-                    </Text>
-                  </View>
-                  <Text style={styles.feedbackText}>{cat.feedback}</Text>
+          <PremiumGate featureName="CV 評分與優化">
+            <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+              {/* Overall Score */}
+              <View style={styles.overallSection}>
+                <View style={[styles.overallBadge, { backgroundColor: badgeColor }]}>
+                  <Text style={styles.overallScore}>{overallScore.toFixed(1)}</Text>
+                  <Text style={styles.overallMax}>/10</Text>
                 </View>
-              ))}
-            </View>
-
-            {/* Overall Feedback */}
-            <View style={styles.overallFeedbackSection}>
-              <Text style={styles.sectionTitle}>總結</Text>
-              <View style={styles.overallFeedbackCard}>
-                {analysis.text_suggestions && analysis.text_suggestions.length > 0 ? (
-                  analysis.text_suggestions.map((suggestion, i) => (
-                    <Text key={i} style={styles.overallFeedbackText}>• {suggestion}</Text>
-                  ))
-                ) : (
-                  <Text style={styles.overallFeedbackText}>
-                    繼續優化你的 CV，提升各項評分以增加面試機會。
-                  </Text>
-                )}
+                <Text style={styles.overallLabel}>整體評分</Text>
               </View>
-            </View>
-          </ScrollView>
+
+              {/* Category Breakdown */}
+              <View style={styles.categoriesSection}>
+                <Text style={styles.sectionTitle}>各項評分</Text>
+                {categories.map((cat) => (
+                  <ScoreBar key={cat.name} label={cat.name} score={cat.score} />
+                ))}
+              </View>
+
+              {/* Category Feedback */}
+              <View style={styles.feedbackSection}>
+                <Text style={styles.sectionTitle}>改進建議</Text>
+                {categories.map((cat) => (
+                  <View key={cat.name} style={styles.feedbackItem}>
+                    <View style={styles.feedbackHeader}>
+                      <Text style={styles.feedbackCategory}>{cat.name}</Text>
+                      <Text style={[styles.feedbackScore, { color: getScoreColor(cat.score) }]}>
+                        {cat.score.toFixed(1)}/10
+                      </Text>
+                    </View>
+                    <Text style={styles.feedbackText}>{cat.feedback}</Text>
+                  </View>
+                ))}
+              </View>
+
+              {/* Overall Feedback */}
+              <View style={styles.overallFeedbackSection}>
+                <Text style={styles.sectionTitle}>總結</Text>
+                <View style={styles.overallFeedbackCard}>
+                  {analysis.text_suggestions && analysis.text_suggestions.length > 0 ? (
+                    analysis.text_suggestions.map((suggestion, i) => (
+                      <Text key={i} style={styles.overallFeedbackText}>• {suggestion}</Text>
+                    ))
+                  ) : (
+                    <Text style={styles.overallFeedbackText}>
+                      繼續優化你的 CV，提升各項評分以增加面試機會。
+                    </Text>
+                  )}
+                </View>
+              </View>
+            </ScrollView>
+          </PremiumGate>
         );
       })()}
     </ThemedView>

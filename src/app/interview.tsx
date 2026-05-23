@@ -482,21 +482,6 @@ export default function InterviewScreen() {
     </View>
   </View>
 );
-
-return (
-  <ThemedView style={styles.container}>
-    {showPremiumOverlay ? (
-      <PremiumGateOverlay />
-    ) : (
-      <>
-        {step === 'config' && renderConfig()}
-        {step === 'interview' && renderInterview()}
-        {step === 'results' && renderResults()}
-      </>
-    )}
-  </ThemedView>
-);
-
 const styles = StyleSheet.create({
   container: { flex: 1 },
   keyboardView: { flex: 1 },
@@ -643,11 +628,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   lockIcon: { fontSize: 40 },
-  overlayTitle: {
-    marginBottom: 8,
-    fontWeight: 'bold',
-    color: '#1f2937',
-  },
+  overlayTitle: { marginBottom: 8, fontWeight: 'bold', color: '#1f2937' },
   overlaySubtitle: {
     textAlign: 'center',
     color: '#6b7280',
@@ -663,16 +644,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  upgradeButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  maybeLaterButton: {
-    marginTop: 12,
-    padding: 8,
-  },
-  maybeLaterText: {
-    color: '#9ca3af',
-  },
+  upgradeButtonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
+  maybeLaterButton: { marginTop: 12, padding: 8 },
+  maybeLaterText: { color: '#9ca3af' },
 });
+
+  return (
+    <ThemedView style={styles.container}>
+      {showPremiumOverlay ? (
+        <PremiumGateOverlay />
+      ) : (
+        <>
+          {step === 'config' && renderConfig()}
+          {step === 'interview' && renderInterview()}
+          {step === 'results' && renderResults()}
+        </>
+      )}
+    </ThemedView>
+  );
+}

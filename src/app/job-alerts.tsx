@@ -348,9 +348,9 @@ if (isLoading) {
     </PremiumGate>
   );
 }
-    flex: 1,
-  },
-  keyboardView: {
+
+const styles = StyleSheet.create({
+  container: {
     flex: 1,
   },
   scrollContent: {
@@ -471,6 +471,3 @@ if (isLoading) {
     color: '#666',
   },
 });
-    </PremiumGate>
-  );
-}

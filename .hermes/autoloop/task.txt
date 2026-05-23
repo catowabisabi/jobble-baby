@@ -15,7 +15,7 @@ Goal: 4-step onboarding wizard to accelerate Aha Moment from 3-5 days to under 5
 ### Frontend (src/app/onboarding.tsx)
 - 4-step wizard with progress bar (1/4 → 4/4)
 - Step 1: File picker → POST /api/v1/cv/upload → animated score reveal (1-10 + category breakdown)
-- Step 2: Form (job_type, location, salary slider) → show Found X jobs preview cards
+- Step 2: Form (job_type, location, salary slider) → show "Found X jobs" preview cards
 - Step 3: One HR question → text input → POST /api/v1/interviews/submit → AI feedback display
 - Step 4: Push notification toggle + permission request → radar activation animation
 

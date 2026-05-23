@@ -50,6 +50,8 @@ class User(Base):
     password_hash = Column(String, nullable=False)
     name = Column(String, nullable=True)
     subscription_tier = Column(String, default="free")  # free, trial, premium
+    onboarding_complete = Column(Boolean, default=False)
+    onboarding_completed_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     cvs = relationship("CV", back_populates="user")

@@ -6,6 +6,7 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from app.api import health, users, cvs, salary, interviews, jobs, market, subscriptions, notifications
+from app.api.v1 import onboarding
 
 limiter = Limiter(key_func=get_remote_address)
 
@@ -49,6 +50,7 @@ app.include_router(jobs.router, prefix="/api/v1/jobs", tags=["工作"])
 app.include_router(market.router, prefix="/api/v1/market", tags=["行情"])
 app.include_router(subscriptions.router, prefix="/api/v1/subscription", tags=["訂閱方案"])
 app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["通知"])
+app.include_router(onboarding.router, prefix="/api/v1/onboarding", tags=["入職導引"])
 
 @app.get("/")
 async def root():

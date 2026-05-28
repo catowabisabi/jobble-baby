@@ -21,8 +21,8 @@ export function WebBadge() {
       <Image
         source={
           theme.background === Colors.dark.background
-            ? require('@/assets/images/expo-badge-white.png')
-            : require('@/assets/images/expo-badge.png')
+            ? require('../../assets/images/expo-badge-white.png')
+            : require('../../assets/images/expo-badge.png')
         }
         style={styles.badgeImage}
         accessibilityLabel="Expo badge"

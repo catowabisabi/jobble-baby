@@ -1,34 +1,51 @@
-# Task: Build Onboarding Wizard
+# Task: M6 Launch - App Store Connect + Play Console developer accounts
 
 ## Context
-Jobble Baby - AI job-hunting app. User uploads CV → AI analysis → subscribes.
-Goal: 4-step onboarding wizard to accelerate Aha Moment from 3-5 days to under 5 minutes.
+Jobble Baby - AI job-hunting app. M6 is the launch milestone. Need App Store + Play Console accounts to publish. Todo #28, priority 5.
 
-## 4 Steps
-1. Upload CV → AI score reveal (the Aha Moment)
-2. Job preferences → matching jobs preview
-3. One interview question → instant AI feedback
-4. Enable notifications → recruiter radar activates
+## Tasks
 
-## Your Tasks
+### 1. Research current account status
+Check if App Store Connect and Google Play Console accounts already exist:
+- Check email for any Apple/Google developer account invitations
+- Check if there are any existing App Store apps in the Apple Developer account
+- Verify Google Play Console access
 
-### Frontend (src/app/onboarding.tsx)
-- 4-step wizard with progress bar (1/4 → 4/4)
-- Step 1: File picker → POST /api/v1/cv/upload → animated score reveal (1-10 + category breakdown)
-- Step 2: Form (job_type, location, salary slider) → show "Found X jobs" preview cards
-- Step 3: One HR question → text input → POST /api/v1/interviews/submit → AI feedback display
-- Step 4: Push notification toggle + permission request → radar activation animation
+### 2. If no accounts exist: Guide user through creation
+Create a clear step-by-step guide document (.hermes/structure-and-test-setup/03-app-store-setup.md) covering:
+- Apple Developer Program enrollment ($99/year) - https://developer.apple.com/programs/
+- Google Play Console developer account ($25 one-time) - https://play.google.com/console
+- Required info: legal entity name, website, phone, credit card
+- Timeline: Apple takes 1-2 days for account approval
 
-### Gate (src/app/_layout.tsx)
-- Check SecureStore for onboarding_complete
-- If missing → redirect to /onboarding
-- On completion → set onboarding_complete=true → redirect to home
+### 3. App Store Connect setup steps
+After account creation:
+- Create new app in App Store Connect
+- App name: "Jobble Baby" (or alternative if taken)
+- Bundle ID: com.jobblebaby.app (or similar)
+- Category: Business / Job Search
+- SKU: jobble-baby-001
+- Pricing: Free with In-App Purchase
+- Upload screenshots for 6.7" iPhone (1290x2796) and iPad Pro (1360x1076)
 
-### Backend (backend/app/routes/)
-- POST /api/v1/onboarding/complete
-- Body: { step: 1|2|3|4, preferences?: { job_type, location, salary_expectation } }
-- Track completion + update user profile with job_preferences
+### 4. Google Play Console setup steps
+- Create new app in Play Console
+- App name: "Jobble Baby" or similar
+- Default language: English (en-US)
+- Category: Business / Job Search
+- Pricing: Free (with subscription IAP)
+- Upload screenshots for phones (1080x1920) and tablets (7" and 10")
+- Create internal testing track
+
+### 5. Store listing content to prepare
+Create .hermes/structure-and-test-setup/04-app-store-content.md with:
+- Short description (80 chars): "AI-powered job hunting assistant"
+- Full description: detailed feature list
+- Keywords for ASO
+- Privacy policy URL requirement
+- Support URL
 
 ## Keywords
-agile sprint, detail-on-demand, fs-permissions
+application fatigue fighter, jit, journey, shadow, noise pollution, vortex
+
 ULW

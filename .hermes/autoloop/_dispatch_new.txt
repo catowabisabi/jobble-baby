@@ -1,40 +1,51 @@
-fix: build onboarding wizard with 4-step activation flow
+# Task: M6 Launch - App Store Connect + Play Console developer accounts
 
 ## Context
-Jobble Baby is an AI job-hunting assistant app. User uploads CV → gets AI help → subscribes. Concept #5 is an Onboarding Wizard that accelerates the Aha Moment from 3-5 days to under 5 minutes.
+Jobble Baby - AI job-hunting app. M6 is the launch milestone. Need App Store + Play Console accounts to publish. Todo #28, priority 5.
 
-## Concept
-4-step first-launch wizard:
-1. Upload CV → instant AI score reveal (Aha Moment)
-2. Set job preferences → immediate job matches
-3. Try one interview question → instant AI feedback
-4. Enable notifications → recruiter radar activates
+## Tasks
 
-Progress bar + badges per step. Skip available but discouraged.
+### 1. Research current account status
+Check if App Store Connect and Google Play Console accounts already exist:
+- Check email for any Apple/Google developer account invitations
+- Check if there are any existing App Store apps in the Apple Developer account
+- Verify Google Play Console access
 
-## Task
+### 2. If no accounts exist: Guide user through creation
+Create a clear step-by-step guide document (.hermes/structure-and-test-setup/03-app-store-setup.md) covering:
+- Apple Developer Program enrollment ($99/year) - https://developer.apple.com/programs/
+- Google Play Console developer account ($25 one-time) - https://play.google.com/console
+- Required info: legal entity name, website, phone, credit card
+- Timeline: Apple takes 1-2 days for account approval
 
-### Step 1: Create onboarding screen
-Create src/app/onboarding.tsx - full-screen 4-step wizard:
-- Step indicator (1/4, 2/4, 3/4, 4/4) with animated progress line
-- Button-based navigation (Next/Back)
-- Each step has clear CTA + small reward
+### 3. App Store Connect setup steps
+After account creation:
+- Create new app in App Store Connect
+- App name: "Jobble Baby" (or alternative if taken)
+- Bundle ID: com.jobblebaby.app (or similar)
+- Category: Business / Job Search
+- SKU: jobble-baby-001
+- Pricing: Free with In-App Purchase
+- Upload screenshots for 6.7" iPhone (1290x2796) and iPad Pro (1360x1076)
 
-### Step 2: Step content
-- Step 1 (Upload CV): File picker for CV → POST /api/v1/cv/upload → score reveal animation (1-10 with category breakdown). Aha Moment - make it magical.
-- Step 2 (Job Preferences): Form - job type (dropdown), location (dropdown), salary expectation (slider). Show "Found X matching jobs" with preview cards.
-- Step 3 (Try Interview): One HR question, text input, POST /api/v1/interviews/submit → show AI feedback.
-- Step 4 (Notifications): Push notification toggle. Request permission. Radar activation animation. "Your recruiter radar is now active."
+### 4. Google Play Console setup steps
+- Create new app in Play Console
+- App name: "Jobble Baby" or similar
+- Default language: English (en-US)
+- Category: Business / Job Search
+- Pricing: Free (with subscription IAP)
+- Upload screenshots for phones (1080x1920) and tablets (7" and 10")
+- Create internal testing track
 
-### Step 3: Gate first-launch users
-In src/app/_layout.tsx, check onboarding_complete in SecureStore. If missing, redirect to /onboarding. After step 4 completion, set onboarding_complete=true and redirect to home.
-
-### Step 4: Backend endpoint
-POST /api/v1/onboarding/complete - Body: { step: 1|2|3|4, preferences?: {...} }. Track completion in user metadata. Update user profile with job_preferences from step 2.
-
-### Step 5: Style
-Use existing theme. Progress bar at top with animated fill. Large touch targets. Celebration micro-animation on step completion.
+### 5. Store listing content to prepare
+Create .hermes/structure-and-test-setup/04-app-store-content.md with:
+- Short description (80 chars): "AI-powered job hunting assistant"
+- Full description: detailed feature list
+- Keywords for ASO
+- Privacy policy URL requirement
+- Support URL
 
 ## Keywords
-agile sprint, detail-on-demand, fs-permissions
+application fatigue fighter, jit, journey, shadow, noise pollution, vortex
+
 ULW

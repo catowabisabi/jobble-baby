@@ -1,8 +1,15 @@
 import { Tabs } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { ThemeProvider } from './context/ThemeContext';
+import { useEffect } from 'react';
+import * as Notifications from 'expo-notifications';
 
 export default function TabLayout() {
+  // Request notification permissions on app launch
+  useEffect(() => {
+    Notifications.requestPermissionsAsync();
+  }, []);
+
   return (
     <ThemeProvider>
       <Tabs>

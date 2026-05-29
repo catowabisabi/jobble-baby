@@ -1,5 +1,6 @@
 // Badge award service — checks conditions and awards badges
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Notifications from 'expo-notifications';
 import { BADGES, Badge } from '../data/badges';
 
 const BADGES_KEY = '@jobble/badges';
@@ -48,8 +49,10 @@ export const awardBadge = async (badgeId: string): Promise<boolean> => {
   const state = await getState();
   if (state[badgeId]?.earned) return false; // already earned
 
+  const badge = BADGES.find((b) => b.id === badgeId);
   state[badgeId] = { earned: true, earnedAt: new Date().toISOString() };
   await saveBadgeState(state);
+  if (badge) await notifyBadgeAward(badge);
   return true;
 };
 
@@ -190,4 +193,19 @@ export const getBadgeCounts = async (): Promise<{ earned: number; total: number 
   const state = await getState();
   const earned = BADGES.filter((b) => state[b.id]?.earned).length;
   return { earned, total: BADGES.length };
+};
+
+// Notify user of a newly awarded badge
+export const notifyBadgeAward = async (badge: Badge): Promise<void> => {
+  try {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: '🎉 Badge Earned!',
+        body: `You earned the "${badge.name}" badge`,
+      },
+      trigger: null, // Fire immediately
+    });
+  } catch (error) {
+    console.error('Failed to send badge award notification:', error);
+  }
 };

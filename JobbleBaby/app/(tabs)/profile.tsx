@@ -1,29 +1,42 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, Share, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import BadgeGallery from '../components/BadgeGallery';
 import { getBadgeCounts } from '../utils/badgeService';
 
 interface SettingRowProps {
   icon: string;
   label: string;
+  onPress?: () => void;
+  isExport?: boolean;
+  isLoading?: boolean;
 }
 
-const SETTINGS = [
-  { icon: '🔔', label: 'Notifications', key: 'notifications' },
-  { icon: '📤', label: 'Data Export', key: 'data-export' },
-  { icon: '🔒', label: 'Privacy', key: 'privacy' },
-  { icon: 'ℹ️', label: 'About', key: 'about' },
+const STORAGE_KEYS = [
+  '@jobble/tracking_entries',
+  '@jobble/growth_entries',
+  '@jobble/badges',
+  '@jobble/schedule_entries',
 ];
 
-function SettingRow({ icon, label }: SettingRowProps) {
+function SettingRow({ icon, label, onPress, isLoading }: SettingRowProps) {
   return (
-    <TouchableOpacity style={rowStyles.container} activeOpacity={0.7}>
+    <TouchableOpacity
+      style={rowStyles.container}
+      activeOpacity={onPress ? 0.7 : 1}
+      onPress={onPress}
+      disabled={!onPress}
+    >
       <View style={rowStyles.left}>
-        <Text style={rowStyles.icon}>{icon}</Text>
+        {isLoading ? (
+          <ActivityIndicator size="small" color="#3B82F6" style={{ marginRight: 12 }} />
+        ) : (
+          <Text style={rowStyles.icon}>{icon}</Text>
+        )}
         <Text style={rowStyles.label}>{label}</Text>
       </View>
-      <Text style={rowStyles.chevron}>›</Text>
+      {onPress && <Text style={rowStyles.chevron}>›</Text>}
     </TouchableOpacity>
   );
 }
@@ -48,6 +61,7 @@ const rowStyles = StyleSheet.create({
 export default function ProfileScreen() {
   const [showBadges, setShowBadges] = useState(false);
   const [badgeCounts, setBadgeCounts] = useState({ earned: 0, total: 0 });
+  const [isExportLoading, setIsExportLoading] = useState(false);
 
   useEffect(() => {
     loadBadgeCounts();
@@ -56,6 +70,29 @@ export default function ProfileScreen() {
   const loadBadgeCounts = async () => {
     const counts = await getBadgeCounts();
     setBadgeCounts(counts);
+  };
+
+  const handleExportData = async () => {
+    setIsExportLoading(true);
+    try {
+      const exportData: Record<string, unknown> = {};
+      for (const key of STORAGE_KEYS) {
+        const raw = await AsyncStorage.getItem(key);
+        exportData[key] = raw ? JSON.parse(raw) : null;
+      }
+      exportData['_exportedAt'] = new Date().toISOString();
+      exportData['_appVersion'] = '1.0.0';
+
+      const jsonStr = JSON.stringify(exportData, null, 2);
+      await Share.share({
+        message: jsonStr,
+        title: 'Jobble Baby Data Export',
+      });
+    } catch (e) {
+      Alert.alert('Export Failed', 'Could not export data. Please try again.');
+    } finally {
+      setIsExportLoading(false);
+    }
   };
 
   return (
@@ -116,9 +153,10 @@ export default function ProfileScreen() {
         {/* Settings Section */}
         <View style={styles.settingsSection}>
           <Text style={styles.settingsLabel}>Settings</Text>
-          {SETTINGS.map((s) => (
-            <SettingRow key={s.key} icon={s.icon} label={s.label} />
-          ))}
+          <SettingRow icon="🔔" label="Notifications" />
+          <SettingRow icon="📤" label="Data Export" onPress={handleExportData} isLoading={isExportLoading} />
+          <SettingRow icon="🔒" label="Privacy" />
+          <SettingRow icon="ℹ️" label="About" />
         </View>
 
         {/* App version */}

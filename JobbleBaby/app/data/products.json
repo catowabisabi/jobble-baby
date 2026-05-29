@@ -4,9 +4,9 @@
     "name": "Essentials",
     "emoji": "🛍️",
     "products": [
-      { "id": "1", "name": "Premium Diapers", "emoji": "🧷", "price": "$29.99", "rating": 4.8, "description": "Hypoallergenic, 12-hour leak protection" },
-      { "id": "2", "name": "Baby Wipes", "emoji": "🧻", "price": "$12.99", "rating": 4.6, "description": "Fragrance-free, 99.9% natural" },
-      { "id": "3", "name": "Diaper Cream", "emoji": "🧴", "price": "$8.99", "rating": 4.7, "description": "Zinc oxide formula, gentle on skin" }
+      { "id": "1", "brand": "Pampers", "name": "Swaddlers Diapers", "emoji": "🧷", "price": "$289/件", "rating": 4.8, "reviews": 12450, "description": "Hypoallergenic, 12-hour leak protection, wetness indicator", "age": "Newborn", "link": "https://www.pampers.com.hk" },
+      { "id": "2", "brand": "Huggies", "name": "Little Snugglers", "emoji": "🧻", "price": "$258/件", "rating": 4.7, "reviews": 8932, "description": "Fragrance-free, 99.9% natural, belly button cutout", "age": "0-3m", "link": "https://www.huggies.com.hk" },
+      { "id": "3", "brand": "Burt's Bees", "name": "Diaper Cream", "emoji": "🧴", "price": "$120", "rating": 4.6, "reviews": 3210, "description": "Zinc oxide formula, 100% natural, gentle on skin", "age": "All", "link": "https://www.burtsbees.com.hk" }
     ]
   },
   {
@@ -14,9 +14,10 @@
     "name": "Feeding",
     "emoji": "🍼",
     "products": [
-      { "id": "4", "name": "Anti-Colic Bottles", "emoji": "🍼", "price": "$34.99", "rating": 4.9, "description": "Vent system prevents gas and fussiness" },
-      { "id": "5", "name": "Silicone Bibs", "emoji": "🍽️", "price": "$15.99", "rating": 4.5, "description": "Easy-clean, food-grade silicone" },
-      { "id": "6", "name": "Baby Food Maker", "emoji": "🥄", "price": "$49.99", "rating": 4.8, "description": "Steam, blend, and warm in one device" }
+      { "id": "4", "brand": "Philips Avent", "name": "Anti-Colic Bottles", "emoji": "🍼", "price": "$299/件", "rating": 4.9, "reviews": 15680, "description": "Airflex vent system prevents gas and fussiness, BPA-free", "age": "0m+", "link": "https://www.philips.com.hk" },
+      { "id": "5", "brand": "Munchkin", "name": "Silicone Bibs", "emoji": "🍽️", "price": "$89", "rating": 4.5, "reviews": 4521, "description": "Easy-clean, food-grade silicone, crumb catcher", "age": "6m+", "link": "https://www.munchkin.com.hk" },
+      { "id": "6", "brand": "Beaba", "name": "Babycook Duo", "emoji": "🥄", "price": "$1,899", "rating": 4.8, "reviews": 2341, "description": "Steam, blend, defrost, reheat — 4-in-1 food maker", "age": "6m+", "link": "https://www.beaba.com.hk" },
+      { "id": "7", "brand": "Medela", "name": "Swing Maxi Breast Pump", "emoji": "🤱", "price": "$2,680", "rating": 4.7, "reviews": 5672, "description": "Double electric, hospital-grade performance, rechargeable", "age": "0m+", "link": "https://www.medela.hk" }
     ]
   },
   {
@@ -24,9 +25,10 @@
     "name": "Sleep",
     "emoji": "🌙",
     "products": [
-      { "id": "7", "name": "Sleep Sack", "emoji": "👶", "price": "$32.99", "rating": 4.7, "description": "TOG 1.0, cotton fleece, safe zip" },
-      { "id": "8", "name": "White Noise Machine", "emoji": "🔊", "price": "$24.99", "rating": 4.6, "description": "32 soothing sounds, timer function" },
-      { "id": "9", "name": "Baby Monitor HD", "emoji": "📹", "price": "$89.99", "rating": 4.9, "description": "1080p camera, night vision, two-way audio" }
+      { "id": "8", "brand": "Love to Dream", "name": "Sleep Suit", "emoji": "👶", "price": "$328", "rating": 4.8, "reviews": 9876, "description": "TOG 1.0 cotton fleece, zip, convertible arms", "age": "0-12m", "link": "https://www.lovetodream.com.hk" },
+      { "id": "9", "brand": "Graco", "name": "DuetSoothe Swing", "emoji": "🔊", "price": "$3,280", "rating": 4.6, "reviews": 3421, "description": "Swing + bouncer, 8 melodies, 5 speeds, Bluetooth", "age": "0-9m", "link": "https://www.graco.com.hk" },
+      { "id": "10", "brand": "Nanit", "name": "Pro Camera", "emoji": "📹", "price": "$2,580", "rating": 4.9, "reviews": 2134, "description": "1080p HD, night vision, two-way audio, breathing band optional", "age": "0m+", "link": "https://www.nanit.com.hk" },
+      { "id": "11", "brand": "Hatch", "name": "Rest+ Sound Machine", "emoji": "🌙", "price": "$598", "rating": 4.7, "reviews": 4532, "description": "Night light, sound machine, time-to-rise, app control", "age": "0m+", "link": "https://www.hatch.co.hk" }
     ]
   },
   {
@@ -34,9 +36,9 @@
     "name": "Health",
     "emoji": "💊",
     "products": [
-      { "id": "10", "name": "Nose Frida", "emoji": "👃", "price": "$19.99", "rating": 4.8, "description": "Doctor-designed, saline drops included" },
-      { "id": "11", "name": "Bath Thermometer", "emoji": "🌡️", "price": "$14.99", "rating": 4.5, "description": "LED display, accurate to 0.1°" },
-      { "id": "12", "name": "Baby First Aid Kit", "emoji": "🩹", "price": "$26.99", "rating": 4.7, "description": "45 pieces, BPA-free containers" }
+      { "id": "12", "brand": "Fridababy", "name": "NoseFrida", "emoji": "👃", "price": "$139", "rating": 4.8, "reviews": 11234, "description": "Doctor-designed nasal aspirator, saline drops included", "age": "0m+", "link": "https://www.fridababy.com.hk" },
+      { "id": "13", "brand": " Braun", "name": "ThermoScan 7", "emoji": "🌡️", "price": "$469", "rating": 4.8, "reviews": 8765, "description": "Ear thermometer, Age Precision tech, pre-warmed tip", "age": "0m+", "link": "https://www.braun.com.hk" },
+      { "id": "14", "brand": "Olbas", "name": "Baby Rub", "emoji": "🩹", "price": "$89", "rating": 4.5, "reviews": 2341, "description": "Gentle vaporRub, 3 essential oils, 50ml", "age": "3m+", "link": "https://www.olbasoil.com.hk" }
     ]
   },
   {
@@ -44,9 +46,19 @@
     "name": "Clothing",
     "emoji": "👕",
     "products": [
-      { "id": "13", "name": "Onesie 5-Pack", "emoji": "👶", "price": "$38.99", "rating": 4.6, "description": "100% organic cotton, snap buttons" },
-      { "id": "14", "name": "Sleep & Play", "emoji": "🧸", "price": "$25.99", "rating": 4.8, "description": "Zipped, footed, tagless comfort" },
-      { "id": "15", "name": "Socks 6-Pack", "emoji": "🧦", "price": "$16.99", "rating": 4.5, "description": "Non-slip grip, stretch fit" }
+      { "id": "15", "brand": "Gap Baby", "name": "Onesie 5-Pack", "emoji": "👶", "price": "$299", "rating": 4.6, "reviews": 5432, "description": "100% organic cotton, snap buttons, assorted colors", "age": "0-24m", "link": "https://www.gap.com.hk" },
+      { "id": "16", "brand": "Halo Sleep", "name": "Sleep & Play", "emoji": "🧸", "price": "$258", "rating": 4.8, "reviews": 3210, "description": "Zip front, footed, tagless, cotton blend", "age": "0-24m", "link": "https://www.halosleep.com.hk" },
+      { "id": "17", "brand": "Carter's", "name": "Socks 6-Pack", "emoji": "🧦", "price": "$129", "rating": 4.5, "reviews": 4321, "description": "Non-slip grip soles, stretch fit, variety pack", "age": "0-24m", "link": "https://www.carters.com.hk" }
+    ]
+  },
+  {
+    "id": "transport",
+    "name": "Transport",
+    "emoji": "🚗",
+    "products": [
+      { "id": "18", "brand": "Cybex", "name": "Cloud G i-Size", "emoji": "🛡️", "price": "$4,280", "rating": 4.9, "reviews": 2341, "description": "i-Size infant car seat, 180-degree recline, LSP system", "age": "0-12m", "link": "https://www.cybex-online.com.hk" },
+      { "id": "19", "brand": "Bugaboo", "name": "Donkey 5", "emoji": "🍼", "price": "$8,980", "rating": 4.8, "reviews": 1876, "description": "Stroller, side-by-side twin/seat config, all-terrain", "age": "0-4y", "link": "https://www.bugaboo.com.hk" },
+      { "id": "20", "brand": "Ergobaby", "name": "Omni 360 Carrier", "emoji": "👶", "price": "$1,298", "rating": 4.7, "reviews": 5432, "description": "Ergonomic, 4 carry positions, newborn to toddler", "age": "0-48m", "link": "https://www.ergobaby.com.hk" }
     ]
   }
 ]

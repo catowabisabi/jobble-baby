@@ -1,14 +1,19 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from 'react';
 import CATEGORIES from '../data/products.json';
 
 interface Product {
   id: string;
+  brand: string;
   name: string;
   emoji: string;
   price: string;
   rating: number;
+  reviews: number;
   description: string;
+  age: string;
+  link: string;
 }
 
 interface Category {
@@ -21,34 +26,83 @@ interface Category {
 const renderStars = (rating: number) => {
   const full = Math.floor(rating);
   const half = rating % 1 >= 0.5 ? 1 : 0;
-  return '★'.repeat(full) + (half ? '½' : '') + ` (${rating})`;
+  return '★'.repeat(full) + (half ? '½' : '');
 };
 
+const AGE_FILTERS = ['All', '0m+', '3m+', '6m+', '12m+', '0-12m', '0-24m', '0-4y', '0-48m'];
+
 export default function ProductsScreen() {
+  const [ageFilter, setAgeFilter] = useState('All');
+
+  const filtered = CATEGORIES.map(cat => ({
+    ...cat,
+    products: cat.products.filter(p => {
+      if (ageFilter === 'All') return true;
+      if (p.age === 'All') return true;
+      return p.age === ageFilter || p.age.startsWith(ageFilter.replace('m+', ''));
+    })
+  })).filter(cat => cat.products.length > 0);
+
+  const handleProductPress = async (product: Product) => {
+    try {
+      await Linking.openURL(product.link);
+    } catch {
+      // Fallback: no external link on this platform
+    }
+  };
+
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
           <Text style={styles.greeting}>Trusted</Text>
           <Text style={styles.title}>Baby Products</Text>
-          <Text style={styles.subtitle}>Curated recommendations for your little one</Text>
+          <Text style={styles.subtitle}>HK & international brands with reviews</Text>
         </View>
 
-        {CATEGORIES.map((category) => (
+        {/* Age Filter */}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterRow}>
+          {AGE_FILTERS.map(filter => (
+            <TouchableOpacity
+              key={filter}
+              style={[styles.filterChip, ageFilter === filter && styles.filterChipActive]}
+              onPress={() => setAgeFilter(filter)}
+            >
+              <Text style={[styles.filterChipText, ageFilter === filter && styles.filterChipTextActive]}>
+                {filter}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        {filtered.map((category) => (
           <View key={category.id} style={styles.categorySection}>
             <View style={styles.categoryHeader}>
               <Text style={styles.categoryEmoji}>{category.emoji}</Text>
               <Text style={styles.categoryName}>{category.name}</Text>
+              <Text style={styles.categoryCount}>{category.products.length} items</Text>
             </View>
             {category.products.map((product) => (
-              <TouchableOpacity key={product.id} style={styles.productCard} activeOpacity={0.7}>
+              <TouchableOpacity
+                key={product.id}
+                style={styles.productCard}
+                activeOpacity={0.7}
+                onPress={() => handleProductPress(product)}
+              >
                 <Text style={styles.productEmoji}>{product.emoji}</Text>
                 <View style={styles.productInfo}>
                   <View style={styles.productHeader}>
+                    <View style={styles.productNameRow}>
+                      <Text style={styles.productBrand}>{product.brand}</Text>
+                      <Text style={styles.productAge}>{product.age}</Text>
+                    </View>
                     <Text style={styles.productName}>{product.name}</Text>
                     <Text style={styles.productPrice}>{product.price}</Text>
                   </View>
-                  <Text style={styles.productRating}>{renderStars(product.rating)}</Text>
+                  <View style={styles.productMeta}>
+                    <Text style={styles.productRating}>{renderStars(product.rating)} {product.rating}</Text>
+                    <Text style={styles.productReviews}>{product.reviews.toLocaleString()} reviews</Text>
+                  </View>
                   <Text style={styles.productDescription}>{product.description}</Text>
                 </View>
               </TouchableOpacity>
@@ -64,14 +118,36 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: '#0a1628' },
   container: { flex: 1, backgroundColor: '#0a1628' },
   content: { padding: 20, paddingBottom: 100 },
-  header: { marginBottom: 24 },
+  header: { marginBottom: 16 },
   greeting: { fontSize: 14, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
   title: { fontSize: 32, fontWeight: 'bold', color: '#fff', marginTop: 4 },
   subtitle: { fontSize: 14, color: '#8b9bb4', marginTop: 8 },
+  filterRow: { flexDirection: 'row', marginBottom: 20, maxHeight: 40 },
+  filterChip: {
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 16,
+    backgroundColor: '#1a2a3a',
+    marginRight: 8,
+    borderWidth: 1,
+    borderColor: '#2a3a4a',
+  },
+  filterChipActive: {
+    backgroundColor: '#3B82F6',
+    borderColor: '#3B82F6',
+  },
+  filterChipText: { fontSize: 13, color: '#8b9bb4', fontWeight: '500' },
+  filterChipTextActive: { color: '#fff' },
   categorySection: { marginBottom: 24 },
-  categoryHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
-  categoryEmoji: { fontSize: 20, marginRight: 8 },
-  categoryName: { fontSize: 16, fontWeight: '600', color: '#fff' },
+  categoryHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+    gap: 8,
+  },
+  categoryEmoji: { fontSize: 20 },
+  categoryName: { fontSize: 16, fontWeight: '600', color: '#fff', flex: 1 },
+  categoryCount: { fontSize: 12, color: '#5a6a7a' },
   productCard: {
     backgroundColor: '#1a2a3a',
     borderRadius: 16,
@@ -80,13 +156,25 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#2a3a4a',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
-  productEmoji: { fontSize: 32, marginRight: 16 },
+  productEmoji: { fontSize: 28, marginRight: 14, marginTop: 2 },
   productInfo: { flex: 1 },
-  productHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  productName: { fontSize: 16, fontWeight: '600', color: '#fff', flex: 1 },
-  productPrice: { fontSize: 16, fontWeight: '600', color: '#3B82F6' },
-  productRating: { fontSize: 12, color: '#f39c12', marginTop: 4 },
-  productDescription: { fontSize: 13, color: '#8b9bb4', marginTop: 4 },
+  productHeader: { marginBottom: 4 },
+  productNameRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 2 },
+  productBrand: { fontSize: 12, color: '#3B82F6', fontWeight: '600' },
+  productAge: {
+    fontSize: 10,
+    color: '#8b9bb4',
+    backgroundColor: '#0d1f35',
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: 4,
+  },
+  productName: { fontSize: 15, fontWeight: '600', color: '#fff', marginBottom: 2 },
+  productPrice: { fontSize: 15, fontWeight: '600', color: '#3B82F6' },
+  productMeta: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 4 },
+  productRating: { fontSize: 12, color: '#f39c12', fontWeight: '600' },
+  productReviews: { fontSize: 11, color: '#5a6a7a' },
+  productDescription: { fontSize: 12, color: '#8b9bb4', lineHeight: 17 },
 });

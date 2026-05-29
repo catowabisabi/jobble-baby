@@ -44,16 +44,18 @@ export function useNotifications() {
   const scheduleSleepNotification = async (
     title: string,
     body: string,
-    hoursFromNow: number = 1
+    weekday: number = 1,
+    hour: number = 14,
+    minute: number = 0
   ): Promise<string> => {
     try {
-      const date = new Date();
-      date.setHours(date.getHours() + hoursFromNow);
       const id = await Notifications.scheduleNotificationAsync({
         content: { title, body },
         trigger: {
-          type: Notifications.SchedulableTriggerInputTypes.DATE,
-          date,
+          type: Notifications.SchedulableTriggerInputTypes.WEEKLY,
+          weekday,
+          hour,
+          minute,
         } as Notifications.NotificationTriggerInput,
       });
       return id;
@@ -66,20 +68,18 @@ export function useNotifications() {
   const scheduleFeedingReminder = async (
     title: string,
     body: string,
+    weekday: number = 1,
     hour: number = 9,
     minute: number = 0
   ): Promise<string> => {
     try {
-      const date = new Date();
-      date.setHours(hour, minute, 0, 0);
-      if (date.getTime() < Date.now()) {
-        date.setDate(date.getDate() + 1);
-      }
       const id = await Notifications.scheduleNotificationAsync({
         content: { title, body },
         trigger: {
-          type: Notifications.SchedulableTriggerInputTypes.DATE,
-          date,
+          type: Notifications.SchedulableTriggerInputTypes.WEEKLY,
+          weekday,
+          hour,
+          minute,
         } as Notifications.NotificationTriggerInput,
       });
       return id;

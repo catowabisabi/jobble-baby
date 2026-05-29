@@ -50,7 +50,7 @@ export default function ScheduleScreen() {
   const [scheduleData, setScheduleData] = useState<ScheduleDay[]>(SCHEDULE_DATA);
   const [weeklySummary, setWeeklySummary] = useState<WeeklyTrend | null>(null);
   const [notificationPermission, setNotificationPermission] = useState<'granted' | 'denied' | 'undetermined'>('undetermined');
-  const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder } = useNotifications();
+  const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder, cancelAllNotifications } = useNotifications();
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme];
 
@@ -108,7 +108,8 @@ export default function ScheduleScreen() {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
       // Schedule sleep notification for 1 hour ahead
-      scheduleSleepNotification('Nap Reminder 🌙', 'Time for baby\'s nap!', 1);
+      await cancelAllNotifications();
+      await scheduleSleepNotification('Nap Reminder 🌙', 'Time for baby\'s nap!', 1, 14, 0);
     } catch (e) {
     }
   };

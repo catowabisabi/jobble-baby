@@ -1,5 +1,9 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const STORAGE_KEY = '@jobble/schedule_entries';
 
 interface SleepData {
   start: string;
@@ -32,9 +36,40 @@ const QUALITY_COLORS = {
 };
 
 export default function ScheduleScreen() {
-  const handleAddEntry = () => {
-    console.log('Add sleep entry pressed');
+  const [scheduleData, setScheduleData] = useState<ScheduleDay[]>(SCHEDULE_DATA);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const stored = await AsyncStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          setScheduleData(JSON.parse(stored));
+        }
+      } catch (e) {
+      }
+    };
+    loadData();
+  }, []);
+
+  const handleAddEntry = async () => {
+    const now = new Date();
+    const startStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    const endHour = (now.getHours() + 2) % 12 || 12;
+    const endStr = endHour + ':00 ' + (now.getHours() + 2 >= 12 ? 'PM' : 'AM');
+    const newEntry: SleepData = { start: startStr, end: endStr, duration: '2h', quality: 'good' };
+    const updated = [...scheduleData];
+    const todayIdx = updated.findIndex(d => d.day.toLowerCase() === now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase());
+    if (todayIdx >= 0) {
+      updated[todayIdx] = { ...updated[todayIdx], sleep: newEntry };
+    }
+    setScheduleData(updated);
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    } catch (e) {
+    }
   };
+
+  const nextNap = scheduleData.find(d => d.sleep)?.sleep || NEXT_NAP;
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -52,10 +87,10 @@ export default function ScheduleScreen() {
             <Text style={styles.moonIcon}>🌙</Text>
           </View>
           <Text style={styles.nextNapTime}>
-            {NEXT_NAP.start} - {NEXT_NAP.end}
+            {nextNap.start} - {nextNap.end}
           </Text>
           <View style={styles.nextNapFooter}>
-            <Text style={styles.nextNapDuration}>{NEXT_NAP.duration}</Text>
+            <Text style={styles.nextNapDuration}>{nextNap.duration}</Text>
             <View style={[styles.qualityDot, { backgroundColor: QUALITY_COLORS.good }]} />
             <Text style={styles.qualityLabel}>Expected</Text>
           </View>
@@ -64,7 +99,7 @@ export default function ScheduleScreen() {
         {/* Weekly Sleep Schedule */}
         <View style={styles.weeklySection}>
           <Text style={styles.sectionTitle}>Weekly Sleep Schedule</Text>
-          {SCHEDULE_DATA.map((item) => (
+          {scheduleData.map((item) => (
             <View key={item.day} style={styles.dayRow}>
               <Text style={styles.dayName}>{item.day}</Text>
               <View style={styles.dayData}>

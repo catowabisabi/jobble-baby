@@ -7,6 +7,12 @@ import { getBadgeCounts } from '../utils/badgeService';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
 
+interface BabyProfile {
+  name: string;
+  birthDate: string;
+  gender: 'boy' | 'girl' | 'prefer_not_to_say';
+}
+
 interface SettingRowProps {
   icon: string;
   label: string;
@@ -81,8 +87,52 @@ export default function ProfileScreen() {
   const [showBadges, setShowBadges] = useState(false);
   const [badgeCounts, setBadgeCounts] = useState({ earned: 0, total: 0 });
   const [isExportLoading, setIsExportLoading] = useState(false);
+  const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme];
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const stored = await AsyncStorage.getItem('@jobble_baby_profile');
+        if (stored) {
+          setBabyProfile(JSON.parse(stored));
+        }
+      } catch {
+        // ignore parse errors
+      }
+    };
+    loadProfile();
+  }, []);
+
+  const getBabyAgeText = (): string => {
+    if (!babyProfile?.birthDate) return '';
+    try {
+      const birth = new Date(babyProfile.birthDate);
+      const now = new Date();
+      const months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+      if (months < 24) return `${months} months old`;
+      const years = Math.floor(months / 12);
+      const remainingMonths = months % 12;
+      return remainingMonths > 0 ? `${years} years ${remainingMonths} months old` : `${years} years old`;
+    } catch {
+      return '';
+    }
+  };
+
+  const getGenderLabel = (): string => {
+    if (!babyProfile?.gender) return '';
+    switch (babyProfile.gender) {
+      case 'boy': return 'Boy';
+      case 'girl': return 'Girl';
+      case 'prefer_not_to_say': return '';
+      default: return '';
+    }
+  };
+
+  const babyAge = getBabyAgeText();
+  const genderLabel = getGenderLabel();
+  const babyMeta = [babyAge, genderLabel].filter(Boolean).join(' · ');
 
   const styles = StyleSheet.create({
     safe: { flex: 1, backgroundColor: '#0D0D0F' },
@@ -193,7 +243,7 @@ export default function ProfileScreen() {
         {/* Avatar + Info */}
         <View style={styles.avatarCard}>
           <View style={styles.avatarCircle}>
-            <Text style={styles.avatarInitials}>JS</Text>
+            <Text style={styles.avatarInitials}>{babyProfile?.name ? babyProfile.name.charAt(0).toUpperCase() : 'B'}</Text>
           </View>
           <View style={styles.parentInfo}>
             <Text style={styles.parentName}>Jamie & Sam</Text>
@@ -206,8 +256,8 @@ export default function ProfileScreen() {
           <View style={styles.babyHeader}>
             <Text style={styles.babyEmoji}>👶</Text>
             <View>
-              <Text style={styles.babyName}>Luna</Text>
-              <Text style={styles.babyMeta}>Born Jan 15, 2026 · Girl</Text>
+              <Text style={styles.babyName}>{babyProfile?.name || 'Baby'}</Text>
+              <Text style={styles.babyMeta}>{babyMeta || 'Baby profile'}</Text>
             </View>
           </View>
         </View>

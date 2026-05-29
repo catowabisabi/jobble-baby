@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
+
+type BabyProfile = {
+  name: string;
+  birthDate: string;
+  gender: 'boy' | 'girl' | 'prefer_not_to_say';
+};
 
 interface QuickEntry {
   id: string;
@@ -37,6 +44,24 @@ const MOCK_EVENTS: TimelineEvent[] = [
 export default function HomeScreen() {
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme];
+
+  const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const stored = await AsyncStorage.getItem('@jobble_baby_profile');
+        if (stored) {
+          setBabyProfile(JSON.parse(stored));
+        }
+      } catch {
+        // ignore parse errors
+      }
+    };
+    loadProfile();
+  }, []);
+
+  const babyName = babyProfile?.name ? `${babyProfile.name}'s` : "Baby's";
 
   const styles = StyleSheet.create({
     safe: { flex: 1, backgroundColor: C.background },
@@ -96,7 +121,7 @@ export default function HomeScreen() {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.greeting}>Good morning</Text>
-          <Text style={styles.babyName}>Baby's Day</Text>
+          <Text style={styles.babyName}>{babyName} Day</Text>
           <Text style={styles.date}>Friday, May 29, 2026</Text>
         </View>
 

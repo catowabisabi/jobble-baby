@@ -12,7 +12,8 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Jobble Baby needs camera access for photo features",
         "NSPhotoLibraryUsageDescription": "Jobble Baby needs photo library access to save baby photos"
-      }
+      },
+      "bundleIdentifier": "com.jobblebaby.app"
     },
     "android": {
       "adaptiveIcon": {

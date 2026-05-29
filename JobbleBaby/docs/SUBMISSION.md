@@ -170,6 +170,6 @@ Add to `app.json` under `ios.infoPlist`:
 - [ ] TestFlight external beta review submitted
 - [ ] Google Play Console app created
 - [x] Play Store listing filled in (docs/PLAY_STORE_LISTING.md)
-- [ ] Play Store feature graphic + screenshots
+- [x] Play Store feature graphic + screenshots (spec: assets/play-store/README.md)
 - [ ] Google Play AAB uploaded
 - [ ] Production submitted for review

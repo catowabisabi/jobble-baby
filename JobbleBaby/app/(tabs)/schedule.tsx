@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getWeeklySummary, WeeklyTrend } from '../utils/weeklySummary';
+import { awardWeeklyViewer } from '../utils/badgeService';
 
 const STORAGE_KEY = '@jobble/schedule_entries';
 
@@ -37,6 +39,7 @@ const QUALITY_COLORS = {
 
 export default function ScheduleScreen() {
   const [scheduleData, setScheduleData] = useState<ScheduleDay[]>(SCHEDULE_DATA);
+  const [weeklySummary, setWeeklySummary] = useState<WeeklyTrend | null>(null);
 
   useEffect(() => {
     const loadData = async () => {

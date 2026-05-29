@@ -13,6 +13,7 @@ interface Entry {
   subtype: string;
   icon: string;
   time: string;
+  date: string;
   note?: string;
 }
 
@@ -36,6 +37,10 @@ const SLEEP_TYPES = [
 const getTimestamp = () => {
   const now = new Date();
   return now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+};
+
+const getDateStr = () => {
+  return new Date().toISOString().split('T')[0];
 };
 
 const EMOJI_MAP = { diaper: '🧷', feed: '🍼', sleep: '🌙', growth: '📈' };

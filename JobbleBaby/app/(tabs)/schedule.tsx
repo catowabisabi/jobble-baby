@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getWeeklySummary, WeeklyTrend } from '../utils/weeklySummary';
 import { awardWeeklyViewer } from '../utils/badgeService';
 import { useNotifications } from '../hooks/useNotifications';
+import { useTheme, COLORS } from '../context/ThemeContext';
 
 const STORAGE_KEY = '@jobble/schedule_entries';
 
@@ -49,6 +50,8 @@ export default function ScheduleScreen() {
   const [weeklySummary, setWeeklySummary] = useState<WeeklyTrend | null>(null);
   const [notificationPermission, setNotificationPermission] = useState<'granted' | 'denied' | 'undetermined'>('undetermined');
   const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder } = useNotifications();
+  const { effectiveTheme } = useTheme();
+  const C = COLORS[effectiveTheme];
 
   useEffect(() => {
     const loadData = async () => {
@@ -224,19 +227,19 @@ export default function ScheduleScreen() {
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#0a1628' },
-  container: { flex: 1, backgroundColor: '#0a1628' },
+  safe: { flex: 1, backgroundColor: C.background },
+  container: { flex: 1, backgroundColor: C.background },
   content: { padding: 20, paddingBottom: 100 },
   header: { marginBottom: 24 },
-  greeting: { fontSize: 14, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
-  title: { fontSize: 32, fontWeight: 'bold', color: '#fff', marginTop: 4 },
+  greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+  title: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
   nextNapCard: {
-    backgroundColor: '#1a2a3a',
+    backgroundColor: C.card,
     borderRadius: 16,
     padding: 16,
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: '#2a3a4a',
+    borderColor: C.border,
   },
   nextNapHeader: {
     flexDirection: 'row',
@@ -244,13 +247,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
-  nextNapLabel: { fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
+  nextNapLabel: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
   moonIcon: { fontSize: 24 },
-  nextNapTime: { fontSize: 18, fontWeight: 'bold', color: '#fff', marginBottom: 12 },
+  nextNapTime: { fontSize: 18, fontWeight: 'bold', color: C.text, marginBottom: 12 },
   nextNapFooter: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  nextNapDuration: { fontSize: 14, color: '#8b9bb4' },
+  nextNapDuration: { fontSize: 14, color: C.muted },
   qualityDot: { width: 8, height: 8, borderRadius: 4 },
-  qualityLabel: { fontSize: 12, color: '#8b9bb4' },
+  qualityLabel: { fontSize: 12, color: C.muted },
   notificationStatus: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -258,9 +261,9 @@ const styles = StyleSheet.create({
     marginTop: 12,
     paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: '#2a3a4a',
+    borderTopColor: C.border,
   },
-  notificationStatusText: { fontSize: 12, color: '#8b9bb4' },
+  notificationStatusText: { fontSize: 12, color: C.muted },
   permissionDot: { width: 8, height: 8, borderRadius: 4 },
   weeklySection: { marginBottom: 24 },
   sectionTitle: { fontSize: 16, fontWeight: '600', color: '#fff', marginBottom: 16 },
@@ -269,25 +272,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#1a2a3a',
+    backgroundColor: C.card,
     borderRadius: 16,
     padding: 16,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#2a3a4a',
+    borderColor: C.border,
   },
-  dayName: { fontSize: 14, fontWeight: '600', color: '#fff', flex: 1 },
+  dayName: { fontSize: 14, fontWeight: '600', color: C.text, flex: 1 },
   dayData: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  sleepTime: { fontSize: 14, color: '#fff' },
-  sleepDuration: { fontSize: 12, color: '#8b9bb4' },
-  noData: { fontSize: 14, color: '#8b9bb4', fontStyle: 'italic' },
+  sleepTime: { fontSize: 14, color: C.text },
+  sleepDuration: { fontSize: 12, color: C.muted },
+  noData: { fontSize: 14, color: C.muted, fontStyle: 'italic' },
   weeklySummaryCard: {
-    backgroundColor: '#1a2a3a',
+    backgroundColor: C.card,
     borderRadius: 16,
     padding: 16,
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: '#2a3a4a',
+    borderColor: C.border,
   },
   weeklySummaryHeader: {
     flexDirection: 'row',
@@ -295,25 +298,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
-  weeklySummaryLabel: { fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
+  weeklySummaryLabel: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
   weeklySummaryIcon: { fontSize: 24 },
   summaryRow: { flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' },
   summaryItem: { alignItems: 'center', flex: 1 },
   summaryEmoji: { fontSize: 24, marginBottom: 8 },
-  summaryCount: { fontSize: 24, fontWeight: 'bold', color: '#fff', marginBottom: 4 },
-  summaryLabel: { fontSize: 10, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 4 },
+  summaryCount: { fontSize: 24, fontWeight: 'bold', color: C.text, marginBottom: 4 },
+  summaryLabel: { fontSize: 10, color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 4 },
   summaryTrend: { fontSize: 16, fontWeight: 'bold' },
   fab: {
     position: 'absolute',
     bottom: 20,
     right: 20,
-    backgroundColor: '#3B82F6',
+    backgroundColor: C.accent,
     width: 56,
     height: 56,
     borderRadius: 28,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
+    shadowColor: C.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,

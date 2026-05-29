@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { onNewLogEntry } from '../utils/badgeService';
 import { Badge } from '../data/badges';
+import { useTheme, COLORS } from '../context/ThemeContext';
 
 const STORAGE_KEY = '@jobble/tracking_entries';
 
@@ -48,6 +49,8 @@ const EMOJI_MAP = { diaper: '🧷', feed: '🍼', sleep: '🌙', growth: '📈' 
 export default function TrackingScreen() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [newBadges, setNewBadges] = useState<Badge[]>([]);
+  const { effectiveTheme } = useTheme();
+  const C = COLORS[effectiveTheme];
 
   useEffect(() => {
     const loadEntries = async () => {
@@ -176,14 +179,14 @@ export default function TrackingScreen() {
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#0a1628' },
-  container: { flex: 1, backgroundColor: '#0a1628' },
+  safe: { flex: 1, backgroundColor: C.background },
+  container: { flex: 1, backgroundColor: C.background },
   content: { padding: 20, paddingBottom: 100 },
   header: { marginBottom: 24 },
-  greeting: { fontSize: 14, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
-  babyName: { fontSize: 32, fontWeight: 'bold', color: '#fff', marginTop: 4 },
+  greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+  babyName: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
   sectionTitle: {
-    fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1,
+    fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1,
     marginBottom: 12, marginTop: 8,
   },
   buttonRow: { flexDirection: 'row', gap: 12, marginBottom: 16 },
@@ -193,28 +196,28 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2, shadowRadius: 4, elevation: 3,
   },
   buttonIcon: { fontSize: 24, marginBottom: 6 },
-  buttonText: { fontSize: 13, fontWeight: '600', color: '#fff' },
+  buttonText: { fontSize: 13, fontWeight: '600', color: C.text },
   historyCard: {
-    backgroundColor: '#1a2a3a', borderRadius: 16, padding: 16,
-    borderWidth: 1, borderColor: '#2a3a4a',
+    backgroundColor: C.card, borderRadius: 16, padding: 16,
+    borderWidth: 1, borderColor: C.border,
   },
-  entryRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a3a4a' },
+  entryRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: C.border },
   entryIcon: { fontSize: 24, marginRight: 12 },
   entryInfo: { flex: 1 },
-  entryType: { fontSize: 16, fontWeight: '600', color: '#fff' },
-  entryNote: { fontSize: 12, color: '#8b9bb4', marginTop: 2 },
-  entryTime: { fontSize: 14, color: '#8b9bb4' },
-  emptyText: { fontSize: 14, color: '#8b9bb4', textAlign: 'center', paddingVertical: 20 },
+  entryType: { fontSize: 16, fontWeight: '600', color: C.text },
+  entryNote: { fontSize: 12, color: C.muted, marginTop: 2 },
+  entryTime: { fontSize: 14, color: C.muted },
+  emptyText: { fontSize: 14, color: C.muted, textAlign: 'center', paddingVertical: 20 },
   badgeBanner: {
-    backgroundColor: '#1a2a3a',
+    backgroundColor: C.card,
     borderRadius: 12,
     padding: 12,
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#3B82F6',
+    borderColor: C.accent,
   },
   badgeBannerIcon: { fontSize: 20, marginRight: 10 },
-  badgeBannerText: { fontSize: 13, fontWeight: '600', color: '#3B82F6', flex: 1 },
+  badgeBannerText: { fontSize: 13, fontWeight: '600', color: C.accent, flex: 1 },
 });

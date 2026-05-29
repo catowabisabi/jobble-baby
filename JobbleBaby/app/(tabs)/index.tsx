@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTheme, COLORS } from '../context/ThemeContext';
 
 interface QuickEntry {
   id: string;
@@ -33,6 +34,9 @@ const MOCK_EVENTS: TimelineEvent[] = [
 ];
 
 export default function HomeScreen() {
+  const { effectiveTheme } = useTheme();
+  const C = COLORS[effectiveTheme];
+
   const [lastEvents] = useState({
     diaper: '08:30',
     feed: '09:00',
@@ -112,13 +116,13 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#0a1628' },
-  container: { flex: 1, backgroundColor: '#0a1628' },
+  safe: { flex: 1, backgroundColor: C.background },
+  container: { flex: 1, backgroundColor: C.background },
   content: { padding: 20, paddingBottom: 100 },
   header: { marginBottom: 24 },
-  greeting: { fontSize: 14, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
-  babyName: { fontSize: 32, fontWeight: 'bold', color: '#fff', marginTop: 4 },
-  date: { fontSize: 14, color: '#8b9bb4', marginTop: 4 },
+  greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+  babyName: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
+  date: { fontSize: 14, color: C.muted, marginTop: 4 },
   summaryRow: { flexDirection: 'row', gap: 12, marginBottom: 16 },
   summaryCard: {
     flex: 1, borderRadius: 16, padding: 16, alignItems: 'center',
@@ -127,27 +131,27 @@ const styles = StyleSheet.create({
   cardLabel: { fontSize: 13, fontWeight: '600', color: '#1a1a2e', marginBottom: 4 },
   cardTime: { fontSize: 12, color: '#555' },
   reminderCard: {
-    backgroundColor: '#1a2a3a', borderRadius: 16, padding: 16, marginBottom: 16,
-    borderWidth: 1, borderColor: '#2a3a4a',
+    backgroundColor: C.card, borderRadius: 16, padding: 16, marginBottom: 16,
+    borderWidth: 1, borderColor: C.border,
   },
-  reminderLabel: { fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
+  reminderLabel: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
   reminderContent: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   reminderIcon: { fontSize: 32 },
-  reminderTitle: { fontSize: 18, fontWeight: '600', color: '#fff' },
-  reminderTime: { fontSize: 14, color: '#8b9bb4' },
+  reminderTitle: { fontSize: 18, fontWeight: '600', color: C.text },
+  reminderTime: { fontSize: 14, color: C.muted },
   timelineSection: { marginBottom: 24 },
-  sectionTitle: { fontSize: 16, fontWeight: '600', color: '#fff', marginBottom: 12 },
+  sectionTitle: { fontSize: 16, fontWeight: '600', color: C.text, marginBottom: 12 },
   timelineScroll: { flexDirection: 'row' },
   timelineItem: { alignItems: 'center', marginRight: 16, width: 64 },
   timelineIconBg: {
-    width: 48, height: 48, borderRadius: 24, backgroundColor: '#1a2a3a',
+    width: 48, height: 48, borderRadius: 24, backgroundColor: C.card,
     alignItems: 'center', justifyContent: 'center', marginBottom: 6,
   },
   timelineIcon: { fontSize: 20 },
-  timelineTime: { fontSize: 12, color: '#8b9bb4' },
-  timelineNote: { fontSize: 10, color: '#5a6a7a', marginTop: 2, maxWidth: 60, textAlign: 'center' },
+  timelineTime: { fontSize: 12, color: C.muted },
+  timelineNote: { fontSize: 10, color: C.muted, marginTop: 2, maxWidth: 60, textAlign: 'center' },
   fabArea: { marginTop: 8 },
-  fabLabel: { fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
+  fabLabel: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
   fabRow: { flexDirection: 'row', gap: 12 },
   fab: {
     flex: 1, borderRadius: 16, padding: 16, alignItems: 'center',

@@ -1,9 +1,11 @@
 import { Tabs } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { ThemeProvider } from './context/ThemeContext';
 
 export default function TabLayout() {
   return (
-    <Tabs>
+    <ThemeProvider>
+      <Tabs>
       <Tabs.Screen
         name="index"
         options={{
@@ -47,5 +49,6 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+    </ThemeProvider>
   );
 }

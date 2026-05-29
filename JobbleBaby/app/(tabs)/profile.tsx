@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BadgeGallery from '../components/BadgeGallery';
 import { getBadgeCounts } from '../utils/badgeService';
+import { useTheme, COLORS } from '../context/ThemeContext';
 
 interface SettingRowProps {
   icon: string;
@@ -58,10 +59,29 @@ const rowStyles = StyleSheet.create({
   chevron: { fontSize: 20, color: '#64748B' },
 });
 
+function ThemeToggleRow() {
+  const { toggleTheme, theme } = useTheme();
+  const label = theme === 'system' ? 'Auto' : theme.charAt(0).toUpperCase() + theme.slice(1);
+  return (
+    <TouchableOpacity style={rowStyles.container} onPress={toggleTheme} activeOpacity={0.7}>
+      <View style={rowStyles.left}>
+        <Text style={rowStyles.icon}>🎨</Text>
+        <Text style={rowStyles.label}>Theme</Text>
+      </View>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Text style={[rowStyles.chevron, { textTransform: 'capitalize' }]}>{label}</Text>
+        <Text style={rowStyles.chevron}> ⟳</Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
 export default function ProfileScreen() {
   const [showBadges, setShowBadges] = useState(false);
   const [badgeCounts, setBadgeCounts] = useState({ earned: 0, total: 0 });
   const [isExportLoading, setIsExportLoading] = useState(false);
+  const { effectiveTheme } = useTheme();
+  const C = COLORS[effectiveTheme];
 
   useEffect(() => {
     loadBadgeCounts();
@@ -155,6 +175,7 @@ export default function ProfileScreen() {
           <Text style={styles.settingsLabel}>Settings</Text>
           <SettingRow icon="🔔" label="Notifications" />
           <SettingRow icon="📤" label="Data Export" onPress={handleExportData} isLoading={isExportLoading} />
+          <ThemeToggleRow />
           <SettingRow icon="🔒" label="Privacy" />
           <SettingRow icon="ℹ️" label="About" />
         </View>
@@ -173,7 +194,7 @@ const styles = StyleSheet.create({
   header: { marginBottom: 20 },
   sectionTitle: { fontSize: 28, fontWeight: '800', color: '#F8FAFC', letterSpacing: -0.5 },
   avatarCard: {
-    backgroundColor: '#1A1A1E',
+    backgroundColor: C.card,
     borderRadius: 16,
     padding: 20,
     flexDirection: 'row',
@@ -184,27 +205,27 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: '#3B82F6',
+    backgroundColor: C.accent,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
   },
   avatarInitials: { fontSize: 22, fontWeight: '800', color: '#fff' },
   parentInfo: { flex: 1 },
-  parentName: { fontSize: 18, fontWeight: '700', color: '#F8FAFC', marginBottom: 4 },
-  parentEmail: { fontSize: 14, color: '#94A3B8' },
+  parentName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
+  parentEmail: { fontSize: 14, color: C.muted },
   babyCard: {
-    backgroundColor: '#1A1A1E',
+    backgroundColor: C.card,
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
   },
   babyHeader: { flexDirection: 'row', alignItems: 'center' },
   babyEmoji: { fontSize: 32, marginRight: 14 },
-  babyName: { fontSize: 18, fontWeight: '700', color: '#F8FAFC', marginBottom: 4 },
-  babyMeta: { fontSize: 14, color: '#94A3B8' },
+  babyName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
+  babyMeta: { fontSize: 14, color: C.muted },
   badgeButton: {
-    backgroundColor: '#1A1A1E',
+    backgroundColor: C.card,
     borderRadius: 16,
     padding: 16,
     flexDirection: 'row',
@@ -212,22 +233,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 8,
     borderWidth: 1,
-    borderColor: '#2a3a4a',
+    borderColor: C.border,
   },
   badgeButtonLeft: { flexDirection: 'row', alignItems: 'center' },
   badgeButtonIcon: { fontSize: 28, marginRight: 14 },
-  badgeButtonTitle: { fontSize: 16, fontWeight: '700', color: '#F8FAFC', marginBottom: 2 },
-  badgeButtonSubtitle: { fontSize: 12, color: '#3B82F6' },
-  badgeButtonChevron: { fontSize: 18, color: '#64748B' },
+  badgeButtonTitle: { fontSize: 16, fontWeight: '700', color: C.text, marginBottom: 2 },
+  badgeButtonSubtitle: { fontSize: 12, color: C.accent },
+  badgeButtonChevron: { fontSize: 18, color: C.muted },
   badgeGalleryWrap: {
-    backgroundColor: '#1A1A1E',
+    backgroundColor: C.card,
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#2a3a4a',
+    borderColor: C.border,
   },
   settingsSection: { marginTop: 8, marginBottom: 24 },
-  settingsLabel: { fontSize: 13, fontWeight: '600', color: '#64748B', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
+  settingsLabel: { fontSize: 13, fontWeight: '600', color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
   version: { fontSize: 12, color: '#475569', textAlign: 'center', marginTop: 8 },
 });

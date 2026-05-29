@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getWeeklySummary, WeeklyTrend } from '../utils/weeklySummary';
 import { awardWeeklyViewer } from '../utils/badgeService';
+import { useNotifications } from '../hooks/useNotifications';
 
 const STORAGE_KEY = '@jobble/schedule_entries';
 
@@ -37,9 +38,17 @@ const QUALITY_COLORS = {
   poor: '#e74c3c',
 };
 
+const PERMISSION_COLORS = {
+  granted: '#2ecc71',
+  denied: '#e74c3c',
+  undetermined: '#f1c40f',
+};
+
 export default function ScheduleScreen() {
   const [scheduleData, setScheduleData] = useState<ScheduleDay[]>(SCHEDULE_DATA);
   const [weeklySummary, setWeeklySummary] = useState<WeeklyTrend | null>(null);
+  const [notificationPermission, setNotificationPermission] = useState<'granted' | 'denied' | 'undetermined'>('undetermined');
+  const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder } = useNotifications();
 
   useEffect(() => {
     const loadData = async () => {
@@ -68,6 +77,18 @@ export default function ScheduleScreen() {
     loadWeeklySummary();
   }, []);
 
+  useEffect(() => {
+    const requestNotifPermissions = async () => {
+      const result = await requestPermissions();
+      setNotificationPermission(result);
+      if (result === 'granted') {
+        // Schedule daily feeding reminder for 9:00 AM
+        scheduleFeedingReminder('Feeding Time 🍼', 'Remember to log feeding', 9, 0);
+      }
+    };
+    requestNotifPermissions();
+  }, [requestPermissions, scheduleFeedingReminder]);
+
   const handleAddEntry = async () => {
     const now = new Date();
     const startStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
@@ -82,11 +103,21 @@ export default function ScheduleScreen() {
     setScheduleData(updated);
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      // Schedule sleep notification for 1 hour ahead
+      scheduleSleepNotification('Nap Reminder 🌙', 'Time for baby\'s nap!', 1);
     } catch (e) {
     }
   };
 
   const nextNap = scheduleData.find(d => d.sleep)?.sleep || NEXT_NAP;
+
+  const getPermissionLabel = () => {
+    switch (notificationPermission) {
+      case 'granted': return 'Granted';
+      case 'denied': return 'Denied';
+      default: return 'Undetermined';
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -94,7 +125,7 @@ export default function ScheduleScreen() {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.greeting}>Sleep Schedule</Text>
-          <Text style={styles.title}>Rest & Naps</Text>
+          <Text style={styles.title}>Rest& Naps</Text>
         </View>
 
         {/* Next Nap Reminder Card */}
@@ -110,6 +141,12 @@ export default function ScheduleScreen() {
             <Text style={styles.nextNapDuration}>{nextNap.duration}</Text>
             <View style={[styles.qualityDot, { backgroundColor: QUALITY_COLORS.good }]} />
             <Text style={styles.qualityLabel}>Expected</Text>
+          </View>
+          <View style={styles.notificationStatus}>
+            <Text style={styles.notificationStatusText}>
+              🔔 Notifications: {getPermissionLabel()}
+            </Text>
+            <View style={[styles.permissionDot, { backgroundColor: PERMISSION_COLORS[notificationPermission] }]} />
           </View>
         </View>
 
@@ -214,6 +251,17 @@ const styles = StyleSheet.create({
   nextNapDuration: { fontSize: 14, color: '#8b9bb4' },
   qualityDot: { width: 8, height: 8, borderRadius: 4 },
   qualityLabel: { fontSize: 12, color: '#8b9bb4' },
+  notificationStatus: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#2a3a4a',
+  },
+  notificationStatusText: { fontSize: 12, color: '#8b9bb4' },
+  permissionDot: { width: 8, height: 8, borderRadius: 4 },
   weeklySection: { marginBottom: 24 },
   sectionTitle: { fontSize: 16, fontWeight: '600', color: '#fff', marginBottom: 16 },
   sectionTitleHidden: { alignItems: 'center', fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 16, display: 'none' },

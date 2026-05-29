@@ -11,7 +11,21 @@
       "bundleId": "com.jobblebaby.app",
       "infoPlist": {
         "NSCameraUsageDescription": "Jobble Baby needs camera access for photo features",
-        "NSPhotoLibraryUsageDescription": "Jobble Baby needs photo library access to save baby photos"
+        "NSPhotoLibraryUsageDescription": "Jobble Baby needs photo library access to save baby photos",
+        "NSPrivacyAccessedAPITypes": [
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
+            "NSPrivacyAccessedAPITypeReasons": [
+              "C617.1"
+            ]
+          },
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1"
+            ]
+          }
+        ]
       },
       "bundleIdentifier": "com.jobblebaby.app"
     },

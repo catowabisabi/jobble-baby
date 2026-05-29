@@ -162,14 +162,14 @@ Add to `app.json` under `ios.infoPlist`:
 - [x] WHO growth percentile chart
 - [x] JSON data export/backup
 - [x] Products tab with HK brands
-- [ ] EAS Build configured (eas.json created)
-- [ ] App Store Connect app record created
-- [ ] App Store listing content filled in
-- [ ] iOS Privacy Manifest added
+- [x] EAS Build configured (eas.json created)
+- [ ] App Store Connect app record created (needs Apple developer account)
+- [x] App Store listing content filled in (docs/APP_STORE_LISTING.md)
+- [x] iOS Privacy Manifest added (app.json)
 - [ ] TestFlight internal build uploaded
 - [ ] TestFlight external beta review submitted
 - [ ] Google Play Console app created
-- [ ] Play Store listing filled in
+- [x] Play Store listing filled in (docs/PLAY_STORE_LISTING.md)
 - [ ] Play Store feature graphic + screenshots
 - [ ] Google Play AAB uploaded
 - [ ] Production submitted for review

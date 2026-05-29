@@ -54,6 +54,20 @@ export default function ScheduleScreen() {
     loadData();
   }, []);
 
+  useEffect(() => {
+    const loadWeeklySummary = async () => {
+      try {
+        const summary = await getWeeklySummary();
+        setWeeklySummary(summary);
+        // Award weekly viewer badge (idempotent)
+        await awardWeeklyViewer();
+      } catch (e) {
+        // Silent fail, UI already has fallback
+      }
+    };
+    loadWeeklySummary();
+  }, []);
+
   const handleAddEntry = async () => {
     const now = new Date();
     const startStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
@@ -99,9 +113,45 @@ export default function ScheduleScreen() {
           </View>
         </View>
 
+        {/* Weekly Summary Card */}
+        {weeklySummary && (
+          <View style={styles.weeklySummaryCard}>
+            <View style={styles.weeklySummaryHeader}>
+              <Text style={styles.weeklySummaryLabel}>WEEKLY SUMMARY</Text>
+              <Text style={styles.weeklySummaryIcon}>📊</Text>
+            </View>
+            <View style={styles.summaryRow}>
+              <View style={styles.summaryItem}>
+                <Text style={styles.summaryEmoji}>🧷</Text>
+                <Text style={styles.summaryCount}>{weeklySummary.current.diaperCount}</Text>
+                <Text style={styles.summaryLabel}>Diapers</Text>
+                <Text style={[styles.summaryTrend, { color: weeklySummary.trends.diaper === '↑' ? '#3B82F6' : weeklySummary.trends.diaper === '↓' ? '#e74c3c' : '#8b9bb4' }]}>{weeklySummary.trends.diaper}</Text>
+              </View>
+              <View style={styles.summaryItem}>
+                <Text style={styles.summaryEmoji}>🍼</Text>
+                <Text style={styles.summaryCount}>{weeklySummary.current.feedCount}</Text>
+                <Text style={styles.summaryLabel}>Feeds</Text>
+                <Text style={[styles.summaryTrend, { color: weeklySummary.trends.feed === '↑' ? '#3B82F6' : weeklySummary.trends.feed === '↓' ? '#e74c3c' : '#8b9bb4' }]}>{weeklySummary.trends.feed}</Text>
+              </View>
+              <View style={styles.summaryItem}>
+                <Text style={styles.summaryEmoji}>🌙</Text>
+                <Text style={styles.summaryCount}>{weeklySummary.current.sleepCount}</Text>
+                <Text style={styles.summaryLabel}>Sleep</Text>
+                <Text style={[styles.summaryTrend, { color: weeklySummary.trends.sleep === '↑' ? '#3B82F6' : weeklySummary.trends.sleep === '↓' ? '#e74c3c' : '#8b9bb4' }]}>{weeklySummary.trends.sleep}</Text>
+              </View>
+              <View style={styles.summaryItem}>
+                <Text style={styles.summaryEmoji}>📈</Text>
+                <Text style={styles.summaryCount}>{weeklySummary.current.growthCount}</Text>
+                <Text style={styles.summaryLabel}>Growth</Text>
+                <Text style={[styles.summaryTrend, { color: weeklySummary.trends.growth === '↑' ? '#3B82F6' : weeklySummary.trends.growth === '↓' ? '#e74c3c' : '#8b9bb4' }]}>{weeklySummary.trends.growth}</Text>
+              </View>
+            </View>
+          </View>
+        )}
+
         {/* Weekly Sleep Schedule */}
         <View style={styles.weeklySection}>
-          <Text style={styles.sectionTitle}>Weekly Sleep Schedule</Text>
+          <Text style={styles.sectionTitleHidden}>Weekly Sleep Schedule</Text>
           {scheduleData.map((item) => (
             <View key={item.day} style={styles.dayRow}>
               <Text style={styles.dayName}>{item.day}</Text>
@@ -166,6 +216,7 @@ const styles = StyleSheet.create({
   qualityLabel: { fontSize: 12, color: '#8b9bb4' },
   weeklySection: { marginBottom: 24 },
   sectionTitle: { fontSize: 16, fontWeight: '600', color: '#fff', marginBottom: 16 },
+  sectionTitleHidden: { alignItems: 'center', fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 16, display: 'none' },
   dayRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -182,6 +233,28 @@ const styles = StyleSheet.create({
   sleepTime: { fontSize: 14, color: '#fff' },
   sleepDuration: { fontSize: 12, color: '#8b9bb4' },
   noData: { fontSize: 14, color: '#8b9bb4', fontStyle: 'italic' },
+  weeklySummaryCard: {
+    backgroundColor: '#1a2a3a',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: '#2a3a4a',
+  },
+  weeklySummaryHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  weeklySummaryLabel: { fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
+  weeklySummaryIcon: { fontSize: 24 },
+  summaryRow: { flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' },
+  summaryItem: { alignItems: 'center', flex: 1 },
+  summaryEmoji: { fontSize: 24, marginBottom: 8 },
+  summaryCount: { fontSize: 24, fontWeight: 'bold', color: '#fff', marginBottom: 4 },
+  summaryLabel: { fontSize: 10, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 4 },
+  summaryTrend: { fontSize: 16, fontWeight: 'bold' },
   fab: {
     position: 'absolute',
     bottom: 20,

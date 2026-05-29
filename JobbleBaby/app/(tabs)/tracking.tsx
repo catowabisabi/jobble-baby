@@ -71,6 +71,7 @@ export default function TrackingScreen() {
       subtype,
       icon,
       time: getTimestamp(),
+      date: getDateStr(),
     };
     const updated = [newEntry, ...entries].slice(0, 10);
     setEntries(updated);

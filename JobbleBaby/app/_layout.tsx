@@ -33,6 +33,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="growth"
+        options={{
+          title: 'Growth',
+          tabBarIcon: ({ color }) => <MaterialIcons size={28} name="show-chart" color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',

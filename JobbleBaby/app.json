@@ -13,8 +13,6 @@
         "NSCameraUsageDescription": "Jobble Baby needs camera access for photo features",
         "NSPhotoLibraryUsageDescription": "Jobble Baby needs photo library access to save baby photos"
       }
-      // App Store screenshots: add 5.5" and 6.7" display screenshots via Expo orbit
-      // "screenshotUrls": ["https://..."]
     },
     "android": {
       "adaptiveIcon": {
@@ -29,14 +27,10 @@
         "backgroundColor": "#E6F4FE",
         "resizeMode": "contain"
       }
-      // Google Play Store listing:
-      // "localizedTitle": "Jobble Baby",
-      // "localizedDescription": "Your baby product guide...",
-      // "localizedShortDescription": "Baby product info at your fingertips",
-      // "video": "https://play.google.com/video/..."
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "scheme": "jobblebaby"
   }
 }

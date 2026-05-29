@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { onNewLogEntry } from '../utils/badgeService';
+import { Badge } from '../data/badges';
 
 const STORAGE_KEY = '@jobble/tracking_entries';
 
 interface Entry {
   id: string;
-  type: 'diaper' | 'feed';
+  type: 'diaper' | 'feed' | 'sleep';
   subtype: string;
   icon: string;
   time: string;
@@ -26,6 +28,11 @@ const FEED_TYPES = [
   { label: 'Solid', color: '#1abc9c' },
 ];
 
+const SLEEP_TYPES = [
+  { label: 'Nap', color: '#AED6F1' },
+  { label: 'Night', color: '#5DADE2' },
+];
+
 const getTimestamp = () => {
   const now = new Date();
   return now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -35,6 +42,7 @@ const EMOJI_MAP = { diaper: '🧷', feed: '🍼', sleep: '🌙', growth: '📈' 
 
 export default function TrackingScreen() {
   const [entries, setEntries] = useState<Entry[]>([]);
+  const [newBadges, setNewBadges] = useState<Badge[]>([]);
 
   useEffect(() => {
     const loadEntries = async () => {
@@ -50,8 +58,8 @@ export default function TrackingScreen() {
     loadEntries();
   }, []);
 
-  const addEntry = async (type: 'diaper' | 'feed', subtype: string) => {
-    const icon = type === 'diaper' ? EMOJI_MAP.diaper : EMOJI_MAP.feed;
+  const addEntry = async (type: 'diaper' | 'feed' | 'sleep', subtype: string) => {
+    const icon = EMOJI_MAP[type];
     const newEntry: Entry = {
       id: Date.now().toString(),
       type,
@@ -63,6 +71,12 @@ export default function TrackingScreen() {
     setEntries(updated);
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      // Check for badge awards
+      const awarded = await onNewLogEntry(type);
+      if (awarded.length > 0) {
+        setNewBadges(awarded);
+        setTimeout(() => setNewBadges([]), 4000);
+      }
     } catch (e) {
       // Silent fail, UI already updated
     }
@@ -75,6 +89,18 @@ export default function TrackingScreen() {
           <Text style={styles.greeting}>Track</Text>
           <Text style={styles.babyName}>Baby Activity</Text>
         </View>
+
+        {/* Badge notification banner */}
+        {newBadges.length > 0 && (
+          <View style={styles.badgeBanner}>
+            <Text style={styles.badgeBannerIcon}>
+              {newBadges.map((b) => b.icon).join(' ')}
+            </Text>
+            <Text style={styles.badgeBannerText}>
+              Badge{newBadges.length > 1 ? 's' : ''} earned: {newBadges.map((b) => b.name).join(', ')}!
+            </Text>
+          </View>
+        )}
 
         <Text style={styles.sectionTitle}>DIAPER</Text>
         <View style={styles.buttonRow}>
@@ -101,6 +127,21 @@ export default function TrackingScreen() {
               onPress={() => addEntry('feed', item.label)}
             >
               <Text style={styles.buttonIcon}>🍼</Text>
+              <Text style={styles.buttonText}>{item.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <Text style={styles.sectionTitle}>SLEEP</Text>
+        <View style={styles.buttonRow}>
+          {SLEEP_TYPES.map((item) => (
+            <TouchableOpacity
+              key={item.label}
+              style={[styles.button, { backgroundColor: item.color }]}
+              activeOpacity={0.7}
+              onPress={() => addEntry('sleep', item.label)}
+            >
+              <Text style={styles.buttonIcon}>🌙</Text>
               <Text style={styles.buttonText}>{item.label}</Text>
             </TouchableOpacity>
           ))}
@@ -158,4 +199,16 @@ const styles = StyleSheet.create({
   entryNote: { fontSize: 12, color: '#8b9bb4', marginTop: 2 },
   entryTime: { fontSize: 14, color: '#8b9bb4' },
   emptyText: { fontSize: 14, color: '#8b9bb4', textAlign: 'center', paddingVertical: 20 },
+  badgeBanner: {
+    backgroundColor: '#1a2a3a',
+    borderRadius: 12,
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#3B82F6',
+  },
+  badgeBannerIcon: { fontSize: 20, marginRight: 10 },
+  badgeBannerText: { fontSize: 13, fontWeight: '600', color: '#3B82F6', flex: 1 },
 });

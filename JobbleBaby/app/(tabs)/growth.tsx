@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { onNewGrowthEntry } from '../utils/badgeService';
+import { Badge } from '../data/badges';
 
 const STORAGE_KEY = '@jobble/growth_entries';
 
@@ -31,6 +33,7 @@ export default function GrowthScreen() {
   const [entries, setEntries] = useState<GrowthEntry[]>([]);
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+  const [newBadges, setNewBadges] = useState<Badge[]>([]);
 
   useEffect(() => {
     const loadEntries = async () => {
@@ -59,6 +62,11 @@ export default function GrowthScreen() {
     setWeight('');
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      const awarded = await onNewGrowthEntry();
+      if (awarded.length > 0) {
+        setNewBadges(awarded);
+        setTimeout(() => setNewBadges([]), 4000);
+      }
     } catch (e) {
     }
   };
@@ -70,6 +78,17 @@ export default function GrowthScreen() {
           <Text style={styles.greeting}>Track</Text>
           <Text style={styles.title}>📈 Growth</Text>
         </View>
+
+        {newBadges.length > 0 && (
+          <View style={styles.badgeBanner}>
+            <Text style={styles.badgeBannerIcon}>
+              {newBadges.map((b) => b.icon).join(' ')}
+            </Text>
+            <Text style={styles.badgeBannerText}>
+              Badge earned: {newBadges.map((b) => b.name).join(', ')}!
+            </Text>
+          </View>
+        )}
 
         <View style={styles.inputCard}>
           <Text style={styles.inputLabel}>HEIGHT (cm)</Text>
@@ -129,6 +148,18 @@ const styles = StyleSheet.create({
   header: { marginBottom: 24 },
   greeting: { fontSize: 14, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
   title: { fontSize: 32, fontWeight: 'bold', color: '#fff', marginTop: 4 },
+  badgeBanner: {
+    backgroundColor: '#1a2a3a',
+    borderRadius: 12,
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#3B82F6',
+  },
+  badgeBannerIcon: { fontSize: 20, marginRight: 10 },
+  badgeBannerText: { fontSize: 13, fontWeight: '600', color: '#3B82F6', flex: 1 },
   inputCard: {
     backgroundColor: '#1a2a3a',
     borderRadius: 16,

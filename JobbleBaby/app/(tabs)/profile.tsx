@@ -1,5 +1,8 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import BadgeGallery from '../components/BadgeGallery';
+import { getBadgeCounts } from '../utils/badgeService';
 
 interface SettingRowProps {
   icon: string;
@@ -43,6 +46,18 @@ const rowStyles = StyleSheet.create({
 });
 
 export default function ProfileScreen() {
+  const [showBadges, setShowBadges] = useState(false);
+  const [badgeCounts, setBadgeCounts] = useState({ earned: 0, total: 0 });
+
+  useEffect(() => {
+    loadBadgeCounts();
+  }, []);
+
+  const loadBadgeCounts = async () => {
+    const counts = await getBadgeCounts();
+    setBadgeCounts(counts);
+  };
+
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -72,6 +87,31 @@ export default function ProfileScreen() {
             </View>
           </View>
         </View>
+
+        {/* Badge Gallery Button */}
+        <TouchableOpacity
+          style={styles.badgeButton}
+          activeOpacity={0.7}
+          onPress={() => setShowBadges(!showBadges)}
+        >
+          <View style={styles.badgeButtonLeft}>
+            <Text style={styles.badgeButtonIcon}>🏅</Text>
+            <View>
+              <Text style={styles.badgeButtonTitle}>Badge Collection</Text>
+              <Text style={styles.badgeButtonSubtitle}>
+                {badgeCounts.earned} of {badgeCounts.total} badges earned
+              </Text>
+            </View>
+          </View>
+          <Text style={styles.badgeButtonChevron}>{showBadges ? '↑' : '↓'}</Text>
+        </TouchableOpacity>
+
+        {/* Expandable Badge Gallery */}
+        {showBadges && (
+          <View style={styles.badgeGalleryWrap}>
+            <BadgeGallery />
+          </View>
+        )}
 
         {/* Settings Section */}
         <View style={styles.settingsSection}>
@@ -119,13 +159,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#1A1A1E',
     borderRadius: 16,
     padding: 20,
-    marginBottom: 24,
+    marginBottom: 16,
   },
   babyHeader: { flexDirection: 'row', alignItems: 'center' },
   babyEmoji: { fontSize: 32, marginRight: 14 },
   babyName: { fontSize: 18, fontWeight: '700', color: '#F8FAFC', marginBottom: 4 },
   babyMeta: { fontSize: 14, color: '#94A3B8' },
-  settingsSection: { marginBottom: 24 },
+  badgeButton: {
+    backgroundColor: '#1A1A1E',
+    borderRadius: 16,
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: '#2a3a4a',
+  },
+  badgeButtonLeft: { flexDirection: 'row', alignItems: 'center' },
+  badgeButtonIcon: { fontSize: 28, marginRight: 14 },
+  badgeButtonTitle: { fontSize: 16, fontWeight: '700', color: '#F8FAFC', marginBottom: 2 },
+  badgeButtonSubtitle: { fontSize: 12, color: '#3B82F6' },
+  badgeButtonChevron: { fontSize: 18, color: '#64748B' },
+  badgeGalleryWrap: {
+    backgroundColor: '#1A1A1E',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#2a3a4a',
+  },
+  settingsSection: { marginTop: 8, marginBottom: 24 },
   settingsLabel: { fontSize: 13, fontWeight: '600', color: '#64748B', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
   version: { fontSize: 12, color: '#475569', textAlign: 'center', marginTop: 8 },
 });

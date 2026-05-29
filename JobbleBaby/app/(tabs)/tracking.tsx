@@ -1,20 +1,143 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+interface Entry {
+  id: string;
+  type: 'diaper' | 'feed';
+  subtype: string;
+  icon: string;
+  time: string;
+  note?: string;
+}
+
+const DIAPER_TYPES = [
+  { label: 'Wet', color: '#3498db' },
+  { label: 'Both', color: '#9b59b6' },
+  { label: 'Dry', color: '#2ecc71' },
+];
+
+const FEED_TYPES = [
+  { label: 'Breast', color: '#e74c3c' },
+  { label: 'Bottle', color: '#f39c12' },
+  { label: 'Solid', color: '#1abc9c' },
+];
+
+const getTimestamp = () => {
+  const now = new Date();
+  return now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+};
+
+const EMOJI_MAP = { diaper: '🧷', feed: '🍼', sleep: '🌙', growth: '📈' };
 
 export default function TrackingScreen() {
+  const [entries, setEntries] = useState<Entry[]>([
+    { id: '1', type: 'diaper', subtype: 'Wet', icon: '🧷', time: '08:30', note: 'Morning change' },
+    { id: '2', type: 'feed', subtype: 'Breast', icon: '🍼', time: '09:00', note: '12 min' },
+    { id: '3', type: 'diaper', subtype: 'Dry', icon: '🧷', time: '11:15' },
+    { id: '4', type: 'feed', subtype: 'Bottle', icon: '🍼', time: '12:30', note: '120ml' },
+  ]);
+
+  const addEntry = (type: 'diaper' | 'feed', subtype: string) => {
+    const icon = type === 'diaper' ? EMOJI_MAP.diaper : EMOJI_MAP.feed;
+    const newEntry: Entry = {
+      id: Date.now().toString(),
+      type,
+      subtype,
+      icon,
+      time: getTimestamp(),
+    };
+    setEntries((prev) => [newEntry, ...prev].slice(0, 10));
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Baby Tracking</Text>
-      <Text style={styles.section}>Diaper Log</Text>
-      <Text style={styles.placeholder}>[Diaper change entries will appear here]</Text>
-      <Text style={styles.section}>Feeding Log</Text>
-      <Text style={styles.placeholder}>[Feeding entries will appear here]</Text>
-    </View>
+    <SafeAreaView style={styles.safe} edges={['top']}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+        <View style={styles.header}>
+          <Text style={styles.greeting}>Track</Text>
+          <Text style={styles.babyName}>Baby Activity</Text>
+        </View>
+
+        <Text style={styles.sectionTitle}>DIAPER</Text>
+        <View style={styles.buttonRow}>
+          {DIAPER_TYPES.map((item) => (
+            <TouchableOpacity
+              key={item.label}
+              style={[styles.button, { backgroundColor: item.color }]}
+              activeOpacity={0.7}
+              onPress={() => addEntry('diaper', item.label)}
+            >
+              <Text style={styles.buttonIcon}>🧷</Text>
+              <Text style={styles.buttonText}>{item.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <Text style={styles.sectionTitle}>FEEDING</Text>
+        <View style={styles.buttonRow}>
+          {FEED_TYPES.map((item) => (
+            <TouchableOpacity
+              key={item.label}
+              style={[styles.button, { backgroundColor: item.color }]}
+              activeOpacity={0.7}
+              onPress={() => addEntry('feed', item.label)}
+            >
+              <Text style={styles.buttonIcon}>🍼</Text>
+              <Text style={styles.buttonText}>{item.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <Text style={styles.sectionTitle}>HISTORY</Text>
+        <View style={styles.historyCard}>
+          {entries.length === 0 ? (
+            <Text style={styles.emptyText}>No entries yet. Tap a button above to log.</Text>
+          ) : (
+            entries.map((entry) => (
+              <View key={entry.id} style={styles.entryRow}>
+                <Text style={styles.entryIcon}>{entry.icon}</Text>
+                <View style={styles.entryInfo}>
+                  <Text style={styles.entryType}>{entry.subtype}</Text>
+                  <Text style={styles.entryNote}>{entry.note || ''}</Text>
+                </View>
+                <Text style={styles.entryTime}>{entry.time}</Text>
+              </View>
+            ))
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#fff' },
-  title: { fontSize: 28, fontWeight: 'bold', marginBottom: 20 },
-  section: { fontSize: 18, fontWeight: '600', marginTop: 16, marginBottom: 8 },
-  placeholder: { fontSize: 14, color: '#999', fontStyle: 'italic' },
+  safe: { flex: 1, backgroundColor: '#0a1628' },
+  container: { flex: 1, backgroundColor: '#0a1628' },
+  content: { padding: 20, paddingBottom: 100 },
+  header: { marginBottom: 24 },
+  greeting: { fontSize: 14, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1 },
+  babyName: { fontSize: 32, fontWeight: 'bold', color: '#fff', marginTop: 4 },
+  sectionTitle: {
+    fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1,
+    marginBottom: 12, marginTop: 8,
+  },
+  buttonRow: { flexDirection: 'row', gap: 12, marginBottom: 16 },
+  button: {
+    flex: 1, borderRadius: 16, padding: 16, alignItems: 'center',
+    shadowColor: '#000', shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2, shadowRadius: 4, elevation: 3,
+  },
+  buttonIcon: { fontSize: 24, marginBottom: 6 },
+  buttonText: { fontSize: 13, fontWeight: '600', color: '#fff' },
+  historyCard: {
+    backgroundColor: '#1a2a3a', borderRadius: 16, padding: 16,
+    borderWidth: 1, borderColor: '#2a3a4a',
+  },
+  entryRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#2a3a4a' },
+  entryIcon: { fontSize: 24, marginRight: 12 },
+  entryInfo: { flex: 1 },
+  entryType: { fontSize: 16, fontWeight: '600', color: '#fff' },
+  entryNote: { fontSize: 12, color: '#8b9bb4', marginTop: 2 },
+  entryTime: { fontSize: 14, color: '#8b9bb4' },
+  emptyText: { fontSize: 14, color: '#8b9bb4', textAlign: 'center', paddingVertical: 20 },
 });

@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const STORAGE_KEY = '@jobble/tracking_entries';
 
 interface Entry {
   id: string;
@@ -31,14 +34,23 @@ const getTimestamp = () => {
 const EMOJI_MAP = { diaper: '🧷', feed: '🍼', sleep: '🌙', growth: '📈' };
 
 export default function TrackingScreen() {
-  const [entries, setEntries] = useState<Entry[]>([
-    { id: '1', type: 'diaper', subtype: 'Wet', icon: '🧷', time: '08:30', note: 'Morning change' },
-    { id: '2', type: 'feed', subtype: 'Breast', icon: '🍼', time: '09:00', note: '12 min' },
-    { id: '3', type: 'diaper', subtype: 'Dry', icon: '🧷', time: '11:15' },
-    { id: '4', type: 'feed', subtype: 'Bottle', icon: '🍼', time: '12:30', note: '120ml' },
-  ]);
+  const [entries, setEntries] = useState<Entry[]>([]);
 
-  const addEntry = (type: 'diaper' | 'feed', subtype: string) => {
+  useEffect(() => {
+    const loadEntries = async () => {
+      try {
+        const stored = await AsyncStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          setEntries(JSON.parse(stored));
+        }
+      } catch (e) {
+        // Fall back to empty array on error
+      }
+    };
+    loadEntries();
+  }, []);
+
+  const addEntry = async (type: 'diaper' | 'feed', subtype: string) => {
     const icon = type === 'diaper' ? EMOJI_MAP.diaper : EMOJI_MAP.feed;
     const newEntry: Entry = {
       id: Date.now().toString(),
@@ -47,7 +59,13 @@ export default function TrackingScreen() {
       icon,
       time: getTimestamp(),
     };
-    setEntries((prev) => [newEntry, ...prev].slice(0, 10));
+    const updated = [newEntry, ...entries].slice(0, 10);
+    setEntries(updated);
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    } catch (e) {
+      // Silent fail, UI already updated
+    }
   };
 
   return (

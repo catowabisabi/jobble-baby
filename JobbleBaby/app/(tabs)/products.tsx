@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import CATEGORIES from '../data/products.json';
 
 interface Product {
   id: string;
@@ -16,59 +17,6 @@ interface Category {
   emoji: string;
   products: Product[];
 }
-
-const CATEGORIES: Category[] = [
-  {
-    id: 'essentials',
-    name: 'Essentials',
-    emoji: '🛍️',
-    products: [
-      { id: '1', name: 'Premium Diapers', emoji: '🧷', price: '$29.99', rating: 4.8, description: 'Hypoallergenic, 12-hour leak protection' },
-      { id: '2', name: 'Baby Wipes', emoji: '🧻', price: '$12.99', rating: 4.6, description: 'Fragrance-free, 99.9% natural' },
-      { id: '3', name: 'Diaper Cream', emoji: '🧴', price: '$8.99', rating: 4.7, description: 'Zinc oxide formula, gentle on skin' },
-    ],
-  },
-  {
-    id: 'feeding',
-    name: 'Feeding',
-    emoji: '🍼',
-    products: [
-      { id: '4', name: 'Anti-Colic Bottles', emoji: '🍼', price: '$34.99', rating: 4.9, description: 'Vent system prevents gas and fussiness' },
-      { id: '5', name: 'Silicone Bibs', emoji: '🍽️', price: '$15.99', rating: 4.5, description: 'Easy-clean, food-grade silicone' },
-      { id: '6', name: 'Baby Food Maker', emoji: '🥄', price: '$49.99', rating: 4.8, description: 'Steam, blend, and warm in one device' },
-    ],
-  },
-  {
-    id: 'sleep',
-    name: 'Sleep',
-    emoji: '🌙',
-    products: [
-      { id: '7', name: 'Sleep Sack', emoji: '👶', price: '$32.99', rating: 4.7, description: 'TOG 1.0, cotton fleece, safe zip' },
-      { id: '8', name: 'White Noise Machine', emoji: '🔊', price: '$24.99', rating: 4.6, description: '32 soothing sounds, timer function' },
-      { id: '9', name: 'Baby Monitor HD', emoji: '📹', price: '$89.99', rating: 4.9, description: '1080p camera, night vision, two-way audio' },
-    ],
-  },
-  {
-    id: 'health',
-    name: 'Health',
-    emoji: '💊',
-    products: [
-      { id: '10', name: 'Nose Frida', emoji: '👃', price: '$19.99', rating: 4.8, description: 'Doctor-designed, saline drops included' },
-      { id: '11', name: 'Bath Thermometer', emoji: '🌡️', price: '$14.99', rating: 4.5, description: 'LED display, accurate to 0.1°' },
-      { id: '12', name: 'Baby First Aid Kit', emoji: '🩹', price: '$26.99', rating: 4.7, description: '45 pieces, BPA-free containers' },
-    ],
-  },
-  {
-    id: 'clothing',
-    name: 'Clothing',
-    emoji: '👕',
-    products: [
-      { id: '13', name: 'Onesie 5-Pack', emoji: '👶', price: '$38.99', rating: 4.6, description: '100% organic cotton, snap buttons' },
-      { id: '14', name: 'Sleep & Play', emoji: '🧸', price: '$25.99', rating: 4.8, description: 'Zipped, footed, tagless comfort' },
-      { id: '15', name: 'Socks 6-Pack', emoji: '🧦', price: '$16.99', rating: 4.5, description: 'Non-slip grip, stretch fit' },
-    ],
-  },
-];
 
 const renderStars = (rating: number) => {
   const full = Math.floor(rating);

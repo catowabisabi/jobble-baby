@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { onNewGrowthEntry } from '../utils/badgeService';
 import { Badge } from '../data/badges';
-import { useTheme, COLORS } from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
+import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble/growth_entries';
 
@@ -320,18 +321,19 @@ function GrowthChart({ gender, chartType, entries }: ChartProps) {
   );
 }
 
+// chartStyles — muted color hardcoded (#8b9bb4) since GrowthChart has no theme context
 const chartStyles = StyleSheet.create({
   container: { marginBottom: 16 },
   legend: { flexDirection: 'row', justifyContent: 'center', gap: 16, marginBottom: 12 },
   legendItem: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   legendLine: { width: 16, height: 3, borderRadius: 2 },
   legendDot: { width: 8, height: 8, borderRadius: 4 },
-  legendText: { fontSize: 10, color: C.muted },
+  legendText: { fontSize: 10, color: '#8b9bb4' },
   svgContainer: { height: CHART_H, backgroundColor: '#0d1f35', borderRadius: 12, overflow: 'hidden', position: 'relative' },
   bandContainer: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 30 },
   xAxis: { position: 'absolute', bottom: 0, left: 0, right: 0, height: 30 },
-  xLabel: { position: 'absolute', fontSize: 10, color: C.muted, width: 20, textAlign: 'center' },
-  yLabel: { position: 'absolute', right: 2, fontSize: 9, color: C.muted },
+  xLabel: { position: 'absolute', fontSize: 10, color: '#8b9bb4', width: 20, textAlign: 'center' },
+  yLabel: { position: 'absolute', right: 2, fontSize: 9, color: '#8b9bb4' },
 });
 
 export default function GrowthScreen() {
@@ -343,6 +345,94 @@ export default function GrowthScreen() {
   const [chartType, setChartType] = useState<ChartType>('height');
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme];
+
+  const styles = StyleSheet.create({
+    safe: { flex: 1, backgroundColor: C.background },
+    container: { flex: 1, backgroundColor: C.background },
+    content: { padding: 20, paddingBottom: 100 },
+    header: { marginBottom: 24 },
+    greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+    title: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
+    badgeBanner: {
+      backgroundColor: C.card,
+      borderRadius: 12,
+      padding: 12,
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: C.accent,
+    },
+    badgeBannerIcon: { fontSize: 20, marginRight: 10 },
+    badgeBannerText: { fontSize: 13, fontWeight: '600', color: C.accent, flex: 1 },
+    chartCard: {
+      backgroundColor: C.card,
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: C.border,
+    },
+    chartHeader: { marginBottom: 12 },
+    chartTitle: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+    chartSubtitle: { fontSize: 11, color: C.muted, marginTop: 2 },
+    toggleRow: { flexDirection: 'row', gap: 8, marginBottom: 8 },
+    toggleBtn: {
+      flex: 1,
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      borderRadius: 8,
+      backgroundColor: C.card,
+      alignItems: 'center',
+    },
+    toggleBtnSmall: { flex: 0.5 },
+    toggleBtnActive: { backgroundColor: C.accent },
+    toggleBtnText: { fontSize: 13, color: C.muted, fontWeight: '500' },
+    toggleBtnTextSmall: { fontSize: 12 },
+    toggleBtnTextActive: { color: C.text },
+    inputCard: {
+      backgroundColor: C.card,
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: C.border,
+    },
+    inputLabel: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8, marginTop: 12 },
+    input: {
+      backgroundColor: C.background,
+      borderRadius: 12,
+      padding: 14,
+      fontSize: 18,
+      color: C.text,
+      borderWidth: 1,
+      borderColor: C.border,
+    },
+    saveButton: {
+      backgroundColor: C.accent,
+      borderRadius: 16,
+      padding: 16,
+      alignItems: 'center',
+      marginTop: 20,
+    },
+    saveButtonText: { fontSize: 16, fontWeight: '600', color: C.text },
+    sectionTitle: {
+      fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1,
+      marginBottom: 12, marginTop: 8,
+    },
+    historyCard: {
+      backgroundColor: C.card,
+      borderRadius: 16,
+      padding: 16,
+      borderWidth: 1,
+      borderColor: C.border,
+    },
+    entryRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: C.border },
+    entryInfo: { flex: 1 },
+    entryDate: { fontSize: 14, fontWeight: '600', color: C.text },
+    entryMeasurements: { fontSize: 12, color: C.muted, marginTop: 4 },
+    emptyText: { fontSize: 14, color: C.muted, textAlign: 'center', paddingVertical: 20 },
+  });
 
   useEffect(() => {
     const loadEntries = async () => {
@@ -493,90 +583,4 @@ export default function GrowthScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: C.background },
-  container: { flex: 1, backgroundColor: C.background },
-  content: { padding: 20, paddingBottom: 100 },
-  header: { marginBottom: 24 },
-  greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
-  title: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
-  badgeBanner: {
-    backgroundColor: C.card,
-    borderRadius: 12,
-    padding: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: C.accent,
-  },
-  badgeBannerIcon: { fontSize: 20, marginRight: 10 },
-  badgeBannerText: { fontSize: 13, fontWeight: '600', color: C.accent, flex: 1 },
-  chartCard: {
-    backgroundColor: C.card,
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: C.border,
-  },
-  chartHeader: { marginBottom: 12 },
-  chartTitle: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
-  chartSubtitle: { fontSize: 11, color: C.muted, marginTop: 2 },
-  toggleRow: { flexDirection: 'row', gap: 8, marginBottom: 8 },
-  toggleBtn: {
-    flex: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-    backgroundColor: C.card,
-    alignItems: 'center',
-  },
-  toggleBtnSmall: { flex: 0.5 },
-  toggleBtnActive: { backgroundColor: C.accent },
-  toggleBtnText: { fontSize: 13, color: C.muted, fontWeight: '500' },
-  toggleBtnTextSmall: { fontSize: 12 },
-  toggleBtnTextActive: { color: C.text },
-  inputCard: {
-    backgroundColor: C.card,
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: C.border,
-  },
-  inputLabel: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8, marginTop: 12 },
-  input: {
-    backgroundColor: C.background,
-    borderRadius: 12,
-    padding: 14,
-    fontSize: 18,
-    color: C.text,
-    borderWidth: 1,
-    borderColor: C.border,
-  },
-  saveButton: {
-    backgroundColor: C.accent,
-    borderRadius: 16,
-    padding: 16,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  saveButtonText: { fontSize: 16, fontWeight: '600', color: C.text },
-  sectionTitle: {
-    fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1,
-    marginBottom: 12, marginTop: 8,
-  },
-  historyCard: {
-    backgroundColor: C.card,
-    borderRadius: 16,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: C.border,
-  },
-  entryRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: C.border },
-  entryInfo: { flex: 1 },
-  entryDate: { fontSize: 14, fontWeight: '600', color: C.text },
-  entryMeasurements: { fontSize: 12, color: C.muted, marginTop: 4 },
-  emptyText: { fontSize: 14, color: C.muted, textAlign: 'center', paddingVertical: 20 },
-});
+

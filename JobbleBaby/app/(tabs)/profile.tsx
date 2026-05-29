@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BadgeGallery from '../components/BadgeGallery';
 import { getBadgeCounts } from '../utils/badgeService';
-import { useTheme, COLORS } from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
+import { COLORS } from '../theme';
 
 interface SettingRowProps {
   icon: string;
@@ -82,6 +83,72 @@ export default function ProfileScreen() {
   const [isExportLoading, setIsExportLoading] = useState(false);
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme];
+
+  const styles = StyleSheet.create({
+    safe: { flex: 1, backgroundColor: '#0D0D0F' },
+    container: { flex: 1 },
+    content: { padding: 20, paddingBottom: 40 },
+    header: { marginBottom: 20 },
+    sectionTitle: { fontSize: 28, fontWeight: '800', color: '#F8FAFC', letterSpacing: -0.5 },
+    avatarCard: {
+      backgroundColor: C.card,
+      borderRadius: 16,
+      padding: 20,
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 16,
+    },
+    avatarCircle: {
+      width: 64,
+      height: 64,
+      borderRadius: 32,
+      backgroundColor: C.accent,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: 16,
+    },
+    avatarInitials: { fontSize: 22, fontWeight: '800', color: '#fff' },
+    parentInfo: { flex: 1 },
+    parentName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
+    parentEmail: { fontSize: 14, color: C.muted },
+    babyCard: {
+      backgroundColor: C.card,
+      borderRadius: 16,
+      padding: 20,
+      marginBottom: 16,
+    },
+    babyHeader: { flexDirection: 'row', alignItems: 'center' },
+    babyEmoji: { fontSize: 32, marginRight: 14 },
+    babyName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
+    babyMeta: { fontSize: 14, color: C.muted },
+    badgeButton: {
+      backgroundColor: C.card,
+      borderRadius: 16,
+      padding: 16,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: 8,
+      borderWidth: 1,
+      borderColor: C.border,
+    },
+    badgeButtonLeft: { flexDirection: 'row', alignItems: 'center' },
+    badgeButtonIcon: { fontSize: 28, marginRight: 14 },
+    badgeButtonTitle: { fontSize: 16, fontWeight: '700', color: C.text, marginBottom: 2 },
+    badgeButtonSubtitle: { fontSize: 12, color: C.accent },
+    badgeButtonChevron: { fontSize: 18, color: C.muted },
+    badgeGalleryWrap: {
+      backgroundColor: C.card,
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: C.border,
+    },
+    settingsSection: { marginTop: 8, marginBottom: 24 },
+    settingsLabel: { fontSize: 13, fontWeight: '600', color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
+    version: { fontSize: 12, color: '#475569', textAlign: 'center', marginTop: 8 },
+  });
 
   useEffect(() => {
     loadBadgeCounts();
@@ -187,68 +254,4 @@ export default function ProfileScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#0D0D0F' },
-  container: { flex: 1 },
-  content: { padding: 20, paddingBottom: 40 },
-  header: { marginBottom: 20 },
-  sectionTitle: { fontSize: 28, fontWeight: '800', color: '#F8FAFC', letterSpacing: -0.5 },
-  avatarCard: {
-    backgroundColor: C.card,
-    borderRadius: 16,
-    padding: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  avatarCircle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: C.accent,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  avatarInitials: { fontSize: 22, fontWeight: '800', color: '#fff' },
-  parentInfo: { flex: 1 },
-  parentName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
-  parentEmail: { fontSize: 14, color: C.muted },
-  babyCard: {
-    backgroundColor: C.card,
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 16,
-  },
-  babyHeader: { flexDirection: 'row', alignItems: 'center' },
-  babyEmoji: { fontSize: 32, marginRight: 14 },
-  babyName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
-  babyMeta: { fontSize: 14, color: C.muted },
-  badgeButton: {
-    backgroundColor: C.card,
-    borderRadius: 16,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: C.border,
-  },
-  badgeButtonLeft: { flexDirection: 'row', alignItems: 'center' },
-  badgeButtonIcon: { fontSize: 28, marginRight: 14 },
-  badgeButtonTitle: { fontSize: 16, fontWeight: '700', color: C.text, marginBottom: 2 },
-  badgeButtonSubtitle: { fontSize: 12, color: C.accent },
-  badgeButtonChevron: { fontSize: 18, color: C.muted },
-  badgeGalleryWrap: {
-    backgroundColor: C.card,
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: C.border,
-  },
-  settingsSection: { marginTop: 8, marginBottom: 24 },
-  settingsLabel: { fontSize: 13, fontWeight: '600', color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
-  version: { fontSize: 12, color: '#475569', textAlign: 'center', marginTop: 8 },
-});
+

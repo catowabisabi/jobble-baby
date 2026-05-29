@@ -3,10 +3,12 @@ import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
 Notifications.setNotificationHandler({
-  handleNotification: async () => ({
+  handleNotification: async (): Promise<Notifications.NotificationBehavior> => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
   }),
 });
 
@@ -19,13 +21,13 @@ export function useNotifications() {
     }
   }, []);
 
-  const requestPermissions = async (): Promise<boolean> => {
+  const requestPermissions = async (): Promise<PermissionStatus> => {
     try {
       const { status } = await Notifications.requestPermissionsAsync();
-      return status === 'granted';
+      return status as PermissionStatus;
     } catch (error) {
       console.error('Failed to request notification permissions:', error);
-      return false;
+      return 'denied';
     }
   };
 

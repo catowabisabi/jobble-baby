@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
-import { useTheme, COLORS } from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
+import { COLORS } from '../theme';
 import CATEGORIES from '../data/products.json';
 
 interface Product {
@@ -53,6 +54,71 @@ export default function ProductsScreen() {
       // Fallback: no external link on this platform
     }
   };
+
+  const styles = StyleSheet.create({
+    safe: { flex: 1, backgroundColor: C.background },
+    container: { flex: 1, backgroundColor: C.background },
+    content: { padding: 20, paddingBottom: 100 },
+    header: { marginBottom: 16 },
+    greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+    title: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
+    subtitle: { fontSize: 14, color: C.muted, marginTop: 8 },
+    filterRow: { flexDirection: 'row', marginBottom: 20, maxHeight: 40 },
+    filterChip: {
+      paddingHorizontal: 14,
+      paddingVertical: 6,
+      borderRadius: 16,
+      backgroundColor: C.card,
+      marginRight: 8,
+      borderWidth: 1,
+      borderColor: C.border,
+    },
+    filterChipActive: {
+      backgroundColor: C.accent,
+      borderColor: C.accent,
+    },
+    filterChipText: { fontSize: 13, color: C.muted, fontWeight: '500' },
+    filterChipTextActive: { color: C.text },
+    categorySection: { marginBottom: 24 },
+    categoryHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 12,
+      gap: 8,
+    },
+    categoryEmoji: { fontSize: 20 },
+    categoryName: { fontSize: 16, fontWeight: '600', color: C.text, flex: 1 },
+    categoryCount: { fontSize: 12, color: C.muted },
+    productCard: {
+      backgroundColor: C.card,
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 12,
+      borderWidth: 1,
+      borderColor: C.border,
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+    },
+    productEmoji: { fontSize: 28, marginRight: 14, marginTop: 2 },
+    productInfo: { flex: 1 },
+    productHeader: { marginBottom: 4 },
+    productNameRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 2 },
+    productBrand: { fontSize: 12, color: C.accent, fontWeight: '600' },
+    productAge: {
+      fontSize: 10,
+      color: C.muted,
+      backgroundColor: C.card,
+      paddingHorizontal: 6,
+      paddingVertical: 1,
+      borderRadius: 4,
+    },
+    productName: { fontSize: 15, fontWeight: '600', color: C.text, marginBottom: 2 },
+    productPrice: { fontSize: 15, fontWeight: '600', color: C.accent },
+    productMeta: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 4 },
+    productRating: { fontSize: 12, color: '#f39c12', fontWeight: '600' },
+    productReviews: { fontSize: 11, color: C.muted },
+    productDescription: { fontSize: 12, color: C.muted, lineHeight: 17 },
+  });
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -117,67 +183,4 @@ export default function ProductsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: C.background },
-  container: { flex: 1, backgroundColor: C.background },
-  content: { padding: 20, paddingBottom: 100 },
-  header: { marginBottom: 16 },
-  greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
-  title: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
-  subtitle: { fontSize: 14, color: C.muted, marginTop: 8 },
-  filterRow: { flexDirection: 'row', marginBottom: 20, maxHeight: 40 },
-  filterChip: {
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 16,
-    backgroundColor: C.card,
-    marginRight: 8,
-    borderWidth: 1,
-    borderColor: C.border,
-  },
-  filterChipActive: {
-    backgroundColor: C.accent,
-    borderColor: C.accent,
-  },
-  filterChipText: { fontSize: 13, color: C.muted, fontWeight: '500' },
-  filterChipTextActive: { color: C.text },
-  categorySection: { marginBottom: 24 },
-  categoryHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-    gap: 8,
-  },
-  categoryEmoji: { fontSize: 20 },
-  categoryName: { fontSize: 16, fontWeight: '600', color: C.text, flex: 1 },
-  categoryCount: { fontSize: 12, color: C.muted },
-  productCard: {
-    backgroundColor: C.card,
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: C.border,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  productEmoji: { fontSize: 28, marginRight: 14, marginTop: 2 },
-  productInfo: { flex: 1 },
-  productHeader: { marginBottom: 4 },
-  productNameRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 2 },
-  productBrand: { fontSize: 12, color: C.accent, fontWeight: '600' },
-  productAge: {
-    fontSize: 10,
-    color: C.muted,
-    backgroundColor: C.card,
-    paddingHorizontal: 6,
-    paddingVertical: 1,
-    borderRadius: 4,
-  },
-  productName: { fontSize: 15, fontWeight: '600', color: C.text, marginBottom: 2 },
-  productPrice: { fontSize: 15, fontWeight: '600', color: C.accent },
-  productMeta: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 4 },
-  productRating: { fontSize: 12, color: '#f39c12', fontWeight: '600' },
-  productReviews: { fontSize: 11, color: C.muted },
-  productDescription: { fontSize: 12, color: C.muted, lineHeight: 17 },
-});
+

@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { onNewLogEntry } from '../utils/badgeService';
 import { Badge } from '../data/badges';
-import { useTheme, COLORS } from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
+import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble/tracking_entries';
 
@@ -90,6 +91,50 @@ export default function TrackingScreen() {
       // Silent fail, UI already updated
     }
   };
+
+  const styles = StyleSheet.create({
+    safe: { flex: 1, backgroundColor: C.background },
+    container: { flex: 1, backgroundColor: C.background },
+    content: { padding: 20, paddingBottom: 100 },
+    header: { marginBottom: 24 },
+    greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+    babyName: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
+    sectionTitle: {
+      fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1,
+      marginBottom: 12, marginTop: 8,
+    },
+    buttonRow: { flexDirection: 'row', gap: 12, marginBottom: 16 },
+    button: {
+      flex: 1, borderRadius: 16, padding: 16, alignItems: 'center',
+      shadowColor: '#000', shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2, shadowRadius: 4, elevation: 3,
+    },
+    buttonIcon: { fontSize: 24, marginBottom: 6 },
+    buttonText: { fontSize: 13, fontWeight: '600', color: C.text },
+    historyCard: {
+      backgroundColor: C.card, borderRadius: 16, padding: 16,
+      borderWidth: 1, borderColor: C.border,
+    },
+    entryRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: C.border },
+    entryIcon: { fontSize: 24, marginRight: 12 },
+    entryInfo: { flex: 1 },
+    entryType: { fontSize: 16, fontWeight: '600', color: C.text },
+    entryNote: { fontSize: 12, color: C.muted, marginTop: 2 },
+    entryTime: { fontSize: 14, color: C.muted },
+    emptyText: { fontSize: 14, color: C.muted, textAlign: 'center', paddingVertical: 20 },
+    badgeBanner: {
+      backgroundColor: C.card,
+      borderRadius: 12,
+      padding: 12,
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: C.accent,
+    },
+    badgeBannerIcon: { fontSize: 20, marginRight: 10 },
+    badgeBannerText: { fontSize: 13, fontWeight: '600', color: C.accent, flex: 1 },
+  });
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -178,46 +223,4 @@ export default function TrackingScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: C.background },
-  container: { flex: 1, backgroundColor: C.background },
-  content: { padding: 20, paddingBottom: 100 },
-  header: { marginBottom: 24 },
-  greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
-  babyName: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
-  sectionTitle: {
-    fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1,
-    marginBottom: 12, marginTop: 8,
-  },
-  buttonRow: { flexDirection: 'row', gap: 12, marginBottom: 16 },
-  button: {
-    flex: 1, borderRadius: 16, padding: 16, alignItems: 'center',
-    shadowColor: '#000', shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2, shadowRadius: 4, elevation: 3,
-  },
-  buttonIcon: { fontSize: 24, marginBottom: 6 },
-  buttonText: { fontSize: 13, fontWeight: '600', color: C.text },
-  historyCard: {
-    backgroundColor: C.card, borderRadius: 16, padding: 16,
-    borderWidth: 1, borderColor: C.border,
-  },
-  entryRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: C.border },
-  entryIcon: { fontSize: 24, marginRight: 12 },
-  entryInfo: { flex: 1 },
-  entryType: { fontSize: 16, fontWeight: '600', color: C.text },
-  entryNote: { fontSize: 12, color: C.muted, marginTop: 2 },
-  entryTime: { fontSize: 14, color: C.muted },
-  emptyText: { fontSize: 14, color: C.muted, textAlign: 'center', paddingVertical: 20 },
-  badgeBanner: {
-    backgroundColor: C.card,
-    borderRadius: 12,
-    padding: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: C.accent,
-  },
-  badgeBannerIcon: { fontSize: 20, marginRight: 10 },
-  badgeBannerText: { fontSize: 13, fontWeight: '600', color: C.accent, flex: 1 },
-});
+

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import sqlite3, os, sys, json
 
-# Project-local autoloop (priority over global)
-# Accept REPO from environment or default to global fallback
-REPO = os.environ.get("AUTOLOOP_REPO", os.path.expanduser("~/.hermes/autoloop"))
-BASE = os.path.join(REPO, ".hermes/autoloop")
-DB   = os.path.join(BASE, "progress.db")
+# Self-locate: we are at PROJECT_ROOT/.hermes/autoloop/loop_routine.py
+_SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))          # .../.hermes/autoloop
+_PROJECT_ROOT = os.path.dirname(_SCRIPT_DIR)                          # .../ (project root)
+BASE          = _SCRIPT_DIR                                           # .../.hermes/autoloop
+DB            = os.path.join(BASE, "progress.db")
 
 POOL_MAX   = 1000
 SEED_KW    = 20

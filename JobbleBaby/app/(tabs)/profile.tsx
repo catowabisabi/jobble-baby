@@ -245,6 +245,22 @@ export default function ProfileScreen() {
           <ThemeToggleRow />
           <SettingRow icon="🔒" label="Privacy" />
           <SettingRow icon="ℹ️" label="About" />
+          <SettingRow
+            icon="🔄"
+            label="Reset Profile"
+            onPress={async () => {
+              Alert.alert('Reset Profile', 'This will clear your baby profile and return to onboarding.', [
+                { text: 'Cancel', style: 'cancel' },
+                {
+                  text: 'Reset',
+                  style: 'destructive',
+                  onPress: async () => {
+                    await AsyncStorage.removeItem('@jobble_baby_profile');
+                  },
+                },
+              ]);
+            }}
+          />
         </View>
 
         {/* App version */}

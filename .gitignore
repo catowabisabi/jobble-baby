@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# Native builds
+ios/
+android/
+
+# Build artifacts
+*.ipa
+*.apk
+*.aab
+
+# Environment
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Autoloop
+.hermes/autoloop/progress.db-journal
+
+# Testing
+*.log
+npm-debug.log*

@@ -106,7 +106,7 @@ export default function ScheduleScreen() {
   const [babyProfile, setBabyProfile] = useState<{ birthDate?: string } | null>(null);
   const [weeklySummary, setWeeklySummary] = useState<WeeklyTrend | null>(null);
   const [notificationPermission, setNotificationPermission] = useState<'granted' | 'denied' | 'undetermined'>('undetermined');
-  const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder, cancelAllNotifications } = useNotifications();
+  const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder, scheduleDailySummary, cancelAllNotifications } = useNotifications();
   const { effectiveTheme } = useTheme();
   const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
@@ -149,6 +149,11 @@ export default function ScheduleScreen() {
       if (result === 'granted') {
         // Schedule daily feeding reminder for 9:00 AM
         scheduleFeedingReminder('Feeding Time 🍼', 'Remember to log feeding', 9, 0);
+        // Schedule daily summary push notification at 8:00 PM
+        scheduleDailySummary(
+          t('schedule.dailySummaryTitle') || 'Daily Summary Ready 📋',
+          t('schedule.dailySummaryBody') || 'Tap to see yesterday\'s summary'
+        );
       }
     };
     requestNotifPermissions();

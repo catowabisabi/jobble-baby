@@ -72,11 +72,40 @@ export default function MilestonesScreen() {
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
   const [selectedType, setSelectedType] = useState(MILESTONE_TYPES[0]);
   const [isCapturing, setIsCapturing] = useState(false);
+  const [showReminder, setShowReminder] = useState(false);
 
   useEffect(() => {
     loadPhotos();
     loadProfile();
+    checkMilestoneReminder();
   }, []);
+
+  const checkMilestoneReminder = async () => {
+    try {
+      const profileRaw = await AsyncStorage.getItem('@jobble_baby_profile');
+      if (!profileRaw) return;
+      const profile: BabyProfile = JSON.parse(profileRaw);
+      if (!profile.birthDate) return;
+      const birth = new Date(profile.birthDate);
+      const now = new Date();
+      const totalDays = Math.floor((now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+      const months = totalDays / 30.44;
+      // Show first smile reminder at 4-6 weeks (28-42 days)
+      if (totalDays >= 28 && totalDays <= 56) {
+        const milestonesRaw = await AsyncStorage.getItem(STORAGE_KEY);
+        const existing: MilestonePhoto[] = milestonesRaw ? JSON.parse(milestonesRaw) : [];
+        const hasSmile = existing.some(p => p.type === 'first_smile');
+        if (!hasSmile) setShowReminder(true);
+      }
+      // Show first food reminder at 5-7 months (150-210 days)
+      if (months >= 5 && months <= 7) {
+        const milestonesRaw = await AsyncStorage.getItem(STORAGE_KEY);
+        const existing: MilestonePhoto[] = milestonesRaw ? JSON.parse(milestonesRaw) : [];
+        const hasFood = existing.some(p => p.type === 'first_food');
+        if (!hasFood && totalDays > 150) setShowReminder(true);
+      }
+    } catch { /* ignore */ }
+  };
 
   const loadPhotos = async () => {
     try {
@@ -195,13 +224,27 @@ export default function MilestonesScreen() {
       backgroundColor: 'rgba(0,0,0,0.5)',
       padding: 6,
     },
+    photoTypeIcon: {
+      position: 'absolute', top: 8, right: 8,
+      backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 12, padding: 4,
+    },
+    reminderBanner: {
+      borderRadius: 12,
+      padding: 16,
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 20,
+      gap: 12,
+    },
+    reminderTitle: { fontSize: 15, fontWeight: '700', color: '#fff', marginBottom: 4 },
+    reminderBody: { fontSize: 13, color: 'rgba(255,255,255,0.9)', lineHeight: 18 },
+    reminderBtn: {
+      paddingHorizontal: 14, paddingVertical: 8,
+      borderRadius: 8, backgroundColor: 'rgba(255,255,255,0.2)',
+    },
+    reminderBtnText: { fontSize: 13, fontWeight: '600', color: '#fff' },
     photoAge: { fontSize: 12, fontWeight: '600', color: '#fff' },
     photoDate: { fontSize: 10, color: 'rgba(255,255,255,0.8)' },
-    photoTypeIcon: {
-      position: 'absolute', top: 6, right: 6,
-      backgroundColor: 'rgba(0,0,0,0.5)',
-      borderRadius: 12, padding: 4,
-    },
     emptyCard: {
       width: PHOTO_SIZE,
       height: PHOTO_SIZE * 1.2,
@@ -252,6 +295,24 @@ export default function MilestonesScreen() {
             </TouchableOpacity>
           ))}
         </View>
+
+        {/* Milestone Reminder Banner */}
+        {showReminder && (
+          <View style={[styles.reminderBanner, { backgroundColor: '#3B82F6' }]}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.reminderTitle}>{t('milestoneReminder.title')}</Text>
+              <Text style={styles.reminderBody}>{t('milestoneReminder.firstSmileBody')}</Text>
+            </View>
+            <View style={{ flexDirection: 'row', gap: 8 }}>
+              <TouchableOpacity onPress={() => setShowReminder(false)} style={styles.reminderBtn}>
+                <Text style={styles.reminderBtnText}>{t('milestoneReminder.dismiss')}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { setShowReminder(false); captureMilestone(); }} style={[styles.reminderBtn, { backgroundColor: '#fff' }]}>
+                <Text style={[styles.reminderBtnText, { color: '#3B82F6' }]}>{t('milestoneReminder.capture')}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
 
         {/* Capture Button */}
         <TouchableOpacity

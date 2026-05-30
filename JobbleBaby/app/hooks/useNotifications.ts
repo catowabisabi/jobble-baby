@@ -89,6 +89,28 @@ export function useNotifications() {
     }
   };
 
+  const scheduleDailySummary = async (
+    title: string,
+    body: string,
+    hour: number = 20,
+    minute: number = 0
+  ): Promise<string> => {
+    try {
+      const id = await Notifications.scheduleNotificationAsync({
+        content: { title, body },
+        trigger: {
+          type: Notifications.SchedulableTriggerInputTypes.DAILY,
+          hour,
+          minute,
+        } as Notifications.NotificationTriggerInput,
+      });
+      return id;
+    } catch (error) {
+      console.error('Failed to schedule daily summary notification:', error);
+      return '';
+    }
+  };
+
   const cancelAllNotifications = async (): Promise<void> => {
     try {
       await Notifications.cancelAllScheduledNotificationsAsync();
@@ -117,6 +139,7 @@ export function useNotifications() {
     getPermissionStatus,
     scheduleSleepNotification,
     scheduleFeedingReminder,
+    scheduleDailySummary,
     cancelAllNotifications,
     setNotificationChannel,
   };

@@ -76,7 +76,12 @@
     "overtiredWarning": "Overtired window approaching — time for a nap!",
     "suggestedNap": "Suggested nap",
     "awakeTime": "Awake time",
-    "maxAwake": "Max awake"
+    "maxAwake": "Max awake",
+    "shareTitle": "Share Baby Schedule",
+    "shareNoDataTitle": "No Schedule Yet",
+    "shareNoDataMsg": "Add some sleep entries first before sharing.",
+    "dailySummaryTitle": "Daily Summary Ready 📋",
+    "dailySummaryBody": "Tap to see yesterday's feeding, sleep & diaper summary."
   },
   "growth": {
     "title": "Growth",
@@ -228,5 +233,13 @@
     "earnedOn": "Earned {{date}}",
     "newBadge": "New Badge: {{name}}!",
     "badges": "Badges"
+  },
+  "milestoneReminder": {
+    "title": "Milestone Window 📣",
+    "firstSmileBody": "Most babies smile by 6-8 weeks. Capture your baby's first smile!",
+    "firstStepsBody": "Most babies crawl between 6-9 months. Is your little one on the move?",
+    "firstFoodBody": "Time for solid foods! Most babies are ready around 6 months.",
+    "dismiss": "Dismiss",
+    "capture": "Capture"
   }
 }

@@ -76,7 +76,12 @@
     "overtiredWarning": "即將過度疲勞，該睡覺了",
     "suggestedNap": "建議小睡",
     "awakeTime": "已清醒",
-    "maxAwake": "最大清醒時間"
+    "maxAwake": "最大清醒時間",
+    "shareTitle": "分享寶寶日程",
+    "shareNoDataTitle": "尚無日程",
+    "shareNoDataMsg": "請先新增睡眠記錄再分享。",
+    "dailySummaryTitle": "每日摘要已準備好 📋",
+    "dailySummaryBody": "點擊查看昨日餵食、睡眠及尿片摘要。"
   },
   "growth": {
     "title": "成長",
@@ -228,5 +233,13 @@
     "earnedOn": "獲得於 {{date}}",
     "newBadge": "新徽章：{{name}}！",
     "badges": "徽章"
+  },
+  "milestoneReminder": {
+    "title": "里程碑提醒 📣",
+    "firstSmileBody": "大多數寶寶在6-8週會微笑。捕捉寶寶的第一個微笑吧！",
+    "firstStepsBody": "大多數寶寶在6-9個月會爬行。您的寶寶開始移動了嗎？",
+    "firstFoodBody": "固體食物時間到了！大多數寶寶在6個月左右準備好了。",
+    "dismiss": "略過",
+    "capture": "記錄"
   }
 }

@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Pressable } from 'react-native';
+import { useState, useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Pressable, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { TrackingEntry } from '../utils/weeklySummary';
+import EmergencySOSScreen from '../components/EmergencySOSScreen';
 
 type BabyProfile = {
   name: string;
@@ -64,6 +65,29 @@ export default function HomeScreen() {
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
   const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>(MOCK_EVENTS);
   const [lastEvents, setLastEvents] = useState({ diaper: '--:--', feed: '--:--', sleep: '--:--' });
+  const [showSOS, setShowSOS] = useState(false);
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [fabPressed, setFabPressed] = useState(false);
+
+  const handleSOSLongPress = () => {
+    setShowSOS(true);
+  };
+
+  const handleFabPressIn = () => {
+    setFabPressed(true);
+    longPressTimer.current = setTimeout(() => {
+      setShowSOS(true);
+      setFabPressed(false);
+    }, 800);
+  };
+
+  const handleFabPressOut = () => {
+    setFabPressed(false);
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  };
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -158,6 +182,29 @@ export default function HomeScreen() {
     },
     fabIcon: { fontSize: 24, marginBottom: 6 },
     fabText: { fontSize: 13, fontWeight: '600', color: '#1a1a2e' },
+    sosButton: {
+      position: 'absolute',
+      bottom: 100,
+      right: 20,
+      width: 64,
+      height: 64,
+      borderRadius: 32,
+      backgroundColor: '#e74c3c',
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 8,
+      elevation: 8,
+      zIndex: 100,
+    },
+    sosButtonActive: {
+      backgroundColor: '#c0392b',
+      transform: [{ scale: 0.95 }],
+    },
+    sosIcon: { fontSize: 28 },
+    sosLabel: { fontSize: 10, color: '#fff', fontWeight: '700', marginTop: 2 },
   });
 
   return (
@@ -228,6 +275,26 @@ export default function HomeScreen() {
           </View>
         </View>
       </ScrollView>
+
+      <Pressable
+        style={[styles.sosButton, fabPressed && styles.sosButtonActive]}
+        onPressIn={handleFabPressIn}
+        onPressOut={handleFabPressOut}
+        onLongPress={handleSOSLongPress}
+        delayLongPress={200}
+      >
+        <Text style={styles.sosIcon}>🆘</Text>
+        <Text style={styles.sosLabel}>SOS</Text>
+      </Pressable>
+
+      <Modal
+        visible={showSOS}
+        animationType="slide"
+        presentationStyle="fullScreen"
+        statusBarTranslucent
+      >
+        <EmergencySOSScreen />
+      </Modal>
     </SafeAreaView>
   );
 }

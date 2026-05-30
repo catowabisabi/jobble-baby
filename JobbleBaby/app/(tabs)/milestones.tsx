@@ -97,7 +97,7 @@ export default function MilestonesScreen() {
     try {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
-        Alert.alert('Permission needed', 'Camera access is required to capture milestones.');
+        Alert.alert(t('milestones.permissionNeeded'), t('milestones.cameraAccessRequired'));
         return;
       }
 
@@ -145,7 +145,7 @@ export default function MilestonesScreen() {
       // Trigger badge check
       await onNewGrowthEntry();
     } catch (e) {
-      Alert.alert('Error', 'Failed to capture milestone photo.');
+      Alert.alert(t('milestones.captureError'), t('milestones.captureErrorMessage'));
     } finally {
       setIsCapturing(false);
     }

@@ -113,7 +113,11 @@
     "firstFood": "First Food",
     "custom": "Custom",
     "gallery": "Milestone Gallery",
-    "noMilestones": "No milestones yet"
+    "noMilestones": "No milestones yet",
+    "permissionNeeded": "Permission needed",
+    "cameraAccessRequired": "Camera access is required to capture milestones.",
+    "captureError": "Error",
+    "captureErrorMessage": "Failed to capture milestone photo."
   },
   "allergens": {
     "title": "Allergens",

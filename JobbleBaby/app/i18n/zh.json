@@ -88,7 +88,21 @@
     "boys": "男孩",
     "girls": "女孩",
     "percentile": "百分位",
-    "noData": "尚無成長數據"
+    "noData": "尚無成長數據",
+    "baby": "寶寶",
+    "badgeEarned": "徽章獲得：{{badges}}！",
+    "fifteenth85th": "15-85百分位",
+    "greeting": "記錄",
+    "heightCm": "身高（厘米）",
+    "history": "歷史記錄",
+    "milestone": "里程碑",
+    "noEntries": "尚無記錄，在上方添加身高體重",
+    "percentileCurves": "百分位曲線與寶寶數據",
+    "saveMeasurement": "保存測量",
+    "third15th": "3-15百分位",
+    "thirty50th": "50百分位",
+    "weightKg": "體重（公斤）",
+    "whoGrowthChart": "世衛成長圖表"
   },
   "milestones": {
     "title": "里程碑",
@@ -99,7 +113,11 @@
     "firstFood": "第一口固體",
     "custom": "自訂",
     "gallery": "里程碑相簿",
-    "noMilestones": "尚無里程碑"
+    "noMilestones": "尚無里程碑",
+    "permissionNeeded": "需要權限",
+    "cameraAccessRequired": "需要相機權限才能捕捉里程碑照片",
+    "captureError": "錯誤",
+    "captureErrorMessage": "捕捉里程碑照片失敗"
   },
   "allergens": {
     "title": "過敏原",

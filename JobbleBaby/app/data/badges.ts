@@ -52,6 +52,14 @@ export const BADGES: Badge[] = [
     category: 'first',
     condition: 'Log 1 sleep entry',
   },
+  {
+    id: 'first_allergen',
+    name: 'First Allergen Introduced',
+    description: 'Introduced your first allergen to baby',
+    icon: '🥜',
+    category: 'first',
+    condition: 'Introduce 1 allergen',
+  },
   // Milestone badges
   {
     id: 'milestone_10',

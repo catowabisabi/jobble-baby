@@ -16,6 +16,10 @@ export default function TabsLayout() {
         options={{ title: 'Home', tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home" size={size} color={color} /> }}
       />
       <Tabs.Screen
+        name="allergens"
+        options={{ title: 'Allergens', tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-apple" size={size} color={color} /> }}
+      />
+      <Tabs.Screen
         name="tracking"
         options={{ title: 'Track', tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="clipboard-list" size={size} color={color} /> }}
       />

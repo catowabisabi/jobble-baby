@@ -154,6 +154,15 @@ export const awardGrowthTracked = async (): Promise<string[]> => {
   return awarded;
 };
 
+// Award first allergen badge
+export const checkFirstAllergenBadge = async (): Promise<string[]> => {
+  const awarded: string[] = [];
+  if (await awardBadge('first_allergen')) {
+    awarded.push('first_allergen');
+  }
+  return awarded;
+};
+
 // Get all newly awarded badges for a log entry
 export const onNewLogEntry = async (entryType: string): Promise<Badge[]> => {
   const allAwarded: string[] = [];

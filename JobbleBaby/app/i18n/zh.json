@@ -69,7 +69,14 @@
     "sleepLabel": "睡眠",
     "growthLabel": "成長",
     "weeklySleepSchedule": "每週睡眠日程",
-    "noSleepRecorded": "尚無睡眠記錄"
+    "noSleepRecorded": "尚無睡眠記錄",
+    "wakeWindow": "清醒窗口",
+    "lastSleep": "上一次睡眠",
+    "ago": "前",
+    "overtiredWarning": "即將過度疲勞，該睡覺了",
+    "suggestedNap": "建議小睡",
+    "awakeTime": "已清醒",
+    "maxAwake": "最大清醒時間"
   },
   "growth": {
     "title": "成長",

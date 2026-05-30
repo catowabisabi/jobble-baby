@@ -47,8 +47,63 @@ const PERMISSION_COLORS = {
   undetermined: '#f1c40f',
 };
 
+// AAP-recommended wake windows by age
+const WAKE_WINDOWS: { maxMonths: number; minMin: number; maxMin: number }[] = [
+  { maxMonths: 0.25,   minMin: 35,  maxMin: 60  },  // 0-6 weeks
+  { maxMonths: 0.75,   minMin: 60,  maxMin: 90  },  // 6-12 weeks
+  { maxMonths: 4,      minMin: 75,  maxMin: 120 },  // 3-4 months
+  { maxMonths: 6,      minMin: 120, maxMin: 180 },  // 4-6 months (2-3h)
+  { maxMonths: 9,      minMin: 150, maxMin: 210 },  // 6-9 months (2.5-3.5h)
+  { maxMonths: 12,     minMin: 180, maxMin: 240 },  // 9-12 months (3-4h)
+  { maxMonths: 18,     minMin: 210, maxMin: 300 },  // 12-18 months (3.5-5h)
+];
+
+function calculateAgeInMonths(birthDate: string): number {
+  try {
+    const birth = new Date(birthDate);
+    const now = new Date();
+    const months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+    const days = Math.floor((now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+    return days / 30.44; // average days per month
+  } catch {
+    return 0;
+  }
+}
+
+function getWakeWindow(months: number): { min: number; max: number } {
+  for (const w of WAKE_WINDOWS) {
+    if (months <= w.maxMonths) return { min: w.minMin, max: w.maxMin };
+  }
+  return { min: 210, max: 300 }; // fallback for 18+ months
+}
+
+function getTimeSinceLastSleep(scheduleData: ScheduleDay[]): { minutes: number; label: string } | null {
+  for (const day of scheduleData) {
+    if (day.sleep) {
+      const now = new Date();
+      const [startTime, period] = day.sleep.start.split(' ');
+      const [hour, minute] = startTime.split(':').map(Number);
+      let h = hour;
+      if (period === 'PM' && h !== 12) h += 12;
+      if (period === 'AM' && h === 12) h = 0;
+      const sleepStart = new Date();
+      sleepStart.setHours(h, minute, 0, 0);
+      const diffMs = now.getTime() - sleepStart.getTime();
+      const diffMin = Math.floor(diffMs / 60000);
+      if (diffMin > 0) {
+        const h_ = Math.floor(diffMin / 60);
+        const m_ = diffMin % 60;
+        const label = h_ > 0 ? `${h_}h ${m_}m` : `${m_}m`;
+        return { minutes: diffMin, label };
+      }
+    }
+  }
+  return null;
+}
+
 export default function ScheduleScreen() {
   const [scheduleData, setScheduleData] = useState<ScheduleDay[]>(SCHEDULE_DATA);
+  const [babyProfile, setBabyProfile] = useState<{ birthDate?: string } | null>(null);
   const [weeklySummary, setWeeklySummary] = useState<WeeklyTrend | null>(null);
   const [notificationPermission, setNotificationPermission] = useState<'granted' | 'denied' | 'undetermined'>('undetermined');
   const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder, cancelAllNotifications } = useNotifications();
@@ -62,6 +117,10 @@ export default function ScheduleScreen() {
         const stored = await AsyncStorage.getItem(STORAGE_KEY);
         if (stored) {
           setScheduleData(JSON.parse(stored));
+        }
+        const profileStored = await AsyncStorage.getItem('@jobble_baby_profile');
+        if (profileStored) {
+          setBabyProfile(JSON.parse(profileStored));
         }
       } catch (e) {
       }
@@ -225,6 +284,50 @@ export default function ScheduleScreen() {
           <Text style={styles.greeting}>{t('schedule.greeting')}</Text>
           <Text style={styles.title}>{t('schedule.title')}</Text>
         </View>
+
+        {/* Wake Window Card */}
+        {babyProfile?.birthDate && (() => {
+          const ageMonths = calculateAgeInMonths(babyProfile.birthDate);
+          const { min: minAwake, max: maxAwake } = getWakeWindow(ageMonths);
+          const timeSince = getTimeSinceLastSleep(scheduleData);
+          const awakeMinutes = timeSince ? timeSince.minutes : 0;
+          const awakePercent = Math.min((awakeMinutes / maxAwake) * 100, 100);
+          const barColor = awakePercent < 60 ? '#2ecc71' : awakePercent < 80 ? '#f1c40f' : '#e74c3c';
+          const isOvertired = awakePercent >= 80;
+          return (
+            <View style={[styles.nextNapCard, { marginBottom: 12 }]}>
+              <View style={styles.nextNapHeader}>
+                <Text style={styles.nextNapLabel}>{t('schedule.wakeWindow') || 'Wake Window'}</Text>
+                <Text style={styles.moonIcon}>⏱️</Text>
+              </View>
+              <Text style={{ fontSize: 14, color: C.text, marginBottom: 6 }}>
+                {babyProfile?.birthDate ? `${minAwake}-${maxAwake} min awake` : ''}
+              </Text>
+              {timeSince && (
+                <Text style={{ fontSize: 13, color: C.muted, marginBottom: 8 }}>
+                  {t('schedule.lastSleep') || 'Last sleep'}: {timeSince.label} {t('schedule.ago') || 'ago'}
+                </Text>
+              )}
+              <View style={{ backgroundColor: C.border, borderRadius: 6, height: 10, marginBottom: 4 }}>
+                <View style={{ width: `${awakePercent}%`, backgroundColor: barColor, borderRadius: 6, height: 10 }} />
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ fontSize: 11, color: C.muted }}>0</Text>
+                <Text style={{ fontSize: 11, color: C.muted }}>{maxAwake}min</Text>
+              </View>
+              {isOvertired && (
+                <View style={{ backgroundColor: '#fef3c7', borderRadius: 8, padding: 10, marginTop: 8 }}>
+                  <Text style={{ fontSize: 13, color: '#92400e' }}>⏰ {(t('schedule.overtiredWarning') || 'Overtired window approaching')}</Text>
+                  {timeSince && (
+                    <Text style={{ fontSize: 12, color: '#92400e', marginTop: 2 }}>
+                      {t('schedule.suggestedNap') || 'Suggested nap'}: ~{Math.round(maxAwake - awakeMinutes)}min
+                    </Text>
+                  )}
+                </View>
+              )}
+            </View>
+          );
+        })()}
 
         {/* Next Nap Reminder Card */}
         <View style={styles.nextNapCard}>

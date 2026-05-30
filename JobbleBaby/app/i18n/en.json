@@ -69,7 +69,14 @@
     "sleepLabel": "Sleep",
     "growthLabel": "Growth",
     "weeklySleepSchedule": "Weekly Sleep Schedule",
-    "noSleepRecorded": "No sleep recorded"
+    "noSleepRecorded": "No sleep recorded",
+    "wakeWindow": "Wake Window",
+    "lastSleep": "Last sleep",
+    "ago": "ago",
+    "overtiredWarning": "Overtired window approaching — time for a nap!",
+    "suggestedNap": "Suggested nap",
+    "awakeTime": "Awake time",
+    "maxAwake": "Max awake"
   },
   "growth": {
     "title": "Growth",

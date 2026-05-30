@@ -164,7 +164,7 @@ export default function ScheduleScreen() {
     notificationStatusText: { fontSize: 12, color: C.muted },
     permissionDot: { width: 8, height: 8, borderRadius: 4 },
     weeklySection: { marginBottom: 24 },
-    sectionTitle: { fontSize: 16, fontWeight: '600', color: '#fff', marginBottom: 16 },
+    sectionTitle: { fontSize: 16, fontWeight: '600', color: C.text, marginBottom: 16 },
     sectionTitleHidden: { alignItems: 'center', fontSize: 12, color: '#8b9bb4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 16, display: 'none' },
     dayRow: {
       flexDirection: 'row',

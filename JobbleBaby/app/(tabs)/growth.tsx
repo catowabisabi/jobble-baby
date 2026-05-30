@@ -165,9 +165,11 @@ interface ChartProps {
   gender: Gender;
   chartType: ChartType;
   entries: GrowthEntry[];
+  chartBg: string;
+  chartMuted: string;
 }
 
-function GrowthChart({ gender, chartType, entries }: ChartProps) {
+function GrowthChart({ gender, chartType, entries, chartBg, chartMuted }: ChartProps) {
   const [chartW, setChartW] = useState(CHART_W);
   const data = chartType === 'height'
     ? (gender === 'boys' ? BOYS_HEIGHT : GIRLS_HEIGHT)
@@ -215,24 +217,23 @@ function GrowthChart({ gender, chartType, entries }: ChartProps) {
       <View style={chartStyles.legend}>
         <View style={chartStyles.legendItem}>
           <View style={[chartStyles.legendLine, { backgroundColor: '#93c5fd' }]} />
-          <Text style={chartStyles.legendText}>3rd-15th</Text>
+          <Text style={[chartStyles.legendText, { color: chartMuted }]}>3rd-15th</Text>
         </View>
         <View style={chartStyles.legendItem}>
           <View style={[chartStyles.legendLine, { backgroundColor: '#60a5fa' }]} />
-          <Text style={chartStyles.legendText}>15th-85th</Text>
+          <Text style={[chartStyles.legendText, { color: chartMuted }]}>15th-85th</Text>
         </View>
         <View style={chartStyles.legendItem}>
           <View style={[chartStyles.legendLine, { backgroundColor: '#3B82F6' }]} />
-          <Text style={chartStyles.legendText}>50th</Text>
+          <Text style={[chartStyles.legendText, { color: chartMuted }]}>50th</Text>
         </View>
         <View style={chartStyles.legendItem}>
           <View style={[chartStyles.legendDot, { backgroundColor: '#fbbf24' }]} />
-          <Text style={chartStyles.legendText}>Baby</Text>
+          <Text style={[chartStyles.legendText, { color: chartMuted }]}>Baby</Text>
         </View>
       </View>
 
-      <View style={chartStyles.svgContainer}>
-        {/* Percentile bands rendered as View polygons */}
+      <View style={[chartStyles.svgContainer, { backgroundColor: chartBg }]}>
         <View style={chartStyles.bandContainer}>
           {/* 3rd-15th band */}
           {AGES_MONTHS.slice(0, -1).map((_, i) => {
@@ -307,33 +308,33 @@ function GrowthChart({ gender, chartType, entries }: ChartProps) {
         {/* X-axis */}
         <View style={chartStyles.xAxis}>
           {xLabels.map(age => (
-            <Text key={`x_${age}`} style={[chartStyles.xLabel, { left: ageToX(age, chartW) - 10 }]}>
+            <Text key={`x_${age}`} style={[chartStyles.xLabel, { left: ageToX(age, chartW) - 10, color: chartMuted }]}>
               {age}m
             </Text>
           ))}
         </View>
 
         {/* Y-axis labels */}
-        <Text style={[chartStyles.yLabel, { top: valueToY(maxVal, minVal, maxVal) - 6 }]}>{maxVal}</Text>
-        <Text style={[chartStyles.yLabel, { top: valueToY(minVal, minVal, maxVal) - 6 }]}>{minVal}</Text>
+        <Text style={[chartStyles.yLabel, { top: valueToY(maxVal, minVal, maxVal) - 6, color: chartMuted }]}>{maxVal}</Text>
+        <Text style={[chartStyles.yLabel, { top: valueToY(minVal, minVal, maxVal) - 6, color: chartMuted }]}>{minVal}</Text>
       </View>
     </View>
   );
 }
 
-// chartStyles — muted color hardcoded (#8b9bb4) since GrowthChart has no theme context
+// chartStyles — shared layout, colors passed via props (chartBg, chartMuted)
 const chartStyles = StyleSheet.create({
   container: { marginBottom: 16 },
   legend: { flexDirection: 'row', justifyContent: 'center', gap: 16, marginBottom: 12 },
   legendItem: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   legendLine: { width: 16, height: 3, borderRadius: 2 },
   legendDot: { width: 8, height: 8, borderRadius: 4 },
-  legendText: { fontSize: 10, color: '#8b9bb4' },
-  svgContainer: { height: CHART_H, backgroundColor: '#0d1f35', borderRadius: 12, overflow: 'hidden', position: 'relative' },
+  legendText: { fontSize: 10 },
+  svgContainer: { height: CHART_H, borderRadius: 12, overflow: 'hidden', position: 'relative' },
   bandContainer: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 30 },
   xAxis: { position: 'absolute', bottom: 0, left: 0, right: 0, height: 30 },
-  xLabel: { position: 'absolute', fontSize: 10, color: '#8b9bb4', width: 20, textAlign: 'center' },
-  yLabel: { position: 'absolute', right: 2, fontSize: 9, color: '#8b9bb4' },
+  xLabel: { position: 'absolute', fontSize: 10, width: 20, textAlign: 'center' },
+  yLabel: { position: 'absolute', right: 2, fontSize: 9 },
 });
 
 export default function GrowthScreen() {
@@ -528,7 +529,7 @@ export default function GrowthScreen() {
             </TouchableOpacity>
           </View>
 
-          <GrowthChart gender={gender} chartType={chartType} entries={entries} />
+          <GrowthChart gender={gender} chartType={chartType} entries={entries} chartBg={C.card} chartMuted={C.muted} />
         </View>
 
         {/* Input card */}

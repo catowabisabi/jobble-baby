@@ -19,6 +19,11 @@ interface SettingRowProps {
   onPress?: () => void;
   isExport?: boolean;
   isLoading?: boolean;
+  rowStyles: ReturnType<typeof StyleSheet.create>;
+}
+
+interface ThemeToggleRowProps {
+  rowStyles: ReturnType<typeof StyleSheet.create>;
 }
 
 const STORAGE_KEYS = [
@@ -28,7 +33,7 @@ const STORAGE_KEYS = [
   '@jobble/schedule_entries',
 ];
 
-function SettingRow({ icon, label, onPress, isLoading }: SettingRowProps) {
+function SettingRow({ icon, label, onPress, isLoading, rowStyles }: SettingRowProps) {
   return (
     <TouchableOpacity
       style={rowStyles.container}
@@ -49,24 +54,7 @@ function SettingRow({ icon, label, onPress, isLoading }: SettingRowProps) {
   );
 }
 
-const rowStyles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#1A1A1E',
-    borderRadius: 12,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    marginBottom: 10,
-  },
-  left: { flexDirection: 'row', alignItems: 'center' },
-  icon: { fontSize: 20, marginRight: 12 },
-  label: { fontSize: 16, color: '#E2E8F0', fontWeight: '500' },
-  chevron: { fontSize: 20, color: '#64748B' },
-});
-
-function ThemeToggleRow() {
+function ThemeToggleRow({ rowStyles }: ThemeToggleRowProps) {
   const { toggleTheme, theme } = useTheme();
   const label = theme === 'system' ? 'Auto' : theme.charAt(0).toUpperCase() + theme.slice(1);
   return (
@@ -90,6 +78,14 @@ export default function ProfileScreen() {
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme];
+
+  const rowStyles = StyleSheet.create({
+    container: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: C.card, borderRadius: 12, paddingVertical: 14, paddingHorizontal: 16, marginBottom: 10 },
+    left: { flexDirection: 'row', alignItems: 'center' },
+    icon: { fontSize: 20, marginRight: 12 },
+    label: { fontSize: 16, color: C.text, fontWeight: '500' },
+    chevron: { fontSize: 20, color: C.muted },
+  });
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -135,11 +131,11 @@ export default function ProfileScreen() {
   const babyMeta = [babyAge, genderLabel].filter(Boolean).join(' · ');
 
   const styles = StyleSheet.create({
-    safe: { flex: 1, backgroundColor: '#0D0D0F' },
+    safe: { flex: 1, backgroundColor: C.background },
     container: { flex: 1 },
     content: { padding: 20, paddingBottom: 40 },
     header: { marginBottom: 20 },
-    sectionTitle: { fontSize: 28, fontWeight: '800', color: '#F8FAFC', letterSpacing: -0.5 },
+    sectionTitle: { fontSize: 28, fontWeight: '800', color: C.text, letterSpacing: -0.5 },
     avatarCard: {
       backgroundColor: C.card,
       borderRadius: 16,
@@ -157,7 +153,7 @@ export default function ProfileScreen() {
       alignItems: 'center',
       marginRight: 16,
     },
-    avatarInitials: { fontSize: 22, fontWeight: '800', color: '#fff' },
+    avatarInitials: { fontSize: 22, fontWeight: '800', color: C.background },
     parentInfo: { flex: 1 },
     parentName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
     parentEmail: { fontSize: 14, color: C.muted },
@@ -197,7 +193,7 @@ export default function ProfileScreen() {
     },
     settingsSection: { marginTop: 8, marginBottom: 24 },
     settingsLabel: { fontSize: 13, fontWeight: '600', color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 },
-    version: { fontSize: 12, color: '#475569', textAlign: 'center', marginTop: 8 },
+    version: { fontSize: 12, color: C.muted, textAlign: 'center', marginTop: 8 },
   });
 
   useEffect(() => {
@@ -290,14 +286,15 @@ export default function ProfileScreen() {
         {/* Settings Section */}
         <View style={styles.settingsSection}>
           <Text style={styles.settingsLabel}>Settings</Text>
-          <SettingRow icon="🔔" label="Notifications" />
-          <SettingRow icon="📤" label="Data Export" onPress={handleExportData} isLoading={isExportLoading} />
-          <ThemeToggleRow />
-          <SettingRow icon="🔒" label="Privacy" />
-          <SettingRow icon="ℹ️" label="About" />
+          <SettingRow icon="🔔" label="Notifications" rowStyles={rowStyles} />
+          <SettingRow icon="📤" label="Data Export" onPress={handleExportData} isLoading={isExportLoading} rowStyles={rowStyles} />
+          <ThemeToggleRow rowStyles={rowStyles} />
+          <SettingRow icon="🔒" label="Privacy" rowStyles={rowStyles} />
+          <SettingRow icon="ℹ️" label="About" rowStyles={rowStyles} />
           <SettingRow
             icon="🔄"
             label="Reset Profile"
+            rowStyles={rowStyles}
             onPress={async () => {
               Alert.alert('Reset Profile', 'This will clear your baby profile and return to onboarding.', [
                 { text: 'Cancel', style: 'cancel' },
@@ -319,5 +316,3 @@ export default function ProfileScreen() {
     </SafeAreaView>
   );
 }
-
-

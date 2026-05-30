@@ -9,6 +9,9 @@
     "ios": {
       "supportsTablet": true,
       "bundleId": "com.jobblebaby.app",
+      "category": "HEALTH_AND_FITNESS",
+      "privacyUrl": "https://jobblebaby.com/privacy",
+      "supportUrl": "https://jobblebaby.com/support",
       "infoPlist": {
         "NSCameraUsageDescription": "Jobble Baby needs camera access for photo features",
         "NSPhotoLibraryUsageDescription": "Jobble Baby needs photo library access to save baby photos",
@@ -38,6 +41,12 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.jobblebaby.app",
+      "permissions": [
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE",
+        "SCHEDULE_EXACT_ALARM"
+      ],
+      "privacyPolicy": "https://jobblebaby.com/privacy",
       "splash": {
         "backgroundColor": "#E6F4FE",
         "resizeMode": "contain"

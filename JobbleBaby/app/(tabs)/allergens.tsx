@@ -8,6 +8,7 @@ import { ReactionLogModal } from '../components/ReactionLogModal';
 import { Badge } from '../data/badges';
 import { checkFirstAllergenBadge } from '../utils/badgeService';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble/allergen_entries';
@@ -19,6 +20,7 @@ export default function AllergensScreen() {
   const [showReactionModal, setShowReactionModal] = useState(false);
   const [newBadges, setNewBadges] = useState<Badge[]>([]);
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   useEffect(() => {
@@ -120,8 +122,8 @@ export default function AllergensScreen() {
     <SafeAreaView style={styles.safe}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Track</Text>
-          <Text style={styles.title}>🥜 Allergens</Text>
+          <Text style={styles.greeting}>{t('allergens.greeting')}</Text>
+          <Text style={styles.title}>🥜 {t('allergens.title')}</Text>
         </View>
 
         {newBadges.length > 0 && (
@@ -130,7 +132,7 @@ export default function AllergensScreen() {
               {newBadges.map((b) => b.icon).join(' ')}
             </Text>
             <Text style={styles.badgeBannerText}>
-              Badge{newBadges.length > 1 ? 's' : ''} earned: {newBadges.map((b) => b.name).join(', ')}!
+              {t('allergens.badgesEarned', { plural: newBadges.length > 1 ? 's' : '', names: newBadges.map((b) => b.name).join(', ') })}
             </Text>
           </View>
         )}

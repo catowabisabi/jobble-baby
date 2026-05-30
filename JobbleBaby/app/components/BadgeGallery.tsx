@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { BADGES, Badge } from '../data/badges';
 import { getEarnedBadges, BadgeState } from '../utils/badgeService';
+import { useLanguage } from '../context/LanguageContext';
 
 interface BadgeGalleryProps {
   compact?: boolean;
 }
 
 export default function BadgeGallery({ compact = false }: BadgeGalleryProps) {
+  const { t } = useLanguage();
   const [badgeState, setBadgeState] = useState<BadgeState>({});
   const [recentAward, setRecentAward] = useState<Badge | null>(null);
 
@@ -35,8 +37,8 @@ export default function BadgeGallery({ compact = false }: BadgeGalleryProps) {
     return (
       <View style={styles.compactContainer}>
         <View style={styles.compactHeader}>
-          <Text style={styles.compactTitle}>🏅 Badges</Text>
-          <Text style={styles.compactCount}>{earnedCount}/{totalCount}</Text>
+          <Text style={styles.compactTitle}>{t('badgeGallery.badges')}</Text>
+          <Text style={styles.compactCount}>{t('badgeGallery.earnedOf', { earned: earnedCount, total: totalCount })}</Text>
         </View>
         <View style={styles.compactBadges}>
           {BADGES.slice(0, 5).map((badge) => {
@@ -57,8 +59,8 @@ export default function BadgeGallery({ compact = false }: BadgeGalleryProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>🏅 Badge Collection</Text>
-        <Text style={styles.subtitle}>{earnedCount} of {totalCount} earned</Text>
+        <Text style={styles.title}>{t('badgeGallery.title')}</Text>
+        <Text style={styles.subtitle}>{t('badgeGallery.earnedOf', { earned: earnedCount, total: totalCount })}</Text>
       </View>
 
       {/* Category sections */}
@@ -68,7 +70,7 @@ export default function BadgeGallery({ compact = false }: BadgeGalleryProps) {
         return (
           <View key={cat} style={styles.categorySection}>
             <Text style={styles.categoryLabel}>
-              {cat === 'streak' ? '🔥 Streak' : cat === 'first' ? '🌟 Firsts' : cat === 'milestone' ? '📊 Milestones' : '✨ Engagement'}
+              {cat === 'streak' ? t('badgeGallery.streak') : cat === 'first' ? t('badgeGallery.firsts') : cat === 'milestone' ? t('badgeGallery.milestones') : t('badgeGallery.engagement')}
               {' '}<Text style={styles.categoryCount}>{catEarned}/{catBadges.length}</Text>
             </Text>
             <View style={styles.badgeGrid}>
@@ -84,11 +86,11 @@ export default function BadgeGallery({ compact = false }: BadgeGalleryProps) {
                       {badge.name}
                     </Text>
                     <Text style={[styles.badgeDesc, !earned && styles.badgeLockedText]}>
-                      {earned ? badge.description : 'Keep logging to unlock!'}
+                      {earned ? badge.description : t('badgeGallery.keepLogging')}
                     </Text>
                     {earned && earnedAt && (
                       <Text style={styles.earnedDate}>
-                        Earned {new Date(earnedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        {t('badgeGallery.earnedOn', { date: new Date(earnedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) })}
                       </Text>
                     )}
                   </View>
@@ -103,7 +105,7 @@ export default function BadgeGallery({ compact = false }: BadgeGalleryProps) {
       {recentAward && (
         <View style={styles.awardBanner}>
           <Text style={styles.awardIcon}>{recentAward.icon}</Text>
-          <Text style={styles.awardText}>New Badge: {recentAward.name}!</Text>
+          <Text style={styles.awardText}>{t('badgeGallery.newBadge', { name: recentAward.name })}</Text>
         </View>
       )}
     </View>

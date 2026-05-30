@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import BadgeGallery from '../components/BadgeGallery';
 import { getBadgeCounts } from '../utils/badgeService';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 
 interface BabyProfile {
@@ -56,15 +57,33 @@ function SettingRow({ icon, label, onPress, isLoading, rowStyles }: SettingRowPr
 
 function ThemeToggleRow({ rowStyles }: ThemeToggleRowProps) {
   const { toggleTheme, theme } = useTheme();
-  const label = theme === 'system' ? 'Auto' : theme.charAt(0).toUpperCase() + theme.slice(1);
+  const { t } = useLanguage();
+  const label = theme === 'system' ? t('profile.auto') : t('profile.' + theme);
   return (
     <TouchableOpacity style={rowStyles.container} onPress={toggleTheme} activeOpacity={0.7}>
       <View style={rowStyles.left}>
         <Text style={rowStyles.icon}>🎨</Text>
-        <Text style={rowStyles.label}>Theme</Text>
+        <Text style={rowStyles.label}>{t('profile.theme')}</Text>
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Text style={[rowStyles.chevron, { textTransform: 'capitalize' }]}>{label}</Text>
+        <Text style={rowStyles.chevron}> ⟳</Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+function LanguageToggleRow({ rowStyles }: { rowStyles: ReturnType<typeof StyleSheet.create> }) {
+  const { t, language, toggleLanguage } = useLanguage();
+  const label = language === 'en' ? 'English' : '繁體中文';
+  return (
+    <TouchableOpacity style={rowStyles.container} onPress={toggleLanguage} activeOpacity={0.7}>
+      <View style={rowStyles.left}>
+        <Text style={rowStyles.icon}>🌐</Text>
+        <Text style={rowStyles.label}>{t('profile.language')}</Text>
+      </View>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Text style={[rowStyles.chevron, { textTransform: 'none' }]}>{label}</Text>
         <Text style={rowStyles.chevron}> ⟳</Text>
       </View>
     </TouchableOpacity>
@@ -77,6 +96,7 @@ export default function ProfileScreen() {
   const [isExportLoading, setIsExportLoading] = useState(false);
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
   const { effectiveTheme } = useTheme();
+  const { t, language, toggleLanguage } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   const rowStyles = StyleSheet.create({
@@ -233,7 +253,7 @@ export default function ProfileScreen() {
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.sectionTitle}>Parent Profile</Text>
+          <Text style={styles.sectionTitle}>{t('profile.parentProfile')}</Text>
         </View>
 
         {/* Avatar + Info */}
@@ -252,8 +272,8 @@ export default function ProfileScreen() {
           <View style={styles.babyHeader}>
             <Text style={styles.babyEmoji}>👶</Text>
             <View>
-              <Text style={styles.babyName}>{babyProfile?.name || 'Baby'}</Text>
-              <Text style={styles.babyMeta}>{babyMeta || 'Baby profile'}</Text>
+              <Text style={styles.babyName}>{babyProfile?.name || t('profile.babyName')}</Text>
+              <Text style={styles.babyMeta}>{babyMeta || t('profile.babyProfile')}</Text>
             </View>
           </View>
         </View>
@@ -267,9 +287,9 @@ export default function ProfileScreen() {
           <View style={styles.badgeButtonLeft}>
             <Text style={styles.badgeButtonIcon}>🏅</Text>
             <View>
-              <Text style={styles.badgeButtonTitle}>Badge Collection</Text>
+              <Text style={styles.badgeButtonTitle}>{t('profile.badgeCollection')}</Text>
               <Text style={styles.badgeButtonSubtitle}>
-                {badgeCounts.earned} of {badgeCounts.total} badges earned
+                {t('profile.earnedOf', { earned: badgeCounts.earned, total: badgeCounts.total })}
               </Text>
             </View>
           </View>
@@ -285,21 +305,22 @@ export default function ProfileScreen() {
 
         {/* Settings Section */}
         <View style={styles.settingsSection}>
-          <Text style={styles.settingsLabel}>Settings</Text>
-          <SettingRow icon="🔔" label="Notifications" rowStyles={rowStyles} />
-          <SettingRow icon="📤" label="Data Export" onPress={handleExportData} isLoading={isExportLoading} rowStyles={rowStyles} />
+          <Text style={styles.settingsLabel}>{t('profile.settings')}</Text>
+          <SettingRow icon="🔔" label={t('profile.notifications')} rowStyles={rowStyles} />
+          <SettingRow icon="📤" label={t('profile.exportData')} onPress={handleExportData} isLoading={isExportLoading} rowStyles={rowStyles} />
           <ThemeToggleRow rowStyles={rowStyles} />
-          <SettingRow icon="🔒" label="Privacy" rowStyles={rowStyles} />
-          <SettingRow icon="ℹ️" label="About" rowStyles={rowStyles} />
+          <LanguageToggleRow rowStyles={rowStyles} />
+          <SettingRow icon="🔒" label={t('profile.privacy')} rowStyles={rowStyles} />
+          <SettingRow icon="ℹ️" label={t('profile.about')} rowStyles={rowStyles} />
           <SettingRow
             icon="🔄"
-            label="Reset Profile"
+            label={t('profile.resetProfile')}
             rowStyles={rowStyles}
             onPress={async () => {
-              Alert.alert('Reset Profile', 'This will clear your baby profile and return to onboarding.', [
-                { text: 'Cancel', style: 'cancel' },
+              Alert.alert(t('profile.resetConfirmTitle'), t('profile.resetConfirmMessage'), [
+                { text: t('common.cancel'), style: 'cancel' },
                 {
-                  text: 'Reset',
+                  text: t('profile.reset'),
                   style: 'destructive',
                   onPress: async () => {
                     await AsyncStorage.removeItem('@jobble_baby_profile');
@@ -311,7 +332,7 @@ export default function ProfileScreen() {
         </View>
 
         {/* App version */}
-        <Text style={styles.version}>Jobble Baby v1.0.0</Text>
+        <Text style={styles.version}>{t('profile.version', { version: '1.0.0' })}</Text>
       </ScrollView>
     </SafeAreaView>
   );

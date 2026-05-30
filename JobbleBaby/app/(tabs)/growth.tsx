@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { onNewGrowthEntry } from '../utils/badgeService';
 import { Badge } from '../data/badges';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble/growth_entries';
@@ -169,9 +170,10 @@ interface ChartProps {
   entries: GrowthEntry[];
   chartBg: string;
   chartMuted: string;
+  t: (key: string) => string;
 }
 
-function GrowthChart({ gender, chartType, entries, chartBg, chartMuted }: ChartProps) {
+function GrowthChart({ gender, chartType, entries, chartBg, chartMuted, t }: ChartProps) {
   const [chartW, setChartW] = useState(CHART_W);
   const data = chartType === 'height'
     ? (gender === 'boys' ? BOYS_HEIGHT : GIRLS_HEIGHT)
@@ -219,19 +221,19 @@ function GrowthChart({ gender, chartType, entries, chartBg, chartMuted }: ChartP
       <View style={chartStyles.legend}>
         <View style={chartStyles.legendItem}>
           <View style={[chartStyles.legendLine, { backgroundColor: '#93c5fd' }]} />
-          <Text style={[chartStyles.legendText, { color: chartMuted }]}>3rd-15th</Text>
+          <Text style={[chartStyles.legendText, { color: chartMuted }]}>{t('growth.third15th')}</Text>
         </View>
         <View style={chartStyles.legendItem}>
           <View style={[chartStyles.legendLine, { backgroundColor: '#60a5fa' }]} />
-          <Text style={[chartStyles.legendText, { color: chartMuted }]}>15th-85th</Text>
+          <Text style={[chartStyles.legendText, { color: chartMuted }]}>{t('growth.fifteenth85th')}</Text>
         </View>
         <View style={chartStyles.legendItem}>
           <View style={[chartStyles.legendLine, { backgroundColor: '#3B82F6' }]} />
-          <Text style={[chartStyles.legendText, { color: chartMuted }]}>50th</Text>
+          <Text style={[chartStyles.legendText, { color: chartMuted }]}>{t('growth.thirty50th')}</Text>
         </View>
         <View style={chartStyles.legendItem}>
           <View style={[chartStyles.legendDot, { backgroundColor: '#fbbf24' }]} />
-          <Text style={[chartStyles.legendText, { color: chartMuted }]}>Baby</Text>
+          <Text style={[chartStyles.legendText, { color: chartMuted }]}>{t('growth.baby')}</Text>
         </View>
       </View>
 
@@ -348,6 +350,7 @@ export default function GrowthScreen() {
   const [gender, setGender] = useState<Gender>('boys');
   const [chartType, setChartType] = useState<ChartType>('height');
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   const styles = StyleSheet.create({
@@ -500,8 +503,8 @@ export default function GrowthScreen() {
         <View style={styles.header}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <View>
-              <Text style={styles.greeting}>Track</Text>
-              <Text style={styles.title}>📈 Growth</Text>
+              <Text style={styles.greeting}>{t('growth.greeting')}</Text>
+              <Text style={styles.title}>📈 {t('growth.title')}</Text>
             </View>
             <TouchableOpacity
               style={[styles.milestoneBtn, { backgroundColor: C.accent }]}
@@ -509,7 +512,7 @@ export default function GrowthScreen() {
               activeOpacity={0.7}
             >
               <MaterialCommunityIcons name="camera" size={16} color={C.text} />
-              <Text style={styles.milestoneBtnText}>📸 Milestone</Text>
+              <Text style={styles.milestoneBtnText}>📸 {t('growth.milestone')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -520,7 +523,7 @@ export default function GrowthScreen() {
               {newBadges.map((b) => b.icon).join(' ')}
             </Text>
             <Text style={styles.badgeBannerText}>
-              Badge earned: {newBadges.map((b) => b.name).join(', ')}!
+              {t('growth.badgeEarned', { badges: newBadges.map((b) => b.name).join(', ') })}
             </Text>
           </View>
         )}
@@ -528,8 +531,8 @@ export default function GrowthScreen() {
         {/* WHO Growth Chart */}
         <View style={styles.chartCard}>
           <View style={styles.chartHeader}>
-            <Text style={styles.chartTitle}>WHO GROWTH CHART</Text>
-            <Text style={styles.chartSubtitle}>Percentile curves vs baby data</Text>
+            <Text style={styles.chartTitle}>{t('growth.whoGrowthChart')}</Text>
+            <Text style={styles.chartSubtitle}>{t('growth.percentileCurves')}</Text>
           </View>
 
           {/* Chart type toggle */}
@@ -564,12 +567,12 @@ export default function GrowthScreen() {
             </TouchableOpacity>
           </View>
 
-          <GrowthChart gender={gender} chartType={chartType} entries={entries} chartBg={C.card} chartMuted={C.muted} />
+          <GrowthChart gender={gender} chartType={chartType} entries={entries} chartBg={C.card} chartMuted={C.muted} t={t} />
         </View>
 
         {/* Input card */}
         <View style={styles.inputCard}>
-          <Text style={styles.inputLabel}>HEIGHT (cm)</Text>
+            <Text style={styles.inputLabel}>{t('growth.heightCm')}</Text>
           <TextInput
             style={styles.input}
             placeholder="0.0"
@@ -578,7 +581,7 @@ export default function GrowthScreen() {
             value={height}
             onChangeText={setHeight}
           />
-          <Text style={styles.inputLabel}>WEIGHT (kg)</Text>
+            <Text style={styles.inputLabel}>{t('growth.weightKg')}</Text>
           <TextInput
             style={styles.input}
             placeholder="0.0"
@@ -588,14 +591,14 @@ export default function GrowthScreen() {
             onChangeText={setWeight}
           />
           <TouchableOpacity style={styles.saveButton} activeOpacity={0.7} onPress={saveEntry}>
-            <Text style={styles.saveButtonText}>Save Measurement</Text>
+            <Text style={styles.saveButtonText}>{t('growth.saveMeasurement')}</Text>
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.sectionTitle}>HISTORY</Text>
+        <Text style={styles.sectionTitle}>{t('growth.history')}</Text>
         <View style={styles.historyCard}>
           {entries.length === 0 ? (
-            <Text style={styles.emptyText}>No entries yet. Add height and weight above.</Text>
+            <Text style={styles.emptyText}>{t('growth.noEntries')}</Text>
           ) : (
             entries.map((entry, idx) => {
               const prev = entries[idx + 1];

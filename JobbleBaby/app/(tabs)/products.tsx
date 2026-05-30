@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'r
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import CATEGORIES from '../data/products.json';
 
@@ -36,6 +37,7 @@ const AGE_FILTERS = ['All', '0m+', '3m+', '6m+', '12m+', '0-12m', '0-24m', '0-4y
 export default function ProductsScreen() {
   const [ageFilter, setAgeFilter] = useState('All');
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   const filtered = CATEGORIES.map(cat => ({
@@ -124,9 +126,9 @@ export default function ProductsScreen() {
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Trusted</Text>
-          <Text style={styles.title}>Baby Products</Text>
-          <Text style={styles.subtitle}>HK & international brands with reviews</Text>
+          <Text style={styles.greeting}>{t('products.greeting')}</Text>
+          <Text style={styles.title}>{t('products.title')}</Text>
+          <Text style={styles.subtitle}>{t('products.subtitle')}</Text>
         </View>
 
         {/* Age Filter */}
@@ -149,7 +151,7 @@ export default function ProductsScreen() {
             <View style={styles.categoryHeader}>
               <Text style={styles.categoryEmoji}>{category.emoji}</Text>
               <Text style={styles.categoryName}>{category.name}</Text>
-              <Text style={styles.categoryCount}>{category.products.length} items</Text>
+              <Text style={styles.categoryCount}>{t('products.items', { count: category.products.length })}</Text>
             </View>
             {category.products.map((product) => (
               <TouchableOpacity
@@ -170,7 +172,7 @@ export default function ProductsScreen() {
                   </View>
                   <View style={styles.productMeta}>
                     <Text style={styles.productRating}>{renderStars(product.rating)} {product.rating}</Text>
-                    <Text style={styles.productReviews}>{product.reviews.toLocaleString()} reviews</Text>
+                    <Text style={styles.productReviews}>{t('products.reviews', { count: product.reviews.toLocaleString() })}</Text>
                   </View>
                   <Text style={styles.productDescription}>{product.description}</Text>
                 </View>

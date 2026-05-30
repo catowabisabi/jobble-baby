@@ -6,6 +6,7 @@ import { getWeeklySummary, WeeklyTrend } from '../utils/weeklySummary';
 import { awardWeeklyViewer } from '../utils/badgeService';
 import { useNotifications } from '../hooks/useNotifications';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble/schedule_entries';
@@ -52,6 +53,7 @@ export default function ScheduleScreen() {
   const [notificationPermission, setNotificationPermission] = useState<'granted' | 'denied' | 'undetermined'>('undetermined');
   const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder, cancelAllNotifications } = useNotifications();
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   useEffect(() => {
@@ -115,14 +117,6 @@ export default function ScheduleScreen() {
   };
 
   const nextNap = scheduleData.find(d => d.sleep)?.sleep || NEXT_NAP;
-
-  const getPermissionLabel = () => {
-    switch (notificationPermission) {
-      case 'granted': return 'Granted';
-      case 'denied': return 'Denied';
-      default: return 'Undetermined';
-    }
-  };
 
   const styles = StyleSheet.create({
     safe: { flex: 1, backgroundColor: C.background },
@@ -228,14 +222,14 @@ export default function ScheduleScreen() {
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.greeting}>Sleep Schedule</Text>
-          <Text style={styles.title}>Rest& Naps</Text>
+          <Text style={styles.greeting}>{t('schedule.greeting')}</Text>
+          <Text style={styles.title}>{t('schedule.title')}</Text>
         </View>
 
         {/* Next Nap Reminder Card */}
         <View style={styles.nextNapCard}>
           <View style={styles.nextNapHeader}>
-            <Text style={styles.nextNapLabel}>Next Nap</Text>
+            <Text style={styles.nextNapLabel}>{t('schedule.nextNap')}</Text>
             <Text style={styles.moonIcon}>🌙</Text>
           </View>
           <Text style={styles.nextNapTime}>
@@ -244,11 +238,11 @@ export default function ScheduleScreen() {
           <View style={styles.nextNapFooter}>
             <Text style={styles.nextNapDuration}>{nextNap.duration}</Text>
             <View style={[styles.qualityDot, { backgroundColor: QUALITY_COLORS.good }]} />
-            <Text style={styles.qualityLabel}>Expected</Text>
+            <Text style={styles.qualityLabel}>{t('schedule.expected')}</Text>
           </View>
           <View style={styles.notificationStatus}>
             <Text style={styles.notificationStatusText}>
-              🔔 Notifications: {getPermissionLabel()}
+              🔔 {t('schedule.notificationsStatus', { status: t('schedule.' + notificationPermission) })}
             </Text>
             <View style={[styles.permissionDot, { backgroundColor: PERMISSION_COLORS[notificationPermission] }]} />
           </View>
@@ -258,32 +252,32 @@ export default function ScheduleScreen() {
         {weeklySummary && (
           <View style={styles.weeklySummaryCard}>
             <View style={styles.weeklySummaryHeader}>
-              <Text style={styles.weeklySummaryLabel}>WEEKLY SUMMARY</Text>
+              <Text style={styles.weeklySummaryLabel}>{t('schedule.weeklySummary')}</Text>
               <Text style={styles.weeklySummaryIcon}>📊</Text>
             </View>
             <View style={styles.summaryRow}>
               <View style={styles.summaryItem}>
                 <Text style={styles.summaryEmoji}>🧷</Text>
                 <Text style={styles.summaryCount}>{weeklySummary.current.diaperCount}</Text>
-                <Text style={styles.summaryLabel}>Diapers</Text>
+                <Text style={styles.summaryLabel}>{t('schedule.diapers')}</Text>
                 <Text style={[styles.summaryTrend, { color: weeklySummary.trends.diaper === '↑' ? '#3B82F6' : weeklySummary.trends.diaper === '↓' ? '#e74c3c' : '#8b9bb4' }]}>{weeklySummary.trends.diaper}</Text>
               </View>
               <View style={styles.summaryItem}>
                 <Text style={styles.summaryEmoji}>🍼</Text>
                 <Text style={styles.summaryCount}>{weeklySummary.current.feedCount}</Text>
-                <Text style={styles.summaryLabel}>Feeds</Text>
+                <Text style={styles.summaryLabel}>{t('schedule.feeds')}</Text>
                 <Text style={[styles.summaryTrend, { color: weeklySummary.trends.feed === '↑' ? '#3B82F6' : weeklySummary.trends.feed === '↓' ? '#e74c3c' : '#8b9bb4' }]}>{weeklySummary.trends.feed}</Text>
               </View>
               <View style={styles.summaryItem}>
                 <Text style={styles.summaryEmoji}>🌙</Text>
                 <Text style={styles.summaryCount}>{weeklySummary.current.sleepCount}</Text>
-                <Text style={styles.summaryLabel}>Sleep</Text>
+                <Text style={styles.summaryLabel}>{t('schedule.sleepLabel')}</Text>
                 <Text style={[styles.summaryTrend, { color: weeklySummary.trends.sleep === '↑' ? '#3B82F6' : weeklySummary.trends.sleep === '↓' ? '#e74c3c' : '#8b9bb4' }]}>{weeklySummary.trends.sleep}</Text>
               </View>
               <View style={styles.summaryItem}>
                 <Text style={styles.summaryEmoji}>📈</Text>
                 <Text style={styles.summaryCount}>{weeklySummary.current.growthCount}</Text>
-                <Text style={styles.summaryLabel}>Growth</Text>
+                <Text style={styles.summaryLabel}>{t('schedule.growthLabel')}</Text>
                 <Text style={[styles.summaryTrend, { color: weeklySummary.trends.growth === '↑' ? '#3B82F6' : weeklySummary.trends.growth === '↓' ? '#e74c3c' : '#8b9bb4' }]}>{weeklySummary.trends.growth}</Text>
               </View>
             </View>
@@ -292,7 +286,7 @@ export default function ScheduleScreen() {
 
         {/* Weekly Sleep Schedule */}
         <View style={styles.weeklySection}>
-          <Text style={styles.sectionTitleHidden}>Weekly Sleep Schedule</Text>
+          <Text style={styles.sectionTitleHidden}>{t('schedule.weeklySleepSchedule')}</Text>
           {scheduleData.map((item) => (
             <View key={item.day} style={styles.dayRow}>
               <Text style={styles.dayName}>{item.day}</Text>
@@ -311,7 +305,7 @@ export default function ScheduleScreen() {
                     />
                   </>
                 ) : (
-                  <Text style={styles.noData}>No sleep recorded</Text>
+                  <Text style={styles.noData}>{t('schedule.noSleepRecorded')}</Text>
                 )}
               </View>
             </View>

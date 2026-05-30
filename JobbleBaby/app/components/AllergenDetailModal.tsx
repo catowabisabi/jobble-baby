@@ -8,9 +8,10 @@ import {
   LayoutAnimation,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Allergen, AllergenEntry, AllergenStatus, STATUS_LABELS, FPIES_WARNING } from '../data/allergens';
+import { Allergen, AllergenEntry, AllergenStatus, STATUS_LABELS } from '../data/allergens';
 import { COLORS } from '../theme';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 
 
 
@@ -27,6 +28,7 @@ const STATUSES: AllergenStatus[] = ['not_introduced', 'introduced', 'reaction_ob
 
 export function AllergenDetailModal({ visible, allergen, entry, onClose, onSave, onLogReaction }: Props) {
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   const [status, setStatus] = useState<AllergenStatus>(entry?.status ?? 'not_introduced');
@@ -107,7 +109,7 @@ export function AllergenDetailModal({ visible, allergen, entry, onClose, onSave,
 
           {showDatePickerSection && (
             <View style={styles.dateSection}>
-              <Text style={[styles.dateLabel, { color: C.muted }]}>Date Introduced:</Text>
+              <Text style={[styles.dateLabel, { color: C.muted }]}>{t('allergenModal.dateIntroduced')}</Text>
               <TouchableOpacity
                 style={[styles.dateButton, { borderColor: C.border }]}
                 onPress={() => setShowDatePicker(true)}
@@ -130,7 +132,7 @@ export function AllergenDetailModal({ visible, allergen, entry, onClose, onSave,
           {status === 'reaction_observed' && (
             <View style={[styles.fpiesNote, { backgroundColor: `${C.accent}15` }]}>
               <Text style={[styles.fpiesText, { color: C.accent }]}>
-                ⚠️ {FPIES_WARNING}
+                ⚠️ {t('allergenModal.fpiesWarning')}
               </Text>
             </View>
           )}
@@ -140,7 +142,7 @@ export function AllergenDetailModal({ visible, allergen, entry, onClose, onSave,
               style={[styles.logReactionButton, { backgroundColor: '#e74c3c' }]}
               onPress={onLogReaction}
             >
-              <Text style={styles.logReactionButtonText}>Log Reaction</Text>
+              <Text style={styles.logReactionButtonText}>{t('allergenModal.logReaction')}</Text>
             </TouchableOpacity>
           )}
         </View>

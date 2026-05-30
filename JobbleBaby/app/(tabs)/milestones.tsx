@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { onNewGrowthEntry } from '../utils/badgeService';
 
@@ -17,11 +18,11 @@ const GRID_GAP = 12;
 const PHOTO_SIZE = (SCREEN_W - 40 - GRID_GAP) / GRID_COLS;
 
 const MILESTONE_TYPES = [
-  { id: 'first_smile', label: 'First Smile', icon: 'emoticon-happy' },
-  { id: 'first_steps', label: 'First Steps', icon: 'human-child' },
-  { id: 'first_word', label: 'First Word', icon: 'comment-text' },
-  { id: 'first_food', label: 'First Food', icon: 'food-apple' },
-  { id: 'custom', label: 'Custom', icon: 'star' },
+  { id: 'first_smile', labelKey: 'firstSmile', icon: 'emoticon-happy' },
+  { id: 'first_steps', labelKey: 'firstSteps', icon: 'human-child' },
+  { id: 'first_word', labelKey: 'firstWord', icon: 'comment-text' },
+  { id: 'first_food', labelKey: 'firstFood', icon: 'food-apple' },
+  { id: 'custom', labelKey: 'custom', icon: 'star' },
 ];
 
 const STORAGE_KEY = '@jobble/milestone_photos';
@@ -64,6 +65,7 @@ function getDateStr(): string {
 
 export default function MilestonesScreen() {
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   const [photos, setPhotos] = useState<MilestonePhoto[]>([]);
@@ -214,19 +216,16 @@ export default function MilestonesScreen() {
   const typeIcon = (typeId: string) =>
     MILESTONE_TYPES.find(t => t.id === typeId)?.icon || 'star';
 
-  const typeLabel = (typeId: string) =>
-    MILESTONE_TYPES.find(t => t.id === typeId)?.label || 'Custom';
-
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Memory</Text>
-          <Text style={styles.title}>🏆 Milestones</Text>
+          <Text style={styles.greeting}>{t('milestones.greeting')}</Text>
+          <Text style={styles.title}>🏆 {t('milestones.title')}</Text>
         </View>
 
         {/* Milestone Type Selector */}
-        <Text style={styles.sectionTitle}>Milestone Type</Text>
+        <Text style={styles.sectionTitle}>{t('milestones.milestoneType')}</Text>
         <View style={styles.typeSelector}>
           {MILESTONE_TYPES.map((type) => (
             <TouchableOpacity
@@ -248,7 +247,7 @@ export default function MilestonesScreen() {
                   selectedType.id === type.id && styles.typeChipTextActive,
                 ]}
               >
-                {type.label}
+                {t(`milestones.${type.labelKey}`)}
               </Text>
             </TouchableOpacity>
           ))}
@@ -263,19 +262,19 @@ export default function MilestonesScreen() {
         >
           <MaterialCommunityIcons name="camera" size={24} color={C.text} />
           <Text style={styles.captureBtnText}>
-            {isCapturing ? 'Opening Camera...' : `Capture ${selectedType.label}`}
+            {isCapturing ? t('common.loading') : t('milestones.captureWithName', { name: t(`milestones.${selectedType.labelKey}`) })}
           </Text>
         </TouchableOpacity>
 
         {/* Gallery */}
         <Text style={styles.sectionTitle}>
-          {photos.length > 0 ? `${photos.length} Milestone${photos.length > 1 ? 's' : ''}` : 'Gallery'}
+          {photos.length > 0 ? t('milestones.milestoneCount', { count: photos.length, plural: photos.length > 1 ? 's' : '' }) : t('milestones.gallery')}
         </Text>
         <View style={styles.galleryGrid}>
           {photos.length === 0 ? (
             <View style={styles.emptyCard}>
               <MaterialCommunityIcons name="image-plus" size={40} style={styles.emptyIcon} />
-              <Text style={styles.emptyText}>No milestones yet{'\n'}Capture your first moment!</Text>
+              <Text style={styles.emptyText}>{t('milestones.noMilestones')}{'\n'}{t('milestones.captureFirst')}</Text>
             </View>
           ) : (
             photos.map((photo) => (

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { onNewLogEntry } from '../utils/badgeService';
 import { Badge } from '../data/badges';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble/tracking_entries';
@@ -51,6 +52,7 @@ export default function TrackingScreen() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [newBadges, setNewBadges] = useState<Badge[]>([]);
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   useEffect(() => {
@@ -140,8 +142,8 @@ export default function TrackingScreen() {
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Track</Text>
-          <Text style={styles.babyName}>Baby Activity</Text>
+          <Text style={styles.greeting}>{t('tracking.greeting')}</Text>
+          <Text style={styles.babyName}>{t('tracking.title')}</Text>
         </View>
 
         {/* Badge notification banner */}
@@ -151,12 +153,12 @@ export default function TrackingScreen() {
               {newBadges.map((b) => b.icon).join(' ')}
             </Text>
             <Text style={styles.badgeBannerText}>
-              Badge{newBadges.length > 1 ? 's' : ''} earned: {newBadges.map((b) => b.name).join(', ')}!
+              {t('tracking.badgeEarned', { plural: newBadges.length > 1 ? 's' : '', names: newBadges.map((b) => b.name).join(', ') })}
             </Text>
           </View>
         )}
 
-        <Text style={styles.sectionTitle}>DIAPER</Text>
+        <Text style={styles.sectionTitle}>{t('tracking.sectionDiaper')}</Text>
         <View style={styles.buttonRow}>
           {DIAPER_TYPES.map((item) => (
             <TouchableOpacity
@@ -166,12 +168,12 @@ export default function TrackingScreen() {
               onPress={() => addEntry('diaper', item.label)}
             >
               <Text style={styles.buttonIcon}>🧷</Text>
-              <Text style={styles.buttonText}>{item.label}</Text>
+              <Text style={styles.buttonText}>{t(`tracking.${item.label.toLowerCase()}`)}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <Text style={styles.sectionTitle}>FEEDING</Text>
+        <Text style={styles.sectionTitle}>{t('tracking.sectionFeeding')}</Text>
         <View style={styles.buttonRow}>
           {FEED_TYPES.map((item) => (
             <TouchableOpacity
@@ -181,12 +183,12 @@ export default function TrackingScreen() {
               onPress={() => addEntry('feed', item.label)}
             >
               <Text style={styles.buttonIcon}>🍼</Text>
-              <Text style={styles.buttonText}>{item.label}</Text>
+              <Text style={styles.buttonText}>{t(`tracking.${item.label.toLowerCase()}`)}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <Text style={styles.sectionTitle}>SLEEP</Text>
+        <Text style={styles.sectionTitle}>{t('tracking.sectionSleep')}</Text>
         <View style={styles.buttonRow}>
           {SLEEP_TYPES.map((item) => (
             <TouchableOpacity
@@ -196,15 +198,15 @@ export default function TrackingScreen() {
               onPress={() => addEntry('sleep', item.label)}
             >
               <Text style={styles.buttonIcon}>🌙</Text>
-              <Text style={styles.buttonText}>{item.label}</Text>
+              <Text style={styles.buttonText}>{t(`tracking.${item.label.toLowerCase()}`)}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <Text style={styles.sectionTitle}>HISTORY</Text>
+        <Text style={styles.sectionTitle}>{t('tracking.sectionHistory')}</Text>
         <View style={styles.historyCard}>
           {entries.length === 0 ? (
-            <Text style={styles.emptyText}>No entries yet. Tap a button above to log.</Text>
+            <Text style={styles.emptyText}>{t('tracking.noEntries')}</Text>
           ) : (
             entries.map((entry) => (
               <View key={entry.id} style={styles.entryRow}>

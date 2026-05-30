@@ -12,9 +12,10 @@ import {
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from 'expo-image-picker';
-import { Reaction, ReactionType, REACTION_SYMPTOMS, FPIES_WARNING, Allergen } from '../data/allergens';
+import { Reaction, ReactionType, REACTION_SYMPTOMS, Allergen } from '../data/allergens';
 import { COLORS } from '../theme';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 
 
 
@@ -27,10 +28,10 @@ interface Props {
 }
 
 const REACTION_TYPES: ReactionType[] = ['IgE', 'FPIES', 'non-IgE'];
-const SEVERITY_LABELS = ['', 'Mild', 'Light', 'Moderate', 'Severe', 'Critical'];
 
 export function ReactionLogModal({ visible, allergen, existingReactions, onClose, onSave }: Props) {
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   const [reactionType, setReactionType] = useState<ReactionType>('IgE');
@@ -40,6 +41,17 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [notes, setNotes] = useState('');
   const [photoUri, setPhotoUri] = useState<string | undefined>(undefined);
+
+  const getSeverityLabel = (level: number) => {
+    const labels: Record<number, string> = {
+1: t('reactionModal.mild'),
+      2: t('reactionModal.light'),
+      3: t('reactionModal.moderate'),
+      4: t('reactionModal.severe'),
+      5: t('reactionModal.critical'),
+    };
+    return labels[level] || '';
+  };
 
   const resetForm = () => {
     setReactionType('IgE');
@@ -103,7 +115,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
         <View style={[styles.card, { backgroundColor: C.card }]}>
           <View style={styles.header}>
             <Text style={[styles.headerText, { color: C.text }]}>
-              Log Reaction {allergen.emoji} {allergen.name}
+              {t('reactionModal.logReaction', { name: `${allergen.emoji} ${allergen.name}` })}
             </Text>
             <TouchableOpacity onPress={handleClose} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
               <Text style={[styles.closeButton, { color: C.muted }]}>✕</Text>
@@ -111,7 +123,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
           </View>
 
           <ScrollView showsVerticalScrollIndicator={false}>
-            <Text style={[styles.sectionLabel, { color: C.muted }]}>Reaction Type</Text>
+            <Text style={[styles.sectionLabel, { color: C.muted }]}>{t('reactionModal.reactionType')}</Text>
             <View style={styles.chipContainer}>
               {REACTION_TYPES.map((type) => (
                 <TouchableOpacity
@@ -140,12 +152,12 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
             {reactionType === 'FPIES' && (
               <View style={[styles.fpiesNote, { backgroundColor: `${C.accent}15` }]}>
                 <Text style={[styles.fpiesText, { color: C.accent }]}>
-                  ⚠️ {FPIES_WARNING}
+                  ⚠️ {t('reactionModal.fpiesWarning')}
                 </Text>
               </View>
             )}
 
-            <Text style={[styles.sectionLabel, { color: C.muted }]}>Symptoms</Text>
+            <Text style={[styles.sectionLabel, { color: C.muted }]}>{t('reactionModal.symptoms')}</Text>
             <View style={styles.chipContainer}>
               {REACTION_SYMPTOMS.map((symptom) => (
                 <TouchableOpacity
@@ -171,7 +183,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
               ))}
             </View>
 
-            <Text style={[styles.sectionLabel, { color: C.muted }]}>Severity</Text>
+            <Text style={[styles.sectionLabel, { color: C.muted }]}>{t('reactionModal.severity')}</Text>
             <View style={styles.severityContainer}>
               {[1, 2, 3, 4, 5].map((level) => (
                 <TouchableOpacity
@@ -199,13 +211,13 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
                       { color: severity === level ? C.accent : C.muted },
                     ]}
                   >
-                    {SEVERITY_LABELS[level]}
+                    {getSeverityLabel(level)}
                   </Text>
                 </TouchableOpacity>
               ))}
             </View>
 
-            <Text style={[styles.sectionLabel, { color: C.muted }]}>Date</Text>
+            <Text style={[styles.sectionLabel, { color: C.muted }]}>{t('reactionModal.date')}</Text>
             <TouchableOpacity
               style={[styles.dateButton, { borderColor: C.border }]}
               onPress={() => setShowDatePicker(true)}
@@ -223,10 +235,10 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
               />
             )}
 
-            <Text style={[styles.sectionLabel, { color: C.muted }]}>Notes</Text>
+            <Text style={[styles.sectionLabel, { color: C.muted }]}>{t('reactionModal.notes')}</Text>
             <TextInput
               style={[styles.notesInput, { backgroundColor: C.card, borderColor: C.border, color: C.text }]}
-              placeholder="Add any additional notes..."
+              placeholder={t('reactionModal.notesPlaceholder')}
               placeholderTextColor={C.muted}
               multiline
               numberOfLines={3}
@@ -234,13 +246,13 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
               onChangeText={setNotes}
             />
 
-            <Text style={[styles.sectionLabel, { color: C.muted }]}>Photo</Text>
+            <Text style={[styles.sectionLabel, { color: C.muted }]}>{t('reactionModal.photo')}</Text>
             <TouchableOpacity
               style={[styles.photoButton, { borderColor: C.border }]}
               onPress={handlePhotoPick}
             >
               <Text style={[styles.photoButtonText, { color: C.accent }]}>
-                {photoUri ? 'Change Photo' : 'Add Photo'}
+                {photoUri ? t('reactionModal.changePhoto') : t('reactionModal.addPhoto')}
               </Text>
             </TouchableOpacity>
             {photoUri && (
@@ -254,13 +266,13 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
                 style={[styles.cancelButton, { borderColor: C.border }]}
                 onPress={handleClose}
               >
-                <Text style={[styles.cancelButtonText, { color: C.text }]}>Cancel</Text>
+                <Text style={[styles.cancelButtonText, { color: C.text }]}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.saveButton, { backgroundColor: C.accent }]}
                 onPress={handleSave}
               >
-                <Text style={styles.saveButtonText}>Save Reaction</Text>
+                <Text style={styles.saveButtonText}>{t('reactionModal.saveReaction')}</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Pressable } from 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { TrackingEntry } from '../utils/weeklySummary';
 
@@ -25,6 +26,13 @@ const QUICK_ENTRIES: QuickEntry[] = [
   { id: 'feed', label: 'Feed', icon: '🍼', color: '#F5B7B1' },
   { id: 'sleep', label: 'Sleep', icon: '🌙', color: '#AED6F1' },
 ];
+
+// i18n key map for quick entry labels
+const QUICK_ENTRY_I18N_KEYS: Record<string, string> = {
+  diaper: 'home.diaper',
+  feed: 'home.feed',
+  sleep: 'home.sleep',
+};
 
 interface TimelineEvent {
   id: string;
@@ -50,6 +58,7 @@ const ICON_MAP: Record<string, string> = {
 
 export default function HomeScreen() {
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
@@ -156,8 +165,8 @@ export default function HomeScreen() {
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.greeting}>Good morning</Text>
-          <Text style={styles.babyName}>{babyName} Day</Text>
+          <Text style={styles.greeting}>{t('home.greetingMorning')}</Text>
+          <Text style={styles.babyName}>{t('home.title')}</Text>
           <Text style={styles.date}>Friday, May 29, 2026</Text>
         </View>
 
@@ -166,7 +175,7 @@ export default function HomeScreen() {
           {QUICK_ENTRIES.map((entry) => (
             <View key={entry.id} style={[styles.summaryCard, { backgroundColor: entry.color }]}>
               <Text style={styles.cardIcon}>{entry.icon}</Text>
-              <Text style={styles.cardLabel}>{entry.label}</Text>
+              <Text style={styles.cardLabel}>{t(QUICK_ENTRY_I18N_KEYS[entry.id])}</Text>
               <Text style={styles.cardTime}>{lastEvents[entry.id as keyof typeof lastEvents] || '--:--'}</Text>
             </View>
           ))}
@@ -174,19 +183,19 @@ export default function HomeScreen() {
 
         {/* Next Reminder */}
         <View style={styles.reminderCard}>
-          <Text style={styles.reminderLabel}>Next Reminder</Text>
+          <Text style={styles.reminderLabel}>{t('home.nextReminder')}</Text>
           <View style={styles.reminderContent}>
             <Text style={styles.reminderIcon}>🍼</Text>
             <View>
-              <Text style={styles.reminderTitle}>Feeding</Text>
-              <Text style={styles.reminderTime}>Next feed in ~2h</Text>
+              <Text style={styles.reminderTitle}>{t('home.feedingReminder')}</Text>
+              <Text style={styles.reminderTime}>{t('home.nextFeedIn')}</Text>
             </View>
           </View>
         </View>
 
         {/* Daily Timeline */}
         <View style={styles.timelineSection}>
-          <Text style={styles.sectionTitle}>Today's Timeline</Text>
+          <Text style={styles.sectionTitle}>{t('home.todayTimeline')}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.timelineScroll}>
             {timelineEvents.map((event) => (
               <View key={event.id} style={styles.timelineItem}>
@@ -204,7 +213,7 @@ export default function HomeScreen() {
 
         {/* Quick Add FAB area */}
         <View style={styles.fabArea}>
-          <Text style={styles.fabLabel}>Quick Add</Text>
+          <Text style={styles.fabLabel}>{t('home.quickAdd')}</Text>
           <View style={styles.fabRow}>
             {QUICK_ENTRIES.map((entry) => (
               <TouchableOpacity
@@ -213,7 +222,7 @@ export default function HomeScreen() {
                 activeOpacity={0.7}
               >
                 <Text style={styles.fabIcon}>{entry.icon}</Text>
-                <Text style={styles.fabText}>{entry.label}</Text>
+                <Text style={styles.fabText}>{t(QUICK_ENTRY_I18N_KEYS[entry.id])}</Text>
               </TouchableOpacity>
             ))}
           </View>

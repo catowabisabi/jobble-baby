@@ -448,8 +448,22 @@ export default function GrowthScreen() {
         setEntries(MOCK_ENTRIES);
       }
     };
+    const loadGender = async () => {
+      try {
+        const saved = await AsyncStorage.getItem('@jobble/gender_preference');
+        if (saved === 'boys' || saved === 'girls') {
+          setGender(saved);
+        }
+      } catch {}
+    };
     loadEntries();
+    loadGender();
   }, []);
+
+  // Persist gender preference when it changes
+  useEffect(() => {
+    AsyncStorage.setItem('@jobble/gender_preference', gender).catch(() => {});
+  }, [gender]);
 
   const saveEntry = async () => {
     const h = parseFloat(height);

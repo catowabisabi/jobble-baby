@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
+import { TrackingEntry } from '../utils/weeklySummary';
 
 type BabyProfile = {
   name: string;
@@ -41,11 +42,19 @@ const MOCK_EVENTS: TimelineEvent[] = [
   { id: '5', type: 'feed', icon: '🍼', time: '12:00', note: 'Bottle, 120ml' },
 ];
 
+const ICON_MAP: Record<string, string> = {
+  diaper: '🧷',
+  feed: '🍼',
+  sleep: '🌙',
+};
+
 export default function HomeScreen() {
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme];
 
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>(MOCK_EVENTS);
+  const [lastEvents, setLastEvents] = useState({ diaper: '--:--', feed: '--:--', sleep: '--:--' });
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -58,7 +67,40 @@ export default function HomeScreen() {
         // ignore parse errors
       }
     };
+    const loadTracking = async () => {
+      try {
+        const raw = await AsyncStorage.getItem('@jobble/tracking_entries');
+        if (!raw) return;
+        const entries: TrackingEntry[] = JSON.parse(raw);
+        const today = new Date().toISOString().split('T')[0];
+        // Today's timeline events
+        const todayEvents = entries
+          .filter((e) => e.date === today)
+          .sort((a, b) => a.time.localeCompare(b.time))
+          .map((e) => ({
+            id: e.id,
+            type: e.type,
+            icon: ICON_MAP[e.type] || '📝',
+            time: e.time,
+            note: e.note,
+          }));
+        if (todayEvents.length > 0) {
+          setTimelineEvents(todayEvents);
+        }
+        // Latest entry per type
+        const latest: Record<string, string> = { diaper: '--:--', feed: '--:--', sleep: '--:--' };
+        for (const e of entries) {
+          if (latest[e.type] === '--:--' || e.time > latest[e.type]) {
+            latest[e.type] = e.time;
+          }
+        }
+        setLastEvents(latest);
+      } catch {
+        // ignore parse errors
+      }
+    };
     loadProfile();
+    loadTracking();
   }, []);
 
   const babyName = babyProfile?.name ? `${babyProfile.name}'s` : "Baby's";
@@ -109,12 +151,6 @@ export default function HomeScreen() {
     fabText: { fontSize: 13, fontWeight: '600', color: '#1a1a2e' },
   });
 
-  const [lastEvents] = useState({
-    diaper: '08:30',
-    feed: '09:00',
-    sleep: '09:45',
-  });
-
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -152,7 +188,7 @@ export default function HomeScreen() {
         <View style={styles.timelineSection}>
           <Text style={styles.sectionTitle}>Today's Timeline</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.timelineScroll}>
-            {MOCK_EVENTS.map((event) => (
+            {timelineEvents.map((event) => (
               <View key={event.id} style={styles.timelineItem}>
                 <View style={styles.timelineIconBg}>
                   <Text style={styles.timelineIcon}>{event.icon}</Text>
@@ -186,4 +222,3 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
-

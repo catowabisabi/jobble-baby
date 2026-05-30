@@ -9,6 +9,7 @@ import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import * as Notifications from 'expo-notifications';
 import OnboardingScreen from './screens/OnboardingScreen';
 import DaycareViewScreen from './screens/DaycareViewScreen';
+import FeedingTimerScreen from './screens/FeedingTimerScreen';
 
 const PROFILE_KEY = '@jobble_baby_profile';
 

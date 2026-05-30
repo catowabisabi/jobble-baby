@@ -311,5 +311,23 @@
     "babyAge": "{{name}} · {{age}}",
     "linkExpired": "This link has expired. Please request a new link from the parent.",
     "invalidLink": "Invalid link. Please request a new link from the parent."
+  },
+  "feedingTimer": {
+    "title": "Feeding Timer",
+    "babyAge": "Baby age: {{age}}",
+    "foodType": "Food Type",
+    "liquid": "Liquid",
+    "solid": "Solid",
+    "quickAdd": "Quick Add",
+    "presetLabel": "{{range}}",
+    "ageRange": {
+      "0-3": "0-3 mo",
+      "3-6": "3-6 mo",
+      "6-12": "6-12 mo",
+      "12+": "12+ mo"
+    },
+    "timer": "Timer",
+    "todayFeeds": "Today's Feeds",
+    "noFeedsToday": "No feeds recorded today"
   }
 }

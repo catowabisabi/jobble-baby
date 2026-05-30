@@ -311,5 +311,23 @@
     "babyAge": "{{name}} · {{age}}",
     "linkExpired": "此連結已過期。請向家長請求新連結。",
     "invalidLink": "無效連結。請向家長請求新連結。"
+  },
+  "feedingTimer": {
+    "title": "餵食計時器",
+    "babyAge": "寶寶年齡：{{age}}",
+    "foodType": "食物類型",
+    "liquid": "液體",
+    "solid": "固體",
+    "quickAdd": "快速新增",
+    "presetLabel": "{{range}}",
+    "ageRange": {
+      "0-3": "0-3 個月",
+      "3-6": "3-6 個月",
+      "6-12": "6-12 個月",
+      "12+": "12 個月以上"
+    },
+    "timer": "計時器",
+    "todayFeeds": "今日餵食",
+    "noFeedsToday": "今日尚無餵食記錄"
   }
 }

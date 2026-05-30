@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { onNewLogEntry } from '../utils/badgeService';
 import { Badge } from '../data/badges';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const STORAGE_KEY = '@jobble/tracking_entries';
 
@@ -136,6 +138,17 @@ export default function TrackingScreen() {
     },
     badgeBannerIcon: { fontSize: 20, marginRight: 10 },
     badgeBannerText: { fontSize: 13, fontWeight: '600', color: C.accent, flex: 1 },
+    feedingTimerLink: { marginBottom: 16 },
+    feedingTimerButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 12,
+      paddingVertical: 14,
+      paddingHorizontal: 20,
+      gap: 8,
+    },
+    feedingTimerText: { fontSize: 14, fontWeight: '700', color: '#fff' },
   });
 
   return (
@@ -187,6 +200,13 @@ export default function TrackingScreen() {
             </TouchableOpacity>
           ))}
         </View>
+
+        <Link href="/feeding-timer" style={styles.feedingTimerLink}>
+          <View style={[styles.feedingTimerButton, { backgroundColor: C.accent }]}>
+            <MaterialCommunityIcons name="timer-outline" size={24} color="#fff" />
+            <Text style={styles.feedingTimerText}>{t('feedingTimer.title')}</Text>
+          </View>
+        </Link>
 
         <Text style={styles.sectionTitle}>{t('tracking.sectionSleep')}</Text>
         <View style={styles.buttonRow}>

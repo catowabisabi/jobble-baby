@@ -8,10 +8,7 @@
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
-      "bundleId": "com.jobblebaby.app",
-      "category": "HEALTH_AND_FITNESS",
-      "privacyUrl": "https://jobblebaby.com/privacy",
-      "supportUrl": "https://jobblebaby.com/support",
+      "bundleIdentifier": "com.jobblebaby.app",
       "infoPlist": {
         "NSCameraUsageDescription": "Jobble Baby needs camera access for photo features",
         "NSPhotoLibraryUsageDescription": "Jobble Baby needs photo library access to save baby photos",
@@ -29,8 +26,7 @@
             ]
           }
         ]
-      },
-      "bundleIdentifier": "com.jobblebaby.app"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -46,15 +42,14 @@
         "VIBRATE",
         "SCHEDULE_EXACT_ALARM"
       ],
-      "privacyPolicy": "https://jobblebaby.com/privacy",
-      "splash": {
-        "backgroundColor": "#E6F4FE",
-        "resizeMode": "contain"
-      }
+      "privacyPolicyUrl": "https://jobblebaby.com/privacy"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "jobblebaby"
+    "scheme": "jobblebaby",
+    "category": "HEALTH_AND_FITNESS",
+    "privacyInfoUrl": "https://jobblebaby.com/privacy",
+    "supportUrl": "https://jobblebaby.com/support"
   }
 }

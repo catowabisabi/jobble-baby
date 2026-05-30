@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Share, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getWeeklySummary, WeeklyTrend } from '../utils/weeklySummary';
@@ -175,6 +175,45 @@ export default function ScheduleScreen() {
     }
   };
 
+  // Encode schedule data to base64 for deep link sharing (React Native compatible)
+  function encodeScheduleForShare(): string {
+    try {
+      const payload = { v: 1, schedule: scheduleData, baby: babyProfile, ts: Date.now() };
+      const json = JSON.stringify(payload);
+      // btoa for React Native / browser environments
+      const base64 = btoa(unescape(encodeURIComponent(json)));
+      return `jobblebaby://schedule?data=${encodeURIComponent(base64)}`;
+    } catch {
+      return '';
+    }
+  }
+
+  // Share schedule as text summary + deep link
+  async function handleShareSchedule() {
+    try {
+      const todayEntries = scheduleData.filter(d => d.sleep);
+      if (todayEntries.length === 0) {
+        Alert.alert(t('schedule.shareNoDataTitle') || 'No Schedule Yet', t('schedule.shareNoDataMsg') || 'Add some sleep entries first before sharing.');
+        return;
+      }
+      const deepLink = encodeScheduleForShare();
+      const summary = [
+        `🍼 ${t('appName')} — ${t('tabs.schedule')}`,
+        '',
+        ...todayEntries.map(d => `• ${d.day}: ${d.sleep?.start}–${d.sleep?.end} (${d.sleep?.duration})`),
+        '',
+        deepLink,
+      ].join('\n');
+
+      await Share.share({
+        message: summary,
+        title: t('schedule.shareTitle') || 'Share Baby Schedule',
+      });
+    } catch (e) {
+      // Silent fail - user cancelled
+    }
+  }
+
   const nextNap = scheduleData.find(d => d.sleep)?.sleep || NEXT_NAP;
 
   const styles = StyleSheet.create({
@@ -274,6 +313,25 @@ export default function ScheduleScreen() {
       elevation: 5,
     },
     fabIcon: { fontSize: 24 },
+    fabShare: {
+      position: 'absolute',
+      bottom: 20,
+      right: 84,
+      backgroundColor: C.card,
+      borderWidth: 1,
+      borderColor: C.border,
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    fabShareIcon: { fontSize: 20 },
   });
 
   return (
@@ -416,7 +474,12 @@ export default function ScheduleScreen() {
         </View>
       </ScrollView>
 
-      {/* FAB */}
+      {/* Share FAB */}
+      <TouchableOpacity style={styles.fabShare} activeOpacity={0.8} onPress={handleShareSchedule}>
+        <Text style={styles.fabShareIcon}>📤</Text>
+      </TouchableOpacity>
+
+      {/* Add Entry FAB */}
       <TouchableOpacity style={styles.fab} activeOpacity={0.8} onPress={handleAddEntry}>
         <Text style={styles.fabIcon}>🌙</Text>
       </TouchableOpacity>

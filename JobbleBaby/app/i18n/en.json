@@ -290,5 +290,26 @@
     "cprTitle": "❤️ CPR",
     "cprWhen": "When to Start CPR",
     "cprSteps": "How to Perform CPR"
+  },
+  "daycare": {
+    "shareButton": "Share with Daycare",
+    "shareTitle": "Share with Daycare",
+    "shareMessage": "View today's schedule in Jobble Baby: {{url}}",
+    "accessLog": "Daycare Access Log",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "No active link",
+    "lastShared": "Last shared",
+    "expiresIn": "Expires in {{days}} days",
+    "expired": "Link expired",
+    "neverShared": "Never shared",
+    "scheduleTitle": "Today's Schedule",
+    "feeds": "Feeds",
+    "diapers": "Diapers",
+    "sleep": "Sleep",
+    "noEntries": "No entries yet",
+    "babyAge": "{{name}} · {{age}}",
+    "linkExpired": "This link has expired. Please request a new link from the parent.",
+    "invalidLink": "Invalid link. Please request a new link from the parent."
   }
 }

@@ -3,20 +3,24 @@ import { View, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Tabs } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import * as Linking from 'expo-linking';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import * as Notifications from 'expo-notifications';
 import OnboardingScreen from './screens/OnboardingScreen';
+import DaycareViewScreen from './screens/DaycareViewScreen';
 
 const PROFILE_KEY = '@jobble_baby_profile';
 
 export default function RootLayout() {
   const [hasProfile, setHasProfile] = useState<boolean | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [initialRoute, setInitialRoute] = useState<string | null>(null);
 
   useEffect(() => {
     Notifications.requestPermissionsAsync();
     checkProfile();
+    checkDeepLink();
   }, []);
 
   const checkProfile = async () => {
@@ -31,6 +35,15 @@ export default function RootLayout() {
     }
   };
 
+  const checkDeepLink = async () => {
+    try {
+      const initialUrl = await Linking.getInitialURL();
+      if (initialUrl && initialUrl.includes('daycare')) {
+        setInitialRoute('daycare');
+      }
+    } catch { /* silent */ }
+  };
+
   if (hasProfile === null) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0D0D0F' }}>
@@ -39,11 +52,20 @@ export default function RootLayout() {
     );
   }
 
-  if (showOnboarding) {
+  if (initialRoute === 'daycare' || showOnboarding) {
+    if (!hasProfile && initialRoute !== 'daycare') {
+      return (
+        <ThemeProvider>
+          <LanguageProvider>
+            <OnboardingScreen onComplete={() => setShowOnboarding(false)} />
+          </LanguageProvider>
+        </ThemeProvider>
+      );
+    }
     return (
       <ThemeProvider>
         <LanguageProvider>
-          <OnboardingScreen onComplete={() => setShowOnboarding(false)} />
+          <DaycareViewScreen />
         </LanguageProvider>
       </ThemeProvider>
     );
@@ -58,9 +80,7 @@ export default function RootLayout() {
   );
 }
 
-// Extracted to separate component so it renders INSIDE LanguageProvider
 function TabNavigator() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { t } = useLanguage();
   return (
     <Tabs>

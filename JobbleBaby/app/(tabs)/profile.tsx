@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, Share, Act
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getDocumentAsync } from 'expo-document-picker';
+import * as Linking from 'expo-linking';
+import { encodeDaycareToken, storeDaycareToken, getDaycareToken, getTokenDaysRemaining, isTokenExpired, DAYCARE_TOKEN_KEY } from '../utils/daycareToken';
 import BadgeGallery from '../components/BadgeGallery';
 import { getBadgeCounts } from '../utils/badgeService';
 import { useTheme } from '../context/ThemeContext';
@@ -100,6 +102,7 @@ export default function ProfileScreen() {
   const [isExportLoading, setIsExportLoading] = useState(false);
   const [isImportLoading, setIsImportLoading] = useState(false);
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
+  const [daycareLog, setDaycareLog] = useState<{ lastShared: string | null; expiresAt: number | null }>({ lastShared: null, expiresAt: null });
   const { effectiveTheme } = useTheme();
   const { t, language, toggleLanguage } = useLanguage();
   const C = COLORS[effectiveTheme];
@@ -225,6 +228,19 @@ export default function ProfileScreen() {
     loadBadgeCounts();
   }, []);
 
+  useEffect(() => {
+    loadDaycareToken();
+  }, []);
+
+  const loadDaycareToken = async () => {
+    try {
+      const stored = await getDaycareToken();
+      if (stored) {
+        setDaycareLog({ lastShared: new Date(stored.createdAt).toLocaleDateString(), expiresAt: stored.expiresAt });
+      }
+    } catch { }
+  };
+
   const loadBadgeCounts = async () => {
     const counts = await getBadgeCounts();
     setBadgeCounts(counts);
@@ -297,6 +313,25 @@ export default function ProfileScreen() {
     }
   };
 
+  const handleShareWithDaycare = async () => {
+    try {
+      const profileStr = await AsyncStorage.getItem('@jobble_baby_profile');
+      if (!profileStr) return;
+      const profile = JSON.parse(profileStr);
+      const token = encodeDaycareToken(profile);
+      await storeDaycareToken(token);
+      const url = Linking.createURL('daycare/' + token);
+      await Share.share({
+        message: t('daycare.shareMessage', { url }),
+        title: t('daycare.shareTitle'),
+      });
+      const stored = await getDaycareToken();
+      if (stored) {
+        setDaycareLog({ lastShared: new Date(stored.createdAt).toLocaleDateString(), expiresAt: stored.expiresAt });
+      }
+    } catch { }
+  };
+
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -358,6 +393,7 @@ export default function ProfileScreen() {
           <SettingRow icon="🔔" label={t('profile.notifications')} rowStyles={rowStyles} />
           <SettingRow icon="📤" label={t('profile.exportData')} onPress={handleExportData} isLoading={isExportLoading} rowStyles={rowStyles} />
           <SettingRow icon="📥" label={t('profile.importData')} onPress={handleImportData} isLoading={isImportLoading} rowStyles={rowStyles} />
+          <SettingRow icon="🔗" label={t('daycare.shareButton')} onPress={handleShareWithDaycare} rowStyles={rowStyles} />
           <ThemeToggleRow rowStyles={rowStyles} />
           <LanguageToggleRow rowStyles={rowStyles} />
           <SettingRow icon="🔒" label={t('profile.privacy')} rowStyles={rowStyles} />
@@ -379,6 +415,34 @@ export default function ProfileScreen() {
               ]);
             }}
           />
+        </View>
+
+        {/* Daycare Access Log */}
+        <View style={{ marginBottom: 24 }}>
+          <Text style={{ fontSize: 13, fontWeight: '600', color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 }}>{t('daycare.accessLog')}</Text>
+          <View style={{ backgroundColor: C.card, borderRadius: 12, padding: 16 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
+              <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: daycareLog.expiresAt && !isTokenExpired(daycareLog.expiresAt) ? '#22C55E' : '#9CA3AF', marginRight: 8 }} />
+              <Text style={{ color: C.text, fontSize: 14 }}>
+                {daycareLog.expiresAt && !isTokenExpired(daycareLog.expiresAt) 
+                  ? t('daycare.active') 
+                  : t('daycare.inactive')}
+              </Text>
+            </View>
+            <Text style={{ color: C.muted, fontSize: 12, marginBottom: 4 }}>{t('daycare.lastShared')}</Text>
+            <Text style={{ color: C.text, fontSize: 14, marginBottom: 8 }}>{daycareLog.lastShared || t('daycare.neverShared')}</Text>
+            {daycareLog.expiresAt && !isTokenExpired(daycareLog.expiresAt) && (
+              <>
+                <Text style={{ color: C.muted, fontSize: 12, marginBottom: 4 }}>{t('daycare.status')}</Text>
+                <Text style={{ color: C.accent, fontSize: 14 }}>
+                  {t('daycare.expiresIn', { days: getTokenDaysRemaining(daycareLog.expiresAt) })}
+                </Text>
+              </>
+            )}
+            {daycareLog.expiresAt && isTokenExpired(daycareLog.expiresAt) && (
+              <Text style={{ color: '#EF4444', fontSize: 14 }}>{t('daycare.expired')}</Text>
+            )}
+          </View>
         </View>
 
         {/* App version */}

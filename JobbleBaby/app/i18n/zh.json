@@ -290,5 +290,26 @@
     "cprTitle": "❤️ 心肺復甦",
     "cprWhen": "何時進行心肺復甦",
     "cprSteps": "如何進行心肺復甦"
+  },
+  "daycare": {
+    "shareButton": "分享給托兒所",
+    "shareTitle": "分享給托兒所",
+    "shareMessage": "在 Jobble Baby 查看今日日程：{{url}}",
+    "accessLog": "托兒所存取記錄",
+    "status": "狀態",
+    "active": "有效",
+    "inactive": "無有效連結",
+    "lastShared": "上次分享",
+    "expiresIn": "{{days}} 天後過期",
+    "expired": "連結已過期",
+    "neverShared": "從未分享",
+    "scheduleTitle": "今日日程",
+    "feeds": "餵食",
+    "diapers": "尿片",
+    "sleep": "睡眠",
+    "noEntries": "尚無記錄",
+    "babyAge": "{{name}} · {{age}}",
+    "linkExpired": "此連結已過期。請向家長請求新連結。",
+    "invalidLink": "無效連結。請向家長請求新連結。"
   }
 }

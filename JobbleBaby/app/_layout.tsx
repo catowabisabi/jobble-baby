@@ -4,8 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Tabs } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { ThemeProvider } from './context/ThemeContext';
-import { LanguageProvider } from './context/LanguageContext';
-import { useLanguage } from './context/LanguageContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import * as Notifications from 'expo-notifications';
 import OnboardingScreen from './screens/OnboardingScreen';
 
@@ -14,7 +13,6 @@ const PROFILE_KEY = '@jobble_baby_profile';
 export default function RootLayout() {
   const [hasProfile, setHasProfile] = useState<boolean | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const { t } = useLanguage();
 
   useEffect(() => {
     Notifications.requestPermissionsAsync();
@@ -54,33 +52,42 @@ export default function RootLayout() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <Tabs>
-          <Tabs.Screen
-            name="index"
-            options={{ title: t('home.title'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="home" color={color} /> }}
-          />
-          <Tabs.Screen
-            name="tracking"
-            options={{ title: t('tracking.title'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="edit" color={color} /> }}
-          />
-          <Tabs.Screen
-            name="schedule"
-            options={{ title: t('schedule.title'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="schedule" color={color} /> }}
-          />
-          <Tabs.Screen
-            name="products"
-            options={{ title: t('products.title'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="shopping-bag" color={color} /> }}
-          />
-          <Tabs.Screen
-            name="growth"
-            options={{ title: t('growth.title'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="show-chart" color={color} /> }}
-          />
-          <Tabs.Screen
-            name="profile"
-            options={{ title: t('profile.title'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="person" color={color} /> }}
-          />
-        </Tabs>
+        <TabNavigator />
       </LanguageProvider>
     </ThemeProvider>
+  );
+}
+
+// Extracted to separate component so it renders INSIDE LanguageProvider
+function TabNavigator() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useLanguage();
+  return (
+    <Tabs>
+      <Tabs.Screen
+        name="index"
+        options={{ title: t('tabs.home'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="home" color={color} /> }}
+      />
+      <Tabs.Screen
+        name="tracking"
+        options={{ title: t('tabs.tracking'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="edit" color={color} /> }}
+      />
+      <Tabs.Screen
+        name="schedule"
+        options={{ title: t('tabs.schedule'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="schedule" color={color} /> }}
+      />
+      <Tabs.Screen
+        name="products"
+        options={{ title: t('tabs.products'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="shopping-bag" color={color} /> }}
+      />
+      <Tabs.Screen
+        name="growth"
+        options={{ title: t('tabs.growth'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="show-chart" color={color} /> }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{ title: t('tabs.profile'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="person" color={color} /> }}
+      />
+    </Tabs>
   );
 }

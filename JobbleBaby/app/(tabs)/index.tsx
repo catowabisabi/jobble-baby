@@ -88,10 +88,10 @@ export default function HomeScreen() {
           setTimelineEvents(todayEvents);
         }
         // Latest entry per type
-        const latest: Record<string, string> = { diaper: '--:--', feed: '--:--', sleep: '--:--' };
+        const latest = { diaper: '--:--', feed: '--:--', sleep: '--:--' };
         for (const e of entries) {
-          if (latest[e.type] === '--:--' || e.time > latest[e.type]) {
-            latest[e.type] = e.time;
+          if (latest[e.type as keyof typeof latest] === '--:--' || e.time > latest[e.type as keyof typeof latest]) {
+            latest[e.type as keyof typeof latest] = e.time;
           }
         }
         setLastEvents(latest);

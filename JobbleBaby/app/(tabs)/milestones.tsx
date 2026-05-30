@@ -59,7 +59,7 @@ function getBabyAgeInMonths(birthDateStr: string): string {
 }
 
 function getDateStr(): string {
-  return new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  return new Date().toISOString().split('T')[0];
 }
 
 export default function MilestonesScreen() {

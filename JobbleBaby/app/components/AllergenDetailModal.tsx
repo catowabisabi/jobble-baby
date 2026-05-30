@@ -6,17 +6,13 @@ import {
   TouchableOpacity,
   Modal,
   LayoutAnimation,
-  Platform,
-  UIManager,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Allergen, AllergenEntry, AllergenStatus, STATUS_LABELS, FPIES_WARNING } from '../data/allergens';
 import { COLORS } from '../theme';
 import { useTheme } from '../context/ThemeContext';
 
-if (Platform.OS === 'android' && UIManager.setLayoutAnimation) {
-  UIManager.setLayoutAnimation;
-}
+
 
 interface Props {
   visible: boolean;

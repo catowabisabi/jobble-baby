@@ -6,8 +6,6 @@ import {
   TouchableOpacity,
   Modal,
   LayoutAnimation,
-  Platform,
-  UIManager,
   TextInput,
   ScrollView,
   Image,
@@ -18,14 +16,7 @@ import { Reaction, ReactionType, REACTION_SYMPTOMS, FPIES_WARNING, Allergen } fr
 import { COLORS } from '../theme';
 import { useTheme } from '../context/ThemeContext';
 
-try {
-  if (Platform.OS === 'android') {
-    const uimanager = UIManager as Record<string, unknown>;
-    if (uimanager.setLayoutAnimation) {
-      uimanager.setLayoutAnimation();
-    }
-  }
-} catch {}
+
 
 interface Props {
   visible: boolean;

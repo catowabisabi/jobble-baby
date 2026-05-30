@@ -108,7 +108,7 @@ interface GrowthEntry {
   weight: number;
 }
 
-const getDateStr = () => new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const getDateStr = () => new Date().toISOString().split('T')[0];
 
 const getTrendArrow = (current: number, previous: number): string => {
   const diff = current - previous;
@@ -129,9 +129,9 @@ const getAgeInMonths = (dateStr: string): number => {
 };
 
 const MOCK_ENTRIES: GrowthEntry[] = [
-  { id: '1', date: 'May 20, 2026', height: 62, weight: 5.2 },
-  { id: '2', date: 'May 15, 2026', height: 61, weight: 5.0 },
-  { id: '3', date: 'May 10, 2026', height: 60, weight: 4.8 },
+  { id: '1', date: '2026-05-20', height: 62, weight: 5.2 },
+  { id: '2', date: '2026-05-15', height: 61, weight: 5.0 },
+  { id: '3', date: '2026-05-10', height: 60, weight: 4.8 },
 ];
 
 const CHART_H = 200;

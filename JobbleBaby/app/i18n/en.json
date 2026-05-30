@@ -80,6 +80,7 @@
     "shareTitle": "Share Baby Schedule",
     "shareNoDataTitle": "No Schedule Yet",
     "shareNoDataMsg": "Add some sleep entries first before sharing.",
+    "shareQRLabel": "Scan to open schedule in Jobble Baby",
     "dailySummaryTitle": "Daily Summary Ready 📋",
     "dailySummaryBody": "Tap to see yesterday's feeding, sleep & diaper summary."
   },

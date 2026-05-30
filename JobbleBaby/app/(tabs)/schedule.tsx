@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Share, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Share, Alert, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import QRCode from 'react-native-qrcode-svg';
 import { getWeeklySummary, WeeklyTrend } from '../utils/weeklySummary';
 import { awardWeeklyViewer } from '../utils/badgeService';
 import { useNotifications } from '../hooks/useNotifications';
@@ -106,6 +107,7 @@ export default function ScheduleScreen() {
   const [babyProfile, setBabyProfile] = useState<{ birthDate?: string } | null>(null);
   const [weeklySummary, setWeeklySummary] = useState<WeeklyTrend | null>(null);
   const [notificationPermission, setNotificationPermission] = useState<'granted' | 'denied' | 'undetermined'>('undetermined');
+  const [showQRModal, setShowQRModal] = useState(false);
   const { requestPermissions, scheduleSleepNotification, scheduleFeedingReminder, scheduleDailySummary, cancelAllNotifications } = useNotifications();
   const { effectiveTheme } = useTheme();
   const { t } = useLanguage();
@@ -158,6 +160,60 @@ export default function ScheduleScreen() {
     };
     requestNotifPermissions();
   }, [requestPermissions, scheduleFeedingReminder]);
+
+  // Share QR Modal Component
+  const ShareQRModal = () => {
+    const deepLink = encodeScheduleForShare();
+    return (
+      <Modal visible={showQRModal} transparent animationType="fade" onRequestClose={() => setShowQRModal(false)}>
+        <View style={{
+          flex: 1,
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 20,
+        }}>
+          <View style={{
+            backgroundColor: '#0D0D0D',
+            borderRadius: 20,
+            padding: 24,
+            alignItems: 'center',
+            width: '100%',
+            maxWidth: 340,
+            borderWidth: 1,
+            borderColor: '#3B82F6',
+          }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#fff', marginBottom: 8 }}>
+              {t('schedule.shareTitle') || 'Share Baby Schedule'}
+            </Text>
+            <Text style={{ fontSize: 13, color: '#9CA3AF', marginBottom: 20, textAlign: 'center' }}>
+              {t('schedule.shareQRLabel')}
+            </Text>
+            <View style={{ backgroundColor: '#fff', borderRadius: 12, padding: 16, marginBottom: 20 }}>
+              <QRCode value={deepLink} size={200} backgroundColor="#ffffff" color="#000000" />
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                setShowQRModal(false);
+                handleShareSchedule();
+              }}
+              style={{ backgroundColor: '#3B82F6', borderRadius: 12, paddingVertical: 14, paddingHorizontal: 32, width: '100%' }}
+            >
+              <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', textAlign: 'center' }}>
+                {t('schedule.shareTitle') || 'Share'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setShowQRModal(false)}
+              style={{ marginTop: 12 }}
+            >
+              <Text style={{ color: '#9CA3AF', fontSize: 14 }}>{t('common.cancel') || 'Cancel'}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
 
   const handleAddEntry = async () => {
     const now = new Date();
@@ -480,9 +536,19 @@ export default function ScheduleScreen() {
       </ScrollView>
 
       {/* Share FAB */}
-      <TouchableOpacity style={styles.fabShare} activeOpacity={0.8} onPress={handleShareSchedule}>
+      <TouchableOpacity style={styles.fabShare} activeOpacity={0.8} onPress={() => {
+        const todayEntries = scheduleData.filter(d => d.sleep);
+        if (todayEntries.length === 0) {
+          Alert.alert(t('schedule.shareNoDataTitle') || 'No Schedule Yet', t('schedule.shareNoDataMsg') || 'Add some sleep entries first before sharing.');
+        } else {
+          setShowQRModal(true);
+        }
+      }}>
         <Text style={styles.fabShareIcon}>📤</Text>
       </TouchableOpacity>
+
+      {/* Share QR Modal */}
+      <ShareQRModal />
 
       {/* Add Entry FAB */}
       <TouchableOpacity style={styles.fab} activeOpacity={0.8} onPress={handleAddEntry}>

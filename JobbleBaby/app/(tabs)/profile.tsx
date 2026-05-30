@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, Share, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getDocumentAsync } from 'expo-document-picker';
 import BadgeGallery from '../components/BadgeGallery';
 import { getBadgeCounts } from '../utils/badgeService';
 import { useTheme } from '../context/ThemeContext';
@@ -32,6 +33,9 @@ const STORAGE_KEYS = [
   '@jobble/growth_entries',
   '@jobble/badges',
   '@jobble/schedule_entries',
+  '@jobble_baby_profile',
+  '@jobble/allergen_entries',
+  '@jobble/milestones',
 ];
 
 function SettingRow({ icon, label, onPress, isLoading, rowStyles }: SettingRowProps) {
@@ -94,6 +98,7 @@ export default function ProfileScreen() {
   const [showBadges, setShowBadges] = useState(false);
   const [badgeCounts, setBadgeCounts] = useState({ earned: 0, total: 0 });
   const [isExportLoading, setIsExportLoading] = useState(false);
+  const [isImportLoading, setIsImportLoading] = useState(false);
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
   const { effectiveTheme } = useTheme();
   const { t, language, toggleLanguage } = useLanguage();
@@ -248,6 +253,50 @@ export default function ProfileScreen() {
     }
   };
 
+  const handleImportData = async () => {
+    setIsImportLoading(true);
+    try {
+      const result = await getDocumentAsync({ type: ['public.json'], copyToCacheDirectory: true, multiple: false });
+      if (result.canceled || !result.assets || result.assets.length === 0) {
+        setIsImportLoading(false);
+        return;
+      }
+      const file = result.assets[0];
+      const content = await fetch(file.uri).then(r => r.text());
+      if (!content.trim()) {
+        Alert.alert(t('profile.importFailed') || 'Import Failed', 'Empty file.');
+        setIsImportLoading(false);
+        return;
+      }
+      let parsed: Record<string, unknown>;
+      try {
+        parsed = JSON.parse(content);
+      } catch {
+        Alert.alert(t('profile.importFailed') || 'Import Failed', 'Invalid backup file.');
+        setIsImportLoading(false);
+        return;
+      }
+      if (!parsed._exportedAt || !parsed._appVersion) {
+        Alert.alert(t('profile.importFailed') || 'Import Failed', 'Missing metadata.');
+        setIsImportLoading(false);
+        return;
+      }
+      let count = 0;
+      for (const key of Object.keys(parsed)) {
+        if (key.startsWith('_')) continue;
+        if (parsed[key] != null) {
+          await AsyncStorage.setItem(key, JSON.stringify(parsed[key]));
+          count++;
+        }
+      }
+      Alert.alert(t('profile.importSuccess') || 'Import Successful', `Imported ${count} entries — restart app to see changes.`);
+    } catch (e) {
+      Alert.alert(t('profile.importFailed') || 'Import Failed', 'Could not import data. Please try again.');
+    } finally {
+      setIsImportLoading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -308,6 +357,7 @@ export default function ProfileScreen() {
           <Text style={styles.settingsLabel}>{t('profile.settings')}</Text>
           <SettingRow icon="🔔" label={t('profile.notifications')} rowStyles={rowStyles} />
           <SettingRow icon="📤" label={t('profile.exportData')} onPress={handleExportData} isLoading={isExportLoading} rowStyles={rowStyles} />
+          <SettingRow icon="📥" label={t('profile.importData')} onPress={handleImportData} isLoading={isImportLoading} rowStyles={rowStyles} />
           <ThemeToggleRow rowStyles={rowStyles} />
           <LanguageToggleRow rowStyles={rowStyles} />
           <SettingRow icon="🔒" label={t('profile.privacy')} rowStyles={rowStyles} />

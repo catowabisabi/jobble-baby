@@ -130,6 +130,8 @@
     "dark": "深色",
     "exportData": "匯出資料",
     "importData": "匯入資料",
+    "importSuccess": "匯入成功",
+    "importFailed": "匯入失敗",
     "badges": "徽章",
     "badgeCollection": "徽章收藏",
     "earnedOf": "已獲得 {{earned}}/{{total}} 枚徽章",

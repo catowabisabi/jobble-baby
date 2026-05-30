@@ -1,0 +1,27 @@
+Task #41 — JSON DATA IMPORT (Profile tab)
+
+Profile tab has Export Data button but NO Import button. Users cannot restore from backup.
+
+CONTEXT:
+- Profile tab: JobbleBaby/app/(tabs)/profile.tsx
+- Expo project: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+- Export uses Share API (exports JSON string via Share.share)
+- Storage keys: @jobble/tracking_entries, @jobble/growth_entries, @jobble/badges, @jobble/schedule_entries, @jobble_baby_profile
+- i18n exists: app/i18n/en.json + zh.json with keys like "profile.importData", "profile.importSuccess", etc. already added
+- expo-document-picker NOT yet installed — install it
+- Use existing handleExportData pattern as reference
+
+IMPLEMENT:
+1. Run: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx expo install expo-document-picker
+2. In profile.tsx — add handleImportData() function:
+   a. Use DocumentPicker to get .json file (types: ['public.json'])
+   b. Read file content
+   c. Parse JSON — validate _exportedAt and _appVersion fields exist
+   d. For each top-level key in exportData (skip keys starting with '_'), write to AsyncStorage
+   e. Show Alert: "Imported {count} entries — restart app to see changes"
+   f. Handle errors: invalid JSON → "Invalid backup file", wrong format → "Missing metadata", empty → "Empty file"
+3. Add Import Data SettingRow below Export Data row in Settings section
+4. Run: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit 2>/dev/null | head -20
+5. Commit: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby && git add -A && git commit -m "feat: add JSON data import to Profile tab — restore from backup file"
+6. Report DONE
+ULW

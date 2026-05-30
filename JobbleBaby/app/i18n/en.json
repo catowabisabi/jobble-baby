@@ -144,6 +144,8 @@
     "dark": "Dark",
     "exportData": "Export Data",
     "importData": "Import Data",
+    "importSuccess": "Import Successful",
+    "importFailed": "Import Failed",
     "badges": "Badges",
     "badgeCollection": "Badge Collection",
     "earnedOf": "{{earned}} of {{total}} badges earned",

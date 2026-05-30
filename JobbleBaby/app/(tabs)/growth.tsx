@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { onNewGrowthEntry } from '../utils/badgeService';
 import { Badge } from '../data/badges';
 import { useTheme } from '../context/ThemeContext';
@@ -338,6 +340,7 @@ const chartStyles = StyleSheet.create({
 });
 
 export default function GrowthScreen() {
+  const router = useRouter();
   const [entries, setEntries] = useState<GrowthEntry[]>([]);
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
@@ -354,6 +357,12 @@ export default function GrowthScreen() {
     header: { marginBottom: 24 },
     greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
     title: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
+    milestoneBtn: {
+      flexDirection: 'row', alignItems: 'center', gap: 4,
+      paddingHorizontal: 10, paddingVertical: 6,
+      borderRadius: 12, marginTop: 4,
+    },
+    milestoneBtnText: { fontSize: 12, fontWeight: '600', color: C.text },
     badgeBanner: {
       backgroundColor: C.card,
       borderRadius: 12,
@@ -489,8 +498,20 @@ export default function GrowthScreen() {
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Track</Text>
-          <Text style={styles.title}>📈 Growth</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <View>
+              <Text style={styles.greeting}>Track</Text>
+              <Text style={styles.title}>📈 Growth</Text>
+            </View>
+            <TouchableOpacity
+              style={[styles.milestoneBtn, { backgroundColor: C.accent }]}
+              onPress={() => router.push('/milestones')}
+              activeOpacity={0.7}
+            >
+              <MaterialCommunityIcons name="camera" size={16} color={C.text} />
+              <Text style={styles.milestoneBtnText}>📸 Milestone</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         {newBadges.length > 0 && (

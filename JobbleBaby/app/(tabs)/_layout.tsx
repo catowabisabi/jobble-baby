@@ -45,6 +45,10 @@ export default function TabsLayout() {
         name="profile"
         options={{ title: t('tabs.profile'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" size={size} color={color} /> }}
       />
+      <Tabs.Screen
+        name="sleep-training"
+        options={{ title: t('tabs.sleepTraining'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="moon" size={size} color={color} /> }}
+      />
     </Tabs>
   );
 }

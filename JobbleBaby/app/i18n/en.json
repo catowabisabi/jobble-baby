@@ -562,5 +562,56 @@
       "first_word": "First Word",
       "first_food": "First Food"
     }
+  },
+  "brainBuilder": {
+    "title": "Brain Builder",
+    "subtitle": "Developmental Milestones",
+    "weeklyFocus": "This Week's Focus",
+    "dailyPrompt": "Today's Activity",
+    "completeBtn": "✓ Done Today",
+    "completed": "Completed",
+    "windowCloses": "Window closes in {{days}} days!",
+    "criticalAlert": "⚠️ Critical Period",
+    "badgeEarned": "🎉 Brain Builder Badge Earned!",
+    "badgeDesc": "5 daily activities completed this week",
+    "progress": "{{count}}/5 this week",
+    "windows": {
+      "0-2": {
+        "name": "0-2 months",
+        "title": "Visual Tracking & Face Recognition",
+        "focus": "Follow faces and high-contrast objects",
+        "prompt": "Tummy time: 3x5min with black & white cards"
+      },
+      "2-4": {
+        "name": "2-4 months",
+        "title": "Reaching & Grasping",
+        "focus": "Track moving objects, grasp rattles",
+        "prompt": "Reach game: Dangle soft rattle 12\" away, encourage swat"
+      },
+      "4-6": {
+        "name": "4-6 months",
+        "title": "Rolling & Babbling",
+        "focus": "Roll both ways, sit with support, babble chains",
+        "prompt": "Tummy time: 3x5min with mirror + peek-a-boo sounds"
+      },
+      "6-9": {
+        "name": "6-9 months",
+        "title": "Sitting & Crawling",
+        "focus": "Sit independently, crawl, pincer grasp",
+        "prompt": "Crawl practice: Place favorite toy just out of reach"
+      },
+      "9-12": {
+        "name": "9-12 months",
+        "title": "Pulling to Stand & First Words",
+        "focus": "Pull to stand, first words, object permanence",
+        "prompt": "Cruise game: Encourage pulling up on low furniture"
+      },
+      "12-18": {
+        "name": "12-18 months",
+        "title": "Walking & Vocabulary Explosion",
+        "focus": "First steps, 10+ words, parallel play",
+        "prompt": "Walk practice: Stand together, hold one finger, walk 5 steps"
+      }
+    }
   }
 }

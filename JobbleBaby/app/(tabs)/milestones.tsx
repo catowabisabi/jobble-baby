@@ -10,7 +10,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
-import { onNewGrowthEntry } from '../utils/badgeService';
+import { onNewGrowthEntry, awardBadge } from '../utils/badgeService';
 
 const { width: SCREEN_W } = Dimensions.get('window');
 const GRID_COLS = 2;
@@ -26,6 +26,7 @@ const MILESTONE_TYPES = [
 ];
 
 const STORAGE_KEY = '@jobble/milestone_photos';
+const BRAIN_BUILDER_KEY = '@jobble/brain_builder_week';
 
 interface BabyProfile {
   name: string;
@@ -43,6 +44,16 @@ interface MilestonePhoto {
   weight?: number;
   percentile?: number;
 }
+
+// WHO/AAP Developmental Windows
+const DEV_WINDOWS = [
+  { key: '0-2', minMonths: 0, maxMonths: 2, name: '0-2 months' },
+  { key: '2-4', minMonths: 2, maxMonths: 4, name: '2-4 months' },
+  { key: '4-6', minMonths: 4, maxMonths: 6, name: '4-6 months' },
+  { key: '6-9', minMonths: 6, maxMonths: 9, name: '6-9 months' },
+  { key: '9-12', minMonths: 9, maxMonths: 12, name: '9-12 months' },
+  { key: '12-18', minMonths: 12, maxMonths: 18, name: '12-18 months' },
+];
 
 function getBabyAgeInMonths(birthDateStr: string): string {
   try {
@@ -63,6 +74,36 @@ function getDateStr(): string {
   return new Date().toISOString().split('T')[0];
 }
 
+function getBabyAgeMonths(birthDateStr: string): number {
+  try {
+    const birth = new Date(birthDateStr);
+    const now = new Date();
+    const totalDays = Math.floor((now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+    return Math.floor(totalDays / 30.44);
+  } catch {
+    return 0;
+  }
+}
+
+function getDevWindow(months: number): typeof DEV_WINDOWS[0] | null {
+  for (const win of DEV_WINDOWS) {
+    if (months >= win.minMonths && months < win.maxMonths) return win;
+  }
+  if (months >= 18) return DEV_WINDOWS[DEV_WINDOWS.length - 1];
+  return null;
+}
+
+function getDaysUntilWindowClose(months: number): number | null {
+  for (const win of DEV_WINDOWS) {
+    if (months >= win.minMonths && months < win.maxMonths) {
+      const windowEndDays = win.maxMonths * 30.44;
+      const currentDays = months * 30.44;
+      return Math.floor(windowEndDays - currentDays);
+    }
+  }
+  return null;
+}
+
 export default function MilestonesScreen() {
   const { effectiveTheme } = useTheme();
   const { t } = useLanguage();
@@ -73,12 +114,38 @@ export default function MilestonesScreen() {
   const [selectedType, setSelectedType] = useState(MILESTONE_TYPES[0]);
   const [isCapturing, setIsCapturing] = useState(false);
   const [showReminder, setShowReminder] = useState(false);
+  const [brainBuilderDone, setBrainBuilderDone] = useState<Set<string>>(new Set());
+  const [babyMonths, setBabyMonths] = useState<number>(0);
+  const [badgeEarned, setBadgeEarned] = useState(false);
 
   useEffect(() => {
     loadPhotos();
     loadProfile();
+    loadBrainBuilder();
     checkMilestoneReminder();
   }, []);
+
+  const loadBrainBuilder = async () => {
+    try {
+      const stored = await AsyncStorage.getItem('@jobble_baby_profile');
+      if (stored) {
+        const profile: BabyProfile = JSON.parse(stored);
+        if (profile.birthDate) {
+          const months = getBabyAgeMonths(profile.birthDate);
+          setBabyMonths(months);
+        }
+      }
+      const raw = await AsyncStorage.getItem(BRAIN_BUILDER_KEY);
+      if (raw) {
+        const data = JSON.parse(raw);
+        const today = getDateStr();
+        if (data.weekStart === today.split('T')[0].substring(0, 7)) {
+          setBrainBuilderDone(new Set(data.doneDays || []));
+          setBadgeEarned(data.badgeEarned || false);
+        }
+      }
+    } catch { /* ignore */ }
+  };
 
   const checkMilestoneReminder = async () => {
     try {
@@ -118,6 +185,29 @@ export default function MilestonesScreen() {
     try {
       const stored = await AsyncStorage.getItem('@jobble_baby_profile');
       if (stored) setBabyProfile(JSON.parse(stored));
+    } catch { /* ignore */ }
+  };
+
+  const markBrainBuilderDone = async () => {
+    const today = getDateStr();
+    const newDone = new Set(brainBuilderDone);
+    newDone.add(today);
+    setBrainBuilderDone(newDone);
+
+    const count = newDone.size;
+    let earned = badgeEarned;
+    if (count >= 5 && !earned) {
+      earned = true;
+      setBadgeEarned(true);
+      await awardBadge('brain_builder');
+    }
+
+    try {
+      await AsyncStorage.setItem(BRAIN_BUILDER_KEY, JSON.stringify({
+        weekStart: today.substring(0, 7),
+        doneDays: Array.from(newDone),
+        badgeEarned: earned,
+      }));
     } catch { /* ignore */ }
   };
 
@@ -254,10 +344,94 @@ export default function MilestonesScreen() {
     },
     emptyText: { fontSize: 12, color: C.muted, marginTop: 8, textAlign: 'center' },
     emptyIcon: { color: C.muted },
+    // Brain Builder styles
+    brainBuilderSection: {
+      backgroundColor: '#6D28D9',
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 24,
+    },
+    brainBuilderHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 12,
+      gap: 10,
+    },
+    brainBuilderIcon: {
+      backgroundColor: 'rgba(255,255,255,0.2)',
+      borderRadius: 12,
+      padding: 8,
+    },
+    brainBuilderTitle: { fontSize: 18, fontWeight: '700', color: '#fff' },
+    brainBuilderSubtitle: { fontSize: 12, color: 'rgba(255,255,255,0.8)', marginTop: 2 },
+    windowTag: {
+      backgroundColor: 'rgba(255,255,255,0.15)',
+      borderRadius: 8,
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      alignSelf: 'flex-start',
+      marginBottom: 12,
+    },
+    windowTagText: { fontSize: 11, color: '#fff', fontWeight: '600' },
+    weeklyFocusCard: {
+      backgroundColor: 'rgba(255,255,255,0.1)',
+      borderRadius: 12,
+      padding: 12,
+      marginBottom: 12,
+    },
+    weeklyFocusLabel: { fontSize: 11, color: 'rgba(255,255,255,0.7)', marginBottom: 4 },
+    weeklyFocusTitle: { fontSize: 15, fontWeight: '700', color: '#fff', marginBottom: 4 },
+    weeklyFocusText: { fontSize: 13, color: 'rgba(255,255,255,0.9)' },
+    dailyPromptCard: {
+      backgroundColor: 'rgba(255,255,255,0.15)',
+      borderRadius: 12,
+      padding: 14,
+      marginBottom: 12,
+    },
+    dailyPromptLabel: { fontSize: 11, color: 'rgba(255,255,255,0.7)', marginBottom: 6 },
+    dailyPromptText: { fontSize: 14, fontWeight: '600', color: '#fff', lineHeight: 20 },
+    completeBtn: {
+      backgroundColor: '#fff',
+      borderRadius: 12,
+      padding: 14,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 8,
+    },
+    completeBtnText: { fontSize: 15, fontWeight: '700', color: '#6D28D9' },
+    completedRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+    progressText: { fontSize: 13, color: 'rgba(255,255,255,0.8)', marginTop: 8 },
+    criticalBanner: {
+      backgroundColor: '#EF4444',
+      borderRadius: 8,
+      padding: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 8,
+      marginBottom: 12,
+    },
+    criticalText: { fontSize: 12, fontWeight: '600', color: '#fff', flex: 1 },
+    badgeCard: {
+      backgroundColor: '#F59E0B',
+      borderRadius: 10,
+      padding: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 8,
+    },
+    badgeCardText: { fontSize: 12, fontWeight: '700', color: '#fff' },
   });
 
   const typeIcon = (typeId: string) =>
     MILESTONE_TYPES.find(t => t.id === typeId)?.icon || 'star';
+
+  // Brain Builder logic
+  const devWindow = getDevWindow(babyMonths);
+  const daysLeft = getDaysUntilWindowClose(babyMonths);
+  const today = getDateStr();
+  const isDoneToday = brainBuilderDone.has(today);
+  const isCritical = daysLeft !== null && daysLeft <= 14 && daysLeft > 0;
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -266,6 +440,82 @@ export default function MilestonesScreen() {
           <Text style={styles.greeting}>{t('milestones.greeting')}</Text>
           <Text style={styles.title}>🏆 {t('milestones.title')}</Text>
         </View>
+
+        {/* Brain Builder Section */}
+        {devWindow && (
+          <View style={styles.brainBuilderSection}>
+            <View style={styles.brainBuilderHeader}>
+              <View style={styles.brainBuilderIcon}>
+                <MaterialCommunityIcons name="brain" size={24} color="#fff" />
+              </View>
+              <View>
+                <Text style={styles.brainBuilderTitle}>{t('brainBuilder.title')}</Text>
+                <Text style={styles.brainBuilderSubtitle}>{t('brainBuilder.subtitle')}</Text>
+              </View>
+            </View>
+
+            <View style={styles.windowTag}>
+              <Text style={styles.windowTagText}>{devWindow.name}</Text>
+            </View>
+
+            {/* Critical period alert */}
+            {isCritical && (
+              <View style={styles.criticalBanner}>
+                <MaterialCommunityIcons name="alert" size={16} color="#fff" />
+                <Text style={styles.criticalText}>{t('brainBuilder.windowCloses', { days: daysLeft })}</Text>
+              </View>
+            )}
+
+            {/* Weekly Focus */}
+            <View style={styles.weeklyFocusCard}>
+              <Text style={styles.weeklyFocusLabel}>{t('brainBuilder.weeklyFocus')}</Text>
+              <Text style={styles.weeklyFocusTitle}>
+                {t(`brainBuilder.windows.${devWindow.key}.title`)}
+              </Text>
+              <Text style={styles.weeklyFocusText}>
+                {t(`brainBuilder.windows.${devWindow.key}.focus`)}
+              </Text>
+            </View>
+
+            {/* Daily Prompt */}
+            <View style={styles.dailyPromptCard}>
+              <Text style={styles.dailyPromptLabel}>{t('brainBuilder.dailyPrompt')}</Text>
+              <Text style={styles.dailyPromptText}>
+                {t(`brainBuilder.windows.${devWindow.key}.prompt`)}
+              </Text>
+            </View>
+
+            {/* Complete button */}
+            <TouchableOpacity
+              style={styles.completeBtn}
+              onPress={markBrainBuilderDone}
+              activeOpacity={0.8}
+            >
+              <View style={styles.completedRow}>
+                <MaterialCommunityIcons
+                  name={isDoneToday ? "check-circle" : "circle-outline"}
+                  size={20}
+                  color={isDoneToday ? "#6D28D9" : "#6D28D9"}
+                />
+                <Text style={styles.completeBtnText}>
+                  {isDoneToday ? t('brainBuilder.completed') : t('brainBuilder.completeBtn')}
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+            <Text style={styles.progressText}>
+              {t('brainBuilder.progress', { count: brainBuilderDone.size })}
+            </Text>
+
+            {/* Badge earned */}
+            {badgeEarned && (
+              <View style={[styles.badgeCard, { marginTop: 12 }]}>
+                <MaterialCommunityIcons name="trophy" size={18} color="#fff" />
+                <Text style={styles.badgeCardText}>{t('brainBuilder.badgeEarned')}</Text>
+              </View>
+            )}
+          </View>
+        )}
 
         {/* Milestone Type Selector */}
         <Text style={styles.sectionTitle}>{t('milestones.milestoneType')}</Text>

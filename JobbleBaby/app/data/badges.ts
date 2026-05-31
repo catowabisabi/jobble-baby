@@ -126,6 +126,14 @@ export const BADGES: Badge[] = [
     category: 'engagement',
     condition: 'Export a doctor visit summary',
   },
+  {
+    id: 'brain_builder',
+    name: 'Brain Builder',
+    description: 'Completed 5 daily developmental activities in a week',
+    icon: '🧠',
+    category: 'engagement',
+    condition: 'Complete 5 brain builder activities in one week',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

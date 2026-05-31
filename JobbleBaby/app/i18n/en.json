@@ -14,7 +14,8 @@
     "circadian": "Circadian",
     "monitorCorrelation": "Monitor",
     "shiftHandoff": "Shift",
-    "stressCascade": "Stress Support"
+    "stressCascade": "Stress Support",
+    "doctorVisit": "Doctor Visit"
   },
   "home": {
     "title": "Home",
@@ -535,5 +536,30 @@
     "checkinStillStressed": "Still feeling overwhelmed",
     "interventionsCompleted": "{{count}} interventions completed",
     "interventions": "Interventions"
+  },
+  "doctorVisit": {
+    "title": "Doctor Visit Summary",
+    "greeting": "Export",
+    "sleepHours": "Sleep",
+    "sleepAvg": "Avg hours/day",
+    "last30Days": "Last 30 days",
+    "feedingFreq": "Feeding",
+    "feedsPerDay": "feeds/day",
+    "growthStats": "Growth",
+    "milestones": "Milestones",
+    "exportBtn": "Share Summary",
+    "copyToClipboard": "Copy to Clipboard",
+    "shareAsText": "Share as Text",
+    "noData": "No data yet",
+    "recentEntries": "Recent",
+    "height": "Height",
+    "weight": "Weight",
+    "percentile": "Percentile",
+    "milestoneTypes": {
+      "first_smile": "First Smile",
+      "first_steps": "First Steps",
+      "first_word": "First Word",
+      "first_food": "First Food"
+    }
   }
 }

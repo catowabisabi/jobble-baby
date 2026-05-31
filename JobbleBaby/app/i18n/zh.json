@@ -14,7 +14,8 @@
     "circadian": "生理時鐘",
     "monitorCorrelation": "監控關聯",
     "shiftHandoff": "交接",
-    "stressCascade": "壓力支援"
+    "stressCascade": "壓力支援",
+    "doctorVisit": "就診準備"
   },
   "home": {
     "title": "主頁",
@@ -535,5 +536,30 @@
     "checkinStillStressed": "仍然感到壓力",
     "interventionsCompleted": "已完成 {{count}} 次干預",
     "interventions": "干預措施"
+  },
+  "doctorVisit": {
+    "title": "就診摘要",
+    "greeting": "匯出",
+    "sleepHours": "睡眠",
+    "sleepAvg": "平均小時/天",
+    "last30Days": "過去30天",
+    "feedingFreq": "餵食",
+    "feedsPerDay": "次/天",
+    "growthStats": "成長",
+    "milestones": "里程碑",
+    "exportBtn": "分享摘要",
+    "copyToClipboard": "複製到剪貼板",
+    "shareAsText": "以文字分享",
+    "noData": "尚無數據",
+    "recentEntries": "最近",
+    "height": "身高",
+    "weight": "體重",
+    "percentile": "百分位",
+    "milestoneTypes": {
+      "first_smile": "第一次微笑",
+      "first_steps": "第一步",
+      "first_word": "第一個字",
+      "first_food": "第一口固體"
+    }
   }
 }

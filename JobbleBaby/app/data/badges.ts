@@ -118,6 +118,14 @@ export const BADGES: Badge[] = [
     category: 'engagement',
     condition: 'Handoff during stress flag',
   },
+  {
+    id: 'medical_prep',
+    name: 'Medical Prep',
+    description: 'Exported a doctor visit summary',
+    icon: '📋',
+    category: 'engagement',
+    condition: 'Export a doctor visit summary',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

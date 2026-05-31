@@ -12,7 +12,8 @@
     "teething": "Teething",
     "milkPrep": "Milk Prep",
     "circadian": "Circadian",
-    "monitorCorrelation": "Monitor"
+    "monitorCorrelation": "Monitor",
+    "shiftHandoff": "Shift"
   },
   "home": {
     "title": "Home",
@@ -485,5 +486,33 @@
     "tipTransportBody": "Use an insulated cooler with frozen ice packs. Milk stays safe up to 24h. Keep cooler closed as much as possible.",
     "tipAddFreshTitle": "Can I add fresh to leftover?",
     "tipAddFreshBody": "Cool fresh milk first, then combine. Use within 2h of when the oldest milk was first exposed to room temp."
+  },
+  "shiftHandoff": {
+    "title": "Shift Handoff",
+    "activeCaregiver": "Active Caregiver",
+    "trustIndicator": "Trust Indicator",
+    "unread": "Unread",
+    "read": "Read",
+    "shiftToggle": "Shift Toggle",
+    "parentA": "Parent A",
+    "parentB": "Parent B",
+    "lastSwitch": "Last switch",
+    "handoverFrom": "Handover from",
+    "handoverNote": "Handover Note",
+    "handoverPlaceholder": "Enter handover notes for the next caregiver...",
+    "last6Hours": "Last 6 Hours",
+    "noRecentEntries": "No entries in the last 6 hours",
+    "careLog": "Care Log",
+    "feeding": "Feeding",
+    "sleep": "Sleep",
+    "diaper": "Diaper",
+    "medicine": "Medicine",
+    "note": "Note",
+    "medicineName": "Medicine Name",
+    "medicineNamePlaceholder": "Enter medicine name",
+    "dosage": "Dosage",
+    "dosagePlaceholder": "Enter dosage",
+    "noteOptional": "Note (optional)",
+    "notePlaceholder": "Add a note..."
   }
 }

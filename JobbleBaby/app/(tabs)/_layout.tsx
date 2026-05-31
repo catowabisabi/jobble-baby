@@ -67,6 +67,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="snowflake" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="shift-handoff"
+        options={{
+          title: t('tabs.shiftHandoff') || 'Shift',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account-switch" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

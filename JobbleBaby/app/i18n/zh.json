@@ -12,7 +12,8 @@
     "teething": "出牙",
     "milkPrep": "母乳準備",
     "circadian": "生理時鐘",
-    "monitorCorrelation": "監控關聯"
+    "monitorCorrelation": "監控關聯",
+    "shiftHandoff": "交接"
   },
   "home": {
     "title": "主頁",
@@ -485,5 +486,33 @@
     "tipTransportBody": "使用隔熱冷藏袋配合冰袋。母乳可安全保存最多24小時。盡量保持冷藏袋關閉。",
     "tipAddFreshTitle": "可以混合新鮮母乳嗎？",
     "tipAddFreshBody": "先將新鮮母乳冷卻後再混合。最早在最早接觸室溫的那袋母乳起2小時內使用。"
+  },
+  "shiftHandoff": {
+    "title": "交接班",
+    "activeCaregiver": "現任照顧者",
+    "trustIndicator": "信任指標",
+    "unread": "未讀",
+    "read": "已讀",
+    "shiftToggle": "切換班次",
+    "parentA": "家長 A",
+    "parentB": "家長 B",
+    "lastSwitch": "上次切換",
+    "handoverFrom": "來自家長",
+    "handoverNote": "交接備註",
+    "handoverPlaceholder": "輸入給下一位照顧者的交接備註...",
+    "last6Hours": "過去6小時",
+    "noRecentEntries": "過去6小時沒有記錄",
+    "careLog": "護理記錄",
+    "feeding": "餵食",
+    "sleep": "睡眠",
+    "diaper": "尿片",
+    "medicine": "藥物",
+    "note": "備註",
+    "medicineName": "藥物名稱",
+    "medicineNamePlaceholder": "輸入藥物名稱",
+    "dosage": "劑量",
+    "dosagePlaceholder": "輸入劑量",
+    "noteOptional": "備註（選填）",
+    "notePlaceholder": "添加備註..."
   }
 }

@@ -47,7 +47,7 @@ export default function TabsLayout() {
       />
       <Tabs.Screen
         name="sleep-training"
-        options={{ title: t('tabs.sleepTraining'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="moon" size={size} color={color} /> }}
+        options={{ title: t('tabs.sleepTraining'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="weather-night" size={size} color={color} /> }}
       />
       <Tabs.Screen
         name="teething"

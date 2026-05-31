@@ -60,6 +60,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="baby-face-outline" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="milk-prep"
+        options={{
+          title: t('tabs.milkPrep'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="snowflake" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

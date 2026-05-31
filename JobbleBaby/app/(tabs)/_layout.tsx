@@ -53,6 +53,13 @@ export default function TabsLayout() {
         name="teething"
         options={{ title: t('tabs.teething'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="tooth" size={size} color={color} /> }}
       />
+      <Tabs.Screen
+        name="monitor-correlation"
+        options={{
+          title: t('tabs.monitorCorrelation') || 'Monitor',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="baby-face-outline" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

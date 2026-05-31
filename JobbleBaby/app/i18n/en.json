@@ -426,5 +426,16 @@
     "tipFirstToothTitle": "First Tooth Care",
     "tipFirstToothBody": "Start brushing when first tooth erupts. Use a tiny smear of fluoride toothpaste on a soft infant toothbrush.",
     "darkMode": "Dark Mode"
+  },
+  "monitor": {
+    "lastEvent": "Last monitor event",
+    "noEvents": "No monitor events yet — tap to open monitor app",
+    "logCry": "Log cry event",
+    "greeting": "Monitor",
+    "correlationTitle": "Correlation"
+  },
+  "settings": {
+    "monitorApp": "Monitor App",
+    "monitorIntegration": "Monitor Integration"
   }
 }

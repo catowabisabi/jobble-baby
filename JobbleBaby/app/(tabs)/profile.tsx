@@ -10,6 +10,7 @@ import { getBadgeCounts } from '../utils/badgeService';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { useMonitorLink, MonitorApp } from '../hooks/useMonitorLink';
 
 interface BabyProfile {
   name: string;
@@ -103,6 +104,8 @@ export default function ProfileScreen() {
   const [isImportLoading, setIsImportLoading] = useState(false);
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
   const [daycareLog, setDaycareLog] = useState<{ lastShared: string | null; expiresAt: number | null }>({ lastShared: null, expiresAt: null });
+  const [preferredMonitorApp, setPreferredMonitorApp] = useState<MonitorApp | null>(null);
+  const { getPreferredApp, setPreferredApp } = useMonitorLink();
   const { effectiveTheme } = useTheme();
   const { t, language, toggleLanguage } = useLanguage();
   const C = COLORS[effectiveTheme];
@@ -232,6 +235,14 @@ export default function ProfileScreen() {
     loadDaycareToken();
   }, []);
 
+  useEffect(() => {
+    const load = async () => {
+      const app = await getPreferredApp();
+      setPreferredMonitorApp(app);
+    };
+    load();
+  }, [getPreferredApp]);
+
   const loadDaycareToken = async () => {
     try {
       const stored = await getDaycareToken();
@@ -332,6 +343,21 @@ export default function ProfileScreen() {
     } catch { }
   };
 
+  const handleMonitorAppPress = async () => {
+    const current = await getPreferredApp();
+    Alert.alert(
+      t('settings.monitorApp') || 'Monitor App',
+      'Select your baby monitor app',
+      [
+        { text: 'Baby Monitor 3G', onPress: async () => { await setPreferredApp('baby-monitor-3g'); setPreferredMonitorApp('baby-monitor-3g'); } },
+        { text: 'Cloud Baby Camera', onPress: async () => { await setPreferredApp('cloudbaby'); setPreferredMonitorApp('cloudbaby'); } },
+        { text: 'Nanit', onPress: async () => { await setPreferredApp('nanit'); setPreferredMonitorApp('nanit'); } },
+        { text: 'Other', onPress: async () => { await setPreferredApp('other'); setPreferredMonitorApp('other'); } },
+        { text: t('common.cancel') || 'Cancel', style: 'cancel' },
+      ]
+    );
+  };
+
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -391,6 +417,17 @@ export default function ProfileScreen() {
         <View style={styles.settingsSection}>
           <Text style={styles.settingsLabel}>{t('profile.settings')}</Text>
           <SettingRow icon="🔔" label={t('profile.notifications')} rowStyles={rowStyles} />
+          <SettingRow
+            icon="📹"
+            label={t('settings.monitorApp') || 'Monitor App'}
+            onPress={handleMonitorAppPress}
+            rowStyles={rowStyles}
+          />
+          <SettingRow
+            icon="🔗"
+            label={t('settings.monitorIntegration') || 'Monitor Integration'}
+            rowStyles={rowStyles}
+          />
           <SettingRow icon="📤" label={t('profile.exportData')} onPress={handleExportData} isLoading={isExportLoading} rowStyles={rowStyles} />
           <SettingRow icon="📥" label={t('profile.importData')} onPress={handleImportData} isLoading={isImportLoading} rowStyles={rowStyles} />
           <SettingRow icon="🔗" label={t('daycare.shareButton')} onPress={handleShareWithDaycare} rowStyles={rowStyles} />

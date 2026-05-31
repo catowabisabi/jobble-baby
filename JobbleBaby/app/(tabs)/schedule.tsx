@@ -9,6 +9,7 @@ import { useNotifications } from '../hooks/useNotifications';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import MonitorWidget from '../components/MonitorWidget';
 
 const STORAGE_KEY = '@jobble/schedule_entries';
 
@@ -403,6 +404,8 @@ export default function ScheduleScreen() {
           <Text style={styles.greeting}>{t('schedule.greeting')}</Text>
           <Text style={styles.title}>{t('schedule.title')}</Text>
         </View>
+
+        <MonitorWidget />
 
         {/* Wake Window Card */}
         {babyProfile?.birthDate && (() => {

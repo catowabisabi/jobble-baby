@@ -426,5 +426,16 @@
     "tipFirstToothTitle": "第一顆牙齒護理",
     "tipFirstToothBody": "第一顆牙長出後開始刷牙。用軟嬰兒牙刷沾少量含氟牙膏。",
     "darkMode": "深色模式"
+  },
+  "monitor": {
+    "lastEvent": "最後監控事件",
+    "noEvents": "尚無監控事件 —點擊開啟監控應用",
+    "logCry": "記錄哭聲事件",
+    "greeting": "監控",
+    "correlationTitle": "關聯分析"
+  },
+  "settings": {
+    "monitorApp": "監控應用",
+    "monitorIntegration": "監控整合"
   }
 }

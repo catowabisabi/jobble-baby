@@ -176,6 +176,7 @@
     "earnedOf": "{{earned}} of {{total}} badges earned",
     "settings": "Settings",
     "notifications": "Notifications",
+    "doctorVisit": "Doctor Visit",
     "privacy": "Privacy",
     "about": "About",
     "resetProfile": "Reset Profile",

@@ -1,0 +1,32 @@
+Implement Doctor Visit Summary Export — generate shareable summary of sleep hours, feeding frequency, growth measurements, milestones achieved for pediatrician appointments. Reuses existing tracking/schedule/growth/milestones data. idea #20.
+
+## Requirements
+1. New tab or modal screen: Doctor Visit Summary
+2. Data pulled from AsyncStorage: @jobble/tracking, @jobble/schedule, @jobble/growth, @jobble/milestones
+3. Summary format: last 7 days of tracking data aggregated, growth chart latest measurement + percentile, list of recent milestones (last 90 days)
+4. Share button: uses expo-sharing or Share API to export as formatted text or PDF-ready HTML string
+5. Design: clean medical report style, high contrast for printing, dark-mode compatible
+6. Reuses existing data models — no new storage schema needed
+
+## Keywords for this task: mechanical joint, newborn routine, swipe gesture
+
+## Context
+- Project: Jobble Baby (Expo/React Native, expo-router, AsyncStorage)
+- Tab files: JobbleBaby/app/(tabs)/index.tsx, tracking.tsx, schedule.tsx, growth.tsx, profile.tsx
+- i18n: JobbleBaby/i18n/en.json and zh.json — add new keys under "doctorVisit" namespace
+- Language: implement in English first, Chinese (zh.json) translation second
+
+## Design
+- Use COLORS from ThemeContext — warm amber palette, voice-free
+- No external dependencies beyond expo-sharing already in package.json
+- Large tap targets for tired parents
+- Print-friendly: black text on white background, minimal color
+
+## Files to create/modify
+- JobbleBaby/app/(tabs)/doctor-visit.tsx (already exists — review and extend if needed)
+- JobbleBaby/app/(tabs)/_layout.tsx (add tab if missing)
+- JobbleBaby/i18n/en.json + zh.json (add keys)
+- JobbleBaby/app/(tabs)/profile.tsx (add "Doctor Visit Summary" row)
+
+Begin implementation now. When done, report which files were created/modified and verify the share functionality works with a test call.
+ULW

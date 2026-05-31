@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getDocumentAsync } from 'expo-document-picker';
 import * as Linking from 'expo-linking';
 import { encodeDaycareToken, storeDaycareToken, getDaycareToken, getTokenDaysRemaining, isTokenExpired, DAYCARE_TOKEN_KEY } from '../utils/daycareToken';
+import { useRouter } from 'expo-router';
 import BadgeGallery from '../components/BadgeGallery';
 import { getBadgeCounts } from '../utils/badgeService';
 import { useTheme } from '../context/ThemeContext';
@@ -108,6 +109,7 @@ export default function ProfileScreen() {
   const { getPreferredApp, setPreferredApp } = useMonitorLink();
   const { effectiveTheme } = useTheme();
   const { t, language, toggleLanguage } = useLanguage();
+  const router = useRouter();
   const C = COLORS[effectiveTheme];
 
   const rowStyles = StyleSheet.create({
@@ -433,6 +435,7 @@ export default function ProfileScreen() {
           <SettingRow icon="🔗" label={t('daycare.shareButton')} onPress={handleShareWithDaycare} rowStyles={rowStyles} />
           <ThemeToggleRow rowStyles={rowStyles} />
           <LanguageToggleRow rowStyles={rowStyles} />
+          <SettingRow icon="🏥" label={t('profile.doctorVisit')} onPress={() => router.push('/doctor-visit')} rowStyles={rowStyles} />
           <SettingRow icon="🔒" label={t('profile.privacy')} rowStyles={rowStyles} />
           <SettingRow icon="ℹ️" label={t('profile.about')} rowStyles={rowStyles} />
           <SettingRow

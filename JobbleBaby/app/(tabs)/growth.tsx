@@ -129,12 +129,6 @@ const getAgeInMonths = (dateStr: string): number => {
   }
 };
 
-const MOCK_ENTRIES: GrowthEntry[] = [
-  { id: '1', date: '2026-05-20', height: 62, weight: 5.2 },
-  { id: '2', date: '2026-05-15', height: 61, weight: 5.0 },
-  { id: '3', date: '2026-05-10', height: 60, weight: 4.8 },
-];
-
 const CHART_H = 200;
 const CHART_PADDING = { top: 20, bottom: 30, left: 10, right: 10 };
 const CHART_W = 340; // approximate, flexes with container
@@ -454,10 +448,10 @@ export default function GrowthScreen() {
         if (stored) {
           setEntries(JSON.parse(stored));
         } else {
-          setEntries(MOCK_ENTRIES);
+          setEntries([]);
         }
       } catch (e) {
-        setEntries(MOCK_ENTRIES);
+        setEntries([]);
       }
     };
     const loadGender = async () => {

@@ -43,14 +43,6 @@ interface TimelineEvent {
   note?: string;
 }
 
-const MOCK_EVENTS: TimelineEvent[] = [
-  { id: '1', type: 'diaper', icon: '🧷', time: '08:30', note: 'Wet' },
-  { id: '2', type: 'feed', icon: '🍼', time: '09:00', note: 'Breast, 12min' },
-  { id: '3', type: 'sleep', icon: '🌙', time: '09:45', note: 'Nap' },
-  { id: '4', type: 'diaper', icon: '🧷', time: '11:15', note: 'Both' },
-  { id: '5', type: 'feed', icon: '🍼', time: '12:00', note: 'Bottle, 120ml' },
-];
-
 const ICON_MAP: Record<string, string> = {
   diaper: '🧷',
   feed: '🍼',
@@ -63,7 +55,7 @@ export default function HomeScreen() {
   const C = COLORS[effectiveTheme];
 
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
-  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>(MOCK_EVENTS);
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
   const [lastEvents, setLastEvents] = useState({ diaper: '--:--', feed: '--:--', sleep: '--:--' });
   const [showSOS, setShowSOS] = useState(false);
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);

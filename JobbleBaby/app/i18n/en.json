@@ -11,7 +11,8 @@
     "sleepTraining": "Sleep",
     "teething": "Teething",
     "milkPrep": "Milk Prep",
-    "circadian": "Circadian"
+    "circadian": "Circadian",
+    "monitorCorrelation": "Monitor"
   },
   "home": {
     "title": "Home",

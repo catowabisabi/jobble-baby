@@ -546,7 +546,7 @@ export default function SleepTrainingScreen() {
       {!canStartTraining && babyProfile?.birthDate && (
         <View style={styles.ageWarning}>
           <Text style={styles.ageWarningText}>
-            {t('sleepTraining.tooYoung') || 'Sleep training recommended at 4+ months. Baby is currently ' + Math.round(babyAge * 10) / 10 + ' months old.'}
+            {t('sleepTraining.tooYoung', { age: Math.round(babyAge * 10) / 10 })}
           </Text>
         </View>
       )}
@@ -670,7 +670,7 @@ export default function SleepTrainingScreen() {
           <View style={styles.cioCard}>
             <View style={styles.cioHeader}>
               <Text style={styles.cioLabel}>{t('sleepTraining.fadingDay') || 'Fading Progress'}</Text>
-              <Text style={styles.cioValue}>{t('sleepTraining.dayOf') || `Day ${session.fadingDay}/14`}</Text>
+              <Text style={styles.cioValue}>{t('sleepTraining.dayOf', { current: session.fadingDay })}</Text>
             </View>
             <View style={styles.cioRow}>
               <Text style={styles.cioRowLabel}>{t('sleepTraining.association') || 'Feed/sleep'}</Text>
@@ -686,7 +686,7 @@ export default function SleepTrainingScreen() {
             {session.checkIns.map((check, idx) => (
               <View key={idx} style={styles.checkInRow}>
                 <Ionicons name="checkmark-circle" size={16} color={AMBER} style={styles.checkInIcon} />
-                <Text style={styles.checkInText}>{t('sleepTraining.checkInNumber') || `Check-in ${idx + 1}`}</Text>
+                <Text style={styles.checkInText}>{t('sleepTraining.checkInNumber', { n: idx + 1 })}</Text>
                 <Text style={styles.checkInTime}>{check.timestamp}</Text>
               </View>
             ))}

@@ -98,6 +98,18 @@ function TabNavigator() {
         options={{ title: t('tabs.schedule'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="schedule" color={color} /> }}
       />
       <Tabs.Screen
+        name="allergens"
+        options={{ title: t('tabs.allergens'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="no-food" color={color} /> }}
+      />
+      <Tabs.Screen
+        name="milestones"
+        options={{ title: t('tabs.milestones'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="emoji-events" color={color} /> }}
+      />
+      <Tabs.Screen
+        name="sleep-training"
+        options={{ title: t('tabs.sleepTraining'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="nightlight" color={color} /> }}
+      />
+      <Tabs.Screen
         name="products"
         options={{ title: t('tabs.products'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="shopping-bag" color={color} /> }}
       />

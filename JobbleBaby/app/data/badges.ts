@@ -102,6 +102,22 @@ export const BADGES: Badge[] = [
     category: 'milestone',
     condition: 'Add 1 growth entry',
   },
+  {
+    id: 'stress_survival',
+    name: 'Stress Survival',
+    description: 'Completed 3 crisis interventions',
+    icon: '🧘',
+    category: 'engagement',
+    condition: 'Complete 3 crisis interventions',
+  },
+  {
+    id: 'team_player',
+    name: 'Team Player',
+    description: 'Handed off to partner during stress',
+    icon: '🤝',
+    category: 'engagement',
+    condition: 'Handoff during stress flag',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

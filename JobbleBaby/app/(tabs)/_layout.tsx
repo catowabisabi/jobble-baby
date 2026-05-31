@@ -74,6 +74,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account-switch" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="stress-cascade"
+        options={{
+          title: t('tabs.stressCascade'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

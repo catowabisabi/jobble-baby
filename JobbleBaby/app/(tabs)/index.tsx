@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Pressable, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -60,6 +61,9 @@ export default function HomeScreen() {
   const [showSOS, setShowSOS] = useState(false);
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [fabPressed, setFabPressed] = useState(false);
+  const [showStressBanner, setShowStressBanner] = useState(false);
+  const [stressLevel, setStressLevel] = useState<'yellow' | 'red'>('yellow');
+  const router = useRouter();
 
   const handleSOSLongPress = () => {
     setShowSOS(true);
@@ -126,6 +130,41 @@ export default function HomeScreen() {
     };
     loadProfile();
     loadTracking();
+  }, []);
+
+  useEffect(() => {
+    const loadStressData = async () => {
+      try {
+        const [logRaw, nightsRaw] = await Promise.all([
+          AsyncStorage.getItem('@jobble/stress_log'),
+          AsyncStorage.getItem('@jobble/sleep_training_nights'),
+        ]);
+        const log = logRaw ? JSON.parse(logRaw) : [];
+        const nights = nightsRaw ? JSON.parse(nightsRaw) : [];
+
+        const sortedNights = [...nights].sort((a: any, b: any) => b.date.localeCompare(a.date));
+        let consecutiveLowSleep = 0;
+        for (const night of sortedNights) {
+          if (night.hoursSlept < 5) {
+            consecutiveLowSleep++;
+          } else {
+            break;
+          }
+        }
+
+        const hasRegression = nights.some((n: any) => n.wasRegression);
+        const hasOverwhelmed = log.some((e: any) => e.type === 'overwhelmed');
+
+        if (consecutiveLowSleep >= 5 && hasOverwhelmed) {
+          setStressLevel('red');
+          setShowStressBanner(true);
+        } else if (consecutiveLowSleep >= 3 && hasRegression) {
+          setStressLevel('yellow');
+          setShowStressBanner(true);
+        }
+      } catch {}
+    };
+    loadStressData();
   }, []);
 
   const babyName = babyProfile?.name ? `${babyProfile.name}'s` : "Baby's";
@@ -208,6 +247,27 @@ export default function HomeScreen() {
           <Text style={styles.babyName}>{t('home.title')}</Text>
           <Text style={styles.date}>Friday, May 29, 2026</Text>
         </View>
+
+        
+        {showStressBanner && (
+          <TouchableOpacity
+            style={{
+              backgroundColor: stressLevel === 'red' ? '#EF4444' : '#F59E0B',
+              borderRadius: 12,
+              padding: 12,
+              marginBottom: 16,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+            onPress={() => router.replace('/stress-cascade')}
+            activeOpacity={0.8}
+          >
+            <Text style={{ fontSize: 20 }}>💜</Text>
+            <Text style={{ flex: 1, marginLeft: 8, fontSize: 14, fontWeight: '600', color: '#fff' }}>
+              {stressLevel === 'red' ? t('stressCascade.cascadeRed') : t('stressCascade.cascadeYellow')}
+            </Text>
+          </TouchableOpacity>
+        )}
 
         {/* Summary Cards */}
         <View style={styles.summaryRow}>

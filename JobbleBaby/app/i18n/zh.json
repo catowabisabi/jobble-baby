@@ -13,7 +13,8 @@
     "milkPrep": "母乳準備",
     "circadian": "生理時鐘",
     "monitorCorrelation": "監控關聯",
-    "shiftHandoff": "交接"
+    "shiftHandoff": "交接",
+    "stressCascade": "壓力支援"
   },
   "home": {
     "title": "主頁",
@@ -514,5 +515,25 @@
     "dosagePlaceholder": "輸入劑量",
     "noteOptional": "備註（選填）",
     "notePlaceholder": "添加備註..."
+  },
+  "stressCascade": {
+    "title": "壓力支援",
+    "subtitle": "你不是一個人",
+    "overwhelmedButton": "我感到不知所措",
+    "parentSleepHours": "家長睡眠時數",
+    "missedMeal": "錯過了一餐",
+    "tooMuchCaffeine": "攝取過多咖啡因",
+    "cascadeYellow": "你似乎累了——記得深呼吸",
+    "cascadeRed": "需要深呼吸——試試4-7-8呼吸法",
+    "breathingTitle": "4-7-8 呼吸法",
+    "breathingInstructions": "吸氣4秒 · 屏息7秒 · 呼氣8秒",
+    "callFriend": "致電朋友",
+    "safeSpaceChecklist": "安全空間清單",
+    "sidsSwaddleReminder": "記住：仰躺包巾，腳在底部",
+    "checkinPrompt": "今天感覺如何？",
+    "checkinBetter": "你做得很好！💜",
+    "checkinStillStressed": "仍然感到壓力",
+    "interventionsCompleted": "已完成 {{count}} 次干預",
+    "interventions": "干預措施"
   }
 }

@@ -13,7 +13,8 @@
     "milkPrep": "Milk Prep",
     "circadian": "Circadian",
     "monitorCorrelation": "Monitor",
-    "shiftHandoff": "Shift"
+    "shiftHandoff": "Shift",
+    "stressCascade": "Stress Support"
   },
   "home": {
     "title": "Home",
@@ -487,7 +488,7 @@
     "tipAddFreshTitle": "Can I add fresh to leftover?",
     "tipAddFreshBody": "Cool fresh milk first, then combine. Use within 2h of when the oldest milk was first exposed to room temp."
   },
-  "shiftHandoff": {
+    "shiftHandoff": {
     "title": "Shift Handoff",
     "activeCaregiver": "Active Caregiver",
     "trustIndicator": "Trust Indicator",
@@ -514,5 +515,25 @@
     "dosagePlaceholder": "Enter dosage",
     "noteOptional": "Note (optional)",
     "notePlaceholder": "Add a note..."
+  },
+  "stressCascade": {
+    "title": "Stress Support",
+    "subtitle": "You are not alone",
+    "overwhelmedButton": "I am feeling overwhelmed",
+    "parentSleepHours": "Parent sleep hours",
+    "missedMeal": "Missed a meal",
+    "tooMuchCaffeine": "Too much caffeine",
+    "cascadeYellow": "You seem tired — remember to breathe",
+    "cascadeRed": "Deep breath needed — try the 4-7-8 exercise",
+    "breathingTitle": "4-7-8 Breathing",
+    "breathingInstructions": "Inhale 4s · Hold 7s · Exhale 8s",
+    "callFriend": "Call a Friend",
+    "safeSpaceChecklist": "Safe Space Checklist",
+    "sidsSwaddleReminder": "Remember: Swaddle on back, feet at bottom",
+    "checkinPrompt": "How are you feeling today?",
+    "checkinBetter": "You are doing great! 💜",
+    "checkinStillStressed": "Still feeling overwhelmed",
+    "interventionsCompleted": "{{count}} interventions completed",
+    "interventions": "Interventions"
   }
 }

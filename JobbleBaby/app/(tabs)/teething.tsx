@@ -15,17 +15,31 @@ const PROFILE_KEY = '@jobble_baby_profile';
 const TEETHING_BLUE = '#60A5FA';
 const TEETHING_AMBER = '#F59E0B';
 
-const TOOTH_POSITIONS: Record<number, { name: string; emoji: string; typicalMonths: number }> = {
-  1:  { name: 'Upper Central Incisor',   emoji: '🔼', typicalMonths: 8  },
-  2:  { name: 'Upper Lateral Incisor',  emoji: '🔼', typicalMonths: 10 },
-  3:  { name: 'Upper Canine',           emoji: '🔼', typicalMonths: 18 },
-  4:  { name: 'Upper First Molar',      emoji: '🔼', typicalMonths: 14 },
-  5:  { name: 'Upper Second Molar',     emoji: '🔼', typicalMonths: 24 },
-  6:  { name: 'Lower Central Incisor',  emoji: '🔽', typicalMonths: 6  },
-  7:  { name: 'Lower Lateral Incisor',  emoji: '🔽', typicalMonths: 7  },
-  8:  { name: 'Lower Canine',           emoji: '🔽', typicalMonths: 18 },
-  9:  { name: 'Lower First Molar',      emoji: '🔽', typicalMonths: 14 },
-  10: { name: 'Lower Second Molar',     emoji: '🔽', typicalMonths: 24 },
+const TOOTH_POSITIONS: Record<number, { name: string; emoji: string; typicalMonths: number; quadrant: 'UR' | 'UL' | 'LL' | 'LR' }> = {
+  // Upper Right (UR): teeth 1-5
+  1:  { name: 'Upper Central Incisor',   emoji: '🔼', typicalMonths: 8,  quadrant: 'UR' },
+  2:  { name: 'Upper Lateral Incisor',  emoji: '🔼', typicalMonths: 10, quadrant: 'UR' },
+  3:  { name: 'Upper Canine',           emoji: '🔼', typicalMonths: 18, quadrant: 'UR' },
+  4:  { name: 'Upper First Molar',      emoji: '🔼', typicalMonths: 14, quadrant: 'UR' },
+  5:  { name: 'Upper Second Molar',     emoji: '🔼', typicalMonths: 24, quadrant: 'UR' },
+  // Upper Left (UL): teeth 6-10
+  6:  { name: 'Upper Central Incisor',   emoji: '🔼', typicalMonths: 8,  quadrant: 'UL' },
+  7:  { name: 'Upper Lateral Incisor',  emoji: '🔼', typicalMonths: 10, quadrant: 'UL' },
+  8:  { name: 'Upper Canine',           emoji: '🔼', typicalMonths: 18, quadrant: 'UL' },
+  9:  { name: 'Upper First Molar',      emoji: '🔼', typicalMonths: 14, quadrant: 'UL' },
+  10: { name: 'Upper Second Molar',     emoji: '🔼', typicalMonths: 24, quadrant: 'UL' },
+  // Lower Left (LL): teeth 11-15
+  11: { name: 'Lower Central Incisor',  emoji: '🔽', typicalMonths: 6,  quadrant: 'LL' },
+  12: { name: 'Lower Lateral Incisor',  emoji: '🔽', typicalMonths: 7,  quadrant: 'LL' },
+  13: { name: 'Lower Canine',           emoji: '🔽', typicalMonths: 18, quadrant: 'LL' },
+  14: { name: 'Lower First Molar',      emoji: '🔽', typicalMonths: 14, quadrant: 'LL' },
+  15: { name: 'Lower Second Molar',     emoji: '🔽', typicalMonths: 24, quadrant: 'LL' },
+  // Lower Right (LR): teeth 16-20
+  16: { name: 'Lower Central Incisor',  emoji: '🔽', typicalMonths: 6,  quadrant: 'LR' },
+  17: { name: 'Lower Lateral Incisor',  emoji: '🔽', typicalMonths: 7,  quadrant: 'LR' },
+  18: { name: 'Lower Canine',           emoji: '🔽', typicalMonths: 18, quadrant: 'LR' },
+  19: { name: 'Lower First Molar',      emoji: '🔽', typicalMonths: 14, quadrant: 'LR' },
+  20: { name: 'Lower Second Molar',     emoji: '🔽', typicalMonths: 24, quadrant: 'LR' },
 };
 
 type SymptomId = 'drooling' | 'gum_swollen' | 'irritable' | 'biting' | 'fever' | 'sleep_disrupted' | 'rash' | 'decreased_appetite';
@@ -194,7 +208,7 @@ export default function TeethingScreen() {
     tabButtonText: { fontSize: 11, fontWeight: '600', color: darkMode ? '#8b9bb4' : C.muted },
     tabButtonTextActive: { color: '#fff' },
     toothGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-    toothCard: { width: '47%', backgroundColor: darkMode ? '#1a2a3a' : C.card, borderRadius: 12, padding: 14, borderWidth: 1, borderColor: darkMode ? '#2a3a4a' : C.border, marginBottom: 8 },
+    toothCard: { width: '23%', backgroundColor: darkMode ? '#1a2a3a' : C.card, borderRadius: 12, padding: 14, borderWidth: 1, borderColor: darkMode ? '#2a3a4a' : C.border, marginBottom: 8 },
     toothCardErupted: { borderColor: TEETHING_BLUE, borderWidth: 2, backgroundColor: darkMode ? '#1a2a4a' : '#EFF6FF' },
     toothHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 6 },
     toothEmoji: { fontSize: 24, marginRight: 8 },
@@ -262,6 +276,9 @@ export default function TeethingScreen() {
     expectedSoonEmoji: { fontSize: 18, marginRight: 8 },
     expectedSoonName: { fontSize: 13, color: darkMode ? '#F8FAFC' : C.text, flex: 1 },
     expectedSoonAge: { fontSize: 12, color: darkMode ? '#8b9bb4' : C.muted },
+    quadrantGrid: { flexDirection: 'row', gap: 8 },
+    quadrantColumn: { flex: 1, alignItems: 'center' },
+    quadrantLabel: { fontSize: 11, fontWeight: '700', color: TEETHING_BLUE, marginBottom: 8, textAlign: 'center' },
   });
 
   const eruptedCount = getEruptedCount();
@@ -306,29 +323,36 @@ export default function TeethingScreen() {
       )}
 
       <Text style={styles.sectionTitle}>All 20 Baby Teeth</Text>
-      <View style={styles.toothGrid}>
-        {Object.entries(TOOTH_POSITIONS).map(([numStr, tooth]) => {
-          const num = parseInt(numStr, 10);
-          const erupted = teeth.find((t) => t.toothId === num);
-          return (
-            <TouchableOpacity
-              key={num}
-              style={[styles.toothCard, erupted && styles.toothCardErupted]}
-              activeOpacity={0.7}
-              onPress={() => markToothErupted(num)}
-            >
-              <View style={styles.toothHeader}>
-                <Text style={styles.toothEmoji}>{tooth.emoji}</Text>
-                <Text style={styles.toothName}>#{num}</Text>
-              </View>
-              <Text style={[styles.toothMeta, erupted && styles.toothMetaErupted]}>
-                {erupted ? `✓ ${formatDate(erupted.eruptingAt!)}` : `~${tooth.typicalMonths} mo`}
-              </Text>
-              {erupted && <Text style={styles.erupting}>ERUPTED</Text>}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+    <View style={styles.quadrantGrid}>
+      {(['UR', 'UL', 'LL', 'LR'] as const).map((quadrant) => (
+        <View key={quadrant} style={styles.quadrantColumn}>
+          <Text style={styles.quadrantLabel}>{quadrant}</Text>
+          {Object.entries(TOOTH_POSITIONS)
+            .filter(([, tooth]) => tooth.quadrant === quadrant)
+            .map(([numStr, tooth]) => {
+              const num = parseInt(numStr, 10);
+              const erupted = teeth.find((t) => t.toothId === num);
+              return (
+                <TouchableOpacity
+                  key={num}
+                  style={[styles.toothCard, erupted && styles.toothCardErupted]}
+                  activeOpacity={0.7}
+                  onPress={() => markToothErupted(num)}
+                >
+                  <View style={styles.toothHeader}>
+                    <Text style={styles.toothEmoji}>{tooth.emoji}</Text>
+                    <Text style={styles.toothName}>#{num}</Text>
+                  </View>
+                  <Text style={[styles.toothMeta, erupted && styles.toothMetaErupted]}>
+                    {erupted ? `✓ ${formatDate(erupted.eruptingAt!)}` : `~${tooth.typicalMonths} mo`}
+                  </Text>
+                  {erupted && <Text style={styles.erupting}>ERUPTED</Text>}
+                </TouchableOpacity>
+              );
+            })}
+        </View>
+      ))}
+    </View>
     </View>
   );
 

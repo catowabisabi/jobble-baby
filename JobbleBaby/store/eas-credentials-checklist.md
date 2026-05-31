@@ -83,10 +83,10 @@ cat JobbleBaby/eas.json
 Expected content:
 ```json
 {
-  "cli": { "version": ">= 5.0.0" },
+  "cli": { "version": ">= 13.0.0" },
   "build": {
     "development": { "developmentClient": true, "distribution": "internal" },
-    "preview": { "distribution": "internal", "ios": { "simulator": false } },
+    "preview": { "distribution": "internal", "ios": { "simulator": true }, "android": { "buildType": "apk" } },
     "production": { "ios": { "simulator": false } }
   },
   "submit": {
@@ -97,6 +97,28 @@ Expected content:
   }
 }
 ```
+
+---
+
+## Internal Testing vs Production Builds
+
+Understanding build types is essential for choosing the right workflow:
+
+| Profile | Purpose | Distribution | Testing Method |
+|---------|---------|--------------|----------------|
+| `development` | Local development with Expo Go | `internal` | Direct install via EAS local build |
+| `preview` | Internal testing on physical devices | `internal` | TestFlight (iOS) / Play Console internal testing (Android) |
+| `production` | App Store / Play Store release | `store` | App Store review (iOS) / Play Store review (Android) |
+
+Key clarifications:
+
+- **`development` and `preview` profiles** use `distribution: "internal"`. These builds are for internal testing BEFORE you push to production. They generate `.ipa` (iOS) and `.aab`/`.apk` (Android) files that can be installed and tested via TestFlight or Google Play Console internal testing tracks **without going through app review**.
+
+- **`production` profile** is for App Store (iOS) and Play Store (Android) release builds. These builds must pass app review before becoming publicly available. The `production` profile uses `distribution: "store"` by default.
+
+- **Internal testing builds** are ideal for: QA teams, stakeholder reviews, beta testers, and pre-release validation. You can distribute these builds to specific testers without making your app publicly available.
+
+- **Production builds** are the final release candidate. Once approved, your app goes live on the App Store or Play Store for all users.
 
 ---
 

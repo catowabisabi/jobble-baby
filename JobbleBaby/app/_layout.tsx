@@ -110,6 +110,10 @@ function TabNavigator() {
         options={{ title: t('tabs.sleepTraining'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="nightlight" color={color} /> }}
       />
       <Tabs.Screen
+        name="teething"
+        options={{ title: t('tabs.teething'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="sentiment-satisfied" color={color} /> }}
+      />
+      <Tabs.Screen
         name="products"
         options={{ title: t('tabs.products'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="shopping-bag" color={color} /> }}
       />

@@ -1,26 +1,36 @@
-Continue: Generate App Store + Play Store screenshots for all 17 tabs.
+Next: Prepare App Store + Play Store submission checklist — close all pre-submission gaps.
 
 ## Context
-- Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
-- store/ directory (screenshots, generate-screenshots.py) is at: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/store/
-- App tab files are at: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/
-- Required dimensions: iPhone 1290x2796, Android 1080x1920. Dark mode UI.
-- Output: PNG files to store/app-store-screenshots/ and store/play-store-screenshots/
+- Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
+- App is Expo SDK 56 with 17 tabs, bundle ID: com.jobblebaby.app
+- Screenshots: ALL DONE (17 App Store + 17 Play Store PNGs generated)
 
-## Required Screenshots (17 tabs)
-Tabs: index, tracking, schedule, products, growth, milestones, allergens, sleep-training, circadian, milk-prep, monitor-correlation, shift-handoff, stress-cascade, teething, doctor-visit, profile (16 tabs + 1 hero)
+## iOS Rejection Checklist — FILL THE GAPS
 
-## Implementation
-Generate placeholder/dummy screenshots at correct dimensions using Python PIL. Each screenshot should:
-- Have correct dimensions (1290x2796 for iPhone, 1080x1920 for Android)
-- Dark background (#0D0D0D)
-- App icon placeholder in center
-- Tab name label
-- Consistent styling
+### Must Fix Before Submission
+1. **Privacy Policy URL**: Create a placeholder privacy policy page. Since there's no real website, create a static privacy.md that can be hosted. Format: standard app privacy policy with sections: Data Collection, Data Usage, Third Parties, Children's Privacy, Contact.
 
-Start with PIL approach. Create 17 placeholder PNGs for App Store (1290x2796) first, then duplicate/resize for Play Store (1080x1920).
-Save files: store/app-store-screenshots/01-home.png through 16-doctor-visit.png + 17-profile-hero.png
-Save Android: store/play-store-screenshots/ same naming
+2. **App Store Connect Setup**: Document the exact steps at app-store-connect-setup.md:
+   - Login to App Store Connect (enomars@gmail.com)
+   - Create app with bundle ID com.jobblebaby.app
+   - Fill: Privacy (select all data types collected), Pricing (Free), Availability (all countries)
+   - Age rating: 4+
+   - Submit for review
 
-Report which files were created with their sizes.
-ULW
+3. **Privacy Nutrition Labels**: For each of the 17 tabs, identify what data is collected. List them in privacy-labels.md with the exact Apple privacy label categories:
+   - Contact Info, Health, Financial Info, Location, Sensitive Info, Browsing History, Purchases, Product Interaction, Third-Party Advertising, Diagnostics
+
+4. **Google Play Console Setup**: Document steps at google-play-setup.md:
+   - Create Play Console account
+   - Create app with package com.jobblebaby.app
+   - Fill store listing (use the 17 screenshots)
+   - Set up internal testing track
+   - Upload APK/AAB via EAS
+
+## Output
+Write 3 files in the store/ directory:
+- store/privacy-policy.md (placeholder privacy policy)
+- store/app-store-connect-setup.md (step-by-step guide)
+- store/google-play-setup.md (step-by-step guide)
+
+Keep them concise and actionable. Use Markdown with checkboxes.

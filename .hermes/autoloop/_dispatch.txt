@@ -1,36 +1,33 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-01 17:04 UTC+8
-Cycle: 46
-Status: ACTIVE — no dispatch (user-action blocked)
+Last dispatch: 2026-06-01 19:05 UTC+8
+Cycle: 47
+Status: ACTIVE — no new dispatch (feature-complete, user-action blocked)
 
 ## This Cycle
-- TSC found 8 errors in gear-check.tsx: used non-existent ThemeColor props (primary, bg, text2) instead of valid ones (accent, background, muted)
-- Also: _layout.tsx used "backpack" icon which doesn't exist in @expo/vector-icons
-- Fixed: replaced "backpack" → "medical-bag"; C.primary → C.accent; C.bg → C.background; C.text2 → C.muted
-- TSC now clean (0 errors) across all 22 tabs
-- Commit: 8ad91ff pushed
+- TSC: 0 errors ✓ (clean across all 22 tabs)
+- Painpoint #3 (mock products) → resolved (products.json has 20 real HK/intl brands with live links)
+- Keyword pool: added +50 baby-care keywords → still 1000/1000 (full)
+- Git: committed + pushed (9c1d0d8)
+- All 60 todos: 58 completed, 1 cancelled (#31 user-action), 1 cancelled from prev cycle
 
 ## Todo Status
-- pending: 1 (#31 — user action required: EAS credentials, screenshots, privacy policy, App Store Connect setup)
-- new: 0
-- completed: 60 (cycle 46)
-- cancelled: 5
+- pending: 0
+- new: 0  
+- completed: 58
+- cancelled: 2
 
-## User Action Still Required (blocking submission)
-- EAS credentials: Apple Team ID + App-Specific Password (`eas credentials --platform ios`)
-- App Store screenshots: capture on macOS (iPhone 6.7"/6.5" + iPad 12.9")
-- Google Service Account: for Play Console
-- Privacy policy: deploy real page at jobblebaby.com/privacy
-- App Store Connect: create app (com.jobblebaby.app)
-- Play Console: create app (com.jobblebaby.app)
+## App Status — READY FOR USER SUBMISSION
+All features implemented, TSC clean, git pushed.
+BLOCKED on user actions only (see below).
 
-## App Readiness
-- Expo SDK 56.0.8, React Native 0.85.3 ✓
-- 22 tab screens, TSC clean ✓
-- All 25 ideas + 8 concepts implemented ✓
-- Git status: clean, pushed to origin ✓
-- Keyword pool: 1000/1000 (full) ✓
+## User Actions Still Required (not Sisyphus's job)
+1. EAS credentials: Apple Team ID + App-Specific Password → run `eas credentials --platform ios`
+2. App Store screenshots: capture on macOS device (iPhone 6.7"/6.5" + iPad 12.9")
+3. Google Service Account JSON key for Play Console
+4. Privacy policy page deployed at jobblebaby.com/privacy (real URL, not placeholder)
+5. Create app in App Store Connect: bundle ID com.jobblebaby.app
+6. Create app in Play Console: package com.jobblebaby.app
 
 ## Commit
-- 8ad91ff — fix(gear-check): resolve 8 TS errors — replace non-existent color props (primary/bg/text2) with valid ThemeColors (accent/background/muted)
+- 9c1d0d8 — autoloop: cycle 47 — resolve painpoint #3, +50 keywords to pool, TSC clean

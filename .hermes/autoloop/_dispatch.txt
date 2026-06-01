@@ -1,15 +1,16 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-01 07:04 UTC+8
-Cycle: 39
-Status: IDLE — no dispatchable tasks; pending requires user action
+Last dispatch: 2026-06-01 08:00 UTC+8
+Cycle: 40
+Status: IDLE — no dispatchable tasks; pending #31 requires user action
 
 ## This Cycle
-- Review: No code changes needed. All tabs operational, tsc clean.
-- Keyword brainstorm: +44 keywords → pool at 1256 words
-- New concepts: Primitive Reflex Tracker, Serve and Return Interaction Logger, Vestibular Stimulation Scheduler, ACEs-Informed Parenting Companion, Circadian Light Therapy
-- Prompt keywords: none (no dispatch — pending #31 requires user action)
-- No dispatchable tasks (pending is user-action: EAS credentials)
+- Review: No code changes needed. All 16 tabs operational, tsc --noEmit clean.
+- Keyword brainstorm: +50 keywords → pool at 1306 words
+- New concepts: 5 draft (from cycle 39: Primitive Reflex Tracker, Serve and Return, Vestibular, ACEs, Circadian Light Therapy)
+- Prompt keywords: none (no dispatch — pending #31 is user-action blocked)
+- No dispatchable tasks (pending is user-action: EAS credentials + screenshots)
+- Commit: 823a337 pushed
 
 ## Todo Status
 - pending: 1 (user action required)
@@ -18,7 +19,7 @@ Status: IDLE — no dispatchable tasks; pending requires user action
 - cancelled: 1
 
 ## Pending Blocker (user action required)
-- EAS credentials (iOS: Apple Team ID + App-Specific Password via eas credentials --platform ios)
+- EAS credentials (iOS: Apple Team ID + App-Specific Password via `eas credentials --platform ios`)
 - App Store screenshots capture on macOS (iPhone 6.7/6.5 + iPad 12.9")
 - Google Service Account for Play Console
 - Privacy policy page deployment (real URL required)
@@ -34,14 +35,14 @@ Status: IDLE — no dispatchable tasks; pending requires user action
 - Play listing: complete ✓
 - EAS credentials checklist: complete ✓
 - tsc --noEmit: 0 errors ✓
-- 18 tabs in (tabs)/ route ✓
+- 16 tabs in (tabs)/ route ✓
 - 31 total .tsx files ✓
 - All ideas implemented: ✓
 - Git status: clean, pushed ✓
 
 ## Sisyphus State
 - Idle, awaiting dispatch
-- Cycle 39 confirmed: all operational, no actionable todos
+- Cycle 40: all operational, no actionable todos
 
 ## Commit
-- fe02ae3 (this cycle) — autoloop: cycle 39 — +44 keywords, pool 1256, +5 concepts
+- 823a337 — autoloop: cycle 40 — review, all tabs clean, pool 1306, no dispatch (user-action blocked)

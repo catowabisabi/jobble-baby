@@ -1,36 +1,30 @@
-Next: Prepare App Store + Play Store submission checklist — close all pre-submission gaps.
+Continue: Review JobbleBaby/app/(tabs)/ for missing functionality, prepare submission summary.
 
 ## Context
 - Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
-- App is Expo SDK 56 with 17 tabs, bundle ID: com.jobblebaby.app
-- Screenshots: ALL DONE (17 App Store + 17 Play Store PNGs generated)
+- All 17 App Store + Play Store screenshots are DONE (store/app-store-screenshots/, store/play-store-screenshots/)
+- 3 docs created: privacy-policy.md, app-store-connect-setup.md, google-play-setup.md
 
-## iOS Rejection Checklist — FILL THE GAPS
+## Required
+1. For each of the 17 tabs, check if the screen is functional or just a placeholder:
+   - Read the tab file (e.g. app/(tabs)/circadian.tsx, app/(tabs)/milk-prep.tsx, etc.)
+   - List which tabs are functional vs placeholder/stub
+   
+2. Create a submission-readiness checklist at store/SUBMISSION_READINESS.md:
+   - Status of each of the 17 tabs (functional/placeholder)
+   - What needs to be fixed before App Store submission
+   - iOS rejection checklist (from app-store-listing.md)
+   - Google Play rejection checklist
 
-### Must Fix Before Submission
-1. **Privacy Policy URL**: Create a placeholder privacy policy page. Since there's no real website, create a static privacy.md that can be hosted. Format: standard app privacy policy with sections: Data Collection, Data Usage, Third Parties, Children's Privacy, Contact.
+3. Key files to check:
+   - app/(tabs)/circadian.tsx
+   - app/(tabs)/milk-prep.tsx
+   - app/(tabs)/monitor-correlation.tsx
+   - app/(tabs)/shift-handoff.tsx
+   - app/(tabs)/stress-cascade.tsx
+   - app/(tabs)/teething.tsx
+   - app/(tabs)/doctor-visit.tsx
+   - app/(tabs)/sleep-training.tsx
 
-2. **App Store Connect Setup**: Document the exact steps at app-store-connect-setup.md:
-   - Login to App Store Connect (enomars@gmail.com)
-   - Create app with bundle ID com.jobblebaby.app
-   - Fill: Privacy (select all data types collected), Pricing (Free), Availability (all countries)
-   - Age rating: 4+
-   - Submit for review
-
-3. **Privacy Nutrition Labels**: For each of the 17 tabs, identify what data is collected. List them in privacy-labels.md with the exact Apple privacy label categories:
-   - Contact Info, Health, Financial Info, Location, Sensitive Info, Browsing History, Purchases, Product Interaction, Third-Party Advertising, Diagnostics
-
-4. **Google Play Console Setup**: Document steps at google-play-setup.md:
-   - Create Play Console account
-   - Create app with package com.jobblebaby.app
-   - Fill store listing (use the 17 screenshots)
-   - Set up internal testing track
-   - Upload APK/AAB via EAS
-
-## Output
-Write 3 files in the store/ directory:
-- store/privacy-policy.md (placeholder privacy policy)
-- store/app-store-connect-setup.md (step-by-step guide)
-- store/google-play-setup.md (step-by-step guide)
-
-Keep them concise and actionable. Use Markdown with checkboxes.
+Report the status of each tab and what needs to be done.
+ULW

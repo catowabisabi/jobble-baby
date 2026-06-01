@@ -17,7 +17,8 @@
     "stressCascade": "Stress Support",
     "doctorVisit": "Doctor Visit",
     "sleepDebt": "Sleep Debt",
-    "tummyTime": "Tummy Time"
+    "tummyTime": "Tummy Time",
+    "bottleRefusal": "Bottle Refusal"
   },
   "home": {
     "title": "Home",
@@ -681,5 +682,42 @@
     "todayHistory": "Today's Log",
     "badgeEarned": "Daily Goal Badge Earned!",
     "rewardUnlocked": "Reward unlocked: {name}"
+  },
+  "bottleRefusal": {
+    "title": "Bottle Refusal",
+    "greeting": "Feeding Hurdles",
+    "subtitle": "Track and understand bottle refusal patterns",
+    "trackRefusals": "Track refusals and patterns",
+    "todayRefusals": "Today's Refusals",
+    "refusalsCount": "refusals today",
+    "logRefusal": "Log Bottle Refusal",
+    "suspectedCauses": "Suspected Causes",
+    "causeFlowFast": "Flow too fast",
+    "causeFlowSlow": "Flow too slow",
+    "causeTempWrong": "Temperature wrong",
+    "causePosition": "Position uncomfortable",
+    "causeTongueTie": "Tongue-tie suspected",
+    "causeOralThrush": "Oral thrush",
+    "causeColdSymptoms": "Cold symptoms",
+    "causeDistracted": "Distracted",
+    "causeOther": "Other",
+    "selectCauseTitle": "Select a Cause",
+    "selectCauseBody": "Please select at least one suspected cause",
+    "durationRefusal": "How long did refusal last?",
+    "minutes": "Minutes",
+    "durationPlaceholder": "Tap to enter...",
+    "enterDurationTitle": "Duration",
+    "enterDurationBody": "Enter in minutes",
+    "noteOptional": "Note (optional)",
+    "notePlaceholder": "Tap to add note...",
+    "addNoteTitle": "Add Note",
+    "saveRefusal": "Save",
+    "weeklyFrequency": "Refusals per Week (last 8 weeks)",
+    "correlationTitle": "Correlation Insight",
+    "correlationBody": "Most refusals ({count}x) linked to \"{cause}\" — consider adjusting nipple flow or investigating further.",
+    "coldCorrelationTitle": "Cold + Refusal Pattern",
+    "coldCorrelationBody": "{count} refusals recorded within 2 weeks of cold symptoms. Monitor for oral discomfort during illness.",
+    "historyTitle": "History",
+    "badgeEarned": "Bottle Refusal Tracker Badge Earned!"
   }
 }

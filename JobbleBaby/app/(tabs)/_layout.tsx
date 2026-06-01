@@ -102,6 +102,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="bottle-refusal"
+        options={{
+          title: t('tabs.bottleRefusal'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="baby-bottle" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

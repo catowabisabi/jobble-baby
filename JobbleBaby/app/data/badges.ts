@@ -142,6 +142,14 @@ export const BADGES: Badge[] = [
     category: 'milestone',
     condition: 'Complete daily tummy time goal',
   },
+  {
+    id: 'bottle_refusal_tracked',
+    name: 'Bottle Refusal Tracker',
+    description: 'Tracked 5 bottle refusal events to identify patterns',
+    icon: '🍼',
+    category: 'milestone',
+    condition: 'Log 5 bottle refusal events',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

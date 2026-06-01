@@ -17,7 +17,8 @@
     "stressCascade": "壓力支援",
     "doctorVisit": "就診準備",
     "sleepDebt": "睡眠債務",
-    "tummyTime": "趴臥時間"
+    "tummyTime": "趴臥時間",
+    "bottleRefusal": "奶瓶抗拒"
   },
   "home": {
     "title": "主頁",
@@ -681,5 +682,42 @@
     "todayHistory": "今日記錄",
     "badgeEarned": "每日目標徽章獲得！",
     "rewardUnlocked": "獎勵解鎖：{{name}}"
+  },
+  "bottleRefusal": {
+    "title": "奶瓶抗拒",
+    "greeting": "餵養障礙",
+    "subtitle": "追蹤並了解奶瓶抗拒模式",
+    "trackRefusals": "追蹤抗拒和模式",
+    "todayRefusals": "今日抗拒",
+    "refusalsCount": "次抗拒",
+    "logRefusal": "記錄奶瓶抗拒",
+    "suspectedCauses": "懷疑原因",
+    "causeFlowFast": "流速太快",
+    "causeFlowSlow": "流速太慢",
+    "causeTempWrong": "溫度不對",
+    "causePosition": "姿勢不舒服",
+    "causeTongueTie": "懷疑舌帶過短",
+    "causeOralThrush": "口腔念珠菌",
+    "causeColdSymptoms": "感冒症狀",
+    "causeDistracted": "分心",
+    "causeOther": "其他",
+    "selectCauseTitle": "選擇原因",
+    "selectCauseBody": "請選擇至少一個懷疑原因",
+    "durationRefusal": "抗拒持續了多久？",
+    "minutes": "分鐘",
+    "durationPlaceholder": "點擊輸入...",
+    "enterDurationTitle": "時長",
+    "enterDurationBody": "輸入分鐘",
+    "noteOptional": "備註（選填）",
+    "notePlaceholder": "點擊添加備註...",
+    "addNoteTitle": "添加備註",
+    "saveRefusal": "儲存",
+    "weeklyFrequency": "每週抗拒次數（過去8週）",
+    "correlationTitle": "關聯發現",
+    "correlationBody": "大多數抗拒（{count}次）與「{cause}」相關——考慮調整奶嘴流速或進一步調查。",
+    "coldCorrelationTitle": "感冒+抗拒模式",
+    "coldCorrelationBody": "感冒症狀後2週內有{count}次抗拒記錄。疾病期間監測口腔不適。",
+    "historyTitle": "歷史記錄",
+    "badgeEarned": "奶瓶抗拒追蹤徽章獲得！"
   }
 }

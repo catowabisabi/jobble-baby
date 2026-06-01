@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, Share, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, Share, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getDocumentAsync } from 'expo-document-picker';
 import * as Linking from 'expo-linking';
+import * as ImagePicker from 'expo-image-picker';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { encodeDaycareToken, storeDaycareToken, getDaycareToken, getTokenDaysRemaining, isTokenExpired, DAYCARE_TOKEN_KEY } from '../utils/daycareToken';
 import { useRouter } from 'expo-router';
 import BadgeGallery from '../components/BadgeGallery';
@@ -17,6 +19,7 @@ interface BabyProfile {
   name: string;
   birthDate: string;
   gender: 'boy' | 'girl' | 'prefer_not_to_say';
+  photoUri?: string;
 }
 
 interface SettingRowProps {
@@ -104,6 +107,7 @@ export default function ProfileScreen() {
   const [isExportLoading, setIsExportLoading] = useState(false);
   const [isImportLoading, setIsImportLoading] = useState(false);
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
+  const [photoUri, setPhotoUri] = useState<string | null>(null);
   const [daycareLog, setDaycareLog] = useState<{ lastShared: string | null; expiresAt: number | null }>({ lastShared: null, expiresAt: null });
   const [preferredMonitorApp, setPreferredMonitorApp] = useState<MonitorApp | null>(null);
   const { getPreferredApp, setPreferredApp } = useMonitorLink();
@@ -125,7 +129,9 @@ export default function ProfileScreen() {
       try {
         const stored = await AsyncStorage.getItem('@jobble_baby_profile');
         if (stored) {
-          setBabyProfile(JSON.parse(stored));
+          const profile = JSON.parse(stored);
+          setBabyProfile(profile);
+          setPhotoUri(profile.photoUri || null);
         }
       } catch {
         // ignore parse errors
@@ -187,6 +193,8 @@ export default function ProfileScreen() {
       marginRight: 16,
     },
     avatarInitials: { fontSize: 22, fontWeight: '800', color: C.background },
+    avatarPhoto: { width: 64, height: 64, borderRadius: 32 },
+    changePhotoBtn: { position: 'absolute', bottom: -2, right: -2, width: 22, height: 22, borderRadius: 11, backgroundColor: '#3B82F6', justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: '#fff' },
     parentInfo: { flex: 1 },
     parentName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
     parentEmail: { fontSize: 14, color: C.muted },
@@ -360,6 +368,62 @@ export default function ProfileScreen() {
     );
   };
 
+  const handleChangePhoto = async () => {
+    Alert.alert(
+      t('profile.changePhoto'),
+      '',
+      [
+        {
+          text: t('profile.takePhoto'),
+          onPress: async () => {
+            const { status } = await ImagePicker.requestCameraPermissionsAsync();
+            if (status !== 'granted') {
+              Alert.alert('Permission needed', 'Camera access is required to take photos.');
+              return;
+            }
+            const result = await ImagePicker.launchCameraAsync({ allowsEditing: true, quality: 0.8 });
+            if (result.canceled || !result.assets?.[0]) return;
+            const uri = result.assets[0].uri;
+            const updatedProfile: BabyProfile = { ...(babyProfile || { name: '', birthDate: '', gender: 'prefer_not_to_say' }), photoUri: uri };
+            await AsyncStorage.setItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
+            setBabyProfile(updatedProfile);
+            setPhotoUri(uri);
+          },
+        },
+        {
+          text: t('profile.chooseLibrary'),
+          onPress: async () => {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+              Alert.alert('Permission needed', 'Photo library access is required to select photos.');
+              return;
+            }
+            const result = await ImagePicker.launchImageLibraryAsync({ allowsEditing: true, quality: 0.8 });
+            if (result.canceled || !result.assets?.[0]) return;
+            const uri = result.assets[0].uri;
+            const updatedProfile: BabyProfile = { ...(babyProfile || { name: '', birthDate: '', gender: 'prefer_not_to_say' }), photoUri: uri };
+            await AsyncStorage.setItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
+            setBabyProfile(updatedProfile);
+            setPhotoUri(uri);
+          },
+        },
+        {
+          text: t('profile.removePhoto'),
+          style: 'destructive',
+          onPress: async () => {
+            if (!babyProfile) return;
+            const { photoUri: _, ...rest } = babyProfile;
+            const updatedProfile: BabyProfile = rest as BabyProfile;
+            await AsyncStorage.setItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
+            setBabyProfile(updatedProfile);
+            setPhotoUri(null);
+          },
+        },
+        { text: t('common.cancel') || 'Cancel', style: 'cancel' },
+      ]
+    );
+  };
+
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -371,7 +435,14 @@ export default function ProfileScreen() {
         {/* Avatar + Info */}
         <View style={styles.avatarCard}>
           <View style={styles.avatarCircle}>
-            <Text style={styles.avatarInitials}>{babyProfile?.name ? babyProfile.name.charAt(0).toUpperCase() : 'B'}</Text>
+            {photoUri ? (
+              <Image source={{ uri: photoUri }} style={styles.avatarPhoto} />
+            ) : (
+              <Text style={styles.avatarInitials}>{babyProfile?.name ? babyProfile.name.charAt(0).toUpperCase() : 'B'}</Text>
+            )}
+            <TouchableOpacity style={styles.changePhotoBtn} onPress={handleChangePhoto} activeOpacity={0.7}>
+              <MaterialCommunityIcons name="camera" size={12} color="#fff" />
+            </TouchableOpacity>
           </View>
           <View style={styles.parentInfo}>
             <Text style={styles.parentName}>Jamie & Sam</Text>

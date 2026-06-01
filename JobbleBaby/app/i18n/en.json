@@ -186,7 +186,11 @@
     "resetConfirmTitle": "Reset Profile",
     "resetConfirmMessage": "This will clear your baby profile and return to onboarding.",
     "reset": "Reset",
-    "version": "Jobble Baby v{{version}}"
+    "version": "Jobble Baby v{{version}}",
+    "changePhoto": "Change Photo",
+    "takePhoto": "Take Photo",
+    "chooseLibrary": "Choose from Library",
+    "removePhoto": "Remove Photo"
   },
   "onboarding": {
     "welcome": "Welcome to Jobble Baby",

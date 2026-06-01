@@ -186,7 +186,11 @@
     "resetConfirmTitle": "重設資料",
     "resetConfirmMessage": "這將清除寶寶資料並返回初始設定。",
     "reset": "重設",
-    "version": "Jobble Baby v{{version}} 版本"
+    "version": "Jobble Baby v{{version}} 版本",
+    "changePhoto": "更改照片",
+    "takePhoto": "拍攝照片",
+    "chooseLibrary": "從相簿選擇",
+    "removePhoto": "移除照片"
   },
   "onboarding": {
     "welcome": "歡迎使用 Jobble Baby",

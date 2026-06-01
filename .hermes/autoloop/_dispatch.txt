@@ -1,26 +1,32 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-01 02:00 UTC+8
-Cycle: 35
-Status: IDLE — no pending tasks
+Last dispatch: 2026-06-01 16:05 UTC+8
+Cycle: 36
+Status: IDLE — no actionable tasks for Sisyphus
 
 ## This Cycle
-- Status review: 16 tabs, all functional, no TODOs pending
-- Brainstorm: +50 keywords to pool (pool at 1000 cap)
-- Commit: 9597f83 — no code changes, status sync
+- Review: 17 tabs all implemented, TS clean (verified via tsc), Sleep Debt Dashboard (idea #25) confirmed complete
+- Keyword brainstorm: +50 keywords → pool at 1118 words
+- Prompt keywords: joy detection, journaling, sleep inertia
+- No new todos to dispatch
 
 ## Todo Status
-- pending: 0
+- pending: 1 (user action required)
 - new: 0
-- completed: 58 (all ideas implemented)
-- cancelled: 5
+- completed: 23
+- cancelled: 4
 
 ## Pending Blocker (user action required)
-- EAS credentials (iOS: Apple Team ID + App-Specific Password; Android: Google Service Account)
+- EAS credentials (iOS: Apple Team ID + App-Specific Password via eas credentials --platform ios)
+- App Store screenshots capture on macOS (iPhone 6.7/6.5 + iPad 12.9")
+- Google Service Account for Play Console
 - Privacy policy page deployment (real URL required)
 - App Store Connect app creation
 - Play Console app creation
-- Screenshot capture on macOS (iPhone 6.7/6.5 + iPad 12.9")
+
+## Sisyphus State
+- Idle, awaiting dispatch
+- Cycle 35 confirmed: all 16 tabs operational, no errors
 
 ## Commit
-- 9597f83 — autoloop: cycle 35 — status review, all 16 tabs operational
+- 9376c97 (previous cycle) — fix(ts): circadian.tsx — C.background2 → C.card

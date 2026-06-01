@@ -1,20 +1,20 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-01 17:04 UTC+8
-Cycle: 37
+Last dispatch: 2026-06-01 06:04 UTC+8
+Cycle: 38
 Status: IDLE — pending user action on EAS credentials
 
 ## This Cycle
-- Review: TypeScript clean (tsc --noEmit passes), 17 tabs operational, no code issues
-- Keyword brainstorm: +48 keywords → pool at 1166 words
-- New concepts: Cryopreserve Legacy Mode, Consequence Mapping Graph, Feeding Position Guidance, Gentle Chime Composer, Sensory Overload Detector, Diaper Rash Prophecy
-- Prompt keywords: cognitive lock, feeding position, gentle chime, cryopreserve, consequence mapping
-- No dispatchable tasks (pending is user-action)
+- Review: TypeScript clean (tsc --noEmit passes), 31 tabs, 18 operational tabs, no code issues
+- Keyword brainstorm: +46 keywords → pool at 1212 words
+- New concepts: Circadian Light Coach, Formula Reaction Timeline, Gear Check Reminder, Bonding Moment Diary, Co-Regulation Tracker
+- Prompt keywords: none (no dispatch — all pending require user action)
+- No dispatchable tasks (pending is user-action: EAS credentials)
 
 ## Todo Status
 - pending: 1 (user action required)
 - new: 0
-- completed: 23
+- completed: 56
 - cancelled: 4
 
 ## Pending Blocker (user action required)
@@ -22,12 +22,26 @@ Status: IDLE — pending user action on EAS credentials
 - App Store screenshots capture on macOS (iPhone 6.7/6.5 + iPad 12.9")
 - Google Service Account for Play Console
 - Privacy policy page deployment (real URL required)
-- App Store Connect app creation
-- Play Console app creation
+- App Store Connect app creation (com.jobblebaby.app)
+- Play Console app creation (com.jobblebaby.app)
+
+## App Readiness Assessment
+- Expo SDK 56.0.8, React Native 0.85.3 ✓
+- eas.json: bundle ID + package both set to com.jobblebaby.app ✓
+- app.json: bundleIdentifier correct ✓
+- Internal testing guide: complete ✓
+- App Store listing: complete ✓
+- Play listing: complete ✓
+- EAS credentials checklist: complete ✓
+- tsc --noEmit: 0 errors ✓
+- 18 tabs in (tabs)/ route ✓
+- 31 total .tsx files ✓
+- All ideas implemented: ✓
+- Git status: clean, pushed ✓
 
 ## Sisyphus State
 - Idle, awaiting dispatch
-- Cycle 36 confirmed: all 16 tabs operational, no errors
+- Cycle 38 confirmed: all operational, no actionable todos
 
 ## Commit
-- 6572deb (this cycle) — autoloop: cycle 37 — +48 keywords, pool 1166, +6 concepts
+- f8fede0 (this cycle) — autoloop: cycle 38 — +46 keywords, pool 1212, +5 concepts

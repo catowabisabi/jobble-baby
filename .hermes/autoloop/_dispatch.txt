@@ -1,41 +1,26 @@
-Implement Doctor Visit Summary Export — generate shareable summary (PDF or text) of care log for pediatrician appointments. Reuses tracking/schedule/growth/milestones data. Add export button to doctor-visit.tsx.
+Continue: Generate App Store + Play Store screenshots for all 17 tabs.
 
 ## Context
-- Project: Jobble Baby (Expo/React Native, expo-router, AsyncStorage)
-- doctor-visit.tsx already exists at JobbleBaby/app/(tabs)/doctor-visit.tsx (440 lines)
-- It already loads: trackingEntries, growthEntries, scheduleEntries, milestones, babyProfile
-- i18n files at JobbleBaby/app/i18n/en.json + zh.json
+- Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+- store/ directory (screenshots, generate-screenshots.py) is at: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/store/
+- App tab files are at: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/
+- Required dimensions: iPhone 1290x2796, Android 1080x1920. Dark mode UI.
+- Output: PNG files to store/app-store-screenshots/ and store/play-store-screenshots/
 
-## Requirements
-1. Add "Export Summary" button to doctor-visit.tsx header/hero section
-2. On press: generate text summary containing:
-   - Baby name + age (computed from birthDate)
-   - Sleep: 30-day average hours/day, sleep window (typical bedtime → wake time)
-   - Feeding: 7-day average feeds/day, most common method (breast/bottle/solid)
-   - Diaper: 7-day average changes/day
-   - Growth: latest height/weight + percentile if available
-   - Milestones: count achieved by category
-3. Use React Native Share API (Share.share from react-native) to share as text
-4. Format cleanly with emojis: 🛏️ Sleep • 🍼 Feed • 📈 Growth • 🎉 Milestones
-5. Add i18n keys for export button label and summary sections
+## Required Screenshots (17 tabs)
+Tabs: index, tracking, schedule, products, growth, milestones, allergens, sleep-training, circadian, milk-prep, monitor-correlation, shift-handoff, stress-cascade, teething, doctor-visit, profile (16 tabs + 1 hero)
 
-## Implementation Approach
-- In doctor-visit.tsx: add calculateSleepAverage(), calculateFeedingStats(), getLatestGrowth() helper functions (already partially exist — check the file)
-- Export button: <TouchableOpacity onPress={handleExport}> with icon 📋
-- handleExport: builds summary string from loaded state data, calls Share.share()
-- Fallback: if data not loaded yet, show Alert "No data to export yet"
+## Implementation
+Generate placeholder/dummy screenshots at correct dimensions using Python PIL. Each screenshot should:
+- Have correct dimensions (1290x2796 for iPhone, 1080x1920 for Android)
+- Dark background (#0D0D0D)
+- App icon placeholder in center
+- Tab name label
+- Consistent styling
 
-## Keywords for this task: pediatric triage, parental rhythm sync, data pension
+Start with PIL approach. Create 17 placeholder PNGs for App Store (1290x2796) first, then duplicate/resize for Play Store (1080x1920).
+Save files: store/app-store-screenshots/01-home.png through 16-doctor-visit.png + 17-profile-hero.png
+Save Android: store/play-store-screenshots/ same naming
 
-## Files to modify
-- JobbleBaby/app/(tabs)/doctor-visit.tsx — add export functionality (DO NOT replace existing content)
-- JobbleBaby/app/i18n/en.json — add keys under doctorVisit namespace
-- JobbleBaby/app/i18n/zh.json — add keys under doctorVisit namespace
-
-## Design
-- Export button: warm accent color (amber/orange), large tap target
-- Summary preview before share (optional — just share directly is fine)
-- Voice-free, concise, parent-friendly language
-
-Begin implementation now. When done, report which files were created/modified with line counts.
+Report which files were created with their sizes.
 ULW

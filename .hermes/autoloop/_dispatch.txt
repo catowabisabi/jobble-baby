@@ -1,14 +1,15 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-01 16:05 UTC+8
-Cycle: 36
-Status: IDLE — no actionable tasks for Sisyphus
+Last dispatch: 2026-06-01 17:04 UTC+8
+Cycle: 37
+Status: IDLE — pending user action on EAS credentials
 
 ## This Cycle
-- Review: 17 tabs all implemented, TS clean (verified via tsc), Sleep Debt Dashboard (idea #25) confirmed complete
-- Keyword brainstorm: +50 keywords → pool at 1118 words
-- Prompt keywords: joy detection, journaling, sleep inertia
-- No new todos to dispatch
+- Review: TypeScript clean (tsc --noEmit passes), 17 tabs operational, no code issues
+- Keyword brainstorm: +48 keywords → pool at 1166 words
+- New concepts: Cryopreserve Legacy Mode, Consequence Mapping Graph, Feeding Position Guidance, Gentle Chime Composer, Sensory Overload Detector, Diaper Rash Prophecy
+- Prompt keywords: cognitive lock, feeding position, gentle chime, cryopreserve, consequence mapping
+- No dispatchable tasks (pending is user-action)
 
 ## Todo Status
 - pending: 1 (user action required)
@@ -26,7 +27,7 @@ Status: IDLE — no actionable tasks for Sisyphus
 
 ## Sisyphus State
 - Idle, awaiting dispatch
-- Cycle 35 confirmed: all 16 tabs operational, no errors
+- Cycle 36 confirmed: all 16 tabs operational, no errors
 
 ## Commit
-- 9376c97 (previous cycle) — fix(ts): circadian.tsx — C.background2 → C.card
+- 6572deb (this cycle) — autoloop: cycle 37 — +48 keywords, pool 1166, +6 concepts

@@ -1,30 +1,50 @@
-Continue: Review JobbleBaby/app/(tabs)/ for missing functionality, prepare submission summary.
+Continue: Implement Sleep Debt Dashboard — parental sleep deficit visualization.
 
 ## Context
 - Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
-- All 17 App Store + Play Store screenshots are DONE (store/app-store-screenshots/, store/play-store-screenshots/)
-- 3 docs created: privacy-policy.md, app-store-connect-setup.md, google-play-setup.md
+- Bundle ID: com.jobblebaby.app
+- Project: Expo/React Native (JobbleBaby/ subdirectory)
+- All 16 tabs functional ✅ — see store/SUBMISSION_READINESS.md for full status
 
-## Required
-1. For each of the 17 tabs, check if the screen is functional or just a placeholder:
-   - Read the tab file (e.g. app/(tabs)/circadian.tsx, app/(tabs)/milk-prep.tsx, etc.)
-   - List which tabs are functional vs placeholder/stub
-   
-2. Create a submission-readiness checklist at store/SUBMISSION_READINESS.md:
-   - Status of each of the 17 tabs (functional/placeholder)
-   - What needs to be fixed before App Store submission
-   - iOS rejection checklist (from app-store-listing.md)
-   - Google Play rejection checklist
+## Task
+Implement Sleep Debt Dashboard (new tab: sleep-debt.tsx):
 
-3. Key files to check:
-   - app/(tabs)/circadian.tsx
-   - app/(tabs)/milk-prep.tsx
-   - app/(tabs)/monitor-correlation.tsx
-   - app/(tabs)/shift-handoff.tsx
-   - app/(tabs)/stress-cascade.tsx
-   - app/(tabs)/teething.tsx
-   - app/(tabs)/doctor-visit.tsx
-   - app/(tabs)/sleep-training.tsx
+1. **Weekly Parent Sleep Debt Visualization**
+   - Load parent sleep hours from @jobble/shift_state (existing shift-handoff AsyncStorage key)
+   - Also allow manual parent sleep hour entry: @jobble/parent_sleep_entries (date + hours)
+   - Calculate cumulative sleep deficit: (7 × 8hr target) - actual hours per week
+   - Display as: debt card with hours in red/amber/green, trend arrow vs last week
 
-Report the status of each tab and what needs to be done.
+2. **Regression Correlation Overlay**
+   - Overlay baby sleep regression windows (from @jobble/schedule_entries — detect regression by >30min drop in longest sleep stretch over 2 consecutive nights)
+   - Show correlation: "Sleep debt + regression = high burnout risk" banner
+
+3. **Shift Redistribution Alert**
+   - When parent sleep debt > 3 nights AND baby in regression → suggest shift redistribution
+   - Use existing shift-handoff infrastructure (@jobble/shift_state)
+   - Show alert: "Redistribute shifts?" with "Swap tonight" / "Ask partner" buttons
+
+4. **Tab Integration**
+   - Create app/(tabs)/sleep-debt.tsx
+   - Add Tabs.Screen name="sleep-debt" in app/(tabs)/_layout.tsx
+   - Add i18n keys: tabs.sleepDebt in en.json + zh.json
+   - Tab icon: MaterialCommunityIcons "sleep" or "alert-decagram"
+
+5. **Badge**
+   - Add "Parental Stamina" badge (badgeService): completed 1 week of tracked sleep after regression
+
+## Implementation Notes
+- Reuse existing shift-handoff AsyncStorage schema
+- Dark theme (COLORS from ThemeContext)
+- All data local, no account needed
+- No external APIs
+
+## Files to create/modify
+- app/(tabs)/sleep-debt.tsx — new file
+- app/(tabs)/_layout.tsx — add Tabs.Screen for sleep-debt
+- app/i18n/en.json — add tabs.sleepDebt
+- app/i18n/zh.json — add tabs.sleepDebt
+- app/context/BadgeContext.tsx — add Parental Stamina badge (or badgeService.ts)
+
+Report what you created and the line count of sleep-debt.tsx.
 ULW

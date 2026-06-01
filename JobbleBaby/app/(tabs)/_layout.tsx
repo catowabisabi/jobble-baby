@@ -88,6 +88,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="medical-bag" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="sleep-debt"
+        options={{
+          title: t('tabs.sleepDebt'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="sleep" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

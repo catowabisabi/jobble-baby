@@ -15,7 +15,8 @@
     "monitorCorrelation": "Monitor",
     "shiftHandoff": "Shift",
     "stressCascade": "Stress Support",
-    "doctorVisit": "Doctor Visit"
+    "doctorVisit": "Doctor Visit",
+    "sleepDebt": "Sleep Debt"
   },
   "home": {
     "title": "Home",
@@ -490,7 +491,7 @@
     "tipAddFreshTitle": "Can I add fresh to leftover?",
     "tipAddFreshBody": "Cool fresh milk first, then combine. Use within 2h of when the oldest milk was first exposed to room temp."
   },
-    "shiftHandoff": {
+  "shiftHandoff": {
     "title": "Shift Handoff",
     "activeCaregiver": "Active Caregiver",
     "trustIndicator": "Trust Indicator",
@@ -613,5 +614,31 @@
         "prompt": "Walk practice: Stand together, hold one finger, walk 5 steps"
       }
     }
+  },
+  "sleepDebt": {
+    "title": "Sleep Debt",
+    "subtitle": "Parental sleep deficit tracker",
+    "target": "Target: {hours}h/night",
+    "debt": "DEBT",
+    "weeklyTarget": "Target: {target}h, Actual: {actual}h",
+    "burnoutRisk": "High burnout risk: sleep debt + baby regression detected. Consider shifting care duties.",
+    "regressions": "Baby Sleep Regressions",
+    "thisWeek": "This Week",
+    "improving": "Improving",
+    "worsening": "Worsening",
+    "same": "Stable",
+    "lastWeek": "last week",
+    "shiftRedistribution": "Shift Redistribution Suggested",
+    "shiftSuggestion": "Your sleep debt is high and baby may be in a regression. Consider redistributing tonight's shifts.",
+    "swapTonight": "Swap Tonight",
+    "askPartner": "Ask Partner",
+    "history": "Weekly History",
+    "current": "Current",
+    "addEntry": "+ Log Sleep",
+    "addSleep": "Log Parent Sleep",
+    "date": "Date (YYYY-MM-DD)",
+    "hoursSlept": "Hours Slept",
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

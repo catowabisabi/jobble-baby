@@ -15,7 +15,8 @@
     "monitorCorrelation": "監控關聯",
     "shiftHandoff": "交接",
     "stressCascade": "壓力支援",
-    "doctorVisit": "就診準備"
+    "doctorVisit": "就診準備",
+    "sleepDebt": "睡眠債務"
   },
   "home": {
     "title": "主頁",
@@ -613,5 +614,31 @@
         "prompt": "走路練習：一起站立，握住一根手指，走5步"
       }
     }
+  },
+  "sleepDebt": {
+    "title": "睡眠債務",
+    "subtitle": "父母睡眠不足追蹤",
+    "target": "目標：每晚 {hours} 小時",
+    "debt": "負債",
+    "weeklyTarget": "目標：{target}小時，實際：{actual}小時",
+    "burnoutRisk": "高度倦怠風險：睡眠債務 + 寶寶倒退期。建議重新分配照顧職責。",
+    "regressions": "寶寶睡眠倒退期",
+    "thisWeek": "本週",
+    "improving": "改善中",
+    "worsening": "惡化中",
+    "same": "穩定",
+    "lastWeek": "上週",
+    "shiftRedistribution": "建議重新分配職責",
+    "shiftSuggestion": "你的睡眠債務偏高，而且寶寶可能正在經歷倒退期。建議今晚重新分配值班。",
+    "swapTonight": "今晚交換",
+    "askPartner": "問另一半",
+    "history": "每週歷史",
+    "current": "本週",
+    "addEntry": "+ 記錄睡眠",
+    "addSleep": "記錄父母睡眠",
+    "date": "日期 (YYYY-MM-DD)",
+    "hoursSlept": "睡眠時數",
+    "cancel": "取消",
+    "save": "儲存"
   }
 }

@@ -216,7 +216,7 @@ export default function CircadianScreen() {
     handoffUnit: { fontSize: 14, color: C.muted },
     handoffNext: { fontSize: 13, color: C.muted, marginTop: 4 },
     summaryGrid: { flexDirection: 'row', gap: 12 },
-    summaryItem: { flex: 1, backgroundColor: C.background2, borderRadius: 12, padding: 12, alignItems: 'center' },
+    summaryItem: { flex: 1, backgroundColor: C.card, borderRadius: 12, padding: 12, alignItems: 'center' },
     summaryIcon: { fontSize: 20, marginBottom: 4 },
     summaryLabel: { fontSize: 11, color: C.muted },
     summaryValue: { fontSize: 14, fontWeight: '600', color: C.text },

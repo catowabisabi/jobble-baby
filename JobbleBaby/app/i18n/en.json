@@ -19,7 +19,8 @@
     "sleepDebt": "Sleep Debt",
     "tummyTime": "Tummy Time",
     "reflexTracker": "Reflex Tracker",
-    "bottleRefusal": "Bottle Refusal"
+    "bottleRefusal": "Bottle Refusal",
+    "gearCheck": "Gear Check"
   },
   "home": {
     "title": "Home",
@@ -759,5 +760,21 @@
     "coldCorrelationBody": "{count} refusals recorded within 2 weeks of cold symptoms. Monitor for oral discomfort during illness.",
     "historyTitle": "History",
     "badgeEarned": "Bottle Refusal Tracker Badge Earned!"
+  },
+  "gearCheck": {
+    "category": {
+      "essentials": "Essentials",
+      "feeding": "Feeding",
+      "comfort": "Comfort",
+      "outdoor": "Outdoor",
+      "health": "Health",
+      "custom": "Custom"
+    },
+    "addCustom": "Add custom item",
+    "customPlaceholder": "Item name",
+    "reset": "Reset",
+    "saveOuting": "Save & New Outing",
+    "resetAlert": "Reset Checklist",
+    "resetConfirm": "Uncheck all items?"
   }
 }

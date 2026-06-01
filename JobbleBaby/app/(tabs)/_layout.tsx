@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
+import GearCheckScreen from './gear-check';
 
 export default function TabsLayout() {
   const { t } = useLanguage();
@@ -107,6 +108,13 @@ export default function TabsLayout() {
         options={{
           title: t('tabs.bottleRefusal'),
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="baby-bottle" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="gear-check"
+        options={{
+          title: t('tabs.gearCheck'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="backpack" size={size} color={color} />
         }}
       />
       <Tabs.Screen

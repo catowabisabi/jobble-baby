@@ -19,7 +19,8 @@
     "sleepDebt": "睡眠債務",
     "tummyTime": "趴臥時間",
     "reflexTracker": "原始反射",
-    "bottleRefusal": "奶瓶抗拒"
+    "bottleRefusal": "奶瓶抗拒",
+    "gearCheck": "装备检查"
   },
   "home": {
     "title": "主頁",
@@ -759,5 +760,21 @@
     "coldCorrelationBody": "感冒症狀後2週內有{count}次抗拒記錄。疾病期間監測口腔不適。",
     "historyTitle": "歷史記錄",
     "badgeEarned": "奶瓶抗拒追蹤徽章獲得！"
+  },
+  "gearCheck": {
+    "category": {
+      "essentials": "必需品",
+      "feeding": "餵養",
+      "comfort": "舒適",
+      "outdoor": "戶外",
+      "health": "健康",
+      "custom": "自訂"
+    },
+    "addCustom": "新增自訂物品",
+    "customPlaceholder": "物品名稱",
+    "reset": "重設",
+    "saveOuting": "儲存並新增行程",
+    "resetAlert": "重設清單",
+    "resetConfirm": "取消勾選所有物品？"
   }
 }

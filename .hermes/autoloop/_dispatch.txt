@@ -1,49 +1,41 @@
-Implement Neurodevelopmental Milestone Notifier — brain-building schedule based on baby's age, weekly focus areas, daily micro-prompts, and critical period closing alerts. idea #18.
-
-## Requirements
-1. New tab or expand existing milestones.tsx: "Brain Builder" section
-2. Uses baby.birthDate from AsyncStorage @jobble_baby_profile to compute current age in months
-3. WHO/AAP developmental windows mapped to ages:
-   - 0-2mo: visual tracking, face recognition
-   - 2-4mo: reaching, grasping, cooing
-   - 4-6mo: rolling, sitting with support, babbling
-   - 6-9mo: sitting, crawling, pincer grasp
-   - 9-12mo: pulling to stand, first words, object permanence
-   - 12-18mo: walking, vocabulary explosion, parallel play
-4. Weekly focus: show current week's developmental goal (single focus area)
-5. Daily micro-prompt: one targeted stimulation activity suggestion (e.g. "Tummy time: 3x5min today with mirror toy")
-6. Critical period alerts: warn when current window is in last 2 weeks (e.g. "Crawling window closes in 10 days!")
-7. Reuses existing MILESTONE_TYPES from milestones.tsx
-8. Badge: "Brain Builder" badge when 5 daily prompts completed in a week
-
-## Keywords for this task: locomotion, crying it out, room climate
+Implement Doctor Visit Summary Export — generate shareable summary (PDF or text) of care log for pediatrician appointments. Reuses tracking/schedule/growth/milestones data. Add export button to doctor-visit.tsx.
 
 ## Context
 - Project: Jobble Baby (Expo/React Native, expo-router, AsyncStorage)
-- Profile birthDate key: @jobble_baby_profile → {birthDate: string}
-- Existing milestones.tsx: milestone photo capture with MILESTONE_TYPES
-- Tab files: JobbleBaby/app/(tabs)/milestones.tsx, profile.tsx
-- i18n: JobbleBaby/app/i18n/en.json and zh.json — add new keys under "brainBuilder" namespace
-- Language: English first, Chinese (zh.json) second
+- doctor-visit.tsx already exists at JobbleBaby/app/(tabs)/doctor-visit.tsx (440 lines)
+- It already loads: trackingEntries, growthEntries, scheduleEntries, milestones, babyProfile
+- i18n files at JobbleBaby/app/i18n/en.json + zh.json
 
-## Design
-- Use COLORS from ThemeContext — warm amber palette, voice-free
-- Brain icon: 🧠 or neural network motif
-- Large tap targets for tired parents
-- Purple/blue accent for "brain" themed elements
-- No external dependencies
-
-## Files to create/modify
-- JobbleBaby/app/(tabs)/milestones.tsx (add Brain Builder section — do NOT replace existing milestone photo capture)
-- JobbleBaby/app/i18n/en.json + zh.json (add keys under brainBuilder namespace)
-- Consider adding brainBuilder prompt data to JobbleBaby/app/data/ directory
+## Requirements
+1. Add "Export Summary" button to doctor-visit.tsx header/hero section
+2. On press: generate text summary containing:
+   - Baby name + age (computed from birthDate)
+   - Sleep: 30-day average hours/day, sleep window (typical bedtime → wake time)
+   - Feeding: 7-day average feeds/day, most common method (breast/bottle/solid)
+   - Diaper: 7-day average changes/day
+   - Growth: latest height/weight + percentile if available
+   - Milestones: count achieved by category
+3. Use React Native Share API (Share.share from react-native) to share as text
+4. Format cleanly with emojis: 🛏️ Sleep • 🍼 Feed • 📈 Growth • 🎉 Milestones
+5. Add i18n keys for export button label and summary sections
 
 ## Implementation Approach
-- Compute baby age from birthDate: months = floor(days / 30.44)
-- Map age → developmental window → current week's focus
-- Daily prompt rotates daily, resets weekly
-- Track prompt completion in AsyncStorage (simple counter, key: @jobble/brain_builder_week)
-- Badge trigger via existing badgeService pattern (onNewGrowthEntry)
+- In doctor-visit.tsx: add calculateSleepAverage(), calculateFeedingStats(), getLatestGrowth() helper functions (already partially exist — check the file)
+- Export button: <TouchableOpacity onPress={handleExport}> with icon 📋
+- handleExport: builds summary string from loaded state data, calls Share.share()
+- Fallback: if data not loaded yet, show Alert "No data to export yet"
 
-Begin implementation now. When done, report which files were created/modified with line counts, and verify birthDate reading works.
+## Keywords for this task: pediatric triage, parental rhythm sync, data pension
+
+## Files to modify
+- JobbleBaby/app/(tabs)/doctor-visit.tsx — add export functionality (DO NOT replace existing content)
+- JobbleBaby/app/i18n/en.json — add keys under doctorVisit namespace
+- JobbleBaby/app/i18n/zh.json — add keys under doctorVisit namespace
+
+## Design
+- Export button: warm accent color (amber/orange), large tap target
+- Summary preview before share (optional — just share directly is fine)
+- Voice-free, concise, parent-friendly language
+
+Begin implementation now. When done, report which files were created/modified with line counts.
 ULW

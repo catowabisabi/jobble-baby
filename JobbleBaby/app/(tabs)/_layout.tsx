@@ -109,6 +109,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="baby-bottle" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="reflex-tracker"
+        options={{
+          title: t('tabs.reflexTracker'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

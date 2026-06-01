@@ -150,6 +150,14 @@ export const BADGES: Badge[] = [
     category: 'milestone',
     condition: 'Log 5 bottle refusal events',
   },
+  {
+    id: 'reflex_tracker',
+    name: 'Reflex Tracker',
+    description: 'Started tracking primitive reflex integration',
+    icon: '🧠',
+    category: 'milestone',
+    condition: 'Log 3 reflex entries',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

@@ -114,7 +114,7 @@ export default function TabsLayout() {
         name="gear-check"
         options={{
           title: t('tabs.gearCheck'),
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="backpack" size={size} color={color} />
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="medical-bag" size={size} color={color} />
         }}
       />
       <Tabs.Screen

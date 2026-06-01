@@ -1,55 +1,46 @@
-# Sisyphus Task — gear-check-reminder (ID #60)
+# Autoloop Dispatch Log — jobble-baby
 
-## Objective
-Implement Gear Check Reminder — a new tab for Jobble Baby app that helps parents remember everything before leaving home with baby.
+Last dispatch: 2026-06-01 16:05 UTC+8
+Cycle: 45
+Status: ACTIVE — #60 gear-check-reminder implemented directly (Hermes)
 
-## Keywords (use all 3)
-gear-check, outing-checklist, diaper-bag
+## This Cycle
+- Verified: 0 pending todos, 0 open painpoints, 18 tabs operational
+- Cleaned: removed 16 stale draft concepts from brainstorm overflow
+- Reviewed: codebase, i18n, tab navigator consistency
+- New feature: implemented #60 Gear Check Reminder directly (340-line gear-check.tsx)
+  - Trip-type selector (short walk / errand / full day)
+  - Weather-aware add-ons (rain cover, sun shade, extra layers)
+  - Check-off UI with category grouping
+  - Custom item modal
+  - AsyncStorage persistence (`@jobble/gear_check_entries`)
+  - i18n (en + zh)
+  - Added to tab navigator
+- Keyword pool: 1000/1000 (full)
+- Ideas: all 25 implemented
+- Concepts: 8 remaining (active/done)
+- Commit: d6b108e pushed
 
-## What to build
+## Todo Status
+- pending: 1 (EAS build — user action required)
+- new: 0
+- completed: 58
+- cancelled: 5
 
-Create `JobbleBaby/app/(tabs)/gear-check.tsx` — a fully functional gear/outing checklist tab:
+## User Action Still Required (blocking submission)
+- EAS credentials: Apple Team ID + App-Specific Password (`eas credentials --platform ios`)
+- App Store screenshots: capture on macOS (iPhone 6.7"/6.5" + iPad 12.9")
+- Google Service Account: for Play Console
+- Privacy policy: deploy real page
+- App Store Connect: create app (com.jobblebaby.app)
+- Play Console: create app (com.jobblebaby.app)
 
-**Core Features:**
-- Context-aware checklist: diaper bag, spare clothes, formula, stroller weather cover, car seat adapter, baby blanket, changing pad, burp cloth, diaper cream, thermometer
-- Trip-type selector: short walk (15min), errand (1hr), full day outing — different items per type
-- Weather-aware add-ons: rain cover for rainy days, sun shade for sunny, extra layers for cold
-- Check-off UI with each item as a tappable row (checked/unchecked state)
-- Manual add custom item button
-- AsyncStorage persistence: save checked state per trip date to `@jobble/gear_check_entries`
-- Load previous checklist state on mount
-- Reset checklist button for next outing
-- Baby age context shown (for packing guidance)
+## App Readiness Assessment
+- Expo SDK 56.0.8, React Native 0.85.3 ✓
+- 19 tabs now (added gear-check) ✓
+- All features implemented: 25 ideas ✓, 8 concepts ✓
+- Git status: clean, pushed ✓
+- Keyword pool: 1000/1000 full ✓
 
-**Implementation Pattern (follow existing tabs):**
-- Use `useState` + `useEffect` for AsyncStorage load on mount
-- AsyncStorage key: `@jobble/gear_check_entries`
-- Use existing `useTheme()` from `../context/ThemeContext`
-- Use existing `useLanguage()` from `../context/LanguageContext`
-- Use `COLORS` from `../theme`
-- Use `SafeAreaView` from `react-native-safe-area-context`
-- Use same `generateId()` pattern from other tabs
-- Icons: `@expo/vector-icons/MaterialIcons` (backpack, check-circle, add, etc.)
-- No external API calls — all local
-
-**Add to Tab Navigator:**
-Edit `JobbleBaby/app/(tabs)/_layout.tsx`:
-- Import `GearCheckScreen` from `./gear-check`
-- Add Tabs.Screen for `gear-check` with title `t('tabs.gearCheck')` and icon `backpack`
-- Use `MaterialCommunityIcons` name="backpack" or "bag-personal"
-
-**i18n:**
-Add to `JobbleBaby/app/i18n/en.json`:
-```
-"tabs": {
-  "gearCheck": "Gear Check"
-}
-```
-Add to `JobbleBaby/app/i18n/zh.json`:
-```
-"tabs": {
-  "gearCheck": "装备检查"
-}
-```
-
-**No code review, no reporting back — just implement and mark done in DB when complete. ULW.**
+## Commit
+- d6b108e — feat(gear-check): add Gear Check Reminder tab with trip-type selector, weather-aware checklist, custom items, AsyncStorage persistence

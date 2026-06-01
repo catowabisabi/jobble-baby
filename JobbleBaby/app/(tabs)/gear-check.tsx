@@ -70,8 +70,9 @@ function getAgeInMonths(birthDate: string): number {
 
 export default function GearCheckScreen() {
   const { t } = useLanguage();
-  const { theme } = useTheme();
-  const C = COLORS[theme];
+  const { theme: themeMode } = useTheme();
+  const effectiveTheme = themeMode === 'system' ? 'dark' : themeMode;
+  const C = COLORS[effectiveTheme];
 
   const [entries, setEntries] = useState<GearEntry[]>([]);
   const [currentTripType, setCurrentTripType] = useState<TripType>('errand');
@@ -185,11 +186,11 @@ export default function GearCheckScreen() {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: C.bg }]} edges={['top']}>
+    <SafeAreaView style={[styles.container, { backgroundColor: C.background }]} edges={['top']}>
       <View style={[styles.header, { borderBottomColor: C.border }]}>
         <Text style={[styles.headerTitle, { color: C.text }]}>{t('tabs.gearCheck') || 'Gear Check'}</Text>
         {babyAge > 0 && (
-          <Text style={[styles.babyAge, { color: C.text2 }]}>
+          <Text style={[styles.babyAge, { color: C.muted }]}>
             {babyAge < 12 ? `${babyAge} months old` : `${(babyAge / 12).toFixed(1)} years old`}
           </Text>
         )}
@@ -201,7 +202,7 @@ export default function GearCheckScreen() {
             key={type}
             style={[
               styles.tripChip,
-              { borderColor: C.border, backgroundColor: currentTripType === type ? C.primary : 'transparent' },
+              { borderColor: C.border, backgroundColor: currentTripType === type ? C.accent : 'transparent' },
             ]}
             onPress={() => { setCurrentTripType(type); initItems(); }}
           >
@@ -214,9 +215,9 @@ export default function GearCheckScreen() {
 
       <View style={styles.progressRow}>
         <View style={[styles.progressBar, { backgroundColor: C.card }]}>
-          <View style={[styles.progressFill, { width: `${progress * 100}%`, backgroundColor: C.primary }]} />
+          <View style={[styles.progressFill, { width: `${progress * 100}%`, backgroundColor: C.accent }]} />
         </View>
-        <Text style={[styles.progressText, { color: C.text2 }]}>
+        <Text style={[styles.progressText, { color: C.muted }]}>
           {checkedCount}/{totalCount}
         </Text>
       </View>
@@ -224,7 +225,7 @@ export default function GearCheckScreen() {
       <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
         {Object.entries(groupedItems).map(([category, items]) => (
           <View key={category} style={styles.categorySection}>
-            <Text style={[styles.categoryLabel, { color: C.text2 }]}>
+            <Text style={[styles.categoryLabel, { color: C.muted }]}>
               {categoryLabels[category] || category}
             </Text>
             {items.map(item => (
@@ -237,11 +238,11 @@ export default function GearCheckScreen() {
                 <MaterialIcons
                   name={item.checked ? 'check-circle' : 'circle'}
                   size={24}
-                  color={item.checked ? C.primary : C.text2}
+                  color={item.checked ? C.accent : C.muted}
                 />
                 <Text style={[
                   styles.itemLabel,
-                  { color: item.checked ? C.text2 : C.text, textDecorationLine: item.checked ? 'line-through' : 'none' },
+                  { color: item.checked ? C.muted : C.text, textDecorationLine: item.checked ? 'line-through' : 'none' },
                 ]}>
                   {item.label}
                 </Text>
@@ -254,8 +255,8 @@ export default function GearCheckScreen() {
           style={[styles.addCustomBtn, { borderColor: C.border }]}
           onPress={() => setShowCustom(true)}
         >
-          <MaterialIcons name="add" size={20} color={C.primary} />
-          <Text style={[styles.addCustomText, { color: C.primary }]}>
+          <MaterialIcons name="add" size={20} color={C.accent} />
+          <Text style={[styles.addCustomText, { color: C.accent }]}>
             {t('gearCheck.addCustom') || 'Add custom item'}
           </Text>
         </TouchableOpacity>
@@ -269,7 +270,7 @@ export default function GearCheckScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.saveBtn, { backgroundColor: C.primary }]}
+          style={[styles.saveBtn, { backgroundColor: C.accent }]}
           onPress={saveCurrentAndStartNew}
         >
           <MaterialIcons name="save" size={20} color="#fff" />
@@ -282,9 +283,9 @@ export default function GearCheckScreen() {
           <View style={[styles.modalContent, { backgroundColor: C.card }]}>
             <Text style={[styles.modalTitle, { color: C.text }]}>{t('gearCheck.addCustom') || 'Add Custom Item'}</Text>
             <TextInput
-              style={[styles.customInput, { borderColor: C.border, color: C.text, backgroundColor: C.bg }]}
+              style={[styles.customInput, { borderColor: C.border, color: C.text, backgroundColor: C.background }]}
               placeholder={t('gearCheck.customPlaceholder') || 'Item name'}
-              placeholderTextColor={C.text2}
+              placeholderTextColor={C.muted}
               value={customItem}
               onChangeText={setCustomItem}
               autoFocus
@@ -293,7 +294,7 @@ export default function GearCheckScreen() {
               <TouchableOpacity style={[styles.modalBtn, { borderColor: C.border }]} onPress={() => { setShowCustom(false); setCustomItem(''); }}>
                 <Text style={[styles.modalBtnText, { color: C.text }]}>{t('common.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.primary }]} onPress={addCustomItem}>
+              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} onPress={addCustomItem}>
                 <Text style={styles.modalBtnPrimary}>{t('common.add') || 'Add'}</Text>
               </TouchableOpacity>
             </View>

@@ -16,7 +16,8 @@
     "shiftHandoff": "Shift",
     "stressCascade": "Stress Support",
     "doctorVisit": "Doctor Visit",
-    "sleepDebt": "Sleep Debt"
+    "sleepDebt": "Sleep Debt",
+    "tummyTime": "Tummy Time"
   },
   "home": {
     "title": "Home",
@@ -174,7 +175,7 @@
     "importFailed": "Import Failed",
     "badges": "Badges",
     "badgeCollection": "Badge Collection",
-    "earnedOf": "{{earned}} of {{total}} badges earned",
+    "earnedOf": "{{earned)}} of {{total}} badges earned",
     "settings": "Settings",
     "notifications": "Notifications",
     "doctorVisit": "Doctor Visit",
@@ -235,7 +236,7 @@
   },
   "badgeGallery": {
     "title": "Badge Collection",
-    "earnedOf": "{{earned}} of {{total}} earned",
+    "earnedOf": "{{earned)}} of {{total}} earned",
     "streak": "Streak",
     "firsts": "Firsts",
     "milestones": "Milestones",
@@ -382,7 +383,7 @@
   "teething": {
     "title": "Teething",
     "greeting": "Baby Care",
-    "subtitle": "Track teeth & comfort symptoms",
+    "subtitle": "Track teeth & comfort symptomsy",
     "selectSymptom": "Select a symptom",
     "logSymptom": "Log Symptom",
     "severity": "Severity",
@@ -640,5 +641,45 @@
     "hoursSlept": "Hours Slept",
     "cancel": "Cancel",
     "save": "Save"
+  },
+  "tummyTime": {
+    "title": "Tummy Time",
+    "greeting": "Daily Activity",
+    "subtitle": "Track and build tummy time strength",
+    "dailyGoal": "Goal: {minutes}m/day",
+    "dailyProgress": "Today's Progress",
+    "currentWindow": "Neurodevelopment Window",
+    "start": "Start",
+    "stop": "Stop",
+    "manualEntry": "Manual Entry",
+    "manualEntryTitle": "Manual Entry",
+    "manualEntryPrompt": "Enter duration in minutes",
+    "positionFront": "Front",
+    "positionPlank": "Plank",
+    "positionSide": "Side",
+    "milestones": "Age Milestones",
+    "milestoneHeadLift": "Head Lift",
+    "milestoneHeadLiftDesc": "Baby lifts head briefly during tummy time, strengthening neck muscles.",
+    "milestonePushUp": "Push-Up Prep",
+    "milestonePushUpDesc": "Baby pushes up on forearms, building core strength for rolling.",
+    "milestoneChestRaise": "Chest Raise",
+    "milestoneChestRaiseDesc": "Baby raises chest and upper body, developing back muscles.",
+    "milestoneArmCrawl": "Arm & Crawl Prep",
+    "milestoneArmCrawlDesc": "Baby shifts weight on arms, preparing for reciprocal arm movements.",
+    "milestoneRollOver": "Roll Over",
+    "milestoneRollOverDesc": "Tummy time builds the strength needed to roll both directions.",
+    "milestoneCrawl": "Crawl",
+    "milestoneCrawlDesc": "Strong push-up and arm coordination leads to crawling.",
+    "milestonePrompt": {
+      "head_lift": "Lift head briefly during front position",
+      "push_up": "Practice push-ups with pillow assist",
+      "chest_raise": "Reach for toys during chest raise",
+      "arm_crawl": "Dangle toys just out of reach to encourage arm shift",
+      "roll_over": "Gently guide roll from tummy time position",
+      "crawl": "Create a crawl course with pillows"
+    },
+    "todayHistory": "Today's Log",
+    "badgeEarned": "Daily Goal Badge Earned!",
+    "rewardUnlocked": "Reward unlocked: {name}"
   }
 }

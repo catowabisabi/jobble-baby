@@ -1,26 +1,26 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-01 08:00 UTC+8
-Cycle: 40
-Status: IDLE — no dispatchable tasks; pending #31 requires user action
+Last dispatch: 2026-06-01 11:00 UTC+8
+Cycle: 42
+Status: DISPATCHED — tummy-time-counter feature dispatched
 
 ## This Cycle
-- Review: No code changes needed. All 16 tabs operational, tsc --noEmit clean.
-- Keyword brainstorm: +50 keywords → pool at 1306 words
-- New concepts: 5 draft (from cycle 39: Primitive Reflex Tracker, Serve and Return, Vestibular, ACEs, Circadian Light Therapy)
-- Prompt keywords: none (no dispatch — pending #31 is user-action blocked)
-- No dispatchable tasks (pending is user-action: EAS credentials + screenshots)
-- Commit: 823a337 pushed
+- Review: tsc --noEmit clean (0 errors). All 17 tabs operational.
+- Keyword brainstorm: +50 baby-care keywords → pool at 1000 (full)
+- New concepts: 5 draft (bottle refusal tracker, eczema flare diary, tummy time counter, colic symptom log, doula visit notes)
+- Prompt keywords (prompt3): neurodevelopment window, cortisol rhythm, malocclusion
+- Dispatched: Tummy Time Counter feature → Sisyphus
+- Commit: bcfecdc pushed
 
 ## Todo Status
-- pending: 1 (user action required)
-- new: 0
+- pending: 0 (all completed or cancelled — no code tasks blocked)
+- new: 1 (tummy-time-counter)
 - completed: 56
-- cancelled: 1
+- cancelled: 5
 
-## Pending Blocker (user action required)
-- EAS credentials (iOS: Apple Team ID + App-Specific Password via `eas credentials --platform ios`)
-- App Store screenshots capture on macOS (iPhone 6.7/6.5 + iPad 12.9")
+## User Action Still Required (blocking submission)
+- EAS credentials (Apple Team ID + App-Specific Password via `eas credentials --platform ios`)
+- App Store screenshots capture on macOS (iPhone 6.7"/6.5" + iPad 12.9")
 - Google Service Account for Play Console
 - Privacy policy page deployment (real URL required)
 - App Store Connect app creation (com.jobblebaby.app)
@@ -28,21 +28,17 @@ Status: IDLE — no dispatchable tasks; pending #31 requires user action
 
 ## App Readiness Assessment
 - Expo SDK 56.0.8, React Native 0.85.3 ✓
-- eas.json: bundle ID + package both set to com.jobblebaby.app ✓
+- eas.json: bundle ID + package both com.jobblebaby.app ✓
 - app.json: bundleIdentifier correct ✓
-- Internal testing guide: complete ✓
-- App Store listing: complete ✓
-- Play listing: complete ✓
-- EAS credentials checklist: complete ✓
 - tsc --noEmit: 0 errors ✓
-- 16 tabs in (tabs)/ route ✓
+- 17 tabs in (tabs)/ route ✓
 - 31 total .tsx files ✓
 - All ideas implemented: ✓
 - Git status: clean, pushed ✓
 
 ## Sisyphus State
-- Idle, awaiting dispatch
-- Cycle 40: all operational, no actionable todos
+- Active, processing tummy-time-counter task
+- Cycle 42 dispatch sent
 
 ## Commit
-- 823a337 — autoloop: cycle 40 — review, all tabs clean, pool 1306, no dispatch (user-action blocked)
+- bcfecdc — autoloop: cycle 42 — +50 keywords pool full (1000), +5 baby-care concepts, tsc clean, dispatched tummy-time-counter

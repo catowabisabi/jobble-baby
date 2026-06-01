@@ -95,6 +95,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="sleep" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="tummy-time"
+        options={{
+          title: t('tabs.tummyTime'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

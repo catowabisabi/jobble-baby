@@ -134,6 +134,14 @@ export const BADGES: Badge[] = [
     category: 'engagement',
     condition: 'Complete 5 brain builder activities in one week',
   },
+  {
+    id: 'tummy_time_goal',
+    name: 'Tummy Time Daily Goal',
+    description: 'Met your daily tummy time goal',
+    icon: '🎯',
+    category: 'milestone',
+    condition: 'Complete daily tummy time goal',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

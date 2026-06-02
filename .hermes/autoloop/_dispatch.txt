@@ -1,33 +1,34 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-02 03:05 UTC+8
-Cycle: 53
-Status: ACTIVE — no new dispatch (feature-complete, user-action blocked)
+Last dispatch: 2026-06-02 04:05 UTC+8
+Cycle: 54
+Status: ACTIVE — feature-complete, user-action blocked
 
 ## This Cycle
 - TSC: 0 errors ✓ (verified clean)
-- Git: f42ea14 pushed
+- Git: 560c379 pushed
 - DB: 0 pending, 0 new — all 60 todos resolved (58 complete, 2 cancelled)
-- Keyword pool: 1000/1000 (full) — +20 CN/en mix added
+- Keyword pool: 1000/1000 (+36 keywords from food allergy / co-regulation brainstorm)
 - tmux session: active, shell idle (Sisyphus idle — no active task)
+- expo-doctor: eas-cli removed from devDeps (fixes local CLI warning)
+- react-native-svg: 15.15.5 (^ allows patch, non-blocking)
 
 ## Todo Status
 - pending: 0
-- new: 0  
+- new: 0
 - completed: 58
 - cancelled: 2
 
 ## App Status — READY FOR USER SUBMISSION
 All features implemented, TSC clean, git pushed.
-BLOCKED on user actions only (see below).
+BLOCKED on user actions only (not Sisyphus's job):
 
-## User Actions Still Required (not Sisyphus's job)
-1. EAS credentials: Apple Team ID + App-Specific Password → run `eas credentials --platform ios`
+1. EAS credentials: Apple Team ID + App-Specific Password → run `npx eas credentials --platform ios`
 2. App Store screenshots: capture on macOS device (iPhone 6.7"/6.5" + iPad 12.9")
 3. Google Service Account JSON key for Play Console
-4. Privacy policy page deployed at jobblebaby.com/privacy (real URL, not placeholder)
+4. Privacy policy page deployed at real URL (not placeholder)
 5. Create app in App Store Connect: bundle ID com.jobblebaby.app
 6. Create app in Play Console: package com.jobblebaby.app
 
 ## Commit
-- f42ea14 — autoloop: cycle 53 — +20 keywords, TSC clean, all complete, awaiting submission
+- 560c379 — autoloop: cycle 54 — clean expo-doctor, rm eas-cli, +36 keywords, TSC clean

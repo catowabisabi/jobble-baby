@@ -1,33 +1,37 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-02 11:01 UTC+8
-Cycle: 58
+Last dispatch: 2026-06-02 13:00 UTC+8
+Cycle: 60
 Status: ACTIVE — feature-complete, user-action blocked
 
 ## This Cycle
-- TSC: 0 errors ✓ (verified clean)
-- Git: c3f1214 pushed
-- DB: 0 pending, 0 new — all 80 todos resolved (58 complete, 22 todo, 4 cancelled)
-- Keyword pool: 1000/1000
+- TSC: 0 errors ✓ (verified clean in JobbleBaby/)
+- Git: 2766a75 → 2766a75 (clean state, no uncommitted changes this cycle)
+- DB: 0 pending, 0 new — all todos resolved
+- Keyword pool: ~1000 (full)
 - tmux session: active, Sisyphus idle
 - Telegram: token not configured (notification skipped)
 
 ## Todo Status
 - pending: 0
 - new: 0
-- completed: 58 (todos) + 22 (todo) = 80 total
-- cancelled: 4 (todo)
+- completed: 58 todos + 22 idea = 80 total
+- cancelled: 4
 
-## App Status — READY FOR USER SUBMISSION
-All features implemented, TSC clean, git pushed.
-BLOCKED on user actions only:
+━━━━━━━━━━━━━━━━━━━━━━━━
+📦 APP IS READY FOR SUBMISSION
+All code features done, TSC clean, git pushed.
 
-1. EAS credentials: Apple Team ID + App-Specific Password → run `npx eas credentials --platform ios`
-2. App Store screenshots: capture on macOS device (iPhone 6.7"/6.5" + iPad 12.9")
-3. Google Service Account JSON key for Play Console
-4. Privacy policy page deployed at real URL (not placeholder)
-5. Create app in App Store Connect: bundle ID com.jobblebaby.app
-6. Create app in Play Console: package com.jobblebaby.app
+USER ACTION REQUIRED:
+ 1. Run: npx eas credentials --platform ios
+    → Provide Apple Team ID + App-Specific Password
+ 2. App Store screenshots: capture on macOS device
+    (iPhone 6.7"/6.5" + iPad 12.9")
+ 3. Google Service Account JSON key for Play Console
+ 4. Deploy privacy policy at real URL (update in app.json)
+ 5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
+ 6. Create app in Play Console → package: com.jobblebaby.app
 
+━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- c3f1214 — autoloop: cycle 58 — dispatch log update, feature-complete state
+- 2766a75 — autoloop: cycle 60 — status checkpoint, all complete, awaiting user submission

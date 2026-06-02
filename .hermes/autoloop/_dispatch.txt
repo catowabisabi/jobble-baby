@@ -1,14 +1,14 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-01 23:00 UTC+8
-Cycle: 49
+Last dispatch: 2026-06-02 03:05 UTC+8
+Cycle: 53
 Status: ACTIVE — no new dispatch (feature-complete, user-action blocked)
 
 ## This Cycle
 - TSC: 0 errors ✓ (verified clean)
-- Git: up to date (5d8f580), nothing to commit
+- Git: f42ea14 pushed
 - DB: 0 pending, 0 new — all 60 todos resolved (58 complete, 2 cancelled)
-- Keyword pool: 1000/1000 (full)
+- Keyword pool: 1000/1000 (full) — +20 CN/en mix added
 - tmux session: active, shell idle (Sisyphus idle — no active task)
 
 ## Todo Status
@@ -30,4 +30,4 @@ BLOCKED on user actions only (see below).
 6. Create app in Play Console: package com.jobblebaby.app
 
 ## Commit
-- 5d8f580 — autoloop: cycle 48 — idle status, all complete, awaiting user submission actions
+- f42ea14 — autoloop: cycle 53 — +20 keywords, TSC clean, all complete, awaiting submission

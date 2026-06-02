@@ -1,27 +1,26 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-02 04:05 UTC+8
-Cycle: 54
+Last dispatch: 2026-06-02 14:02 UTC+8
+Cycle: 57
 Status: ACTIVE — feature-complete, user-action blocked
 
 ## This Cycle
 - TSC: 0 errors ✓ (verified clean)
-- Git: 560c379 pushed
-- DB: 0 pending, 0 new — all 60 todos resolved (58 complete, 2 cancelled)
-- Keyword pool: 1000/1000 (+36 keywords from food allergy / co-regulation brainstorm)
-- tmux session: active, shell idle (Sisyphus idle — no active task)
-- expo-doctor: eas-cli removed from devDeps (fixes local CLI warning)
-- react-native-svg: 15.15.5 (^ allows patch, non-blocking)
+- Git: 0558bc3 (already up to date, nothing to commit)
+- DB: 0 pending, 0 new — all 60+26 todos resolved
+- Keyword pool: 1000/1000
+- tmux session: active, Sisyphus idle
+- Cycle incremented to 57, DB sync'd to git HEAD
 
 ## Todo Status
 - pending: 0
 - new: 0
-- completed: 58
-- cancelled: 2
+- completed: 58 (todos) + 22 (todo) = 80 total
+- cancelled: 4 (todo)
 
 ## App Status — READY FOR USER SUBMISSION
 All features implemented, TSC clean, git pushed.
-BLOCKED on user actions only (not Sisyphus's job):
+BLOCKED on user actions only:
 
 1. EAS credentials: Apple Team ID + App-Specific Password → run `npx eas credentials --platform ios`
 2. App Store screenshots: capture on macOS device (iPhone 6.7"/6.5" + iPad 12.9")
@@ -31,4 +30,4 @@ BLOCKED on user actions only (not Sisyphus's job):
 6. Create app in Play Console: package com.jobblebaby.app
 
 ## Commit
-- 560c379 — autoloop: cycle 54 — clean expo-doctor, rm eas-cli, +36 keywords, TSC clean
+- 0558bc3 — autoloop: cycle 57 — DB update, TSC clean, feature-complete state

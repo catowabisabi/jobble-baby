@@ -1,22 +1,22 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-03 00:02 UTC+8
-Cycle: 162
+Last dispatch: 2026-06-03 02:00 UTC+8
+Cycle: 164
 Status: ACTIVE — feature-complete, user-action blocked
 
 ## This Cycle
 - TSC: 0 errors ✓ (verified clean in JobbleBaby/)
-- Git: 3bb1063 → 6029840 (clean state)
+- Git: 571d0e5 → a2f5a8e (loop_state sync)
 - DB: 0 pending, 0 new — all todos resolved
-- Keyword pool: 1050 total (+50 brainstorm sparks)
+- Keyword pool: 1000 total
 - expo export: clean
-- tmux session: active, Sisyphus idle
+- tmux session: active
 - Telegram: token not configured
 
 ## Todo Status
 - pending: 0
 - new: 0
-- completed: 58 todos + 22 idea = 80 total
+- completed: 60 todos + 30 idea = 90 total
 - cancelled: 4
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
@@ -35,4 +35,4 @@ USER ACTION REQUIRED:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- 6029840 — autoloop: cycle 162 — brainstorm 50 cross-domain sparks, TSC clean, export clean, feature-complete
+- a2f5a8e — autoloop: cycle 164 — feature-complete, TSC clean, awaiting user submission

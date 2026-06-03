@@ -1,16 +1,14 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-03 18:00 UTC+8
-Cycle: 170
-Status: ACTIVE — Sisyphus implementing reading-ritual tab
+Last dispatch: 2026-06-03 19:04 UTC+8
+Cycle: 171
+Status: ACTIVE — Sisyphus implementing Oral Motor Roadmap
 
-## This Cycle (170)
-- TSC: verified clean (0 errors)
-- Git: 3e7771a → committed (cycle 169 status)
-- DB: cycle 170, Keyword pool +1092 (+43 new brainstorm keywords)
-- New Ideas: #36-40 from brainstorm (Wet Diaper, Decibel Cry, Reading Ritual, Hysteresis Sleep, Fontanelle Alert)
-- Sisyphus: dispatched #38 Reading Bedtime Ritual (Idea #38)
-- tmux session: active, buffer sent via /tmp/newtask.txt
+## This Cycle (171)
+- TSC: clean (0 errors)
+- Git: 18fa2d2 (prior)
+- DB: cycle 171, todo #61 created for Idea #31, idea #31 status → dispatched
+- Sisyphus: dispatched Oral Motor Roadmap (Idea #31, todo #61)
 
 ## App Submission Status — ALL FEATURES DONE
 All 21 tabs implemented, TSC 0 errors, expo export clean.
@@ -18,8 +16,7 @@ All 21 tabs implemented, TSC 0 errors, expo export clean.
 USER ACTION REQUIRED (blocking EAS build):
   1. Run: npx eas credentials --platform ios
      → Provide Apple Team ID + App-Specific Password
-  2. App Store screenshots: capture on macOS device
-     (iPhone 6.7"/6.5" + iPad 12.9")
+  2. App Store screenshots: capture on macOS device (iPhone 6.7"/6.5" + iPad 12.9")
   3. Google Service Account JSON key for Play Console
   4. Deploy privacy policy at real URL (update in app.json)
   5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
@@ -28,15 +25,11 @@ USER ACTION REQUIRED (blocking EAS build):
 ## Pending (blocked)
 - EAS credentials — user action required
 - Privacy policy URL — placeholder, needs real deployment
+- Idea #31: Oral Motor Roadmap ← DISPATCHED this cycle
 
-## Dispatched
-- Idea #38: Reading Bedtime Ritual ← DISPATCHED this cycle
-
-## Ideas — Queued (not dispatched)
-- Idea #31: Oral Motor Roadmap
+## Ideas — Queued (not yet dispatched)
 - Idea #32: Weaning Rash Six-Track
 - Idea #33: Hip Click Ortolani Pre-Screen
-- Idea #34: Pumping Membrane Wear Tracker (cancelled — not completed)
 - Idea #35: Fontanelle Soft Spot Map
 - Idea #36: Wet Diaper Weight Proxy
 - Idea #37: Decibel Cry Waveform
@@ -45,5 +38,5 @@ USER ACTION REQUIRED (blocking EAS build):
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- 3e7771a — (cycle 169 prior commit)
+- 18fa2d2 — (cycle 170 prior commit)
 - This cycle: DB update + _dispatch.txt (no new code changes)

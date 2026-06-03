@@ -1,14 +1,14 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-03 19:04 UTC+8
-Cycle: 171
-Status: ACTIVE — Sisyphus implementing Oral Motor Roadmap
+Last dispatch: 2026-06-03 20:00 UTC+8
+Cycle: 172
+Status: ACTIVE — Sisyphus dispatched Weaning Rash Six-Track
 
-## This Cycle (171)
-- TSC: clean (0 errors)
-- Git: 18fa2d2 (prior)
-- DB: cycle 171, todo #61 created for Idea #31, idea #31 status → dispatched
-- Sisyphus: dispatched Oral Motor Roadmap (Idea #31, todo #61)
+## This Cycle (172)
+- TSC: clean (0 errors) on prior code
+- Git: prior commit d965f40
+- DB: cycle 172, todo #62 created for Idea #32, idea #32 status → dispatched, idea #31 (Oral Motor) todo #61 reset to pending
+- Sisyphus: dispatched Weaning Rash Six-Track (Idea #32, todo #62)
 
 ## App Submission Status — ALL FEATURES DONE
 All 21 tabs implemented, TSC 0 errors, expo export clean.
@@ -25,18 +25,19 @@ USER ACTION REQUIRED (blocking EAS build):
 ## Pending (blocked)
 - EAS credentials — user action required
 - Privacy policy URL — placeholder, needs real deployment
-- Idea #31: Oral Motor Roadmap ← DISPATCHED this cycle
+- Idea #31: Oral Motor Roadmap ← RESET to pending (Sisyphus stuck, will retry)
+- Idea #32: Weaning Rash Six-Track ← DISPATCHED this cycle
 
 ## Ideas — Queued (not yet dispatched)
-- Idea #32: Weaning Rash Six-Track
 - Idea #33: Hip Click Ortolani Pre-Screen
 - Idea #35: Fontanelle Soft Spot Map
 - Idea #36: Wet Diaper Weight Proxy
 - Idea #37: Decibel Cry Waveform
+- Idea #38: Reading Bedtime Ritual
 - Idea #39: Hysteresis Sleep Curve
 - Idea #40: Fontanelle Depression Alert
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- 18fa2d2 — (cycle 170 prior commit)
-- This cycle: DB update + _dispatch.txt (no new code changes)
+- d965f40 — (cycle 171 prior commit)
+- This cycle: DB update + _dispatch.txt + sisyphus_task.txt (no new code changes)

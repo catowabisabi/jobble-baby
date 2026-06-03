@@ -1,0 +1,73 @@
+# Weaning Rash Six-Track — Task for Sisyphus
+
+## Goal
+Implement **Weaning Rash Six-Track tab** — 6-window timeline for tracking skin reactions, GI, and stool changes after solid food introduction.
+
+## Files to Create/Modify
+
+### 1. Create: app/(tabs)/weaning-rash.tsx
+
+```tsx
+// Imports
+import { useRouter } from 'expo-router';
+import { useState, useEffect } from 'react';
+import { ScrollView, View, Text, TouchableOpacity, TextInput, FlatList, Modal, StyleSheet } from 'react-native';
+import { C } from '../constants/theme';
+import { storageGet, storageSet } from '../constants/storage';
+import { t } from '../i18n';
+
+// State: entries array, selectedFood, selectedWindow, isAddingEntry, etc.
+// UI: 6-window timeline, food entry form, FPIES alert, history FlatList
+// AsyncStorage: @jobble/weaning_rash_entries, @jobble/weaning_foods_list
+// TSC must pass 0 errors before done
+```
+
+### 2. Modify: app/(tabs)/_layout.tsx
+Add Tabs.Screen entry for weaning-rash tab.
+
+### 3. Modify: app/i18n/en.json and app/i18n/zh.json
+Add all i18n keys for weaning rash tab.
+
+## Full Implementation Details
+
+### State
+- entries array: { id, date, food_name, window (1-6), rash_type (none/mild/moderate/severe), rash_location[], gi_symptoms[], stool_type, notes, badge_earned }
+- windowLabels: ["Days 1-2", "Days 3-4", "Days 5-7", "Week 2", "Week 3", "Week 4"]
+- selectedFood string, selectedWindow number (1-6), isAddingEntry boolean
+
+### UI Components
+1. Header: "Weaning Rash Six-Track" (en) / "加固疹追蹤" (zh)
+2. Greeting: "Track your baby's reaction to new foods"
+3. 6-Window Timeline: horizontal segmented progress with window labels
+4. Food Entry Form (modal):
+   - Food name input (text)
+   - Window selector (1-6 as segmented control)
+   - Rash Type: 4-button selector (None/Mild/Moderate/Severe) with color coding
+   - Rash Location: multi-select chips (face, torso, arms, legs, diaper area, other)
+   - GI Symptoms: multi-select chips (vomiting, diarrhea, constipation, bloating, blood in stool, gassy)
+   - Stool Type: 5-button selector (normal/soft/runny/hard/mucousy)
+   - Notes: multiline text input
+   - Save button
+5. FPIES Alert Banner: red banner if rash occurs within 72h of new food
+6. History: FlatList of past entries grouped by window
+7. Milestone badge: "Food Explorer" when 3+ different foods logged
+
+### AsyncStorage
+- @jobble/weaning_rash_entries
+- @jobble/weaning_foods_list (for autocomplete)
+- calcWindow returns 1-6 based on days since food introduction
+
+### i18n Keys (en + zh)
+tabs.weaningRash, weaningRash.title, weaningRash.greeting, weaningRash.foodName, weaningRash.window1-6, weaningRash.rashNone/Mild/Moderate/Severe, weaningRash.rashLocation (all 6), weaningRash.giSymptoms (all 6), weaningRash.stoolType (all 5), weaningRash.fpiesAlert, weaningRash.foodExplorer, weaningRash.history, weaningRash.addFood, weaningRash.notes, weaningRash.save
+
+### Tab Integration
+Add Tabs.Screen to app/(tabs)/_layout.tsx: name="weaning-rash", icon="food-drumstick", label=t("tabs.weaningRash")
+
+### Theme
+- Dark #0D0D0D background, #3B82F6 accent cards
+- Window progress: 6-step segmented bar
+- Rash severity: #10B981 (none), #F59E0B (mild), #F97316 (moderate), #EF4444 (severe)
+- FPIES alert: #DC2626 red banner
+
+## VERIFICATION
+npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done ULW

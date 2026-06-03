@@ -1,23 +1,28 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-03 06:00 UTC+8
+Last dispatch: 2026-06-03 07:04 UTC+8
 Cycle: 165
 Status: ACTIVE — feature-complete, user-action blocked
 
 ## This Cycle
 - TSC: 0 errors ✓ (verified clean in JobbleBaby/)
-- Git: 571d0e5 → a2f5a8e (loop_state sync)
+- Git: a2f5a8e → 5146692 (cycle 165 push)
 - DB: 0 pending, 0 new — all todos resolved
+- Ideas 23/24 marked implemented ✓
 - Keyword pool: 1000 total
 - expo export: clean
 - tmux session: active
 - Telegram: token not configured
 
+## Ideas Status (All Implemented)
+- Idea #23: Doctor Visit Summary Export ✓ (app/(tabs)/doctor-visit.tsx, 440 lines)
+- Idea #24: App Store Listing Optimization ✓ (store/app-store-listing.md, A/B variants, keywords, checklist)
+
 ## Todo Status
 - pending: 0
 - new: 0
-- completed: 60 todos + 30 idea = 90 total
-- cancelled: 4
+- completed: 22 todo items, 30 ideas = 52 total resolved
+- cancelled: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 📦 APP IS READY FOR SUBMISSION
@@ -35,4 +40,4 @@ USER ACTION REQUIRED:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- a2f5a8e — autoloop: cycle 164 — feature-complete, TSC clean, awaiting user submission
+- 5146692 — autoloop: cycle 165 — ideas 23/24 implemented, feature-complete, TSC clean

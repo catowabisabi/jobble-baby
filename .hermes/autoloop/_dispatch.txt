@@ -1,16 +1,16 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-03 13:10 UTC+8
-Cycle: 169
-Status: ACTIVE — awaiting user action on EAS credentials
+Last dispatch: 2026-06-03 18:00 UTC+8
+Cycle: 170
+Status: ACTIVE — Sisyphus implementing reading-ritual tab
 
-## This Cycle (169)
+## This Cycle (170)
 - TSC: verified clean (0 errors)
-- Git: ab9a8c6 (nothing to commit — clean tree)
-- DB: cycle updated to 169
-- Keywords: +70 new postpartum/maternal/信任/birthing care keywords
-- Sisyphus: dispatched pump-maintenance task (Idea #34)
-- tmux session: active, alive confirmed
+- Git: 3e7771a → committed (cycle 169 status)
+- DB: cycle 170, Keyword pool +1092 (+43 new brainstorm keywords)
+- New Ideas: #36-40 from brainstorm (Wet Diaper, Decibel Cry, Reading Ritual, Hysteresis Sleep, Fontanelle Alert)
+- Sisyphus: dispatched #38 Reading Bedtime Ritual (Idea #38)
+- tmux session: active, buffer sent via /tmp/newtask.txt
 
 ## App Submission Status — ALL FEATURES DONE
 All 21 tabs implemented, TSC 0 errors, expo export clean.
@@ -29,14 +29,21 @@ USER ACTION REQUIRED (blocking EAS build):
 - EAS credentials — user action required
 - Privacy policy URL — placeholder, needs real deployment
 
-## Ideas — Out of Scope (not dispatched, user must request)
+## Dispatched
+- Idea #38: Reading Bedtime Ritual ← DISPATCHED this cycle
+
+## Ideas — Queued (not dispatched)
 - Idea #31: Oral Motor Roadmap
 - Idea #32: Weaning Rash Six-Track
 - Idea #33: Hip Click Ortolani Pre-Screen
-- Idea #34: Pumping Membrane Wear Tracker ← DISPATCHED this cycle
+- Idea #34: Pumping Membrane Wear Tracker (cancelled — not completed)
 - Idea #35: Fontanelle Soft Spot Map
+- Idea #36: Wet Diaper Weight Proxy
+- Idea #37: Decibel Cry Waveform
+- Idea #39: Hysteresis Sleep Curve
+- Idea #40: Fontanelle Depression Alert
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- ab9a8c6 — (cycle 168 prior commit)
-- This cycle: DB update only (no new code changes)
+- 3e7771a — (cycle 169 prior commit)
+- This cycle: DB update + _dispatch.txt (no new code changes)

@@ -1,43 +1,38 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-03 09:00 UTC+8
-Cycle: 167
+Last dispatch: 2026-06-03 12:00 UTC+8
+Cycle: 168
 Status: ACTIVE — feature-complete, user-action blocked
 
-## This Cycle
-- TSC: 0 errors ✓ (verified clean in JobbleBaby/)
-- Git: 13040df → 6b4d7ce (cycle 167 push)
-- DB: 0 pending, 0 new — all todos resolved
-- Ideas 23/24 marked implemented ✓
-- Keyword pool: 1000 total
-- expo export: clean (dist/ generated successfully)
-- tmux session: active
-- Telegram: token not configured
+## This Cycle (168)
+- TSC: verified clean
+- Git: 895aa9d (brainstorm cycle 168 keywords pushed)
+- DB: 0 pending, 0 new (all todos resolved)
+- Keywords: +49 new baby care keywords (body mapping, neuroendocrine reset, etc.)
+- Ideas 31-35 generated (5 new concepts from brainstorm, new status)
+- tmux session: active, Sisyphus alive
 
-## Ideas Status (All Implemented)
-- Idea #23: Doctor Visit Summary Export ✓ (app/(tabs)/doctor-visit.tsx, 440 lines)
-- Idea #24: App Store Listing Optimization ✓ (store/app-store-listing.md, A/B variants, keywords, checklist)
+## App Submission Status — ALL FEATURES DONE
+All 16 tabs implemented, TSC 0 errors, expo export clean.
 
-## Todo Status
-- pending: 0
-- new: 0
-- completed: 22 todo items, 30 ideas = 52 total resolved
-- cancelled: 0
+USER ACTION REQUIRED (blocking EAS build):
+  1. Run: npx eas credentials --platform ios
+     → Provide Apple Team ID + App-Specific Password
+  2. App Store screenshots: capture on macOS device
+     (iPhone 6.7"/6.5" + iPad 12.9")
+  3. Google Service Account JSON key for Play Console
+  4. Deploy privacy policy at real URL (update in app.json)
+  5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
+  6. Create app in Play Console → package: com.jobblebaby.app
 
-━━━━━━━━━━━━━━━━━━━━━━━━
-📦 APP IS READY FOR SUBMISSION
-All code features done, TSC clean, expo export clean, git pushed.
-
-USER ACTION REQUIRED:
- 1. Run: npx eas credentials --platform ios
-    → Provide Apple Team ID + App-Specific Password
- 2. App Store screenshots: capture on macOS device
-    (iPhone 6.7"/6.5" + iPad 12.9")
- 3. Google Service Account JSON key for Play Console
- 4. Deploy privacy policy at real URL (update in app.json)
- 5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
- 6. Create app in Play Console → package: com.jobblebaby.app
+## Ideas (5 new from cycle 168, not dispatched)
+- Idea #31: Oral Motor Roadmap (new)
+- Idea #32: Weaning Rash Six-Track (new)
+- Idea #33: Hip Click Ortolani Pre-Screen (new)
+- Idea #34: Pumping Membrane Wear Tracker (new)
+- Idea #35: Fontanelle Soft Spot Map (new)
+⚠️ Out of current submission scope — user must request to proceed
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- 6b4d7ce — autoloop: cycle 167 — status check, feature-complete, awaiting user submission action
+- 895aa9d — autoloop: cycle 168 — brainstorm 49 keywords + 5 ideas (Oral Motor, Weaning Rash, Hip Screen, Pump Maintenance, Fontanelle)

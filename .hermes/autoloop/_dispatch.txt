@@ -1,16 +1,16 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-04 01:XX UTC+8
-Cycle: 178
-Status: ACTIVE — Sisyphus running Pediatric Report PDF task
+Last dispatch: 2026-06-04 02:XX UTC+8
+Cycle: 179
+Status: ACTIVE — Sisyphus running Fontanelle Soft Spot Map task
 
-## This Cycle (178) — Review + Commit
-- 29 tabs verified: weaning-rash.tsx EXISTS (261 lines), fontanelle.tsx MISSING
-- TSC 0 errors across all tabs
-- Sisyphus tmux pane active — responding to prompts
-- Stale task files: current_task.txt shows Weaning Rash (already done), sisyphus_task.txt shows Fontanelle (not done)
-- Next action: re-dispatch Fontanelle as top priority when Sisyphus reports done
-- Git: 080ee53 → pushed
+## This Cycle (179) — Review + Commit
+- 29 tabs verified: weaning-rash.tsx EXISTS (261 lines), fontanelle.tsx MISSING (will be created)
+- TSC 0 errors across all tabs (verified)
+- Sisyphus tmux pane active — re-dispatched Fontanelle task via buffer paste
+- Prior Pediatric Report PDF task (todo #75) — Sisyphus only pasted to terminal, never ran opencode. Reset to pending.
+- Next: Fontanelle in progress, todo #75 (Pediatric Report PDF) pending
+- Git: 080ee53 → 2e6329e → pushed
 
 ## App Status — ALL FEATURES DONE (29 tabs)
 All 29 tabs implemented. TSC 0 errors. Expo export clean.
@@ -25,14 +25,14 @@ EAS build blocked on user action.
   6. Create app in Play Console → package: com.jobblebaby.app
 
 ## Pending Todos
-- #70 [pending]: Fontanelle Soft Spot Map → top priority re-dispatch
+- #70 [in_progress]: Fontanelle Soft Spot Map → Sisyphus working
 - #71 [pending]: Medicine Dose Calculator (idea #46)
 - #72 [pending]: Caregiver Shift Handoff Log (idea #47)
 - #73 [pending]: Breast Milk Transfer Efficiency (idea #48)
 - #74 [pending]: Sleep Association Pattern Map (idea #49)
-- #75 [in_progress]: Pediatric Report PDF Export (idea #50) → Sisyphus
+- #75 [pending]: Pediatric Report PDF Export (idea #50) → reset to pending, was stuck
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- 080ee53 — autoloop: cycle 178 — review 29 tabs, TSC 0 err, Sisyphus on Pediatric Report PDF (todo #75)
-- Prior: 17355da (Fontanelle reset), 14536af (TSC clean), 276267f (db update)
+- 2e6329e — autoloop: cycle 179 — reset todo #70 Fontanelle re-dispatched, Sisyphus confirmed on Fontanelle (todo #70)
+- Prior: 080ee53 (cycle 178), 17355da (Fontanelle reset), 14536af (TSC clean), 276267f (db update)

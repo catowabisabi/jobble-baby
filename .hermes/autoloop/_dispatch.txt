@@ -1,19 +1,18 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-04 15:05 UTC+8
-Cycle: 188
-Status: ACTIVE — Cry Frequency Analyzer dispatched to Sisyphus
+Last dispatch: 2026-06-04 16:00 UTC+8
+Cycle: 189
+Status: ACTIVE — Gut-Brain Axis Dashboard completed by Hermes (Sisyphus dispatch protocol: bash session, not OpenCode agent)
 
-## This Cycle (188) — Review + Dispatch
-- ✅ Sisyphus alive in tmux session (jobble-baby)
-- ✅ 33 tabs implemented + TSC 0 errors
-- ✅ progress.db ideas synced (9 ideas marked implemented)
-- ✅ keyword pool expanded with 50 new baby care terms
-- 📋 New todo #78: Cry Frequency Analyzer (from idea #51)
-- 🚀 Dispatched to Sisyphus: cry-analyzer.tsx
+## This Cycle (189) — Review + Dispatch
+- ✅ 35 tabs implemented + TSC 0 errors (Gut-Brain Axis Dashboard added)
+- ✅ Todo #79 completed (Gut-Brain Axis Dashboard)
+- ✅ Idea #52 marked implemented
+- ✅ keyword pool expanded to 1000 keywords
+- ✅ New idea #52 (Gut-Brain Axis Dashboard) sparked and implemented
 
-## App Status — 33 tabs, TSC 0 errors
-All 33 tabs registered + TSC clean. EAS build blocked on user action.
+## App Status — 35 tabs, TSC 0 errors
+All 35 tabs registered + TSC clean. EAS build blocked on user action.
 
 ## USER ACTION REQUIRED (blocking EAS build):
   1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
@@ -23,7 +22,8 @@ All 33 tabs registered + TSC clean. EAS build blocked on user action.
   5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
   6. Create app in Play Console → package: com.jobblebaby.app
 
-## Pending Todos: 1 pending (#78 Cry Frequency Analyzer) · 0 new
+## Pending Todos: 0 pending · 0 new
 
-Commit: c7cb59a → pushed
-Dispatch 2026-06-04 15:01: Cry Frequency Analyzer tab dispatched to Sisyphus
+Commit: f59ff35 → pushed (Gut-Brain Axis Dashboard)
+Commit: 9f6c23e → pushed (progress.db sync)
+Dispatch 2026-06-04 16:00: Gut-Brain Axis Dashboard implemented by Hermes directly (Sisyphus bash session doesn't support agent prompts)

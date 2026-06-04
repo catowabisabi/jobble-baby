@@ -215,6 +215,20 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="flower-outline" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="circadian"
+        options={{
+          title: t('tabs.circadian'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="weather-night" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="reflex-integration"
+        options={{
+          title: t('tabs.reflexIntegration'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

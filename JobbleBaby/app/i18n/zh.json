@@ -23,7 +23,9 @@
     "gearCheck": "装备检查",
     "weaningRash": "加固疹",
     "oralMotor": "口腔運動",
-    "moroReflex": "莫羅反射"
+    "moroReflex": "莫羅反射",
+    "tongueTie": "舌繫帶",
+    "jetLag": "時差適應"
   },
   "home": {
     "title": "主頁",
@@ -849,5 +851,44 @@
     "history": "歷史",
     "noEvents": "尚未記錄驚跳",
     "badgeCalm": "冷靜寶寶"
+  },
+  "tongueTie": {
+    "title": "舌繫帶追蹤",
+    "greeting": "追蹤舌繫帶診斷、鬆解手術和餵養進度",
+    "stage": "現階段",
+    "notDiagnosed": "未確診",
+    "diagnosed": "已確診",
+    "released": "已手術",
+    "addRecord": "新增記項",
+    "type": "記項類型",
+    "diagnosis": "診斷",
+    "release": "鬆解手術",
+    "followup": "跟進",
+    "latchScore": "含乳評分",
+    "painScore": "媽媽疼痛指數",
+    "feedingImprovement": "餵養改善",
+    "notes": "備註",
+    "save": "儲存",
+    "history": "歷史",
+    "noRecords": "尚無記項",
+    "feedingImprovedBadge": "餵養改善"
+  },
+  "jetLag": {
+    "title": "時差適應",
+    "greeting": "幫助寶寶在旅行後適應新時區",
+    "departureZone": "出發時區",
+    "arrivalZone": "到達時區",
+    "babyAge": "寶寶月齡",
+    "shiftHours": "時差",
+    "recommendedPlan": "建議計劃",
+    "dailyShift": "每日調整",
+    "currentDay": "第幾天",
+    "todayTarget": "今日目標睡眠時段",
+    "awakeWindow": "清醒時段",
+    "alertLargeShift": "大時差（>5小時）— 6個月以下寶寶請諮詢兒科醫生",
+    "startPlan": "開始計劃",
+    "history": "歷史",
+    "noPlan": "尚未設置旅行計劃",
+    "save": "儲存"
   }
 }

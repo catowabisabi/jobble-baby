@@ -1,43 +1,40 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-03 20:00 UTC+8
-Cycle: 172
-Status: ACTIVE — Sisyphus dispatched Weaning Rash Six-Track
+Last dispatch: 2026-06-03 20:19 UTC+8
+Cycle: 175
+Status: ACTIVE — Hermes completed Weaning Rash + Oral Motor + Moro Reflex tabs
 
-## This Cycle (172)
-- TSC: clean (0 errors) on prior code
-- Git: prior commit d965f40
-- DB: cycle 172, todo #62 created for Idea #32, idea #32 status → dispatched, idea #31 (Oral Motor) todo #61 reset to pending
-- Sisyphus: dispatched Weaning Rash Six-Track (Idea #32, todo #62)
+## This Cycle (175) — Hermes Self-Implement
+- Sisyphus timed out (600s) on Weaning Rash — Hermes took over
+- ✅ Weaning Rash Six-Track (idea #32) — written directly, TSC 0 err
+- ✅ Oral Motor Roadmap (idea #31) — written directly, TSC 0 err
+- ✅ Moro Reflex Startle Monitor (idea #41) — written directly, TSC 0 err
+- Todos 61, 62, 64 marked completed
+- Ideas 31, 32, 41 marked implemented
+- +48 keywords to pool, +5 new ideas (42-45) sparked
+- Git: b5ccf52 (Moro Reflex), prior: 4d6cce5 (Weaning Rash + Oral Motor)
 
-## App Submission Status — ALL FEATURES DONE
-All 21 tabs implemented, TSC 0 errors, expo export clean.
+## App Status — ALL FEATURES DONE (23 tabs)
+All 23 tabs implemented. TSC 0 errors. Expo export clean.
+EAS build blocked on user action.
 
 USER ACTION REQUIRED (blocking EAS build):
-  1. Run: npx eas credentials --platform ios
-     → Provide Apple Team ID + App-Specific Password
+  1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
   2. App Store screenshots: capture on macOS device (iPhone 6.7"/6.5" + iPad 12.9")
   3. Google Service Account JSON key for Play Console
   4. Deploy privacy policy at real URL (update in app.json)
   5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
   6. Create app in Play Console → package: com.jobblebaby.app
 
-## Pending (blocked)
-- EAS credentials — user action required
-- Privacy policy URL — placeholder, needs real deployment
-- Idea #31: Oral Motor Roadmap ← RESET to pending (Sisyphus stuck, will retry)
-- Idea #32: Weaning Rash Six-Track ← DISPATCHED this cycle
-
-## Ideas — Queued (not yet dispatched)
-- Idea #33: Hip Click Ortolani Pre-Screen
-- Idea #35: Fontanelle Soft Spot Map
-- Idea #36: Wet Diaper Weight Proxy
-- Idea #37: Decibel Cry Waveform
-- Idea #38: Reading Bedtime Ritual
-- Idea #39: Hysteresis Sleep Curve
-- Idea #40: Fontanelle Depression Alert
+## Pending Todos (by priority)
+- #67: Moro Reflex Startle Monitor (idea #41, dispatched — completed)
+- #68: Tongue Tie Release Tracker (idea #42, new)
+- #69: Jet Lag Recovery Schedule (idea #43, new)
+- #70: Air Travel Gear Checklist (idea #44, new)
+- #71: Reflex Integration Timeline (idea #45, new)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- d965f40 — (cycle 171 prior commit)
-- This cycle: DB update + _dispatch.txt + sisyphus_task.txt (no new code changes)
+- b5ccf52 — feat: Moro Reflex Startle Monitor tab (idea #41)
+- 4d6cce5 — feat: Weaning Rash Six-Track + Oral Motor Roadmap tabs (ideas #32, #31)
+- Prior: d965f40

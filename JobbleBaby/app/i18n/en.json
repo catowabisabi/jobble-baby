@@ -23,7 +23,9 @@
     "gearCheck": "Gear Check",
     "weaningRash": "Weaning Rash",
     "oralMotor": "Oral Motor",
-    "moroReflex": "Moro Reflex"
+    "moroReflex": "Moro Reflex",
+    "tongueTie": "Tongue Tie",
+    "jetLag": "Jet Lag"
   },
   "home": {
     "title": "Home",
@@ -849,5 +851,44 @@
     "history": "History",
     "noEvents": "No startles logged yet",
     "badgeCalm": "Calm Baby"
+  },
+  "tongueTie": {
+    "title": "Tongue Tie Tracker",
+    "greeting": "Track tongue tie diagnosis, release, and feeding progress",
+    "stage": "Current Stage",
+    "notDiagnosed": "Not Diagnosed",
+    "diagnosed": "Diagnosed",
+    "released": "Released",
+    "addRecord": "Add Record",
+    "type": "Record Type",
+    "diagnosis": "Diagnosis",
+    "release": "Release Procedure",
+    "followup": "Follow-up",
+    "latchScore": "Latch Score",
+    "painScore": "Pain Score (Mother)",
+    "feedingImprovement": "Feeding Improvement",
+    "notes": "Notes",
+    "save": "Save",
+    "history": "History",
+    "noRecords": "No records yet",
+    "feedingImprovedBadge": "Feeding Improved"
+  },
+  "jetLag": {
+    "title": "Jet Lag Recovery",
+    "greeting": "Help baby adjust to new timezone after travel",
+    "departureZone": "Departure Timezone",
+    "arrivalZone": "Arrival Timezone",
+    "babyAge": "Baby's Age (months)",
+    "shiftHours": "Time Shift",
+    "recommendedPlan": "Recommended Plan",
+    "dailyShift": "Daily Adjustment",
+    "currentDay": "Day",
+    "todayTarget": "Today's Target Sleep Window",
+    "awakeWindow": "Wake Window",
+    "alertLargeShift": "Large shift (>5h) — consult pediatrician for babies under 6 months",
+    "startPlan": "Start Plan",
+    "history": "History",
+    "noPlan": "No travel plan set",
+    "save": "Save"
   }
 }

@@ -145,6 +145,20 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="alert-octagon" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="tongue-tie"
+        options={{
+          title: t('tabs.tongueTie'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="link-variant" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="jet-lag"
+        options={{
+          title: t('tabs.jetLag'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="airplane" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

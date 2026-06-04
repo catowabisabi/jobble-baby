@@ -1,6 +1,6 @@
-Implement **Moro Reflex Startle Monitor** — track baby startle events from the Moro reflex, correlate with sleep disruption, flag if excessive.
+Implement **Tongue Tie Release Tracker** — track tongue tie (lingual frenulum) diagnosis, release procedure, and post-procedure feeding progress.
 
-## 1. Create: app/(tabs)/moro-reflex.tsx
+## 1. Create: app/(tabs)/tongue-tie.tsx
 
 ```tsx
 // Imports
@@ -11,62 +11,63 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 
-// State: events array { id, timestamp, trigger (loud noise/sudden movement/light/other), severity (mild/moderate/severe), correlated_sleep_disruption boolean, notes }
-// Alert threshold: >10 startles per hour → yellow flag; >15 → red alert
-// UI: header, greeting, today's count card, hourly rate gauge, event log form, alert banner
-// AsyncStorage: @jobble/moro_reflex_events
+// State: records array { id, date, type (diagnosis/release/followup), notes, latch_score (1-5), pain_score (1-5), feeding_improvement }
+// AsyncStorage: @jobble/tongue_tie_records
 
-// 4 trigger types: "loud noise", "sudden movement", "bright light", "temperature change", "other"
-// 3 severity levels: mild / moderate / severe
-// Correlation toggle: "Did this cause sleep disruption?"
-// Alert banner: yellow >10/hr, red >15/hr
+// UI Components:
+// 1. Header: "Tongue Tie Tracker" (en) / "舌繫帶追蹤" (zh)
+// 2. Status card: shows current stage (not-diagnosed / diagnosed / released / released+followup)
+// 3. Timeline: FlatList of all records sorted by date desc
+// 4. Add Record FAB → modal with type selector
+// 5. Latch improvement chart: simple before/after comparison if 2+ records
+// 6. Badge: "Released" when procedure logged, "Feeding Improved" when latch_score improves
 
-// Badge: "Calm Baby" — 24h with 0 startles logged
+// Record types: "diagnosis" (when tongue tie identified), "release" (procedure date), "followup" (post-procedure check-in)
+// Latch score: 1=poor, 2=fair, 3=adequate, 4=good, 5=excellent
+// Pain score: 1=no pain, 5=severe (for mother during feeding)
+
+// Tab icon: MaterialCommunityIcons "link-variant" or "content-cut"
 ```
 
 ## 2. Modify: app/(tabs)/_layout.tsx
-Add Tabs.Screen entry for "moro-reflex" with icon "alert-octagon".
+Add Tabs.Screen entry for "tongue-tie" with icon "link-variant".
 
 ## 3. Modify: app/i18n/en.json and app/i18n/zh.json
 
 **en.json keys:**
-- tabs.moroReflex: "Moro Reflex"
-- moroReflex.title: "Moro Reflex Monitor"
-- moroReflex.greeting: "Track your baby's startle responses"
-- moroReflex.todayCount: "Today's Startles"
-- moroReflex.hourlyRate: "Per Hour"
-- moroReflex.addEvent: "Log Startle"
-- moroReflex.trigger: "Trigger"
-- moroReflex.triggerLoud: "Loud Noise"
-- moroReflex.triggerMovement: "Sudden Movement"
-- moroReflex.triggerLight: "Bright Light"
-- moroReflex.triggerTemp: "Temperature Change"
-- moroReflex.triggerOther: "Other"
-- moroReflex.severity: "Severity"
-- moroReflex.mild: "Mild"
-- moroReflex.moderate: "Moderate"
-- moroReflex.severe: "Severe"
-- moroReflex.sleepDisruption: "Sleep Disruption?"
-- moroReflex.yes: "Yes"
-- moroReflex.no: "No"
-- moroReflex.notes: "Notes"
-- moroReflex.save: "Save"
-- moroReflex.alertYellow: "Frequent startles detected — monitor closely"
-- moroReflex.alertRed: "Excessive startles — consult pediatrician"
-- moroReflex.history: "History"
-- moroReflex.noEvents: "No startles logged yet"
-- moroReflex.badgeCalm: "Calm Baby"
+- tabs.tongueTie: "Tongue Tie"
+- tongueTie.title: "Tongue Tie Tracker"
+- tongueTie.greeting: "Track tongue tie diagnosis, release, and feeding progress"
+- tongueTie.diagnosis: "Diagnosis"
+- tongueTie.release: "Release Procedure"
+- tongueTie.followup: "Follow-up"
+- tongueTie.addRecord: "Add Record"
+- tongueTie.type: "Record Type"
+- tongueTie.date: "Date"
+- tongueTie.latchScore: "Latch Score"
+- tongueTie.painScore: "Pain Score (Mother)"
+- tongueTie.feedingImprovement: "Feeding Improvement"
+- tongueTie.notes: "Notes"
+- tongueTie.save: "Save"
+- tongueTie.history: "History"
+- tongueTie.noRecords: "No records yet"
+- tongueTie.releasedBadge: "Released"
+- tongueTie.feedingImprovedBadge: "Feeding Improved"
+- tongueTie.notDiagnosed: "Not Diagnosed"
+- tongueTie.diagnosed: "Diagnosed"
+- tongueTie.stage: "Current Stage"
 
 **zh.json equivalents:**
-- tabs.moroReflex: "莫羅反射"
-- moroReflex.title: "莫羅反射監測"
-- moroReflex.greeting: "追蹤寶寶的驚跳反應"
+- tabs.tongueTie: "舌繫帶"
+- tongueTie.title: "舌繫帶追蹤"
+- tongueTie.greeting: "追蹤舌繫帶診斷、鬆解手術和餵養進度"
 - [translate all other keys to Chinese]
 
 ## Theme
 - Dark #0D0D0D background, #3B82F6 accent cards
-- Alert yellow: #F59E0B, Alert red: #EF4444
-- Follow existing tab patterns
+- Release stage: amber (#F59E0B)
+- Follow-up stage: green (#10B981)
+- Follow existing tab patterns (teething.tsx as reference)
 
 ## TSC Verification
 After creating all files, run: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit

@@ -22,7 +22,8 @@
     "bottleRefusal": "奶瓶抗拒",
     "gearCheck": "装备检查",
     "weaningRash": "加固疹",
-    "oralMotor": "口腔運動"
+    "oralMotor": "口腔運動",
+    "moroReflex": "莫羅反射"
   },
   "home": {
     "title": "主頁",
@@ -821,5 +822,32 @@
     "addEntry": "新增記項",
     "notes": "備註",
     "save": "儲存"
+  },
+  "moroReflex": {
+    "title": "莫羅反射監測",
+    "greeting": "追蹤寶寶的驚跳反應",
+    "todayCount": "今日驚跳",
+    "hourlyRate": "每小時",
+    "addEvent": "記錄驚跳",
+    "trigger": "觸發因素",
+    "triggerLoud": "巨響",
+    "triggerMovement": "突然移動",
+    "triggerLight": "強光",
+    "triggerTemp": "溫度變化",
+    "triggerOther": "其他",
+    "severity": "嚴重程度",
+    "mild": "輕微",
+    "moderate": "中等",
+    "severe": "嚴重",
+    "sleepDisruption": "睡眠受影響？",
+    "yes": "是",
+    "no": "否",
+    "notes": "備註",
+    "save": "儲存",
+    "alertYellow": "驚跳頻繁 — 密切監察",
+    "alertRed": "過度驚跳 — 請諮詢兒科醫生",
+    "history": "歷史",
+    "noEvents": "尚未記錄驚跳",
+    "badgeCalm": "冷靜寶寶"
   }
 }

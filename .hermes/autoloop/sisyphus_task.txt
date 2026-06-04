@@ -1,47 +1,73 @@
-Implement **Weaning Rash Six-Track tab** — 6-window timeline for tracking skin reactions, GI, and stool changes after solid food introduction.
+Implement **Moro Reflex Startle Monitor** — track baby startle events from the Moro reflex, correlate with sleep disruption, flag if excessive.
 
-**1. File: app/(tabs)/weaning-rash.tsx**
-- Import: useRouter, useState, useEffect from expo-router, C from theme, storageGet/storageSet from ../constants/storage, t() from ../i18n, badgeService
-- Import: ScrollView, View, Text, TouchableOpacity, FlatList from react-native
+## 1. Create: app/(tabs)/moro-reflex.tsx
 
-**2. State:**
-- entries array: { id, date, food_name, window (1-6), rash_type (none/mild/moderate/severe), rash_location, gi_symptoms[], stool_type, notes, badge_earned }
-- windowLabels: ["Days 1-2", "Days 3-4", "Days 5-7", "Week 2", "Week 3", "Week 4"]
-- selectedFood string, selectedWindow number (1-6), isAddingEntry boolean
+```tsx
+// Imports
+import { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, Modal, TextInput } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useLanguage } from '../context/LanguageContext';
 
-**3. UI Components:**
-- Header: "Weaning Rash Six-Track" (en) / "加固疹追蹤" (zh)
-- Greeting: "Track your baby's reaction to new foods"
-- 6-Window Timeline: horizontal segmented progress with window labels
-- Food Entry Form (modal):
-  - Food name input (text)
-  - Window selector (1-6 as segmented control)
-  - Rash Type: 4-button selector (None / Mild / Moderate / Severe) with color coding (green/yellow/orange/red)
-  - Rash Location: multi-select chips (face, torso, arms, legs, diaper area, other)
-  - GI Symptoms: multi-select chips (vomiting, diarrhea, constipation, bloating, blood in stool, gassy)
-  - Stool Type: 5-button selector (normal/soft/runny/hard/mucousy) with Bristol stool icons
-  - Notes: multiline text input
-  - Save button
-- FPIES Alert Banner: if rash occurs within 72h of new food → show red banner "FPIES reaction possible — contact your pediatrician"
-- History: FlatList of past entries grouped by window, sorted by date desc
-- Milestone badge: "Food Explorer" when 3+ different foods logged
+// State: events array { id, timestamp, trigger (loud noise/sudden movement/light/other), severity (mild/moderate/severe), correlated_sleep_disruption boolean, notes }
+// Alert threshold: >10 startles per hour → yellow flag; >15 → red alert
+// UI: header, greeting, today's count card, hourly rate gauge, event log form, alert banner
+// AsyncStorage: @jobble/moro_reflex_events
 
-**4. AsyncStorage:**
-- @jobble/weaning_rash_entries (array of entries)
-- @jobble/weaning_foods_list (array of unique food names for autocomplete)
-- calcWindow(baby_age_days_from_introduction) returns 1-6
+// 4 trigger types: "loud noise", "sudden movement", "bright light", "temperature change", "other"
+// 3 severity levels: mild / moderate / severe
+// Correlation toggle: "Did this cause sleep disruption?"
+// Alert banner: yellow >10/hr, red >15/hr
 
-**5. i18n en.json + zh.json:**
-- tabs.weaningRash, weaningRash.title, weaningRash.greeting, weaningRash.foodName, weaningRash.window1-6, weaningRash.rashNone/Mild/Moderate/Severe, weaningRash.rashLocation (all 6), weaningRash.giSymptoms (all 6), weaningRash.stoolType (all 5), weaningRash.fpiesAlert, weaningRash.foodExplorer, weaningRash.history, weaningRash.addFood, weaningRash.notes, weaningRash.save
+// Badge: "Calm Baby" — 24h with 0 startles logged
+```
 
-**6. Tab Integration:**
-- Add Tabs.Screen to app/(tabs)/_layout.tsx: name="weaning-rash", icon="food-drumstick", label=t("tabs.weaningRash")
-- Check _layout.tsx carefully — add the entry in the correct sorted position
+## 2. Modify: app/(tabs)/_layout.tsx
+Add Tabs.Screen entry for "moro-reflex" with icon "alert-octagon".
 
-**7. Theme:**
+## 3. Modify: app/i18n/en.json and app/i18n/zh.json
+
+**en.json keys:**
+- tabs.moroReflex: "Moro Reflex"
+- moroReflex.title: "Moro Reflex Monitor"
+- moroReflex.greeting: "Track your baby's startle responses"
+- moroReflex.todayCount: "Today's Startles"
+- moroReflex.hourlyRate: "Per Hour"
+- moroReflex.addEvent: "Log Startle"
+- moroReflex.trigger: "Trigger"
+- moroReflex.triggerLoud: "Loud Noise"
+- moroReflex.triggerMovement: "Sudden Movement"
+- moroReflex.triggerLight: "Bright Light"
+- moroReflex.triggerTemp: "Temperature Change"
+- moroReflex.triggerOther: "Other"
+- moroReflex.severity: "Severity"
+- moroReflex.mild: "Mild"
+- moroReflex.moderate: "Moderate"
+- moroReflex.severe: "Severe"
+- moroReflex.sleepDisruption: "Sleep Disruption?"
+- moroReflex.yes: "Yes"
+- moroReflex.no: "No"
+- moroReflex.notes: "Notes"
+- moroReflex.save: "Save"
+- moroReflex.alertYellow: "Frequent startles detected — monitor closely"
+- moroReflex.alertRed: "Excessive startles — consult pediatrician"
+- moroReflex.history: "History"
+- moroReflex.noEvents: "No startles logged yet"
+- moroReflex.badgeCalm: "Calm Baby"
+
+**zh.json equivalents:**
+- tabs.moroReflex: "莫羅反射"
+- moroReflex.title: "莫羅反射監測"
+- moroReflex.greeting: "追蹤寶寶的驚跳反應"
+- [translate all other keys to Chinese]
+
+## Theme
 - Dark #0D0D0D background, #3B82F6 accent cards
-- Window progress: 6-step segmented bar with color gradient
-- Rash severity colors: #10B981 (none), #F59E0B (mild), #F97316 (moderate), #EF4444 (severe)
-- FPIES alert: #DC2626 red banner
+- Alert yellow: #F59E0B, Alert red: #EF4444
+- Follow existing tab patterns
 
-**8. TSC: npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done ULW
+## TSC Verification
+After creating all files, run: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit
+Must pass 0 errors before reporting done ULW

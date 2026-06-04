@@ -138,6 +138,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="baby-carriage" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="moro-reflex"
+        options={{
+          title: t('tabs.moroReflex'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="alert-octagon" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

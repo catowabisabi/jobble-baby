@@ -22,7 +22,8 @@
     "bottleRefusal": "Bottle Refusal",
     "gearCheck": "Gear Check",
     "weaningRash": "Weaning Rash",
-    "oralMotor": "Oral Motor"
+    "oralMotor": "Oral Motor",
+    "moroReflex": "Moro Reflex"
   },
   "home": {
     "title": "Home",
@@ -821,5 +822,32 @@
     "addEntry": "Add Entry",
     "notes": "Notes",
     "save": "Save"
+  },
+  "moroReflex": {
+    "title": "Moro Reflex Monitor",
+    "greeting": "Track your baby's startle responses",
+    "todayCount": "Today's Startles",
+    "hourlyRate": "Per Hour",
+    "addEvent": "Log Startle",
+    "trigger": "Trigger",
+    "triggerLoud": "Loud Noise",
+    "triggerMovement": "Sudden Movement",
+    "triggerLight": "Bright Light",
+    "triggerTemp": "Temperature Change",
+    "triggerOther": "Other",
+    "severity": "Severity",
+    "mild": "Mild",
+    "moderate": "Moderate",
+    "severe": "Severe",
+    "sleepDisruption": "Sleep Disruption?",
+    "yes": "Yes",
+    "no": "No",
+    "notes": "Notes",
+    "save": "Save",
+    "alertYellow": "Frequent startles detected — monitor closely",
+    "alertRed": "Excessive startles — consult pediatrician",
+    "history": "History",
+    "noEvents": "No startles logged yet",
+    "badgeCalm": "Calm Baby"
   }
 }

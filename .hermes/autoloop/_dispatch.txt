@@ -1,22 +1,18 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-04 09:05 UTC+8
-Cycle: 181
-Status: ACTIVE — Sisyphus running Medicine Dose Calculator task (todo #71)
+Last dispatch: 2026-06-04 06:06 UTC+8
+Cycle: 182
+Status: ACTIVE — Sisyphus dispatched medicine-dose task
 
-## This Cycle (181) — Review + Commit
-- fontanelle.tsx committed + pushed (1deaa42) — 495 lines, TSC clean
-- Found 2 DEAD TABS: circadian.tsx + reflex-integration.tsx exist but NOT in _layout.tsx
-- painpoints + todos added for dead tab registration
-- Sisyphus re-dispatched medicine-dose task via opencode . --prompt (correct command format)
-- Git: 76e2bb9 → 1deaa42 → pushed
+## This Cycle (182) — Review + Commit
+- Fixed i18n JSON trailing duplicate closing brace (en.json + zh.json line 1009)
+- TSC now passes 0 errors
+- Registered 2 DEAD TABS: circadian.tsx + reflex-integration.tsx in _layout.tsx
+- 31 tabs now registered (all TSC clean)
+- Re-dispatched medicine-dose task to Sisyphus
 
-## App Status — 29 tabs implemented, TSC 0 errors
-All tabs implemented + TSC clean. EAS build blocked on user action.
-
-## DEAD TABS (registered as painpoints, fix todos added)
-- circadian.tsx (359 lines) — NOT in _layout.tsx
-- reflex-integration.tsx (200 lines) — NOT in _layout.tsx
+## App Status — 31 tabs implemented, TSC 0 errors
+All registered tabs implemented + TSC clean. EAS build blocked on user action.
 
 ## USER ACTION REQUIRED (blocking EAS build):
   1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
@@ -26,24 +22,13 @@ All tabs implemented + TSC clean. EAS build blocked on user action.
   5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
   6. Create app in Play Console → package: com.jobblebaby.app
 
-## Pending Todos (6 pending/new)
+## Pending Todos (5 pending)
 - #71 [in_progress]: Medicine Dose Calculator → Sisyphus working
 - #72 [pending]: Caregiver Shift Handoff Log
 - #73 [pending]: Breast Milk Transfer Efficiency
 - #74 [pending]: Sleep Association Pattern Map
 - #75 [pending]: Pediatric Report PDF Export
-- #new [pending]: Register circadian tab in _layout.tsx
-- #new [pending]: Register reflex-integration tab in _layout.tsx
 
-## New Ideas (DB)
-- #35: Fontanelle Soft Spot Map → implemented ✓
-- #36: Wet Diaper Weight Proxy → new
-- #37: Decibel Cry Waveform → new
-- #38: Reading Bedtime Ritual → new
-- #39: Hysteresis Sleep Curve → new
-
-━━━━━━━━━━━━━━━━━━━━━━━━
-## Commit
-- 1deaa42 — feat: Fontanelle Soft Spot Map tab — photo-log weekly size, track closure, head circumference correlation, dehydration/early closure alerts
-- 76e2bb9 — feat: Fontanelle Soft Spot Map tab (prior incomplete)
-- 7d17b97 — autoloop: cycle 180
+## Commits (cycle 182)
+- e5a0ed9 fix: remove trailing duplicate closing brace in i18n JSON files (TSC clean)
+- b7ca7e1 feat: register circadian + reflex-integration tabs in _layout.tsx (31 tabs total, TSC 0 err)

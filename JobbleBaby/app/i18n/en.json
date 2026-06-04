@@ -11,6 +11,7 @@
     "sleepTraining": "Sleep",
     "teething": "Teething",
     "milkPrep": "Milk Prep",
+    "milkTransfer": "Milk Transfer",
     "circadian": "Circadian",
     "monitorCorrelation": "Monitor",
     "shiftHandoff": "Shift",
@@ -936,6 +937,73 @@
     "title": "Soft Spot Map",
     "greeting": "Track",
     "subtitle": "Monitor fontanelle closure & head growth"
+  },
+  "milkTransfer": {
+    "title": "Milk Transfer",
+    "greeting": "Track",
+    "subtitle": "Breast milk transfer efficiency tracking",
+    "tabs": {
+      "session": "Session",
+      "chart": "Chart",
+      "history": "History"
+    },
+    "session": {
+      "timer": "TIMER",
+      "side": "BREAST SIDE",
+      "leftSide": "Left",
+      "rightSide": "Right",
+      "bothSides": "Both",
+      "startSession": "Start Session",
+      "stopSession": "Stop Session",
+      "resetSession": "Reset",
+      "saveSession": "Save Session"
+    },
+    "timer": {
+      "start": "Start",
+      "stop": "Stop",
+      "reset": "Reset"
+    },
+    "weight": {
+      "title": "WEIGHT (grams)",
+      "preFeed": "Pre-feed",
+      "postFeed": "Post-feed",
+      "grams": "grams",
+      "enterWeight": "Enter both weights to calculate transfer"
+    },
+    "offered": {
+      "label": "OFFERED",
+      "placeholder": "0",
+      "mlUnit": "ml offered"
+    },
+    "result": {
+      "transferred": "Transferred",
+      "efficiency": "Efficiency",
+      "efficiencyGood": "Good",
+      "efficiencyModerate": "Moderate",
+      "efficiencyLow": "Low"
+    },
+    "chart": {
+      "title": "TRANSFER RATE",
+      "transferRate": "Last 7 Sessions (ml transferred)",
+      "noData": "No sessions logged yet"
+    },
+    "balance": {
+      "title": "L/R BALANCE",
+      "leftSide": "Left",
+      "rightSide": "Right",
+      "balanceLabel": "Time Balance"
+    },
+    "history": {
+      "title": "HISTORY",
+      "empty": "No sessions logged yet",
+      "sessionEntry": "{{date}}: {{side}} · {{duration}} · {{offered}}ml → {{transferred}}ml ({{eff}}%)"
+    },
+    "badge": {
+      "efficientFeeder": "Efficient Feeder",
+      "badgeDesc": "Log 10 sessions to earn this badge"
+    },
+    "alertTitle": "Missing Data",
+    "enterWeight": "Please enter both pre and post weights in grams."
   },
   "medicineDose": {
     "title": "Medicine Dose",

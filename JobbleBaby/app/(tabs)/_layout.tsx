@@ -180,6 +180,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="medical-bag" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="milk-transfer"
+        options={{
+          title: t('tabs.milkTransfer'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="water-outline" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

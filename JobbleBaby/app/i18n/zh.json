@@ -11,6 +11,7 @@
     "sleepTraining": "睡眠訓練",
     "teething": "出牙",
     "milkPrep": "母乳準備",
+    "milkTransfer": "母乳轉移",
     "circadian": "生理時鐘",
     "monitorCorrelation": "監控關聯",
     "shiftHandoff": "交接",
@@ -936,6 +937,73 @@
     "title": "軟點地圖",
     "greeting": "追蹤",
     "subtitle": "監察鹵門閉合與頭部發育"
+  },
+  "milkTransfer": {
+    "title": "母乳轉移",
+    "greeting": "追蹤",
+    "subtitle": "母乳轉移效率追蹤",
+    "tabs": {
+      "session": "環節",
+      "chart": "圖表",
+      "history": "歷史"
+    },
+    "session": {
+      "timer": "計時器",
+      "side": "乳房側",
+      "leftSide": "左側",
+      "rightSide": "右側",
+      "bothSides": "雙側",
+      "startSession": "開始環節",
+      "stopSession": "停止環節",
+      "resetSession": "重設",
+      "saveSession": "儲存環節"
+    },
+    "timer": {
+      "start": "開始",
+      "stop": "停止",
+      "reset": "重設"
+    },
+    "weight": {
+      "title": "體重（克）",
+      "preFeed": "餵前",
+      "postFeed": "餵後",
+      "grams": "克",
+      "enterWeight": "輸入兩個體重以計算轉移量"
+    },
+    "offered": {
+      "label": "提供量",
+      "placeholder": "0",
+      "mlUnit": "毫升"
+    },
+    "result": {
+      "transferred": "轉移量",
+      "efficiency": "效率",
+      "efficiencyGood": "良好",
+      "efficiencyModerate": "中等",
+      "efficiencyLow": "偏低"
+    },
+    "chart": {
+      "title": "轉移率",
+      "transferRate": "過去7次環節（毫升轉移）",
+      "noData": "尚無記錄"
+    },
+    "balance": {
+      "title": "左右平衡",
+      "leftSide": "左側",
+      "rightSide": "右側",
+      "balanceLabel": "時間平衡"
+    },
+    "history": {
+      "title": "歷史記錄",
+      "empty": "尚無記錄",
+      "sessionEntry": "{{date}}：{{side}} · {{duration}} · {{offered}}ml → {{transferred}}ml（{{eff}}%）"
+    },
+    "badge": {
+      "efficientFeeder": "高效餵養者",
+      "badgeDesc": "記錄10次環節以獲得此徽章"
+    },
+    "alertTitle": "缺少數據",
+    "enterWeight": "請輸入餵前和餵後體重（克）。"
   },
   "medicineDose": {
     "title": "藥物劑量",

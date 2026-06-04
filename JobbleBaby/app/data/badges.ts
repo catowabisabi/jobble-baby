@@ -158,6 +158,14 @@ export const BADGES: Badge[] = [
     category: 'milestone',
     condition: 'Log 3 reflex entries',
   },
+  {
+    id: 'efficient_feeder',
+    name: 'Efficient Feeder',
+    description: 'Logged 10 breast milk transfer sessions',
+    icon: '🍼',
+    category: 'milestone',
+    condition: 'Log 10 milk transfer sessions',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

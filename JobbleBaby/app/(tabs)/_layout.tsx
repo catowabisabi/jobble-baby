@@ -166,6 +166,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="airplane" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="fontanelle"
+        options={{
+          title: t('tabs.fontanelle'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="head-dots-horizontal" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

@@ -124,6 +124,20 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="weaning-rash"
+        options={{
+          title: t('tabs.weaningRash'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-drumstick" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="oral-motor"
+        options={{
+          title: t('tabs.oralMotor'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="baby-carriage" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

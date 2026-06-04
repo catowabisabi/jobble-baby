@@ -20,7 +20,9 @@
     "tummyTime": "Tummy Time",
     "reflexTracker": "Reflex Tracker",
     "bottleRefusal": "Bottle Refusal",
-    "gearCheck": "Gear Check"
+    "gearCheck": "Gear Check",
+    "weaningRash": "Weaning Rash",
+    "oralMotor": "Oral Motor"
   },
   "home": {
     "title": "Home",
@@ -776,5 +778,48 @@
     "saveOuting": "Save & New Outing",
     "resetAlert": "Reset Checklist",
     "resetConfirm": "Uncheck all items?"
+  },
+  "weaningRash": {
+    "title": "Weaning Rash Six-Track",
+    "greeting": "Track your baby's reaction to new foods",
+    "foodName": "Food Name",
+    "window1": "Days 1-2",
+    "window2": "Days 3-4",
+    "window3": "Days 5-7",
+    "window4": "Week 2",
+    "window5": "Week 3",
+    "window6": "Week 4",
+    "rashNone": "None",
+    "rashMild": "Mild",
+    "rashModerate": "Moderate",
+    "rashSevere": "Severe",
+    "rashLocation": "Rash Location",
+    "giSymptoms": "GI Symptoms",
+    "stoolType": "Stool Type",
+    "fpiesAlert": "FPIES reaction possible — contact your pediatrician",
+    "foodExplorer": "Food Explorer",
+    "history": "History",
+    "addFood": "Add Food",
+    "notes": "Notes",
+    "save": "Save"
+  },
+  "oralMotor": {
+    "title": "Oral Motor Roadmap",
+    "greeting": "Track bottle and nipple acceptance",
+    "nippleLevels": "Nipple Levels",
+    "level1": "Newborn",
+    "level2": "Slow Flow",
+    "level3": "Variable",
+    "level4": "Fast Flow",
+    "level5": "Y-Cut",
+    "acceptance": "Acceptance",
+    "accepted": "Accepted",
+    "refused": "Refused",
+    "partial": "Partial",
+    "nippleNavigator": "Nipple Navigator",
+    "history": "History",
+    "addEntry": "Add Entry",
+    "notes": "Notes",
+    "save": "Save"
   }
 }

@@ -20,7 +20,9 @@
     "tummyTime": "趴臥時間",
     "reflexTracker": "原始反射",
     "bottleRefusal": "奶瓶抗拒",
-    "gearCheck": "装备检查"
+    "gearCheck": "装备检查",
+    "weaningRash": "加固疹",
+    "oralMotor": "口腔運動"
   },
   "home": {
     "title": "主頁",
@@ -776,5 +778,48 @@
     "saveOuting": "儲存並新增行程",
     "resetAlert": "重設清單",
     "resetConfirm": "取消勾選所有物品？"
+  },
+  "weaningRash": {
+    "title": "加固疹追蹤",
+    "greeting": "追蹤寶寶對新食物的反應",
+    "foodName": "食物名稱",
+    "window1": "第1-2天",
+    "window2": "第3-4天",
+    "window3": "第5-7天",
+    "window4": "第2週",
+    "window5": "第3週",
+    "window6": "第4週",
+    "rashNone": "無",
+    "rashMild": "輕微",
+    "rashModerate": "中等",
+    "rashSevere": "嚴重",
+    "rashLocation": "疹位置",
+    "giSymptoms": "腸胃症狀",
+    "stoolType": "大便類型",
+    "fpiesAlert": "可能係 FPIES 反應 — 請聯絡兒科醫生",
+    "foodExplorer": "食物探索者",
+    "history": "歷史",
+    "addFood": "新增食物",
+    "notes": "備註",
+    "save": "儲存"
+  },
+  "oralMotor": {
+    "title": "口腔運動地圖",
+    "greeting": "追蹤奶瓶和奶嘴接受度",
+    "nippleLevels": "奶嘴階段",
+    "level1": "新生兒",
+    "level2": "慢流",
+    "level3": "可變",
+    "level4": "快流",
+    "level5": "Y型切口",
+    "acceptance": "接受度",
+    "accepted": "接受",
+    "refused": "拒絕",
+    "partial": "部分",
+    "nippleNavigator": "奶嘴導航員",
+    "history": "歷史",
+    "addEntry": "新增記項",
+    "notes": "備註",
+    "save": "儲存"
   }
 }

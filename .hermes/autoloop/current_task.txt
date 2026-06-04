@@ -1,32 +1,7 @@
-# Fontanelle Soft Spot Map — Task for Sisyphus
-
-## Goal
-Implement **Fontanelle Soft Spot Map tab** — photo-log anterior fontanelle size weekly, track closure progress, correlate with head circumference growth chart. Alert if size unexpectedly increases (possible dehydration) or closure before 9 months.
-
-## Reference
-Use existing tabs as patterns: growth.tsx (charts/data), milestones.tsx (badges), weaning-rash.tsx (modal entry form).
-
-## Files to Create/Modify
-1. Create: app/(tabs)/fontanelle.tsx
-2. Modify: app/(tabs)/_layout.tsx — add Tabs.Screen entry
-3. Modify: app/i18n/en.json and zh.json — add i18n keys
-
-## State
-entries array: { id, date, week_number, fontanelle_size_mm, photo_uri, head_circumference_cm, notes, alert_triggered }
-AsyncStorage: @jobble/fontanelle_entries
-
-## UI Components
-1. Header: "Fontanelle Soft Spot Map" (en) / "臍門追蹤" (zh)
-2. Alert Banner: red if fontanelle size increases >5mm vs prior week (possible dehydration) OR closure before 9 months (early closure)
-3. Weekly Entry Card: week number, fontanelle size slider (0-60mm), head circumference input (cm)
-4. Photo Capture: optional photo of fontanelle area
-5. Growth Correlation: simple chart overlaying fontanelle size on head circumference
-6. Closure Timeline: visual progress toward closure (expected 12-18 months)
-7. History: FlatList of past entries
-8. Milestone badge: "Soft Spot Guardian" when 4+ weeks logged
-
-## Tab Integration
-name="fontanelle", icon="head-outline", label=t("tabs.fontanelle")
-
-## VERIFICATION
-npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done ULW
+# Cry Frequency Analyzer Tab — Dispatched to Sisyphus
+Todo: #78 P3 — Cry Frequency Analyzer Tab
+Dispatched: 2026-06-04 15:05
+Status: in_progress
+File: app/(tabs)/cry-analyzer.tsx
+i18n: en.json + zh.json keys
+Badge: cry_champion — Cry Champion (7-day streak)

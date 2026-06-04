@@ -201,6 +201,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="file-document-outline" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="cry-analyzer"
+        options={{
+          title: t('tabs.cryAnalyzer'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

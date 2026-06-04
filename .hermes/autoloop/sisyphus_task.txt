@@ -1,68 +1,75 @@
-# Pediatric Report PDF Export — Task for Sisyphus
+# Cry Frequency Analyzer — Task for Sisyphus
 
 ## Goal
-Implement **Pediatric Report PDF Export** tab — generate a shareable PDF summary of the baby's health data for pediatrician visits, including growth chart with WHO percentile bands, milestone timeline, feeding history, and sleep summary.
+Implement **Cry Frequency Analyzer tab** — manual tap-to-log crying episodes with timestamp, duration, cause tag, and intensity. Aggregate daily/weekly cry score, pattern timeline overlaid on sleep/feeding, colic alert threshold by age.
 
 ## Tech Stack
-- Expo SDK (managed workflow) — NO react-native-pdf-lib or react-native-html-to-pdf (not compatible with Expo managed workflow)
-- Use **expo-print** + **expo-sharing** for PDF generation and sharing
-- Build HTML string → `await Print.printToFileAsync({ html })` → share via `Sharing.shareAsync(uri)`
+- Expo SDK (managed workflow) — NO native audio analysis
+- Manual logging with big tap target for one-handed use
+- AsyncStorage for @jobble/cry_entries
+- expo-print NOT needed — this tab logs data, PDF export comes later if at all
 
 ## Reference Files
-- `app/(tabs)/growth.tsx` — WHO growth data structure and chart data (uses @jobble/growth_entries)
-- `app/(tabs)/milestones.tsx` — milestone timeline (uses @jobble/milestone_photos)
-- `app/(tabs)/tracking.tsx` — feeding/diaper/sleep log (uses @jobble/tracking_entries)
-- `app/(tabs)/allergens.tsx` — allergen status (uses @jobble/allergen_entries)
-- `@jobble_baby_profile` — baby name, birth date, gender
+- `app/(tabs)/tracking.tsx` — entry pattern (FlatList, FAB, modal form)
+- `app/(tabs)/stress-cascade.tsx` — colic curve data and alert design
+- `app/(tabs)/sleep-association.tsx` — timeline correlation pattern
+- `app/data/badges.ts` — badge registration
 
 ## Files to Create/Modify
-1. Create: `app/(tabs)/pediatric-report.tsx`
+1. Create: `app/(tabs)/cry-analyzer.tsx`
 2. Modify: `app/(tabs)/_layout.tsx` — add Tabs.Screen entry
 3. Modify: `app/i18n/en.json` — add i18n keys
 4. Modify: `app/i18n/zh.json` — add i18n keys
 5. Modify: `app/data/badges.ts` — add badge
 
+## Data Model
+```typescript
+// @jobble/cry_entries — Array<CryEntry>
+interface CryEntry {
+  id: string;            // uuid
+  timestamp: string;    // ISO8601
+  duration_minutes: number;
+  cause_tag: 'hunger' | 'overtired' | 'teething' | 'reflux' | '分离焦虑' | 'other';
+  intensity: 1 | 2 | 3 | 4 | 5;  // 1=mild whimper, 5=screaming
+  notes?: string;
+}
+```
+
 ## UI Layout
-1. **Header**: "Pediatric Report" (en) / "兒科報告" (zh)
-2. **Baby Info Card**: Name, birth date, current age (calculated from profile), gender
-3. **Report Preview** (scrollable):
-   - Growth Chart: text table showing date, weight (kg), height (cm), head circumference, with WHO percentile ranges labeled
-   - Milestone Timeline: chronological list of key milestones with dates and ages
-   - Feeding Summary: last 7 days aggregated (total feeds, total ml/breastfeeding duration)
-   - Sleep Summary: last 7 days aggregated (total sleep hours, average longest stretch)
-   - Allergen Status: quick list of introduced allergens and dates
-4. **Export Button**: "Export PDF" → `Print.printToFileAsync({ html })` → `Sharing.shareAsync(uri)`
+1. **Header**: "Cry Frequency Analyzer" (en) / "哭聲分析器" (zh)
+2. **Big + Button** (center bottom, large 64px tap target): "Log Cry" — opens entry modal
+3. **Cry Entry Modal** (when + tapped):
+   - Duration: minutes picker (1-120)
+   - Cause: chip selector (hunger / overtired / teething / reflux / separation anxiety / other)
+   - Intensity: 1-5 slider with labels (1=Whimper, 3=Medium, 5=Screaming)
+   - Notes: optional text
+   - Save button
+4. **Today's Summary Card** (top):
+   - Total cry episodes today
+   - Total cry minutes today
+   - Color-coded severity bar: green (<30min), yellow (30-90min), red (>90min)
+5. **Weekly Cry Score Chart**: Bar chart — cry minutes per day for last 7 days
+   - Baseline line: age-expected colic threshold (6wk peak = 180min/day)
+6. **Cry Pattern Timeline**: Vertical timeline of today's cry episodes overlaid with sleep/feeding entries from @jobble/tracking_entries
+7. **Colic Alert Banner**: Red banner if current week avg > colic threshold for baby's age
+   - Colic curve: 6 weeks peak, resolves by 12-16 weeks
+8. **History**: FlatList of past 30 days entries, grouped by date
 
-## HTML Template for PDF
-Build a clean HTML string with inline CSS. Style for A4 printing. Use system fonts. Structure:
-```
-<!DOCTYPE html>
-<html><head><meta charset="utf-8"><style>
-  body { font-family: -apple-system, sans-serif; padding: 20px; color: #333; }
-  h1 { color: #1a1a2e; border-bottom: 2px solid #3B82F6; }
-  h2 { color: #3B82F6; margin-top: 20px; }
-  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-  th { background: #f0f4ff; }
-  .section { page-break-inside: avoid; }
-</style></head><body>
-<h1>${babyName} — Pediatric Health Report</h1>
-<p>Generated: ${date} | Baby age: ${age}</p>
-... sections ...
-</body></html>
-```
-
-## i18n Keys to Add
-tabs.pediatricReport, pediatricReport.title, pediatricReport.exportPdf, pediatricReport.generated, pediatricReport.babyName, pediatricReport.ageMos, pediatricReport.growthSection, pediatricReport.milestoneSection, pediatricReport.feedingSection, pediatricReport.sleepSection, pediatricReport.allergenSection, pediatricReport.noData, pediatricReport.weight, pediatricReport.height, pediatricReport.headCirc, pediatricReport.percentile, pediatricReport.date, pediatricReport.milestone, pediatricReport.ageAtMilestone
+## i18n Keys
+tabs.cryAnalyzer, cryAnalyzer.title, cryAnalyzer.logCry, cryAnalyzer.addEntry, cryAnalyzer.duration, cryAnalyzer.cause, cryAnalyzer.intensity, cryAnalyzer.notes, cryAnalyzer.todaySummary, cryAnalyzer.episodesToday, cryAnalyzer.minutesToday, cryAnalyzer.weeklyScore, cryAnalyzer.colicAlert, cryAnalyzer.history, cryAnalyzer.noEntries, cryAnalyzer.hunger, cryAnalyzer.overtired, cryAnalyzer.teething, cryAnalyzer.reflux, cryAnalyzer.separationAnxiety, cryAnalyzer.other, cryAnalyzer.intensityWhimper, cryAnalyzer.intensityMedium, cryAnalyzer.intensityScreaming, cryAnalyzer.colicThreshold, cryAnalyzer.badgeDesc
 
 ## Tab Registration
-name="pediatric-report", icon="file-document-outline", label=t("tabs.pediatricReport")
+name="cry-analyzer", icon="heart-outline", label=t("tabs.cryAnalyzer")
 
 ## Badge to Add
-id: pediatric_report, name: "Doctor Ready", description: "Exported a pediatric report", icon: "📋", category: "milestone"
+id: cry_champion, name: "Cry Champion", description: "Logged crying data for 7 consecutive days", icon: "💧", category: "milestone"
 
-## Data Reading
-All data read from existing AsyncStorage keys — no new storage schema needed. Parse existing entries, aggregate for PDF.
+## Colic Threshold Reference
+- 0-4 weeks: 120 min/day warning threshold
+- 5-8 weeks: 180 min/day (peak colic)
+- 9-12 weeks: 150 min/day
+- 13-16 weeks: 90 min/day
+- 17+ weeks: 60 min/day
 
 ## VERIFICATION
 npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done. ULW

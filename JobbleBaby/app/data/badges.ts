@@ -182,6 +182,14 @@ export const BADGES: Badge[] = [
     category: 'milestone',
     condition: 'Export a pediatric report',
   },
+  {
+    id: 'cry_champion',
+    name: 'Cry Champion',
+    description: 'Logged crying data for 7 consecutive days',
+    icon: '💧',
+    category: 'milestone',
+    condition: 'Log crying data for 7 consecutive days',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

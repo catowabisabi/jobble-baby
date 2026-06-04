@@ -174,17 +174,10 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="circadian"
+        name="medicine-dose"
         options={{
-          title: t('tabs.circadian'),
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="weather-night" size={size} color={color} />
-        }}
-      />
-      <Tabs.Screen
-        name="reflex-integration"
-        options={{
-          title: t('tabs.reflexIntegration'),
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
+          title: t('tabs.medicineDose'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="medical-bag" size={size} color={color} />
         }}
       />
     </Tabs>

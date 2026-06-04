@@ -1,45 +1,70 @@
-# Sleep Association Pattern Map — Task for Sisyphus
+# Pediatric Report PDF Export — Task for Sisyphus
 
 ## Goal
-Implement **Sleep Association Pattern Map tab** — log and track what sleep associations baby uses to fall asleep (pacifier, swaddle, white noise, rocking, feeding, blackout, etc.), correlate associations with night waking frequency and sleep quality, identify dependency risks, and suggest gradual fade-out schedules.
+Implement **Pediatric Report PDF Export** tab — generate a shareable PDF summary of the baby's health data for pediatrician visits, including growth chart with WHO percentile bands, milestone timeline, feeding history, and sleep summary.
 
-## Reference
-Use existing tabs as patterns: sleep-training.tsx (check-ins/night logging), milestones.tsx (badges), tracking.tsx (entry cards).
+## Tech Stack
+- Expo SDK (managed workflow) — NO react-native-pdf-lib or react-native-html-to-pdf (not compatible with Expo managed workflow)
+- Use **expo-print** + **expo-sharing** for PDF generation and sharing
+- Build HTML string → `await Print.printToFileAsync({ html })` → share via `Sharing.shareAsync()`
+
+## Reference Files
+- `app/(tabs)/growth.tsx` — for WHO growth data structure and chart data
+- `app/(tabs)/milestones.tsx` — for milestone timeline
+- `app/(tabs)/tracking.tsx` — for feeding/diaper/sleep log
 
 ## Files to Create/Modify
-1. Create: app/(tabs)/sleep-association.tsx
-2. Modify: app/(tabs)/_layout.tsx — add Tabs.Screen entry
-3. Modify: app/i18n/en.json and zh.json — add i18n keys
-4. Modify: app/data/badges.ts — add Sleep Association badge
+1. Create: `app/(tabs)/pediatric-report.tsx`
+2. Modify: `app/(tabs)/_layout.tsx` — add Tabs.Screen entry
+3. Modify: `app/i18n/en.json` and `zh.json` — add i18n keys
+4. Modify: `app/data/badges.ts` — add badge
 
 ## State
-entries array: { id, date, associations: string[], fallingAsleepMinutes, nightWakings, longestStretch, qualityRating, notes, alert_triggered }
-AsyncStorage: @jobble/sleep_association_entries
+No new AsyncStorage needed — read from existing keys:
+- `@jobble/growth_entries` (growth.tsx)
+- `@jobble/milestone_entries` (milestones.tsx)
+- `@jobble/feeding_entries` (tracking.tsx)
+- `@jobble/sleep_log` (tracking.tsx)
+- `@jobble/baby_profile` (onboarding)
 
-## Associations List (multi-select)
-- pacifier, swaddle, white_noise, rocking, feeding_to_sleep, blackout_curtain, room_dark, fan, music, massage, cuddling, teether, comforter, other
+## UI Layout
+1. **Header**: "Pediatric Report" (en) / "兒科報告" (zh)
+2. **Baby Info Card**: Name, birth date, current age (calculated from profile), gender
+3. **Report Sections** (all in one scrollable view, one Print button at bottom):
+   - Growth Chart: text table showing date, weight (kg), height (cm), head circumference, plotted against WHO percentile ranges. Not a chart image — a clean text table with percentile bands labeled.
+   - Milestone Timeline: chronological list of key milestones with dates and ages
+   - Feeding Summary: last 7 days of feeding entries aggregated (total feeds, total ml/breastfeeding duration)
+   - Sleep Summary: last 7 days aggregated (total sleep hours, average longest stretch)
+   - Allergen Status: quick list of introduced allergens and dates
+4. **Print/Share Button**: "Export PDF" → `Print.printToFileAsync({ html })` → `Sharing.shareAsync(uri)`
 
-## UI Components
-1. Header: "Sleep Association Map" (en) / "睡眠關聯圖" (zh)
-2. Alert Banner: orange if baby relies on feeding_to_sleep association for >60% of entries (sleep dependency risk)
-3. Tonight's Log Card: multi-select association chips, falling-asleep time input (minutes), quality slider (1-5 stars)
-4. Association Frequency Chart: bar chart showing % usage per association over last 14 days
-5. Waking Correlation: simple scatter or grouped bar — which associations correlate with fewer night wakings
-6. Fade-Out Tracker: if feeding_to_sleep used >60%, show gradual fade-out plan (replace with rock → replace with cuddle → replace with patting)
-7. History: FlatList of past entries grouped by date
-8. Milestone badge: "Sleep Architect" when 7+ entries logged
-
-## Tab Integration
-name="sleep-association", icon="cloud-outline", label=t("tabs.sleepAssociation")
+## HTML Template for PDF
+Build a clean HTML string with inline CSS. Style for A4 printing. Use @import url for fonts if needed, or system fonts. Structure:
+```
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+  body { font-family: -apple-system, sans-serif; padding: 20px; color: #333; }
+  h1 { color: #1a1a2e; border-bottom: 2px solid #3B82F6; }
+  h2 { color: #3B82F6; margin-top: 20px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  th { background: #f0f4ff; }
+  .section { page-break-inside: avoid; }
+</style></head><body>
+<h1>${babyName} — Pediatric Health Report</h1>
+<p>Generated: ${date} | Baby age: ${age}</p>
+... sections ...
+</body></html>
+```
 
 ## i18n Keys
-tabs.sleepAssociation, sleepAssociation.title, sleepAssociation.alertDependency, sleepAssociation.todaysLog, sleepAssociation.associations, sleepAssociation.pacifier, sleepAssociation.swaddle, sleepAssociation.whiteNoise, sleepAssociation.rocking, sleepAssociation.feedingToSleep, sleepAssociation.blackout, sleepAssociation.fan, sleepAssociation.music, sleepAssociation.massage, sleepAssociation.cuddling, sleepAssociation.teether, sleepAssociation.comforter, sleepAssociation.fallingAsleepMin, sleepAssociation.quality, sleepAssociation.nightWakings, sleepAssociation.longestStretch, sleepAssociation.history, sleepAssociation.fadeOutPlan, sleepAssociation.fadeOutStep1, sleepAssociation.fadeOutStep2, sleepAssociation.fadeOutStep3, sleepAssociation.congrats, sleepAssociation.sleepArchitect
+tabs.pediatricReport, pediatricReport.title, pediatricReport.exportPdf, pediatricReport.generated, pediatricReport.babyName, pediatricReport.ageMos, pediatricReport.growthSection, pediatricReport.milestoneSection, pediatricReport.feedingSection, pediatricReport.sleepSection, pediatricReport.allergenSection, pediatricReport.noData, pediatricReport.weight, pediatricReport.height, pediatricReport.headCirc, pediatricReport.percentile, pediatricReport.date, pediatricReport.milestone, pediatricReport.ageAtMilestone
 
-## AsyncStorage
-@jobble/sleep_association_entries
+## Tab Integration
+name="pediatric-report", icon="file-document-outline", label=t("tabs.pediatricReport")
 
 ## Badge
-id: sleep_architect, name: "Sleep Architect", description: "Tracked 7+ sleep associations", icon: "☁️", category: "milestone"
+id: pediatric_report, name: "Doctor Ready", description: "Exported a pediatric report", icon: "📋", category: "milestone"
 
 ## VERIFICATION
-npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done ULW
+npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done. ULW

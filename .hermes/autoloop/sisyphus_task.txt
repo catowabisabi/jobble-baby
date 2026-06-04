@@ -1,61 +1,45 @@
-# Medicine Dose Calculator — Task for Sisyphus
+# Sleep Association Pattern Map — Task for Sisyphus
 
 ## Goal
-Implement **Medicine Dose Calculator tab** — calculate correct medication dosage based on baby's weight and age, provide weight-based dosing charts for common baby medications (acetaminophen, ibuprofen, diphenhydramine), dosage alerts for max daily limits, and conversion helpers (ml ↔ tsp ↔ drops).
+Implement **Sleep Association Pattern Map tab** — log and track what sleep associations baby uses to fall asleep (pacifier, swaddle, white noise, rocking, feeding, blackout, etc.), correlate associations with night waking frequency and sleep quality, identify dependency risks, and suggest gradual fade-out schedules.
 
 ## Reference
-Use existing tabs as patterns: growth.tsx (charts/data), products.tsx (lists), profile.tsx (baby info retrieval).
+Use existing tabs as patterns: sleep-training.tsx (check-ins/night logging), milestones.tsx (badges), tracking.tsx (entry cards).
 
 ## Files to Create/Modify
-1. Create: app/(tabs)/medicine-dose.tsx
+1. Create: app/(tabs)/sleep-association.tsx
 2. Modify: app/(tabs)/_layout.tsx — add Tabs.Screen entry
 3. Modify: app/i18n/en.json and zh.json — add i18n keys
+4. Modify: app/data/badges.ts — add Sleep Association badge
 
 ## State
-- baby weight from @jobble_baby_profile
-- selected medication (acetaminophen/ibuprofen/diphenhydramine/other)
-- weight input override option
-- calculated dose result
-- dosage history log
+entries array: { id, date, associations: string[], fallingAsleepMinutes, nightWakings, longestStretch, qualityRating, notes, alert_triggered }
+AsyncStorage: @jobble/sleep_association_entries
 
-## Medications Data
-### Acetaminophen (Tylenol/Paracetamol)
-- 10-15 mg/kg per dose
-- Max 75 mg/kg/day
-- Dosing interval: every 4-6 hours
-- Concentration: 160mg/5ml (infant drops)
-
-### Ibuprofen (Advil/Motrin)
-- 5-10 mg/kg per dose
-- Max 40 mg/kg/day
-- Dosing interval: every 6-8 hours
-- Concentration: 100mg/5ml
-
-### Diphenhydramine (Benadryl)
-- 0.5-1 mg/kg per dose
-- Max 5 mg/kg/day (divided)
-- For allergic reactions only
-- Age limit: not for infants <6 months
+## Associations List (multi-select)
+- pacifier, swaddle, white_noise, rocking, feeding_to_sleep, blackout_curtain, room_dark, fan, music, massage, cuddling, teether, comforter, other
 
 ## UI Components
-1. Baby Profile Card: auto-loaded weight, age from profile
-2. Medication Selector: dropdown of common medications
-3. Weight Input: editable weight override (kg + lbs toggle)
-4. Dose Calculator: shows calculated dose in ml
-5. Conversion Panel: ml ↔ tsp ↔ drops (1 tsp = 5ml, 1ml = 20 drops)
-6. Max Daily Alert: red banner if dose exceeds max
-7. Dosing Schedule: frequency reminder (q4h, q6h, q8h)
-8. History Log: FlatList of recent dose calculations
-9. Milestone badge: "Dose Guardian" when 5+ calculations logged
+1. Header: "Sleep Association Map" (en) / "睡眠關聯圖" (zh)
+2. Alert Banner: orange if baby relies on feeding_to_sleep association for >60% of entries (sleep dependency risk)
+3. Tonight's Log Card: multi-select association chips, falling-asleep time input (minutes), quality slider (1-5 stars)
+4. Association Frequency Chart: bar chart showing % usage per association over last 14 days
+5. Waking Correlation: simple scatter or grouped bar — which associations correlate with fewer night wakings
+6. Fade-Out Tracker: if feeding_to_sleep used >60%, show gradual fade-out plan (replace with rock → replace with cuddle → replace with patting)
+7. History: FlatList of past entries grouped by date
+8. Milestone badge: "Sleep Architect" when 7+ entries logged
 
 ## Tab Integration
-name="medicine-dose", icon="medical-outline", label=t("tabs.medicineDose")
-
-## AsyncStorage
-@jobble/medicine_dose_history
+name="sleep-association", icon="cloud-outline", label=t("tabs.sleepAssociation")
 
 ## i18n Keys
-tabs.medicineDose, medicineDose.title, medicineDose.babyWeight, medicineDose.selectMed, medicineDose.acetaminophen, medicineDose.ibuprofen, medicineDose.diphenhydramine, medicineDose.weightKg, medicineDose.doseMl, medicineDose.maxDaily, medicineDose.conversion, medicineDose.history, medicineDose.saveDose, medicineDose.alertMaxExceeded, medicineDose.congrats, medicineDose.medicineDoseGuardian
+tabs.sleepAssociation, sleepAssociation.title, sleepAssociation.alertDependency, sleepAssociation.todaysLog, sleepAssociation.associations, sleepAssociation.pacifier, sleepAssociation.swaddle, sleepAssociation.whiteNoise, sleepAssociation.rocking, sleepAssociation.feedingToSleep, sleepAssociation.blackout, sleepAssociation.fan, sleepAssociation.music, sleepAssociation.massage, sleepAssociation.cuddling, sleepAssociation.teether, sleepAssociation.comforter, sleepAssociation.fallingAsleepMin, sleepAssociation.quality, sleepAssociation.nightWakings, sleepAssociation.longestStretch, sleepAssociation.history, sleepAssociation.fadeOutPlan, sleepAssociation.fadeOutStep1, sleepAssociation.fadeOutStep2, sleepAssociation.fadeOutStep3, sleepAssociation.congrats, sleepAssociation.sleepArchitect
+
+## AsyncStorage
+@jobble/sleep_association_entries
+
+## Badge
+id: sleep_architect, name: "Sleep Architect", description: "Tracked 7+ sleep associations", icon: "☁️", category: "milestone"
 
 ## VERIFICATION
 npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done ULW

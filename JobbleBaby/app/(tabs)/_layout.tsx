@@ -51,6 +51,13 @@ export default function TabsLayout() {
         options={{ title: t('tabs.sleepTraining'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="weather-night" size={size} color={color} /> }}
       />
       <Tabs.Screen
+        name="sleep-association"
+        options={{
+          title: t('tabs.sleepAssociation'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="cloud-outline" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="teething"
         options={{ title: t('tabs.teething'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="tooth" size={size} color={color} /> }}
       />

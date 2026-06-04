@@ -31,4 +31,4 @@ All registered tabs implemented + TSC clean. EAS build blocked on user action.
 
 ## Commits (cycle 182)
 - e5a0ed9 fix: remove trailing duplicate closing brace in i18n JSON files (TSC clean)
-- b7ca7e1 feat: register circadian + reflex-integration tabs in _layout.tsx (31 tabs total, TSC 0 err)
+- b7ca7e1 feat: register circadian + reflex-integration tabs in _layout.tsx (31 tabs total, TSC 0 err)Dispatch 2026-06-04 08:05: Sleep Association Pattern Map → sisyphus

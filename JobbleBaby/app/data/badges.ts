@@ -159,6 +159,14 @@ export const BADGES: Badge[] = [
     condition: 'Log 3 reflex entries',
   },
   {
+    id: 'sleep_architect',
+    name: 'Sleep Architect',
+    description: 'Tracked 7+ sleep associations',
+    icon: '☁️',
+    category: 'milestone',
+    condition: 'Log 7+ sleep association entries',
+  },
+  {
     id: 'efficient_feeder',
     name: 'Efficient Feeder',
     description: 'Logged 10 breast milk transfer sessions',

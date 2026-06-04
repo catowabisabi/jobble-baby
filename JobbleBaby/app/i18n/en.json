@@ -28,7 +28,8 @@
     "jetLag": "Jet Lag",
     "reflexIntegration": "Reflex Integration",
     "hipClick": "Hip Click",
-    "fontanelle": "Fontanelle"
+    "fontanelle": "Fontanelle",
+    "medicineDose": "Medicine Dose"
   },
   "home": {
     "title": "Home",
@@ -931,47 +932,77 @@
     "referralBadge": "Needs Referral",
     "clearBadge": "Normal"
   },
-  "fontanelle": {
+"fontanelle": {
     "title": "Soft Spot Map",
     "greeting": "Track",
-    "subtitle": "Monitor fontanelle closure & head growth",
-    "chart_tab": "Chart",
-    "log_tab": "Log",
-    "tips_tab": "Tips",
-    "week": "Week {{week}}",
-    "fontanelle_size": "Fontanelle Size (mm)",
-    "fontanelle_size_ph": "e.g. 20",
-    "head_circumference": "Head Circumference (cm)",
-    "head_circumference_ph": "e.g. 40",
-    "photo": "Photo",
-    "add_photo": "Add Photo",
-    "change_photo": "Change Photo",
-    "notes": "Notes",
-    "notes_ph": "Optional notes...",
-    "save_entry": "Save Entry",
-    "no_entries": "No entries yet. Start logging to track progress.",
-    "entry_saved": "Entry saved!",
-    "dehydration_alert": "Dehydration Alert",
-    "dehydration_alert_body": "Fontanelle > 40mm may indicate dehydration or increased intracranial pressure. Please consult your pediatrician.",
-    "early_closure_alert": "Early Closure Alert",
-    "early_closure_alert_body": "Fontanelle appears to be closing before 9 months. Please consult your pediatrician.",
-    "alert_clear": "Clear",
-    "alert_consult": "Consult Doctor",
-    "log_history": "History",
-    "today_log": "Today's Log",
-    "no_log_today": "No entries today",
-    "tips_title": "About Fontanelle",
-    "tip_what_title": "What is Fontanelle?",
-    "tip_what_body": "The fontanelle is the soft spot on your baby's head where skull bones haven't yet fused. The anterior fontanelle (front) typically closes between 12-18 months.",
-    "tip_closure_title": "Normal Closure",
-    "tip_closure_body": "Most babies' fontanelle closes between 12-18 months. Earlier or later closure should be discussed with your pediatrician.",
-    "tip_dehydration_title": "Signs of Dehydration",
-    "tip_dehydration_body": "A sunken fontanelle can indicate dehydration. Other signs include fewer wet diapers, dry mouth, and crying without tears.",
-    "tip_bulging_title": "When to Worry",
-    "tip_bulging_body": "A bulging fontanelle (>40mm apparent size) may indicate increased pressure or illness. Seek medical attention if your baby appears unwell.",
-    "tip_measurement_title": "How to Measure",
-    "tip_measurement_body": "Gently feel the edges of the fontanelle with your fingertip. The fontanelle should feel soft and flat. Measure the gap between the skull bones.",
-    "age_weeks": "{{name}} · {{weeks}} weeks",
-    "no_profile": "Add baby profile to track age-based progress"
+    "subtitle": "Monitor fontanelle closure & head growth"
+  },
+  "medicineDose": {
+    "title": "Medicine Dose",
+    "greeting": "Dose Calculator",
+    "subtitle": "Safe dosing for your baby",
+    "babyCard": {
+      "title": "Baby Profile",
+      "age": "Age",
+      "monthsOld": "{{count}} months old",
+      "weight": "Weight",
+      "enterWeight": "Enter weight"
+    },
+    "medication": {
+      "label": "Medication",
+      "acetaminophen": "Acetaminophen",
+      "acetaminophenBrand": "(Tylenol)",
+      "ibuprofen": "Ibuprofen",
+      "ibuprofenBrand": "(Advil/Motrin)",
+      "diphenhydramine": "Diphenhydramine",
+      "diphenhydramineBrand": "(Benadryl)"
+    },
+    "weightInput": {
+      "label": "Baby Weight",
+      "kg": "kg",
+      "lbs": "lbs",
+      "placeholder": "Enter weight"
+    },
+    "doseResult": {
+      "label": "Calculated Dose",
+      "perDose": "Per Dose",
+      "ml": "{{count}} ml",
+      "tsp": "{{count}} tsp",
+      "drops": "{{count}} drops",
+      "mg": "{{count}} mg"
+    },
+    "conversion": {
+      "title": "Conversions",
+      "ml": "ml",
+      "tsp": "tsp",
+      "drops": "drops"
+    },
+    "maxDaily": {
+      "alert": "⚠️ MAX DAILY DOSE EXCEEDED",
+      "alertBody": "This dose exceeds the maximum recommended daily limit of {{max}} mg/kg/day for {{med}}.",
+      "maxPerDay": "Max daily: {{max}} mg/kg",
+      "maxPerDose": "Max per dose: {{max}} mg/kg"
+    },
+    "schedule": {
+      "label": "Dosing Schedule",
+      "acetaminophen": "Every 4-6 hours, max 5 doses/day",
+      "ibuprofen": "Every 6-8 hours, max 4 doses/day",
+      "diphenhydramine": "Every 6-8 hours, max 4 doses/day",
+      "consultDoctor": "Always consult your pediatrician before giving medication"
+    },
+    "history": {
+      "title": "Dose History",
+      "empty": "No doses recorded yet",
+      "doseEntry": "{{amount}} ml of {{med}}",
+      "timeAgo": "{{time}} ago"
+    },
+    "guardian": {
+      "badge": "Dose Guardian",
+      "badgeDesc": "5+ calculations performed",
+      "earned": "🏆 Badge Earned: Dose Guardian!"
+    },
+    "calculate": "Calculate Dose",
+    "saveDose": "Save to History",
+    "disclaimer": "For reference only. Always consult your pediatrician."
   }
 }

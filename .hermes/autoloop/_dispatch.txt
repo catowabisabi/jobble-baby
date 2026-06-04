@@ -1,20 +1,22 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-04 02:XX UTC+8
-Cycle: 179
-Status: ACTIVE — Sisyphus running Fontanelle Soft Spot Map task
+Last dispatch: 2026-06-04 09:05 UTC+8
+Cycle: 181
+Status: ACTIVE — Sisyphus running Medicine Dose Calculator task (todo #71)
 
-## This Cycle (179) — Review + Commit
-- 29 tabs verified: weaning-rash.tsx EXISTS (261 lines), fontanelle.tsx MISSING (will be created)
-- TSC 0 errors across all tabs (verified)
-- Sisyphus tmux pane active — re-dispatched Fontanelle task via buffer paste
-- Prior Pediatric Report PDF task (todo #75) — Sisyphus only pasted to terminal, never ran opencode. Reset to pending.
-- Next: Fontanelle in progress, todo #75 (Pediatric Report PDF) pending
-- Git: 080ee53 → 2e6329e → pushed
+## This Cycle (181) — Review + Commit
+- fontanelle.tsx committed + pushed (1deaa42) — 495 lines, TSC clean
+- Found 2 DEAD TABS: circadian.tsx + reflex-integration.tsx exist but NOT in _layout.tsx
+- painpoints + todos added for dead tab registration
+- Sisyphus re-dispatched medicine-dose task via opencode . --prompt (correct command format)
+- Git: 76e2bb9 → 1deaa42 → pushed
 
-## App Status — ALL FEATURES DONE (29 tabs)
-All 29 tabs implemented. TSC 0 errors. Expo export clean.
-EAS build blocked on user action.
+## App Status — 29 tabs implemented, TSC 0 errors
+All tabs implemented + TSC clean. EAS build blocked on user action.
+
+## DEAD TABS (registered as painpoints, fix todos added)
+- circadian.tsx (359 lines) — NOT in _layout.tsx
+- reflex-integration.tsx (200 lines) — NOT in _layout.tsx
 
 ## USER ACTION REQUIRED (blocking EAS build):
   1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
@@ -24,15 +26,24 @@ EAS build blocked on user action.
   5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
   6. Create app in Play Console → package: com.jobblebaby.app
 
-## Pending Todos
-- #70 [in_progress]: Fontanelle Soft Spot Map → Sisyphus working
-- #71 [pending]: Medicine Dose Calculator (idea #46)
-- #72 [pending]: Caregiver Shift Handoff Log (idea #47)
-- #73 [pending]: Breast Milk Transfer Efficiency (idea #48)
-- #74 [pending]: Sleep Association Pattern Map (idea #49)
-- #75 [pending]: Pediatric Report PDF Export (idea #50) → reset to pending, was stuck
+## Pending Todos (6 pending/new)
+- #71 [in_progress]: Medicine Dose Calculator → Sisyphus working
+- #72 [pending]: Caregiver Shift Handoff Log
+- #73 [pending]: Breast Milk Transfer Efficiency
+- #74 [pending]: Sleep Association Pattern Map
+- #75 [pending]: Pediatric Report PDF Export
+- #new [pending]: Register circadian tab in _layout.tsx
+- #new [pending]: Register reflex-integration tab in _layout.tsx
+
+## New Ideas (DB)
+- #35: Fontanelle Soft Spot Map → implemented ✓
+- #36: Wet Diaper Weight Proxy → new
+- #37: Decibel Cry Waveform → new
+- #38: Reading Bedtime Ritual → new
+- #39: Hysteresis Sleep Curve → new
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- 2e6329e — autoloop: cycle 179 — reset todo #70 Fontanelle re-dispatched, Sisyphus confirmed on Fontanelle (todo #70)
-- Prior: 080ee53 (cycle 178), 17355da (Fontanelle reset), 14536af (TSC clean), 276267f (db update)
+- 1deaa42 — feat: Fontanelle Soft Spot Map tab — photo-log weekly size, track closure, head circumference correlation, dehydration/early closure alerts
+- 76e2bb9 — feat: Fontanelle Soft Spot Map tab (prior incomplete)
+- 7d17b97 — autoloop: cycle 180

@@ -1,74 +1,73 @@
-Implement **Tongue Tie Release Tracker** — track tongue tie (lingual frenulum) diagnosis, release procedure, and post-procedure feeding progress.
+# Fontanelle Soft Spot Map — Task for Sisyphus
 
-## 1. Create: app/(tabs)/tongue-tie.tsx
+## Goal
+Implement **Fontanelle Soft Spot Map tab** — photo-log anterior fontanelle size weekly, track closure progress, correlate with head circumference growth chart. Alert if size unexpectedly increases (possible dehydration) or closure before 9 months.
+
+## Files to Create/Modify
+
+### 1. Create: app/(tabs)/fontanelle.tsx
 
 ```tsx
 // Imports
+import { useRouter } from 'expo-router';
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, Modal, TextInput } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useLanguage } from '../context/LanguageContext';
+import { ScrollView, View, Text, TouchableOpacity, TextInput, FlatList, Modal, StyleSheet, Image } from 'react-native';
+import { C } from '../constants/theme';
+import { storageGet, storageSet } from '../constants/storage';
+import { t } from '../i18n';
 
-// State: records array { id, date, type (diagnosis/release/followup), notes, latch_score (1-5), pain_score (1-5), feeding_improvement }
-// AsyncStorage: @jobble/tongue_tie_records
-
-// UI Components:
-// 1. Header: "Tongue Tie Tracker" (en) / "舌繫帶追蹤" (zh)
-// 2. Status card: shows current stage (not-diagnosed / diagnosed / released / released+followup)
-// 3. Timeline: FlatList of all records sorted by date desc
-// 4. Add Record FAB → modal with type selector
-// 5. Latch improvement chart: simple before/after comparison if 2+ records
-// 6. Badge: "Released" when procedure logged, "Feeding Improved" when latch_score improves
-
-// Record types: "diagnosis" (when tongue tie identified), "release" (procedure date), "followup" (post-procedure check-in)
-// Latch score: 1=poor, 2=fair, 3=adequate, 4=good, 5=excellent
-// Pain score: 1=no pain, 5=severe (for mother during feeding)
-
-// Tab icon: MaterialCommunityIcons "link-variant" or "content-cut"
+// State: entries array, currentWeek, isAddingEntry, showAlert
+// AsyncStorage: @jobble/fontanelle_entries, @jobble/fontanelle_photos
+// UI: weekly logging, size measurement slider, photo capture, growth correlation chart
+// TSC must pass 0 errors before done
 ```
 
-## 2. Modify: app/(tabs)/_layout.tsx
-Add Tabs.Screen entry for "tongue-tie" with icon "link-variant".
+### 2. Modify: app/(tabs)/_layout.tsx
+Add Tabs.Screen entry for fontanelle tab.
 
-## 3. Modify: app/i18n/en.json and app/i18n/zh.json
+### 3. Modify: app/i18n/en.json and app/i18n/zh.json
+Add all i18n keys for fontanelle tab.
 
-**en.json keys:**
-- tabs.tongueTie: "Tongue Tie"
-- tongueTie.title: "Tongue Tie Tracker"
-- tongueTie.greeting: "Track tongue tie diagnosis, release, and feeding progress"
-- tongueTie.diagnosis: "Diagnosis"
-- tongueTie.release: "Release Procedure"
-- tongueTie.followup: "Follow-up"
-- tongueTie.addRecord: "Add Record"
-- tongueTie.type: "Record Type"
-- tongueTie.date: "Date"
-- tongueTie.latchScore: "Latch Score"
-- tongueTie.painScore: "Pain Score (Mother)"
-- tongueTie.feedingImprovement: "Feeding Improvement"
-- tongueTie.notes: "Notes"
-- tongueTie.save: "Save"
-- tongueTie.history: "History"
-- tongueTie.noRecords: "No records yet"
-- tongueTie.releasedBadge: "Released"
-- tongueTie.feedingImprovedBadge: "Feeding Improved"
-- tongueTie.notDiagnosed: "Not Diagnosed"
-- tongueTie.diagnosed: "Diagnosed"
-- tongueTie.stage: "Current Stage"
+## Full Implementation Details
 
-**zh.json equivalents:**
-- tabs.tongueTie: "舌繫帶"
-- tongueTie.title: "舌繫帶追蹤"
-- tongueTie.greeting: "追蹤舌繫帶診斷、鬆解手術和餵養進度"
-- [translate all other keys to Chinese]
+### State
+- entries array: { id, date, week_number, fontanelle_size_mm, photo_uri, head_circumference_cm, notes, alert_triggered }
+- currentWeek number, isAddingEntry boolean, showAlert boolean
 
-## Theme
+### UI Components
+1. Header: "Fontanelle Soft Spot Map" (en) / "臍門追蹤" (zh)
+2. Greeting: "Track your baby's soft spot size and head growth"
+3. Alert Banner: red if fontanelle size increases unexpectedly (possible dehydration) or closes before 9 months
+4. Weekly Entry Card: current week number, fontanelle size input (slider 0-60mm), head circumference input (cm)
+5. Photo Capture: optional photo of fontanelle area (camera or gallery)
+6. Growth Correlation: simple chart overlaying fontanelle size on head circumference growth
+7. Closure Timeline: visual progress toward closure (expected 12-18 months)
+8. History: FlatList of past entries
+9. Milestone badge: "Soft Spot Guardian" when 4+ weeks logged
+
+### Measurement Guidance
+- Anterior fontanelle: measure in mm, typically 30-50mm at birth
+- Normal closure range: 12-18 months
+- Alert conditions:
+  - Size increases >5mm vs prior week (possible dehydration)
+  - Closure occurs before 9 months (early closure)
+  - Head circumference drops below 3rd percentile
+
+### AsyncStorage
+- @jobble/fontanelle_entries
+- @jobble/fontanelle_photos
+
+### i18n Keys (en + zh)
+tabs.fontanelle, fontanelle.title, fontanelle.greeting, fontanelle.week, fontanelle.size, fontanelle.headCircumference, fontanelle.photo, fontanelle.addEntry, fontanelle.save, fontanelle.history, fontanelle.alertDehydration, fontanelle.alertEarlyClosure, fontanelle.noRecords, fontanelle.softSpotGuardian, fontanelle.closureTimeline, fontanelle.notes
+
+### Tab Integration
+Add Tabs.Screen to app/(tabs)/_layout.tsx: name="fontanelle", icon="head-outline", label=t("tabs.fontanelle")
+
+### Theme
 - Dark #0D0D0D background, #3B82F6 accent cards
-- Release stage: amber (#F59E0B)
-- Follow-up stage: green (#10B981)
-- Follow existing tab patterns (teething.tsx as reference)
+- Alert banner: #DC2626
+- Closure progress: gradient blue → green
+- Follow existing tab patterns (growth.tsx or milestones.tsx as reference)
 
-## TSC Verification
-After creating all files, run: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit
-Must pass 0 errors before reporting done ULW
+## VERIFICATION
+npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done ULW

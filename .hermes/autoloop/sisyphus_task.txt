@@ -6,40 +6,35 @@ Implement **Pediatric Report PDF Export** tab — generate a shareable PDF summa
 ## Tech Stack
 - Expo SDK (managed workflow) — NO react-native-pdf-lib or react-native-html-to-pdf (not compatible with Expo managed workflow)
 - Use **expo-print** + **expo-sharing** for PDF generation and sharing
-- Build HTML string → `await Print.printToFileAsync({ html })` → share via `Sharing.shareAsync()`
+- Build HTML string → `await Print.printToFileAsync({ html })` → share via `Sharing.shareAsync(uri)`
 
 ## Reference Files
-- `app/(tabs)/growth.tsx` — for WHO growth data structure and chart data
-- `app/(tabs)/milestones.tsx` — for milestone timeline
-- `app/(tabs)/tracking.tsx` — for feeding/diaper/sleep log
+- `app/(tabs)/growth.tsx` — WHO growth data structure and chart data (uses @jobble/growth_entries)
+- `app/(tabs)/milestones.tsx` — milestone timeline (uses @jobble/milestone_photos)
+- `app/(tabs)/tracking.tsx` — feeding/diaper/sleep log (uses @jobble/tracking_entries)
+- `app/(tabs)/allergens.tsx` — allergen status (uses @jobble/allergen_entries)
+- `@jobble_baby_profile` — baby name, birth date, gender
 
 ## Files to Create/Modify
 1. Create: `app/(tabs)/pediatric-report.tsx`
 2. Modify: `app/(tabs)/_layout.tsx` — add Tabs.Screen entry
-3. Modify: `app/i18n/en.json` and `zh.json` — add i18n keys
-4. Modify: `app/data/badges.ts` — add badge
-
-## State
-No new AsyncStorage needed — read from existing keys:
-- `@jobble/growth_entries` (growth.tsx)
-- `@jobble/milestone_entries` (milestones.tsx)
-- `@jobble/feeding_entries` (tracking.tsx)
-- `@jobble/sleep_log` (tracking.tsx)
-- `@jobble/baby_profile` (onboarding)
+3. Modify: `app/i18n/en.json` — add i18n keys
+4. Modify: `app/i18n/zh.json` — add i18n keys
+5. Modify: `app/data/badges.ts` — add badge
 
 ## UI Layout
 1. **Header**: "Pediatric Report" (en) / "兒科報告" (zh)
 2. **Baby Info Card**: Name, birth date, current age (calculated from profile), gender
-3. **Report Sections** (all in one scrollable view, one Print button at bottom):
-   - Growth Chart: text table showing date, weight (kg), height (cm), head circumference, plotted against WHO percentile ranges. Not a chart image — a clean text table with percentile bands labeled.
+3. **Report Preview** (scrollable):
+   - Growth Chart: text table showing date, weight (kg), height (cm), head circumference, with WHO percentile ranges labeled
    - Milestone Timeline: chronological list of key milestones with dates and ages
-   - Feeding Summary: last 7 days of feeding entries aggregated (total feeds, total ml/breastfeeding duration)
+   - Feeding Summary: last 7 days aggregated (total feeds, total ml/breastfeeding duration)
    - Sleep Summary: last 7 days aggregated (total sleep hours, average longest stretch)
    - Allergen Status: quick list of introduced allergens and dates
-4. **Print/Share Button**: "Export PDF" → `Print.printToFileAsync({ html })` → `Sharing.shareAsync(uri)`
+4. **Export Button**: "Export PDF" → `Print.printToFileAsync({ html })` → `Sharing.shareAsync(uri)`
 
 ## HTML Template for PDF
-Build a clean HTML string with inline CSS. Style for A4 printing. Use @import url for fonts if needed, or system fonts. Structure:
+Build a clean HTML string with inline CSS. Style for A4 printing. Use system fonts. Structure:
 ```
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><style>
@@ -57,14 +52,17 @@ Build a clean HTML string with inline CSS. Style for A4 printing. Use @import ur
 </body></html>
 ```
 
-## i18n Keys
+## i18n Keys to Add
 tabs.pediatricReport, pediatricReport.title, pediatricReport.exportPdf, pediatricReport.generated, pediatricReport.babyName, pediatricReport.ageMos, pediatricReport.growthSection, pediatricReport.milestoneSection, pediatricReport.feedingSection, pediatricReport.sleepSection, pediatricReport.allergenSection, pediatricReport.noData, pediatricReport.weight, pediatricReport.height, pediatricReport.headCirc, pediatricReport.percentile, pediatricReport.date, pediatricReport.milestone, pediatricReport.ageAtMilestone
 
-## Tab Integration
+## Tab Registration
 name="pediatric-report", icon="file-document-outline", label=t("tabs.pediatricReport")
 
-## Badge
+## Badge to Add
 id: pediatric_report, name: "Doctor Ready", description: "Exported a pediatric report", icon: "📋", category: "milestone"
+
+## Data Reading
+All data read from existing AsyncStorage keys — no new storage schema needed. Parse existing entries, aggregate for PDF.
 
 ## VERIFICATION
 npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done. ULW

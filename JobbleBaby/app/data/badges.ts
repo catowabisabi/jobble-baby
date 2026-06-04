@@ -174,6 +174,14 @@ export const BADGES: Badge[] = [
     category: 'milestone',
     condition: 'Log 10 milk transfer sessions',
   },
+  {
+    id: 'pediatric_report',
+    name: 'Doctor Ready',
+    description: 'Exported a pediatric report',
+    icon: '📋',
+    category: 'milestone',
+    condition: 'Export a pediatric report',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

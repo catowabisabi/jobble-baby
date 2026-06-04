@@ -31,7 +31,29 @@
     "reflexIntegration": "原始反射整合",
     "hipClick": "髖關節點擊",
     "fontanelle": "鹵門",
-    "medicineDose": "藥物劑量"
+    "medicineDose": "藥物劑量",
+    "pediatricReport": "報告"
+  },
+  "pediatricReport": {
+    "title": "醫療",
+    "reportTitle": "兒科報告",
+    "babyInfo": "嬰兒資料",
+    "ageMos": "月齡",
+    "growthSection": "生長記錄",
+    "milestoneSection": "里程碑",
+    "feedingSection": "餵食（7天）",
+    "sleepSection": "睡眠（7天）",
+    "allergenSection": "過敏原",
+    "noData": "尚無記錄",
+    "exportPdf": "匯出 PDF",
+    "generating": "正在生成 PDF...",
+    "shareTitle": "匯出兒科報告",
+    "weight": "體重",
+    "height": "身高",
+    "headCirc": "頭圍",
+    "date": "日期",
+    "milestone": "里程碑",
+    "ageAtMilestone": "月齡"
   },
   "home": {
     "title": "主頁",

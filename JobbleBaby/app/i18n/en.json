@@ -31,7 +31,29 @@
     "reflexIntegration": "Reflex Integration",
     "hipClick": "Hip Click",
     "fontanelle": "Fontanelle",
-    "medicineDose": "Medicine Dose"
+    "medicineDose": "Medicine Dose",
+    "pediatricReport": "Report"
+  },
+  "pediatricReport": {
+    "title": "Medical",
+    "reportTitle": "Pediatric Report",
+    "babyInfo": "Baby Info",
+    "ageMos": "Age",
+    "growthSection": "Growth Records",
+    "milestoneSection": "Milestones",
+    "feedingSection": "Feeding (7 days)",
+    "sleepSection": "Sleep (7 days)",
+    "allergenSection": "Allergens",
+    "noData": "No entries yet",
+    "exportPdf": "Export PDF",
+    "generating": "Generating PDF...",
+    "shareTitle": "Export Pediatric Report",
+    "weight": "Weight",
+    "height": "Height",
+    "headCirc": "Head Circ.",
+    "date": "Date",
+    "milestone": "Milestone",
+    "ageAtMilestone": "Age"
   },
   "home": {
     "title": "Home",

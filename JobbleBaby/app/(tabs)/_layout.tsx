@@ -194,6 +194,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="water-outline" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="pediatric-report"
+        options={{
+          title: t('tabs.pediatricReport'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="file-document-outline" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

@@ -25,7 +25,8 @@
     "oralMotor": "Oral Motor",
     "moroReflex": "Moro Reflex",
     "tongueTie": "Tongue Tie",
-    "jetLag": "Jet Lag"
+    "jetLag": "Jet Lag",
+    "reflexIntegration": "Reflex Integration"
   },
   "home": {
     "title": "Home",
@@ -889,6 +890,19 @@
     "startPlan": "Start Plan",
     "history": "History",
     "noPlan": "No travel plan set",
+    "save": "Save"
+  },
+  "reflexIntegration": {
+    "title": "Reflex Integration Timeline",
+    "greeting": "Track primitive reflex development and integration",
+    "status": "Status",
+    "integrated": "Integrated",
+    "present": "Present",
+    "hyperResponsive": "Hyper-Responsive",
+    "persistent": "Persistent",
+    "timeline": "Integration Timeline",
+    "noRecords": "No records yet",
+    "notes": "Notes",
     "save": "Save"
   }
 }

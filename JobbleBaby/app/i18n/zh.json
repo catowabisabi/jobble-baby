@@ -25,7 +25,8 @@
     "oralMotor": "口腔運動",
     "moroReflex": "莫羅反射",
     "tongueTie": "舌繫帶",
-    "jetLag": "時差適應"
+    "jetLag": "時差適應",
+    "reflexIntegration": "原始反射整合"
   },
   "home": {
     "title": "主頁",
@@ -889,6 +890,19 @@
     "startPlan": "開始計劃",
     "history": "歷史",
     "noPlan": "尚未設置旅行計劃",
+    "save": "儲存"
+  },
+  "reflexIntegration": {
+    "title": "原始反射整合時間線",
+    "greeting": "追蹤原始反射發展與整合",
+    "status": "狀態",
+    "integrated": "已整合",
+    "present": "存在",
+    "hyperResponsive": "過度活躍",
+    "persistent": "持續",
+    "timeline": "整合時間線",
+    "noRecords": "尚無記項",
+    "notes": "備註",
     "save": "儲存"
   }
 }

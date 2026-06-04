@@ -125,6 +125,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="hip-click"
+        options={{
+          title: t('tabs.hipClick'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-male-female-child" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="weaning-rash"
         options={{
           title: t('tabs.weaningRash'),

@@ -26,7 +26,8 @@
     "moroReflex": "Moro Reflex",
     "tongueTie": "Tongue Tie",
     "jetLag": "Jet Lag",
-    "reflexIntegration": "Reflex Integration"
+    "reflexIntegration": "Reflex Integration",
+    "hipClick": "Hip Click"
   },
   "home": {
     "title": "Home",
@@ -904,5 +905,29 @@
     "noRecords": "No records yet",
     "notes": "Notes",
     "save": "Save"
+  },
+  "hipClick": {
+    "title": "Hip Click / Ortolani",
+    "greeting": "DDH screening at diaper changes",
+    "infoTitle": "Hip Click & Ortolani Sign",
+    "infoText": "Hip abduction checks during diaper changes help detect DDH (Developmental Dysplasia of the Hip). A palpable 'clunk' during the Barlow/Ortolani maneuver may indicate hip instability. Persistent clunk beyond 8 weeks requires ultrasound referral.",
+    "hipSide": "Hip Side",
+    "left": "Left",
+    "right": "Right",
+    "both": "Both",
+    "babyAgeWeeks": "Baby age",
+    "result": "Result",
+    "clean": "Clean",
+    "clunk": "Clunk",
+    "needsScan": "Needs Scan",
+    "notes": "Notes",
+    "addCheck": "Add Hip Check",
+    "save": "Save",
+    "history": "History",
+    "noRecords": "No records yet",
+    "alertTitle": "Referral Recommended",
+    "alertText": "Persistent hip clunk detected past 8 weeks. An ultrasound is recommended. Please consult your pediatrician.",
+    "referralBadge": "Needs Referral",
+    "clearBadge": "Normal"
   }
 }

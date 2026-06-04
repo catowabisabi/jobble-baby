@@ -26,7 +26,8 @@
     "moroReflex": "莫羅反射",
     "tongueTie": "舌繫帶",
     "jetLag": "時差適應",
-    "reflexIntegration": "原始反射整合"
+    "reflexIntegration": "原始反射整合",
+    "hipClick": "髖關節點擊"
   },
   "home": {
     "title": "主頁",
@@ -904,5 +905,29 @@
     "noRecords": "尚無記項",
     "notes": "備註",
     "save": "儲存"
+  },
+  "hipClick": {
+    "title": "髖關節點擊 / 奧爾托蘭尼",
+    "greeting": "換尿片時進行發育性髖關節發育不良篩查",
+    "infoTitle": "髖關節點擊與奧爾托蘭尼徵",
+    "infoText": "在換尿片時進行髖關節外展檢查，有助發現DDH（發育性髖關節發育不良）。在巴洛姆/奧爾托蘭尼手法中可觸及的「咔嗒」聲可能表示髖關節不穩定。8週後持續出現咔嗒聲需要超聲波轉介。",
+    "hipSide": "髖關節側",
+    "left": "左",
+    "right": "右",
+    "both": "雙側",
+    "babyAgeWeeks": "寶寶年齡",
+    "result": "結果",
+    "clean": "正常",
+    "clunk": "咔嗒聲",
+    "needsScan": "需要掃描",
+    "notes": "備註",
+    "addCheck": "添加髖關節檢查",
+    "save": "儲存",
+    "history": "歷史",
+    "noRecords": "尚無記錄",
+    "alertTitle": "建議轉介",
+    "alertText": "檢測到超過8週的持續髖關節咔嗒聲。建議超聲波檢查。請諮詢您的兒科醫生。",
+    "referralBadge": "需要轉介",
+    "clearBadge": "正常"
   }
 }

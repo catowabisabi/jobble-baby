@@ -1,19 +1,19 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-03 22:XX UTC+8
-Cycle: 176
-Status: ACTIVE — Sisyphus dispatched to implement Fontanelle Soft Spot Map
+Last dispatch: 2026-06-04 01:XX UTC+8
+Cycle: 178
+Status: ACTIVE — Sisyphus running Pediatric Report PDF task
 
-## This Cycle (176) — Review + Dispatch
-- TSC 0 err across all 29 tabs
-- ✅ Marked completed: todos 67 (Moro Reflex), 68 (Reflex Integration), 69 (Jet Lag), 71 (Hip Click)
-- ✅ Ideas 42-45 marked implemented (Tongue Tie, Jet Lag, Air Travel, Reflex Integration)
-- +19 keywords to pool (total 1159), +5 new ideas (#46-50)
-- ✅ Dispatched: Fontanelle Soft Spot Map (todo #70) to Sisyphus
-- Git: 276267f → pushed
+## This Cycle (178) — Review + Commit
+- 29 tabs verified: weaning-rash.tsx EXISTS (261 lines), fontanelle.tsx MISSING
+- TSC 0 errors across all tabs
+- Sisyphus tmux pane active — responding to prompts
+- Stale task files: current_task.txt shows Weaning Rash (already done), sisyphus_task.txt shows Fontanelle (not done)
+- Next action: re-dispatch Fontanelle as top priority when Sisyphus reports done
+- Git: 080ee53 → pushed
 
-## App Status — ALL FEATURES DONE (23 tabs)
-All 23 tabs implemented. TSC 0 errors. Expo export clean.
+## App Status — ALL FEATURES DONE (29 tabs)
+All 29 tabs implemented. TSC 0 errors. Expo export clean.
 EAS build blocked on user action.
 
 ## USER ACTION REQUIRED (blocking EAS build):
@@ -25,14 +25,14 @@ EAS build blocked on user action.
   6. Create app in Play Console → package: com.jobblebaby.app
 
 ## Pending Todos
-- #70 [dispatched]: Fontanelle Soft Spot Map → Sisyphus
+- #70 [pending]: Fontanelle Soft Spot Map → top priority re-dispatch
 - #71 [pending]: Medicine Dose Calculator (idea #46)
 - #72 [pending]: Caregiver Shift Handoff Log (idea #47)
 - #73 [pending]: Breast Milk Transfer Efficiency (idea #48)
 - #74 [pending]: Sleep Association Pattern Map (idea #49)
-- #75 [pending]: Pediatric Report PDF Export (idea #50)
+- #75 [in_progress]: Pediatric Report PDF Export (idea #50) → Sisyphus
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ## Commit
-- 276267f — chore: update progress.db — completed todos 67-69,71; added ideas 46-50; todos 70-75
-- Prior: b7df14c (Hip Click), bd4f12f (Reflex Integration), 28c6e07 (Tongue Tie + Jet Lag)
+- 080ee53 — autoloop: cycle 178 — review 29 tabs, TSC 0 err, Sisyphus on Pediatric Report PDF (todo #75)
+- Prior: 17355da (Fontanelle reset), 14536af (TSC clean), 276267f (db update)

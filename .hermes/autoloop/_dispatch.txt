@@ -1,18 +1,24 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-04 16:00 UTC+8
-Cycle: 189
-Status: ACTIVE — Gut-Brain Axis Dashboard completed by Hermes (Sisyphus dispatch protocol: bash session, not OpenCode agent)
+Last dispatch: 2026-06-04 17:06 UTC+8
+Cycle: 190
+Status: ACTIVE — All 35 tabs registered, TSC 0 errors, keyword pool 1000
 
-## This Cycle (189) — Review + Dispatch
-- ✅ 35 tabs implemented + TSC 0 errors (Gut-Brain Axis Dashboard added)
-- ✅ Todo #79 completed (Gut-Brain Axis Dashboard)
-- ✅ Idea #52 marked implemented
-- ✅ keyword pool expanded to 1000 keywords
-- ✅ New idea #52 (Gut-Brain Axis Dashboard) sparked and implemented
+## This Cycle (190) — Critical Bug Fix
+- 🔧 FIXED: circadian + reflex-integration tabs were NOT in _layout.tsx despite commits b7ca7e1 and f59ff35 claiming they were registered
+- Root cause: merge conflict resolution error — gut-brain-axis commit (f59ff35) accidentally overwrote the circadian/reflex-integration entries that existed in b7ca7e1
+- Tabs.Screen entries now restored: circadian + reflex-integration both re-added
+- TSC verified: 0 errors across all 35 tabs
+- Commit: 389e38f → pushed (restore circadian + reflex-integration to _layout.tsx)
 
-## App Status — 35 tabs, TSC 0 errors
-All 35 tabs registered + TSC clean. EAS build blocked on user action.
+## App Status — 35 tabs, TSC 0 errors, ALL REGISTERED
+All 35 tab files have corresponding Tabs.Screen entries in _layout.tsx:
+  allergens, bottle-refusal, circadian, cry-analyzer, doctor-visit, fontanelle,
+  gear-check, growth, gut-brain-axis, hip-click, index, jet-lag, medicine-dose,
+  milestones, milk-prep, milk-transfer, monitor-correlation, moro-reflex, oral-motor,
+  pediatric-report, products, profile, reflex-integration, reflex-tracker, schedule,
+  shift-handoff, sleep-association, sleep-debt, sleep-training, stress-cascade,
+  teething, tongue-tie, tracking, tummy-time, weaning-rash
 
 ## USER ACTION REQUIRED (blocking EAS build):
   1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
@@ -23,7 +29,9 @@ All 35 tabs registered + TSC clean. EAS build blocked on user action.
   6. Create app in Play Console → package: com.jobblebaby.app
 
 ## Pending Todos: 0 pending · 0 new
+- No pending/new tasks — project feature-complete
+- 77 completed todos, 51 implemented ideas
 
-Commit: f59ff35 → pushed (Gut-Brain Axis Dashboard)
-Commit: 9f6c23e → pushed (progress.db sync)
-Dispatch 2026-06-04 16:00: Gut-Brain Axis Dashboard implemented by Hermes directly (Sisyphus bash session doesn't support agent prompts)
+Commit: 389e38f → pushed (restore circadian + reflex-integration to _layout.tsx)
+Commit: 9f6c23e → pushed (cycle 189 dispatch)
+Dispatch 2026-06-04 17:06: No dispatch — all 35 tabs implemented, TSC 0 err, 0 pending todos

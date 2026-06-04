@@ -1,73 +1,61 @@
-# Fontanelle Soft Spot Map — Task for Sisyphus
+# Medicine Dose Calculator — Task for Sisyphus
 
 ## Goal
-Implement **Fontanelle Soft Spot Map tab** — photo-log anterior fontanelle size weekly, track closure progress, correlate with head circumference growth chart. Alert if size unexpectedly increases (possible dehydration) or closure before 9 months.
+Implement **Medicine Dose Calculator tab** — calculate correct medication dosage based on baby's weight and age, provide weight-based dosing charts for common baby medications (acetaminophen, ibuprofen, diphenhydramine), dosage alerts for max daily limits, and conversion helpers (ml ↔ tsp ↔ drops).
+
+## Reference
+Use existing tabs as patterns: growth.tsx (charts/data), products.tsx (lists), profile.tsx (baby info retrieval).
 
 ## Files to Create/Modify
+1. Create: app/(tabs)/medicine-dose.tsx
+2. Modify: app/(tabs)/_layout.tsx — add Tabs.Screen entry
+3. Modify: app/i18n/en.json and zh.json — add i18n keys
 
-### 1. Create: app/(tabs)/fontanelle.tsx
+## State
+- baby weight from @jobble_baby_profile
+- selected medication (acetaminophen/ibuprofen/diphenhydramine/other)
+- weight input override option
+- calculated dose result
+- dosage history log
 
-```tsx
-// Imports
-import { useRouter } from 'expo-router';
-import { useState, useEffect } from 'react';
-import { ScrollView, View, Text, TouchableOpacity, TextInput, FlatList, Modal, StyleSheet, Image } from 'react-native';
-import { C } from '../constants/theme';
-import { storageGet, storageSet } from '../constants/storage';
-import { t } from '../i18n';
+## Medications Data
+### Acetaminophen (Tylenol/Paracetamol)
+- 10-15 mg/kg per dose
+- Max 75 mg/kg/day
+- Dosing interval: every 4-6 hours
+- Concentration: 160mg/5ml (infant drops)
 
-// State: entries array, currentWeek, isAddingEntry, showAlert
-// AsyncStorage: @jobble/fontanelle_entries, @jobble/fontanelle_photos
-// UI: weekly logging, size measurement slider, photo capture, growth correlation chart
-// TSC must pass 0 errors before done
-```
+### Ibuprofen (Advil/Motrin)
+- 5-10 mg/kg per dose
+- Max 40 mg/kg/day
+- Dosing interval: every 6-8 hours
+- Concentration: 100mg/5ml
 
-### 2. Modify: app/(tabs)/_layout.tsx
-Add Tabs.Screen entry for fontanelle tab.
+### Diphenhydramine (Benadryl)
+- 0.5-1 mg/kg per dose
+- Max 5 mg/kg/day (divided)
+- For allergic reactions only
+- Age limit: not for infants <6 months
 
-### 3. Modify: app/i18n/en.json and app/i18n/zh.json
-Add all i18n keys for fontanelle tab.
+## UI Components
+1. Baby Profile Card: auto-loaded weight, age from profile
+2. Medication Selector: dropdown of common medications
+3. Weight Input: editable weight override (kg + lbs toggle)
+4. Dose Calculator: shows calculated dose in ml
+5. Conversion Panel: ml ↔ tsp ↔ drops (1 tsp = 5ml, 1ml = 20 drops)
+6. Max Daily Alert: red banner if dose exceeds max
+7. Dosing Schedule: frequency reminder (q4h, q6h, q8h)
+8. History Log: FlatList of recent dose calculations
+9. Milestone badge: "Dose Guardian" when 5+ calculations logged
 
-## Full Implementation Details
+## Tab Integration
+name="medicine-dose", icon="medical-outline", label=t("tabs.medicineDose")
 
-### State
-- entries array: { id, date, week_number, fontanelle_size_mm, photo_uri, head_circumference_cm, notes, alert_triggered }
-- currentWeek number, isAddingEntry boolean, showAlert boolean
+## AsyncStorage
+@jobble/medicine_dose_history
 
-### UI Components
-1. Header: "Fontanelle Soft Spot Map" (en) / "臍門追蹤" (zh)
-2. Greeting: "Track your baby's soft spot size and head growth"
-3. Alert Banner: red if fontanelle size increases unexpectedly (possible dehydration) or closes before 9 months
-4. Weekly Entry Card: current week number, fontanelle size input (slider 0-60mm), head circumference input (cm)
-5. Photo Capture: optional photo of fontanelle area (camera or gallery)
-6. Growth Correlation: simple chart overlaying fontanelle size on head circumference growth
-7. Closure Timeline: visual progress toward closure (expected 12-18 months)
-8. History: FlatList of past entries
-9. Milestone badge: "Soft Spot Guardian" when 4+ weeks logged
-
-### Measurement Guidance
-- Anterior fontanelle: measure in mm, typically 30-50mm at birth
-- Normal closure range: 12-18 months
-- Alert conditions:
-  - Size increases >5mm vs prior week (possible dehydration)
-  - Closure occurs before 9 months (early closure)
-  - Head circumference drops below 3rd percentile
-
-### AsyncStorage
-- @jobble/fontanelle_entries
-- @jobble/fontanelle_photos
-
-### i18n Keys (en + zh)
-tabs.fontanelle, fontanelle.title, fontanelle.greeting, fontanelle.week, fontanelle.size, fontanelle.headCircumference, fontanelle.photo, fontanelle.addEntry, fontanelle.save, fontanelle.history, fontanelle.alertDehydration, fontanelle.alertEarlyClosure, fontanelle.noRecords, fontanelle.softSpotGuardian, fontanelle.closureTimeline, fontanelle.notes
-
-### Tab Integration
-Add Tabs.Screen to app/(tabs)/_layout.tsx: name="fontanelle", icon="head-outline", label=t("tabs.fontanelle")
-
-### Theme
-- Dark #0D0D0D background, #3B82F6 accent cards
-- Alert banner: #DC2626
-- Closure progress: gradient blue → green
-- Follow existing tab patterns (growth.tsx or milestones.tsx as reference)
+## i18n Keys
+tabs.medicineDose, medicineDose.title, medicineDose.babyWeight, medicineDose.selectMed, medicineDose.acetaminophen, medicineDose.ibuprofen, medicineDose.diphenhydramine, medicineDose.weightKg, medicineDose.doseMl, medicineDose.maxDaily, medicineDose.conversion, medicineDose.history, medicineDose.saveDose, medicineDose.alertMaxExceeded, medicineDose.congrats, medicineDose.medicineDoseGuardian
 
 ## VERIFICATION
 npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done ULW

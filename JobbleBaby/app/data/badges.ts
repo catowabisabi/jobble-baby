@@ -190,6 +190,14 @@ export const BADGES: Badge[] = [
     category: 'milestone',
     condition: 'Log crying data for 7 consecutive days',
   },
+  {
+    id: 'gut_guardian',
+    name: 'Gut Guardian',
+    description: 'Logged microbiome factors for 14 consecutive days',
+    icon: '🌱',
+    category: 'milestone',
+    condition: 'Log microbiome factors for 14 consecutive days',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

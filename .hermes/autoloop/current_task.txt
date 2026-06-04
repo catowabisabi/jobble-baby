@@ -1,7 +1,7 @@
-# Cry Frequency Analyzer Tab — Dispatched to Sisyphus
-Todo: #78 P3 — Cry Frequency Analyzer Tab
-Dispatched: 2026-06-04 15:05
+# Gut-Brain Axis Dashboard — Dispatched to Sisyphus
+Todo: #79 P2 — Gut-Brain Axis Dashboard
+Dispatched: 2026-06-04 16:00
 Status: in_progress
-File: app/(tabs)/cry-analyzer.tsx
+File: app/(tabs)/gut-brain-axis.tsx
 i18n: en.json + zh.json keys
-Badge: cry_champion — Cry Champion (7-day streak)
+Badge: gut_guardian — Gut Guardian (14-day streak)

@@ -1,22 +1,22 @@
-# Cry Frequency Analyzer — Task for Sisyphus
+# Gut-Brain Axis Dashboard — Task for Sisyphus
 
 ## Goal
-Implement **Cry Frequency Analyzer tab** — manual tap-to-log crying episodes with timestamp, duration, cause tag, and intensity. Aggregate daily/weekly cry score, pattern timeline overlaid on sleep/feeding, colic alert threshold by age.
+Implement **Gut-Brain Axis Dashboard tab** — a unified view connecting feeding method, microbiome health, and neurological development (sleep, cry). Track skin-to-skin contact, probiotic/prebiotic intake, bottle flow rate, gut symptoms, and surface correlation insights.
 
 ## Tech Stack
-- Expo SDK (managed workflow) — NO native audio analysis
-- Manual logging with big tap target for one-handed use
-- AsyncStorage for @jobble/cry_entries
-- expo-print NOT needed — this tab logs data, PDF export comes later if at all
+- Expo SDK (managed workflow)
+- Manual logging — no native microbiome analysis
+- AsyncStorage for @jobble/microbiome_log and @jobble/gut_symptoms
+- Reuse tracking tab entry pattern (FlatList, FAB, modal form)
 
 ## Reference Files
 - `app/(tabs)/tracking.tsx` — entry pattern (FlatList, FAB, modal form)
-- `app/(tabs)/stress-cascade.tsx` — colic curve data and alert design
-- `app/(tabs)/sleep-association.tsx` — timeline correlation pattern
+- `app/(tabs)/cry-analyzer.tsx` — correlation pattern (timeline overlay with sleep/feeding)
+- `app/(tabs)/sleep-association.tsx` — 2x2 correlation matrix pattern
 - `app/data/badges.ts` — badge registration
 
 ## Files to Create/Modify
-1. Create: `app/(tabs)/cry-analyzer.tsx`
+1. Create: `app/(tabs)/gut-brain-axis.tsx`
 2. Modify: `app/(tabs)/_layout.tsx` — add Tabs.Screen entry
 3. Modify: `app/i18n/en.json` — add i18n keys
 4. Modify: `app/i18n/zh.json` — add i18n keys
@@ -24,52 +24,73 @@ Implement **Cry Frequency Analyzer tab** — manual tap-to-log crying episodes w
 
 ## Data Model
 ```typescript
-// @jobble/cry_entries — Array<CryEntry>
-interface CryEntry {
-  id: string;            // uuid
-  timestamp: string;    // ISO8601
-  duration_minutes: number;
-  cause_tag: 'hunger' | 'overtired' | 'teething' | 'reflux' | '分离焦虑' | 'other';
-  intensity: 1 | 2 | 3 | 4 | 5;  // 1=mild whimper, 5=screaming
-  notes?: string;
+// @jobble/microbiome_log — Array<MicrobiomeEntry>
+interface MicrobiomeEntry {
+  id: string;              // uuid
+  date: string;           // YYYY-MM-DD
+  feeding_method: 'bf_direct' | 'bf_pumped' | 'formula' | 'mixed';
+  skin_to_skin_minutes: number;  // 0-999
+  probiotic_drops: boolean;
+  prebiotic_grams: number; // 0-50, one decimal
+  flow_rate?: 'slow' | 'medium' | 'fast';  // only for bottle feeders
+}
+
+// @jobble/gut_symptoms — Array<GutSymptom>
+interface GutSymptom {
+  id: string;
+  date: string;           // YYYY-MM-DD
+  stool_frequency: number; // times per day
+  stool_consistency: 'watery' | 'soft' | 'formed';
+  gas_severity: 1 | 2 | 3 | 4 | 5;  // 1=no gas, 5=severe
+  reflux_episodes: number; // count today
 }
 ```
 
 ## UI Layout
-1. **Header**: "Cry Frequency Analyzer" (en) / "哭聲分析器" (zh)
-2. **Big + Button** (center bottom, large 64px tap target): "Log Cry" — opens entry modal
-3. **Cry Entry Modal** (when + tapped):
-   - Duration: minutes picker (1-120)
-   - Cause: chip selector (hunger / overtired / teething / reflux / separation anxiety / other)
-   - Intensity: 1-5 slider with labels (1=Whimper, 3=Medium, 5=Screaming)
-   - Notes: optional text
-   - Save button
-4. **Today's Summary Card** (top):
-   - Total cry episodes today
-   - Total cry minutes today
-   - Color-coded severity bar: green (<30min), yellow (30-90min), red (>90min)
-5. **Weekly Cry Score Chart**: Bar chart — cry minutes per day for last 7 days
-   - Baseline line: age-expected colic threshold (6wk peak = 180min/day)
-6. **Cry Pattern Timeline**: Vertical timeline of today's cry episodes overlaid with sleep/feeding entries from @jobble/tracking_entries
-7. **Colic Alert Banner**: Red banner if current week avg > colic threshold for baby's age
-   - Colic curve: 6 weeks peak, resolves by 12-16 weeks
-8. **History**: FlatList of past 30 days entries, grouped by date
+1. **Header**: "Gut-Brain Axis" (en) / "腸腦軸" (zh)
+2. **Gut Health Gauge Card** (top): Large circular gauge 0-100
+   - Red zone: 0-30 (concern), Yellow: 31-70 (monitor), Green: 71-100 (healthy)
+   - Score = weighted: stool_freq(20%) + stool_consistency(20%) + gas(20%) + reflux(20%) + feeding_diversity(20%)
+3. **Daily Log FAB** (bottom center, large 64px tap target): "+" button
+   - Opens modal with two tabs: "Feeding Log" + "Gut Symptoms"
+   - Feeding Log: feeding method chips, skin-to-skin minutes (0-120 slider), probiotic toggle, prebiotic grams (0-20 slider), flow rate chips (slow/medium/fast)
+   - Gut Symptoms: stool frequency (1-10 stepper), consistency chips (watery/soft/formed), gas severity 1-5 slider, reflux episodes stepper
+4. **Correlation Dashboard** (middle): Two 2x2 mini charts:
+   - Left: Sleep Duration vs Gut Score (scatter dots, last 14 days)
+   - Right: Cry Episodes vs Feeding Method (bar chart by feeding type)
+   - Read from @jobble/tracking_entries + @jobble/cry_entries
+5. **Microbiome Timeline Card**: Horizontal timeline
+   - Birth mode badge, antibiotic exposure badge, probiotic course markers
+   - Overlaid with gut health score line
+6. **Insight Cards** (bottom): 2-3 cards with gentle insights:
+   - "Skin-to-skin on {date} correlated with +15% gut health score this week"
+   - "Formula feeding days show higher gas severity — consider paced feeding"
+   - Only show if N>=7 days of data; gentle tone, no alarming language
+7. **History**: FlatList of past 30 days, each row shows: date, feeding_method, gut_score, key insight
+
+## Gut Health Score Algorithm
+```
+raw_score = 0
+// stool_freq ideal = 2-4/day → score = 25 if 2-4, else 15
+// stool_consistency: soft=25, formed=20, watery=5
+// gas: 1=25, 2=20, 3=15, 4=10, 5=5
+// reflux: 0=25, 1=20, 2=15, 3=10, 4+=5
+// feeding_diversity (BF+pumping+formula in same week): yes=25, no=15
+raw_score = sum of above (max 100)
+// Apply 7-day moving average, final = round(raw_score)
+```
 
 ## i18n Keys
-tabs.cryAnalyzer, cryAnalyzer.title, cryAnalyzer.logCry, cryAnalyzer.addEntry, cryAnalyzer.duration, cryAnalyzer.cause, cryAnalyzer.intensity, cryAnalyzer.notes, cryAnalyzer.todaySummary, cryAnalyzer.episodesToday, cryAnalyzer.minutesToday, cryAnalyzer.weeklyScore, cryAnalyzer.colicAlert, cryAnalyzer.history, cryAnalyzer.noEntries, cryAnalyzer.hunger, cryAnalyzer.overtired, cryAnalyzer.teething, cryAnalyzer.reflux, cryAnalyzer.separationAnxiety, cryAnalyzer.other, cryAnalyzer.intensityWhimper, cryAnalyzer.intensityMedium, cryAnalyzer.intensityScreaming, cryAnalyzer.colicThreshold, cryAnalyzer.badgeDesc
+tabs.gutBrainAxis, gutBrainAxis.title, gutBrainAxis.gutHealthGauge, gutBrainAxis.dailyLog, gutBrainAxis.feedingLog, gutBrainAxis.gutSymptoms, gutBrainAxis.feedingMethod, gutBrainAxis.skinToSkin, gutBrainAxis.probiotic, gutBrainAxis.prebiotic, gutBrainAxis.flowRate, gutBrainAxis.stoolFrequency, gutBrainAxis.stoolConsistency, gutBrainAxis.gasSeverity, gutBrainAxis.refluxEpisodes, gutBrainAxis.correlation, gutBrainAxis.sleepVsGut, gutBrainAxis.cryVsFeeding, gutBrainAxis.insights, gutBrainAxis.noDataYet, gutBrainAxis.history, gutBrainAxis.slow, gutBrainAxis.medium, gutBrainAxis.fast, gutBrainAxis.watery, gutBrainAxis.soft, gutBrainAxis.formed, gutBrainAxis.badgeDesc, gutBrainAxis.birthMode, gutBrainAxis.antibiotics, gutBrainAxis.probioticCourse
 
 ## Tab Registration
-name="cry-analyzer", icon="heart-outline", label=t("tabs.cryAnalyzer")
+name="gut-brain-axis", icon="stomach-outline", label=t("tabs.gutBrainAxis")
 
 ## Badge to Add
-id: cry_champion, name: "Cry Champion", description: "Logged crying data for 7 consecutive days", icon: "💧", category: "milestone"
+id: gut_guardian, name: "Gut Guardian", description: "Logged microbiome factors for 14 consecutive days", icon: "🌱", category: "milestone"
 
-## Colic Threshold Reference
-- 0-4 weeks: 120 min/day warning threshold
-- 5-8 weeks: 180 min/day (peak colic)
-- 9-12 weeks: 150 min/day
-- 13-16 weeks: 90 min/day
-- 17+ weeks: 60 min/day
+## Colic Threshold Reference (reuse from cry-analyzer)
+Same as cry-analyzer: 0-4wk=120min, 5-8wk=180min, 9-12wk=150min, 13-16wk=90min, 17+wk=60min
 
 ## VERIFICATION
 npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done. ULW

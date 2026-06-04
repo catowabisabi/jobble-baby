@@ -208,6 +208,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="gut-brain-axis"
+        options={{
+          title: t('tabs.gutBrainAxis'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="flower-outline" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

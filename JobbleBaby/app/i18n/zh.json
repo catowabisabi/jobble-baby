@@ -1231,5 +1231,78 @@
     "saveSymptoms": "儲存症狀",
     "skin_to_skin_high": "高頻肌膚接觸與本週腸道健康分數改善相關",
     "formula_gas_warning": "配方奶餵養日排氣較多 — 建議嘗試節奏式餵奶"
+  },
+  "assessment": {
+    "tab": "評估",
+    "hazelbakerScore": "Hazelbaker 評分",
+    "guide": "評估指南",
+    "hazelbakerScale": "Hazelbaker 評估量表",
+    "hazelbakerDesc": "6個功能項目各0-2分：舌頭抬起、伸展、展開、反彈、凹陷、蠕動。0-5分=明顯黏連，6-8分=中等，9-12分=功能性。",
+    "jawSymmetry": "下頜對稱檢查表",
+    "jawSymmetryDesc": "5個視覺指標 — 勾選適用的項目：",
+    "jawNotes": "家長觀察",
+    "tongueLift": "舌頭抬起",
+    "tongueExtension": "舌頭伸展",
+    "tongueSpread": "舌頭展開",
+    "tongueSnapBack": "舌頭反彈",
+    "tongueHollowing": "舌頭凹陷",
+    "tonguePeristalsis": "舌頭蠕動",
+    "chinRest": "靜止时下巴偏斜",
+    "chinCry": "哭泣時下巴偏斜",
+    "lipAsym": "嘴唇不對稱",
+    "biteAlign": "咬合對齊",
+    "masseter": "咀嚼肌張力",
+    "newEntry": "新建評估",
+    "history": "評估歷史",
+    "saved": "評估已儲存"
+  },
+  "feeding": {
+    "tab": "餵養記錄",
+    "avgLatch7d": "7天平均銜乳質量",
+    "trend": "7天趨勢",
+    "logEntry": "記錄餵養",
+    "history": "餵養歷史",
+    "latchQuality": "銜乳質量",
+    "durationMin": "時長（分鐘）",
+    "milkMl": "奶量（毫升）",
+    "bottleFlowRate": "奶瓶流速",
+    "gagEpisodes": "作嘔次數",
+    "notes": "備註",
+    "slow": "慢速",
+    "medium": "中速",
+    "fast": "快速",
+    "nipple": "奶嘴尺寸"
+  },
+  "chewing": {
+    "tab": "咀嚼",
+    "timeline": "咀嚼里程碑時間線",
+    "logMilestone": "記錄里程碑",
+    "stage": "階段",
+    "foodItem": "食物",
+    "gagEpisodes": "作嘔次數",
+    "refusalEvents": "拒絕次數",
+    "notes": "備註",
+    "suck": "吸吮",
+    "suckSwallow": "吸-吞-呼吸",
+    "chewingStage": "咀嚼",
+    "biting": "咬"
+  },
+  "correlate": {
+    "tab": "相關性",
+    "overlay": "相關性儀表板",
+    "description": "餵養 × 體重 × 哭聲 疊加",
+    "overlayDesc": "疊加銜乳質量趨勢 + 體重增長速度 + 哭聲頻率，識別模式並在發現餵養困難時提醒。",
+    "recentFeeding": "最近餵養記錄",
+    "exportReferral": "轉介報告",
+    "shareWithPediatrician": "分享給兒科醫生",
+    "exportNote": "導出評分 + 餵養記錄摘要為 PDF",
+    "alertFeedingDifficulty": "檢測到餵養困難 — 建議考慮舌繫帶評估"
+  },
+  "badge": {
+    "latcher": "銜乳達人",
+    "tongueTieAware": "舌繫帶關注"
+  },
+  "common": {
+    "save": "儲存"
   }
 }

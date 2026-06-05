@@ -1231,5 +1231,78 @@
     "saveSymptoms": "Save Symptoms",
     "skin_to_skin_high": "High skin-to-skin correlates with better gut health scores this week",
     "formula_gas_warning": "Formula feeding days show elevated gas — consider paced feeding technique"
+  },
+  "assessment": {
+    "tab": "Assess",
+    "hazelbakerScore": "Hazelbaker Score",
+    "guide": "Assessment Guide",
+    "hazelbakerScale": "Hazelbaker Assessment Scale",
+    "hazelbakerDesc": "6 functional items scored 0-2 each: tongue lift, extension, spread, snap-back, hollowing, peristalsis. 0-5=significant tie, 6-8=moderate, 9-12=functional.",
+    "jawSymmetry": "Jaw Symmetry Checklist",
+    "jawSymmetryDesc": "5 visual indicators — check any that apply:",
+    "jawNotes": "Parent Observations",
+    "tongueLift": "Tongue Lift",
+    "tongueExtension": "Tongue Extension",
+    "tongueSpread": "Tongue Spread",
+    "tongueSnapBack": "Tongue Snap-back",
+    "tongueHollowing": "Tongue Hollowing",
+    "tonguePeristalsis": "Tongue Peristalsis",
+    "chinRest": "Chin Deviation at Rest",
+    "chinCry": "Chin Deviation on Cry",
+    "lipAsym": "Lip Asymmetry",
+    "biteAlign": "Bite Alignment",
+    "masseter": "Masseter Muscle Tone",
+    "newEntry": "New Assessment",
+    "history": "Assessment History",
+    "saved": "Assessment saved"
+  },
+  "feeding": {
+    "tab": "Feeding Log",
+    "avgLatch7d": "7-Day Avg Latch Quality",
+    "trend": "7-Day Trend",
+    "logEntry": "Log Feeding",
+    "history": "Feeding History",
+    "latchQuality": "Latch Quality",
+    "durationMin": "Duration (min)",
+    "milkMl": "Milk (ml)",
+    "bottleFlowRate": "Flow Rate",
+    "gagEpisodes": "Gag Episodes",
+    "notes": "Notes",
+    "slow": "Slow",
+    "medium": "Medium",
+    "fast": "Fast",
+    "nipple": "Nipple Size"
+  },
+  "chewing": {
+    "tab": "Chewing",
+    "timeline": "Chewing Milestone Timeline",
+    "logMilestone": "Log Milestone",
+    "stage": "Stage",
+    "foodItem": "Food Item",
+    "gagEpisodes": "Gag Episodes",
+    "refusalEvents": "Refusal Events",
+    "notes": "Notes",
+    "suck": "Suck",
+    "suckSwallow": "Suck-Swallow-Breathe",
+    "chewingStage": "Chewing",
+    "biting": "Biting"
+  },
+  "correlate": {
+    "tab": "Correlation",
+    "overlay": "Correlation Dashboard",
+    "description": "Feeding × Weight × Cry Overlay",
+    "overlayDesc": "Overlay latch quality trend + weight gain velocity + cry frequency to identify patterns and alert when feeding difficulty is detected.",
+    "recentFeeding": "Recent Feeding Entries",
+    "exportReferral": "Referral Export",
+    "shareWithPediatrician": "Share with Pediatrician",
+    "exportNote": "Exports assessment score + feeding log summary as PDF",
+    "alertFeedingDifficulty": "Feeding difficulty detected — consider tongue tie assessment"
+  },
+  "badge": {
+    "latcher": "Latcher",
+    "tongueTieAware": "Tongue Tie Aware"
+  },
+  "common": {
+    "save": "Save"
   }
 }

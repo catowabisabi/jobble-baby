@@ -34,7 +34,25 @@
     "medicineDose": "Medicine Dose",
     "pediatricReport": "Report",
     "cryAnalyzer": "Cry Analyzer",
-    "gutBrainAxis": "Gut-Brain"
+    "gutBrainAxis": "Gut-Brain",
+    "projection": "Projection"
+  },
+  "projection": {
+    "title": "6-Month Projection",
+    "subtitle": "What's coming next",
+    "sleepRegression": "Sleep Regression Risk",
+    "growthTrajectory": "Growth Trajectory",
+    "teethingForecast": "Teething Forecast",
+    "feedingEvolution": "Feeding Evolution",
+    "wakeWindow": "Wake Window",
+    "upcomingMilestones": "Upcoming Milestones",
+    "confidenceHigh": "High confidence",
+    "confidenceMedium": "Medium confidence",
+    "confidenceLow": "Low confidence (more data needed)",
+    "noData": "Not enough data to project",
+    "daysAway": "days away",
+    "tapForDetails": "Tap for details",
+    "next30days": "Next 30 Days"
   },
   "cryAnalyzer": {
     "title": "Cry Frequency Analyzer",

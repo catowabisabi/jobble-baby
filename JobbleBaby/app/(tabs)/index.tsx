@@ -193,6 +193,17 @@ export default function HomeScreen() {
     reminderIcon: { fontSize: 32 },
     reminderTitle: { fontSize: 18, fontWeight: '600', color: C.text },
     reminderTime: { fontSize: 14, color: C.muted },
+    projectionCard: {
+      backgroundColor: C.accent + '18',
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: C.accent + '44',
+    },
+    projectionRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
+    projectionLabel: { fontSize: 12, color: C.muted, flex: 1 },
+    projectionValue: { fontSize: 14, fontWeight: '600', color: C.text },
     timelineSection: { marginBottom: 24 },
     sectionTitle: { fontSize: 16, fontWeight: '600', color: C.text, marginBottom: 12 },
     timelineScroll: { flexDirection: 'row' },
@@ -291,6 +302,33 @@ export default function HomeScreen() {
             </View>
           </View>
         </View>
+
+        {/* Next 30 Days Projection Widget */}
+        <TouchableOpacity
+          style={styles.projectionCard}
+          activeOpacity={0.7}
+          onPress={() => router.push('/projection')}
+        >
+          <View style={styles.projectionRow}>
+            <Text style={{ fontSize: 16 }}>🔮</Text>
+            <Text style={[styles.sectionTitle, { marginBottom: 0, marginLeft: 8, flex: 1 }]}>
+              {t('projection.next30days')}
+            </Text>
+            <Text style={{ fontSize: 12, color: C.accent }}>{t('projection.tapForDetails')} →</Text>
+          </View>
+          <View style={styles.projectionRow}>
+            <Text style={styles.projectionLabel}>🌙 Sleep regression</Text>
+            <Text style={styles.projectionValue}>4mo / 8mo / 12mo peaks</Text>
+          </View>
+          <View style={styles.projectionRow}>
+            <Text style={styles.projectionLabel}>🦷 Teething forecast</Text>
+            <Text style={styles.projectionValue}>Next 3 teeth expected</Text>
+          </View>
+          <View style={styles.projectionRow}>
+            <Text style={styles.projectionLabel}>📈 Growth velocity</Text>
+            <Text style={styles.projectionValue}>WHO percentile track</Text>
+          </View>
+        </TouchableOpacity>
 
         {/* Daily Timeline */}
         <View style={styles.timelineSection}>

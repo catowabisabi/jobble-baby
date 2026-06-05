@@ -34,7 +34,25 @@
     "medicineDose": "藥物劑量",
     "pediatricReport": "報告",
     "cryAnalyzer": "哭聲分析器",
-    "gutBrainAxis": "腸腦軸"
+    "gutBrainAxis": "腸腦軸",
+    "projection": "發育預測"
+  },
+  "projection": {
+    "title": "半年發育預測",
+    "subtitle": "即將發生的事",
+    "sleepRegression": "睡眠倒退風險",
+    "growthTrajectory": "成長趨勢",
+    "teethingForecast": "出牙預測",
+    "feedingEvolution": "餵養變化",
+    "wakeWindow": "清醒窗口",
+    "upcomingMilestones": "即將到來的里程碑",
+    "confidenceHigh": "高可信度",
+    "confidenceMedium": "中可信度",
+    "confidenceLow": "低可信度（需要更多數據）",
+    "noData": "數據不足，無法預測",
+    "daysAway": "天後",
+    "tapForDetails": "點擊查看詳情",
+    "next30days": "未來30天"
   },
   "cryAnalyzer": {
     "title": "哭聲頻率分析器",

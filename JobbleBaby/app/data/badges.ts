@@ -198,6 +198,14 @@ export const BADGES: Badge[] = [
     category: 'milestone',
     condition: 'Log microbiome factors for 14 consecutive days',
   },
+  {
+    id: 'futurist',
+    name: 'Futurist',
+    description: "Logged a 30-day projection that came true within 1 week",
+    icon: '🔮',
+    category: 'milestone',
+    condition: 'Projection date passes and actual milestone/regression logged within ±7 days of prediction',
+  },
 ];
 
 export const getBadgeById = (id: string): Badge | undefined =>

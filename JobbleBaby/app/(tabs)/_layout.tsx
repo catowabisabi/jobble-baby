@@ -229,6 +229,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="projection"
+        options={{
+          title: t('tabs.projection'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

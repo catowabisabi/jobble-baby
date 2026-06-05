@@ -1,96 +1,17 @@
-# Gut-Brain Axis Dashboard — Task for Sisyphus
+# Fix react-native-svg Version Mismatch
 
 ## Goal
-Implement **Gut-Brain Axis Dashboard tab** — a unified view connecting feeding method, microbiome health, and neurological development (sleep, cry). Track skin-to-skin contact, probiotic/prebiotic intake, bottle flow rate, gut symptoms, and surface correlation insights.
+Fix the expo-doctor warning: react-native-svg version mismatch (expected 15.15.4, found 15.15.5).
 
-## Tech Stack
-- Expo SDK (managed workflow)
-- Manual logging — no native microbiome analysis
-- AsyncStorage for @jobble/microbiome_log and @jobble/gut_symptoms
-- Reuse tracking tab entry pattern (FlatList, FAB, modal form)
+## Steps
+1. Run: `npx expo install --check` in JobbleBaby/ to review dependencies
+2. Run: `npx expo install react-native-svg` to align to correct version
+3. Run: `npx tsc --noEmit` — must pass 0 errors
+4. Verify expo-doctor shows 21/21 passing
 
-## Reference Files
-- `app/(tabs)/tracking.tsx` — entry pattern (FlatList, FAB, modal form)
-- `app/(tabs)/cry-analyzer.tsx` — correlation pattern (timeline overlay with sleep/feeding)
-- `app/(tabs)/sleep-association.tsx` — 2x2 correlation matrix pattern
-- `app/data/badges.ts` — badge registration
+## Verification
+- `npx expo-doctor` must show 21/21 checks passed (0 failed)
+- TSC 0 errors
+- Commit + push
 
-## Files to Create/Modify
-1. Create: `app/(tabs)/gut-brain-axis.tsx`
-2. Modify: `app/(tabs)/_layout.tsx` — add Tabs.Screen entry
-3. Modify: `app/i18n/en.json` — add i18n keys
-4. Modify: `app/i18n/zh.json` — add i18n keys
-5. Modify: `app/data/badges.ts` — add badge
-
-## Data Model
-```typescript
-// @jobble/microbiome_log — Array<MicrobiomeEntry>
-interface MicrobiomeEntry {
-  id: string;              // uuid
-  date: string;           // YYYY-MM-DD
-  feeding_method: 'bf_direct' | 'bf_pumped' | 'formula' | 'mixed';
-  skin_to_skin_minutes: number;  // 0-999
-  probiotic_drops: boolean;
-  prebiotic_grams: number; // 0-50, one decimal
-  flow_rate?: 'slow' | 'medium' | 'fast';  // only for bottle feeders
-}
-
-// @jobble/gut_symptoms — Array<GutSymptom>
-interface GutSymptom {
-  id: string;
-  date: string;           // YYYY-MM-DD
-  stool_frequency: number; // times per day
-  stool_consistency: 'watery' | 'soft' | 'formed';
-  gas_severity: 1 | 2 | 3 | 4 | 5;  // 1=no gas, 5=severe
-  reflux_episodes: number; // count today
-}
-```
-
-## UI Layout
-1. **Header**: "Gut-Brain Axis" (en) / "腸腦軸" (zh)
-2. **Gut Health Gauge Card** (top): Large circular gauge 0-100
-   - Red zone: 0-30 (concern), Yellow: 31-70 (monitor), Green: 71-100 (healthy)
-   - Score = weighted: stool_freq(20%) + stool_consistency(20%) + gas(20%) + reflux(20%) + feeding_diversity(20%)
-3. **Daily Log FAB** (bottom center, large 64px tap target): "+" button
-   - Opens modal with two tabs: "Feeding Log" + "Gut Symptoms"
-   - Feeding Log: feeding method chips, skin-to-skin minutes (0-120 slider), probiotic toggle, prebiotic grams (0-20 slider), flow rate chips (slow/medium/fast)
-   - Gut Symptoms: stool frequency (1-10 stepper), consistency chips (watery/soft/formed), gas severity 1-5 slider, reflux episodes stepper
-4. **Correlation Dashboard** (middle): Two 2x2 mini charts:
-   - Left: Sleep Duration vs Gut Score (scatter dots, last 14 days)
-   - Right: Cry Episodes vs Feeding Method (bar chart by feeding type)
-   - Read from @jobble/tracking_entries + @jobble/cry_entries
-5. **Microbiome Timeline Card**: Horizontal timeline
-   - Birth mode badge, antibiotic exposure badge, probiotic course markers
-   - Overlaid with gut health score line
-6. **Insight Cards** (bottom): 2-3 cards with gentle insights:
-   - "Skin-to-skin on {date} correlated with +15% gut health score this week"
-   - "Formula feeding days show higher gas severity — consider paced feeding"
-   - Only show if N>=7 days of data; gentle tone, no alarming language
-7. **History**: FlatList of past 30 days, each row shows: date, feeding_method, gut_score, key insight
-
-## Gut Health Score Algorithm
-```
-raw_score = 0
-// stool_freq ideal = 2-4/day → score = 25 if 2-4, else 15
-// stool_consistency: soft=25, formed=20, watery=5
-// gas: 1=25, 2=20, 3=15, 4=10, 5=5
-// reflux: 0=25, 1=20, 2=15, 3=10, 4+=5
-// feeding_diversity (BF+pumping+formula in same week): yes=25, no=15
-raw_score = sum of above (max 100)
-// Apply 7-day moving average, final = round(raw_score)
-```
-
-## i18n Keys
-tabs.gutBrainAxis, gutBrainAxis.title, gutBrainAxis.gutHealthGauge, gutBrainAxis.dailyLog, gutBrainAxis.feedingLog, gutBrainAxis.gutSymptoms, gutBrainAxis.feedingMethod, gutBrainAxis.skinToSkin, gutBrainAxis.probiotic, gutBrainAxis.prebiotic, gutBrainAxis.flowRate, gutBrainAxis.stoolFrequency, gutBrainAxis.stoolConsistency, gutBrainAxis.gasSeverity, gutBrainAxis.refluxEpisodes, gutBrainAxis.correlation, gutBrainAxis.sleepVsGut, gutBrainAxis.cryVsFeeding, gutBrainAxis.insights, gutBrainAxis.noDataYet, gutBrainAxis.history, gutBrainAxis.slow, gutBrainAxis.medium, gutBrainAxis.fast, gutBrainAxis.watery, gutBrainAxis.soft, gutBrainAxis.formed, gutBrainAxis.badgeDesc, gutBrainAxis.birthMode, gutBrainAxis.antibiotics, gutBrainAxis.probioticCourse
-
-## Tab Registration
-name="gut-brain-axis", icon="stomach-outline", label=t("tabs.gutBrainAxis")
-
-## Badge to Add
-id: gut_guardian, name: "Gut Guardian", description: "Logged microbiome factors for 14 consecutive days", icon: "🌱", category: "milestone"
-
-## Colic Threshold Reference (reuse from cry-analyzer)
-Same as cry-analyzer: 0-4wk=120min, 5-8wk=180min, 9-12wk=150min, 13-16wk=90min, 17+wk=60min
-
-## VERIFICATION
-npx tsc --noEmit in JobbleBaby/ must pass 0 errors before reporting done. ULW
+ULW

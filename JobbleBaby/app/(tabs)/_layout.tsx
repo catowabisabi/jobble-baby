@@ -236,6 +236,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="clinician-portal"
+        options={{
+          title: t('tabs.clinicianPortal'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="doctor" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

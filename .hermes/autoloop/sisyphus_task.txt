@@ -1,76 +1,82 @@
-# Task: Implement Tongue Tie & Jaw Symmetry Assessment Tool — Idea #55
+# Task: Implement Clinician Portal — Pediatrician Share Hub — Idea #56
 
 ## Context
-You are implementing Idea #55 from the progress.db (Jobble Baby project, Expo SDK 56, expo-router tabs).
+You are implementing Idea #56 from the progress.db (Jobble Baby project, Expo SDK 56, expo-router tabs).
 All data stored in AsyncStorage under @jobble/* keys. TSC must pass 0 errors before commit.
 
 ## Your Task
-Implement a new tab: `app/(tabs)/tongue-tie.tsx`
+Implement a new tab: `app/(tabs)/clinician-portal.tsx`
 
 ### Features Required
 
-1. **Hazelbaker Assessment Score**
-   - 6 functional items: tongue lift, tongue extension, tongue spread, tongue snap-back, tongue hollowing, tongue peristalsis
-   - Each scored 0-2 (absent/partial/complete)
-   - Total score 0-12: 0-5 = significant tie, 6-8 = moderate, 9-12 = functional
-   - Visual guide showing 4 tongue tie types (anterior, posterior, submucosal, lingual frenulum)
-   - Photo comparison cards: normal vs tethered frenulum
+1. **Clinician Hub Home**
+   - "Prepare Visit Report" primary button
+   - Date range selector: Last 30 days / 60 days / 90 days / Custom
+   - Visit history list (past visits with date, doctor name, notes)
+   - "Schedule Pre-Visit Checklist" card showing pending items for baby's age
 
-2. **Jaw Symmetry Checklist**
-   - 5 visual indicators: chin deviation at rest, chin deviation on cry, lip asymmetry, bite alignment, masseter muscle tone
-   - Each: Yes/No + optional photo
-   - Notes field for parent observations
+2. **Visit Report Generator**
+   - Toggle sections to include: growth chart, milestone timeline, feeding summary, sleep log, cry frequency, allergen log, assessment scores
+   - Generate a structured summary as a scrollable preview screen
+   - "Share via..." button → native iOS/Android share sheet (via expo-sharing)
+   - "Save PDF" button → via expo-print
+   - Sections collapsible for compact sharing
 
-3. **Feeding Efficiency Log**
-   - Log per feeding: latch quality (1-5), duration (minutes), milk transferred (ml if weighed), bottle flow rate (slow/medium/fast/nipple_size), gag episodes count
-   - Display: today's log + 7-day trend chart (bar chart, avg latch quality)
-   - Correlation: feeding efficiency vs weight gain (links to growth.tsx data)
+3. **Report Sections** (each collapsible):
+   - **Growth**: WHO percentile chart (reuses existing growth.tsx data) + measurements table with dates
+   - **Milestones**: completed milestones + any delayed ones with age-adjusted benchmarks
+   - **Feeding**: average daily intake, method breakdown (BF/formula/mixed), any concerns
+   - **Sleep**: total hours/day, night wakings, sleep efficiency, regression events
+   - **Cry**: total minutes/day, pattern classification if cry-analyzer data available
+   - **Allergen**: introduction timeline, reactions logged
+   - **Assessments**: Hazelbaker score, jaw symmetry, reflex integration status (from tongue-tie.tsx and reflex-integration.tsx)
 
-4. **Correlation Dashboard**
-   - Overlay: latch quality trend + weight gain velocity + cry frequency (from cry-analyzer if available)
-   - Alert threshold: "Feeding difficulty detected — consider tongue tie assessment" shown when latch quality <3 for 5+ consecutive entries
+4. **Visit History**
+   - Add past visit: date, doctor name, clinic, notes, action items
+   - List view: date + doctor name, tap to expand notes
+   - Edit/delete past visits
 
-5. **Chewing Milestone Tracker**
-   - Timeline stages: suck (0-3mo) → suck-swallow-breathe (3-6mo) → chewing (6-9mo) → biting (9-12mo)
-   - Log: date, milestone type, food item introduced, gag episodes, refusal events
-   - Visual timeline display
-
-6. **Referral Export**
-   - Button: "Share with Pediatrician"
-   - Generates: assessment score + feeding log summary + growth chart snippet
-   - Uses expo-print or expo-sharing to export as PDF
+5. **Pre-Visit Checklist**
+   - Automated checklist based on baby's age from profile:
+     - "Vaccination due? Check vaccination schedule"
+     - "Growth measurement recorded this month?"
+     - "Any assessments pending (tongue tie, reflex)?"
+   - Check off items, save state to AsyncStorage
 
 ### Data Model (AsyncStorage)
-- @jobble/tongue_assessment: { date, hazelbaker_score, jaw_symmetry_notes, photos[] }
-- @jobble/feeding_efficiency: { date, latch_quality, duration_min, milk_ml, bottle_flow_rate, gag_episodes }
-- @jobble/chewing_milestone: { date, milestone_type, food_item, gag_episodes, notes }
+- @jobble/visit_history: [{ id, date, doctor_name, clinic, notes, action_items[] }]
+- @jobble/clinician_report_config: { sections_enabled, date_range, include_photos }
+- @jobble/visit_checklist: { items[], last_updated }
 
 ### Integration Points
-- Reuse tracking tab entry pattern (similar structure)
-- Link to growth.tsx for weight correlation
-- Link to milestones.tsx for chewing milestones
-- Link to pediatrician-report.tsx for export
-- i18n: add keys to en.json + zh.json (tabs.tongueTie, assessment.*, feeding.*, chewing.*)
+- Reuse growth.tsx WHO chart data (@jobble/growth_entries)
+- Reuse milestone.tsx data (@jobble/milestone_entries)
+- Reuse tongue-tie.tsx data (@jobble/tongue_assessment)
+- Reuse cry-analyzer.tsx data (@jobble/cry_entries) if available
+- Reuse allergen-tracker.tsx data (@jobble/allergen_entries) if available
+- Reuse reflex-integration.tsx data (@jobble/reflex_entries) if available
+- Reuse profile.tsx for baby info header (name, birth date, gender)
+- i18n: add keys to en.json + zh.json (tabs.clinicianPortal, clinician.*, visit.*, checklist.*)
 
 ### Badge
-- "Latcher" (badge ID: latcher): Logged 7 consecutive feeding efficiency entries
-- "Tongue Tie Aware" (badge ID: tongue-tie-aware): Completed full assessment + logged at least 1 photo
+- "Prepared Parent" (badge ID: prepared-parent): Generated and shared 3 visit reports
+- "Well-Baby Champion" (badge ID: well-baby-champion): Attended 4 well-baby checkups on time (logged in visit history)
 
 ### Files to Create/Modify
-- app/(tabs)/tongue-tie.tsx — NEW (main implementation)
-- app/(tabs)/_layout.tsx — register tongue-tie tab (icon: medical, label: t('tabs.tongueTie'))
-- app/i18n/en.json — add all t('tabs.tongueTie'), t('assessment.*'), t('feeding.*'), t('chewing.*') keys
+- app/(tabs)/clinician-portal.tsx — NEW (main implementation, ~400-500 lines)
+- app/(tabs)/_layout.tsx — register clinician-portal tab (icon: MaterialCommunityIcons name="doctor", label: t('tabs.clinicianPortal'))
+- app/i18n/en.json — add all t('tabs.clinicianPortal'), t('clinician.*'), t('visit.*'), t('checklist.*') keys
 - app/i18n/zh.json — add all Chinese translations
-- app/services/badgeService.ts — add latcher + tongue-tie-aware badges
+- app/services/badgeService.ts — add prepared-parent + well-baby-champion badges
 
 ### Verification
 - `npx tsc --noEmit` must pass 0 errors
 - Tab visible and tappable in tab bar
-- Feeding log saves and retrieves from AsyncStorage
-- Badge triggers correctly after 7 entries
+- Visit report generates without crashing
+- Badge triggers correctly after 3 shared reports
 - Run in Expo Go or prebuild to verify UI
 
 ## Commit message
-feat(tab): implement Tongue Tie & Jaw Symmetry Assessment Tool — Hazelbaker score, jaw symmetry checklist, feeding efficiency log, chewing milestone tracker, referral export, badges
+feat(tab): implement Clinician Portal — pediatrician share hub with visit report generator, visit history, pre-visit checklist, badges (idea #56)
 
 ULW

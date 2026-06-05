@@ -1,4 +1,96 @@
-# No pending dispatch
+# Implement 6-Month Development Projection Engine
 
-All 35 tabs implemented. TSC 0 errors. expo-doctor 21/21.
-Awaiting user action: EAS credentials, App Store Connect, Play Console, privacy policy URL.
+## Goal
+Implement a **Projection** tab that shows parents what's coming in the next 6 months based on their logged data.
+
+## Context
+Baby tracking app with 36 tabs already implemented. TSC 0 errors, expo-doctor 21/21. You work in /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/
+
+## Requirements
+
+### 1. New Tab: app/(tabs)/projection.tsx
+- Import from expo/next
+- Dark theme (background #0D0D0D, cards #1A1A1A, accent #3B82F6)
+- Use existing ThemeContext for colors
+
+### 2. Home Dashboard Widget
+In app/(tabs)/index.tsx, add a "Next 30 Days" card to the existing dashboard showing:
+- Next projected sleep regression window (date + confidence)
+- Next developmental milestone expected
+- Growth velocity trend arrow
+- Teething forecast (which teeth expected)
+- Tap → opens Projection tab
+
+### 3. Projection Logic (all local, no server)
+- **Sleep regressions**: Wolke/Paul model peaks at 4mo, 8mo, 12mo (±2 weeks). Calculate from baby's birth date stored in @jobble/baby_profile. Show countdown to next regression if within 12 weeks.
+- **Growth projection**: Read @jobble/growth_entries, calculate velocity (g/day or cm/day), project forward using WHO percentile bands. Show trajectory line.
+- **Feeding evolution**: Based on baby age, project milk-to-solid transition timing (around 6 months). From feeding frequency data in @jobble/tracking_entries.
+- **Wake window progression**: Age-based optimal wake windows, show current + next window coming.
+- **Teething forecast**: From @jobble/teething_entries and baby's age, project which teeth are expected in next 6 months.
+
+### 4. Data Reading (read-only)
+- @jobble/baby_profile: { birthDate, name, gender }
+- @jobble/growth_entries: [{ date, weight, height, headCirc }]
+- @jobble/teething_entries: [{ toothId, eruptionDate, painLevel }]
+- @jobble/tracking_entries: [{ date, type, ... }]
+- @jobble/sleep_training_entries: [{ date, nightSleep, naps, disruptions }]
+- @jobble/milestone_entries: [{ id, date, type }]
+
+### 5. Confidence Scoring
+- High (>80%): 4+ data points for the metric, consistent pattern
+- Medium (50-80%): 2-3 data points
+- Low (<50%): 1 data point or extrapolation only
+
+### 6. i18n Keys to Add (en.json + zh.json)
+- tabs.projection = "Projection" / "發育預測"
+- projection.title = "6-Month Projection" / "半年發育預測"
+- projection.next30days = "Next 30 Days" / "未來30天"
+- projection.sleepRegression = "Sleep Regression Risk" / "睡眠倒退風險"
+- projection.growthTrajectory = "Growth Trajectory" / "成長趨勢"
+- projection.teethingForecast = "Teething Forecast" / "出牙預測"
+- projection.feedingEvolution = "Feeding Evolution" / "餵養變化"
+- projection.confidenceHigh = "High confidence" / "高可信度"
+- projection.confidenceMedium = "Medium confidence" / "中可信度"
+- projection.confidenceLow = "Low confidence (more data needed)" / "低可信度（需要更多數據）"
+- projection.noData = "Not enough data to project" / "數據不足，無法預測"
+- projection.daysAway = "days away" / "天後"
+- projection.tapForDetails = "Tap for details" / "點擊查看詳情"
+
+### 7. Badge to Add (app/services/badgeService.ts or similar)
+- id: futurist
+- name: "Futurist" (Chinese: 預言家)
+- description: "Logged a 30-day projection that came true within 1 week"
+- icon: "🔮"
+- category: milestone
+- Trigger: When projection date passes and actual milestone/regression was logged within ±7 days of prediction
+
+### 8. Tab Registration
+In app/(tabs)/_layout.tsx add:
+```
+<Tabs.Screen
+  name="projection"
+  options={{
+    title: t('tabs.projection'),
+    tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
+  }}
+/>
+```
+
+### 9. Files to Create/Modify
+- app/(tabs)/projection.tsx — NEW
+- app/(tabs)/index.tsx — add Home widget card
+- app/(tabs)/_layout.tsx — register projection tab
+- app/i18n/en.json — add projection keys
+- app/i18n/zh.json — add projection keys
+- app/services/badgeService.ts — add futurist badge (check existing badge file path)
+
+## Verification
+- `npx tsc --noEmit` must pass 0 errors
+- Tab visible and tappable in tab bar
+- Home widget shows "Next 30 Days" card
+- Run in Expo Go or prebuild to verify UI
+
+## Commit message
+fix(tab): implement 6-Month Development Projection Engine tab with Home widget, confidence scoring, Wolke/Paul regression model, WHO growth projection
+
+ULW

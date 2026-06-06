@@ -1,22 +1,36 @@
-# Sisyphus Task — Cycle 214
+# Sisyphus Task — Cycle 215
 
 ## Context
-Jobble Baby: 45+ tabs, TSC 0 errors, i18n done. Expo SDK 56.
+Jobble Baby: 45+ tabs, TSC 0 errors, i18n done. Expo SDK 56. Accessibility audit found 0 accessibilityLabel attributes across 861 touchable elements — WCAG 2.1 AA gap.
 
-## Task: Quality Review & Polish
+## Task: WCAG 2.1 AA Accessibility Fix
 
-Review all tabs in app/(tabs)/ for:
-1. Consistency: useLanguage/useTheme, @jobble/ prefix, tabs.* i18n keys
-2. Error Handling: try/catch AsyncStorage, loading/error states
-3. Accessibility: accessibilityLabel, color contrast, 44pt touch targets
-4. UI Polish: hardcoded strings, spacing consistency, resolve TODOs
-5. Performance: useCallback/useMemo, FlatList optimization
-6. Specific checks: feeding-readiness, colic-relief, gut-brain-axis, projection
+Audit ALL tabs in app/(tabs)/ and add accessibilityLabel to every interactive element.
 
-Fix each issue with commit: fix(<tab>): <description>
-If none: "Quality review complete — no critical issues."
+### Scope
+1. **TouchableOpacity / Pressable / Button** — add accessibilityLabel with descriptive text (e.g., "Add feeding entry", "Navigate to schedule")
+2. **Tab bar items** — ensure each tab has a meaningful accessibilityLabel
+3. **Form inputs (TextInput)** — add accessibilityLabel matching the field purpose
+4. **Modal triggers** — buttons that open modals should have accessibilityLabel describing the modal content
 
-Verify: npx tsc --noEmit after each fix.
+### Priority
+- HIGH: Empty state buttons, FAB (floating action button), primary action buttons
+- MEDIUM: Secondary buttons, list item actions
+- LOW: Tooltips, informational icons
+
+### Rules
+- accessibilityLabel text should be in the user's language (use t() if available, otherwise plain English)
+- Keep labels concise but descriptive (3-8 words)
+- Do NOT add accessibilityHint (not needed for this app)
+- Do NOT change any functionality — only add labels
+
+### After each tab
+- Run: npx tsc --noEmit (must pass)
+- Commit per tab: git add -A && git commit -m "fix(a11y): add accessibilityLabel to <tab-name>"
+
+If no elements need labels in a tab: skip silently.
+
+Verify overall: npx tsc --noEmit must pass before ending.
 ULW
 ===
-Quality Review & Polish===
+WCAG 2.1 AA Accessibility Fix

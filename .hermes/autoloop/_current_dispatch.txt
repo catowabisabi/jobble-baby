@@ -1,22 +1,10 @@
-# Sisyphus Task — Cycle 214
+WCAG 2.1 AA Accessibility Fix — Cycle 215
 
-## Context
-Jobble Baby: 45+ tabs, TSC 0 errors, i18n done. Expo SDK 56.
+Fix accessibility in app/(tabs)/index.tsx first:
+1. Add accessibilityLabel to all TouchableOpacity/Pressable elements
+2. Run: npx tsc --noEmit
+3. Commit: git add -A && git commit -m "fix(a11y): index.tsx accessibility labels"
+4. Then continue with next tab
 
-## Task: Quality Review & Polish
-
-Review all tabs in app/(tabs)/ for:
-1. Consistency: useLanguage/useTheme, @jobble/ prefix, tabs.* i18n keys
-2. Error Handling: try/catch AsyncStorage, loading/error states
-3. Accessibility: accessibilityLabel, color contrast, 44pt touch targets
-4. UI Polish: hardcoded strings, spacing consistency, resolve TODOs
-5. Performance: useCallback/useMemo, FlatList optimization
-6. Specific checks: feeding-readiness, colic-relief, gut-brain-axis, projection
-
-Fix each issue with commit: fix(<tab>): <description>
-If none: "Quality review complete — no critical issues."
-
-Verify: npx tsc --noEmit after each fix.
+Keywords: flow disruption, silent reflux diagnosis, mental load mapping
 ULW
-===
-Quality Review & Polish===

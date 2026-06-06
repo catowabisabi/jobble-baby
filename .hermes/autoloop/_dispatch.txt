@@ -1,58 +1,36 @@
-# Sisyphus Task — Cycle 214
+# Sisyphus Task — Cycle 215
 
 ## Context
-Jobble Baby project is development-complete: 45+ tabs, TSC 0 errors, i18n done, all major concepts implemented. Expo SDK 56.
+Jobble Baby: 45+ tabs, TSC 0 errors, i18n done. Expo SDK 56. Accessibility audit found 0 accessibilityLabel attributes across 861 touchable elements — WCAG 2.1 AA gap.
 
-## Next Task
-Quality Review & Polish — systematic code quality sweep across all tabs.
+## Task: WCAG 2.1 AA Accessibility Fix
 
-## Requirements
+Audit ALL tabs in app/(tabs)/ and add accessibilityLabel to every interactive element.
 
-Do a thorough code quality review across all tabs in `app/(tabs)/`. Focus on:
+### Scope
+1. **TouchableOpacity / Pressable / Button** — add accessibilityLabel with descriptive text (e.g., "Add feeding entry", "Navigate to schedule")
+2. **Tab bar items** — ensure each tab has a meaningful accessibilityLabel
+3. **Form inputs (TextInput)** — add accessibilityLabel matching the field purpose
+4. **Modal triggers** — buttons that open modals should have accessibilityLabel describing the modal content
 
-### 1. Consistency Checks
-- All tabs should use `useLanguage()` from `../context/LanguageContext` (not useTranslation)
-- All tabs should use `useTheme()` from `../context/ThemeContext`
-- All AsyncStorage keys should follow `@jobble/` prefix convention
-- All i18n keys should be in `tabs.*` namespace for tab titles
+### Priority
+- HIGH: Empty state buttons, FAB (floating action button), primary action buttons
+- MEDIUM: Secondary buttons, list item actions
+- LOW: Tooltips, informational icons
 
-### 2. Error Handling
-- Check for missing try/catch around AsyncStorage operations
-- Check for missing loading states / error states
-- Check for missing null/undefined checks on data
+### Rules
+- accessibilityLabel text should be in the user's language (use t() if available, otherwise plain English)
+- Keep labels concise but descriptive (3-8 words)
+- Do NOT add accessibilityHint (not needed for this app)
+- Do NOT change any functionality — only add labels
 
-### 3. Accessibility
-- Check for missing `accessibilityLabel` on touchable elements
-- Check for sufficient color contrast (text vs background)
-- Check for touch targets >= 44x44pt
+### After each tab
+- Run: npx tsc --noEmit (must pass)
+- Commit per tab: git add -A && git commit -m "fix(a11y): add accessibilityLabel to <tab-name>"
 
-### 4. UI Polish
-- Check for hardcoded strings that should use i18n
-- Check for inconsistent spacing/padding patterns
-- Check for placeholder/TODO comments that should be resolved
+If no elements need labels in a tab: skip silently.
 
-### 5. Performance
-- Check for unnecessary re-renders (missing useCallback/useMemo)
-- Check for large lists without FlatList optimization
-- Check for images without proper dimensions
-
-### 6. Specific Tab Checks
-- `feeding-readiness.tsx` (just completed) — verify all 8 features work
-- `colic-relief.tsx` — verify white noise library functionality
-- `gut-brain-axis.tsx` — verify correlation dashboard calculations
-- `projection.tsx` — verify 6-month projection algorithm
-
-## Output Format
-For each issue found, create a fix commit with message:
-`fix(<tab>): <description> — <issue>`
-
-If no critical issues found, report: "Quality review complete — no critical issues found. Project is in excellent shape."
-
-## Verification
-- `npx tsc --noEmit` must still pass 0 errors after any fixes
-- Run `npx tsc --noEmit` after each fix
-
-## Keywords
-code quality, consistency, error handling, accessibility, UI polish, performance, AsyncStorage, i18n, useCallback, useMemo, accessibility label, touch target
-
+Verify overall: npx tsc --noEmit must pass before ending.
 ULW
+===
+WCAG 2.1 AA Accessibility Fix

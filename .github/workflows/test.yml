@@ -1,0 +1,38 @@
+name: Test and Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - '*'
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  test:
+    name: TypeScript Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: JobbleBaby/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: JobbleBaby
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+        working-directory: JobbleBaby
+
+      - name: Expo dependency validation
+        run: npx expo install --check
+        working-directory: JobbleBaby

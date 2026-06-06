@@ -1,73 +1,85 @@
-# Sisyphus Task — Cycle 219 (re-dispatch)
+# Sisyphus Task — Cycle 221
 
 ## Context
-Jobble Baby: 45+ tabs, TSC 0 errors, i18n done. WCAG 2.1 AA complete (294 labels). App dev-complete. Pending: Baby Safety Audit Navigator (todo #86).
+Jobble Baby: 45+ tabs, TSC 0 errors, i18n done, WCAG 2.1 AA (294 labels). App dev-complete. Pre-launch phase: needs CI/CD pipeline and privacy policy page.
 
-## Task: Implement Baby Safety Audit Navigator tab
+## Task: Pre-Launch Infrastructure Setup
 
-Create app/(tabs)/safety-audit.tsx — guided home safety checklist.
+Prepare two infrastructure components needed for App Store and Play Store submission.
 
-### Features
-1. **Sleep Environment Check**
-   - Crib slat spacing <2.375 inches (no cant-needle test)
-   - No crib bumpers, pillow, or soft bedding
-   - Firm mattress, fitted sheet only
-   - Baby alone on back (no co-sleeping unless planned)
-   - Checkbox for each item + pass/fail toggle
+---
 
-2. **Car Seat Safety**
-   - Rear-facing confirmation
-   - Harness slot at or below shoulder level
-   - Chest clip at armpit level
-   - Car seat expiration date check (sticker location)
-   - Photo capture option for each zone
+## Part 1: GitHub Actions CI/CD Pipeline for EAS Builds
 
-3. **Babywearing Safety**
-   - M-position hips (frog legs)
-   - Airway visible (chin off chest)
-   - No forward-facing before 6 months
-   - No unsupervised car in carrier
+Create these files:
 
-4. **Bath Safety**
-   - Max 2 inches water depth
-   - Elbow test confirmation (water temp <100°F/38°C)
-   - No ring toys that can trap fingers
-   - Never leave unattended
+FILE: .github/workflows/eas-build.yml
+Trigger: push to main branch
+Steps:
+  - Checkout code
+  - Setup Node.js 20
+  - Run npm ci
+  - Run npx expo install --check
+  - Run npx tsc --noEmit
+  - Run eas build --platform all --profile preview --non-interactive
+  - Upload IPA and AAB as artifacts
 
-5. **Feeding Safety**
-   - No honey before 12 months
-   - Upright positioning during feeds
-   - Paced bottle feeding to prevent aspiration
-   - Proper head elevation
+Required secrets (use placeholder instructions):
+  - EAS_TOKEN: from eas credentials
+  - EXPO_APPLE_APP_SPECIFIC_PASSWORD: from Apple Developer account
+  - EXPO_APPLE_TEAM_ID: from Apple Developer account
 
-6. **Supervision Zones**
-   - Fall prevention: elevated surfaces, stairs
-   - Stair gates installed top and bottom
-   - No unattended baby on changing table
-   - Hot surface check
+FILE: .github/workflows/test.yml
+Trigger: pull request
+Steps:
+  - npm ci
+  - npx tsc --noEmit
 
-### Data
-- AsyncStorage key: @jobble/safety_audit_entries
-- Schema: { zone: string, items: { label: string, passed: boolean, photo?: string }[], date: string, notes: string }
-- Each audit = one entry array, newest first
-- Exportable summary for pediatrician/landlord
+FILE: docs/EAS_SETUP.md
+Content: Step-by-step guide for user to configure EAS credentials:
+  Step 1: Create EAS account at https://expo.dev
+  Step 2: Run eas credentials --platform ios to configure Apple credentials
+  Step 3: Run eas credentials --platform android to configure Android credentials
+  Step 4: Create EAS_TOKEN from https://expo.dev/settings/access-tokens
+  Step 5: Add secrets to GitHub repo settings
 
-### Files
-- Create: app/(tabs)/safety-audit.tsx
-- Add Tabs.Screen to app/(tabs)/_layout.tsx
-- Add i18n keys to en.json + zh.json:
-  - tabs.safetyAudit, safetyAudit.title, safetyAudit.zones.*, safetyAudit.passLabel, safetyAudit.failLabel, safetyAudit.exportReport, safetyAudit.addPhoto
+---
 
-### Rules
-- Use existing tab pattern (see schedule.tsx as reference)
-- TSC must pass: npx tsc --noEmit
-- i18n: all user-facing strings via t()
-- Accessibility: reuse WCAG labels from other tabs
-- No functionality changes to existing tabs
+## Part 2: Privacy Policy HTML Page
 
-### After
-- npx tsc --noEmit must pass
-- Commit: git add -A && git commit -m "feat(tab): implement Baby Safety Audit Navigator"
+Create docs/privacy-policy.html
+
+Requirements:
+  - Self-contained HTML (no external JS, minimal CSS inlined)
+  - Mobile-responsive with viewport meta
+  - Content from store/privacy-policy.md
+  - Brand colors: background #E6F4FE, text #2D3748, accent #4A90A4
+  - Semantic HTML: header, main, section, footer
+  - Print-friendly CSS
+  - Open Graph meta tags
+  - Section structure:
+    * Data Collection
+    * Data Usage
+    * Third-Party Services
+    * Childrens Privacy
+    * Data Storage and Security
+    * Your Rights
+    * Contact
+
+---
+
+## After Each Part
+  - Check that files are created correctly
+  - Commit each part separately:
+    * git add .github/workflows/eas-build.yml .github/workflows/test.yml docs/EAS_SETUP.md
+    * git commit -m "feat(ci): add GitHub Actions EAS build pipeline"
+    * git add docs/privacy-policy.html
+    * git commit -m "feat(infra): add privacy policy HTML page"
+
+## Rules
+  - Do NOT add real credentials anywhere
+  - All credential-dependent config gets placeholder instructions
+  - HTML must be valid and renderable in mobile browser
+  - YAML must be valid (use yamllint or manual check)
+
 ULW
-===
-Baby Safety Audit Navigator

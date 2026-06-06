@@ -1124,7 +1124,8 @@
   "fontanelle": {
     "title": "軟點地圖",
     "greeting": "追蹤",
-    "subtitle": "監察鹵門閉合與頭部發育"
+    "subtitle": "監察鹵門閉合與頭部發育",
+    "notesPlaceholder": "任何關於前囪門的觀察記錄..."
   },
   "milkTransfer": {
     "title": "母乳轉移",
@@ -1396,7 +1397,9 @@
     "shareReport": "分享報告",
     "noEntries": "尚無記錄",
     "save": "儲存",
-    "cancel": "取消"
+    "cancel": "取消",
+    "notesPlaceholder": "任何備註...",
+    "noEntriesTapLogReading": "暫無記錄。點擊「記錄讀數」新增。"
   },
   "iotSecurity": {
     "networkScore": "網絡安全評分",

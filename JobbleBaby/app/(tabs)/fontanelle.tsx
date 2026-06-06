@@ -373,7 +373,7 @@ export default function FontanelleScreen() {
                   style={styles.noteInputText}
                   value={note}
                   onChangeText={setNote}
-                  placeholder="Any observations..."
+                  placeholder={t('fontanelle.notesPlaceholder')}
                   placeholderTextColor={C.muted}
                   multiline
                 />

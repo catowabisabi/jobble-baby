@@ -1124,7 +1124,8 @@
   "fontanelle": {
     "title": "Soft Spot Map",
     "greeting": "Track",
-    "subtitle": "Monitor fontanelle closure & head growth"
+    "subtitle": "Monitor fontanelle closure & head growth",
+    "notesPlaceholder": "Any observations about the fontanelle..."
   },
   "milkTransfer": {
     "title": "Milk Transfer",
@@ -1396,7 +1397,9 @@
     "shareReport": "Share Report",
     "noEntries": "No entries yet",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "notesPlaceholder": "Any notes...",
+    "noEntriesTapLogReading": "No entries yet. Tap \"Log Reading\" to add."
   },
   "iotSecurity": {
     "networkScore": "Network Security Score",

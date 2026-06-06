@@ -1,49 +1,58 @@
-# Sisyphus Task — Cycle 212
+# Sisyphus Task — Cycle 214
 
 ## Context
-Jobble Baby project, Expo SDK 56, 42+ tabs, TSC 0 errors.
+Jobble Baby project is development-complete: 45+ tabs, TSC 0 errors, i18n done, all major concepts implemented. Expo SDK 56.
 
 ## Next Task
-Implement Concept #28: Feeding Readiness & Flavor Priming Navigator.
+Quality Review & Polish — systematic code quality sweep across all tabs.
 
 ## Requirements
 
-Create `app/(tabs)/feeding-readiness.tsx` — a tab to help parents know when baby is ready for solids, what flavors to introduce, and track the complementary feeding journey.
+Do a thorough code quality review across all tabs in `app/(tabs)/`. Focus on:
 
-### Features
-1. **Feeding Readiness Checklist** — 6 signs baby is ready: head control, sitting support, tongue thrust regression, food interest, doubled birth weight, pincer grasp preview. Each sign has a visual guide and checkbox.
-2. **Flavor Journey Journal** — log first tastes across categories: bland, umami, sweet, sour. 12-week flavor map with color coding (green=accepted, yellow=reluctant, red=rejected). Track food items with date, amount, reaction severity (1-3).
-3. **Texture Progression Tracker** — 4 stages: purees (4-6m) → mashable (6-8m) → finger foods (8-10m) → family meals (10-12m). Visual timeline showing current stage and transition markers.
-4. **WHO Allergen Introduction Log** — guided schedule for top 9 allergens (peanut, egg, milk, soy, wheat, fish, shellfish, tree nuts, sesame). Log introduction date and reaction severity (none/mild/moderate/severe).
-5. **Growth Correlation View** — overlay feeding frequency with weight/height percentile from growth.tsx. Show correlation trend line.
-6. **Iron-Rich Food Reminders** — at 6m+, suggest iron-rich foods (fortified cereal, pureed meats, beans). Track intake vs WHO recommended.
-7. **Feeding Alerts** — prompt for: "Start solids at 6 months", "Introduce allergens one at a time", "Iron-rich foods needed at 6m"
-8. **Badge**: "Flavor Explorer" — logged 20+ distinct foods in first year
+### 1. Consistency Checks
+- All tabs should use `useLanguage()` from `../context/LanguageContext` (not useTranslation)
+- All tabs should use `useTheme()` from `../context/ThemeContext`
+- All AsyncStorage keys should follow `@jobble/` prefix convention
+- All i18n keys should be in `tabs.*` namespace for tab titles
 
-### Data Model
-- AsyncStorage: `@jobble/feeding_readiness` — { checklist_done: boolean, date: string }
-- AsyncStorage: `@jobble/flavor_journal` — [{ id, date, category, food, amount_g, reaction_severity }]
-- AsyncStorage: `@jobble/texture_stage` — { current_stage: 1-4, transition_dates: [] }
-- AsyncStorage: `@jobble/allergen_log` — [{ allergen, date_introduced, reaction_severity }]
+### 2. Error Handling
+- Check for missing try/catch around AsyncStorage operations
+- Check for missing loading states / error states
+- Check for missing null/undefined checks on data
 
-### Files to Create/Modify
-- `app/(tabs)/feeding-readiness.tsx` — NEW (~300-340 lines)
-- `app/(tabs)/_layout.tsx` — register feeding-readiness tab (icon: MaterialCommunityIcons name="food-drumstick", label: t('tabs.feedingReadiness'))
-- `app/i18n/en.json` — add `tabs.feedingReadiness`, `feedingReadiness.*` keys
-- `app/i18n/zh.json` — add Chinese translations
+### 3. Accessibility
+- Check for missing `accessibilityLabel` on touchable elements
+- Check for sufficient color contrast (text vs background)
+- Check for touch targets >= 44x44pt
 
-### Verification
-- `npx tsc --noEmit` must pass 0 errors
-- Tab visible and tappable in tab bar
-- Feeding readiness checklist functional
-- Flavor journal saves entries correctly
-- Texture stage progression works
-- Allergen log tracks reactions
+### 4. UI Polish
+- Check for hardcoded strings that should use i18n
+- Check for inconsistent spacing/padding patterns
+- Check for placeholder/TODO comments that should be resolved
 
-## Commit message
-feat(tab): implement Feeding Readiness & Flavor Priming Navigator — complementary feeding journey, allergen log, texture progression (concept #28)
+### 5. Performance
+- Check for unnecessary re-renders (missing useCallback/useMemo)
+- Check for large lists without FlatList optimization
+- Check for images without proper dimensions
+
+### 6. Specific Tab Checks
+- `feeding-readiness.tsx` (just completed) — verify all 8 features work
+- `colic-relief.tsx` — verify white noise library functionality
+- `gut-brain-axis.tsx` — verify correlation dashboard calculations
+- `projection.tsx` — verify 6-month projection algorithm
+
+## Output Format
+For each issue found, create a fix commit with message:
+`fix(<tab>): <description> — <issue>`
+
+If no critical issues found, report: "Quality review complete — no critical issues found. Project is in excellent shape."
+
+## Verification
+- `npx tsc --noEmit` must still pass 0 errors after any fixes
+- Run `npx tsc --noEmit` after each fix
 
 ## Keywords
-feeding_readiness, flavor_priming, umami, glutamate, complementary_feeding, who_guidelines, texture_progression, allergen_log, growth_correlation, iron_deficiency, pincer_grasp, tongue_thrust, solid_foods, first_tastes, food_reaction, weaning, baby_led_feeding, high_chair, spoon_readiness, milk_to_solids_transition
+code quality, consistency, error handling, accessibility, UI polish, performance, AsyncStorage, i18n, useCallback, useMemo, accessibility label, touch target
 
 ULW

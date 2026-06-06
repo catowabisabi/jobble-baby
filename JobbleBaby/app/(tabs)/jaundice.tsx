@@ -245,7 +245,7 @@ export default function JaundiceScreen() {
         <View style={[styles.section, { backgroundColor: C.card }]}>
           <Text style={[styles.sectionTitle, { color: C.text }]}>Bilirubin Log</Text>
           {entries.length === 0 ? (
-            <Text style={[styles.emptyText, { color: C.muted }]}>No entries yet. Tap "Log Reading" to add.</Text>
+            <Text style={[styles.emptyText, { color: C.muted }]}>{t('jaundice.noEntriesTapLogReading')}</Text>
           ) : (
             entries.slice(0, 10).map(entry => {
               const risk = getRiskLevel(entry.bilirubin, entry.method, entry.ageDays);
@@ -333,7 +333,7 @@ export default function JaundiceScreen() {
               </TouchableOpacity>
             </View>
             <Text style={[styles.modalLabel, { color: C.muted }]}>Notes (optional)</Text>
-            <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text }]} value={logNotes} onChangeText={setLogNotes} placeholder="Any notes..." placeholderTextColor={C.muted} />
+            <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text }]} value={logNotes} onChangeText={setLogNotes}            placeholder={t('jaundice.notesPlaceholder')} placeholderTextColor={C.muted} />
             <View style={styles.modalActions}>
               <TouchableOpacity style={[styles.cancelBtn, { borderColor: C.border }]} onPress={() => setShowLogModal(false)}>
                 <Text style={[styles.cancelBtnText, { color: C.text }]}>Cancel</Text>

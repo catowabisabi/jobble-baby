@@ -1,20 +1,28 @@
 # Autoloop Dispatch Log — jobble-baby
 
-Last dispatch: 2026-06-05 20:00 UTC+8
-Cycle: 205
-Status: ACTIVE — 39 tabs registered, TSC 0 errors, keyword pool 1039
+Last dispatch: 2026-06-05 23:02 UTC+8
+Cycle: 208
+Status: ACTIVE — 40 tabs registered, TSC 0 errors, keyword pool 1087
 
-## This Cycle (205) — Jaundice Tracker — COMPLETED (direct implementation)
-- ✅ Implemented Jaundice Tracker directly (tmux paste dispatch failed)
-- ✅ Created app/(tabs)/jaundice.tsx (~380 lines)
-- ✅ Registered jaundice tab in _layout.tsx
+## This Cycle (208) — Bonding Journal — COMPLETED (direct implementation)
+- ✅ Implemented Bonding Moments Journal directly (tmux paste dispatch failed)
+- ✅ Created app/(tabs)/bonding-journal.tsx (~310 lines)
+- ✅ Registered bonding-journal tab in _layout.tsx (icon: hand-heart)
 - ✅ Added i18n keys to en.json + zh.json
 - ✅ TSC 0 errors
-- ✅ Commit: cccb4e2 → pushed (with artifact cleanup b9bf9f5e)
-- 39 tabs total
+- ✅ Commit: b520431 → pushed
+- 40 tabs total (39 + bonding-journal)
 
-## App Status — 39 tabs, TSC 0 errors, ALL REGISTERED
-All 39 tab files have corresponding Tabs.Screen entries in _layout.tsx
+## Bonding Journal Features
+- Baby Info Header (from profile)
+- Skin-to-Skin Timer (start/stop, cumulative tracking)
+- Mood Check-In (1-5 scale, daily)
+- Bonding Milestones (5 checkable items)
+- Attachment Moment Journal (photo, notes, timestamps)
+- History View (grouped by day)
+
+## App Status — 40 tabs, TSC 0 errors, ALL REGISTERED
+All 40 tab files have corresponding Tabs.Screen entries in _layout.tsx
 
 ## USER ACTION REQUIRED (blocking EAS build):
   1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
@@ -24,4 +32,4 @@ All 39 tab files have corresponding Tabs.Screen entries in _layout.tsx
   5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
   6. Create app in Play Console → package: com.jobblebaby.app
 
-Commit: cccb4e2 → pushed (autoloop cycle 205: jaundice tracker implemented, TSC 0)
+Commit: b520431 → pushed (autoloop cycle 208: bonding journal implemented, TSC 0)

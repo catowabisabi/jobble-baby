@@ -1,0 +1,11 @@
+source "https://rubygems.org"
+
+# Fastlane - App Store deployment automation
+# https://fastlane.tools
+gem "fastlane", ">= 2.220.0"
+
+# Optional: Gemini integration for App Store Connect
+# gem "fastlane-plugin-spaceship"  # Included with fastlane
+
+# Optional: Screenshot management
+# gem "fastlane-plugin-screenshot" # Deprecated, use frameit

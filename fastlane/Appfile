@@ -1,0 +1,20 @@
+# Fastlane Appfile for Jobble Baby
+# https://docs.fastlane.tools/advanced/Appfile/
+
+# App Bundle Identifier
+app_identifier("com.jobblebaby.app")
+
+# Apple ID / App Store Connect email
+# Fill in your Apple ID email before running fastlane
+apple_id("YOUR_APPLE_ID@EMAIL.COM")
+
+# Developer Portal Team ID (10-character string)
+# team_id("XXXXXXXXXX")
+
+# Itunes Connect Team ID (different from team_id)
+# itc_team_id("XXXXXXXXXX")
+
+# Optional: Path to your App Store Connect API key JSON
+# key_id("XXXXXXXXXX")
+# issuer_id("XXXXXXXX-XX-XX-XX-XX-XXXXXXXXXX")
+# api_key_path("./api_key.json")

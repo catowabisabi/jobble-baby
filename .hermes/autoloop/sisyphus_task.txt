@@ -1,75 +1,152 @@
-# Sisyphus Task — Cycle 219 (re-dispatch)
+#!/bin/bash
+# Sisyphus Task — Cycle 221
+# Task: Implement App Store Listing Automation
 
-## Context
-Jobble Baby: 45+ tabs, TSC 0 errors, i18n done. WCAG 2.1 AA complete (294 labels). App dev-complete. Pending: Baby Safety Audit Navigator (todo #86).
+set -e
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
 
-## Task: Implement Baby Safety Audit Navigator tab
+echo "=== Cycle 221: App Store Listing Automation ==="
 
-Create app/(tabs)/safety-audit.tsx — guided home safety checklist.
+# Create docs/PLAY_SETUP.md
+cat > /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/docs/PLAY_SETUP.md << 'MDEOF'
+# Google Play Console Setup Guide
 
-### Features
-1. **Sleep Environment Check**
-   - Crib slat spacing less than 2.375 inches
-   - No crib bumpers, pillow, or soft bedding
-   - Firm mattress, fitted sheet only
-   - Baby alone on back
-   - Checkbox for each item plus pass or fail toggle
+## Prerequisites
+- Google Play Console account (paid)
+- Service account for API access
 
-2. **Car Seat Safety**
-   - Rear-facing confirmation
-   - Harness slot at or below shoulder level
-   - Chest clip at armpit level
-   - Car seat expiration date check
-   - Photo capture option for each zone
+## Step 1: Create Service Account
 
-3. **Babywearing Safety**
-   - M-position hips (frog legs)
-   - Airway visible (chin off chest)
-   - No forward-facing before 6 months
-   - No unsupervised car in carrier
+1. Go to Google Play Console → Settings → API Access
+2. Click "Create new service account"
+3. In Google Cloud Console:
+   - Go to IAM → Service Accounts
+   - Create key → JSON format
+   - Download and convert to base64 for GitHub Secret
 
-4. **Bath Safety**
-   - Max 2 inches water depth
-   - Elbow test confirmation (water temp below 100F or 38C)
-   - No ring toys that can trap fingers
-   - Never leave unattended
+## Step 2: Grant Play Console Access
 
-5. **Feeding Safety**
-   - No honey before 12 months
-   - Upright positioning during feeds
-   - Paced bottle feeding to prevent aspiration
-   - Proper head elevation
+1. In Play Console → API Access → Service accounts
+2. Click "Grant access" for the new service account
+3. Select roles: Release Manager, Finance
 
-6. **Supervision Zones**
-   - Fall prevention: elevated surfaces, stairs
-   - Stair gates installed top and bottom
-   - No unattended baby on changing table
-   - Hot surface check
+## Step 3: Add GitHub Secrets
 
-### Data
-- AsyncStorage key: @jobble/safety_audit_entries
-- Schema: zone (string), items array ({ label, passed boolean, photo optional }), date (string), notes (string)
-- Each audit is one entry, newest first
-- Exportable summary for pediatrician or landlord
+Required secrets:
+- `PLAY_SERVICE_ACCOUNT_JSON`: Base64-encoded service account JSON key
+- `PLAY_PACKAGE_NAME`: com.jobblebaby.app
 
-### Files to create or modify
-- Create: app/(tabs)/safety-audit.tsx
-- Add Tabs.Screen to app/(tabs)/_layout.tsx for safety-audit
-- Add i18n keys to en.json and zh.json:
-  - tabs.safetyAudit
-  - safetyAudit.title
-  - safetyAudit.zones.sleep, safetyAudit.zones.carSeat, safetyAudit.zones.babywearing, safetyAudit.zones.bath, safetyAudit.zones.feeding, safetyAudit.zones.supervision
-  - safetyAudit.passLabel, safetyAudit.failLabel
-  - safetyAudit.exportReport, safetyAudit.addPhoto
+## Files
 
-### Rules
-- Use existing tab pattern from schedule.tsx as reference
-- TSC must pass: npx tsc --noEmit
-- i18n: all user-facing strings via t()
-- Accessibility: reuse WCAG labels from other tabs
-- No functionality changes to existing tabs
+- `scripts/play-console-upload.py`: Python script using google-api-python-client
+- `docs/PLAY_SETUP.md`: This guide
+MDEOF
 
-### After
-- Run: npx tsc --noEmit (must pass)
-- Commit: git add -A and git commit -m "feat(tab): implement Baby Safety Audit Navigator"
-ULW
+# Create the Play Console upload script
+mkdir -p scripts
+
+cat > /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/scripts/play-console-upload.py << 'PYEOF'
+#!/usr/bin/env python3
+"""
+Google Play Console API - App Upload Script
+Requires: google-api-python-client, google-auth
+Install: pip install google-api-python-client google-auth
+"""
+import os
+import sys
+import argparse
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+
+SCOPES = ['https://www.googleapis.com/auth/androidpublisher']
+
+def get_play_service():
+    json_key = os.environ.get('PLAY_SERVICE_ACCOUNT_JSON')
+    if not json_key:
+        print("Error: PLAY_SERVICE_ACCOUNT_JSON not set")
+        sys.exit(1)
+    
+    import base64, json
+    key_data = base64.b64decode(json_key).decode()
+    credentials = service_account.Credentials.from_service_account_info(
+        json.loads(key_data), scopes=SCOPES
+    )
+    return build('androidpublisher', 'v3', credentials=credentials)
+
+def upload_apk(service, package_name, apk_path):
+    edit_request = service.edits().insert(body={}, packageName=package_name)
+    result = edit_request.execute()
+    edit_id = result['id']
+
+    media = MediaFileUpload(apk_path, mimetype='application/vnd.android.package')
+    apk_response = service.edits().edits().uploadApk(
+        packageName=package_name, editId=edit_id, media_body=media
+    ).execute()
+    print(f"APK uploaded: {apk_response.get('versionCode')}")
+    return edit_id
+
+def submit_for_review(service, package_name, edit_id):
+    track = 'internal'  # or 'alpha', 'beta', 'production'
+    service.edits().tracks().update(
+        editId=edit_id,
+        packageName=package_name,
+        body={'track': track}
+    ).execute()
+    service.edits().commit(editId=edit_id, packageName=package_name).execute()
+    print("Submitted for internal testing")
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Upload APK to Play Console')
+    parser.add_argument('--apk', required=True, help='Path to APK file')
+    parser.add_argument('--package', default='com.jobblebaby.app', help='Package name')
+    args = parser.parse_args()
+
+    service = get_play_service()
+    edit_id = upload_apk(service, args.package, args.apk)
+    submit_for_review(service, args.package, edit_id)
+    print("Done!")
+PYEOF
+
+chmod +x /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/scripts/play-console-upload.py
+
+# Create fastlane App Store automation (optional enhancement)
+mkdir -p /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/fastlane
+
+cat > /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/fastlane/Appfile << 'FASTLANEEOF'
+app_identifier("com.jobblebaby.app")
+apple_id("") # Add your Apple ID email
+FASTLANEEOF
+
+cat > /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/fastlane/metadata.txt << 'FASTLANEEOF'
+# App Store Connect Metadata
+#
+# Before using, fill in your Apple credentials:
+#   fastlane creds
+#
+# To run:
+#   fastlane deliver --skip_screenshots --skip_metadata
+#
+# See docs/EAS_SETUP.md for credential setup
+FASTLANEEOF
+
+echo "=== Creating App Store listing spec ==="
+
+# Read existing store listing spec
+if [ -f ../store/app-store-listing.md ]; then
+    echo "Using existing store/app-store-listing.md"
+fi
+
+# Commit
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
+git add -A
+git commit -m "feat(automation): add Play Console upload script + fastlane Appfile
+
+- scripts/play-console-upload.py: Google Play Publisher API upload script
+- docs/PLAY_SETUP.md: Step-by-step Play Console API setup guide
+- fastlane/Appfile: Fastlane config for App Store (credentials needed)
+- fastlane/metadata.txt: Setup instructions"
+
+echo "=== Cycle 221 complete ==="
+echo "Commit: $(git log -1 --oneline)"
+exit 0

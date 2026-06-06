@@ -10,6 +10,15 @@ import * as Notifications from 'expo-notifications';
 import OnboardingScreen from './screens/OnboardingScreen';
 import DaycareViewScreen from './screens/DaycareViewScreen';
 import FeedingTimerScreen from './screens/FeedingTimerScreen';
+import * as Sentry from '@sentry/react-native';
+
+// Initialize Sentry
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+  environment: __DEV__ ? 'development' : 'production',
+  enableAutoPerformanceTracing: true,
+  tracesSampleRate: __DEV__ ? 1.0 : 0.1,
+});
 
 const PROFILE_KEY = '@jobble_baby_profile';
 

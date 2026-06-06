@@ -1,82 +1,77 @@
-# Task: Implement Clinician Portal — Pediatrician Share Hub — Idea #56
+# Task: Implement Jaundice Tracker — Idea #57
 
 ## Context
-You are implementing Idea #56 from the progress.db (Jobble Baby project, Expo SDK 56, expo-router tabs).
+You are implementing Idea #57 from the progress.db (Jobble Baby project, Expo SDK 56, expo-router tabs).
 All data stored in AsyncStorage under @jobble/* keys. TSC must pass 0 errors before commit.
 
 ## Your Task
-Implement a new tab: `app/(tabs)/clinician-portal.tsx`
+Implement a new tab: app/(tabs)/jaundice.tsx
 
 ### Features Required
 
-1. **Clinician Hub Home**
-   - "Prepare Visit Report" primary button
-   - Date range selector: Last 30 days / 60 days / 90 days / Custom
-   - Visit history list (past visits with date, doctor name, notes)
-   - "Schedule Pre-Visit Checklist" card showing pending items for baby's age
+1. **Jaundice Home Dashboard**
+   - Baby info header (name, birth date, age in days/weeks) — reuse profile.tsx data
+   - Current risk level indicator: Low / Moderate / High (based on bilirubin if entered)
+   - "Log Reading" FAB button
+   - Recent entries list (date, bilirubin mg/dL, method: blood test / transcutaneous)
+   - Alert banner if bilirubin >12 mg/dL for breastfed or >15 mg/dL for formula-fed
 
-2. **Visit Report Generator**
-   - Toggle sections to include: growth chart, milestone timeline, feeding summary, sleep log, cry frequency, allergen log, assessment scores
-   - Generate a structured summary as a scrollable preview screen
-   - "Share via..." button → native iOS/Android share sheet (via expo-sharing)
-   - "Save PDF" button → via expo-print
-   - Sections collapsible for compact sharing
+2. **Bilirubin Log Entry**
+   - Date picker (default: today)
+   - Bilirubin value input (mg/dL, numeric with 1 decimal)
+   - Measurement method toggle: Blood test / Transcutaneous (Tc) meter
+   - Baby age in days (auto-calculated from birth date in profile)
+   - Notes field (optional)
+   - Save to AsyncStorage @jobble/jaundice_entries
 
-3. **Report Sections** (each collapsible):
-   - **Growth**: WHO percentile chart (reuses existing growth.tsx data) + measurements table with dates
-   - **Milestones**: completed milestones + any delayed ones with age-adjusted benchmarks
-   - **Feeding**: average daily intake, method breakdown (BF/formula/mixed), any concerns
-   - **Sleep**: total hours/day, night wakings, sleep efficiency, regression events
-   - **Cry**: total minutes/day, pattern classification if cry-analyzer data available
-   - **Allergen**: introduction timeline, reactions logged
-   - **Assessments**: Hazelbaker score, jaw symmetry, reflex integration status (from tongue-tie.tsx and reflex-integration.tsx)
+3. **Phototherapy Tracker**
+   - "Start Phototherapy Session" button
+   - Start/end time pickers
+   - Lamp type selector: LED / Halogen / Fiber Optic / BiliBlanket
+   - Duration auto-calculated
+   - Session history list
+   - Save to AsyncStorage @jobble/phototherapy_entries
 
-4. **Visit History**
-   - Add past visit: date, doctor name, clinic, notes, action items
-   - List view: date + doctor name, tap to expand notes
-   - Edit/delete past visits
+4. **Feeding Correlation**
+   - Show feeding frequency from @jobble/tracking_entries (last 7 days avg)
+   - "Low feeding = dehydration risk" alert if avg <6 feeds/day
+   - Link to tracking tab
 
-5. **Pre-Visit Checklist**
-   - Automated checklist based on baby's age from profile:
-     - "Vaccination due? Check vaccination schedule"
-     - "Growth measurement recorded this month?"
-     - "Any assessments pending (tongue tie, reflex)?"
-   - Check off items, save state to AsyncStorage
+5. **Risk Chart**
+   - WHO/NICE age-adjusted bilirubin risk chart (text-based threshold table)
+   - Age in days (rows) vs Risk level (Low/Medium/High/Exchange)
+   - Highlight current reading on chart if entered
+
+6. **Data Export**
+   - "Share Report" button → expo-sharing with text summary
+   - Include: baby name, age, all bilirubin readings, phototherapy sessions, feeding avg
 
 ### Data Model (AsyncStorage)
-- @jobble/visit_history: [{ id, date, doctor_name, clinic, notes, action_items[] }]
-- @jobble/clinician_report_config: { sections_enabled, date_range, include_photos }
-- @jobble/visit_checklist: { items[], last_updated }
+- @jobble/jaundice_entries: [{ id, date, bilirubin, method, ageDays, notes }]
+- @jobble/phototherapy_entries: [{ id, date, startTime, endTime, lampType, durationMin }]
 
 ### Integration Points
-- Reuse growth.tsx WHO chart data (@jobble/growth_entries)
-- Reuse milestone.tsx data (@jobble/milestone_entries)
-- Reuse tongue-tie.tsx data (@jobble/tongue_assessment)
-- Reuse cry-analyzer.tsx data (@jobble/cry_entries) if available
-- Reuse allergen-tracker.tsx data (@jobble/allergen_entries) if available
-- Reuse reflex-integration.tsx data (@jobble/reflex_entries) if available
-- Reuse profile.tsx for baby info header (name, birth date, gender)
-- i18n: add keys to en.json + zh.json (tabs.clinicianPortal, clinician.*, visit.*, checklist.*)
-
-### Badge
-- "Prepared Parent" (badge ID: prepared-parent): Generated and shared 3 visit reports
-- "Well-Baby Champion" (badge ID: well-baby-champion): Attended 4 well-baby checkups on time (logged in visit history)
+- Reuse profile.tsx for baby name, birth date (@jobble_baby_profile)
+- Reuse tracking.tsx for feeding data (@jobble/tracking_entries)
+- i18n: add keys to en.json + zh.json (tabs.jaundice, jaundice.*, phototherapy.*, risk.*)
 
 ### Files to Create/Modify
-- app/(tabs)/clinician-portal.tsx — NEW (main implementation, ~400-500 lines)
-- app/(tabs)/_layout.tsx — register clinician-portal tab (icon: MaterialCommunityIcons name="doctor", label: t('tabs.clinicianPortal'))
-- app/i18n/en.json — add all t('tabs.clinicianPortal'), t('clinician.*'), t('visit.*'), t('checklist.*') keys
+- app/(tabs)/jaundice.tsx — NEW (~300-350 lines)
+- app/(tabs)/_layout.tsx — register jaundice tab (icon: MaterialCommunityIcons name="lightbulb-outline" or "medical-bag", label: t('tabs.jaundice'))
+- app/i18n/en.json — add all t('tabs.jaundice'), t('jaundice.*'), t('phototherapy.*'), t('risk.*') keys
 - app/i18n/zh.json — add all Chinese translations
-- app/services/badgeService.ts — add prepared-parent + well-baby-champion badges
 
 ### Verification
 - `npx tsc --noEmit` must pass 0 errors
 - Tab visible and tappable in tab bar
-- Visit report generates without crashing
-- Badge triggers correctly after 3 shared reports
+- Bilirubin entry saves and displays in list
+- Alert banner shows when reading exceeds threshold
 - Run in Expo Go or prebuild to verify UI
 
 ## Commit message
-feat(tab): implement Clinician Portal — pediatrician share hub with visit report generator, visit history, pre-visit checklist, badges (idea #56)
+feat(tab): implement Jaundice Tracker — bilirubin log, phototherapy sessions, risk chart, feeding correlation (idea #57)
+
+## Keywords
+delight, jaundice, phototherapy
 
 ULW

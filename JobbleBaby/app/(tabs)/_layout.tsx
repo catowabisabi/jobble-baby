@@ -243,6 +243,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="doctor" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="jaundice"
+        options={{
+          title: t('tabs.jaundice'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="lightbulb-outline" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

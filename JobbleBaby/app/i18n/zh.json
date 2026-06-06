@@ -36,7 +36,8 @@
     "cryAnalyzer": "哭聲分析器",
     "gutBrainAxis": "腸腦軸",
     "projection": "發育預測",
-    "clinicianPortal": "醫療共享"
+    "clinicianPortal": "醫療共享",
+    "jaundice": "黃疸"
   },
   "projection": {
     "title": "半年發育預測",
@@ -291,15 +292,7 @@
     "datePlaceholder": "選擇日期"
   },
   "common": {
-    "save": "儲存",
-    "cancel": "取消",
-    "delete": "刪除",
-    "edit": "編輯",
-    "loading": "載入中...",
-    "error": "錯誤",
-    "success": "成功",
-    "confirm": "確認",
-    "back": "返回"
+    "save": "儲存"
   },
   "allergenModal": {
     "dateIntroduced": "引入日期：",
@@ -1122,7 +1115,7 @@
     "referralBadge": "需要轉介",
     "clearBadge": "正常"
   },
-"fontanelle": {
+  "fontanelle": {
     "title": "軟點地圖",
     "greeting": "追蹤",
     "subtitle": "監察鹵門閉合與頭部發育"
@@ -1373,7 +1366,30 @@
     "latcher": "銜乳達人",
     "tongueTieAware": "舌繫帶關注"
   },
-  "common": {
-    "save": "儲存"
+  "jaundice": {
+    "title": "黃疸追蹤",
+    "logReading": "記錄讀數",
+    "bilirubin": "膽紅素",
+    "method": "測量方式",
+    "bloodTest": "血液檢測",
+    "transcutaneous": "經皮測量",
+    "ageDays": "日齡",
+    "notes": "備註",
+    "risk": "風險等級",
+    "low": "低",
+    "moderate": "中",
+    "high": "高",
+    "exchange": "換血",
+    "alertHigh": "膽紅素偏高 — 建議追蹤",
+    "alertFeeding": "餵養不足 — 脫水風險",
+    "phototherapy": "光照治療",
+    "lampType": "燈具類型",
+    "startTime": "開始時間",
+    "endTime": "結束時間",
+    "duration": "時長",
+    "shareReport": "分享報告",
+    "noEntries": "尚無記錄",
+    "save": "儲存",
+    "cancel": "取消"
   }
 }

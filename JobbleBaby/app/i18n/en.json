@@ -36,7 +36,8 @@
     "cryAnalyzer": "Cry Analyzer",
     "gutBrainAxis": "Gut-Brain",
     "projection": "Projection",
-    "clinicianPortal": "Clinician Portal"
+    "clinicianPortal": "Clinician Portal",
+    "jaundice": "Jaundice"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -291,15 +292,7 @@
     "datePlaceholder": "Select date"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading...",
-    "error": "Error",
-    "success": "Success",
-    "confirm": "Confirm",
-    "back": "Back"
+    "save": "Save"
   },
   "allergenModal": {
     "dateIntroduced": "Date Introduced:",
@@ -1122,7 +1115,7 @@
     "referralBadge": "Needs Referral",
     "clearBadge": "Normal"
   },
-"fontanelle": {
+  "fontanelle": {
     "title": "Soft Spot Map",
     "greeting": "Track",
     "subtitle": "Monitor fontanelle closure & head growth"
@@ -1373,7 +1366,30 @@
     "latcher": "Latcher",
     "tongueTieAware": "Tongue Tie Aware"
   },
-  "common": {
-    "save": "Save"
+  "jaundice": {
+    "title": "Jaundice Tracker",
+    "logReading": "Log Reading",
+    "bilirubin": "Bilirubin",
+    "method": "Method",
+    "bloodTest": "Blood Test",
+    "transcutaneous": "Transcutaneous",
+    "ageDays": "Age (days)",
+    "notes": "Notes",
+    "risk": "Risk Level",
+    "low": "Low",
+    "moderate": "Moderate",
+    "high": "High",
+    "exchange": "Exchange",
+    "alertHigh": "High bilirubin — Follow up recommended",
+    "alertFeeding": "Low feeding — dehydration risk",
+    "phototherapy": "Phototherapy",
+    "lampType": "Lamp Type",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "duration": "Duration",
+    "shareReport": "Share Report",
+    "noEntries": "No entries yet",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }

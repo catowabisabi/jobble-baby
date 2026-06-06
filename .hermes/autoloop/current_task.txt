@@ -1,32 +1,18 @@
-# Cycle 200 — Tongue Tie & Jaw Symmetry Assessment Tool — COMPLETED
-## Status: Done (implemented by Hermes directly)
-- Idea #55 created + implemented
-- Todo #81 marked completed
-- +54 brainstorm keywords added (pool: 1148)
-- Concept #9: Data Export & Backup System (new)
-- Commit: b8646dc pushed
+# Cycle 204 — Jaundice Tracker — DISPATCHED
+## Status: Dispatched to Sisyphus (Idea #57)
+- Ideas #57-59 created (Jaundice Tracker, IoT Security Guide, Bonding Moments Journal)
+- +39 keywords added (pool: 1039)
+- Commit: 76b59a5 → pushed
+- Todo #30: in_progress (Jaundice Tracker)
+- Sisyphus dispatched: Jaundice Tracker task
 
-## What was done
-The Sisyphus dispatch failed (tmux session had plain bash, no agent).
-Hermes implemented Idea #55 directly:
-- Hazelbaker Assessment Score (6 items, 0-12 scale)
-- Jaw Symmetry Checklist (5 visual indicators)
-- Feeding Efficiency Log (latch quality, duration, milk ml, flow rate, gag episodes)
-- 7-day trend bar chart + avg latch quality
-- Correlation Dashboard (latch × weight × cry overlay)
-- Alert banner when latch quality < 3 for 5+ consecutive entries
-- Chewing Milestone Tracker (suck → suck-swallow-breathe → chewing → biting)
-- Referral Export button
-- Badges: Latcher (7-day streak) + Tongue Tie Aware
-- i18n: en.json + zh.json with all assessment/feeding/chewing/correlate keys
-- TSC: 0 errors
+## App Status — 36 tabs, TSC 0 errors
+All tabs registered, project stable
 
-## Outstanding (User Action Required)
-- EAS credentials configuration
-- App Store Connect app creation
-- Play Console app creation
-- Privacy policy URL deployment (jobblebaby.com/privacy)
-- Apple Developer Program enrollment
-- Google Play Console enrollment
-
-## No pending todos — project stable, all 36 tabs implemented, TSC 0 errors
+## USER ACTION REQUIRED (blocking EAS build):
+  1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
+  2. App Store screenshots: capture on macOS device
+  3. Google Service Account JSON key for Play Console
+  4. Deploy privacy policy at real URL
+  5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
+  6. Create app in Play Console → package: com.jobblebaby.app

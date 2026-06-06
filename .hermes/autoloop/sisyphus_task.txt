@@ -1,36 +1,75 @@
-# Sisyphus Task — Cycle 215
+# Sisyphus Task — Cycle 219 (re-dispatch)
 
 ## Context
-Jobble Baby: 45+ tabs, TSC 0 errors, i18n done. Expo SDK 56. Accessibility audit found 0 accessibilityLabel attributes across 861 touchable elements — WCAG 2.1 AA gap.
+Jobble Baby: 45+ tabs, TSC 0 errors, i18n done. WCAG 2.1 AA complete (294 labels). App dev-complete. Pending: Baby Safety Audit Navigator (todo #86).
 
-## Task: WCAG 2.1 AA Accessibility Fix
+## Task: Implement Baby Safety Audit Navigator tab
 
-Audit ALL tabs in app/(tabs)/ and add accessibilityLabel to every interactive element.
+Create app/(tabs)/safety-audit.tsx — guided home safety checklist.
 
-### Scope
-1. **TouchableOpacity / Pressable / Button** — add accessibilityLabel with descriptive text (e.g., "Add feeding entry", "Navigate to schedule")
-2. **Tab bar items** — ensure each tab has a meaningful accessibilityLabel
-3. **Form inputs (TextInput)** — add accessibilityLabel matching the field purpose
-4. **Modal triggers** — buttons that open modals should have accessibilityLabel describing the modal content
+### Features
+1. **Sleep Environment Check**
+   - Crib slat spacing less than 2.375 inches
+   - No crib bumpers, pillow, or soft bedding
+   - Firm mattress, fitted sheet only
+   - Baby alone on back
+   - Checkbox for each item plus pass or fail toggle
 
-### Priority
-- HIGH: Empty state buttons, FAB (floating action button), primary action buttons
-- MEDIUM: Secondary buttons, list item actions
-- LOW: Tooltips, informational icons
+2. **Car Seat Safety**
+   - Rear-facing confirmation
+   - Harness slot at or below shoulder level
+   - Chest clip at armpit level
+   - Car seat expiration date check
+   - Photo capture option for each zone
+
+3. **Babywearing Safety**
+   - M-position hips (frog legs)
+   - Airway visible (chin off chest)
+   - No forward-facing before 6 months
+   - No unsupervised car in carrier
+
+4. **Bath Safety**
+   - Max 2 inches water depth
+   - Elbow test confirmation (water temp below 100F or 38C)
+   - No ring toys that can trap fingers
+   - Never leave unattended
+
+5. **Feeding Safety**
+   - No honey before 12 months
+   - Upright positioning during feeds
+   - Paced bottle feeding to prevent aspiration
+   - Proper head elevation
+
+6. **Supervision Zones**
+   - Fall prevention: elevated surfaces, stairs
+   - Stair gates installed top and bottom
+   - No unattended baby on changing table
+   - Hot surface check
+
+### Data
+- AsyncStorage key: @jobble/safety_audit_entries
+- Schema: zone (string), items array ({ label, passed boolean, photo optional }), date (string), notes (string)
+- Each audit is one entry, newest first
+- Exportable summary for pediatrician or landlord
+
+### Files to create or modify
+- Create: app/(tabs)/safety-audit.tsx
+- Add Tabs.Screen to app/(tabs)/_layout.tsx for safety-audit
+- Add i18n keys to en.json and zh.json:
+  - tabs.safetyAudit
+  - safetyAudit.title
+  - safetyAudit.zones.sleep, safetyAudit.zones.carSeat, safetyAudit.zones.babywearing, safetyAudit.zones.bath, safetyAudit.zones.feeding, safetyAudit.zones.supervision
+  - safetyAudit.passLabel, safetyAudit.failLabel
+  - safetyAudit.exportReport, safetyAudit.addPhoto
 
 ### Rules
-- accessibilityLabel text should be in the user's language (use t() if available, otherwise plain English)
-- Keep labels concise but descriptive (3-8 words)
-- Do NOT add accessibilityHint (not needed for this app)
-- Do NOT change any functionality — only add labels
+- Use existing tab pattern from schedule.tsx as reference
+- TSC must pass: npx tsc --noEmit
+- i18n: all user-facing strings via t()
+- Accessibility: reuse WCAG labels from other tabs
+- No functionality changes to existing tabs
 
-### After each tab
+### After
 - Run: npx tsc --noEmit (must pass)
-- Commit per tab: git add -A && git commit -m "fix(a11y): add accessibilityLabel to <tab-name>"
-
-If no elements need labels in a tab: skip silently.
-
-Verify overall: npx tsc --noEmit must pass before ending.
+- Commit: git add -A and git commit -m "feat(tab): implement Baby Safety Audit Navigator"
 ULW
-===
-WCAG 2.1 AA Accessibility Fix

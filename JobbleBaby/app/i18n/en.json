@@ -43,7 +43,8 @@
     "habitReset": "Habit Reset",
     "caregiverFatigue": "Resilience",
     "colicRelief": "Colic Relief",
-    "feedingReadiness": "Feeding"
+    "feedingReadiness": "Feeding",
+    "safetyAudit": "Safety Audit"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -1617,5 +1618,49 @@
     "alertAllergenTiming": "Introduce allergens one at a time, 3-5 days apart",
     "alertIronRich": "Iron-rich foods needed at 6m+ — breast milk alone is insufficient",
     "badgeFlavorExplorer": "Badge earned: Flavor Explorer — 20+ distinct foods logged!"
+  },
+  "safetyAudit": {
+    "title": "Baby Safety Audit",
+    "zones": {
+      "sleep": "Sleep Environment",
+      "carSeat": "Car Seat",
+      "babywearing": "Babywearing",
+      "bath": "Bath Safety",
+      "feeding": "Feeding Safety",
+      "supervision": "Supervision Zones"
+    },
+    "items": {
+      "cribSlatSpacing": "Crib slat spacing <2.375 inches",
+      "noCribBumpers": "No crib bumpers or soft bedding",
+      "firmMattress": "Firm mattress, fitted sheet only",
+      "aloneOnBack": "Baby alone on back",
+      "rearFacing": "Rear-facing confirmation",
+      "harnessSlot": "Harness slot at or below shoulder",
+      "chestClip": "Chest clip at armpit level",
+      "carSeatExpiration": "Car seat expiration date checked",
+      "mPositionHips": "M-position hips (frog legs)",
+      "airwayVisible": "Airway visible (chin off chest)",
+      "noForwardFacing": "No forward-facing before 6 months",
+      "noUnsupervisedCarrier": "No unsupervised car in carrier",
+      "maxWaterDepth": "Max 2 inches water depth",
+      "elbowTest": "Elbow test: water <38C/100F",
+      "noRingToys": "No ring toys that trap fingers",
+      "neverUnattended": "Never leave baby unattended",
+      "noHoney": "No honey before 12 months",
+      "uprightFeeds": "Upright positioning during feeds",
+      "pacedBottle": "Paced bottle feeding",
+      "headElevation": "Proper head elevation",
+      "fallPrevention": "Fall prevention measures",
+      "stairGates": "Stair gates top and bottom",
+      "noUnattendedChangingTable": "No unattended changing table",
+      "hotSurfaceCheck": "Hot surface check done"
+    },
+    "passLabel": "Pass",
+    "failLabel": "Fail",
+    "nextZone": "Next",
+    "finishAudit": "Finish Audit",
+    "completeTitle": "Audit Complete",
+    "completeMessage": "Safety audit saved successfully.",
+    "history": "Audit History"
   }
 }

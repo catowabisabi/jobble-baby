@@ -125,6 +125,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="safety-audit"
+        options={{
+          title: t('tabs.safetyAudit'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="shield-check" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="reflex-tracker"
         options={{
           title: t('tabs.reflexTracker'),

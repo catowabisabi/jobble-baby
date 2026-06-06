@@ -43,7 +43,8 @@
     "habitReset": "習慣重置",
     "caregiverFatigue": "心理韌性",
     "colicRelief": "Colic Relief",
-    "feedingReadiness": "加固"
+    "feedingReadiness": "加固",
+    "safetyAudit": "安全檢查"
   },
   "projection": {
     "title": "半年發育預測",
@@ -1619,5 +1620,49 @@
     "alertIronRich": "6m+需要補鐵食物 — 母乳已不足夠",
     "badgeFlavorExplorer": "獲得徽章：味道探索者 — 已記錄20+種不同食物！",
     "tabs.feedingReadiness": "加固"
+  },
+  "safetyAudit": {
+    "title": "嬰兒安全檢查",
+    "zones": {
+      "sleep": "睡眠環境",
+      "carSeat": "汽車座椅",
+      "babywearing": "嬰兒揹帶",
+      "bath": "洗澡安全",
+      "feeding": "餵食安全",
+      "supervision": "監護區域"
+    },
+    "items": {
+      "cribSlatSpacing": "嬰兒床柵欄間距 <2.375 英寸",
+      "noCribBumpers": "無床圍或軟床品",
+      "firmMattress": "硬床墊，僅用床笠",
+      "aloneOnBack": "寶寶仰睡",
+      "rearFacing": "確認後向乘坐",
+      "harnessSlot": "安全帶插槽在肩膀或以下",
+      "chestClip": "胸口扣在腋下高度",
+      "carSeatExpiration": "已檢查汽車座椅有效期",
+      "mPositionHips": "M字型髖關節（青蛙腿）",
+      "airwayVisible": "氣道通暢（下巴離開胸口）",
+      "noForwardFacing": "6個月前不前向揹",
+      "noUnsupervisedCarrier": " carrier內不可離開",
+      "maxWaterDepth": "水位不超過2英寸",
+      "elbowTest": "手肘測試：水溫低於38C",
+      "noRingToys": "無會卡住手指的環形玩具",
+      "neverUnattended": "不可單獨留置",
+      "noHoney": "12個月前不可食蜂蜜",
+      "uprightFeeds": "餵奶時保持直立",
+      "pacedBottle": "控制奶瓶流速",
+      "headElevation": "頭部適當墊高",
+      "fallPrevention": "防跌倒措施",
+      "stairGates": "樓梯上下有門欄",
+      "noUnattendedChangingTable": "換尿布台不可單獨留置",
+      "hotSurfaceCheck": "已檢查熱表面"
+    },
+    "passLabel": "通過",
+    "failLabel": "不合格",
+    "nextZone": "下一項",
+    "finishAudit": "完成檢查",
+    "completeTitle": "檢查完成",
+    "completeMessage": "安全檢查已成功保存。",
+    "history": "檢查歷史"
   }
 }

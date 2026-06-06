@@ -271,6 +271,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="refresh" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="caregiver-fatigue"
+        options={{
+          title: t('tabs.caregiverFatigue'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

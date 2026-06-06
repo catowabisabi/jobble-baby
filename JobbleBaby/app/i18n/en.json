@@ -40,7 +40,8 @@
     "jaundice": "Jaundice",
     "iotSecurity": "IoT Security",
     "bondingJournal": "Bonding Journal",
-    "habitReset": "Habit Reset"
+    "habitReset": "Habit Reset",
+    "caregiverFatigue": "Resilience"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -1458,5 +1459,39 @@
     "domainNutrition": "Nutrition",
     "domainSelfCare": "Self-care",
     "domainSocial": "Social"
+  },
+  "caregiverFatigue": {
+    "title": "Caregiver Resilience",
+    "subtitle": "Track your wellbeing and get support",
+    "dailyCheckIn": "Daily Check-In",
+    "checkedIn": "Checked in today!",
+    "energy": "Energy",
+    "mood": "Mood",
+    "patience": "Patience",
+    "connection": "Connection",
+    "saveCheckIn": "Save Check-In",
+    "mentalLoad": "Mental Load Map",
+    "hoursPerDay": "hrs/day total",
+    "restQuantum": "Rest Quantum",
+    "restHint": "Add rest windows (even 15 min blocks count)",
+    "minRecommended": "min recommended",
+    "respiteScheduling": "Respite Scheduling",
+    "weeklyGoal": "Weekly goal",
+    "week": "Week",
+    "setRespiteGoal": "Set Respite Goal",
+    "burnoutSurvey": "Burnout Trajectory Survey",
+    "exhaustion": "Exhaustion",
+    "sleepQuality": "Sleep Quality",
+    "supportNetwork": "Support Network",
+    "mentalLoadSurvey": "Mental Load",
+    "guiltLevel": "Guilt Level",
+    "takeSurvey": "Take Burnout Survey",
+    "surveyDesc": "One-time assessment of your current state",
+    "considerHelp": "Consider asking for help — use the Shift Handoff tab to delegate",
+    "delegateMore": "Delegate More Tasks",
+    "exhaustionAlertTitle": "Support Needed",
+    "exhaustionAlertBody": "Your resilience score has been below 40 for 5+ days. Consider reaching out for support.",
+    "badgeName": "Resilience Champion",
+    "badgeDesc": "Maintained resilience score > 80% for 7 consecutive days"
   }
 }

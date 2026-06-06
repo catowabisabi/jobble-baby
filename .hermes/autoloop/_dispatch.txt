@@ -1,35 +1,50 @@
-# Autoloop Dispatch Log — jobble-baby
+# Sisyphus Task — Cycle 210
 
-Last dispatch: 2026-06-05 23:02 UTC+8
-Cycle: 208
-Status: ACTIVE — 40 tabs registered, TSC 0 errors, keyword pool 1087
+## Context
+Jobble Baby project, Expo SDK 56, 42 tabs, TSC 0 errors.
 
-## This Cycle (208) — Bonding Journal — COMPLETED (direct implementation)
-- ✅ Implemented Bonding Moments Journal directly (tmux paste dispatch failed)
-- ✅ Created app/(tabs)/bonding-journal.tsx (~310 lines)
-- ✅ Registered bonding-journal tab in _layout.tsx (icon: hand-heart)
-- ✅ Added i18n keys to en.json + zh.json
-- ✅ TSC 0 errors
-- ✅ Commit: b520431 → pushed
-- 40 tabs total (39 + bonding-journal)
+## Next Task
+Implement Concept #26: Caregiver Fatigue & Resilience Tracker.
 
-## Bonding Journal Features
-- Baby Info Header (from profile)
-- Skin-to-Skin Timer (start/stop, cumulative tracking)
-- Mood Check-In (1-5 scale, daily)
-- Bonding Milestones (5 checkable items)
-- Attachment Moment Journal (photo, notes, timestamps)
-- History View (grouped by day)
+## Requirements
 
-## App Status — 40 tabs, TSC 0 errors, ALL REGISTERED
-All 40 tab files have corresponding Tabs.Screen entries in _layout.tsx
+Create `app/(tabs)/caregiver-fatigue.tsx` — a tab for tracking caregiver burnout and resilience.
 
-## USER ACTION REQUIRED (blocking EAS build):
-  1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
-  2. App Store screenshots: capture on macOS device (iPhone 6.7"/6.5" + iPad 12.9")
-  3. Google Service Account JSON key for Play Console
-  4. Deploy privacy policy at real URL (update in app.json)
-  5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
-  6. Create app in Play Console → package: com.jobblebaby.app
+### Features
+1. **Burnout Trajectory Survey** — one-time assessment: rate current exhaustion (1-5), sleep quality (1-5), support network size (1-5), mental load (1-5), guilt level (1-5). Stored in AsyncStorage.
+2. **Daily Resilience Check-In** — 1-5 scale per day: energy, mood, patience, connection. Simple tap interface.
+3. **Mental Load Mapping** — list of caregiving tasks (feeding, sleep, diaper, medicine, appointments, etc.) with estimated hours. Shows total mental load hours per day.
+4. **Rest Quantum Calculator** — parent inputs available rest windows (even 15 min blocks). Shows cumulative rest credit vs recommended minimum (based on baby age).
+5. **Caregiver Resilience Score** — composite 0-100 score: burnout trajectory + 7-day check-in average + rest credit. Color-coded (red <40, yellow 40-70, green >70).
+6. **Exhaustion Threshold Alert** — if resilience score drops below 40 for 5 consecutive days, show "Consider asking for help" banner with suggestion to use shift-handoff tab.
+7. **Respite Scheduling Engine** — parent sets "respite goal" (e.g., 2 hours per week). App tracks actual vs goal. Alert if goal missed 3 weeks in a row.
+8. **Shift Handoff Integration** — link to shift-handoff tab; show "delegate more" suggestion if resilience score is low.
+9. **Badge**: "Resilience Champion" — 7-day streak maintaining resilience score > 80%.
 
-Commit: b520431 → pushed (autoloop cycle 208: bonding journal implemented, TSC 0)
+### Data Model
+- AsyncStorage: `@jobble/caregiver_survey` — { date, exhaustion, sleepQuality, supportNetwork, mentalLoad, guiltLevel }
+- AsyncStorage: `@jobble/resilience_daily` — [{ date, energy, mood, patience, connection }]
+- AsyncStorage: `@jobble/mental_load_tasks` — [{ id, label, estimatedHours }]
+- AsyncStorage: `@jobble/respite_goal` — { weeklyHoursGoal, totalWeeks }
+- AsyncStorage: `@jobble/resilience_score` — { currentScore, streakDays }
+
+### Files to Create/Modify
+- `app/(tabs)/caregiver-fatigue.tsx` — NEW (~300-340 lines)
+- `app/(tabs)/_layout.tsx` — register caregiver-fatigue tab (icon: MaterialCommunityIcons name="heart-pulse", label: t('tabs.caregiverFatigue'))
+- `app/i18n/en.json` — add `tabs.caregiverFatigue`, `caregiverFatigue.*` keys
+- `app/i18n/zh.json` — add Chinese translations
+
+### Verification
+- `npx tsc --noEmit` must pass 0 errors
+- Tab visible and tappable in tab bar
+- Resilience score computes correctly from inputs
+- Alert fires when score drops below threshold
+- Badge awards correctly when streak condition met
+
+## Commit message
+feat(tab): implement Caregiver Fatigue & Resilience Tracker — burnout trajectory, resilience score, respite scheduling (concept #26)
+
+## Keywords
+burnout trajectory prediction, sleep debt repayment tracker, mental load mapping, support network density, rest quantum calculator, fatigue recovery milestone, caregiver resilience score, exhaustion threshold alert, respite scheduling engine
+
+ULW

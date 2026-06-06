@@ -40,7 +40,8 @@
     "jaundice": "黃疸",
     "iotSecurity": "IoT 安全",
     "bondingJournal": "情感記錄",
-    "habitReset": "習慣重置"
+    "habitReset": "習慣重置",
+    "caregiverFatigue": "心理韌性"
   },
   "projection": {
     "title": "半年發育預測",
@@ -1458,5 +1459,39 @@
     "domainNutrition": "營養",
     "domainSelfCare": "自我照顧",
     "domainSocial": "社交"
+  },
+  "caregiverFatigue": {
+    "title": "照顧者心理韌性",
+    "subtitle": "追蹤你的身心健康並獲得支持",
+    "dailyCheckIn": "每日心情記錄",
+    "checkedIn": "今日已完成記錄！",
+    "energy": "精力",
+    "mood": "情緒",
+    "patience": "耐心",
+    "connection": "連結感",
+    "saveCheckIn": "儲存記錄",
+    "mentalLoad": "心理負荷地圖",
+    "hoursPerDay": "小時/天（合計）",
+    "restQuantum": "休息配額",
+    "restHint": "新增休息時段（即使15分鐘也計算）",
+    "minRecommended": "分鐘（最低建議）",
+    "respiteScheduling": "喘息服務排程",
+    "weeklyGoal": "每週目標",
+    "week": "第",
+    "setRespiteGoal": "設定喘息目標",
+    "burnoutSurvey": "倦怠軌跡評估",
+    "exhaustion": "疲憊程度",
+    "sleepQuality": "睡眠質量",
+    "supportNetwork": "支援網絡",
+    "mentalLoadSurvey": "心理負荷",
+    "guiltLevel": "內疚程度",
+    "takeSurvey": "填寫倦怠評估",
+    "surveyDesc": "一次性評估你目前的狀態",
+    "considerHelp": "考慮尋求幫助 — 使用交接班標籤來分配任務",
+    "delegateMore": "分配更多任務",
+    "exhaustionAlertTitle": "需要支援",
+    "exhaustionAlertBody": "你的心理韌性分數已連續5天低於40分。考慮尋求外界支援。",
+    "badgeName": "心理韌性大師",
+    "badgeDesc": "連續7天保持心理韌性分數高於80%"
   }
 }

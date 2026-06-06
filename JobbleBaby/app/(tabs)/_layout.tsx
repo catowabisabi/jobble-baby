@@ -264,6 +264,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="hand-heart" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="habit-reset"
+        options={{
+          title: t('tabs.habitReset'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="refresh" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

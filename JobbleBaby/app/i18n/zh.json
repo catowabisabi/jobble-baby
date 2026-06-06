@@ -39,7 +39,8 @@
     "clinicianPortal": "醫療共享",
     "jaundice": "黃疸",
     "iotSecurity": "IoT 安全",
-    "bondingJournal": "情感記錄"
+    "bondingJournal": "情感記錄",
+    "habitReset": "習慣重置"
   },
   "projection": {
     "title": "半年發育預測",
@@ -1440,5 +1441,22 @@
     "milestoneFirstStory": "第一次讲故事",
     "milestoneFirstBath": "第一次洗澡",
     "milestoneFirstSolidReaction": "第一次固體反應"
+  },
+  "habitReset": {
+    "regressionSurvey": "回歸後影響調查",
+    "takeSurvey": "填寫調查",
+    "lastSurvey": "上次調查",
+    "dailyCheckin": "每日打卡",
+    "noHabits": "暫無微習慣，請在下方添加",
+    "addHabit": "添加微習慣",
+    "domain": "範疇",
+    "habitPlaceholder": "例如：步行10分鐘",
+    "historyCalendar": "歷史日曆",
+    "burnoutAlert": "多個範疇評分偏低 — 考慮尋求幫助或重新分配值班",
+    "domainSleep": "睡眠",
+    "domainExercise": "運動",
+    "domainNutrition": "營養",
+    "domainSelfCare": "自我照顧",
+    "domainSocial": "社交"
   }
 }

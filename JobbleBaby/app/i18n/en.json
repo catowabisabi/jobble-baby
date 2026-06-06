@@ -39,7 +39,8 @@
     "clinicianPortal": "Clinician Portal",
     "jaundice": "Jaundice",
     "iotSecurity": "IoT Security",
-    "bondingJournal": "Bonding Journal"
+    "bondingJournal": "Bonding Journal",
+    "habitReset": "Habit Reset"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -1440,5 +1441,22 @@
     "milestoneFirstStory": "First Story",
     "milestoneFirstBath": "First Bath",
     "milestoneFirstSolidReaction": "First Solid Reaction"
+  },
+  "habitReset": {
+    "regressionSurvey": "Post-Regression Impact Survey",
+    "takeSurvey": "Take Survey",
+    "lastSurvey": "Last survey",
+    "dailyCheckin": "Daily Check-In",
+    "noHabits": "No micro-habits yet. Add one below.",
+    "addHabit": "Add Micro-Habit",
+    "domain": "Domain",
+    "habitPlaceholder": "e.g. Walk 10 minutes",
+    "historyCalendar": "History Calendar",
+    "burnoutAlert": "Multiple areas struggling — consider asking for help or redistributing shifts",
+    "domainSleep": "Sleep",
+    "domainExercise": "Exercise",
+    "domainNutrition": "Nutrition",
+    "domainSelfCare": "Self-care",
+    "domainSocial": "Social"
   }
 }

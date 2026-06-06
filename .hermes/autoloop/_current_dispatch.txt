@@ -1,50 +1,50 @@
-# Sisyphus Task — Cycle 210
+# Sisyphus Task — Cycle 211
 
 ## Context
 Jobble Baby project, Expo SDK 56, 42 tabs, TSC 0 errors.
 
 ## Next Task
-Implement Concept #26: Caregiver Fatigue & Resilience Tracker.
+Implement Concept #27: Colic Relief & Purple Crying Navigator.
 
 ## Requirements
 
-Create `app/(tabs)/caregiver-fatigue.tsx` — a tab for tracking caregiver burnout and resilience.
+Create `app/(tabs)/colic-relief.tsx` — a tab to help parents navigate the Period of PURPLE Crying and colic.
 
 ### Features
-1. **Burnout Trajectory Survey** — one-time assessment: rate current exhaustion (1-5), sleep quality (1-5), support network size (1-5), mental load (1-5), guilt level (1-5). Stored in AsyncStorage.
-2. **Daily Resilience Check-In** — 1-5 scale per day: energy, mood, patience, connection. Simple tap interface.
-3. **Mental Load Mapping** — list of caregiving tasks (feeding, sleep, diaper, medicine, appointments, etc.) with estimated hours. Shows total mental load hours per day.
-4. **Rest Quantum Calculator** — parent inputs available rest windows (even 15 min blocks). Shows cumulative rest credit vs recommended minimum (based on baby age).
-5. **Caregiver Resilience Score** — composite 0-100 score: burnout trajectory + 7-day check-in average + rest credit. Color-coded (red <40, yellow 40-70, green >70).
-6. **Exhaustion Threshold Alert** — if resilience score drops below 40 for 5 consecutive days, show "Consider asking for help" banner with suggestion to use shift-handoff tab.
-7. **Respite Scheduling Engine** — parent sets "respite goal" (e.g., 2 hours per week). App tracks actual vs goal. Alert if goal missed 3 weeks in a row.
-8. **Shift Handoff Integration** — link to shift-handoff tab; show "delegate more" suggestion if resilience score is low.
-9. **Badge**: "Resilience Champion" — 7-day streak maintaining resilience score > 80%.
+1. **Crying Pattern Tracker** — log fussy episodes with duration, intensity (1-10), triggers
+2. **5 S's Activation Guide** — step-by-step Swaddle, Side-hold, Shush, Swing, Suck techniques with visual guide
+3. **Colic Comfort Arsenal** — bicycle legs, belly massage, warm compress, gripe water, probiotic drops logging
+4. **Purple Crying Education** — explain the normalcy of excessive crying (peaking at 2 months), when to seek help
+5. **Real-time Crying Timer** — track total crying hours per day vs baseline, show trend
+6. **White Noise Library** — built-in white noise sounds (vacuum, fan, shusher) with timer
+7. **Caregiver Stress Monitor** — if crying exceeds 5 hours/day, alert for caregiver break
+8. **Pediatrician Connection** — quick notes for when crying seems abnormal (intussusception, hernia)
+9. **Badge**: "Survived the Purple" — logged 7 consecutive days of colic management without escalation
 
 ### Data Model
-- AsyncStorage: `@jobble/caregiver_survey` — { date, exhaustion, sleepQuality, supportNetwork, mentalLoad, guiltLevel }
-- AsyncStorage: `@jobble/resilience_daily` — [{ date, energy, mood, patience, connection }]
-- AsyncStorage: `@jobble/mental_load_tasks` — [{ id, label, estimatedHours }]
-- AsyncStorage: `@jobble/respite_goal` — { weeklyHoursGoal, totalWeeks }
-- AsyncStorage: `@jobble/resilience_score` — { currentScore, streakDays }
+- AsyncStorage: `@jobble/crying_episodes` — [{ id, date, durationMinutes, intensity, triggers }]
+- AsyncStorage: `@jobble/comfort_arsenal` — [{ date, technique, duration }]
+- AsyncStorage: `@jobble/purple_education` — { viewed: boolean }
+- AsyncStorage: `@jobble/daily_crying_total` — { date, totalMinutes }
+- AsyncStorage: `@jobble/white_noise_timer` — { soundType, durationSeconds }
 
 ### Files to Create/Modify
-- `app/(tabs)/caregiver-fatigue.tsx` — NEW (~300-340 lines)
-- `app/(tabs)/_layout.tsx` — register caregiver-fatigue tab (icon: MaterialCommunityIcons name="heart-pulse", label: t('tabs.caregiverFatigue'))
-- `app/i18n/en.json` — add `tabs.caregiverFatigue`, `caregiverFatigue.*` keys
+- `app/(tabs)/colic-relief.tsx` — NEW (~300-340 lines)
+- `app/(tabs)/_layout.tsx` — register colic-relief tab (icon: MaterialCommunityIcons name="emoticon-cry", label: t('tabs.colicRelief'))
+- `app/i18n/en.json` — add `tabs.colicRelief`, `colicRelief.*` keys
 - `app/i18n/zh.json` — add Chinese translations
 
 ### Verification
 - `npx tsc --noEmit` must pass 0 errors
 - Tab visible and tappable in tab bar
-- Resilience score computes correctly from inputs
-- Alert fires when score drops below threshold
-- Badge awards correctly when streak condition met
+- Crying episodes save and display correctly
+- Timer tracks cumulative crying correctly
+- Alert fires when daily crying exceeds 5 hours
 
 ## Commit message
-feat(tab): implement Caregiver Fatigue & Resilience Tracker — burnout trajectory, resilience score, respite scheduling (concept #26)
+feat(tab): implement Colic Relief & Purple Crying Navigator — 5 S's guide, crying tracker, white noise, caregiver stress monitor (concept #27)
 
 ## Keywords
-burnout trajectory prediction, sleep debt repayment tracker, mental load mapping, support network density, rest quantum calculator, fatigue recovery milestone, caregiver resilience score, exhaustion threshold alert, respite scheduling engine
+period of PURPLE crying, colic relief, 5 S's technique, excessive crying management, infant crying baseline, white noise library, caregiver stress, colic comfort arsenal, crying trigger identification, normal crying development
 
 ULW

@@ -1,50 +1,49 @@
-# Sisyphus Task — Cycle 211
+# Sisyphus Task — Cycle 212
 
 ## Context
-Jobble Baby project, Expo SDK 56, 42 tabs, TSC 0 errors.
+Jobble Baby project, Expo SDK 56, 42+ tabs, TSC 0 errors.
 
 ## Next Task
-Implement Concept #27: Colic Relief & Purple Crying Navigator.
+Implement Concept #28: Feeding Readiness & Flavor Priming Navigator.
 
 ## Requirements
 
-Create `app/(tabs)/colic-relief.tsx` — a tab to help parents navigate the Period of PURPLE Crying and colic.
+Create `app/(tabs)/feeding-readiness.tsx` — a tab to help parents know when baby is ready for solids, what flavors to introduce, and track the complementary feeding journey.
 
 ### Features
-1. **Crying Pattern Tracker** — log fussy episodes with duration, intensity (1-10), triggers
-2. **5 S's Activation Guide** — step-by-step Swaddle, Side-hold, Shush, Swing, Suck techniques with visual guide
-3. **Colic Comfort Arsenal** — bicycle legs, belly massage, warm compress, gripe water, probiotic drops logging
-4. **Purple Crying Education** — explain the normalcy of excessive crying (peaking at 2 months), when to seek help
-5. **Real-time Crying Timer** — track total crying hours per day vs baseline, show trend
-6. **White Noise Library** — built-in white noise sounds (vacuum, fan, shusher) with timer
-7. **Caregiver Stress Monitor** — if crying exceeds 5 hours/day, alert for caregiver break
-8. **Pediatrician Connection** — quick notes for when crying seems abnormal (intussusception, hernia)
-9. **Badge**: "Survived the Purple" — logged 7 consecutive days of colic management without escalation
+1. **Feeding Readiness Checklist** — 6 signs baby is ready: head control, sitting support, tongue thrust regression, food interest, doubled birth weight, pincer grasp preview. Each sign has a visual guide and checkbox.
+2. **Flavor Journey Journal** — log first tastes across categories: bland, umami, sweet, sour. 12-week flavor map with color coding (green=accepted, yellow=reluctant, red=rejected). Track food items with date, amount, reaction severity (1-3).
+3. **Texture Progression Tracker** — 4 stages: purees (4-6m) → mashable (6-8m) → finger foods (8-10m) → family meals (10-12m). Visual timeline showing current stage and transition markers.
+4. **WHO Allergen Introduction Log** — guided schedule for top 9 allergens (peanut, egg, milk, soy, wheat, fish, shellfish, tree nuts, sesame). Log introduction date and reaction severity (none/mild/moderate/severe).
+5. **Growth Correlation View** — overlay feeding frequency with weight/height percentile from growth.tsx. Show correlation trend line.
+6. **Iron-Rich Food Reminders** — at 6m+, suggest iron-rich foods (fortified cereal, pureed meats, beans). Track intake vs WHO recommended.
+7. **Feeding Alerts** — prompt for: "Start solids at 6 months", "Introduce allergens one at a time", "Iron-rich foods needed at 6m"
+8. **Badge**: "Flavor Explorer" — logged 20+ distinct foods in first year
 
 ### Data Model
-- AsyncStorage: `@jobble/crying_episodes` — [{ id, date, durationMinutes, intensity, triggers }]
-- AsyncStorage: `@jobble/comfort_arsenal` — [{ date, technique, duration }]
-- AsyncStorage: `@jobble/purple_education` — { viewed: boolean }
-- AsyncStorage: `@jobble/daily_crying_total` — { date, totalMinutes }
-- AsyncStorage: `@jobble/white_noise_timer` — { soundType, durationSeconds }
+- AsyncStorage: `@jobble/feeding_readiness` — { checklist_done: boolean, date: string }
+- AsyncStorage: `@jobble/flavor_journal` — [{ id, date, category, food, amount_g, reaction_severity }]
+- AsyncStorage: `@jobble/texture_stage` — { current_stage: 1-4, transition_dates: [] }
+- AsyncStorage: `@jobble/allergen_log` — [{ allergen, date_introduced, reaction_severity }]
 
 ### Files to Create/Modify
-- `app/(tabs)/colic-relief.tsx` — NEW (~300-340 lines)
-- `app/(tabs)/_layout.tsx` — register colic-relief tab (icon: MaterialCommunityIcons name="emoticon-cry", label: t('tabs.colicRelief'))
-- `app/i18n/en.json` — add `tabs.colicRelief`, `colicRelief.*` keys
+- `app/(tabs)/feeding-readiness.tsx` — NEW (~300-340 lines)
+- `app/(tabs)/_layout.tsx` — register feeding-readiness tab (icon: MaterialCommunityIcons name="food-drumstick", label: t('tabs.feedingReadiness'))
+- `app/i18n/en.json` — add `tabs.feedingReadiness`, `feedingReadiness.*` keys
 - `app/i18n/zh.json` — add Chinese translations
 
 ### Verification
 - `npx tsc --noEmit` must pass 0 errors
 - Tab visible and tappable in tab bar
-- Crying episodes save and display correctly
-- Timer tracks cumulative crying correctly
-- Alert fires when daily crying exceeds 5 hours
+- Feeding readiness checklist functional
+- Flavor journal saves entries correctly
+- Texture stage progression works
+- Allergen log tracks reactions
 
 ## Commit message
-feat(tab): implement Colic Relief & Purple Crying Navigator — 5 S's guide, crying tracker, white noise, caregiver stress monitor (concept #27)
+feat(tab): implement Feeding Readiness & Flavor Priming Navigator — complementary feeding journey, allergen log, texture progression (concept #28)
 
 ## Keywords
-period of PURPLE crying, colic relief, 5 S's technique, excessive crying management, infant crying baseline, white noise library, caregiver stress, colic comfort arsenal, crying trigger identification, normal crying development
+feeding_readiness, flavor_priming, umami, glutamate, complementary_feeding, who_guidelines, texture_progression, allergen_log, growth_correlation, iron_deficiency, pincer_grasp, tongue_thrust, solid_foods, first_tastes, food_reaction, weaning, baby_led_feeding, high_chair, spoon_readiness, milk_to_solids_transition
 
 ULW

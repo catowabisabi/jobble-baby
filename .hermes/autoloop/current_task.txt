@@ -1,17 +1,1 @@
-# Cycle 205 — Jaundice Tracker — COMPLETED
-## Status: Implemented directly (tmux paste dispatch failed, implemented by Hermes)
-- Idea #57 Jaundice Tracker: COMPLETED
-- 39 tabs registered, TSC 0 errors
-- Commit: cccb4e2 → pushed
-- Artifact cleanup: b9bf9f5e (removed empty files 12, 15)
-
-## App Status — 39 tabs, TSC 0 errors
-All tabs registered in _layout.tsx
-
-## USER ACTION REQUIRED (blocking EAS build):
-  1. Run: npx eas credentials --platform ios → Apple Team ID + App-Specific Password
-  2. App Store screenshots: capture on macOS device
-  3. Google Service Account JSON key for Play Console
-  4. Deploy privacy policy at real URL
-  5. Create app in App Store Connect → bundle ID: com.jobblebaby.app
-  6. Create app in Play Console → package: com.jobblebaby.app
+Concept #28: Feeding Readiness & Flavor Priming Navigator

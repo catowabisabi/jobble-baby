@@ -262,6 +262,7 @@ export default function HomeScreen() {
         
         {showStressBanner && (
           <TouchableOpacity
+            accessibilityLabel="Open stress cascade screen"
             style={{
               backgroundColor: stressLevel === 'red' ? '#EF4444' : '#F59E0B',
               borderRadius: 12,
@@ -305,6 +306,7 @@ export default function HomeScreen() {
 
         {/* Next 30 Days Projection Widget */}
         <TouchableOpacity
+          accessibilityLabel="View 30-day projection"
           style={styles.projectionCard}
           activeOpacity={0.7}
           onPress={() => router.push('/projection')}
@@ -355,6 +357,7 @@ export default function HomeScreen() {
             {QUICK_ENTRIES.map((entry) => (
               <TouchableOpacity
                 key={entry.id}
+                accessibilityLabel={`Add ${entry.id} entry`}
                 style={[styles.fab, { backgroundColor: entry.color }]}
                 activeOpacity={0.7}
               >
@@ -367,6 +370,7 @@ export default function HomeScreen() {
       </ScrollView>
 
       <Pressable
+        accessibilityLabel="Open SOS emergency screen"
         style={[styles.sosButton, fabPressed && styles.sosButtonActive]}
         onPressIn={handleFabPressIn}
         onPressOut={handleFabPressOut}

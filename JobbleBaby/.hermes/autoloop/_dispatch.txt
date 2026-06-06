@@ -1,0 +1,28 @@
+Implement Concept #27: Colic Relief & Purple Crying Navigator.
+
+## Task
+Create `app/(tabs)/colic-relief.tsx` — a new tab to help parents navigate the Period of PURPLE Crying and colic.
+
+## Requirements
+1. **Crying Pattern Tracker** — log fussy episodes with duration, intensity (1-10), triggers (dropdown: hunger, wind, overtired, overstimulated, reflux, teething, unknown)
+2. **5 S's Activation Guide** — step-by-step Swaddle, Side-hold, Shush, Swing, Suck techniques with visual guide cards. Each S has an illustrated instruction card.
+3. **Colic Comfort Arsenal** — action cards: bicycle legs, belly massage, warm compress, gripe water, probiotic drops — each tappable to log usage + duration
+4. **Purple Crying Education** — explain the normalcy of excessive crying (peaking at 2 months), when to seek medical help (intussusception signs, hernia)
+5. **Real-time Crying Timer** — start/stop timer, track total crying hours per day, show 7-day trend bar chart
+6. **White Noise Library** — 4 built-in sounds (vacuum, fan, shusher, ocean) with play/stop + timer (15/30/60 min)
+7. **Caregiver Stress Monitor** — if crying exceeds 5 hours/day, show bright alert for caregiver break + emergency contacts
+8. **Badge**: "Survived the Purple" — earned after logging 7 consecutive days of colic management
+
+## Technical
+- File: `app/(tabs)/colic-relief.tsx`
+- Use `useTranslation` from `i18n` 
+- Use `useBabyProfile` from `~/hooks/useBabyProfile`
+- AsyncStorage keys: `@jobble/crying_log`, `@jobble/colic_comfort_log`, `@jobble/white_noise_pref`, `@jobble/colic_badge`
+- TSC clean, no new errors
+- Add i18n keys to `app/i18n/en.json` + `app/i18n/zh.json` under `colicRelief.*`
+- Register in `app/(tabs)/_layout.tsx` Tabs.Screen with name `colic-relief`
+
+## Context keywords
+masseter muscle, latch-breath synchronization, melatonin production
+
+ULW

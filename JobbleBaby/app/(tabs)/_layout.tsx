@@ -278,6 +278,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="colic-relief"
+        options={{
+          title: t('tabs.colicRelief') || 'Colic',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="emoticon-cry" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

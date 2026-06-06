@@ -285,6 +285,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="emoticon-cry" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="feeding-readiness"
+        options={{
+          title: t('tabs.feedingReadiness'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-drumstick" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

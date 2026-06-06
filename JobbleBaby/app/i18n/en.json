@@ -38,7 +38,8 @@
     "projection": "Projection",
     "clinicianPortal": "Clinician Portal",
     "jaundice": "Jaundice",
-    "iotSecurity": "IoT Security"
+    "iotSecurity": "IoT Security",
+    "bondingJournal": "Bonding Journal"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -1407,5 +1408,37 @@
     "edu_firmware_body": "Firmware updates patch security vulnerabilities discovered in baby monitor hardware. Manufacturers regularly release updates - check your monitor app at least monthly for new versions.",
     "edu_password_title": "Default Password Risks",
     "edu_password_body": "Most IoT devices ship with default credentials that are publicly documented online. Changing the default password is the single most effective step you can take to secure your baby monitor."
+  },
+  "bondingJournal": {
+    "greeting": "Track",
+    "title": "Bonding Journal",
+    "skinToSkin": "Skin-to-Skin Timer",
+    "timerRunning": "Timer running...",
+    "timerIdle": "Tap play to start session",
+    "startTimer": "Start",
+    "stop": "Stop",
+    "timerSaved": "Session Saved",
+    "sessionSaved": "{{minutes}} min skin-to-skin session saved",
+    "totalTime": "Total skin-to-skin time",
+    "moodCheckIn": "Mood Check-In",
+    "howAreYou": "How are you feeling today?",
+    "milestones": "Bonding Milestones",
+    "addMoment": "Add Moment",
+    "history": "History",
+    "noEntries": "No moments recorded yet",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "notesPlaceholder": "Add notes about this moment...",
+    "momentFirstHold": "First Hold",
+    "momentFirstSmile": "First Smile",
+    "momentFirstBath": "First Bath",
+    "momentFeedingBond": "Feeding Bond",
+    "momentLullabySung": "Lullaby Sung",
+    "momentTummyTimeTalk": "Tummy Time Talk",
+    "milestoneFirstHug": "First Hug",
+    "milestoneFirstKiss": "First Kiss",
+    "milestoneFirstStory": "First Story",
+    "milestoneFirstBath": "First Bath",
+    "milestoneFirstSolidReaction": "First Solid Reaction"
   }
 }

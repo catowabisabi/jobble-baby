@@ -38,7 +38,8 @@
     "projection": "發育預測",
     "clinicianPortal": "醫療共享",
     "jaundice": "黃疸",
-    "iotSecurity": "IoT 安全"
+    "iotSecurity": "IoT 安全",
+    "bondingJournal": "情感記錄"
   },
   "projection": {
     "title": "半年發育預測",
@@ -1407,5 +1408,37 @@
     "edu_firmware_body": "固件更新修補了在嬰兒監控器硬件中發現的安全漏洞。製造商定期發布更新 - 請每月至少檢查一次監控應用程序是否有新版本。",
     "edu_password_title": "默認密碼風險",
     "edu_password_body": "大多數IoT設備出廠時使用默認密碼，這些密碼在網上公開可见。更改默認密碼是保護嬰兒監控器安全的最有效步驟。"
+  },
+  "bondingJournal": {
+    "greeting": "記錄",
+    "title": "情感記錄",
+    "skinToSkin": "肌膚接觸計時器",
+    "timerRunning": "計時中...",
+    "timerIdle": "點擊開始以啟動計時",
+    "startTimer": "開始",
+    "stop": "停止",
+    "timerSaved": "記錄已儲存",
+    "sessionSaved": "{{minutes}}分鐘肌膚接觸已記錄",
+    "totalTime": "總肌膚接觸時間",
+    "moodCheckIn": "心情記錄",
+    "howAreYou": "今日心情如何？",
+    "milestones": "情感里程碑",
+    "addMoment": "添加時刻",
+    "history": "歷史記錄",
+    "noEntries": "暫無記錄",
+    "today": "今日",
+    "yesterday": "昨日",
+    "notesPlaceholder": "為這個時刻添加備註...",
+    "momentFirstHold": "第一次抱起",
+    "momentFirstSmile": "第一次微笑",
+    "momentFirstBath": "第一次洗澡",
+    "momentFeedingBond": "餵養情感",
+    "momentLullabySung": "唱搖籃曲",
+    "momentTummyTimeTalk": "趴臥說話",
+    "milestoneFirstHug": "第一次拥抱",
+    "milestoneFirstKiss": "第一次親吻",
+    "milestoneFirstStory": "第一次讲故事",
+    "milestoneFirstBath": "第一次洗澡",
+    "milestoneFirstSolidReaction": "第一次固體反應"
   }
 }

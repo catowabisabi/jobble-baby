@@ -257,6 +257,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="shield-lock" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="bonding-journal"
+        options={{
+          title: t('tabs.bondingJournal'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="hand-heart" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

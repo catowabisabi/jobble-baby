@@ -37,7 +37,8 @@
     "gutBrainAxis": "Gut-Brain",
     "projection": "Projection",
     "clinicianPortal": "Clinician Portal",
-    "jaundice": "Jaundice"
+    "jaundice": "Jaundice",
+    "iotSecurity": "IoT Security"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -1391,5 +1392,20 @@
     "noEntries": "No entries yet",
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "iotSecurity": {
+    "networkScore": "Network Security Score",
+    "selectDevice": "Select Device",
+    "securityChecklist": "Security Checklist",
+    "learnMore": "Learn More",
+    "alertLog": "Security Alert Log",
+    "alertPlaceholder": "Log a security concern...",
+    "reviewPrivacy": "Review Privacy Policy for",
+    "edu_vlan_title": "Why Network Isolation Matters",
+    "edu_vlan_body": "Putting your baby monitor on a separate VLAN prevents attackers from accessing camera footage if another device on your network is compromised. Most routers support guest networks or VLAN configuration.",
+    "edu_firmware_title": "Why Firmware Updates Matter",
+    "edu_firmware_body": "Firmware updates patch security vulnerabilities discovered in baby monitor hardware. Manufacturers regularly release updates - check your monitor app at least monthly for new versions.",
+    "edu_password_title": "Default Password Risks",
+    "edu_password_body": "Most IoT devices ship with default credentials that are publicly documented online. Changing the default password is the single most effective step you can take to secure your baby monitor."
   }
 }

@@ -250,6 +250,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="lightbulb-outline" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="iot-security"
+        options={{
+          title: t('tabs.iotSecurity'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="shield-lock" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

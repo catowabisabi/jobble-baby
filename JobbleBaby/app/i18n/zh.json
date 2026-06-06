@@ -37,7 +37,8 @@
     "gutBrainAxis": "腸腦軸",
     "projection": "發育預測",
     "clinicianPortal": "醫療共享",
-    "jaundice": "黃疸"
+    "jaundice": "黃疸",
+    "iotSecurity": "IoT 安全"
   },
   "projection": {
     "title": "半年發育預測",
@@ -1391,5 +1392,20 @@
     "noEntries": "尚無記錄",
     "save": "儲存",
     "cancel": "取消"
+  },
+  "iotSecurity": {
+    "networkScore": "網絡安全評分",
+    "selectDevice": "選擇設備",
+    "securityChecklist": "安全檢查清單",
+    "learnMore": "了解更多",
+    "alertLog": "安全警報日誌",
+    "alertPlaceholder": "記錄安全疑慮...",
+    "reviewPrivacy": "查看隱私政策",
+    "edu_vlan_title": "為什麼網絡隔離重要",
+    "edu_vlan_body": "將嬰兒監控器放在单独的VLAN可以防止攻擊者在其他設備被入侵時訪問監控畫面。大多数路由器支持訪客網絡或VLAN配置。",
+    "edu_firmware_title": "為什麼固件更新重要",
+    "edu_firmware_body": "固件更新修補了在嬰兒監控器硬件中發現的安全漏洞。製造商定期發布更新 - 請每月至少檢查一次監控應用程序是否有新版本。",
+    "edu_password_title": "默認密碼風險",
+    "edu_password_body": "大多數IoT設備出廠時使用默認密碼，這些密碼在網上公開可见。更改默認密碼是保護嬰兒監控器安全的最有效步驟。"
   }
 }

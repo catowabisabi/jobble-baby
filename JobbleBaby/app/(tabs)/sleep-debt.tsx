@@ -433,9 +433,11 @@ export default function SleepDebt() {
             <Text style={styles.shiftAlertText}>{t('sleepDebt.shiftSuggestion')}</Text>
             <View style={styles.shiftButtons}>
               <TouchableOpacity style={[styles.shiftButton, styles.swapButton]} onPress={handleSwapShift}>
+                              accessibilityLabel="TouchableOpacity in sleep-debt"
                 <Text style={styles.shiftButtonText}>{t('sleepDebt.swapTonight')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.shiftButton, styles.askButton]}>
+                              accessibilityLabel="TouchableOpacity in sleep-debt"
                 <Text style={styles.shiftButtonTextAlt}>{t('sleepDebt.askPartner')}</Text>
               </TouchableOpacity>
             </View>
@@ -463,6 +465,7 @@ export default function SleepDebt() {
         </View>
 
         <TouchableOpacity style={styles.addButton} onPress={() => setShowAddModal(true)}>
+                        accessibilityLabel="Toggle sleep-debt panel"
           <Text style={styles.addButtonText}>{t('sleepDebt.addEntry')}</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -490,9 +493,11 @@ export default function SleepDebt() {
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity style={[styles.modalButton, styles.cancelBtn]} onPress={() => setShowAddModal(false)}>
+                              accessibilityLabel="Toggle sleep-debt panel"
                 <Text style={styles.btnTextCancel}>{t('sleepDebt.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.modalButton, styles.confirmBtn]} onPress={handleAddEntry}>
+                              accessibilityLabel="Add sleep-debt entry"
                 <Text style={styles.btnText}>{t('sleepDebt.save')}</Text>
               </TouchableOpacity>
             </View>

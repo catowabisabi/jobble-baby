@@ -513,6 +513,7 @@ export default function CryAnalyzer() {
 
       <View style={styles.fabContainer}>
         <Pressable style={styles.fab} onPress={() => setShowModal(true)}>
+                        accessibilityLabel="Toggle cry-analyzer panel"
           <Text style={styles.fabText}>+</Text>
         </Pressable>
       </View>
@@ -525,6 +526,7 @@ export default function CryAnalyzer() {
             <Text style={styles.modalLabel}>{t('cryAnalyzer.duration')} (1-120 min)</Text>
             <View style={styles.durationRow}>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in cry-analyzer"
                 style={styles.durationBtn}
                 onPress={() => setDuration((d) => String(Math.max(1, parseInt(d, 10) - 5)))}
               >
@@ -533,6 +535,7 @@ export default function CryAnalyzer() {
               <Text style={styles.durationValue}>{duration}</Text>
               <Text style={styles.durationUnit}>min</Text>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in cry-analyzer"
                 style={styles.durationBtn}
                 onPress={() => setDuration((d) => String(Math.min(120, parseInt(d, 10) + 5)))}
               >
@@ -544,6 +547,7 @@ export default function CryAnalyzer() {
             <View style={styles.causeRow}>
               {CAUSE_TAGS.map((tag) => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in cry-analyzer"
                   key={tag.key}
                   style={[styles.causeChip, selectedCause === tag.key && styles.causeChipSelected]}
                   onPress={() => setSelectedCause(tag.key)}
@@ -561,6 +565,7 @@ export default function CryAnalyzer() {
             <View style={styles.intensityRow}>
               {[1, 2, 3, 4, 5].map((v) => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in cry-analyzer"
                   key={v}
                   style={[styles.intensityBtn, intensity === v && styles.intensityBtnActive]}
                   onPress={() => setIntensity(v)}
@@ -580,9 +585,11 @@ export default function CryAnalyzer() {
             />
 
             <TouchableOpacity style={styles.saveBtn} onPress={handleSave}>
+                            accessibilityLabel="Add cry-analyzer entry"
               <Text style={styles.saveBtnText}>{t('cryAnalyzer.addEntry')}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowModal(false)}>
+                            accessibilityLabel="Toggle cry-analyzer panel"
               <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
             </TouchableOpacity>
           </View>

@@ -336,6 +336,7 @@ export default function CircadianScreen() {
               </View>
               <View style={styles.tummyButtonRow}>
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in circadian"
                   style={[styles.tummyBtn, { backgroundColor: '#EF4444' }]}
                   onPress={handleEndTummy}
                 >
@@ -346,6 +347,7 @@ export default function CircadianScreen() {
           ) : (
             <View style={styles.tummyButtonRow}>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in circadian"
                 style={[styles.tummyBtn, { backgroundColor: '#3B82F6' }]}
                 onPress={handleStartTummy}
               >

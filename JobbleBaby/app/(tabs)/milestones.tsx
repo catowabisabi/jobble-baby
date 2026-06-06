@@ -487,6 +487,7 @@ export default function MilestonesScreen() {
 
             {/* Complete button */}
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in milestones"
               style={styles.completeBtn}
               onPress={markBrainBuilderDone}
               activeOpacity={0.8}
@@ -522,6 +523,7 @@ export default function MilestonesScreen() {
         <View style={styles.typeSelector}>
           {MILESTONE_TYPES.map((type) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in milestones"
               key={type.id}
               style={[
                 styles.typeChip,
@@ -555,9 +557,11 @@ export default function MilestonesScreen() {
             </View>
             <View style={{ flexDirection: 'row', gap: 8 }}>
               <TouchableOpacity onPress={() => setShowReminder(false)} style={styles.reminderBtn}>
+                              accessibilityLabel="Toggle milestones panel"
                 <Text style={styles.reminderBtnText}>{t('milestoneReminder.dismiss')}</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => { setShowReminder(false); captureMilestone(); }} style={[styles.reminderBtn, { backgroundColor: '#fff' }]}>
+                              accessibilityLabel="Toggle milestones panel"
                 <Text style={[styles.reminderBtnText, { color: '#3B82F6' }]}>{t('milestoneReminder.capture')}</Text>
               </TouchableOpacity>
             </View>
@@ -566,6 +570,7 @@ export default function MilestonesScreen() {
 
         {/* Capture Button */}
         <TouchableOpacity
+                        accessibilityLabel="TouchableOpacity in milestones"
           style={[styles.captureBtn, isCapturing && styles.captureBtnDisabled]}
           onPress={captureMilestone}
           disabled={isCapturing}

@@ -175,6 +175,7 @@ export default function TrackingScreen() {
         <View style={styles.buttonRow}>
           {DIAPER_TYPES.map((item) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in tracking"
               key={item.label}
               style={[styles.button, { backgroundColor: item.color }]}
               activeOpacity={0.7}
@@ -190,6 +191,7 @@ export default function TrackingScreen() {
         <View style={styles.buttonRow}>
           {FEED_TYPES.map((item) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in tracking"
               key={item.label}
               style={[styles.button, { backgroundColor: item.color }]}
               activeOpacity={0.7}
@@ -212,6 +214,7 @@ export default function TrackingScreen() {
         <View style={styles.buttonRow}>
           {SLEEP_TYPES.map((item) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in tracking"
               key={item.label}
               style={[styles.button, { backgroundColor: item.color }]}
               activeOpacity={0.7}

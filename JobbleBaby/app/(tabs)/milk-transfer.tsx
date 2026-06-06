@@ -298,14 +298,17 @@ export default function MilkTransferScreen() {
         <View style={styles.timerRow}>
           {!isRunning ? (
             <TouchableOpacity style={[styles.timerBtn, styles.timerBtnStart]} onPress={startTimer} activeOpacity={0.7}>
+                            accessibilityLabel="Start milk-transfer timer"
               <Text style={styles.timerBtnText}>▶ {t('milkTransfer.timer.start')}</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity style={[styles.timerBtn, styles.timerBtnStop]} onPress={stopTimer} activeOpacity={0.7}>
+                            accessibilityLabel="Stop milk-transfer timer"
               <Text style={styles.timerBtnText}>■ {t('milkTransfer.timer.stop')}</Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity style={[styles.timerBtn, styles.timerBtnReset]} onPress={resetTimer} activeOpacity={0.7}>
+                          accessibilityLabel="TouchableOpacity in milk-transfer"
             <Text style={[styles.timerBtnText, styles.timerBtnTextAlt]}>{t('milkTransfer.timer.reset')}</Text>
           </TouchableOpacity>
         </View>
@@ -316,6 +319,7 @@ export default function MilkTransferScreen() {
         <View style={styles.sideRow}>
           {(['left', 'right', 'both'] as BreastSide[]).map((side) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in milk-transfer"
               key={side}
               style={[styles.sideBtn, selectedSide === side && styles.sideBtnActive]}
               activeOpacity={0.7}
@@ -393,6 +397,7 @@ export default function MilkTransferScreen() {
       )}
 
       <TouchableOpacity style={styles.saveButton} activeOpacity={0.7} onPress={saveSession}>
+                      accessibilityLabel="Save milk-transfer entry"
         <Text style={styles.saveButtonText}>✓ {t('milkTransfer.session.saveSession')}</Text>
       </TouchableOpacity>
     </View>
@@ -499,6 +504,7 @@ export default function MilkTransferScreen() {
         <View style={styles.tabBar}>
           {(['session', 'chart', 'history'] as const).map((tab) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in milk-transfer"
               key={tab}
               style={[styles.tabButton, currentView === tab && styles.tabButtonActive]}
               activeOpacity={0.7}

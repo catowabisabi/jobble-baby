@@ -555,6 +555,7 @@ export default function SleepTrainingScreen() {
       <View style={styles.methodGrid}>
         {METHODS.map((method) => (
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in sleep-training"
             key={method.id}
             style={[styles.methodCard, session.method === method.id && styles.methodCardSelected]}
             activeOpacity={0.7}
@@ -575,6 +576,7 @@ export default function SleepTrainingScreen() {
 
       {session.method && (
         <TouchableOpacity
+                        accessibilityLabel="TouchableOpacity in sleep-training"
           style={canStartTraining ? styles.startButton : styles.startButtonDisabled}
           activeOpacity={0.7}
           onPress={startNight}
@@ -697,11 +699,13 @@ export default function SleepTrainingScreen() {
         <View style={styles.actionRow}>
           {(isFerber || isChair) && (
             <TouchableOpacity style={styles.checkInButton} activeOpacity={0.7} onPress={logCheckIn}>
+                            accessibilityLabel="TouchableOpacity in sleep-training"
               <Text style={styles.checkInButtonText}>✓ {t('sleepTraining.logCheck') || 'Log Check'}</Text>
             </TouchableOpacity>
           )}
           {isExtinction && (
             <TouchableOpacity style={styles.checkInButton} activeOpacity={0.7} onPress={logCheckIn}>
+                            accessibilityLabel="TouchableOpacity in sleep-training"
               <Text style={styles.checkInButtonText}>✓ {t('sleepTraining.logCheck') || 'Log Check'}</Text>
             </TouchableOpacity>
           )}
@@ -709,14 +713,17 @@ export default function SleepTrainingScreen() {
 
         <View style={styles.actionRow}>
           <TouchableOpacity style={styles.pauseButton} activeOpacity={0.7} onPress={session.isPaused ? resumeNight : pauseNight}>
+                          accessibilityLabel="TouchableOpacity in sleep-training"
             <Text style={styles.pauseButtonText}>{session.isPaused ? '▶ Resume' : '⏸ Pause'}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.endButton} activeOpacity={0.7} onPress={() => endNight(true)}>
+                          accessibilityLabel="TouchableOpacity in sleep-training"
             <Text style={styles.endButtonText}>{t('sleepTraining.endNight') || '✓ End Night (Success)'}</Text>
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={[styles.navButton, { marginTop: 12 }]} activeOpacity={0.7} onPress={() => setCurrentScreen('method')}>
+                        accessibilityLabel="TouchableOpacity in sleep-training"
           <Text style={styles.navButtonText}>{t('common.back') || 'Back to Methods'}</Text>
         </TouchableOpacity>
       </View>
@@ -770,9 +777,11 @@ export default function SleepTrainingScreen() {
 
         <View style={styles.navRow}>
           <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('method')}>
+                          accessibilityLabel="TouchableOpacity in sleep-training"
             <Text style={styles.navButtonText}>{t('sleepTraining.newSession') || '+ New Session'}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('report')}>
+                          accessibilityLabel="TouchableOpacity in sleep-training"
             <Text style={styles.navButtonText}>{t('sleepTraining.weeklyReport') || '📊 Weekly Report'}</Text>
           </TouchableOpacity>
         </View>
@@ -872,9 +881,11 @@ export default function SleepTrainingScreen() {
 
         <View style={styles.navRow}>
           <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('log')}>
+                          accessibilityLabel="TouchableOpacity in sleep-training"
             <Text style={styles.navButtonText}>{t('sleepTraining.backToLog') || '← Back to Log'}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('method')}>
+                          accessibilityLabel="TouchableOpacity in sleep-training"
             <Text style={styles.navButtonText}>{t('sleepTraining.newSession') || '+ New Session'}</Text>
           </TouchableOpacity>
         </View>
@@ -889,6 +900,7 @@ export default function SleepTrainingScreen() {
         <View style={styles.tabBar}>
           {(['method', 'active', 'log', 'report'] as const).map((tab) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in sleep-training"
               key={tab}
               style={[styles.tabButton, currentScreen === tab && styles.tabButtonActive]}
               activeOpacity={0.7}

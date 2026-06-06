@@ -87,6 +87,7 @@ export default function WeaningRashScreen() {
             const active = w === win;
             return (
               <TouchableOpacity key={w} style={[styles.winChip, active && styles.winChipActive]}
+                              accessibilityLabel="TouchableOpacity in weaning-rash"
                 onPress={() => setWin(w)}>
                 <Text style={[styles.winLabel, active && styles.winLabelActive]}>{label}</Text>
                 <Text style={styles.winCount}>{done} log{done !== 1 ? 's' : ''}</Text>
@@ -105,6 +106,7 @@ export default function WeaningRashScreen() {
 
         {/* Add Food */}
         <TouchableOpacity style={styles.addBtn} onPress={() => setModal(true)}>
+                        accessibilityLabel="Add weaning-rash entry"
           <MaterialCommunityIcons name="plus" size={20} color="#fff" />
           <Text style={styles.addBtnText}>{t('weaningRash.addFood')}</Text>
         </TouchableOpacity>
@@ -146,6 +148,7 @@ export default function WeaningRashScreen() {
             <View style={styles.winRow}>
               {WINDOW_LABELS.map((label, i) => (
                 <TouchableOpacity key={i+1} style={[styles.winOpt, win === i+1 && styles.winOptActive]}
+                                accessibilityLabel="TouchableOpacity in weaning-rash"
                   onPress={() => setWin(i+1)}>
                   <Text style={[styles.winOptText, win === i+1 && styles.winOptTextActive]}>{i+1}</Text>
                 </TouchableOpacity>
@@ -156,6 +159,7 @@ export default function WeaningRashScreen() {
             <View style={styles.rashRow}>
               {(['none','mild','moderate','severe'] as RashType[]).map(r => (
                 <TouchableOpacity key={r} style={[styles.rashBtn, { backgroundColor: RASH_COLORS[r] }]}
+                                accessibilityLabel="TouchableOpacity in weaning-rash"
                   onPress={() => setRash(r)}>
                   <Text style={styles.rashBtnText}>{t('weaningRash.rash' + r.charAt(0).toUpperCase() + r.slice(1))}</Text>
                 </TouchableOpacity>
@@ -166,6 +170,7 @@ export default function WeaningRashScreen() {
             <View style={styles.chipRow}>
               {RASH_LOCATIONS.map(l => (
                 <TouchableOpacity key={l} style={[styles.chip, locs.includes(l) && styles.chipActive]}
+                                accessibilityLabel="TouchableOpacity in weaning-rash"
                   onPress={() => toggleLoc(l)}>
                   <Text style={[styles.chipText, locs.includes(l) && styles.chipTextActive]}>{l}</Text>
                 </TouchableOpacity>
@@ -176,6 +181,7 @@ export default function WeaningRashScreen() {
             <View style={styles.chipRow}>
               {GI_SYMPTOMS.map(g => (
                 <TouchableOpacity key={g} style={[styles.chip, gis.includes(g) && styles.chipActive]}
+                                accessibilityLabel="TouchableOpacity in weaning-rash"
                   onPress={() => toggleGi(g)}>
                   <Text style={[styles.chipText, gis.includes(g) && styles.chipTextActive]}>{g}</Text>
                 </TouchableOpacity>
@@ -186,6 +192,7 @@ export default function WeaningRashScreen() {
             <View style={styles.chipRow}>
               {STOOL_TYPES.map(s => (
                 <TouchableOpacity key={s} style={[styles.chip, stool === s && styles.chipActive]}
+                                accessibilityLabel="TouchableOpacity in weaning-rash"
                   onPress={() => setStool(s)}>
                   <Text style={[styles.chipText, stool === s && styles.chipTextActive]}>{s}</Text>
                 </TouchableOpacity>
@@ -198,9 +205,11 @@ export default function WeaningRashScreen() {
 
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
+                              accessibilityLabel="Cancel weaning-rash action"
                 <Text style={styles.cancelBtnText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={save}>
+                              accessibilityLabel="Save weaning-rash entry"
                 <Text style={styles.saveBtnText}>{t('weaningRash.save')}</Text>
               </TouchableOpacity>
             </View>

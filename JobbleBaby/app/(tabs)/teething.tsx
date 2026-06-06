@@ -334,6 +334,7 @@ export default function TeethingScreen() {
               const erupted = teeth.find((t) => t.toothId === num);
               return (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in teething"
                   key={num}
                   style={[styles.toothCard, erupted && styles.toothCardErupted]}
                   activeOpacity={0.7}
@@ -374,6 +375,7 @@ export default function TeethingScreen() {
               ))}
             </View>
             <TouchableOpacity style={styles.clearButton} onPress={clearTodaySymptoms}>
+                            accessibilityLabel="TouchableOpacity in teething"
               <Text style={styles.clearButtonText}>{t('teething.clearToday') || 'Clear today'}</Text>
             </TouchableOpacity>
           </View>
@@ -386,6 +388,7 @@ export default function TeethingScreen() {
             const count = getSymptomCount(symptomId);
             return (
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in teething"
                 key={symptomId}
                 style={[styles.symptomCard, selectedSymptom === symptomId && styles.symptomCardSelected]}
                 activeOpacity={0.7}
@@ -409,6 +412,7 @@ export default function TeethingScreen() {
             <View style={styles.severityRow}>
               {([1, 2, 3] as const).map((sev) => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in teething"
                   key={sev}
                   style={[styles.severityButton, severity === sev && styles.severityButtonActive]}
                   activeOpacity={0.7}
@@ -423,10 +427,12 @@ export default function TeethingScreen() {
             <View style={styles.noteInput}>
               <Text style={styles.noteInputLabel}>{t('teething.noteOptional') || 'Note (optional)'}</Text>
               <TouchableOpacity onPress={() => Alert.prompt ? Alert.prompt('Add note', '', (text) => setNote(text || '')) : null}>
+                              accessibilityLabel="Add teething entry"
                 <Text style={styles.noteInputText}>{note || t('teething.tapToAddNote') || 'Tap to add note...'}</Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.logButton} activeOpacity={0.7} onPress={logSymptom}>
+                            accessibilityLabel="TouchableOpacity in teething"
               <Text style={styles.logButtonText}>✓ {t('teething.logSymptom') || 'Log Symptom'}</Text>
             </TouchableOpacity>
           </>
@@ -530,6 +536,7 @@ export default function TeethingScreen() {
         <View style={styles.tabBar}>
           {(['chart', 'tracker', 'relief', 'tips'] as const).map((tab) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in teething"
               key={tab}
               style={[styles.tabButton, currentScreen === tab && styles.tabButtonActive]}
               activeOpacity={0.7}

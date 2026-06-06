@@ -135,6 +135,7 @@ export default function ProductsScreen() {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterRow}>
           {AGE_FILTERS.map(filter => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in products"
               key={filter}
               style={[styles.filterChip, ageFilter === filter && styles.filterChipActive]}
               onPress={() => setAgeFilter(filter)}
@@ -155,6 +156,7 @@ export default function ProductsScreen() {
             </View>
             {category.products.map((product) => (
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in products"
                 key={product.id}
                 style={styles.productCard}
                 activeOpacity={0.7}

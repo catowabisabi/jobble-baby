@@ -102,6 +102,7 @@ export default function JetLagScreen() {
             {/* Day Cards */}
             {plan.days.map((d, i) => (
               <TouchableOpacity key={d.day} style={[styles.dayCard, d.completed && styles.dayCardDone]}
+                              accessibilityLabel="TouchableOpacity in jet-lag"
                 onPress={() => !d.completed && completeDay(d.day)}>
                 <View style={styles.dayHeader}>
                   <Text style={styles.dayNum}>{t('jetLag.currentDay')} {d.day}</Text>
@@ -126,6 +127,7 @@ export default function JetLagScreen() {
 
         {/* Start New Plan */}
         <TouchableOpacity style={styles.addBtn} onPress={() => setModal(true)}>
+                        accessibilityLabel="Add jet-lag entry"
           <MaterialCommunityIcons name="plus" size={20} color="#fff" />
           <Text style={styles.addBtnText}>{t('jetLag.startPlan')}</Text>
         </TouchableOpacity>
@@ -148,9 +150,11 @@ export default function JetLagScreen() {
 
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
+                              accessibilityLabel="Cancel jet-lag action"
                 <Text style={styles.cancelBtnText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={start}>
+                              accessibilityLabel="Start jet-lag timer"
                 <Text style={styles.saveBtnText}>{t('jetLag.save')}</Text>
               </TouchableOpacity>
             </View>

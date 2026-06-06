@@ -449,6 +449,7 @@ export default function TummyTimeScreen() {
           <View style={styles.positionSelector}>
             {POSITIONS.map((pos) => (
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in tummy-time"
                 key={pos.id}
                 style={[
                   styles.positionChip,
@@ -478,16 +479,19 @@ export default function TummyTimeScreen() {
           <View style={styles.timerButtonRow}>
             {!isTimerRunning ? (
               <TouchableOpacity style={styles.startBtn} activeOpacity={0.7} onPress={startTimer}>
+                              accessibilityLabel="Start tummy-time timer"
                 <Text style={styles.startBtnText}>▶ {t('tummyTime.start') || 'Start'}</Text>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity style={styles.stopBtn} activeOpacity={0.7} onPress={stopTimer}>
+                              accessibilityLabel="Stop tummy-time timer"
                 <Text style={styles.stopBtnText}>⏹ {t('tummyTime.stop') || 'Stop'}</Text>
               </TouchableOpacity>
             )}
           </View>
 
           <TouchableOpacity style={styles.manualBtn} activeOpacity={0.7} onPress={addManualEntry}>
+                          accessibilityLabel="Add tummy-time entry"
             <Text style={styles.manualBtnText}>✏️ {t('tummyTime.manualEntry') || 'Manual Entry'}</Text>
           </TouchableOpacity>
         </View>

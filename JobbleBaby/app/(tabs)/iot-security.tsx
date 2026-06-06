@@ -158,6 +158,7 @@ export default function IoTSecurityScreen() {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.brandScroll}>
           {BRANDS.map(b => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in iot-security"
               key={b.id}
               onPress={() => setSelectedBrand(b.id)}
               style={[styles.brandChip, { backgroundColor: selectedBrand === b.id ? C.accent : C.card, borderColor: C.accent }]}
@@ -171,6 +172,7 @@ export default function IoTSecurityScreen() {
         <Text style={[styles.sectionTitle, { color: C.text }]}>{t('iotSecurity.securityChecklist')}</Text>
         {(CHECKLIST_TEMPLATE[selectedBrand] || []).map(item => (
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in iot-security"
             key={item.key}
             style={[styles.checkItem, { backgroundColor: C.card }]}
             onPress={() => toggleItem(item.key)}
@@ -189,6 +191,7 @@ export default function IoTSecurityScreen() {
         {/* Privacy Policy Link */}
         {brand && (
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in iot-security"
             style={[styles.privacyBtn, { backgroundColor: C.card }]}
             onPress={() => Linking.openURL(brand.privacyUrl)}
           >
@@ -208,6 +211,7 @@ export default function IoTSecurityScreen() {
           { key: 'password', icon: 'lock-outline', title: t('iotSecurity.edu_password_title'), body: t('iotSecurity.edu_password_body') },
         ].map(card => (
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in iot-security"
             key={card.key}
             style={[styles.eduCard, { backgroundColor: C.card }]}
             onPress={() => setExpandedCard(expandedCard === 'edu_' + card.key ? null : 'edu_' + card.key)}
@@ -233,6 +237,7 @@ export default function IoTSecurityScreen() {
             onChangeText={setAlertText}
           />
           <TouchableOpacity style={[styles.addBtn, { backgroundColor: C.accent }]} onPress={addAlert}>
+                          accessibilityLabel="Add iot-security entry"
             <MaterialCommunityIcons name="plus" size={20} color="#fff" />
           </TouchableOpacity>
         </View>

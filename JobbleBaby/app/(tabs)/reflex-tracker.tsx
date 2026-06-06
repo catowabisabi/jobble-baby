@@ -336,6 +336,7 @@ export default function ReflexTrackerScreen() {
           return (
             <View key={reflex.id} style={[styles.reflexCard, isAlert && styles.reflexCardAlert]}>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in reflex-tracker"
                 activeOpacity={0.7}
                 onPress={() => setExpandedReflex(isExpanded ? null : reflex.id)}
                 style={styles.reflexCardHeader}
@@ -365,6 +366,7 @@ export default function ReflexTrackerScreen() {
               {isExpanded && (
                 <View style={styles.historySection}>
                   <TouchableOpacity
+                                  accessibilityLabel="TouchableOpacity in reflex-tracker"
                     style={{ backgroundColor: REFLEX_BLUE, borderRadius: 10, padding: 10, alignItems: 'center', marginBottom: 12 }}
                     activeOpacity={0.7}
                     onPress={() => openForm(reflex.id)}
@@ -408,6 +410,7 @@ export default function ReflexTrackerScreen() {
             <View style={styles.statusRow}>
               {statusOptions.map((opt) => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in reflex-tracker"
                   key={opt}
                   style={[styles.statusOption, selectedStatus === opt && styles.statusOptionSelected]}
                   activeOpacity={0.7}
@@ -421,6 +424,7 @@ export default function ReflexTrackerScreen() {
             </View>
 
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in reflex-tracker"
               style={styles.noteInput}
               onPress={() => {
                 Alert.prompt
@@ -444,9 +448,11 @@ export default function ReflexTrackerScreen() {
 
             <View style={styles.formBtnRow}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowForm(false)}>
+                              accessibilityLabel="Toggle reflex-tracker panel"
                 <Text style={styles.cancelBtnText}>{t('common.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={saveEntry}>
+                              accessibilityLabel="Save reflex-tracker entry"
                 <Text style={styles.saveBtnText}>{t('common.save') || 'Save'}</Text>
               </TouchableOpacity>
             </View>

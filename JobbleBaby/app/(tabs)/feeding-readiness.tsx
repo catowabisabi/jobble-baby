@@ -349,6 +349,7 @@ export default function FeedingReadinessScreen() {
         <View style={styles.sectionNav}>
           {SECTIONS.map(s => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in feeding-readiness"
               key={s.key}
               style={[styles.sectionBtn, activeSection === s.key && styles.sectionBtnActive]}
               onPress={() => setActiveSection(s.key)}
@@ -375,6 +376,7 @@ export default function FeedingReadinessScreen() {
                   <Text style={styles.signDesc}>{t('feedingReadiness.' + sign.desc)}</Text>
                 </View>
                 <TouchableOpacity style={styles.checkBtn} onPress={() => toggleCheck(sign.id)}>
+                                accessibilityLabel="TouchableOpacity in feeding-readiness"
                   <MaterialCommunityIcons
                     name={checklistDone[sign.id] ? 'checkbox-marked' : 'checkbox-blank-outline'}
                     size={24} color={checklistDone[sign.id] ? '#10B981' : C.muted}
@@ -403,6 +405,7 @@ export default function FeedingReadinessScreen() {
               <View style={styles.flavorGrid}>
                 {FLAVOR_CATEGORIES.map(cat => (
                   <TouchableOpacity
+                                  accessibilityLabel="TouchableOpacity in feeding-readiness"
                     key={cat}
                     style={[styles.flavorChip, flavorForm.category === cat && styles.flavorChipActive]}
                     onPress={() => setFlavorForm(f => ({ ...f, category: cat }))}
@@ -415,6 +418,7 @@ export default function FeedingReadinessScreen() {
               </View>
 
               <TouchableOpacity style={styles.addBtn} onPress={() => setShowFlavorModal(true)}>
+                              accessibilityLabel="Toggle feeding-readiness panel"
                 <MaterialCommunityIcons name="plus" size={18} color={C.text} />
                 <Text style={styles.addBtnText}>{t('feedingReadiness.addFlavorEntry')}</Text>
               </TouchableOpacity>
@@ -446,6 +450,7 @@ export default function FeedingReadinessScreen() {
               {TEXTURE_STAGES.map((s, idx) => (
                 <View key={s.stage} style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
                   <TouchableOpacity
+                                  accessibilityLabel="TouchableOpacity in feeding-readiness"
                     style={textureStage.current_stage >= s.stage ? styles.stageActive : styles.stageInactive}
                     onPress={() => textureStage.current_stage < s.stage && advanceTexture()}
                     disabled={textureStage.current_stage >= s.stage}
@@ -462,6 +467,7 @@ export default function FeedingReadinessScreen() {
             </View>
             {textureStage.current_stage < 4 && (
               <TouchableOpacity style={styles.addBtn} onPress={advanceTexture}>
+                              accessibilityLabel="Add feeding-readiness entry"
                 <Text style={styles.addBtnText}>{t('feedingReadiness.advanceStage')}</Text>
               </TouchableOpacity>
             )}
@@ -477,6 +483,7 @@ export default function FeedingReadinessScreen() {
                 const log = allergenLog.find(l => l.allergen === a.id);
                 return (
                   <TouchableOpacity key={a.id} style={styles.allergenItem} onPress={() => openAllergenModal(a.id)}>
+                                  accessibilityLabel="TouchableOpacity in feeding-readiness"
                     <Text style={styles.allergenEmoji}>{a.emoji}</Text>
                     <Text style={styles.allergenName}>{a.name}</Text>
                     <Text style={[styles.allergenStatus, log ? { color: SEVERITY_COLORS[log.reaction_severity] } : {}]}>
@@ -498,6 +505,7 @@ export default function FeedingReadinessScreen() {
             </Text>
             {IRON_FOODS.map(food => (
               <TouchableOpacity key={food.id} style={styles.ironRow} onPress={() => toggleIron(food.id)}>
+                              accessibilityLabel="TouchableOpacity in feeding-readiness"
                 <View style={[styles.ironCheck, ironIntake[food.id] && styles.ironCheckFilled]}>
                   {ironIntake[food.id] && <MaterialCommunityIcons name="check" size={14} color={C.text} />}
                 </View>
@@ -538,6 +546,7 @@ export default function FeedingReadinessScreen() {
             <View style={styles.flavorGrid}>
               {FLAVOR_CATEGORIES.map(cat => (
                 <TouchableOpacity key={cat} style={[styles.flavorChip, flavorForm.category === cat && styles.flavorChipActive]}
+                                accessibilityLabel="TouchableOpacity in feeding-readiness"
                   onPress={() => setFlavorForm(s => ({ ...s, category: cat }))}>
                   <Text style={[styles.flavorChipText, flavorForm.category === cat && styles.flavorChipTextActive]}>
                     {t('feedingReadiness.cat' + cat.charAt(0).toUpperCase() + cat.slice(1))}
@@ -553,6 +562,7 @@ export default function FeedingReadinessScreen() {
             <View style={styles.severityRow}>
               {([1, 2, 3] as const).map(sev => (
                 <TouchableOpacity key={sev} style={[styles.severityBtn, flavorForm.severity === sev && styles.severityBtnActive]}
+                                accessibilityLabel="TouchableOpacity in feeding-readiness"
                   onPress={() => setFlavorForm(s => ({ ...s, severity: sev }))}>
                   <Text style={[styles.severityBtnText, flavorForm.severity === sev && styles.severityBtnTextActive]}>
                     {sev === 1 ? t('feedingReadiness.accepted') : sev === 2 ? t('feedingReadiness.reluctant') : t('feedingReadiness.rejected')}
@@ -563,9 +573,11 @@ export default function FeedingReadinessScreen() {
 
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowFlavorModal(false)}>
+                              accessibilityLabel="Toggle feeding-readiness panel"
                 <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={saveFlavorEntry}>
+                              accessibilityLabel="Save feeding-readiness entry"
                 <Text style={styles.saveBtnText}>{t('common.save')}</Text>
               </TouchableOpacity>
             </View>
@@ -588,6 +600,7 @@ export default function FeedingReadinessScreen() {
             <View style={styles.severityRow}>
               {(['none', 'mild', 'moderate', 'severe'] as const).map(sev => (
                 <TouchableOpacity key={sev} style={[styles.severityBtn, allergenSeverity === sev && styles.severityBtnActive]}
+                                accessibilityLabel="TouchableOpacity in feeding-readiness"
                   onPress={() => setAllergenSeverity(sev)}>
                   <Text style={[styles.severityBtnText, allergenSeverity === sev && styles.severityBtnTextActive]}>
                     {t('feedingReadiness.' + sev)}
@@ -598,9 +611,11 @@ export default function FeedingReadinessScreen() {
 
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowAllergenModal(false)}>
+                              accessibilityLabel="Toggle feeding-readiness panel"
                 <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={saveAllergenEntry}>
+                              accessibilityLabel="Save feeding-readiness entry"
                 <Text style={styles.saveBtnText}>{t('common.save')}</Text>
               </TouchableOpacity>
             </View>

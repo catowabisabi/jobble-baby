@@ -360,6 +360,7 @@ export default function FontanelleScreen() {
             </View>
 
             <TouchableOpacity style={styles.photoButton} onPress={pickImage} activeOpacity={0.7}>
+                            accessibilityLabel="TouchableOpacity in fontanelle"
               <Ionicons name="camera-outline" size={24} color={C.muted} style={{ marginBottom: 8 }} />
               <Text style={styles.photoButtonText}>
                 {photoUri ? '📷 Photo added — tap to change' : 'Add Photo (optional)'}
@@ -381,6 +382,7 @@ export default function FontanelleScreen() {
             </View>
 
             <TouchableOpacity style={styles.logButton} onPress={saveEntry} activeOpacity={0.7}>
+                            accessibilityLabel="Save fontanelle entry"
               <Text style={styles.logButtonText}>✓ {t('fontanelle.saveEntry') || 'Save Entry'}</Text>
             </TouchableOpacity>
 
@@ -475,6 +477,7 @@ export default function FontanelleScreen() {
         <View style={styles.tabBar}>
           {(['chart', 'log', 'tips'] as const).map((tab) => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in fontanelle"
               key={tab}
               style={[styles.tabButton, currentScreen === tab && styles.tabButtonActive]}
               activeOpacity={0.7}

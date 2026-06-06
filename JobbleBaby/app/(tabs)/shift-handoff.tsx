@@ -412,6 +412,7 @@ export default function ShiftHandoff() {
           <Text style={styles.sectionTitle}>{t('shiftHandoff.shiftToggle')}</Text>
           <View style={styles.shiftButtons}>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in shift-handoff"
               style={[
                 styles.shiftButton,
                 shiftState.activeCaregiver === 'PA' ? styles.shiftButtonActive : styles.shiftButtonInactive,
@@ -426,6 +427,7 @@ export default function ShiftHandoff() {
               )}
             </TouchableOpacity>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in shift-handoff"
               style={[
                 styles.shiftButton,
                 shiftState.activeCaregiver === 'PB' ? styles.shiftButtonActive : styles.shiftButtonInactive,
@@ -513,6 +515,7 @@ export default function ShiftHandoff() {
           <Text style={styles.sectionTitle}>{t('shiftHandoff.careLog')}</Text>
           <View style={styles.quickEntryRow}>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in shift-handoff"
               style={[styles.quickEntryButton, { backgroundColor: '#F5B7B1' }]}
               onPress={() => openEntryModal('feeding')}
             >
@@ -520,6 +523,7 @@ export default function ShiftHandoff() {
               <Text style={styles.quickEntryLabel}>{t('shiftHandoff.feeding')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in shift-handoff"
               style={[styles.quickEntryButton, { backgroundColor: '#AED6F1' }]}
               onPress={() => openEntryModal('sleep')}
             >
@@ -527,6 +531,7 @@ export default function ShiftHandoff() {
               <Text style={styles.quickEntryLabel}>{t('shiftHandoff.sleep')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in shift-handoff"
               style={[styles.quickEntryButton, { backgroundColor: '#A8D5BA' }]}
               onPress={() => openEntryModal('diaper')}
             >
@@ -534,6 +539,7 @@ export default function ShiftHandoff() {
               <Text style={styles.quickEntryLabel}>{t('shiftHandoff.diaper')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in shift-handoff"
               style={[styles.quickEntryButton, { backgroundColor: '#F5B7B1' }]}
               onPress={() => openEntryModal('medicine')}
             >
@@ -541,6 +547,7 @@ export default function ShiftHandoff() {
               <Text style={styles.quickEntryLabel}>{t('shiftHandoff.medicine')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in shift-handoff"
               style={[styles.quickEntryButton, { backgroundColor: '#D2B4DE' }]}
               onPress={() => openEntryModal('note')}
             >
@@ -596,9 +603,11 @@ export default function ShiftHandoff() {
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity style={[styles.modalButton, styles.modalButtonCancel]} onPress={cancelShiftSwitch}>
+                              accessibilityLabel="Cancel shift-handoff action"
                 <Text style={styles.modalButtonTextCancel}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.modalButton, styles.modalButtonConfirm]} onPress={confirmShiftSwitch}>
+                              accessibilityLabel="TouchableOpacity in shift-handoff"
                 <Text style={styles.modalButtonText}>{t('common.confirm')}</Text>
               </TouchableOpacity>
             </View>
@@ -615,6 +624,7 @@ export default function ShiftHandoff() {
               <View style={styles.subTypeRow}>
                 {['breast', 'bottle', 'solid'].map((sub) => (
                   <TouchableOpacity
+                                  accessibilityLabel="TouchableOpacity in shift-handoff"
                     key={sub}
                     style={[styles.subTypeButton, entrySubType === sub && styles.subTypeButtonSelected]}
                     onPress={() => setEntrySubType(sub)}
@@ -631,6 +641,7 @@ export default function ShiftHandoff() {
               <View style={styles.subTypeRow}>
                 {['nap', 'night'].map((sub) => (
                   <TouchableOpacity
+                                  accessibilityLabel="TouchableOpacity in shift-handoff"
                     key={sub}
                     style={[styles.subTypeButton, entrySubType === sub && styles.subTypeButtonSelected]}
                     onPress={() => setEntrySubType(sub)}
@@ -647,6 +658,7 @@ export default function ShiftHandoff() {
               <View style={styles.subTypeRow}>
                 {['wet', 'dry', 'both'].map((sub) => (
                   <TouchableOpacity
+                                  accessibilityLabel="TouchableOpacity in shift-handoff"
                     key={sub}
                     style={[styles.subTypeButton, entrySubType === sub && styles.subTypeButtonSelected]}
                     onPress={() => setEntrySubType(sub)}
@@ -696,12 +708,14 @@ export default function ShiftHandoff() {
 
             <View style={styles.modalButtons}>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in shift-handoff"
                 style={[styles.modalButton, styles.modalButtonCancel]}
                 onPress={() => setShowEntryModal(false)}
               >
                 <Text style={styles.modalButtonTextCancel}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.modalButton, styles.modalButtonConfirm]} onPress={saveEntry}>
+                              accessibilityLabel="Save shift-handoff entry"
                 <Text style={styles.modalButtonText}>{t('common.save')}</Text>
               </TouchableOpacity>
             </View>

@@ -115,6 +115,7 @@ export default function MoroReflexScreen() {
 
         {/* Add Event */}
         <TouchableOpacity style={styles.addBtn} onPress={() => setModal(true)}>
+                        accessibilityLabel="Add moro-reflex entry"
           <MaterialCommunityIcons name="plus" size={20} color="#fff" />
           <Text style={styles.addBtnText}>{t('moroReflex.addEvent')}</Text>
         </TouchableOpacity>
@@ -154,6 +155,7 @@ export default function MoroReflexScreen() {
             <View style={styles.chipRow}>
               {TRIGGERS.map(tr => (
                 <TouchableOpacity key={tr.key} style={[styles.chip, trigger === tr.key && styles.chipActive]}
+                                accessibilityLabel="TouchableOpacity in moro-reflex"
                   onPress={() => setTrigger(tr.key)}>
                   <Text style={[styles.chipText, trigger === tr.key && styles.chipTextActive]}>
                     {t(tr.labelKey)}
@@ -166,6 +168,7 @@ export default function MoroReflexScreen() {
             <View style={styles.sevRow}>
               {SEVERITIES.map(s => (
                 <TouchableOpacity key={s} style={[styles.sevBtn, { backgroundColor: SEV_COLORS[s] }]}
+                                accessibilityLabel="TouchableOpacity in moro-reflex"
                   onPress={() => setSeverity(s)}>
                   <Text style={styles.sevBtnText}>{t('moroReflex.' + s)}</Text>
                 </TouchableOpacity>
@@ -175,10 +178,12 @@ export default function MoroReflexScreen() {
             <Text style={styles.fieldLabel}>{t('moroReflex.sleepDisruption')}</Text>
             <View style={styles.disruptRow}>
               <TouchableOpacity style={[styles.disruptBtn, !disruption && styles.disruptBtnActive]}
+                              accessibilityLabel="TouchableOpacity in moro-reflex"
                 onPress={() => setDisruption(false)}>
                 <Text style={[styles.disruptBtnText, !disruption && styles.disruptBtnTextActive]}>{t('moroReflex.no')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.disruptBtn, disruption && styles.disruptBtnActive]}
+                              accessibilityLabel="TouchableOpacity in moro-reflex"
                 onPress={() => setDisruption(true)}>
                 <Text style={[styles.disruptBtnText, disruption && styles.disruptBtnTextActive]}>{t('moroReflex.yes')}</Text>
               </TouchableOpacity>
@@ -190,9 +195,11 @@ export default function MoroReflexScreen() {
 
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
+                              accessibilityLabel="Cancel moro-reflex action"
                 <Text style={styles.cancelBtnText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={save}>
+                              accessibilityLabel="Save moro-reflex entry"
                 <Text style={styles.saveBtnText}>{t('moroReflex.save')}</Text>
               </TouchableOpacity>
             </View>

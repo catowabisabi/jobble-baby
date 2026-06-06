@@ -48,6 +48,7 @@ const STORAGE_KEYS = [
 function SettingRow({ icon, label, onPress, isLoading, rowStyles }: SettingRowProps) {
   return (
     <TouchableOpacity
+                    accessibilityLabel="TouchableOpacity in profile"
       style={rowStyles.container}
       activeOpacity={onPress ? 0.7 : 1}
       onPress={onPress}
@@ -72,6 +73,7 @@ function ThemeToggleRow({ rowStyles }: ThemeToggleRowProps) {
   const label = theme === 'system' ? t('profile.auto') : t('profile.' + theme);
   return (
     <TouchableOpacity style={rowStyles.container} onPress={toggleTheme} activeOpacity={0.7}>
+                    accessibilityLabel="TouchableOpacity in profile"
       <View style={rowStyles.left}>
         <Text style={rowStyles.icon}>🎨</Text>
         <Text style={rowStyles.label}>{t('profile.theme')}</Text>
@@ -89,6 +91,7 @@ function LanguageToggleRow({ rowStyles }: { rowStyles: ReturnType<typeof StyleSh
   const label = language === 'en' ? 'English' : '繁體中文';
   return (
     <TouchableOpacity style={rowStyles.container} onPress={toggleLanguage} activeOpacity={0.7}>
+                    accessibilityLabel="TouchableOpacity in profile"
       <View style={rowStyles.left}>
         <Text style={rowStyles.icon}>🌐</Text>
         <Text style={rowStyles.label}>{t('profile.language')}</Text>
@@ -441,6 +444,7 @@ export default function ProfileScreen() {
               <Text style={styles.avatarInitials}>{babyProfile?.name ? babyProfile.name.charAt(0).toUpperCase() : 'B'}</Text>
             )}
             <TouchableOpacity style={styles.changePhotoBtn} onPress={handleChangePhoto} activeOpacity={0.7}>
+                            accessibilityLabel="TouchableOpacity in profile"
               <MaterialCommunityIcons name="camera" size={12} color="#fff" />
             </TouchableOpacity>
           </View>
@@ -463,6 +467,7 @@ export default function ProfileScreen() {
 
         {/* Badge Gallery Button */}
         <TouchableOpacity
+                        accessibilityLabel="TouchableOpacity in profile"
           style={styles.badgeButton}
           activeOpacity={0.7}
           onPress={() => setShowBadges(!showBadges)}

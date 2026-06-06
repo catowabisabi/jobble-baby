@@ -258,6 +258,7 @@ export default function CaregiverFatigueScreen() {
         {/* Burnout Trajectory Survey */}
         {!survey && (
           <TouchableOpacity style={styles.actionCard} onPress={() => setShowSurvey(true)}>
+                          accessibilityLabel="Toggle caregiver-fatigue panel"
             <MaterialCommunityIcons name="clipboard-text" size={28} color="#3B82F6" />
             <View style={styles.actionInfo}>
               <Text style={styles.actionTitle}>{t('caregiverFatigue.takeSurvey')}</Text>
@@ -279,6 +280,7 @@ export default function CaregiverFatigueScreen() {
               <Text style={styles.checkInLabel}>{t('caregiverFatigue.energy')}</Text>
               {[1, 2, 3, 4, 5].map(v => (
                 <TouchableOpacity key={v} style={[styles.rateBtn, todayCheckIn.energy === v && styles.rateBtnActive]} onPress={() => setTodayCheckIn({ ...todayCheckIn, energy: v })}>
+                                accessibilityLabel="TouchableOpacity in caregiver-fatigue"
                   <Text style={[styles.rateBtnText, todayCheckIn.energy === v && styles.rateBtnTextActive]}>{v}</Text>
                 </TouchableOpacity>
               ))}
@@ -288,6 +290,7 @@ export default function CaregiverFatigueScreen() {
             <Text style={styles.checkInLabel}>{t('caregiverFatigue.mood')}</Text>
             {[1, 2, 3, 4, 5].map(v => (
               <TouchableOpacity key={v} style={[styles.rateBtn, todayCheckIn.mood === v && styles.rateBtnActive]} onPress={() => setTodayCheckIn({ ...todayCheckIn, mood: v })}>
+                              accessibilityLabel="TouchableOpacity in caregiver-fatigue"
                 <Text style={[styles.rateBtnText, todayCheckIn.mood === v && styles.rateBtnTextActive]}>{v}</Text>
               </TouchableOpacity>
             ))}
@@ -296,6 +299,7 @@ export default function CaregiverFatigueScreen() {
             <Text style={styles.checkInLabel}>{t('caregiverFatigue.patience')}</Text>
             {[1, 2, 3, 4, 5].map(v => (
               <TouchableOpacity key={v} style={[styles.rateBtn, todayCheckIn.patience === v && styles.rateBtnActive]} onPress={() => setTodayCheckIn({ ...todayCheckIn, patience: v })}>
+                              accessibilityLabel="TouchableOpacity in caregiver-fatigue"
                 <Text style={[styles.rateBtnText, todayCheckIn.patience === v && styles.rateBtnTextActive]}>{v}</Text>
               </TouchableOpacity>
             ))}
@@ -304,12 +308,14 @@ export default function CaregiverFatigueScreen() {
             <Text style={styles.checkInLabel}>{t('caregiverFatigue.connection')}</Text>
             {[1, 2, 3, 4, 5].map(v => (
               <TouchableOpacity key={v} style={[styles.rateBtn, todayCheckIn.connection === v && styles.rateBtnActive]} onPress={() => setTodayCheckIn({ ...todayCheckIn, connection: v })}>
+                              accessibilityLabel="TouchableOpacity in caregiver-fatigue"
                 <Text style={[styles.rateBtnText, todayCheckIn.connection === v && styles.rateBtnTextActive]}>{v}</Text>
               </TouchableOpacity>
             ))}
           </View>
           {!hasCheckedInToday && (
             <TouchableOpacity style={styles.saveBtn} onPress={saveDailyCheckIn}>
+                            accessibilityLabel="Save caregiver-fatigue entry"
               <Text style={styles.saveBtnText}>{t('caregiverFatigue.saveCheckIn')}</Text>
             </TouchableOpacity>
           )}
@@ -325,10 +331,12 @@ export default function CaregiverFatigueScreen() {
                 <Text style={styles.taskLabel}>{task.label}</Text>
                 <View style={styles.taskControls}>
                   <TouchableOpacity style={styles.taskBtn} onPress={() => updateMentalLoad(task.id, Math.max(0, task.estimatedHours - 0.5))}>
+                                  accessibilityLabel="TouchableOpacity in caregiver-fatigue"
                     <Text style={styles.taskBtnText}>-</Text>
                   </TouchableOpacity>
                   <Text style={styles.taskHours}>{task.estimatedHours.toFixed(1)}h</Text>
                   <TouchableOpacity style={styles.taskBtn} onPress={() => updateMentalLoad(task.id, task.estimatedHours + 0.5)}>
+                                  accessibilityLabel="TouchableOpacity in caregiver-fatigue"
                     <Text style={styles.taskBtnText}>+</Text>
                   </TouchableOpacity>
                 </View>
@@ -345,6 +353,7 @@ export default function CaregiverFatigueScreen() {
             <View style={styles.restBtns}>
               {[15, 30, 60].map(m => (
                 <TouchableOpacity key={m} style={styles.restBtn} onPress={() => addRestWindow(m)}>
+                                accessibilityLabel="Add caregiver-fatigue entry"
                   <Text style={styles.restBtnText}>+{m}m</Text>
                 </TouchableOpacity>
               ))}
@@ -359,6 +368,7 @@ export default function CaregiverFatigueScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('caregiverFatigue.respiteScheduling')}</Text>
           <TouchableOpacity style={styles.respiteCard} onPress={() => setShowRespite(true)}>
+                          accessibilityLabel="Toggle caregiver-fatigue panel"
             <MaterialCommunityIcons name="calendar-check" size={24} color="#8B5CF6" />
             <View style={styles.respiteInfo}>
               <Text style={styles.respiteGoalText}>{t('caregiverFatigue.weeklyGoal')}: {respiteGoal.weeklyHoursGoal}h</Text>
@@ -369,6 +379,7 @@ export default function CaregiverFatigueScreen() {
 
         {/* Shift Handoff Link */}
         <TouchableOpacity style={styles.handoffLink}>
+                        accessibilityLabel="TouchableOpacity in caregiver-fatigue"
           <MaterialCommunityIcons name="account-switch" size={24} color="#3B82F6" />
           <Text style={styles.handoffText}>{t('caregiverFatigue.delegateMore')}</Text>
         </TouchableOpacity>
@@ -391,6 +402,7 @@ export default function CaregiverFatigueScreen() {
                 <View style={styles.surveyBtns}>
                   {[1, 2, 3, 4, 5].map(v => (
                     <TouchableOpacity
+                                    accessibilityLabel="TouchableOpacity in caregiver-fatigue"
                       key={v}
                       style={[styles.surveyBtn, (surveyForm as any)[item.key] === v && styles.surveyBtnActive]}
                       onPress={() => setSurveyForm({ ...surveyForm, [item.key]: v })}
@@ -403,9 +415,11 @@ export default function CaregiverFatigueScreen() {
             ))}
             <View style={styles.modalActions}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowSurvey(false)}>
+                              accessibilityLabel="Toggle caregiver-fatigue panel"
                 <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.submitBtn} onPress={saveSurvey}>
+                              accessibilityLabel="Save caregiver-fatigue entry"
                 <Text style={styles.submitBtnText}>{t('common.save')}</Text>
               </TouchableOpacity>
             </View>
@@ -423,6 +437,7 @@ export default function CaregiverFatigueScreen() {
               <View style={styles.surveyBtns}>
                 {[1, 2, 3, 4, 5].map(v => (
                   <TouchableOpacity
+                                  accessibilityLabel="TouchableOpacity in caregiver-fatigue"
                     key={v}
                     style={[styles.surveyBtn, respiteForm.goalHours === v && styles.surveyBtnActive]}
                     onPress={() => setRespiteForm({ ...respiteForm, goalHours: v })}
@@ -434,9 +449,11 @@ export default function CaregiverFatigueScreen() {
             </View>
             <View style={styles.modalActions}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowRespite(false)}>
+                              accessibilityLabel="Toggle caregiver-fatigue panel"
                 <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.submitBtn} onPress={saveRespite}>
+                              accessibilityLabel="Save caregiver-fatigue entry"
                 <Text style={styles.submitBtnText}>{t('common.save')}</Text>
               </TouchableOpacity>
             </View>

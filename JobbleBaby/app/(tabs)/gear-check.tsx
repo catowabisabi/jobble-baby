@@ -199,6 +199,7 @@ export default function GearCheckScreen() {
       <View style={styles.tripTypeRow}>
         {(Object.keys(TRIP_LABELS) as TripType[]).map(type => (
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in gear-check"
             key={type}
             style={[
               styles.tripChip,
@@ -230,6 +231,7 @@ export default function GearCheckScreen() {
             </Text>
             {items.map(item => (
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in gear-check"
                 key={item.id}
                 style={[styles.itemRow, { backgroundColor: C.card }]}
                 onPress={() => toggleItem(item.id)}
@@ -252,6 +254,7 @@ export default function GearCheckScreen() {
         ))}
 
         <TouchableOpacity
+                        accessibilityLabel="TouchableOpacity in gear-check"
           style={[styles.addCustomBtn, { borderColor: C.border }]}
           onPress={() => setShowCustom(true)}
         >
@@ -264,12 +267,14 @@ export default function GearCheckScreen() {
 
       <View style={[styles.footer, { borderTopColor: C.border }]}>
         <TouchableOpacity style={[styles.footerBtn, { backgroundColor: C.card }]} onPress={resetChecklist}>
+                        accessibilityLabel="TouchableOpacity in gear-check"
           <MaterialIcons name="refresh" size={20} color={C.text} />
           <Text style={[styles.footerBtnText, { color: C.text }]}>
             {t('gearCheck.reset') || 'Reset'}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+                        accessibilityLabel="TouchableOpacity in gear-check"
           style={[styles.saveBtn, { backgroundColor: C.accent }]}
           onPress={saveCurrentAndStartNew}
         >
@@ -292,9 +297,11 @@ export default function GearCheckScreen() {
             />
             <View style={styles.modalBtns}>
               <TouchableOpacity style={[styles.modalBtn, { borderColor: C.border }]} onPress={() => { setShowCustom(false); setCustomItem(''); }}>
+                              accessibilityLabel="Toggle gear-check panel"
                 <Text style={[styles.modalBtnText, { color: C.text }]}>{t('common.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} onPress={addCustomItem}>
+                              accessibilityLabel="Add gear-check entry"
                 <Text style={styles.modalBtnPrimary}>{t('common.add') || 'Add'}</Text>
               </TouchableOpacity>
             </View>

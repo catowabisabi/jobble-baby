@@ -506,6 +506,7 @@ export default function MedicineDoseScreen() {
         <View style={styles.dropdownSection}>
           <Text style={styles.sectionLabel}>{t('medicineDose.medication.label') || 'Medication'}</Text>
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in medicine-dose"
             style={[styles.dropdownButton, showDropdown && styles.dropdownButtonActive]}
             activeOpacity={0.7}
             onPress={() => setShowDropdown(!showDropdown)}
@@ -525,6 +526,7 @@ export default function MedicineDoseScreen() {
                 const isSelected = med === selectedMed;
                 return (
                   <TouchableOpacity
+                                  accessibilityLabel="TouchableOpacity in medicine-dose"
                     key={med}
                     style={[styles.dropdownItem, isSelected && styles.dropdownItemSelected, med === 'diphenhydramine' && styles.dropdownItemLast]}
                     activeOpacity={0.7}
@@ -579,6 +581,7 @@ export default function MedicineDoseScreen() {
 
         {/* Calculate Button */}
         <TouchableOpacity style={styles.calcButton} activeOpacity={0.7} onPress={handleCalculate}>
+                        accessibilityLabel="TouchableOpacity in medicine-dose"
           <Text style={styles.calcButtonText}>{t('medicineDose.calculate') || 'Calculate Dose'}</Text>
         </TouchableOpacity>
 
@@ -630,6 +633,7 @@ export default function MedicineDoseScreen() {
 
             {/* Save Button */}
             <TouchableOpacity style={styles.saveButton} activeOpacity={0.7} onPress={handleSaveDose}>
+                            accessibilityLabel="Save medicine-dose entry"
               <Text style={styles.saveButtonText}>{t('medicineDose.saveDose') || 'Save to History'}</Text>
             </TouchableOpacity>
 

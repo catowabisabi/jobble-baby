@@ -469,6 +469,7 @@ export default function ClinicianPortalScreen() {
 
   const Toggle = ({ value, onValueChange }: { value: boolean; onValueChange: (v: boolean) => void }) => (
     <TouchableOpacity onPress={() => onValueChange(!value)}>
+                    accessibilityLabel="TouchableOpacity in clinician-portal"
       <View style={[s.toggleTrack, { backgroundColor: value ? '#1a56db' : '#e5e7eb' }]}>
         <View style={{ alignItems: 'flex-end' }}>
           <View style={{ width: 18, height: 18, borderRadius: 9, backgroundColor: '#fff' }} />
@@ -502,6 +503,7 @@ export default function ClinicianPortalScreen() {
 
         {/* Prepare Report Button */}
         <TouchableOpacity style={s.primaryBtn} onPress={generateReport}>
+                        accessibilityLabel="TouchableOpacity in clinician-portal"
           <MaterialCommunityIcons name="file-document-outline" size={20} color="#fff" style={{ marginRight: 8 }} />
           <Text style={s.primaryBtnText}>{t('clinician.prepareReport')}</Text>
         </TouchableOpacity>
@@ -549,6 +551,7 @@ export default function ClinicianPortalScreen() {
             <View style={{ flexDirection: 'row', marginTop: 8 }}>
               {([30, 60, 90] as const).map(d => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in clinician-portal"
                   key={d}
                   style={[s.chip, config.dateRange === d && s.chipActive]}
                   onPress={() => setConfig(c => ({ ...c, dateRange: d }))}
@@ -567,6 +570,7 @@ export default function ClinicianPortalScreen() {
             {checklist.length === 0 && <Text style={s.emptyState}>{t('clinician.noChecklist')}</Text>}
             {checklist.map(item => (
               <TouchableOpacity key={item.id} style={s.checklistItem} onPress={() => toggleChecklist(item.id)}>
+                              accessibilityLabel="TouchableOpacity in clinician-portal"
                 <View style={[s.checkbox, item.checked && { backgroundColor: '#1a56db' }]}>
                   {item.checked && <MaterialCommunityIcons name="check" size={14} color="#fff" />}
                 </View>
@@ -581,6 +585,7 @@ export default function ClinicianPortalScreen() {
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
             <Text style={s.sectionTitle}>{t('clinician.visitHistory')}</Text>
             <TouchableOpacity onPress={() => setShowAddVisit(true)}>
+                            accessibilityLabel="Toggle clinician-portal panel"
               <MaterialCommunityIcons name="plus-circle" size={24} color="#1a56db" />
             </TouchableOpacity>
           </View>
@@ -590,6 +595,7 @@ export default function ClinicianPortalScreen() {
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={s.cardTitle}>{formatDate(visit.date)}</Text>
                 <TouchableOpacity onPress={() => deleteVisit(visit.id)}>
+                                accessibilityLabel="TouchableOpacity in clinician-portal"
                   <MaterialCommunityIcons name="delete-outline" size={18} color="#ef4444" />
                 </TouchableOpacity>
               </View>
@@ -652,9 +658,11 @@ export default function ClinicianPortalScreen() {
               value={newVisit.actionItems} onChangeText={v => setNewVisit(n => ({ ...n, actionItems: v }))} />
             <View style={{ flexDirection: 'row', marginTop: 8 }}>
               <TouchableOpacity style={[s.secondaryBtn, { flex: 1, marginRight: 8 }]} onPress={() => setShowAddVisit(false)}>
+                              accessibilityLabel="Toggle clinician-portal panel"
                 <Text style={s.secondaryBtnText}>{t('clinician.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[s.primaryBtn, { flex: 1, marginTop: 0 }]} onPress={saveVisit}>
+                              accessibilityLabel="Save clinician-portal entry"
                 <Text style={s.primaryBtnText}>{t('clinician.save')}</Text>
               </TouchableOpacity>
             </View>
@@ -669,6 +677,7 @@ export default function ClinicianPortalScreen() {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
               <Text style={s.modalTitle}>{t('clinician.reportPreview')}</Text>
               <TouchableOpacity onPress={() => setShowReport(false)}>
+                              accessibilityLabel="Toggle clinician-portal panel"
                 <MaterialCommunityIcons name="close" size={24} color={C.text} />
               </TouchableOpacity>
             </View>
@@ -731,9 +740,11 @@ export default function ClinicianPortalScreen() {
             </ScrollView>
             <View style={{ flexDirection: 'row', marginTop: 16 }}>
               <TouchableOpacity style={[s.secondaryBtn, { flex: 1, marginRight: 8 }]} onPress={() => setShowReport(false)}>
+                              accessibilityLabel="Toggle clinician-portal panel"
                 <Text style={s.secondaryBtnText}>{t('clinician.close')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[s.primaryBtn, { flex: 1, marginTop: 0 }]} onPress={shareReport}>
+                              accessibilityLabel="TouchableOpacity in clinician-portal"
                 <MaterialCommunityIcons name="share-variant" size={16} color="#fff" style={{ marginRight: 6 }} />
                 <Text style={s.primaryBtnText}>{t('clinician.share')}</Text>
               </TouchableOpacity>

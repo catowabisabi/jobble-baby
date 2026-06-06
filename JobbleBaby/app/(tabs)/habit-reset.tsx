@@ -225,6 +225,7 @@ export default function HabitResetScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>{t('habitReset.regressionSurvey') || 'Post-Regression Impact Survey'}</Text>
         <TouchableOpacity style={styles.primaryBtn} onPress={() => setSurveyModal(true)}>
+                        accessibilityLabel="Button in habit-reset"
           <MaterialCommunityIcons name="clipboard-check" size={20} color="#fff" />
           <Text style={styles.primaryBtnText}>{t('habitReset.takeSurvey') || 'Take Survey'}</Text>
         </TouchableOpacity>
@@ -255,6 +256,7 @@ export default function HabitResetScreen() {
           return (
             <View key={mh.id} style={styles.habitRow}>
               <TouchableOpacity
+                              accessibilityLabel="Button in habit-reset"
                 style={[styles.habitCheck, done && styles.habitCheckDone]}
                 onPress={() => toggleHabit(mh.id)}
               >
@@ -271,6 +273,7 @@ export default function HabitResetScreen() {
           );
         })}
         <TouchableOpacity style={styles.addBtn} onPress={() => setAddHabitModal(true)}>
+                        accessibilityLabel="Add habit-reset entry"
           <MaterialCommunityIcons name="plus" size={18} color="#007AFF" />
           <Text style={styles.addBtnText}>{t('habitReset.addHabit') || 'Add Micro-Habit'}</Text>
         </TouchableOpacity>
@@ -280,7 +283,7 @@ export default function HabitResetScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>{t('habitReset.historyCalendar') || 'History Calendar'}</Text>
         <View style={styles.calendarNav}>
-          <TouchableOpacity onPress={() => {
+          <TouchableOpacity accessibilityLabel="Navigate to previous month" onPress={() => {
             const d = new Date(selectedDate);
             d.setMonth(d.getMonth() - 1);
             setSelectedDate(d.toISOString().substring(0, 7) + '-01');
@@ -288,7 +291,7 @@ export default function HabitResetScreen() {
             <MaterialCommunityIcons name="chevron-left" size={24} color="#007AFF" />
           </TouchableOpacity>
           <Text style={styles.monthLabel}>{monthLabel}</Text>
-          <TouchableOpacity onPress={() => {
+          <TouchableOpacity accessibilityLabel="Navigate to previous month" onPress={() => {
             const d = new Date(selectedDate);
             d.setMonth(d.getMonth() + 1);
             setSelectedDate(d.toISOString().substring(0, 7) + '-01');
@@ -341,6 +344,7 @@ export default function HabitResetScreen() {
                   <View style={styles.scoreButtons}>
                     {[1,2,3,4,5].map(s => (
                       <TouchableOpacity
+                                      accessibilityLabel="Button in habit-reset"
                         key={s}
                         style={[styles.scoreBtn, current === s && styles.scoreBtnActive]}
                         onPress={() => survey && setSurvey({ ...survey, [key]: s })}
@@ -354,9 +358,11 @@ export default function HabitResetScreen() {
             })}
             <View style={styles.modalActions}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setSurveyModal(false)}>
+                              accessibilityLabel="Cancel habit-reset action"
                 <Text style={styles.cancelBtnText}>{t('common.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                              accessibilityLabel="Button in habit-reset"
                 style={styles.saveBtn}
                 onPress={() => {
                   const s = survey ?? { date: getToday(), sleepScore: 3, exerciseScore: 3, nutritionScore: 3, mentalScore: 3 };
@@ -379,6 +385,7 @@ export default function HabitResetScreen() {
             <View style={styles.domainPicker}>
               {HABIT_DOMAINS.map(d => (
                 <TouchableOpacity
+                                accessibilityLabel="Button in habit-reset"
                   key={d}
                   style={[styles.domainChip, newHabitDomain === d && styles.domainChipActive]}
                   onPress={() => setNewHabitDomain(d)}
@@ -398,9 +405,11 @@ export default function HabitResetScreen() {
             />
             <View style={styles.modalActions}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => { setAddHabitModal(false); setNewHabitLabel(''); }}>
+                              accessibilityLabel="Add habit-reset entry"
                 <Text style={styles.cancelBtnText}>{t('common.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={addMicroHabit}>
+                              accessibilityLabel="Add habit-reset entry"
                 <Text style={styles.saveBtnText}>{t('common.add') || 'Add'}</Text>
               </TouchableOpacity>
             </View>

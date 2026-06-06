@@ -194,6 +194,7 @@ export default function ScheduleScreen() {
               <QRCode value={deepLink} size={200} backgroundColor="#ffffff" color="#000000" />
             </View>
             <TouchableOpacity
+                            accessibilityLabel="Button in schedule"
               onPress={() => {
                 setShowQRModal(false);
                 handleShareSchedule();
@@ -205,6 +206,7 @@ export default function ScheduleScreen() {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+                            accessibilityLabel="Toggle schedule panel"
               onPress={() => setShowQRModal(false)}
               style={{ marginTop: 12 }}
             >
@@ -539,7 +541,7 @@ export default function ScheduleScreen() {
       </ScrollView>
 
       {/* Share FAB */}
-      <TouchableOpacity style={styles.fabShare} activeOpacity={0.8} onPress={() => {
+      <TouchableOpacity style={styles.fabShare} activeOpacity={0.8} accessibilityLabel="Button in schedule" onPress={() => {
         const todayEntries = scheduleData.filter(d => d.sleep);
         if (todayEntries.length === 0) {
           Alert.alert(t('schedule.shareNoDataTitle') || 'No Schedule Yet', t('schedule.shareNoDataMsg') || 'Add some sleep entries first before sharing.');
@@ -555,6 +557,7 @@ export default function ScheduleScreen() {
 
       {/* Add Entry FAB */}
       <TouchableOpacity style={styles.fab} activeOpacity={0.8} onPress={handleAddEntry}>
+                      accessibilityLabel="Add schedule entry"
         <Text style={styles.fabIcon}>🌙</Text>
       </TouchableOpacity>
     </SafeAreaView>

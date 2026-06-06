@@ -128,6 +128,7 @@ export default function HipClickScreen() {
 
         {/* Add check button */}
         <TouchableOpacity style={styles.addBtn} onPress={() => setModal(true)}>
+                        accessibilityLabel="Add hip-click entry"
           <MaterialCommunityIcons name="plus" size={20} color="#fff" />
           <Text style={styles.addBtnText}>{t('hipClick.addCheck')}</Text>
         </TouchableOpacity>
@@ -178,6 +179,7 @@ export default function HipClickScreen() {
             <View style={styles.sideRow}>
               {(['left', 'right', 'both'] as HipSide[]).map(s => (
                 <TouchableOpacity key={s} style={[styles.sideBtn, side === s && styles.sideBtnActive]}
+                                accessibilityLabel="TouchableOpacity in hip-click"
                   onPress={() => setSide(s)}>
                   <Text style={[styles.sideBtnText, side === s && styles.sideBtnTextActive]}>
                     {s === 'left' ? t('hipClick.left') : s === 'right' ? t('hipClick.right') : t('hipClick.both')}
@@ -190,6 +192,7 @@ export default function HipClickScreen() {
             <View style={styles.resultRow}>
               {(['clean', 'clunk', 'needsScan'] as CheckResult[]).map(r => (
                 <TouchableOpacity key={r} style={[styles.resultBtn, result === r && styles.resultBtnActive]}
+                                accessibilityLabel="TouchableOpacity in hip-click"
                   onPress={() => setResult(r)}>
                   <Text style={[styles.resultBtnText, result === r && styles.resultBtnTextActive]}>
                     {r === 'clean' ? t('hipClick.clean') : r === 'clunk' ? t('hipClick.clunk') : t('hipClick.needsScan')}
@@ -210,9 +213,11 @@ export default function HipClickScreen() {
 
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
+                              accessibilityLabel="Cancel hip-click action"
                 <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={save}>
+                              accessibilityLabel="Save hip-click entry"
                 <Text style={styles.saveBtnText}>{t('hipClick.save')}</Text>
               </TouchableOpacity>
             </View>

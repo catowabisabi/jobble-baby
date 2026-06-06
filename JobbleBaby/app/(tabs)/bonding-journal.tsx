@@ -494,11 +494,13 @@ export default function BondingJournalScreen() {
             <View style={styles.timerButtons}>
               {timerRunning ? (
                 <TouchableOpacity style={[styles.timerBtn, styles.timerBtnStop]} onPress={stopTimer}>
+                                accessibilityLabel="Stop bonding-journal timer"
                   <MaterialCommunityIcons name="stop" size={22} color="#fff" />
                   <Text style={styles.timerBtnText}>{t('bondingJournal.stop')}</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity style={[styles.timerBtn, styles.timerBtnStart]} onPress={startTimer}>
+                                accessibilityLabel="Start bonding-journal timer"
                   <MaterialCommunityIcons name="play" size={22} color="#fff" />
                   <Text style={styles.timerBtnText}>{t('bondingJournal.startTimer')}</Text>
                 </TouchableOpacity>
@@ -517,6 +519,7 @@ export default function BondingJournalScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('bondingJournal.moodCheckIn')}</Text>
           <TouchableOpacity style={styles.moodCard} onPress={() => setShowMoodPanel(!showMoodPanel)}>
+                          accessibilityLabel="Toggle bonding-journal panel"
             <View style={styles.moodHeader}>
               <Text style={styles.moodTitle}>{t('bondingJournal.howAreYou')}</Text>
               <Text style={styles.moodDate}>{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</Text>
@@ -524,6 +527,7 @@ export default function BondingJournalScreen() {
             <View style={styles.moodSelectors}>
               {[1, 2, 3, 4, 5].map(score => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in bonding-journal"
                   key={score}
                   style={[styles.moodBtn, todayMood === score && styles.moodBtnActive]}
                   onPress={() => handleMoodSelect(score)}
@@ -542,6 +546,7 @@ export default function BondingJournalScreen() {
             <View style={styles.milestonesGrid}>
               {BONDING_MILESTONES.map(milestone => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in bonding-journal"
                   key={milestone.id}
                   style={styles.milestoneItem}
                   onPress={() => handleMilestoneToggle(milestone.id)}
@@ -557,6 +562,7 @@ export default function BondingJournalScreen() {
         </View>
 
         <TouchableOpacity style={styles.addEntryBtn} onPress={() => setShowAddEntry(true)}>
+                        accessibilityLabel="Toggle bonding-journal panel"
           <MaterialCommunityIcons name="plus" size={20} color="#fff" style={{ marginRight: 8 }} />
           <Text style={styles.addEntryBtnText}>{t('bondingJournal.addMoment')}</Text>
         </TouchableOpacity>
@@ -599,11 +605,13 @@ export default function BondingJournalScreen() {
       {showAddEntry && (
         <View style={styles.modalOverlay}>
           <TouchableOpacity style={{ flex: 1 }} onPress={() => setShowAddEntry(false)} />
+                          accessibilityLabel="Toggle bonding-journal panel"
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>{t('bondingJournal.addMoment')}</Text>
             <View style={styles.typeGrid}>
               {MOMENT_TYPES.map(mt => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in bonding-journal"
                   key={mt.id}
                   style={[styles.typeBtn, selectedType === mt.id && styles.typeBtnActive]}
                   onPress={() => setSelectedType(mt.id)}
@@ -629,9 +637,11 @@ export default function BondingJournalScreen() {
             />
             <View style={styles.modalActions}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowAddEntry(false)}>
+                              accessibilityLabel="Toggle bonding-journal panel"
                 <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in bonding-journal"
                 style={[styles.saveBtn, !selectedType && { opacity: 0.5 }]}
                 onPress={handleAddEntry}
                 disabled={!selectedType}

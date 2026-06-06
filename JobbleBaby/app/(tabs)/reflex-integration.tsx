@@ -82,6 +82,7 @@ export default function ReflexIntegrationScreen() {
             const overdue = isOverdue(reflex.id);
             return (
               <TouchableOpacity key={reflex.id} style={[styles.reflexCard, overdue && styles.reflexCardOverdue]}
+                              accessibilityLabel="TouchableOpacity in reflex-integration"
                 onPress={() => { setSelected(reflex.id); setModal(true); }}>
                 <View style={[styles.reflexDot, { backgroundColor: reflex.color }]} />
                 <Text style={styles.reflexName}>{reflex.name}</Text>
@@ -136,6 +137,7 @@ export default function ReflexIntegrationScreen() {
             <View style={styles.statusRow}>
               {(['present','integrated','hyper-responsive','persistent'] as ReflexRecord['status'][]).map(s => (
                 <TouchableOpacity key={s} style={[styles.statusBtn, status === s && styles.statusBtnActive]}
+                                accessibilityLabel="TouchableOpacity in reflex-integration"
                   onPress={() => setStatus(s)}>
                   <Text style={[styles.statusBtnText, status === s && styles.statusBtnTextActive]}>{s}</Text>
                 </TouchableOpacity>
@@ -148,9 +150,11 @@ export default function ReflexIntegrationScreen() {
 
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
+                              accessibilityLabel="Cancel reflex-integration action"
                 <Text style={styles.cancelBtnText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={save}>
+                              accessibilityLabel="Save reflex-integration entry"
                 <Text style={styles.saveBtnText}>{t('reflexIntegration.save')}</Text>
               </TouchableOpacity>
             </View>

@@ -399,6 +399,7 @@ export default function StressCascade() {
         )}
 
         <TouchableOpacity style={styles.overwhelmedButton} onPress={handleOverwhelmed} activeOpacity={0.8}>
+                        accessibilityLabel="TouchableOpacity in stress-cascade"
           <Text style={styles.overwhelmedButtonText}>{t('stressCascade.overwhelmedButton')}</Text>
         </TouchableOpacity>
 
@@ -424,6 +425,7 @@ export default function StressCascade() {
             <Switch value={tooMuchCaffeine} onValueChange={setTooMuchCaffeine} trackColor={{ false: C.border, true: '#8B5CF6' }} />
           </View>
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in stress-cascade"
             style={{ backgroundColor: C.accent, borderRadius: 8, padding: 10, alignItems: 'center', marginTop: 8 }}
             onPress={handleSaveSleepHours}
           >
@@ -435,6 +437,7 @@ export default function StressCascade() {
           <Text style={styles.sectionTitle}>{t('stressCascade.interventions') || 'Interventions'}</Text>
 
           <TouchableOpacity style={styles.interventionCard} onPress={handleStartBreathing} activeOpacity={0.7}>
+                          accessibilityLabel="Start stress-cascade timer"
             <View style={styles.interventionRow}>
               <Text style={styles.interventionIcon}>🌬️</Text>
               <View style={{ flex: 1 }}>
@@ -445,6 +448,7 @@ export default function StressCascade() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.interventionCard} onPress={handleCallFriend} activeOpacity={0.7}>
+                          accessibilityLabel="TouchableOpacity in stress-cascade"
             <View style={styles.interventionRow}>
               <Text style={styles.interventionIcon}>📞</Text>
               <View style={{ flex: 1 }}>
@@ -487,6 +491,7 @@ export default function StressCascade() {
       {showBreathing && (
         <View style={styles.breathingOverlay}>
           <TouchableOpacity style={styles.closeBreathingBtn} onPress={() => setShowBreathing(false)}>
+                          accessibilityLabel="Toggle stress-cascade panel"
             <Text style={styles.closeBreathingText}>✕ {t('common.close')}</Text>
           </TouchableOpacity>
           <Animated.View style={[styles.breathingCircle, { transform: [{ scale: scaleAnim }] }]}>
@@ -506,9 +511,11 @@ export default function StressCascade() {
           <View style={styles.checkinCard}>
             <Text style={styles.checkinTitle}>{t('stressCascade.checkinPrompt')}</Text>
             <TouchableOpacity style={styles.checkinButton} onPress={handleCheckinBetter}>
+                            accessibilityLabel="TouchableOpacity in stress-cascade"
               <Text style={styles.checkinButtonText}>{t('stressCascade.checkinBetter')}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.checkinSecondaryButton} onPress={handleCheckinStillStressed}>
+                            accessibilityLabel="TouchableOpacity in stress-cascade"
               <Text style={styles.checkinSecondaryText}>{t('stressCascade.checkinStillStressed') || 'Still feeling overwhelmed'}</Text>
             </TouchableOpacity>
           </View>

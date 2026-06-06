@@ -232,10 +232,12 @@ export default function JaundiceScreen() {
         {/* Quick Actions */}
         <View style={styles.actions}>
           <TouchableOpacity style={[styles.actionBtn, { backgroundColor: C.accent }]} onPress={() => setShowLogModal(true)}>
+                          accessibilityLabel="Toggle jaundice panel"
             <MaterialCommunityIcons name="plus" size={20} color="#fff" />
             <Text style={styles.actionBtnText}>Log Reading</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.actionBtn, { backgroundColor: C.accent }]} onPress={() => setShowPhotoModal(true)}>
+                          accessibilityLabel="Toggle jaundice panel"
             <MaterialCommunityIcons name="lightbulb-outline" size={20} color="#fff" />
             <Text style={styles.actionBtnText}>Phototherapy</Text>
           </TouchableOpacity>
@@ -309,6 +311,7 @@ export default function JaundiceScreen() {
 
         {/* Share Button */}
         <TouchableOpacity style={[styles.shareBtn, { backgroundColor: C.accent }]} onPress={shareReport}>
+                        accessibilityLabel="TouchableOpacity in jaundice"
           <MaterialCommunityIcons name="share-variant" size={20} color="#fff" />
           <Text style={styles.shareBtnText}>Share Report</Text>
         </TouchableOpacity>
@@ -326,9 +329,11 @@ export default function JaundiceScreen() {
             <Text style={[styles.modalLabel, { color: C.muted }]}>Method</Text>
             <View style={styles.toggleRow}>
               <TouchableOpacity style={[styles.toggleBtn, logMethod === 'blood' && { backgroundColor: C.accent }]} onPress={() => setLogMethod('blood')}>
+                              accessibilityLabel="TouchableOpacity in jaundice"
                 <Text style={[styles.toggleText, logMethod === 'blood' && { color: '#fff' }]}>Blood Test</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.toggleBtn, logMethod === 'transcutaneous' && { backgroundColor: C.accent }]} onPress={() => setLogMethod('transcutaneous')}>
+                              accessibilityLabel="TouchableOpacity in jaundice"
                 <Text style={[styles.toggleText, logMethod === 'transcutaneous' && { color: '#fff' }]}>Tc Meter</Text>
               </TouchableOpacity>
             </View>
@@ -336,9 +341,11 @@ export default function JaundiceScreen() {
             <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text }]} value={logNotes} onChangeText={setLogNotes}            placeholder={t('jaundice.notesPlaceholder')} placeholderTextColor={C.muted} />
             <View style={styles.modalActions}>
               <TouchableOpacity style={[styles.cancelBtn, { borderColor: C.border }]} onPress={() => setShowLogModal(false)}>
+                              accessibilityLabel="Toggle jaundice panel"
                 <Text style={[styles.cancelBtnText, { color: C.text }]}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={addJaundiceEntry}>
+                              accessibilityLabel="Add jaundice entry"
                 <Text style={styles.saveBtnText}>Save</Text>
               </TouchableOpacity>
             </View>
@@ -359,15 +366,18 @@ export default function JaundiceScreen() {
             <View style={styles.lampRow}>
               {LAMP_TYPES.map(lamp => (
                 <TouchableOpacity key={lamp} style={[styles.lampBtn, photoLamp === lamp && { backgroundColor: C.accent }]} onPress={() => setPhotoLamp(lamp)}>
+                                accessibilityLabel="TouchableOpacity in jaundice"
                   <Text style={[styles.lampBtnText, photoLamp === lamp && { color: '#fff' }]}>{lamp}</Text>
                 </TouchableOpacity>
               ))}
             </View>
             <View style={styles.modalActions}>
               <TouchableOpacity style={[styles.cancelBtn, { borderColor: C.border }]} onPress={() => setShowPhotoModal(false)}>
+                              accessibilityLabel="Toggle jaundice panel"
                 <Text style={[styles.cancelBtnText, { color: C.text }]}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={addPhotoEntry}>
+                              accessibilityLabel="Add jaundice entry"
                 <Text style={styles.saveBtnText}>Save</Text>
               </TouchableOpacity>
             </View>

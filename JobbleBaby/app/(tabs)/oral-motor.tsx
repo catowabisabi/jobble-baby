@@ -64,6 +64,7 @@ export default function OralMotorScreen() {
             const tried_this = tried.has(n.level);
             return (
               <TouchableOpacity key={n.level} style={[styles.nippleCard, tried_this && styles.nippleCardTried]}
+                              accessibilityLabel="TouchableOpacity in oral-motor"
                 onPress={() => { setSelLevel(n.level); setModal(true); }}>
                 <Text style={styles.nippleLevel}>#{n.level}</Text>
                 <Text style={styles.nippleLabel}>{t('oralMotor.level' + n.level)}</Text>
@@ -123,6 +124,7 @@ export default function OralMotorScreen() {
             <View style={styles.winRow}>
               {NIPPLE_LEVELS.map(n => (
                 <TouchableOpacity key={n.level} style={[styles.winOpt, selLevel === n.level && styles.winOptActive]}
+                                accessibilityLabel="TouchableOpacity in oral-motor"
                   onPress={() => setSelLevel(n.level)}>
                   <Text style={[styles.winOptText, selLevel === n.level && styles.winOptTextActive]}>{n.level}</Text>
                 </TouchableOpacity>
@@ -133,6 +135,7 @@ export default function OralMotorScreen() {
             <View style={styles.acceptRow}>
               {(['accepted','refused','partial'] as Acceptance[]).map(a => (
                 <TouchableOpacity key={a} style={[styles.acceptBtn, { backgroundColor: acceptColor(a) }]}
+                                accessibilityLabel="TouchableOpacity in oral-motor"
                   onPress={() => setAccept(a)}>
                   <Text style={styles.acceptBtnText}>{t('oralMotor.' + a)}</Text>
                 </TouchableOpacity>
@@ -145,9 +148,11 @@ export default function OralMotorScreen() {
 
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
+                              accessibilityLabel="Cancel oral-motor action"
                 <Text style={styles.cancelBtnText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={save}>
+                              accessibilityLabel="Save oral-motor entry"
                 <Text style={styles.saveBtnText}>{t('oralMotor.save')}</Text>
               </TouchableOpacity>
             </View>

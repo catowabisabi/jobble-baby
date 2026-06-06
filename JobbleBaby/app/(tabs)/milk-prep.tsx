@@ -358,6 +358,7 @@ export default function MilkPrepScreen() {
           <Text style={styles.inputLabel}>{t('milkPrep.thawMethod')}</Text>
           <View style={styles.methodRow}>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in milk-prep"
               style={[styles.methodButton, thawMethod === 'fridge' && styles.methodButtonActive]}
               onPress={() => setThawMethod('fridge')}
             >
@@ -366,6 +367,7 @@ export default function MilkPrepScreen() {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in milk-prep"
               style={[styles.methodButton, thawMethod === 'warmWater' && styles.methodButtonActive]}
               onPress={() => setThawMethod('warmWater')}
             >
@@ -374,6 +376,7 @@ export default function MilkPrepScreen() {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in milk-prep"
               style={[styles.methodButton, thawMethod === 'runningWater' && styles.methodButtonActive]}
               onPress={() => setThawMethod('runningWater')}
             >
@@ -402,6 +405,7 @@ export default function MilkPrepScreen() {
         <Text style={styles.sectionTitle}>{t('milkPrep.stashTitle')}</Text>
         <View style={styles.card}>
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in milk-prep"
             style={[styles.addBagButton, { backgroundColor: C.accent }]}
             onPress={() => setShowAddModal(true)}
           >
@@ -424,6 +428,7 @@ export default function MilkPrepScreen() {
                       </Text>
                     </View>
                     <TouchableOpacity style={styles.deleteButton} onPress={() => deleteMilkBag(bag.id)}>
+                                    accessibilityLabel="TouchableOpacity in milk-prep"
                       <MaterialCommunityIcons name="trash-can-outline" size={18} color={STATUS_COLORS.error} />
                     </TouchableOpacity>
                   </View>
@@ -463,6 +468,7 @@ export default function MilkPrepScreen() {
             </View>
           </View>
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in milk-prep"
             style={[styles.generateButton, { backgroundColor: C.accent }]}
             onPress={generateBatchSchedule}
           >
@@ -489,12 +495,14 @@ export default function MilkPrepScreen() {
           {!timer && !timerExpired && (
             <View style={styles.timerRow}>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in milk-prep"
                 style={[styles.timerButton, { backgroundColor: C.accent }]}
                 onPress={() => startTimer('room')}
               >
                 <Text style={styles.timerButtonText}>{t('milkPrep.startRoomTemp')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in milk-prep"
                 style={[styles.timerButton, { backgroundColor: C.accent }]}
                 onPress={() => startTimer('fridge')}
               >
@@ -507,6 +515,7 @@ export default function MilkPrepScreen() {
               <Text style={styles.timerDisplay}>{timerDisplay}</Text>
               <Text style={styles.timerStatus}>{t('milkPrep.timerRunning')}</Text>
               <TouchableOpacity style={[styles.stopButton, { marginTop: 16 }]} onPress={stopTimer}>
+                              accessibilityLabel="Stop milk-prep timer"
                 <Text style={styles.stopButtonText}>{t('milkPrep.stopTimer')}</Text>
               </TouchableOpacity>
             </>
@@ -517,6 +526,7 @@ export default function MilkPrepScreen() {
                 <Text style={styles.expiredText}>{t('milkPrep.timerExpired')}</Text>
               </View>
               <TouchableOpacity style={styles.stopButton} onPress={stopTimer}>
+                              accessibilityLabel="Stop milk-prep timer"
                 <Text style={styles.stopButtonText}>{t('milkPrep.stopTimer')}</Text>
               </TouchableOpacity>
             </>
@@ -532,6 +542,7 @@ export default function MilkPrepScreen() {
           ].map((tip) => (
             <View key={tip.key} style={styles.tipItem}>
               <TouchableOpacity style={styles.tipHeader} onPress={() => toggleTip(tip.key)}>
+                              accessibilityLabel="TouchableOpacity in milk-prep"
                 <Text style={styles.tipTitle}>{tip.title}</Text>
                 <MaterialCommunityIcons
                   name={expandedTips[tip.key] ? 'chevron-up' : 'chevron-down'}
@@ -568,12 +579,14 @@ export default function MilkPrepScreen() {
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in milk-prep"
                 style={[styles.modalButton, styles.modalButtonCancel]}
                 onPress={() => setShowAddModal(false)}
               >
                 <Text style={styles.modalButtonText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in milk-prep"
                 style={[styles.modalButton, styles.modalButtonSave]}
                 onPress={addMilkBag}
               >

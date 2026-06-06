@@ -310,6 +310,7 @@ export default function PediatricReportScreen() {
 
         {/* Export Button */}
         <TouchableOpacity style={styles.exportBtn} onPress={doExport} disabled={loading}>
+                        accessibilityLabel="TouchableOpacity in pediatric-report"
           <MaterialCommunityIcons name="file-pdf-box" size={22} color={C.text} style={{ marginRight: 8 }} />
           <Text style={styles.exportBtnText}>
             {loading ? (t('pediatricReport.generating') || 'Generating...') : (t('pediatricReport.exportPdf') || 'Export PDF')}

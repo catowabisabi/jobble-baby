@@ -239,6 +239,7 @@ export default function ColicReliefScreen() {
 
   const renderTab = (tab: 'tracker' | 'guide' | 'comfort' | 'education' | 'timer' | 'whitenoise', label: string) => (
     <TouchableOpacity
+                    accessibilityLabel="TouchableOpacity in colic-relief"
       style={[styles.tabBtn, activeTab === tab && styles.tabBtnActive]}
       onPress={() => setActiveTab(tab)}
     >
@@ -274,6 +275,7 @@ export default function ColicReliefScreen() {
         <View style={styles.intensityRow}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in colic-relief"
               key={n}
               style={[styles.intensityBtn, cryingIntensity === n && styles.intensityBtnActive]}
               onPress={() => setCryingIntensity(n)}
@@ -288,6 +290,7 @@ export default function ColicReliefScreen() {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.triggerScroll}>
           {TRIGGERS.map(tr => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in colic-relief"
               key={tr}
               style={[styles.triggerBtn, cryingTrigger === tr && styles.triggerBtnActive]}
               onPress={() => setCryingTrigger(tr)}
@@ -300,6 +303,7 @@ export default function ColicReliefScreen() {
         </ScrollView>
       </View>
       <TouchableOpacity style={styles.primaryBtn} onPress={addCryingEntry}>
+                      accessibilityLabel="Add colic-relief entry"
         <Text style={styles.primaryBtnText}>{t('colicRelief.logEpisode')}</Text>
       </TouchableOpacity>
       <Text style={styles.logTitle}>{t('colicRelief.recentLog')}</Text>
@@ -340,6 +344,7 @@ export default function ColicReliefScreen() {
       <View style={styles.comfortGrid}>
         {COMFORT_ACTIONS.map(action => (
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in colic-relief"
             key={action.id}
             style={styles.comfortCard}
             onPress={() => addComfortEntry(action.id)}
@@ -392,10 +397,12 @@ export default function ColicReliefScreen() {
       <View style={styles.timerControls}>
         {!timerRunning ? (
           <TouchableOpacity style={styles.primaryBtn} onPress={startTimer}>
+                          accessibilityLabel="Start colic-relief timer"
             <Text style={styles.primaryBtnText}>{t('colicRelief.startTimer')}</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity style={styles.stopBtn} onPress={stopTimer}>
+                          accessibilityLabel="Stop colic-relief timer"
             <Text style={styles.stopBtnText}>{t('colicRelief.stopTimer')}</Text>
           </TouchableOpacity>
         )}
@@ -419,6 +426,7 @@ export default function ColicReliefScreen() {
       <View style={styles.soundGrid}>
         {WHITE_NOISE_SOUNDS.map(sound => (
           <TouchableOpacity
+                          accessibilityLabel="TouchableOpacity in colic-relief"
             key={sound}
             style={[styles.soundCard, playingSound === sound && styles.soundCardActive]}
             onPress={() => playingSound === sound ? stopSound() : playSound(sound, 30)}
@@ -436,6 +444,7 @@ export default function ColicReliefScreen() {
         <View style={styles.presetRow}>
           {[15, 30, 60].map(m => (
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in colic-relief"
               key={m}
               style={styles.presetBtn}
               onPress={() => playingSound ? playSound(playingSound, m) : null}

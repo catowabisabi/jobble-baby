@@ -338,7 +338,7 @@ export default function SleepAssociationScreen() {
               <Text key={n} style={{ fontSize: 18, color: n <= todayEntry.qualityRating ? SLEEP_ASSOC_AMBER : C.border }}>★</Text>
             ))}
           </View>
-          <TouchableOpacity style={{ marginTop: 12 }} onPress={() => {
+          <TouchableOpacity style={{ marginTop: 12 }} accessibilityLabel="Button in sleep-association" onPress={() => {
             setSelectedAssociations(todayEntry.associations);
             setFallingAsleepMinutes(todayEntry.fallingAsleepMinutes.toString());
             setNightWakings(todayEntry.nightWakings.toString());
@@ -367,6 +367,7 @@ export default function SleepAssociationScreen() {
                 const selected = selectedAssociations.includes(opt.id);
                 return (
                   <TouchableOpacity
+                                  accessibilityLabel="Button in sleep-association"
                     key={opt.id}
                     style={[styles.assocChip, selected && styles.assocChipSelected]}
                     onPress={() => toggleAssociation(opt.id)}
@@ -424,19 +425,21 @@ export default function SleepAssociationScreen() {
               <View style={styles.starsRow}>
                 {[1,2,3,4,5].map(n => (
                   <TouchableOpacity key={n} style={styles.starBtn} onPress={() => setQualityRating(n)}>
+                                  accessibilityLabel="Button in sleep-association"
                     <Text style={styles.starIcon}>{n <= qualityRating ? '★' : '☆'}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
             </View>
 
-            <TouchableOpacity style={styles.notesInput} onPress={() => {
+            <TouchableOpacity style={styles.notesInput} accessibilityLabel="Button in sleep-association" onPress={() => {
               Alert.prompt ? Alert.prompt('Notes', '', (text) => setNotes(text || '')) : null;
             }}>
               <Text style={styles.notesText}>{notes || t('sleepAssociation.noteOptional')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.logButton} onPress={logEntry} activeOpacity={0.7}>
+                            accessibilityLabel="Button in sleep-association"
               <Text style={styles.logButtonText}>✓ {t('sleepAssociation.logEntry')}</Text>
             </TouchableOpacity>
           </View>
@@ -593,6 +596,7 @@ export default function SleepAssociationScreen() {
         <View style={styles.tabBar}>
           {(['log', 'chart', 'fadeout', 'history'] as const).map(tab => (
             <TouchableOpacity
+                            accessibilityLabel="Button in sleep-association"
               key={tab}
               style={[styles.tabButton, currentScreen === tab && styles.tabButtonActive]}
               activeOpacity={0.7}

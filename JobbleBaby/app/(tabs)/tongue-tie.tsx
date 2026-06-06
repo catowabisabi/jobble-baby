@@ -204,6 +204,7 @@ export default function TongueTieScreen() {
         <View style={styles.tabRow}>
           {TABS.map(tb => (
             <TouchableOpacity key={tb.key} style={[styles.tabBtn, tab===tb.key&&styles.tabBtnActive]}
+                            accessibilityLabel="TouchableOpacity in tongue-tie"
               onPress={() => setTab(tb.key)}>
               <MaterialCommunityIcons name={tb.icon as any} size={16} color={tab===tb.key?'#3B82F6':'#6B7280'} />
               <Text style={[styles.tabBtnTxt, tab===tb.key&&styles.tabBtnTxtActive]}>{tb.label}</Text>
@@ -264,6 +265,7 @@ export default function TongueTieScreen() {
             </View>
 
             <TouchableOpacity style={styles.addBtn} onPress={() => setAssessModal(true)}>
+                            accessibilityLabel="Add tongue-tie entry"
               <MaterialCommunityIcons name="plus" size={20} color="#fff" />
               <Text style={styles.addBtnText}>{t('assessment.newEntry') || 'New Assessment'}</Text>
             </TouchableOpacity>
@@ -321,6 +323,7 @@ export default function TongueTieScreen() {
             </View>
 
             <TouchableOpacity style={styles.addBtn} onPress={() => setFeedModal(true)}>
+                            accessibilityLabel="Add tongue-tie entry"
               <MaterialCommunityIcons name="plus" size={20} color="#fff" />
               <Text style={styles.addBtnText}>{t('feeding.logEntry') || 'Log Feeding'}</Text>
             </TouchableOpacity>
@@ -392,6 +395,7 @@ export default function TongueTieScreen() {
             </View>
 
             <TouchableOpacity style={styles.addBtn} onPress={() => setChewModal(true)}>
+                            accessibilityLabel="Add tongue-tie entry"
               <MaterialCommunityIcons name="plus" size={20} color="#fff" />
               <Text style={styles.addBtnText}>{t('chewing.logMilestone') || 'Log Milestone'}</Text>
             </TouchableOpacity>
@@ -425,6 +429,7 @@ export default function TongueTieScreen() {
 
             <Text style={styles.sectionHdr}>{t('correlate.exportReferral') || 'Referral Export'}</Text>
             <TouchableOpacity style={styles.exportBtn}>
+                            accessibilityLabel="TouchableOpacity in tongue-tie"
               <MaterialCommunityIcons name="share" size={18} color="#fff" />
               <Text style={styles.exportBtnText}>{t('correlate.shareWithPediatrician') || 'Share with Pediatrician'}</Text>
             </TouchableOpacity>
@@ -450,6 +455,7 @@ export default function TongueTieScreen() {
                     <View style={styles.scorePickerRow}>
                       {[0,1,2].map(v => (
                         <TouchableOpacity key={v} style={[styles.scoreBtn, hazelbaker[idx]===v&&styles.scoreBtnActive]}
+                                        accessibilityLabel="TouchableOpacity in tongue-tie"
                           onPress={() => scoreItem(idx,v)}>
                           <Text style={[styles.scoreBtnText, hazelbaker[idx]===v&&styles.scoreBtnTextActive]}>{v}</Text>
                         </TouchableOpacity>
@@ -472,6 +478,7 @@ export default function TongueTieScreen() {
               ].map(item => (
                 <View key={item.key} style={styles.checkRow}>
                   <TouchableOpacity style={styles.checkBox} onPress={() => setJawSymmetry(s=>({...s, [item.key]: !s[item.key]}))}>
+                                  accessibilityLabel="TouchableOpacity in tongue-tie"
                     <MaterialCommunityIcons name={jawSymmetry[item.key]?'checkbox-marked':'checkbox-blank-outline'} size={20} color="#3B82F6" />
                     <Text style={styles.checkLabel}>{item.label}</Text>
                   </TouchableOpacity>
@@ -484,9 +491,11 @@ export default function TongueTieScreen() {
 
               <View style={styles.modalBtns}>
                 <TouchableOpacity style={styles.cancelBtn} onPress={() => setAssessModal(false)}>
+                                accessibilityLabel="Cancel tongue-tie action"
                   <Text style={styles.cancelBtnText}>Cancel</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.saveBtn} onPress={saveAssessment}>
+                                accessibilityLabel="Save tongue-tie entry"
                   <Text style={styles.saveBtnText}>{t('common.save') || 'Save'}</Text>
                 </TouchableOpacity>
               </View>
@@ -506,6 +515,7 @@ export default function TongueTieScreen() {
               <View style={styles.scorePickerRow}>
                 {([1,2,3,4,5] as const).map(s => (
                   <TouchableOpacity key={s} style={[styles.scoreBtn, latchQ===s&&styles.scoreBtnActive]}
+                                  accessibilityLabel="TouchableOpacity in tongue-tie"
                     onPress={() => setLatchQ(s)}>
                     <Text style={[styles.scoreBtnText, latchQ===s&&styles.scoreBtnTextActive]}>{s}</Text>
                   </TouchableOpacity>
@@ -527,6 +537,7 @@ export default function TongueTieScreen() {
               <View style={styles.chipRow}>
                 {(['slow','medium','fast','nipple'] as const).map(r => (
                   <TouchableOpacity key={r} style={[styles.chip, flowRate===r&&styles.chipActive]}
+                                  accessibilityLabel="TouchableOpacity in tongue-tie"
                     onPress={() => setFlowRate(r)}>
                     <Text style={[styles.chipText, flowRate===r&&styles.chipTextActive]}>
                       {t(`feeding.${r}`) || r}
@@ -545,9 +556,11 @@ export default function TongueTieScreen() {
 
               <View style={styles.modalBtns}>
                 <TouchableOpacity style={styles.cancelBtn} onPress={() => setFeedModal(false)}>
+                                accessibilityLabel="Cancel tongue-tie action"
                   <Text style={styles.cancelBtnText}>Cancel</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.saveBtn} onPress={saveFeeding}>
+                                accessibilityLabel="Save tongue-tie entry"
                   <Text style={styles.saveBtnText}>{t('common.save') || 'Save'}</Text>
                 </TouchableOpacity>
               </View>
@@ -567,6 +580,7 @@ export default function TongueTieScreen() {
               <View style={styles.chipRow}>
                 {(['suck','suck_swallow_breathe','chewing','biting'] as const).map(s => (
                   <TouchableOpacity key={s} style={[styles.chip, chewStage===s&&styles.chipActive]}
+                                  accessibilityLabel="TouchableOpacity in tongue-tie"
                     onPress={() => setChewStage(s)}>
                     <Text style={[styles.chipText, chewStage===s&&styles.chipTextActive]}>
                       {t(`chewing.${s}`) || s}
@@ -593,9 +607,11 @@ export default function TongueTieScreen() {
 
               <View style={styles.modalBtns}>
                 <TouchableOpacity style={styles.cancelBtn} onPress={() => setChewModal(false)}>
+                                accessibilityLabel="Cancel tongue-tie action"
                   <Text style={styles.cancelBtnText}>Cancel</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.saveBtn} onPress={saveChewing}>
+                                accessibilityLabel="Save tongue-tie entry"
                   <Text style={styles.saveBtnText}>{t('common.save') || 'Save'}</Text>
                 </TouchableOpacity>
               </View>

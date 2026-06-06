@@ -376,6 +376,7 @@ export default function BottleRefusalScreen() {
 
         {!showLogForm ? (
           <TouchableOpacity style={styles.logBtn} activeOpacity={0.7} onPress={() => setShowLogForm(true)}>
+                          accessibilityLabel="Toggle bottle-refusal panel"
             <Text style={styles.logBtnText}>+ {t('bottleRefusal.logRefusal') || 'Log Bottle Refusal'}</Text>
           </TouchableOpacity>
         ) : (
@@ -386,6 +387,7 @@ export default function BottleRefusalScreen() {
             <View style={styles.causeGrid}>
               {SUSPECTED_CAUSES.map((cause) => (
                 <TouchableOpacity
+                                accessibilityLabel="TouchableOpacity in bottle-refusal"
                   key={cause.id}
                   style={[styles.causeChip, selectedCauses.has(cause.id) && styles.causeChipSelected]}
                   activeOpacity={0.7}
@@ -407,6 +409,7 @@ export default function BottleRefusalScreen() {
             <View style={styles.durationRow}>
               <Text style={styles.durationLabel}>{t('bottleRefusal.minutes') || 'Minutes'}</Text>
               <TouchableOpacity
+                              accessibilityLabel="TouchableOpacity in bottle-refusal"
                 style={[styles.durationInput, { alignItems: 'center', justifyContent: 'center' }]}
                 onPress={() => {
                   Alert.prompt
@@ -439,6 +442,7 @@ export default function BottleRefusalScreen() {
 
             <Text style={styles.formNoteLabel}>{t('bottleRefusal.noteOptional') || 'Note (optional)'}</Text>
             <TouchableOpacity
+                            accessibilityLabel="TouchableOpacity in bottle-refusal"
               style={styles.noteInput}
               onPress={() => {
                 Alert.prompt
@@ -463,9 +467,11 @@ export default function BottleRefusalScreen() {
 
             <View style={styles.formButtonRow}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => { setShowLogForm(false); setSelectedCauses(new Set()); setDuration(''); setNote(''); }}>
+                              accessibilityLabel="Toggle bottle-refusal panel"
                 <Text style={styles.cancelBtnText}>{t('common.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={logRefusal}>
+                              accessibilityLabel="Save bottle-refusal entry"
                 <Text style={styles.saveBtnText}>{t('bottleRefusal.saveRefusal') || 'Save'}</Text>
               </TouchableOpacity>
             </View>

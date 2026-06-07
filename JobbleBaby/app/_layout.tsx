@@ -131,6 +131,10 @@ function TabNavigator() {
         options={{ title: t('tabs.growth'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="show-chart" color={color} /> }}
       />
       <Tabs.Screen
+        name="constellation"
+        options={{ title: t('tabs.constellation'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="stars" color={color} /> }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{ title: t('tabs.profile'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="person" color={color} /> }}
       />

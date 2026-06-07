@@ -44,7 +44,8 @@
     "caregiverFatigue": "Resilience",
     "colicRelief": "Colic Relief",
     "feedingReadiness": "Feeding",
-    "safetyAudit": "Safety Audit"
+    "safetyAudit": "Safety Audit",
+    "constellation": "Constellation"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -1662,5 +1663,9 @@
     "completeTitle": "Audit Complete",
     "completeMessage": "Safety audit saved successfully.",
     "history": "Audit History"
+  },
+  "constellation": {
+    "title": "Development Constellation",
+    "subtitle": "Map your baby's developmental galaxy"
   }
 }

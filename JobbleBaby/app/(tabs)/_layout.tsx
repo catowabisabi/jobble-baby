@@ -327,6 +327,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="thermometer" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="constellation"
+        options={{
+          title: t('tabs.constellation'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="map-marker-star" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

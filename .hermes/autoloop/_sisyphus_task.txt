@@ -1,0 +1,77 @@
+# Sisyphus Task — Habit Reset Protocol Tab
+
+## Context
+- Project: Jobble Baby (React Native / Expo app)
+- Working directory: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+- Tab file to create: app/(tabs)/habit-reset.tsx
+- i18n files: app/i18n/en.json, app/i18n/zh.json
+- Register tab in: app/(tabs)/_layout.tsx
+- Reference tabs for patterns: growth.tsx, thermal-regulation.tsx
+- Theme: useTheme() + COLORS[effectiveTheme] (const C = COLORS[effectiveTheme])
+- TSC must pass with 0 errors before commit
+
+## Concept (from DB concept #8)
+Habit Reset Protocol: post-regression parent self-recovery tracker. After baby sleep regression or illness disrupts parent routines, this tab helps rebuild sleep schedule, exercise, nutrition, and self-care habits with gentle daily nudges and progress visualization. Prevents parental burnout spiral. Synergizes with sleep debt dashboard and shift handoff. AsyncStorage: @jobble/habit_reset_entries.
+
+## Requirements
+
+### 1. Create habit-reset.tsx tab
+Implement a parent self-recovery tracker with these sections:
+
+**A. Daily Check-In Card**
+- 4 habit categories: Sleep, Exercise, Nutrition, Self-Care
+- Each category: binary checkbox + optional note
+- Daily streak counter per category
+- Visual streak flame icon when streak >= 3
+
+**B. Weekly Reset Score**
+- Composite 0-100 score from % completion across categories
+- Line chart showing score over past 7 days
+- Color coded: red (<40), yellow (40-70), green (>70)
+
+**C. Gentle Nudge System**
+- Time-of-day based prompts: morning (exercise), afternoon (nutrition), evening (self-care), night (sleep)
+- Soft notification cards with encouraging copy
+- Dismissible with "Done" tap
+
+**D. Regression Context Logger**
+- Brief log entry: what disrupted the routine (baby illness, travel, regression, work stress)
+- Date picker for when disruption started
+- Optional: link to baby health events from other tabs
+
+**E. Recovery Timeline**
+- Visual timeline from disruption date to current
+- Milestone markers: "First good night sleep", "Exercise goal met", "Back on track"
+- Projected "full recovery" date based on streak data
+
+**F. Integration Badges**
+- Synergy with sleep-debt tab: show cumulative sleep debt
+- Synergy with shift-handoff tab: show shift partner status
+- Badge notification if partner also using habit reset
+
+### 2. i18n Keys
+Add to en.json and zh.json under prefixes:
+- tabs.habitReset: "Habit Reset Protocol"
+- habitReset.*: all labels, placeholders, button text (75+ keys)
+
+### 3. Register Tab
+Add to _layout.tsx after an existing tab:
+```
+<Tabs.Screen name="habit-reset" options={{ title: t('tabs.habitReset'), headerShown: false }} />
+```
+
+### 4. Theme & Patterns
+- Import useTheme from 'react-native' or expo-related theme
+- const C = COLORS[effectiveTheme] for all colors
+- Use expo-router Tabs pattern
+- No Badge type import (use onNewGrowthEntry callback if needed)
+
+### 5. TSC Compliance
+- Run: npx tsc --noEmit
+- Fix all errors before reporting done
+- Zero tolerance for type errors
+
+## Keywords for this task
+developmental milestone, associate play stage, uterine rupture signs
+
+## ULW — execute without asking

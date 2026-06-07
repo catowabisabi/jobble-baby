@@ -1,68 +1,76 @@
-# Sisyphus Task — Cycle 231
+# Sisyphus Task — Cycle 233
 
 ## Context
-Jobble Baby: 50 tabs, TSC 0 errors. Growth tab exists (625 lines) with WHO growth standards. Todo #93: implement Growth Velocity Tracker as an enhancement to the existing growth.tsx tab.
+Jobble Baby: 50 tabs, TSC 0 errors. New concept #37 created: Post-Procedure Feeding and Recovery Navigator. No pending todos. Two open painpoints require user action: #18 (GitHub Secrets) and #19 (privacy policy URL).
 
-## Task: Implement Growth Velocity Tracker
+## Task: Implement Post-Procedure Feeding and Recovery Navigator
 
-Enhance the existing `app/(tabs)/growth.tsx` with a new "Growth Velocity Tracker" section. This is an ADDITIVE enhancement — do NOT remove existing functionality.
+Create a new tab: app/(tabs)/procedure-recovery.tsx
 
-### Features to Add
+### Features to Implement
 
-1. **Growth Velocity Visualization**
-   - Calculate and display velocity of growth (cm/month) over time
-   - Show acceleration/deceleration phases against WHO velocity standards
-   - Line chart showing growth velocity with WHO velocity zones (low/normal/high)
-   - Storage key: `@jobble/growth_velocity_data`
+1. **Procedure Log**
+   - Log: procedure type (frenotomy, frenulectomy, ear tubes, hernia repair, other), date, surgeon/clinic name
+   - Photo-capture of post-op instructions (via expo-image-picker or camera)
+   - Storage key: @jobble/procedure_log
 
-2. **Velocity Alert System**
-   - Alert when growth velocity drops below expected range
-   - Configurable thresholds (mild/moderate/severe)
-   - In-app notification when velocity concern detected
-   - Storage key: `@jobble/velocity_alert_threshold`
+2. **Feeding Recovery Tracker**
+   - For frenotomy/frenulectomy: track return to feeding
+   - Input: latch quality (1-5), bottle acceptance (yes/no/partial), feeding duration (minutes), pain score during feeds (1-5)
+   - Alert if no feeding for 12+ hours
+   - Storage key: @jobble/feeding_recovery
 
-3. **Skinfold Tracking**
-   - Record skinfold measurements (triceps, subscapular) for nutritional status
-   - Track skinfold ratio over time
-   - Visual indicator of fat stores
-   - Storage key: `@jobble/skinfold_entries`
+3. **Pain and Comfort Score**
+   - Simple 1-5 scale input with emoji indicators
+   - Educational tip: how to read pain cues in infants
+   - Storage key: @jobble/pain_comfort_score
 
-4. **Ponderal Index Calculator**
-   - Ponderal Index = weight(kg) / height(m)³
-   - For low birth weight detection and monitoring
-   - Display against WHO Ponderal Index standards
-   - Storage key: `@jobble/ponderal_index`
+4. **Medication Log**
+   - Acetaminophen/ibuprofen dosing with weight-based calculator
+   - Track: drug name, dose (mg), time given, response (helped/did not help)
+   - Storage key: @jobble/medication_log
 
-5. **Mid-Parental Height Target Line**
-   - Calculate mid-parental height (MPH) target
-   - Boys: (father height + mother height + 13) / 2
-   - Girls: (father height + mother height - 13) / 2
-   - Display target range on growth chart
-   - Storage key: `@jobble/parental_heights`
+5. **Wound Monitoring Guide**
+   - Photo-log surgical site with timestamp
+   - Visual comparison cards: normal healing vs infection signs
+   - Alert thresholds: fever above 38C, increasing redness/swelling
+   - Storage key: @jobble/wound_photo
 
-6. **Growth Phase Indicators**
-   - Identify and label growth phases (infancy, toddler, preschool)
-   - Show current phase on chart
-   - Highlight transition periods
+6. **Recovery Timeline**
+   - Procedure-specific expected recovery curve displayed as progress bars
+   - Frenotomy: Day 1-3 swelling expected, Day 4-7 feeding improves, Week 2 back to baseline
+   - Track actual status per day
+   - Storage key: @jobble/recovery_timeline
+
+7. **Follow-up Alert**
+   - Set reminder for follow-up appointment date
+   - Pre-visit checklist: questions to ask, photos to bring
+   - Storage key: @jobble/follow_up_alert
+
+8. **Pediatrician Alert**
+   - Escalation triggers: pain score above 3 for 3+ days, fever above 38C, no feeding for 24hrs
+   - Display "Call doctor" prompt with phone shortcut
+   - Storage key: @jobble/pediatrician_alert
 
 ### Implementation Rules
-- Follow existing growth.tsx code style and structure
-- Use existing theme context, language context, AsyncStorage patterns
-- Keep existing tabs structure (Tab, ScrollView, cards)
+- Follow existing tab code style: Tab + ScrollView + cards layout
+- Use existing theme context (useColorMode, useColorPalette)
+- Use existing language context (useTranslation, t())
+- AsyncStorage for all persistence
 - TSC must pass 0 errors after changes
-- i18n: add keys to en.json + zh.json (use t() for all user-facing text)
-- New storage keys: `@jobble/growth_velocity_data`, `@jobble/velocity_alert_threshold`, `@jobble/skinfold_entries`, `@jobble/ponderal_index`, `@jobble/parental_heights`
+- i18n: add all user-facing strings to en.json and zh.json
+- Register in app/(tabs)/_layout.tsx with icon: medical-bag, label: t('tabs.procedureRecovery')
 
 ### After Implementation
 Step 1: Run TypeScript check
-  cd JobbleBaby
+  cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
   npx tsc --noEmit
   (Must pass 0 errors before continuing)
 
-Step 2: Verify existing growth functionality still works
+Step 2: Verify tab appears in navigation
 
 Step 3: Commit
   git add -A
-  git commit -m "feat(growth): add Growth Velocity Tracker — velocity chart, WHO standards, skinfold tracking, ponderal index, MPH target line, i18n"
+  git commit -m "feat(tab): add Post-Procedure Feeding and Recovery Navigator — procedure log, feeding tracker, pain score, medication log, wound monitoring, recovery timeline, i18n"
 
 ULW

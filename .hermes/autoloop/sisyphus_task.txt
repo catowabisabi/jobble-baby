@@ -1,6 +1,4 @@
-# Sisyphus Task — Cycle 225
-# Status: COMPLETED
-# Todo #88 completed, constellation tab implemented
-# Commit: afe531f
-# TSC: 0 errors
-# i18n: en.json + zh.json updated
+# Sisyphus Task — Cycle 226
+# Status: DISPATCHED
+# Todo #89: Implement 8-Month Developmental Storm Navigator tab (concept #35)
+# Keywords: vestibular system, wake_windows, symphonic_collapse

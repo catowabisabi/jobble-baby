@@ -46,7 +46,8 @@
     "feedingReadiness": "Feeding",
     "safetyAudit": "Safety Audit",
     "constellation": "Constellation",
-    "phototherapyComfort": "Phototherapy"
+    "phototherapyComfort": "Phototherapy",
+    "eightMonthStorm": "8-Month Storm"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -1709,5 +1710,19 @@
     "feeding": "Fed",
     "fillTimes": "Please fill start and end times",
     "invalidTimes": "End time must be after start time"
+  },
+  "eightMonthStorm": {
+    "title": "8-Month Storm",
+    "convergenceTimeline": "Convergence Timeline",
+    "stormSeverity": "Storm Severity Score",
+    "separationAnxiety": "Separation Anxiety",
+    "strangerWariness": "Stranger Wariness",
+    "sleepStorm": "Sleep Storm",
+    "motorCluster": "Motor Milestone",
+    "emergencyCalm": "Emergency Calm",
+    "departureRitual": "Departure Ritual",
+    "separationGames": "Separation Games",
+    "addEntry": "Add Entry",
+    "whatsNext": "What's Next"
   }
 }

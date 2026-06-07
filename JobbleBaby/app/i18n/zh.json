@@ -46,7 +46,8 @@
     "feedingReadiness": "加固",
     "safetyAudit": "安全檢查",
     "constellation": "星圖",
-    "phototherapyComfort": "光照護理"
+    "phototherapyComfort": "光照護理",
+    "eightMonthStorm": "8個月風暴"
   },
   "projection": {
     "title": "半年發育預測",
@@ -1711,5 +1712,19 @@
     "feeding": "餵奶",
     "fillTimes": "請填寫開始和結束時間",
     "invalidTimes": "結束時間必須在開始時間之後"
+  },
+  "eightMonthStorm": {
+    "title": "8個月風暴",
+    "convergenceTimeline": "發育時間線",
+    "stormSeverity": "風暴嚴重程度",
+    "separationAnxiety": "分離焦慮",
+    "strangerWariness": "陌生人焦慮",
+    "sleepStorm": "睡眠風暴",
+    "motorCluster": "運動里程碑",
+    "emergencyCalm": "緊急冷靜",
+    "departureRitual": "告別儀式",
+    "separationGames": "躲貓貓遊戲",
+    "addEntry": "添加記錄",
+    "whatsNext": "下一步"
   }
 }

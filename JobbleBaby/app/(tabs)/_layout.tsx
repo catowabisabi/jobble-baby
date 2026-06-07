@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import GearCheckScreen from './gear-check';
 
@@ -304,6 +304,13 @@ export default function TabsLayout() {
         options={{
           title: t('tabs.phototherapyComfort'),
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="lightbulb-on" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="eight-month-storm"
+        options={{
+          title: t('tabs.eightMonthStorm'),
+          tabBarIcon: ({ color, size }) => <Ionicons name="cloud-outline" size={size} color={color} />
         }}
       />
     </Tabs>

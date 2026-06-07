@@ -341,6 +341,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket-launch" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="growth-montage"
+        options={{
+          title: t('tabs.growthMontage'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="movie" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

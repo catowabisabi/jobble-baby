@@ -1,61 +1,15 @@
 ## Context
-Jobble Baby: 48+ tabs, TSC 0 errors, i18n complete (en.json + zh.json). New tab: Growth Velocity Tracker.
+Jobble Baby: 49 tabs now, TSC 0 errors. 8-Month Storm Navigator tab was just created by Hermes (direct implementation, not via Sisyphus dispatch).
 
-## Task: Implement Growth Velocity Tracker tab
+## Task: Verify 8-Month Storm Navigator tab
 
-Create a new tab at app/(tabs)/growth-velocity.tsx that visualizes not just percentile position but the VELOCITY of growth.
+Please verify the newly created tab:
+1. Check that app/(tabs)/eight-month-storm.tsx exists and is correct
+2. Check that _layout.tsx has the eight-month-storm tab registered
+3. Check that en.json and zh.json have the eightMonthStorm keys
+4. Run: cd JobbleBaby && npx tsc --noEmit (should pass 0 errors)
+5. Report any issues found
 
-### Requirements
+If all looks good, reply with: "Verified: 8-Month Storm Navigator — OK"
 
-#### 1. Data Model
-Use AsyncStorage key @jobble/growth_velocity_entries
-Interface GrowthVelocityEntry: id, date, weight_kg, length_cm, head_circumference_cm, skinfold_mm, notes
-Also load birth data from @jobble_baby_profile (birthDate, birthWeight, birthLength)
-
-#### 2. Velocity Calculation
-For each entry calculate monthly velocity:
-velocity_cm_per_month = (length_n - length_n-1) / months_between * 30
-velocity_kg_per_month = (weight_n - weight_n-1) / months_between * 30
-Compare against WHO velocity standards:
-  0-3mo: ~3.5 cm/month, ~2.2 kg/month
-  3-6mo: ~2.5 cm/month, ~1.4 kg/month
-  6-12mo: ~1.5 cm/month, ~0.7 kg/month
-
-#### 3. UI Sections
-A. Summary cards: current percentile, velocity this month, velocity vs expected
-B. Growth velocity chart: line chart showing cm/month over time vs WHO standard bands
-C. Length/Weight/Head circumference cards with velocity arrows (up/down/stable)
-D. Ponderal index = weight_kg / (length_m^3) — flag if < 10th percentile
-E. Skinfold tracking for nutritional assessment
-F. Mid-parental height target line on chart (from profile if available)
-G. Alerts: velocity drop >30% below expected, ponderal index low
-
-#### 4. Add Entry Modal
-Fields: date, weight (kg), length (cm), head circumference (cm), skinfold (mm), notes
-Validation: all numeric, reasonable ranges (weight 0.5-20kg, length 30-100cm)
-
-#### 5. Styling
-Use same patterns as other tabs: SafeAreaView, ScrollView, COLORS from theme, useLanguage, useTheme
-Dark mode support
-Accessibility labels on all touchables
-
-#### 6. Tab Registration
-Add to app/(tabs)/_layout.tsx:
-  name="growth-velocity"
-  title: t('tabs.growthVelocity')
-  icon: trend-up
-
-#### 7. i18n
-Add to app/i18n/en.json:
-  tabs.growthVelocity: "Growth Velocity"
-  growthVelocity: { title, currentPercentile, velocityThisMonth, velocityVsExpected, alertVelocityDrop, ponderalIndex, skinfold, midParentalTarget, addEntry, ... }
-
-Add to app/i18n/zh.json:
-  tabs.growthVelocity: "生長速度"
-  growthVelocity: { ... Chinese translations }
-
-### Rules
-Run npx tsc --noEmit after tab is created — must pass 0 errors
-Commit: git add -A && git commit -m "feat(tab): add Growth Velocity Tracker"
-Push: git push
 ULW

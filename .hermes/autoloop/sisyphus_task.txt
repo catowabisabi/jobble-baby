@@ -1,76 +1,77 @@
-# Sisyphus Task — Cycle 233
+# Sisyphus Task — Cycle 235
 
 ## Context
-Jobble Baby: 50 tabs, TSC 0 errors. New concept #37 created: Post-Procedure Feeding and Recovery Navigator. No pending todos. Two open painpoints require user action: #18 (GitHub Secrets) and #19 (privacy policy URL).
+Jobble Baby: TSC 0 errors, 51 tabs. Post-Procedure Recovery Navigator (procedure-recovery.tsx) just implemented and committed (106b669). Highest priority pending: todo #94 DevOps Foundation.
 
-## Task: Implement Post-Procedure Feeding and Recovery Navigator
+## Task: Implement GitHub Actions CI/CD + Sentry Crash Reporting
 
-Create a new tab: app/(tabs)/procedure-recovery.tsx
+Create the DevOps Foundation for the project.
 
-### Features to Implement
+### Part 1: GitHub Actions CI/CD Pipeline
 
-1. **Procedure Log**
-   - Log: procedure type (frenotomy, frenulectomy, ear tubes, hernia repair, other), date, surgeon/clinic name
-   - Photo-capture of post-op instructions (via expo-image-picker or camera)
-   - Storage key: @jobble/procedure_log
+Create `.github/workflows/ci.yml`:
+```yaml
+name: CI
+on: [push, pull_request]
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx expo install --check
+```
 
-2. **Feeding Recovery Tracker**
-   - For frenotomy/frenulectomy: track return to feeding
-   - Input: latch quality (1-5), bottle acceptance (yes/no/partial), feeding duration (minutes), pain score during feeds (1-5)
-   - Alert if no feeding for 12+ hours
-   - Storage key: @jobble/feeding_recovery
+Create `.github/workflows/eas-build.yml` (manual trigger):
+```yaml
+name: EAS Build
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        type: choice
+        options: [ios, android, all]
+        default: all
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx expo install
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - run: eas build --platform ${{ github.event.inputs.platform }} --profile preview
+```
 
-3. **Pain and Comfort Score**
-   - Simple 1-5 scale input with emoji indicators
-   - Educational tip: how to read pain cues in infants
-   - Storage key: @jobble/pain_comfort_score
+### Part 2: Sentry Integration
 
-4. **Medication Log**
-   - Acetaminophen/ibuprofen dosing with weight-based calculator
-   - Track: drug name, dose (mg), time given, response (helped/did not help)
-   - Storage key: @jobble/medication_log
+Install: `cd JobbleBaby && npx expo install @sentry/react-native`
 
-5. **Wound Monitoring Guide**
-   - Photo-log surgical site with timestamp
-   - Visual comparison cards: normal healing vs infection signs
-   - Alert thresholds: fever above 38C, increasing redness/swelling
-   - Storage key: @jobble/wound_photo
+Create `docs/SENTRY_SETUP.md` with instructions for user to add their DSN.
 
-6. **Recovery Timeline**
-   - Procedure-specific expected recovery curve displayed as progress bars
-   - Frenotomy: Day 1-3 swelling expected, Day 4-7 feeding improves, Week 2 back to baseline
-   - Track actual status per day
-   - Storage key: @jobble/recovery_timeline
+### Part 3: CI/CD Documentation
 
-7. **Follow-up Alert**
-   - Set reminder for follow-up appointment date
-   - Pre-visit checklist: questions to ask, photos to bring
-   - Storage key: @jobble/follow_up_alert
-
-8. **Pediatrician Alert**
-   - Escalation triggers: pain score above 3 for 3+ days, fever above 38C, no feeding for 24hrs
-   - Display "Call doctor" prompt with phone shortcut
-   - Storage key: @jobble/pediatrician_alert
-
-### Implementation Rules
-- Follow existing tab code style: Tab + ScrollView + cards layout
-- Use existing theme context (useColorMode, useColorPalette)
-- Use existing language context (useTranslation, t())
-- AsyncStorage for all persistence
-- TSC must pass 0 errors after changes
-- i18n: add all user-facing strings to en.json and zh.json
-- Register in app/(tabs)/_layout.tsx with icon: medical-bag, label: t('tabs.procedureRecovery')
+Create `docs/CI_CD_SETUP.md` with:
+- GitHub Actions setup instructions
+- Secrets needed (EXPO_TOKEN, APPLE_APP_SPECIFIC_PASSWORD, APPLE_TEAM_ID)
+- EAS build commands
+- Telegram notification setup for build status
 
 ### After Implementation
-Step 1: Run TypeScript check
-  cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
-  npx tsc --noEmit
-  (Must pass 0 errors before continuing)
-
-Step 2: Verify tab appears in navigation
-
-Step 3: Commit
-  git add -A
-  git commit -m "feat(tab): add Post-Procedure Feeding and Recovery Navigator — procedure log, feeding tracker, pain score, medication log, wound monitoring, recovery timeline, i18n"
+1. Run: cd JobbleBaby && npx tsc --noEmit (0 errors)
+2. Commit: git add -A && git commit -m "feat(devops): add GitHub Actions CI/CD + Sentry crash reporting"
+3. git push
 
 ULW

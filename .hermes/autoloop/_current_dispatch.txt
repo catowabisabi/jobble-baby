@@ -1,5 +1,5 @@
-# Sisyphus Task — Cycle 226
+# Sisyphus Task — Cycle 228
 # Status: DISPATCHED
-# Todo #89: Implement 8-Month Developmental Storm Navigator tab (concept #35)
-# Keywords: vestibular system, wake_windows, symphonic_collapse
-# Timestamp: 2026-06-06 21:00
+# Todo #93: Implement Growth Velocity Tracker tab (concept #37)
+# Keywords: ponderal index, WHO velocity standards, growth velocity percentile
+# Timestamp: 2026-06-06 23:00

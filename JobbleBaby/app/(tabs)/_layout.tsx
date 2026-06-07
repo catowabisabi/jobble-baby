@@ -313,6 +313,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <Ionicons name="cloud-outline" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="procedure-recovery"
+        options={{
+          title: t('tabs.procedureRecovery'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="medical-bag" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

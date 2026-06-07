@@ -47,7 +47,8 @@
     "safetyAudit": "安全檢查",
     "constellation": "星圖",
     "phototherapyComfort": "光照護理",
-    "eightMonthStorm": "8個月風暴"
+    "eightMonthStorm": "8個月風暴",
+    "procedureRecovery": "術後護理"
   },
   "projection": {
     "title": "半年發育預測",
@@ -1451,6 +1452,70 @@
     "cancel": "取消",
     "notesPlaceholder": "任何備註...",
     "noEntriesTapLogReading": "暫無記錄。點擊「記錄讀數」新增。"
+  },
+  "procedureRecovery": {
+    "tabs": {
+      "procedure": "手術",
+      "feeding": "餵奶",
+      "medication": "藥物",
+      "wound": "傷口",
+      "recovery": "進度"
+    },
+    "procedure": {
+      "title": "記錄手術",
+      "type": "手術類型",
+      "date": "手術日期",
+      "clinic": "醫生 / 診所名稱",
+      "save": "儲存手術"
+    },
+    "pain": {
+      "title": "疼痛與舒適指數",
+      "hint": "點擊記錄寶寶的感受",
+      "save": "記錄疼痛指數"
+    },
+    "feeding": {
+      "title": "餵奶康復",
+      "latch": "含乳品質 (1-5)",
+      "bottle": "奶瓶接受度",
+      "duration": "餵奶時長（分鐘）",
+      "save": "記錄餵奶",
+      "history": "餵奶歷史"
+    },
+    "medication": {
+      "title": "藥物記錄",
+      "drug": "藥物",
+      "dose": "劑量（毫克）",
+      "response": "效果",
+      "save": "記錄藥物",
+      "history": "藥物歷史"
+    },
+    "wound": {
+      "title": "傷口監測",
+      "capture": "拍攝傷口照片",
+      "alertTitle": "警戒指標"
+    },
+    "recovery": {
+      "title": "康復時間線",
+      "followup": {
+        "title": "覆診提醒",
+        "msg": "設定覆診提醒",
+        "btn": "設定覆診提醒"
+      }
+    },
+    "alerts": {
+      "noFeedingTitle": "餵奶提醒",
+      "noFeedingMsg": "已超過12小時未記錄餵奶。建議嘗試餵奶。"
+    },
+    "pediatrician": {
+      "title": "聯絡兒科醫生",
+      "msg": "疼痛指數連續3天達4分以上。請聯絡兒科醫生。"
+    },
+    "errors": {
+      "required": "請填寫必填欄位",
+      "addProcedureFirst": "請先記錄手術"
+    },
+    "saved": "手術已記錄",
+    "recent": "最近記錄"
   },
   "iotSecurity": {
     "networkScore": "網絡安全評分",

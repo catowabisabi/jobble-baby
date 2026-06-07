@@ -334,6 +334,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="map-marker-star" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="launch-checklist"
+        options={{
+          title: t('tabs.launchChecklist'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket-launch" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

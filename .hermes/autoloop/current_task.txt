@@ -1,68 +1,20 @@
-# Sisyphus Task — Cycle 231
+# Current Dispatch — Cycle 241
 
-## Context
-Jobble Baby: 50 tabs, TSC 0 errors. Growth tab exists (625 lines) with WHO growth standards. Todo #93: implement Growth Velocity Tracker as an enhancement to the existing growth.tsx tab.
+## Status
+- Todo #95 (launch-checklist) was marked pending — file was never created
+- Todo #96 (Growth Montage Generator) is new
+- Cycle 241 started: launch-checklist re-dispatched to Sisyphus
 
-## Task: Implement Growth Velocity Tracker
+## Completed this cycle
+- Marked todo #95 as pending (file never created)
+- Ran brainstorm: 50 keywords added to pool (now 1000)
+- Committed autoloop state
 
-Enhance the existing `app/(tabs)/growth.tsx` with a new "Growth Velocity Tracker" section. This is an ADDITIVE enhancement — do NOT remove existing functionality.
+## Pending (user action)
+- EAS credentials configuration
+- App Store Connect app creation
+- Play Console app creation
+- Privacy policy URL deployment
 
-### Features to Add
-
-1. **Growth Velocity Visualization**
-   - Calculate and display velocity of growth (cm/month) over time
-   - Show acceleration/deceleration phases against WHO velocity standards
-   - Line chart showing growth velocity with WHO velocity zones (low/normal/high)
-   - Storage key: `@jobble/growth_velocity_data`
-
-2. **Velocity Alert System**
-   - Alert when growth velocity drops below expected range
-   - Configurable thresholds (mild/moderate/severe)
-   - In-app notification when velocity concern detected
-   - Storage key: `@jobble/velocity_alert_threshold`
-
-3. **Skinfold Tracking**
-   - Record skinfold measurements (triceps, subscapular) for nutritional status
-   - Track skinfold ratio over time
-   - Visual indicator of fat stores
-   - Storage key: `@jobble/skinfold_entries`
-
-4. **Ponderal Index Calculator**
-   - Ponderal Index = weight(kg) / height(m)³
-   - For low birth weight detection and monitoring
-   - Display against WHO Ponderal Index standards
-   - Storage key: `@jobble/ponderal_index`
-
-5. **Mid-Parental Height Target Line**
-   - Calculate mid-parental height (MPH) target
-   - Boys: (father height + mother height + 13) / 2
-   - Girls: (father height + mother height - 13) / 2
-   - Display target range on growth chart
-   - Storage key: `@jobble/parental_heights`
-
-6. **Growth Phase Indicators**
-   - Identify and label growth phases (infancy, toddler, preschool)
-   - Show current phase on chart
-   - Highlight transition periods
-
-### Implementation Rules
-- Follow existing growth.tsx code style and structure
-- Use existing theme context, language context, AsyncStorage patterns
-- Keep existing tabs structure (Tab, ScrollView, cards)
-- TSC must pass 0 errors after changes
-- i18n: add keys to en.json + zh.json (use t() for all user-facing text)
-- New storage keys: `@jobble/growth_velocity_data`, `@jobble/velocity_alert_threshold`, `@jobble/skinfold_entries`, `@jobble/ponderal_index`, `@jobble/parental_heights`
-
-### After Implementation
-Step 1: Run TypeScript check
-  cd JobbleBaby
-  npx tsc --noEmit
-  (Must pass 0 errors before continuing)
-
-Step 2: Verify existing growth functionality still works
-
-Step 3: Commit
-  git add -A
-  git commit -m "feat(growth): add Growth Velocity Tracker — velocity chart, WHO standards, skinfold tracking, ponderal index, MPH target line, i18n"
-
-ULW
+## Next dispatch
+After launch-checklist.tsx is complete, dispatch Growth Montage Generator (todo #96)

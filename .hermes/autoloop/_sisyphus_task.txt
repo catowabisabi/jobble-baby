@@ -1,15 +1,15 @@
-# Sisyphus Task — Cycle 239
+# Sisyphus Task — Cycle 241
 
 ## Context
-Jobble Baby: TSC 0 errors, 50+ tabs, accessibility fixed (341 labels). App is feature-complete. Remaining blockers are user-action items: EAS credentials, App Store Connect, Play Console, privacy policy URL. This task creates an interactive checklist tab to guide the user through all pre-submission requirements.
+Jobble Baby: TSC 0 errors, 50+ tabs. Todo #95: launch-checklist.tsx was dispatched previously but the file was NEVER CREATED (commit only touched autoloop files). You MUST now create the actual file.
 
 ## Task: Implement App Store Launch Interactive Checklist tab
 
-Create `app/(tabs)/launch-checklist.tsx` — a new tab that tracks every pre-submission requirement with progress saved to AsyncStorage.
+Create `app/(tabs)/launch-checklist.tsx` — a new tab tracking every pre-submission requirement with progress saved to AsyncStorage.
 
 ### Features
 
-1. **Checklist Items** — Track these items with checkbox UI:
+1. **Checklist Items** (16 total):
    - App Store Connect App Created (bundle ID: com.jobblebaby.app)
    - Bundle ID Verified
    - Export Compliance Set (AES-256)
@@ -30,46 +30,41 @@ Create `app/(tabs)/launch-checklist.tsx` — a new tab that tracks every pre-sub
 2. **Progress Tracking**
    - Show: "X / 16 items complete"
    - Visual progress bar (percentage)
-   - Save checked state to AsyncStorage key: `@jobble/launch_checklist`
+   - AsyncStorage key: `@jobble/launch_checklist`
    - Persist across sessions
 
 3. **Item Detail Cards**
-   - Each checklist item: title, description, status (pending/done), optional link field
-   - Tap to mark done/undone
-   - Done items: green checkmark, slightly faded
-   - Pending items: full opacity
+   - Each: title, description, status (pending/done), tap to toggle
+   - Done: green checkmark + faded opacity
+   - Pending: full opacity
 
 4. **Launch Ready Badge**
-   - When all 16 items checked: show banner
-   - Badge awarded: "Launch Commander"
-   - Storage key: `@jobble/launch_ready_badge`
+   - All 16 checked = "Launch Commander" badge
+   - AsyncStorage key: `@jobble/launch_ready_badge`
 
 5. **Quick Actions**
-   - "Reset Checklist" button to clear all progress (with confirmation alert)
-   - "Export Status" button — share current checklist state as text via Share API
+   - Reset Checklist (with confirmation alert)
+   - Export Status (via Share API)
 
-6. **Contextual Hints**
-   - Each item has a small hint text explaining what "done" means
-   - EAS credentials hint: "Run: eas credentials --platform ios (needs Apple Team ID)"
-   - Privacy policy hint: "Deploy to jobblebaby.com/privacy or Netlify"
+6. **Contextual Hints per item**
 
 ### Implementation Rules
-- New tab: `app/(tabs)/launch-checklist.tsx`
-- Follow existing tab patterns: Tab → ScrollView → Section cards
+- New file: `app/(tabs)/launch-checklist.tsx`
+- Follow existing tab patterns: `Tab` → `ScrollView` → Section cards
 - Use existing theme context, language context, AsyncStorage patterns
 - TSC must pass 0 errors after changes
 - i18n: add keys to en.json + zh.json (use t() for all user-facing text)
 - Register in `app/(tabs)/_layout.tsx`
-- Icon: `rocket-launch` (MaterialCommunityIcons), label: t('tabs.launchChecklist')
-- Badge: "Launch Commander" (all 16 items checked)
+- Icon: `rocket-launch` (MaterialCommunityIcons)
+- Label: t('tabs.launchChecklist')
 
 ### After Implementation
-1. Run: cd JobbleBaby && npx tsc --noEmit (0 errors required)
+1. Run: `cd JobbleBaby && npx tsc --noEmit` (0 errors required)
 2. Verify tab appears in tab bar
-3. Commit: git add -A && git commit -m "feat(tab): add App Store Launch Interactive Checklist — 16-item pre-submission tracker, progress persistence, Launch Ready badge, i18n"
-4. git push
+3. Commit: `git add -A && git commit -m "feat(tab): add App Store Launch Interactive Checklist — 16-item pre-submission tracker, progress persistence, Launch Ready badge, i18n"`
+4. `git push`
 
-## Keywords for this task
-export_compliance, content_rights, age_rating, eas_build, testflight_beta
+## Keywords
+export_compliance, content_rights, age_rating, eas_build, testflight_beta, privacy_policy_deployment, bundle_id_verification
 
 ULW

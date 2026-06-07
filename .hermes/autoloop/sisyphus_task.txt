@@ -1,7 +1,7 @@
-# Sisyphus Task — Cycle 239
+# Sisyphus Task — Cycle 241
 
 ## Context
-Jobble Baby: TSC 0 errors, 50+ tabs, accessibility fixed. App is feature-complete. Remaining blockers are user-action items. This task creates an interactive checklist tab to guide through all pre-submission requirements.
+Jobble Baby: TSC 0 errors, 50+ tabs. Todo #95: launch-checklist.tsx was dispatched previously but the file was NEVER CREATED (commit only touched autoloop files). You MUST now create the actual file.
 
 ## Task: Implement App Store Launch Interactive Checklist tab
 
@@ -10,29 +10,47 @@ Create `app/(tabs)/launch-checklist.tsx` — a new tab tracking every pre-submis
 ### Features
 
 1. **Checklist Items** (16 total):
-   App Store Connect App Created, Bundle ID Verified, Export Compliance Set, Content Rights Confirmed, Age Rating Set, App Store Screenshots Captured, App Store Metadata Reviewed, EAS Build Completed, TestFlight Beta Testing Active, Privacy Policy URL Deployed, Play Console App Created, Play Store Screenshots Captured, Play Store Metadata Reviewed, Play Store Privacy Policy URL Set, Google Play App Signing Configured, Submission Button Clicked
+   - App Store Connect App Created (bundle ID: com.jobblebaby.app)
+   - Bundle ID Verified
+   - Export Compliance Set (AES-256)
+   - Content Rights Confirmed
+   - Age Rating Set (4+)
+   - App Store Screenshots Captured (iPhone 6.7", 6.5", iPad 12.9")
+   - App Store Metadata Reviewed (name, promo text, description, keywords)
+   - EAS Build Completed (iOS + Android)
+   - TestFlight Beta Testing Active
+   - Privacy Policy URL Deployed (real URL, not placeholder)
+   - Play Console App Created
+   - Play Store Screenshots Captured
+   - Play Store Metadata Reviewed
+   - Play Store Privacy Policy URL Set
+   - Google Play App Signing Configured
+   - Submission Button Clicked
 
 2. **Progress Tracking**
-   - Show X / 16 items complete with visual progress bar
+   - Show: "X / 16 items complete"
+   - Visual progress bar (percentage)
    - AsyncStorage key: `@jobble/launch_checklist`
+   - Persist across sessions
 
 3. **Item Detail Cards**
-   - Title, description, status (pending/done), tap to toggle
-   - Done: green checkmark + faded. Pending: full opacity
+   - Each: title, description, status (pending/done), tap to toggle
+   - Done: green checkmark + faded opacity
+   - Pending: full opacity
 
 4. **Launch Ready Badge**
-   - All 16 checked = banner + Launch Commander badge
+   - All 16 checked = "Launch Commander" badge
    - AsyncStorage key: `@jobble/launch_ready_badge`
 
 5. **Quick Actions**
    - Reset Checklist (with confirmation alert)
    - Export Status (via Share API)
 
-6. **Contextual Hints** per item explaining what done means
+6. **Contextual Hints per item**
 
 ### Implementation Rules
-- New tab: `app/(tabs)/launch-checklist.tsx`
-- Follow existing tab patterns: Tab, ScrollView, Section cards
+- New file: `app/(tabs)/launch-checklist.tsx`
+- Follow existing tab patterns: `Tab` → `ScrollView` → Section cards
 - Use existing theme context, language context, AsyncStorage patterns
 - TSC must pass 0 errors after changes
 - i18n: add keys to en.json + zh.json (use t() for all user-facing text)
@@ -41,15 +59,12 @@ Create `app/(tabs)/launch-checklist.tsx` — a new tab tracking every pre-submis
 - Label: t('tabs.launchChecklist')
 
 ### After Implementation
-Run TypeScript check:
-  cd JobbleBaby && npx tsc --noEmit
-Verify tab appears in tab bar
-Commit:
-  cd JobbleBaby && git add -A && git commit -m "feat(tab): add App Store Launch Interactive Checklist - 16-item pre-submission tracker, progress persistence, Launch Ready badge, i18n"
-Push:
-  git push
+1. Run: `cd JobbleBaby && npx tsc --noEmit` (0 errors required)
+2. Verify tab appears in tab bar
+3. Commit: `git add -A && git commit -m "feat(tab): add App Store Launch Interactive Checklist — 16-item pre-submission tracker, progress persistence, Launch Ready badge, i18n"`
+4. `git push`
 
 ## Keywords
-export_compliance, content_rights, age_rating, eas_build, testflight_beta
+export_compliance, content_rights, age_rating, eas_build, testflight_beta, privacy_policy_deployment, bundle_id_verification
 
 ULW

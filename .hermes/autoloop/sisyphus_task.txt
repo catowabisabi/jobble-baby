@@ -1,77 +1,68 @@
-# Sisyphus Task — Cycle 235
+# Sisyphus Task — Cycle 236
 
 ## Context
-Jobble Baby: TSC 0 errors, 51 tabs. Post-Procedure Recovery Navigator (procedure-recovery.tsx) just implemented and committed (106b669). Highest priority pending: todo #94 DevOps Foundation.
+Jobble Baby: TSC 0 errors, 48+ tabs. All major feature tabs implemented. DevOps foundation complete (CI/CD + Sentry). Next priority: implement Infant Thermal Regulation Dashboard tab.
 
-## Task: Implement GitHub Actions CI/CD + Sentry Crash Reporting
+## Task: Implement Infant Thermal Regulation Dashboard tab
 
-Create the DevOps Foundation for the project.
+Create `app/(tabs)/thermal-regulation.tsx` — a new tab helping parents track and manage baby's thermal health.
 
-### Part 1: GitHub Actions CI/CD Pipeline
+### Features
 
-Create `.github/workflows/ci.yml`:
-```yaml
-name: CI
-on: [push, pull_request]
-jobs:
-  quality:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npx tsc --noEmit
-      - run: npx expo install --check
-```
+1. **Temperature Log**
+   - Input: body temp (axillary/ear/forehead), ambient room temp, clothing layers (1-5), sweat level (none/damp/wet)
+   - Timestamp auto-generated
+   - Storage key: `@jobble/thermal_log`
 
-Create `.github/workflows/eas-build.yml` (manual trigger):
-```yaml
-name: EAS Build
-on:
-  workflow_dispatch:
-    inputs:
-      platform:
-        type: choice
-        options: [ios, android, all]
-        default: all
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npx expo install
-      - uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-      - run: eas build --platform ${{ github.event.inputs.platform }} --profile preview
-```
+2. **Thermal Map Timeline**
+   - Visual timeline: body temp vs ambient temp overlaid with sleep quality
+   - Color-coded: blue (cold) → green (optimal) → red (hot)
+   - Storage key: `@jobble/thermal_log`
 
-### Part 2: Sentry Integration
+3. **Overheating Risk Alert**
+   - When ambient >24°C + clothing >2 layers → alert: "Overheating risk — remove layer"
+   - Configurable threshold
+   - Storage key: `@jobble/thermal_alert_threshold`
 
-Install: `cd JobbleBaby && npx expo install @sentry/react-native`
+4. **Fever Tracker**
+   - Log fever episodes: temp, duration, treatment given, feeding change
+   - Alert thresholds: >38°C (rectal/ear) or >37.5°C (axillary)
+   - Correlation: fever + feeding frequency drop = dehydration risk
+   - Storage key: `@jobble/fever_episode`
 
-Create `docs/SENTRY_SETUP.md` with instructions for user to add their DSN.
+5. **Evaporative Cooling Guide**
+   - Tepid sponging timer (10 min)
+   - Target pulse points: groin, axillae, neck
+   - Step-by-step instructional card
+   - Storage key: `@jobble/fever_treatment`
 
-### Part 3: CI/CD Documentation
+6. **Car Seat Temperature Alert**
+   - Ambient >28°C → notification: "Car seat can reach dangerous temps in direct sun"
+   - Storage key: `@jobble/car_temp_alert_enabled`
 
-Create `docs/CI_CD_SETUP.md` with:
-- GitHub Actions setup instructions
-- Secrets needed (EXPO_TOKEN, APPLE_APP_SPECIFIC_PASSWORD, APPLE_TEAM_ID)
-- EAS build commands
-- Telegram notification setup for build status
+7. **Sleep Environment Score**
+   - Composite: ambient temp + clothing + air circulation → "optimal/cooler/warmer"
+   - Recommendations for optimal sleep temperature (16-20°C)
+   - Storage key: `@jobble/sleep_environment_score`
+
+8. **Thermal Correlation Dashboard**
+   - Overlay thermal events with sleep quality and feeding
+   - "Does overheating correlate with night wakings?" insight card
+
+### Implementation Rules
+- New tab: `app/(tabs)/thermal-regulation.tsx`
+- Follow existing tab patterns: Tab → ScrollView → Section cards
+- Use existing theme context, language context, AsyncStorage patterns
+- TSC must pass 0 errors after changes
+- i18n: add keys to en.json + zh.json (use t() for all user-facing text)
+- Register in `app/(tabs)/_layout.tsx`
+- Icon: `thermometer` (MaterialCommunityIcons), label: t('tabs.thermalRegulation')
+- Badge: "Thermal Guardian" (logged temperature for 30 consecutive days)
 
 ### After Implementation
-1. Run: cd JobbleBaby && npx tsc --noEmit (0 errors)
-2. Commit: git add -A && git commit -m "feat(devops): add GitHub Actions CI/CD + Sentry crash reporting"
-3. git push
+1. Run: `cd JobbleBaby && npx tsc --noEmit` (0 errors required)
+2. Verify tab appears in tab bar
+3. Commit: `git add -A && git commit -m "feat(tab): add Infant Thermal Regulation Dashboard — temperature log, fever tracker, overheating alert, sleep environment score, i18n"`
+4. git push
 
 ULW

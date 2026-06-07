@@ -1,55 +1,68 @@
-# Sisyphus Task — Cycle 229
+# Sisyphus Task — Cycle 236
 
 ## Context
-Jobble Baby: 49 tabs, TSC 0 errors. Circadian tab exists (361 lines) but lacks Dusk Light Navigator functionality. Todo #90: implement Circadian Dusk Light Navigator as an enhancement to the existing circadian.tsx tab.
+Jobble Baby: TSC 0 errors, 48+ tabs. All major feature tabs implemented. DevOps foundation complete (CI/CD + Sentry). Next priority: implement Infant Thermal Regulation Dashboard tab.
 
-## Task: Implement Circadian Dusk Light Navigator
+## Task: Implement Infant Thermal Regulation Dashboard tab
 
-Enhance the existing `app/(tabs)/circadian.tsx` with a new "Dusk Light Navigator" section. This is an ADDITIVE enhancement — do NOT remove existing functionality.
+Create `app/(tabs)/thermal-regulation.tsx` — a new tab helping parents track and manage baby's thermal health.
 
-### Features to Add
+### Features
 
-1. **Light Exposure Logger**
-   - Log daily light exposure: outdoor sunlight (direct), outdoor shade, indoor bright, indoor dim, screen time
-   - Time picker for each entry (start time + duration)
-   - Storage key: `@jobble/light_exposure_log`
+1. **Temperature Log**
+   - Input: body temp (axillary/ear/forehead), ambient room temp, clothing layers (1-5), sweat level (none/damp/wet)
+   - Timestamp auto-generated
+   - Storage key: `@jobble/thermal_log`
 
-2. **Dusk Light Alarm**
-   - Configurable daily reminder: "Time for dusk light exposure" (user sets time)
-   - Uses local notifications or in-app alert
-   - Toggle on/off
-   - Storage key: `@jobble/dusk_alarm_time`
+2. **Thermal Map Timeline**
+   - Visual timeline: body temp vs ambient temp overlaid with sleep quality
+   - Color-coded: blue (cold) → green (optimal) → red (hot)
+   - Storage key: `@jobble/thermal_log`
 
-3. **Melatonin Optimization Guide**
-   - Educational card: "How light affects baby sleep"
-   -睡前燈光距離：recommended 照度 (<50 lux) and distance (>1m) from crib
-   - Screen time cutoff recommendation (no screens 1hr before bedtime)
-   - Blue light filtering reminder for parent devices
-   - Storage key: `@jobble/melatonin_settings`
+3. **Overheating Risk Alert**
+   - When ambient >24°C + clothing >2 layers → alert: "Overheating risk — remove layer"
+   - Configurable threshold
+   - Storage key: `@jobble/thermal_alert_threshold`
 
-4. **Light Therapy Prescriber (Phase Shifting)**
-   - For jet lag or day/night confusion: prescribe light exposure schedule
-   - Input: current baby sleep time, target sleep time, days to shift
-   - Output: recommended light exposure windows (bright light morning, dim light evening)
-   - Visual timeline showing current vs target schedule
-   - Storage key: `@jobble/phase_shift_plan`
+4. **Fever Tracker**
+   - Log fever episodes: temp, duration, treatment given, feeding change
+   - Alert thresholds: >38°C (rectal/ear) or >37.5°C (axillary)
+   - Correlation: fever + feeding frequency drop = dehydration risk
+   - Storage key: `@jobble/fever_episode`
 
-5. **Physiological Sigh Integration**
-   - Brief educational tip on physiological sighs (double inhale) for calming
-   - Link to stress-cascade tab for full protocol
-   - Card appears in evening view
+5. **Evaporative Cooling Guide**
+   - Tepid sponging timer (10 min)
+   - Target pulse points: groin, axillae, neck
+   - Step-by-step instructional card
+   - Storage key: `@jobble/fever_treatment`
+
+6. **Car Seat Temperature Alert**
+   - Ambient >28°C → notification: "Car seat can reach dangerous temps in direct sun"
+   - Storage key: `@jobble/car_temp_alert_enabled`
+
+7. **Sleep Environment Score**
+   - Composite: ambient temp + clothing + air circulation → "optimal/cooler/warmer"
+   - Recommendations for optimal sleep temperature (16-20°C)
+   - Storage key: `@jobble/sleep_environment_score`
+
+8. **Thermal Correlation Dashboard**
+   - Overlay thermal events with sleep quality and feeding
+   - "Does overheating correlate with night wakings?" insight card
 
 ### Implementation Rules
-- Follow existing circadian.tsx code style and structure
+- New tab: `app/(tabs)/thermal-regulation.tsx`
+- Follow existing tab patterns: Tab → ScrollView → Section cards
 - Use existing theme context, language context, AsyncStorage patterns
-- Keep existing tabs structure (Tab, ScrollView, cards)
 - TSC must pass 0 errors after changes
 - i18n: add keys to en.json + zh.json (use t() for all user-facing text)
-- New storage keys: `@jobble/light_exposure_log`, `@jobble/dusk_alarm_time`, `@jobble/melatonin_settings`, `@jobble/phase_shift_plan`
+- Register in `app/(tabs)/_layout.tsx`
+- Icon: `thermometer` (MaterialCommunityIcons), label: t('tabs.thermalRegulation')
+- Badge: "Thermal Guardian" (logged temperature for 30 consecutive days)
 
 ### After Implementation
-1. Run: `npx tsc --noEmit` (must pass 0 errors)
-2. Verify: existing circadian functionality still works
-3. Commit: `git add -A && git commit -m "feat(circadian): add Dusk Light Navigator — light exposure log, dusk alarm, melatonin optimization, phase shift prescriber, i18n"`
+1. Run: `cd JobbleBaby && npx tsc --noEmit` (0 errors required)
+2. Verify tab appears in tab bar
+3. Commit: `git add -A && git commit -m "feat(tab): add Infant Thermal Regulation Dashboard — temperature log, fever tracker, overheating alert, sleep environment score, i18n"`
+4. git push
 
 ULW

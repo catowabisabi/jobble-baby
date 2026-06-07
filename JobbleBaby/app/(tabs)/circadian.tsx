@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -356,7 +356,333 @@ export default function CircadianScreen() {
             </View>
           )}
         </View>
+
+        {/* Dusk Light Navigator */}
+        <DuskLightNavigator C={C} t={t} />
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+// === Dusk Light Navigator Sub-Component ===
+interface LightExposureEntry {
+  id: string;
+  date: string;
+  outdoorSun: number; // minutes
+  outdoorShade: number;
+  indoorBright: number;
+  indoorDim: number;
+  screenTime: number;
+  time: string;
+}
+
+interface DuskAlarmSettings {
+  enabled: boolean;
+  hour: number;
+  minute: number;
+}
+
+interface MelatoninSettings {
+  screenCutoffHours: number;
+  minLuxDistance: string;
+}
+
+interface PhaseShiftPlan {
+  currentSleepTime: string;
+  targetSleepTime: string;
+  daysToShift: number;
+  brightLightMorningStart: string;
+  brightLightMorningEnd: string;
+  dimLightEveningStart: string;
+  dimLightEveningEnd: string;
+  active: boolean;
+}
+
+function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
+  const [lightLog, setLightLog] = useState<LightExposureEntry[]>([]);
+  const [duskAlarm, setDuskAlarm] = useState<DuskAlarmSettings>({ enabled: false, hour: 19, minute: 0 });
+  const [melatoninSettings, setMelatoninSettings] = useState<MelatoninSettings>({ screenCutoffHours: 1, minLuxDistance: '>1m, <50 lux' });
+  const [phaseShiftPlan, setPhaseShiftPlan] = useState<PhaseShiftPlan | null>(null);
+  const [showLightLogger, setShowLightLogger] = useState(false);
+  const [showPhaseShift, setShowPhaseShift] = useState(false);
+  const [logForm, setLogForm] = useState({ outdoorSun: '', outdoorShade: '', indoorBright: '', indoorDim: '', screenTime: '' });
+  const [shiftForm, setShiftForm] = useState({ currentSleep: '22:00', targetSleep: '20:00', daysToShift: '3' });
+
+  useEffect(() => {
+    loadDuskData();
+  }, []);
+
+  const loadDuskData = async () => {
+    try {
+      const lightStr = await AsyncStorage.getItem('@jobble/light_exposure_log');
+      if (lightStr) setLightLog(JSON.parse(lightStr));
+      const alarmStr = await AsyncStorage.getItem('@jobble/dusk_alarm_time');
+      if (alarmStr) setDuskAlarm(JSON.parse(alarmStr));
+      const melStr = await AsyncStorage.getItem('@jobble/melatonin_settings');
+      if (melStr) setMelatoninSettings(JSON.parse(melStr));
+      const phaseStr = await AsyncStorage.getItem('@jobble/phase_shift_plan');
+      if (phaseStr) setPhaseShiftPlan(JSON.parse(phaseStr));
+    } catch (e) { /* silent */ }
+  };
+
+  const handleLogLight = async () => {
+    const entry: LightExposureEntry = {
+      id: `le_${Date.now()}`,
+      date: new Date().toISOString().split('T')[0],
+      time: new Date().toTimeString().slice(0, 5),
+      outdoorSun: parseInt(logForm.outdoorSun) || 0,
+      outdoorShade: parseInt(logForm.outdoorShade) || 0,
+      indoorBright: parseInt(logForm.indoorBright) || 0,
+      indoorDim: parseInt(logForm.indoorDim) || 0,
+      screenTime: parseInt(logForm.screenTime) || 0,
+    };
+    const updated = [entry, ...lightLog].slice(0, 30);
+    setLightLog(updated);
+    await AsyncStorage.setItem('@jobble/light_exposure_log', JSON.stringify(updated));
+    setLogForm({ outdoorSun: '', outdoorShade: '', indoorBright: '', indoorDim: '', screenTime: '' });
+    setShowLightLogger(false);
+    Alert.alert(t('duskLight.logSaved') || 'Light Log Saved', `${entry.outdoorSun + entry.outdoorShade + entry.indoorBright + entry.indoorDim + entry.screenTime} min total logged`);
+  };
+
+  const handleSaveAlarm = async (hour: number, minute: number, enabled: boolean) => {
+    const settings = { enabled, hour, minute };
+    setDuskAlarm(settings);
+    await AsyncStorage.setItem('@jobble/dusk_alarm_time', JSON.stringify(settings));
+    Alert.alert(t('duskLight.alarmSaved') || 'Alarm Saved', enabled ? `${hour}:${minute.toString().padStart(2, '0')} ${t('duskLight.dailyReminder') || 'daily reminder'}` : t('duskLight.alarmDisabled') || 'Alarm disabled');
+  };
+
+  const handleCalculatePhaseShift = async () => {
+    const current = shiftForm.currentSleep;
+    const target = shiftForm.targetSleep;
+    const days = parseInt(shiftForm.daysToShift) || 3;
+    const shiftHours = (parseInt(target.split(':')[0]) - parseInt(current.split(':')[0]) + 24) % 24;
+    const brightStart = `${Math.max(6, 7 - Math.floor(shiftHours / 2))}:00`;
+    const brightEnd = `${Math.min(10, 9 - Math.floor(shiftHours / 2))}:00`;
+    const dimStart = `${Math.max(17, 20 - Math.floor(shiftHours / 2))}:00`;
+    const dimEnd = `${Math.min(21, 21 - Math.floor(shiftHours / 2))}:00`;
+    const plan: PhaseShiftPlan = {
+      currentSleepTime: current,
+      targetSleepTime: target,
+      daysToShift: days,
+      brightLightMorningStart: brightStart,
+      brightLightMorningEnd: brightEnd,
+      dimLightEveningStart: dimStart,
+      dimLightEveningEnd: dimEnd,
+      active: true,
+    };
+    setPhaseShiftPlan(plan);
+    await AsyncStorage.setItem('@jobble/phase_shift_plan', JSON.stringify(plan));
+    setShowPhaseShift(false);
+    Alert.alert(t('duskLight.phaseShiftCalculated') || 'Phase Shift Calculated', `${t('duskLight.brightLightMorning') || 'Bright light'}: ${brightStart}-${brightEnd}\n${t('duskLight.dimLightEvening') || 'Dim light'}: ${dimStart}-${dimEnd}`);
+  };
+
+  const todayLight = lightLog.find(e => e.date === new Date().toISOString().split('T')[0]);
+  const todayTotal = todayLight ? todayLight.outdoorSun + todayLight.outdoorShade + todayLight.indoorBright + todayLight.indoorDim + todayLight.screenTime : 0;
+
+  const styles = StyleSheet.create({
+    duskSection: { marginTop: 8 },
+    duskCard: { backgroundColor: C.card, borderRadius: 16, padding: 16, marginBottom: 16, borderWidth: 1, borderColor: C.border },
+    duskTitle: { fontSize: 18, fontWeight: 'bold', color: C.text, marginBottom: 12 },
+    lightGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+    lightItem: { backgroundColor: C.background, borderRadius: 12, padding: 12, alignItems: 'center', minWidth: '45%' },
+    lightIcon: { fontSize: 24, marginBottom: 4 },
+    lightLabel: { fontSize: 11, color: C.muted },
+    lightValue: { fontSize: 16, fontWeight: '600', color: C.text },
+    lightInput: { backgroundColor: C.background, borderRadius: 8, padding: 10, color: C.text, fontSize: 14, minWidth: 80 },
+    lightInputRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8 },
+    lightInputLabel: { fontSize: 13, color: C.muted, minWidth: 100 },
+    alarmRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 },
+    alarmTime: { fontSize: 24, fontWeight: 'bold', color: C.text },
+    alarmToggle: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+    alarmBtn: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 8, backgroundColor: C.background },
+    alarmBtnText: { fontSize: 14, color: C.text },
+    melCard: { backgroundColor: '#2D1F4E', borderRadius: 12, padding: 14, marginBottom: 12 },
+    melTitle: { fontSize: 14, fontWeight: '600', color: '#E8D5FF', marginBottom: 8 },
+    melText: { fontSize: 12, color: '#D4C4E8', lineHeight: 18 },
+    melHighlight: { fontWeight: 'bold', color: '#FFD700' },
+    phaseCard: { backgroundColor: C.card, borderRadius: 12, padding: 14, marginBottom: 12 },
+    phaseTitle: { fontSize: 14, fontWeight: '600', color: C.text, marginBottom: 8 },
+    phaseRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 6 },
+    phaseIcon: { fontSize: 16 },
+    phaseLabel: { fontSize: 12, color: C.muted, flex: 1 },
+    phaseTime: { fontSize: 14, fontWeight: '600', color: '#10B981' },
+    phaseDimTime: { fontSize: 14, fontWeight: '600', color: '#6366F1' },
+    physioTip: { backgroundColor: '#FEF3C7', borderRadius: 10, padding: 12, marginTop: 8 },
+    physioTipText: { fontSize: 12, color: '#92400E', lineHeight: 18 },
+    physioLink: { color: '#D97706', fontWeight: '600', textDecorationLine: 'underline' },
+    logBtn: { backgroundColor: '#8B5CF6', borderRadius: 10, padding: 12, alignItems: 'center', marginTop: 8 },
+    logBtnText: { color: '#fff', fontSize: 14, fontWeight: '600' },
+    expandBtn: { backgroundColor: C.background, borderRadius: 8, padding: 10, alignItems: 'center', marginTop: 8 },
+    expandBtnText: { color: C.text, fontSize: 13 },
+    calcBtn: { backgroundColor: '#10B981', borderRadius: 10, padding: 12, alignItems: 'center', marginTop: 8 },
+    calcBtnText: { color: '#fff', fontSize: 14, fontWeight: '600' },
+    inputRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8 },
+    inputLabel: { fontSize: 13, color: C.muted, minWidth: 110 },
+    textInput: { backgroundColor: C.background, borderRadius: 8, padding: 10, color: C.text, fontSize: 14, flex: 1 },
+  });
+
+  return (
+    <View style={styles.duskSection}>
+      <Text style={[styles.duskTitle, { color: C.text }]}>{t('duskLight.title') || '🌙 Dusk Light Navigator'}</Text>
+
+      {/* Light Exposure Summary */}
+      <View style={styles.duskCard}>
+        <Text style={styles.duskTitle}>{t('duskLight.lightExposure') || 'Light Exposure Today'}</Text>
+        <View style={styles.lightGrid}>
+          <View style={styles.lightItem}>
+            <Text style={styles.lightIcon}>☀️</Text>
+            <Text style={styles.lightLabel}>{t('duskLight.outdoorSun') || 'Outdoor Sun'}</Text>
+            <Text style={styles.lightValue}>{todayLight?.outdoorSun || 0} min</Text>
+          </View>
+          <View style={styles.lightItem}>
+            <Text style={styles.lightIcon}>🌳</Text>
+            <Text style={styles.lightLabel}>{t('duskLight.shade') || 'Shade'}</Text>
+            <Text style={styles.lightValue}>{todayLight?.outdoorShade || 0} min</Text>
+          </View>
+          <View style={styles.lightItem}>
+            <Text style={styles.lightIcon}>💡</Text>
+            <Text style={styles.lightLabel}>{t('duskLight.indoorBright') || 'Indoor Bright'}</Text>
+            <Text style={styles.lightValue}>{todayLight?.indoorBright || 0} min</Text>
+          </View>
+          <View style={styles.lightItem}>
+            <Text style={styles.lightIcon}>🌙</Text>
+            <Text style={styles.lightLabel}>{t('duskLight.indoorDim') || 'Indoor Dim'}</Text>
+            <Text style={styles.lightValue}>{todayLight?.indoorDim || 0} min</Text>
+          </View>
+          <View style={styles.lightItem}>
+            <Text style={styles.lightIcon}>📱</Text>
+            <Text style={styles.lightLabel}>{t('duskLight.screenTime') || 'Screen Time'}</Text>
+            <Text style={styles.lightValue}>{todayLight?.screenTime || 0} min</Text>
+          </View>
+          <View style={styles.lightItem}>
+            <Text style={styles.lightIcon}>📊</Text>
+            <Text style={styles.lightLabel}>{t('duskLight.total') || 'Total'}</Text>
+            <Text style={styles.lightValue}>{todayTotal} min</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.expandBtn} onPress={() => setShowLightLogger(!showLightLogger)}>
+          <Text style={styles.expandBtnText}>{showLightLogger ? (t('duskLight.hideLogger') || 'Hide Logger') : (t('duskLight.logLight') || '+ Log Light Exposure')}</Text>
+        </TouchableOpacity>
+        {showLightLogger && (
+          <View style={{ marginTop: 12 }}>
+            <View style={styles.lightInputRow}>
+              <Text style={styles.lightInputLabel}>{t('duskLight.outdoorSun') || 'Outdoor Sun (min)'}</Text>
+              <TextInput style={styles.lightInput} keyboardType="numeric" value={logForm.outdoorSun} onChangeText={(v) => setLogForm({ ...logForm, outdoorSun: v })} placeholder="0" placeholderTextColor={C.muted} />
+            </View>
+            <View style={styles.lightInputRow}>
+              <Text style={styles.lightInputLabel}>{t('duskLight.shade') || 'Shade (min)'}</Text>
+              <TextInput style={styles.lightInput} keyboardType="numeric" value={logForm.outdoorShade} onChangeText={(v) => setLogForm({ ...logForm, outdoorShade: v })} placeholder="0" placeholderTextColor={C.muted} />
+            </View>
+            <View style={styles.lightInputRow}>
+              <Text style={styles.lightInputLabel}>{t('duskLight.indoorBright') || 'Indoor Bright (min)'}</Text>
+              <TextInput style={styles.lightInput} keyboardType="numeric" value={logForm.indoorBright} onChangeText={(v) => setLogForm({ ...logForm, indoorBright: v })} placeholder="0" placeholderTextColor={C.muted} />
+            </View>
+            <View style={styles.lightInputRow}>
+              <Text style={styles.lightInputLabel}>{t('duskLight.indoorDim') || 'Indoor Dim (min)'}</Text>
+              <TextInput style={styles.lightInput} keyboardType="numeric" value={logForm.indoorDim} onChangeText={(v) => setLogForm({ ...logForm, indoorDim: v })} placeholder="0" placeholderTextColor={C.muted} />
+            </View>
+            <View style={styles.lightInputRow}>
+              <Text style={styles.lightInputLabel}>{t('duskLight.screenTime') || 'Screen Time (min)'}</Text>
+              <TextInput style={styles.lightInput} keyboardType="numeric" value={logForm.screenTime} onChangeText={(v) => setLogForm({ ...logForm, screenTime: v })} placeholder="0" placeholderTextColor={C.muted} />
+            </View>
+            <TouchableOpacity style={styles.logBtn} onPress={handleLogLight}>
+              <Text style={styles.logBtnText}>{t('duskLight.saveLog') || 'Save Log'}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+
+      {/* Dusk Light Alarm */}
+      <View style={styles.duskCard}>
+        <Text style={styles.duskTitle}>{t('duskLight.duskAlarm') || '🌆 Dusk Light Alarm'}</Text>
+        <View style={styles.alarmRow}>
+          <Text style={styles.alarmTime}>{duskAlarm.hour.toString().padStart(2, '0')}:{duskAlarm.minute.toString().padStart(2, '0')}</Text>
+          <View style={styles.alarmToggle}>
+            <TouchableOpacity style={[styles.alarmBtn, { backgroundColor: duskAlarm.enabled ? '#10B981' : C.background }]} onPress={() => handleSaveAlarm(duskAlarm.hour, duskAlarm.minute, !duskAlarm.enabled)}>
+              <Text style={[styles.alarmBtnText, { color: duskAlarm.enabled ? '#fff' : C.text }]}>{duskAlarm.enabled ? (t('duskLight.enabled') || 'ON') : (t('duskLight.disabled') || 'OFF')}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', gap: 8 }}>
+          <TouchableOpacity style={[styles.alarmBtn, { flex: 1 }]} onPress={() => handleSaveAlarm(Math.max(0, duskAlarm.hour - 1), duskAlarm.minute, duskAlarm.enabled)}>
+            <Text style={styles.alarmBtnText}>-1h</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.alarmBtn, { flex: 1 }]} onPress={() => handleSaveAlarm(Math.min(23, duskAlarm.hour + 1), duskAlarm.minute, duskAlarm.enabled)}>
+            <Text style={styles.alarmBtnText}>+1h</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={{ fontSize: 11, color: C.muted, marginTop: 8 }}>{t('duskLight.alarmHint') || 'Sets daily reminder for dusk light exposure'}</Text>
+      </View>
+
+      {/* Melatonin Optimization Guide */}
+      <View style={styles.duskCard}>
+        <Text style={styles.duskTitle}>{t('duskLight.melatoninGuide') || '😴 Melatonin Optimization'}</Text>
+        <View style={styles.melCard}>
+          <Text style={styles.melTitle}>{t('duskLight.melatoninTitle') || 'Light → Baby Sleep Quality'}</Text>
+          <Text style={styles.melText}>
+            {t('duskLight.melatoninTip1') || 'Evening light exposure directly affects melatonin production. Keep room dim (<50 lux) and >1m from crib.'}{'\n'}
+            <Text style={styles.melHighlight}>{t('duskLight.screenCutoff') || 'Screen cutoff: 1hr before bedtime'}</Text>
+          </Text>
+        </View>
+        <View style={styles.melCard}>
+          <Text style={styles.melTitle}>{t('duskLight.bedtimeRoutine') || 'Bedtime Light Routine'}</Text>
+          <Text style={styles.melText}>
+            • {t('duskLight.dimLights') || 'Dim lights 2hr before sleep'}{'\n'}
+            • {t('duskLight.noBlueLight') || 'Avoid blue light 1hr before'}{'\n'}
+            • {t('duskLight.nightLightRed') || 'If night light needed, use red/orange'}{'\n'}
+            • {t('duskLight.cribDistance') || 'Light source >1m from crib, <50 lux'}
+          </Text>
+        </View>
+      </View>
+
+      {/* Light Therapy Prescriber */}
+      <View style={styles.duskCard}>
+        <Text style={styles.duskTitle}>{t('duskLight.lightTherapy') || '🕐 Light Therapy Prescriber'}</Text>
+        <Text style={{ fontSize: 12, color: C.muted, marginBottom: 12 }}>{t('duskLight.jetLagHint') || 'For jet lag or day-night confusion: input times to generate schedule'}</Text>
+        <View style={styles.inputRow}>
+          <Text style={styles.inputLabel}>{t('duskLight.currentSleep') || 'Current sleep'}</Text>
+          <TextInput style={styles.textInput} value={shiftForm.currentSleep} onChangeText={(v) => setShiftForm({ ...shiftForm, currentSleep: v })} placeholder="22:00" placeholderTextColor={C.muted} />
+        </View>
+        <View style={styles.inputRow}>
+          <Text style={styles.inputLabel}>{t('duskLight.targetSleep') || 'Target sleep'}</Text>
+          <TextInput style={styles.textInput} value={shiftForm.targetSleep} onChangeText={(v) => setShiftForm({ ...shiftForm, targetSleep: v })} placeholder="20:00" placeholderTextColor={C.muted} />
+        </View>
+        <View style={styles.inputRow}>
+          <Text style={styles.inputLabel}>{t('duskLight.daysToShift') || 'Days to shift'}</Text>
+          <TextInput style={styles.textInput} keyboardType="numeric" value={shiftForm.daysToShift} onChangeText={(v) => setShiftForm({ ...shiftForm, daysToShift: v })} placeholder="3" placeholderTextColor={C.muted} />
+        </View>
+        <TouchableOpacity style={styles.calcBtn} onPress={handleCalculatePhaseShift}>
+          <Text style={styles.calcBtnText}>{t('duskLight.calculate') || 'Calculate Schedule'}</Text>
+        </TouchableOpacity>
+        {phaseShiftPlan?.active && (
+          <View style={{ marginTop: 12 }}>
+            <View style={styles.phaseCard}>
+              <Text style={styles.phaseTitle}>{t('duskLight.prescribedSchedule') || 'Prescribed Schedule'}</Text>
+              <View style={styles.phaseRow}>
+                <Text style={styles.phaseIcon}>☀️</Text>
+                <Text style={styles.phaseLabel}>{t('duskLight.brightLightMorning') || 'Bright light morning'}</Text>
+                <Text style={styles.phaseTime}>{phaseShiftPlan.brightLightMorningStart}-{phaseShiftPlan.brightLightMorningEnd}</Text>
+              </View>
+              <View style={styles.phaseRow}>
+                <Text style={styles.phaseIcon}>🌙</Text>
+                <Text style={styles.phaseLabel}>{t('duskLight.dimLightEvening') || 'Dim light evening'}</Text>
+                <Text style={styles.phaseDimTime}>{phaseShiftPlan.dimLightEveningStart}-{phaseShiftPlan.dimLightEveningEnd}</Text>
+              </View>
+            </View>
+          </View>
+        )}
+      </View>
+
+      {/* Physiological Sigh Integration */}
+      <View style={styles.duskCard}>
+        <Text style={styles.duskTitle}>{t('duskLight.physioSigh') || '🫁 Physiological Sigh'}</Text>
+        <View style={styles.physioTip}>
+          <Text style={styles.physioTipText}>
+            {t('duskLight.physioSighTip') || 'Double inhale through nose + long exhale activates parasympathetic system, calming baby fast.'}{'\n\n'}
+            <Text style={styles.physioLink}>{t('duskLight.stressCascadeLink') || 'See Stress Support tab for full cascade mapping'}</Text>
+          </Text>
+        </View>
+      </View>
+    </View>
   );
 }

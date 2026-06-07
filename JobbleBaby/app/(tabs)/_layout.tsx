@@ -299,6 +299,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-drumstick" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="phototherapy-comfort"
+        options={{
+          title: t('tabs.phototherapyComfort'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="lightbulb-on" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

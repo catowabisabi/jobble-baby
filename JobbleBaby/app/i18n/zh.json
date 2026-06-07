@@ -45,7 +45,8 @@
     "colicRelief": "Colic Relief",
     "feedingReadiness": "加固",
     "safetyAudit": "安全檢查",
-    "constellation": "星圖"
+    "constellation": "星圖",
+    "phototherapyComfort": "光照護理"
   },
   "projection": {
     "title": "半年發育預測",
@@ -1669,5 +1670,46 @@
   "constellation": {
     "title": "發展星圖",
     "subtitle": "繪製寶寶的發育星系"
+  },
+  "photoComfort": {
+    "title": "光照治療舒緩伴伴",
+    "babyNameDefault": "我的寶寶",
+    "daysOld": "天大",
+    "sessions": "療程",
+    "totalTime": "總時長",
+    "maskCompliance": "眼罩達標",
+    "parentWellness": "家長身心健康",
+    "stressNote": "追蹤您的壓力水平 — 自我照顧也是照顧的一部分",
+    "comfortTips": "家居護理清單",
+    "tipEyeMask": "眼罩必須完全覆蓋雙眼",
+    "tipSkinTemp": "每30分鐘檢查體溫 — 保持寶寶涼爽",
+    "tipFeeding": "光照期間每2-3小時餵奶 — 額外液體有助排出膽紅素",
+    "tipDiaper": "療程前後更換尿布 — 膽紅素通過糞便排出",
+    "tipBonding": "休息時肌膚接觸對寶寶和家長都有幫助",
+    "newSession": "新療程",
+    "share": "分享",
+    "sessionHistory": "療程記錄",
+    "noSessions": "尚無記錄。點擊「新療程」開始。",
+    "date": "日期",
+    "startTime": "開始",
+    "endTime": "結束",
+    "lampType": "燈具類型",
+    "comfortChecklist": "舒緩清單",
+    "eyeMaskOn": "寶寶已戴眼罩",
+    "skinTempChecked": "已檢查體溫",
+    "diaperChanged": "已換尿布",
+    "feedingDuring": "療程中有餵奶",
+    "skinTempFelt": "皮膚溫度感覺",
+    "parentStress": "家長壓力 (1=良好, 5=崩潰)",
+    "notes": "備註",
+    "notesPlaceholder": "任何備註...",
+    "cancel": "取消",
+    "save": "儲存",
+    "eyeMask": "眼罩",
+    "skinTemp": "體溫",
+    "diaper": "尿布",
+    "feeding": "餵奶",
+    "fillTimes": "請填寫開始和結束時間",
+    "invalidTimes": "結束時間必須在開始時間之後"
   }
 }

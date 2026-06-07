@@ -45,7 +45,8 @@
     "colicRelief": "Colic Relief",
     "feedingReadiness": "Feeding",
     "safetyAudit": "Safety Audit",
-    "constellation": "Constellation"
+    "constellation": "Constellation",
+    "phototherapyComfort": "Phototherapy"
   },
   "projection": {
     "title": "6-Month Projection",
@@ -1667,5 +1668,46 @@
   "constellation": {
     "title": "Development Constellation",
     "subtitle": "Map your baby's developmental galaxy"
+  },
+  "photoComfort": {
+    "title": "Phototherapy Comfort Companion",
+    "babyNameDefault": "My Baby",
+    "daysOld": "days old",
+    "sessions": "Sessions",
+    "totalTime": "Total Time",
+    "maskCompliance": "Mask OK",
+    "parentWellness": "Parent Wellness",
+    "stressNote": "Track your stress level — self-care is part of care",
+    "comfortTips": "Home Care Checklist",
+    "tipEyeMask": "Eye mask must cover both eyes completely",
+    "tipSkinTemp": "Check skin temp every 30 min — keep baby cool",
+    "tipFeeding": "Feed every 2-3h during phototherapy — extra fluids help flush bilirubin",
+    "tipDiaper": "Change diaper before/after sessions — bilirubin exits via stool",
+    "tipBonding": "Skin-to-skin during breaks helps both baby and parent",
+    "newSession": "New Session",
+    "share": "Share",
+    "sessionHistory": "Session History",
+    "noSessions": "No sessions yet. Tap New Session to begin.",
+    "date": "Date",
+    "startTime": "Start",
+    "endTime": "End",
+    "lampType": "Lamp Type",
+    "comfortChecklist": "Comfort Checklist",
+    "eyeMaskOn": "Eye mask on baby",
+    "skinTempChecked": "Skin temp checked",
+    "diaperChanged": "Diaper changed",
+    "feedingDuring": "Fed during session",
+    "skinTempFelt": "Skin temp felt",
+    "parentStress": "Parent stress (1=great, 5=overwhelmed)",
+    "notes": "Notes",
+    "notesPlaceholder": "Any notes...",
+    "cancel": "Cancel",
+    "save": "Save",
+    "eyeMask": "Eye mask",
+    "skinTemp": "Skin temp",
+    "diaper": "Diaper",
+    "feeding": "Fed",
+    "fillTimes": "Please fill start and end times",
+    "invalidTimes": "End time must be after start time"
   }
 }

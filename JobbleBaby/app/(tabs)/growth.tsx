@@ -11,6 +11,11 @@ import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble/growth_entries';
+const VELOCITY_STORAGE_KEY = '@jobble/growth_velocity_data';
+const ALERT_THRESHOLD_KEY = '@jobble/velocity_alert_threshold';
+const SKINFOLD_KEY = '@jobble/skinfold_entries';
+const PONDERAL_KEY = '@jobble/ponderal_index';
+const PARENTAL_KEY = '@jobble/parental_heights';
 
 // WHO Child Growth Standards — ages 0 to 24 months
 const AGES_MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 18, 21, 24];
@@ -99,6 +104,87 @@ const GIRLS_WEIGHT: number[][] = [
   [9.0, 9.9, 11.3, 12.8, 14.3],// 24m
 ];
 
+// WHO Height Velocity Standards (cm/month) for boys [3rd, 50th, 97th]
+const BOYS_HEIGHT_VELOCITY: number[][] = [
+  [3.5, 4.0, 4.5],  // 0-1m
+  [2.5, 3.0, 3.5],  // 1-2m
+  [2.0, 2.5, 3.0],  // 2-3m
+  [1.5, 2.0, 2.5],  // 3-4m
+  [1.2, 1.7, 2.2],  // 4-5m
+  [1.0, 1.5, 2.0],  // 5-6m
+  [0.8, 1.3, 1.8],  // 6-7m
+  [0.7, 1.2, 1.7],  // 7-8m
+  [0.6, 1.1, 1.6],  // 8-9m
+  [0.5, 1.0, 1.5],  // 9-10m
+  [0.4, 0.9, 1.4],  // 10-11m
+  [0.3, 0.8, 1.3],  // 11-12m
+  [0.3, 0.7, 1.1],  // 12-15m
+  [0.3, 0.6, 0.9],  // 15-18m
+  [0.2, 0.5, 0.8],  // 18-21m
+  [0.2, 0.5, 0.8],  // 21-24m
+];
+
+// WHO Height Velocity Standards (cm/month) for girls [3rd, 50th, 97th]
+const GIRLS_HEIGHT_VELOCITY: number[][] = [
+  [3.0, 3.5, 4.0],  // 0-1m
+  [2.3, 2.8, 3.3],  // 1-2m
+  [1.8, 2.3, 2.8],  // 2-3m
+  [1.4, 1.9, 2.4],  // 3-4m
+  [1.1, 1.6, 2.1],  // 4-5m
+  [0.9, 1.4, 1.9],  // 5-6m
+  [0.7, 1.2, 1.7],  // 6-7m
+  [0.6, 1.1, 1.6],  // 7-8m
+  [0.5, 1.0, 1.5],  // 8-9m
+  [0.4, 0.9, 1.4],  // 9-10m
+  [0.3, 0.8, 1.3],  // 10-11m
+  [0.3, 0.7, 1.2],  // 11-12m
+  [0.2, 0.6, 1.0],  // 12-15m
+  [0.2, 0.5, 0.8],  // 15-18m
+  [0.2, 0.5, 0.8],  // 18-21m
+  [0.2, 0.4, 0.7],  // 21-24m
+];
+
+// WHO Ponderal Index Standards [3rd, 50th, 97th] by age in months
+const BOYS_PONDERAL: number[][] = [
+  [10.2, 12.3, 14.5],  // 0m
+  [11.1, 13.4, 15.8],  // 1m
+  [11.8, 14.2, 16.8],  // 2m
+  [12.3, 14.8, 17.5],  // 3m
+  [12.7, 15.3, 18.1],  // 4m
+  [13.0, 15.6, 18.5],  // 5m
+  [13.2, 15.9, 18.9],  // 6m
+  [13.4, 16.1, 19.2],  // 7m
+  [13.5, 16.3, 19.4],  // 8m
+  [13.6, 16.4, 19.6],  // 9m
+  [13.6, 16.5, 19.7],  // 10m
+  [13.6, 16.6, 19.8],  // 11m
+  [13.6, 16.6, 19.9],  // 12m
+  [13.5, 16.5, 19.8],  // 15m
+  [13.4, 16.4, 19.6],  // 18m
+  [13.3, 16.2, 19.4],  // 21m
+  [13.2, 16.0, 19.2],  // 24m
+];
+
+const GIRLS_PONDERAL: number[][] = [
+  [9.8, 11.8, 14.0],  // 0m
+  [10.6, 12.8, 15.2],  // 1m
+  [11.3, 13.6, 16.2],  // 2m
+  [11.8, 14.2, 16.9],  // 3m
+  [12.2, 14.7, 17.5],  // 4m
+  [12.5, 15.0, 17.9],  // 5m
+  [12.7, 15.3, 18.3],  // 6m
+  [12.9, 15.5, 18.6],  // 7m
+  [13.0, 15.7, 18.8],  // 8m
+  [13.1, 15.8, 19.0],  // 9m
+  [13.1, 15.9, 19.1],  // 10m
+  [13.1, 15.9, 19.2],  // 11m
+  [13.1, 15.9, 19.2],  // 12m
+  [13.0, 15.8, 19.1],  // 15m
+  [12.9, 15.6, 18.9],  // 18m
+  [12.8, 15.4, 18.7],  // 21m
+  [12.7, 15.3, 18.5],  // 24m
+];
+
 type Gender = 'boys' | 'girls';
 type ChartType = 'height' | 'weight';
 
@@ -109,6 +195,46 @@ interface GrowthEntry {
   weight: number;
 }
 
+interface VelocityEntry {
+  id: string;
+  date: string;
+  velocity: number;
+  ageMonths: number;
+}
+
+interface VelocityAlertThreshold {
+  mild: number;
+  moderate: number;
+  severe: number;
+}
+
+interface SkinfoldEntry {
+  id: string;
+  date: string;
+  triceps: number;
+  subscapular: number;
+  ratio: number;
+}
+
+interface PonderalEntry {
+  id: string;
+  date: string;
+  weight: number;
+  height: number;
+  pi: number;
+  ageMonths: number;
+}
+
+interface ParentalHeights {
+  father: number;
+  mother: number;
+  mphBoys: number;
+  mphGirls: number;
+}
+
+type AlertLevel = 'mild' | 'moderate' | 'severe';
+type GrowthPhase = 'infancy' | 'toddler' | 'preschool';
+
 const getDateStr = () => new Date().toISOString().split('T')[0];
 
 const getTrendArrow = (current: number, previous: number): string => {
@@ -116,6 +242,82 @@ const getTrendArrow = (current: number, previous: number): string => {
   if (diff > 0.1) return '↑';
   if (diff < -0.1) return '↓';
   return '→';
+};
+
+const getGrowthPhase = (ageMonths: number): GrowthPhase => {
+  if (ageMonths < 12) return 'infancy';
+  if (ageMonths < 36) return 'toddler';
+  return 'preschool';
+};
+
+const getPhaseLabel = (phase: GrowthPhase, t: (key: string) => string): string => {
+  switch (phase) {
+    case 'infancy': return t('growth.infancy');
+    case 'toddler': return t('growth.toddler');
+    case 'preschool': return t('growth.preschool');
+  }
+};
+
+const getPhaseDescription = (phase: GrowthPhase, t: (key: string) => string): string => {
+  switch (phase) {
+    case 'infancy': return t('growth.phaseInfancy');
+    case 'toddler': return t('growth.phaseToddler');
+    case 'preschool': return t('growth.phasePreschool');
+  }
+};
+
+const calculateVelocity = (entries: GrowthEntry[]): VelocityEntry[] => {
+  if (entries.length < 2) return [];
+  const sorted = [...entries].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const velocities: VelocityEntry[] = [];
+  for (let i = 1; i < sorted.length; i++) {
+    const prev = sorted[i - 1];
+    const curr = sorted[i];
+    const prevDate = new Date(prev.date);
+    const currDate = new Date(curr.date);
+    const monthDiff = (currDate.getFullYear() - prevDate.getFullYear()) * 12 + (currDate.getMonth() - prevDate.getMonth());
+    if (monthDiff > 0) {
+      const heightDiff = curr.height - prev.height;
+      const velocity = heightDiff / monthDiff;
+      const ageMonths = getAgeInMonths(curr.date);
+      velocities.push({
+        id: `vel_${i}`,
+        date: curr.date,
+        velocity,
+        ageMonths,
+      });
+    }
+  }
+  return velocities;
+};
+
+const calculatePonderalIndex = (weight: number, height: number): number => {
+  if (height <= 0) return 0;
+  const heightM = height / 100;
+  return weight / (heightM * heightM * heightM);
+};
+
+const calculateMPH = (father: number, mother: number, gender: Gender): number => {
+  if (gender === 'boys') {
+    return (father + mother + 13) / 2;
+  }
+  return (father + mother - 13) / 2;
+};
+
+const getVelocityStatus = (velocity: number, ageIndex: number, gender: Gender): 'acceleration' | 'deceleration' | 'normal' => {
+  const velocityData = gender === 'boys' ? BOYS_HEIGHT_VELOCITY : GIRLS_HEIGHT_VELOCITY;
+  if (ageIndex < 0 || ageIndex >= velocityData.length) return 'normal';
+  const [pct3, pct50, pct97] = velocityData[ageIndex];
+  if (velocity > pct97) return 'acceleration';
+  if (velocity < pct3) return 'deceleration';
+  return 'normal';
+};
+
+const getAlertLevel = (velocity: number, threshold: VelocityAlertThreshold): AlertLevel | null => {
+  if (velocity < threshold.severe) return 'severe';
+  if (velocity < threshold.moderate) return 'moderate';
+  if (velocity < threshold.mild) return 'mild';
+  return null;
 };
 
 const getAgeInMonths = (dateStr: string): number => {
@@ -343,6 +545,21 @@ export default function GrowthScreen() {
   const [newBadges, setNewBadges] = useState<Badge[]>([]);
   const [gender, setGender] = useState<Gender>('boys');
   const [chartType, setChartType] = useState<ChartType>('height');
+  const [velocityEntries, setVelocityEntries] = useState<VelocityEntry[]>([]);
+  const [alertThreshold, setAlertThreshold] = useState<VelocityAlertThreshold>({ mild: 0.5, moderate: 0.3, severe: 0.1 });
+  const [velocityAlert, setVelocityAlert] = useState<AlertLevel | null>(null);
+  const [skinfoldEntries, setSkinfoldEntries] = useState<SkinfoldEntry[]>([]);
+  const [triceps, setTriceps] = useState('');
+  const [subscapular, setSubscapular] = useState('');
+  const [ponderalEntries, setPonderalEntries] = useState<PonderalEntry[]>([]);
+  const [parentalHeights, setParentalHeights] = useState<ParentalHeights | null>(null);
+  const [fatherHeight, setFatherHeight] = useState('');
+  const [motherHeight, setMotherHeight] = useState('');
+  const [currentPhase, setCurrentPhase] = useState<GrowthPhase>('infancy');
+  const [showVelocitySection, setShowVelocitySection] = useState(false);
+  const [showSkinfoldSection, setShowSkinfoldSection] = useState(false);
+  const [showPonderalSection, setShowPonderalSection] = useState(false);
+  const [showParentalSection, setShowParentalSection] = useState(false);
   const { effectiveTheme } = useTheme();
   const { t } = useLanguage();
   const C = COLORS[effectiveTheme];

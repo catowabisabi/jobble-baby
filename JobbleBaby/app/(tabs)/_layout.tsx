@@ -320,6 +320,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="medical-bag" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="thermal-regulation"
+        options={{
+          title: t('tabs.thermalRegulation'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="thermometer" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

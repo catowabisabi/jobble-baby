@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-"""Dispatch task to Sisyphus via tmux, escaping backticks properly."""
-import subprocess
+"""
+Sisyphus Task Dispatch — Cycle 236
+Infant Thermal Regulation Dashboard tab
+"""
+import os
 
-task = r"""# Sisyphus Task — Cycle 236
+task = """# Sisyphus Task — Cycle 236
 
 ## Context
 Jobble Baby: TSC 0 errors, 50 tabs. DevOps CI/CD complete. Next priority: implement Infant Thermal Regulation Dashboard tab.
@@ -72,20 +75,7 @@ Create app/(tabs)/thermal-regulation.tsx — a new tab helping parents track and
 ULW"""
 
 # Write task to file
-task_file = "/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_task.txt"
-with open(task_file, "w") as f:
+task_file = os.path.join(os.path.dirname(__file__), 'sisyphus_task.txt')
+with open(task_file, 'w') as f:
     f.write(task)
-
-# Escape backticks for tmux send-keys
-escaped = task.replace("`", "\\`")
-
-# Send to tmux session
-result = subprocess.run(["tmux", "set-buffer", task], capture_output=True)
-print("set-buffer:", result.returncode, result.stderr.decode()[:100] if result.stderr else "")
-
-result = subprocess.run(["tmux", "paste-buffer", "-t", "jobble-baby"], capture_output=True)
-print("paste-buffer:", result.returncode, result.stderr.decode()[:100] if result.stderr else "")
-
-# Also send Enter to execute
-result = subprocess.run(["tmux", "send-keys", "-t", "jobble-baby", "Enter"], capture_output=True)
-print("send-keys Enter:", result.returncode)
+print(f"Task written to {task_file}")

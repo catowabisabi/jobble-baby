@@ -1,15 +1,62 @@
+# Sisyphus Task — Cycle 230
+
 ## Context
-Jobble Baby: 49 tabs now, TSC 0 errors. 8-Month Storm Navigator tab was just created by Hermes (direct implementation, not via Sisyphus dispatch).
+Jobble Baby: 49 tabs, TSC 0 errors. Circadian tab exists (361 lines) but lacks Dusk Light Navigator functionality. Todo #90: implement Circadian Dusk Light Navigator as an enhancement to the existing circadian.tsx tab.
 
-## Task: Verify 8-Month Storm Navigator tab
+## Task: Implement Circadian Dusk Light Navigator
 
-Please verify the newly created tab:
-1. Check that app/(tabs)/eight-month-storm.tsx exists and is correct
-2. Check that _layout.tsx has the eight-month-storm tab registered
-3. Check that en.json and zh.json have the eightMonthStorm keys
-4. Run: cd JobbleBaby && npx tsc --noEmit (should pass 0 errors)
-5. Report any issues found
+Enhance the existing app/(tabs)/circadian.tsx with a new Dusk Light Navigator section. This is an ADDITIVE enhancement — do NOT remove existing functionality.
 
-If all looks good, reply with: "Verified: 8-Month Storm Navigator — OK"
+### Features to Add
+
+1. **Light Exposure Logger**
+   - Log daily light exposure: outdoor sunlight (direct), outdoor shade, indoor bright, indoor dim, screen time
+   - Time picker for each entry (start time + duration)
+   - Storage key: @jobble/light_exposure_log
+
+2. **Dusk Light Alarm**
+   - Configurable daily reminder: Time for dusk light exposure (user sets time)
+   - Uses local notifications or in-app alert
+   - Toggle on/off
+   - Storage key: @jobble/dusk_alarm_time
+
+3. **Melatonin Optimization Guide**
+   - Educational card: How light affects baby sleep
+   - 睡前燈光距離：recommended 照度 (<50 lux) and distance (>1m) from crib
+   - Screen time cutoff recommendation (no screens 1hr before bedtime)
+   - Blue light filtering reminder for parent devices
+   - Storage key: @jobble/melatonin_settings
+
+4. **Light Therapy Prescriber (Phase Shifting)**
+   - For jet lag or day/night confusion: prescribe light exposure schedule
+   - Input: current baby sleep time, target sleep time, days to shift
+   - Output: recommended light exposure windows (bright light morning, dim light evening)
+   - Visual timeline showing current vs target schedule
+   - Storage key: @jobble/phase_shift_plan
+
+5. **Physiological Sigh Integration**
+   - Brief educational tip on physiological sighs (double inhale) for calming
+   - Link to stress-cascade tab for full protocol
+   - Card appears in evening view
+
+### Implementation Rules
+- Follow existing circadian.tsx code style and structure
+- Use existing theme context, language context, AsyncStorage patterns
+- Keep existing tabs structure (Tab, ScrollView, cards)
+- TSC must pass 0 errors after changes
+- i18n: add keys to en.json + zh.json (use t() for all user-facing text)
+- New storage keys: @jobble/light_exposure_log, @jobble/dusk_alarm_time, @jobble/melatonin_settings, @jobble/phase_shift_plan
+
+### After Implementation
+Step 1: Run TypeScript check
+  cd JobbleBaby
+  npx tsc --noEmit
+  (Must pass 0 errors before continuing)
+
+Step 2: Verify existing circadian functionality still works
+
+Step 3: Commit
+  git add -A
+  git commit -m "feat(circadian): add Dusk Light Navigator — light exposure log, dusk alarm, melatonin optimization, phase shift prescriber, i18n"
 
 ULW

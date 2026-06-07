@@ -1,1 +1,39 @@
+# Sisyphus Task — Cycle 238
 
+## Context
+Jobble Baby: TSC 0 errors, 51 tabs, all implemented. Critical accessibility gap identified: 861 interactive elements have ZERO accessibilityLabel attributes. WCAG 2.1 AA requires all interactive elements have accessible names. This must be fixed before App Store submission.
+
+## Task: Fix Accessibility — Add accessibilityLabel to All Interactive Elements
+
+Audit and fix ALL interactive elements across the entire codebase. Every button, TouchableOpacity, Pressable, TextInput, and tab bar icon must have a meaningful accessibilityLabel.
+
+### Scope
+- `app/(tabs)/` — all .tsx files (51 tabs)
+- `components/` — any shared interactive components
+- Tab bar icons in `app/(tabs)/_layout.tsx`
+
+### Rules
+1. Add `accessibilityLabel="meaningful description"` to every interactive element
+2. Labels must be human-readable, specific, and localized (use t() for i18n text)
+3. Do NOT use generic labels like "button" — use "Add feeding entry", "Navigate to sleep schedule"
+4. For icons without text: `accessibilityLabel={t('a11y.iconName')}` — add keys to en.json/zh.json
+5. For tab bar items: each tab icon needs a label like "Home tab", "Tracking tab", etc.
+6. Do NOT change any logic, styles, or functionality — only add accessibilityLabel props
+
+### Approach
+1. Run: `cd JobbleBaby && grep -r "TouchableOpacity\|Pressable\|<Button\|accessibilityLabel" app/\(tabs\)/ --include="*.tsx" | wc -l` — get baseline count
+2. Go tab by tab, add accessibilityLabel to every interactive element
+3. Add missing i18n keys for icon labels to en.json + zh.json
+4. Run: `cd JobbleBaby && npx tsc --noEmit` — 0 errors required
+5. Verify: count should increase from baseline
+
+### After Fix
+1. Run: `cd JobbleBaby && npx tsc --noEmit` (0 errors required)
+2. Count elements with accessibilityLabel: `grep -r "accessibilityLabel" app/ --include="*.tsx" | wc -l`
+3. Commit: `git add -A && git commit -m "fix(a11y): add accessibilityLabel to all interactive elements — WCAG 2.1 AA compliance"` 
+4. git push
+
+## Keywords for this task
+polyphasic sleep pattern, data_sovereignty, heart rate variability
+
+## ULW — execute without asking

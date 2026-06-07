@@ -348,6 +348,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="movie" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="regression-navigator"
+        options={{
+          title: t('tabs.regressionNavigator'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="sleep" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

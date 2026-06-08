@@ -1,16 +1,28 @@
-# Current Dispatch — Cycle 250
+# Current Dispatch — Cycle 251
 
 ## Status
-- Todo #98 (fontanelle-hydration) completed — TSC 0 errors, i18n complete
-- Todo #99 (bilateral-coordination) is new, dispatched to Sisyphus
-- Concept #42: Bilateral Coordination and Data Portability Hub created
+- Todo #99 (bilateral-coordination) completed — TSC 0 errors, i18n complete
+- Todo #100 (sleep-architecture) dispatched to Sisyphus
+- Concept #42: Sleep Architecture & Restfulness Analysis Hub created
+- Idea #63: Linked to concept #42
 - 50 keywords added to pool (now 1000)
 
 ## Completed this cycle
-- Verified fontanelle-hydration.tsx (file exists, registered, TSC clean)
-- Marked concept #33 Infant Thermal Regulation as implemented
+- Implemented bilateral-coordination.tsx (file created, registered, TSC clean)
+- Added i18n keys for bilateral tab (en.json + zh.json)
+- Marked todo #99 as completed, concept #42 as implemented
 - Ran brainstorm: 50 keywords added to pool
 - Committed progress.db
 
 ## Next dispatch
-Sisyphus is implementing bilateral-coordination.tsx (todo #99)
+Sisyphus is implementing sleep-architecture.tsx (todo #100)
+
+## Tab count
+55 tabs registered in _layout.tsx
+
+## Pending (user action)
+- EAS credentials configuration
+- App Store Connect app creation
+- Play Console app creation
+- Privacy policy URL deployment (has deployable HTML at docs/privacy-policy.html)
+- Sentry crash reporting (npm install blocked by peer deps)

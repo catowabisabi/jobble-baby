@@ -1,25 +1,27 @@
-# Sisyphus Task — Cycle 250
+# Sisyphus Task — Cycle 251
 
 ## Context
-Jobble Baby: TSC 0 errors, all 98 todos complete. New concept #42: Bilateral Coordination and Data Portability Hub dispatched as todo #99.
+Jobble Baby: TSC 0 errors, 99 todos complete. New concept #42: Sleep Architecture & Restfulness Analysis Hub dispatched as todo #100.
 
-## Task: Implement Bilateral Coordination and Data Portability Hub Tab
+## Task: Implement Sleep Architecture & Restfulness Analysis Hub Tab
 
-Create a new React Native tab at `app/(tabs)/bilateral-coordination.tsx` that helps parents track their baby's left-right body coordination development and export portable development data for pediatrician visits.
+Create a new React Native tab at `app/(tabs)/sleep-architecture.tsx` that helps parents understand and optimize their baby's sleep quality beyond just duration.
 
 ### Requirements
 
 1. **Core Features**
-   - **Bilateral Milestone Tracker**: Log symmetrical vs asymmetrical movements on a 1-5 scale (1= fully asymmetric, 5= fully symmetric) for: grasping, kicking, reaching, crawling, waving, clapping
-   - **Handedness Early Signals**: Track which hand/foot baby prefers for different activities
-   - **Hemisphere Readiness Indicators**: Display age-based readiness indicators for bilateral activities (crawling age, pointing age, waving age, clapping age) based on developmental norms
-   - **Data Export Hub**: Button to export a JSON summary of baby's growth, milestones, and feeding logs using React Native Share API — combine data from AsyncStorage keys: `@jobble/growth_log`, `@jobble/milestone_entries`, `@jobble/tracking_entries`
-   - **Milestone PDF-Ready Summary**: Generate a formatted text summary (for now, display as shareable text) of key milestones, growth stats, and recent notes — parents can copy/share with pediatrician
-   - **Cross-Tab Correlation**: Show correlation between bilateral coordination scores and recent sleep quality scores (read from `@jobble/sleep_entries` if available)
+   - **Sleep Architecture Visualizer**: Show pie chart of light/REM/deep sleep phases based on age-based typical patterns + parent inputs (night wakings, feedings, crying episodes)
+   - **Restfulness Index Score**: Daily score 0-100 combining: total sleep duration vs recommended, number of night wakings, time to fall asleep, wake after sleep onset
+   - **Circadian Entrainment Tracker**: Track light exposure timing, feeding schedules, nap transitions — identify if baby's internal clock is aligned with desired schedule
+   - **Wake Window Optimizer**: Based on age and last nap, suggest optimal wake time before next sleep. Track actual vs suggested
+   - **White Noise Calibration**: Let parent test different white noise types and log baby's settling time. Recommend optimal sound
+   - **Sleep Environment Score**: Log room temperature, humidity, noise level, light level — correlate with restfulness index
+   - **Sleep Debt Accumulator**: Track cumulative sleep debt across days. Alert when debt exceeds threshold
+   - **Regression Prediction**: Based on developmental milestones (4-month sleep regression, 8-month storm), predict upcoming sleep challenges
 
 2. **Data Persistence**
-   - Use AsyncStorage keys: `@jobble/bilateral_log`, `@jobble/coordination_scores`
-   - Store entries with date, movement_type, symmetry_score (1-5), notes
+   - Use AsyncStorage keys: `@jobble/sleep_architecture`, `@jobble/circadian_inputs`, `@jobble/wake_windows`, `@jobble/white_noise_logs`, `@jobble/sleep_environment`, `@jobble/sleep_debt`
+   - Store entries with date, various metrics per data type
 
 3. **UI/UX**
    - Dark theme consistent with app aesthetic (use COLORS from theme.ts)
@@ -27,18 +29,20 @@ Create a new React Native tab at `app/(tabs)/bilateral-coordination.tsx` that he
    - accessibilityLabel on all interactive elements
    - Card-based layout with clear sections for each feature
    - Use MaterialCommunityIcons for section headers
+   - Restfulness score as prominent circular display
+   - Sleep phases as color-coded pie chart visualization
 
 4. **Integration**
    - Import and use existing useLanguage and useTheme contexts
    - Add to `app/(tabs)/_layout.tsx` navigation stack
-   - Register in the tab bar with name "bilateral" and title from i18n
-   - Use existing badgeService for awarding badges on bilateral milestones
+   - Register in the tab bar with name "sleep-architecture" and title from i18n
+   - Use existing badgeService for awarding badges
 
 5. **File Location**
-   - Save to: `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/bilateral-coordination.tsx`
+   - Save to: `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/sleep-architecture.tsx`
 
 ### Implementation Steps
-1. Read theme.ts and existing tabs (e.g., growth.tsx, projection.tsx) for patterns
+1. Read theme.ts and existing tabs (e.g., fontanelle-hydration.tsx, circadian.tsx) for patterns
 2. Create the tab with full functionality
 3. Add i18n keys for all user-facing strings (add to en.json and zh.json)
 4. Register in _layout.tsx (add to tabs array with proper i18n title)
@@ -46,6 +50,6 @@ Create a new React Native tab at `app/(tabs)/bilateral-coordination.tsx` that he
 6. DO NOT commit — just create the files
 
 ### Keywords
-quantum_biology_consciousness, bilateral coordination, developmental_data_portability
+sleep_restfulness_index, sleep_architecture_mapping, circadian_entrainment_phase, wake_window_calculator, white_noise_calibration
 
 ULW

@@ -369,6 +369,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="sleep-architecture"
+        options={{
+          title: t('tabs.sleepArchitecture'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="moon-waning-crescent" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

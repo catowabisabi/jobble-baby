@@ -384,6 +384,8 @@ export default function SleepTrainingScreen() {
       borderWidth: 1,
       borderColor: session.redLightMode ? '#B91C1C' : C.border,
       marginBottom: 12,
+      minHeight: 44,
+      minWidth: 44,
     },
     methodCardSelected: {
       borderColor: AMBER,
@@ -402,8 +404,10 @@ export default function SleepTrainingScreen() {
       padding: 18,
       alignItems: 'center',
       marginTop: 16,
+      minHeight: 48,
+      minWidth: 44,
     },
-    startButtonDisabled: { backgroundColor: session.redLightMode ? '#7F1D1D' : C.muted, borderRadius: 16, padding: 18, alignItems: 'center', marginTop: 16 },
+    startButtonDisabled: { backgroundColor: session.redLightMode ? '#7F1D1D' : C.muted, borderRadius: 16, padding: 18, alignItems: 'center', marginTop: 16, minHeight: 48, minWidth: 44 },
     startButtonText: { fontSize: 16, fontWeight: '700', color: '#fff' },
     ageWarning: {
       backgroundColor: session.redLightMode ? '#7F1D1D' : '#FEF3C7',
@@ -462,12 +466,14 @@ export default function SleepTrainingScreen() {
       alignItems: 'center',
       width: '100%',
       marginBottom: 12,
+      minHeight: 48,
+      minWidth: 44,
     },
     checkInButtonText: { fontSize: 16, fontWeight: '700', color: '#fff' },
     actionRow: { flexDirection: 'row', gap: 12, width: '100%' },
-    pauseButton: { flex: 1, backgroundColor: session.redLightMode ? '#7F1D1D' : C.card, borderRadius: 16, padding: 16, alignItems: 'center', borderWidth: 1, borderColor: session.redLightMode ? '#B91C1C' : C.border },
+    pauseButton: { flex: 1, backgroundColor: session.redLightMode ? '#7F1D1D' : C.card, borderRadius: 16, padding: 16, alignItems: 'center', borderWidth: 1, borderColor: session.redLightMode ? '#B91C1C' : C.border, minHeight: 48, minWidth: 44 },
     pauseButtonText: { fontSize: 14, fontWeight: '600', color: session.redLightMode ? '#FEE2E2' : C.text },
-    endButton: { flex: 1, backgroundColor: '#22C55E', borderRadius: 16, padding: 16, alignItems: 'center' },
+    endButton: { flex: 1, backgroundColor: '#22C55E', borderRadius: 16, padding: 16, alignItems: 'center', minHeight: 48, minWidth: 44 },
     endButtonText: { fontSize: 14, fontWeight: '700', color: '#fff' },
     redLightToggle: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: session.redLightMode ? '#991B1B' : C.card, borderRadius: 12, padding: 14, marginBottom: 16, borderWidth: 1, borderColor: session.redLightMode ? '#B91C1C' : C.border },
     redLightLabel: { fontSize: 14, color: session.redLightMode ? '#FEE2E2' : C.text, fontWeight: '500' },
@@ -528,12 +534,12 @@ export default function SleepTrainingScreen() {
     progressRingText: { fontSize: 18, fontWeight: '700', color: C.text },
     // Tab bar
     tabBar: { flexDirection: 'row', gap: 8, marginBottom: 20 },
-    tabButton: { flex: 1, backgroundColor: C.card, borderRadius: 12, padding: 12, alignItems: 'center', borderWidth: 1, borderColor: C.border },
+    tabButton: { flex: 1, backgroundColor: C.card, borderRadius: 12, padding: 12, alignItems: 'center', borderWidth: 1, borderColor: C.border, minHeight: 44, minWidth: 44 },
     tabButtonActive: { backgroundColor: AMBER, borderColor: AMBER },
     tabButtonText: { fontSize: 12, fontWeight: '600', color: C.muted },
     tabButtonTextActive: { color: '#fff' },
     navRow: { flexDirection: 'row', gap: 12, marginTop: 16 },
-    navButton: { flex: 1, backgroundColor: C.card, borderRadius: 12, padding: 14, alignItems: 'center', borderWidth: 1, borderColor: C.border },
+    navButton: { flex: 1, backgroundColor: C.card, borderRadius: 12, padding: 14, alignItems: 'center', borderWidth: 1, borderColor: C.border, minHeight: 44, minWidth: 44 },
     navButtonText: { fontSize: 14, fontWeight: '600', color: C.text },
   });
 
@@ -555,7 +561,7 @@ export default function SleepTrainingScreen() {
       <View style={styles.methodGrid}>
         {METHODS.map((method) => (
           <TouchableOpacity
-                          accessibilityLabel="TouchableOpacity in sleep-training"
+                          accessibilityLabel={`Select ${method.name} sleep training method`}
             key={method.id}
             style={[styles.methodCard, session.method === method.id && styles.methodCardSelected]}
             activeOpacity={0.7}
@@ -576,7 +582,7 @@ export default function SleepTrainingScreen() {
 
       {session.method && (
         <TouchableOpacity
-                        accessibilityLabel="TouchableOpacity in sleep-training"
+                        accessibilityLabel="Start tonight's sleep training session"
           style={canStartTraining ? styles.startButton : styles.startButtonDisabled}
           activeOpacity={0.7}
           onPress={startNight}
@@ -698,32 +704,27 @@ export default function SleepTrainingScreen() {
         {/* Action buttons */}
         <View style={styles.actionRow}>
           {(isFerber || isChair) && (
-            <TouchableOpacity style={styles.checkInButton} activeOpacity={0.7} onPress={logCheckIn}>
-                            accessibilityLabel="TouchableOpacity in sleep-training"
+            <TouchableOpacity style={styles.checkInButton} activeOpacity={0.7} onPress={logCheckIn} accessibilityLabel="Log check-in for Ferber or chair method">
               <Text style={styles.checkInButtonText}>✓ {t('sleepTraining.logCheck') || 'Log Check'}</Text>
             </TouchableOpacity>
           )}
           {isExtinction && (
-            <TouchableOpacity style={styles.checkInButton} activeOpacity={0.7} onPress={logCheckIn}>
-                            accessibilityLabel="TouchableOpacity in sleep-training"
+            <TouchableOpacity style={styles.checkInButton} activeOpacity={0.7} onPress={logCheckIn} accessibilityLabel="Log check-in for extinction method">
               <Text style={styles.checkInButtonText}>✓ {t('sleepTraining.logCheck') || 'Log Check'}</Text>
             </TouchableOpacity>
           )}
         </View>
 
         <View style={styles.actionRow}>
-          <TouchableOpacity style={styles.pauseButton} activeOpacity={0.7} onPress={session.isPaused ? resumeNight : pauseNight}>
-                          accessibilityLabel="TouchableOpacity in sleep-training"
+          <TouchableOpacity style={styles.pauseButton} activeOpacity={0.7} onPress={session.isPaused ? resumeNight : pauseNight} accessibilityLabel={session.isPaused ? "Resume sleep training session" : "Pause sleep training session"}>
             <Text style={styles.pauseButtonText}>{session.isPaused ? '▶ Resume' : '⏸ Pause'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.endButton} activeOpacity={0.7} onPress={() => endNight(true)}>
-                          accessibilityLabel="TouchableOpacity in sleep-training"
+          <TouchableOpacity style={styles.endButton} activeOpacity={0.7} onPress={() => endNight(true)} accessibilityLabel="End tonight's sleep training session with success">
             <Text style={styles.endButtonText}>{t('sleepTraining.endNight') || '✓ End Night (Success)'}</Text>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={[styles.navButton, { marginTop: 12 }]} activeOpacity={0.7} onPress={() => setCurrentScreen('method')}>
-                        accessibilityLabel="TouchableOpacity in sleep-training"
+        <TouchableOpacity style={[styles.navButton, { marginTop: 12 }]} activeOpacity={0.7} onPress={() => setCurrentScreen('method')} accessibilityLabel="Go back to sleep training methods">
           <Text style={styles.navButtonText}>{t('common.back') || 'Back to Methods'}</Text>
         </TouchableOpacity>
       </View>
@@ -776,12 +777,10 @@ export default function SleepTrainingScreen() {
         )}
 
         <View style={styles.navRow}>
-          <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('method')}>
-                          accessibilityLabel="TouchableOpacity in sleep-training"
+          <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('method')} accessibilityLabel="Start a new sleep training session">
             <Text style={styles.navButtonText}>{t('sleepTraining.newSession') || '+ New Session'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('report')}>
-                          accessibilityLabel="TouchableOpacity in sleep-training"
+          <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('report')} accessibilityLabel="View weekly sleep training report">
             <Text style={styles.navButtonText}>{t('sleepTraining.weeklyReport') || '📊 Weekly Report'}</Text>
           </TouchableOpacity>
         </View>
@@ -880,12 +879,10 @@ export default function SleepTrainingScreen() {
         </View>
 
         <View style={styles.navRow}>
-          <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('log')}>
-                          accessibilityLabel="TouchableOpacity in sleep-training"
+          <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('log')} accessibilityLabel="Go back to night log">
             <Text style={styles.navButtonText}>{t('sleepTraining.backToLog') || '← Back to Log'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('method')}>
-                          accessibilityLabel="TouchableOpacity in sleep-training"
+          <TouchableOpacity style={styles.navButton} activeOpacity={0.7} onPress={() => setCurrentScreen('method')} accessibilityLabel="Start a new sleep training session">
             <Text style={styles.navButtonText}>{t('sleepTraining.newSession') || '+ New Session'}</Text>
           </TouchableOpacity>
         </View>
@@ -900,7 +897,7 @@ export default function SleepTrainingScreen() {
         <View style={styles.tabBar}>
           {(['method', 'active', 'log', 'report'] as const).map((tab) => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in sleep-training"
+                            accessibilityLabel={`Go to ${tab === 'method' ? 'methods' : tab === 'active' ? 'active session' : tab === 'log' ? 'night log' : 'weekly report'} tab`}
               key={tab}
               style={[styles.tabButton, currentScreen === tab && styles.tabButtonActive]}
               activeOpacity={0.7}

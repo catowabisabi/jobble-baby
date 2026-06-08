@@ -358,7 +358,8 @@ export default function MilkPrepScreen() {
           <Text style={styles.inputLabel}>{t('milkPrep.thawMethod')}</Text>
           <View style={styles.methodRow}>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in milk-prep"
+                            accessibilityLabel="Thaw method: fridge"
+                            accessibilityHint="Select refrigerator thawing method"
               style={[styles.methodButton, thawMethod === 'fridge' && styles.methodButtonActive]}
               onPress={() => setThawMethod('fridge')}
             >
@@ -367,7 +368,8 @@ export default function MilkPrepScreen() {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in milk-prep"
+                            accessibilityLabel="Thaw method: warm water"
+                            accessibilityHint="Select warm water bath thawing method"
               style={[styles.methodButton, thawMethod === 'warmWater' && styles.methodButtonActive]}
               onPress={() => setThawMethod('warmWater')}
             >
@@ -376,7 +378,8 @@ export default function MilkPrepScreen() {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in milk-prep"
+                            accessibilityLabel="Thaw method: running water"
+                            accessibilityHint="Select running water thawing method"
               style={[styles.methodButton, thawMethod === 'runningWater' && styles.methodButtonActive]}
               onPress={() => setThawMethod('runningWater')}
             >
@@ -405,10 +408,11 @@ export default function MilkPrepScreen() {
         <Text style={styles.sectionTitle}>{t('milkPrep.stashTitle')}</Text>
         <View style={styles.card}>
           <TouchableOpacity
-                          accessibilityLabel="TouchableOpacity in milk-prep"
-            style={[styles.addBagButton, { backgroundColor: C.accent }]}
-            onPress={() => setShowAddModal(true)}
-          >
+                            accessibilityLabel="Add milk bag"
+                            accessibilityHint="Opens dialog to add a new milk storage bag"
+              style={[styles.addBagButton, { backgroundColor: C.accent }]}
+              onPress={() => setShowAddModal(true)}
+            >
             <MaterialCommunityIcons name="plus" size={20} color="#fff" />
             <Text style={styles.addBagButtonText}>{t('milkPrep.addBag')}</Text>
           </TouchableOpacity>
@@ -427,8 +431,7 @@ export default function MilkPrepScreen() {
                         {daysLeft < 0 ? t('milkPrep.expired') : t('milkPrep.expiresIn', { days: daysLeft })}
                       </Text>
                     </View>
-                    <TouchableOpacity style={styles.deleteButton} onPress={() => deleteMilkBag(bag.id)}>
-                                    accessibilityLabel="TouchableOpacity in milk-prep"
+                    <TouchableOpacity style={styles.deleteButton} onPress={() => deleteMilkBag(bag.id)} accessibilityLabel="Delete milk bag" accessibilityHint={`Removes ${bag.volumeMl}ml milk bag from stash`}>
                       <MaterialCommunityIcons name="trash-can-outline" size={18} color={STATUS_COLORS.error} />
                     </TouchableOpacity>
                   </View>
@@ -468,7 +471,8 @@ export default function MilkPrepScreen() {
             </View>
           </View>
           <TouchableOpacity
-                          accessibilityLabel="TouchableOpacity in milk-prep"
+                            accessibilityLabel="Generate batch schedule"
+                            accessibilityHint="Creates a usage schedule for milk bags"
             style={[styles.generateButton, { backgroundColor: C.accent }]}
             onPress={generateBatchSchedule}
           >
@@ -495,14 +499,16 @@ export default function MilkPrepScreen() {
           {!timer && !timerExpired && (
             <View style={styles.timerRow}>
               <TouchableOpacity
-                              accessibilityLabel="TouchableOpacity in milk-prep"
+                              accessibilityLabel="Start room temperature timer"
+                              accessibilityHint="Starts 1-hour timer for milk at room temperature"
                 style={[styles.timerButton, { backgroundColor: C.accent }]}
                 onPress={() => startTimer('room')}
               >
                 <Text style={styles.timerButtonText}>{t('milkPrep.startRoomTemp')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                              accessibilityLabel="TouchableOpacity in milk-prep"
+                              accessibilityLabel="Start fridge thaw timer"
+                              accessibilityHint="Starts 2-hour timer for refrigerator thawing"
                 style={[styles.timerButton, { backgroundColor: C.accent }]}
                 onPress={() => startTimer('fridge')}
               >

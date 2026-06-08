@@ -48,7 +48,8 @@ const STORAGE_KEYS = [
 function SettingRow({ icon, label, onPress, isLoading, rowStyles }: SettingRowProps) {
   return (
     <TouchableOpacity
-                    accessibilityLabel="TouchableOpacity in profile"
+                    accessibilityLabel={label}
+                    accessibilityHint={onPress ? `Opens ${label} settings` : undefined}
       style={rowStyles.container}
       activeOpacity={onPress ? 0.7 : 1}
       onPress={onPress}
@@ -72,8 +73,7 @@ function ThemeToggleRow({ rowStyles }: ThemeToggleRowProps) {
   const { t } = useLanguage();
   const label = theme === 'system' ? t('profile.auto') : t('profile.' + theme);
   return (
-    <TouchableOpacity style={rowStyles.container} onPress={toggleTheme} activeOpacity={0.7}>
-                    accessibilityLabel="TouchableOpacity in profile"
+    <TouchableOpacity style={rowStyles.container} onPress={toggleTheme} activeOpacity={0.7} accessibilityLabel="Theme toggle" accessibilityHint="Changes app appearance theme">
       <View style={rowStyles.left}>
         <Text style={rowStyles.icon}>🎨</Text>
         <Text style={rowStyles.label}>{t('profile.theme')}</Text>
@@ -90,8 +90,7 @@ function LanguageToggleRow({ rowStyles }: { rowStyles: ReturnType<typeof StyleSh
   const { t, language, toggleLanguage } = useLanguage();
   const label = language === 'en' ? 'English' : '繁體中文';
   return (
-    <TouchableOpacity style={rowStyles.container} onPress={toggleLanguage} activeOpacity={0.7}>
-                    accessibilityLabel="TouchableOpacity in profile"
+    <TouchableOpacity style={rowStyles.container} onPress={toggleLanguage} activeOpacity={0.7} accessibilityLabel="Language toggle" accessibilityHint="Changes app language">
       <View style={rowStyles.left}>
         <Text style={rowStyles.icon}>🌐</Text>
         <Text style={rowStyles.label}>{t('profile.language')}</Text>
@@ -197,7 +196,7 @@ export default function ProfileScreen() {
     },
     avatarInitials: { fontSize: 22, fontWeight: '800', color: C.background },
     avatarPhoto: { width: 64, height: 64, borderRadius: 32 },
-    changePhotoBtn: { position: 'absolute', bottom: -2, right: -2, width: 22, height: 22, borderRadius: 11, backgroundColor: '#3B82F6', justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: '#fff' },
+    changePhotoBtn: { position: 'absolute', bottom: -2, right: -2, width: 44, height: 44, borderRadius: 22, backgroundColor: '#3B82F6', justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: '#fff' }, // 44x44px touch target per WCAG 2.1 AA
     parentInfo: { flex: 1 },
     parentName: { fontSize: 18, fontWeight: '700', color: C.text, marginBottom: 4 },
     parentEmail: { fontSize: 14, color: C.muted },
@@ -443,8 +442,7 @@ export default function ProfileScreen() {
             ) : (
               <Text style={styles.avatarInitials}>{babyProfile?.name ? babyProfile.name.charAt(0).toUpperCase() : 'B'}</Text>
             )}
-            <TouchableOpacity style={styles.changePhotoBtn} onPress={handleChangePhoto} activeOpacity={0.7}>
-                            accessibilityLabel="TouchableOpacity in profile"
+<TouchableOpacity style={styles.changePhotoBtn} onPress={handleChangePhoto} activeOpacity={0.7} accessibilityLabel="Change baby photo" accessibilityHint="Opens options to take or select a new baby photo">
               <MaterialCommunityIcons name="camera" size={12} color="#fff" />
             </TouchableOpacity>
           </View>
@@ -467,7 +465,8 @@ export default function ProfileScreen() {
 
         {/* Badge Gallery Button */}
         <TouchableOpacity
-                        accessibilityLabel="TouchableOpacity in profile"
+                        accessibilityLabel="Badge collection"
+                        accessibilityHint="Opens or closes the badge collection gallery"
           style={styles.badgeButton}
           activeOpacity={0.7}
           onPress={() => setShowBadges(!showBadges)}

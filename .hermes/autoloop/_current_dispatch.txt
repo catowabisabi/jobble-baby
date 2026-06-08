@@ -1,19 +1,20 @@
-# Current Dispatch — Cycle 255
+# Current Dispatch — Cycle 256
 
 ## Status
-- Todo #100 (sleep-architecture) completed — TSC 0 errors
-- Todo #101 (Accessibility Audit) pending — dispatched to Sisyphus
-- appstore-checklist.tsx verified — registered in _layout.tsx, i18n complete
-- 57 tabs total in _layout.tsx
+- Todo #101 (a11y batch 1: Home, Tracking, Schedule, Growth, Products, Milestones) — COMPLETED
+- Todo #102 (a11y batch 2: Sleep, Stress, Teething, Doctor, Monitor, Shift) — COMPLETED
+- Todo #103 (a11y batch 3: Circadian, Milk Prep, Allergens, Profile, Bonding Journal, Bottle Refusal) — pending, next dispatch
+- 57 tabs registered in _layout.tsx
 
 ## Completed this cycle
-- Verified appstore-checklist.tsx (exists, registered, TSC clean)
-- Verified i18n keys: tabs.appstoreChecklist + launchChecklist items
-- Todo #100 marked completed
-- Committed: 574ef6e → pushed
+- Accessibility audit batch 1: 6 tabs improved (WCAG 2.1 AA) — committed ed4c5af
+- Accessibility audit batch 2 partial: sleep-training, stress-cascade — committed 25fd9a8
+- Accessibility audit batch 2 complete: teething, doctor-visit, shift-handoff — committed c62f332
+- Todo #101, #102 marked completed
+- TSC 0 errors throughout
 
 ## Next dispatch
-Sisyphus is implementing Accessibility Audit (todo #101) — first batch of 6 tabs
+Todo #103: Accessibility Audit Batch 3 — 6 tabs
 
 ## Pending (user action)
 - EAS credentials configuration
@@ -21,3 +22,13 @@ Sisyphus is implementing Accessibility Audit (todo #101) — first batch of 6 ta
 - Play Console app creation
 - Privacy policy URL deployment (has deployable HTML at docs/privacy-policy.html)
 - Sentry crash reporting (npm install blocked by peer deps)
+
+## Accessibility Progress
+- Batches 1+2 complete: 12 tabs audited
+- ~45 tabs remaining for full WCAG 2.1 AA compliance
+- Next batch: Circadian, Milk Prep, Allergens, Profile, Bonding Journal, Bottle Refusal
+
+## Commit history (this cycle)
+- ed4c5af: fix(a11y): accessibility audit batch 1
+- 25fd9a8: fix(a11y): accessibility audit batch 2 partial
+- c62f332: fix(a11y): accessibility audit batch 2 complete

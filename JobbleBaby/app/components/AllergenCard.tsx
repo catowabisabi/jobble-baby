@@ -34,6 +34,8 @@ export default function AllergenCard({ allergen, entry, onPress }: AllergenCardP
       ]}
       activeOpacity={0.7}
       onPress={onPress}
+      accessibilityLabel={`${allergen.name} allergen - ${STATUS_LABELS[status]}`}
+      accessibilityHint={`Opens details for ${allergen.name}`}
     >
       <View style={styles.content}>
         <Text style={styles.emoji}>{allergen.emoji}</Text>

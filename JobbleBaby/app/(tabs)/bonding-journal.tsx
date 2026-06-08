@@ -371,15 +371,15 @@ export default function BondingJournalScreen() {
       borderRadius: 10,
     },
     milestoneCheckbox: {
-      width: 24,
-      height: 24,
-      borderRadius: 12,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       borderWidth: 2,
       borderColor: C.accent,
       marginRight: 10,
       justifyContent: 'center',
       alignItems: 'center',
-    },
+    }, // 44x44px touch target per WCAG 2.1 AA
     milestoneLabel: { fontSize: 13, color: C.text, flex: 1 },
     addEntryBtn: {
       backgroundColor: C.accent,

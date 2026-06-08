@@ -336,7 +336,8 @@ export default function CircadianScreen() {
               </View>
               <View style={styles.tummyButtonRow}>
                 <TouchableOpacity
-                                accessibilityLabel="TouchableOpacity in circadian"
+                  accessibilityLabel="End tummy time session"
+                  accessibilityHint="Stops the tummy time timer and saves the session"
                   style={[styles.tummyBtn, { backgroundColor: '#EF4444' }]}
                   onPress={handleEndTummy}
                 >
@@ -347,12 +348,13 @@ export default function CircadianScreen() {
           ) : (
             <View style={styles.tummyButtonRow}>
               <TouchableOpacity
-                              accessibilityLabel="TouchableOpacity in circadian"
-                style={[styles.tummyBtn, { backgroundColor: '#3B82F6' }]}
-                onPress={handleStartTummy}
-              >
-                <Text style={styles.tummyBtnText}>Start Tummy Time</Text>
-              </TouchableOpacity>
+                  accessibilityLabel="Start tummy time"
+                  accessibilityHint="Starts the tummy time tracking timer"
+                  style={[styles.tummyBtn, { backgroundColor: '#3B82F6' }]}
+                  onPress={handleStartTummy}
+                >
+                  <Text style={styles.tummyBtnText}>Start Tummy Time</Text>
+                </TouchableOpacity>
             </View>
           )}
         </View>

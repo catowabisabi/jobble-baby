@@ -235,7 +235,9 @@ export default function ThermalRegulationScreen() {
           ].map(sec => (
             <TouchableOpacity
               key={sec.key}
-              accessibilityLabel={`Section: ${sec.label}`}
+              accessibilityLabel={`${sec.label} section`}
+              accessibilityHint={`Opens the ${sec.label} section`}
+              accessibilityRole="button"
               style={[styles.sectionBtn, activeSection === sec.key && { backgroundColor: C.accent }]}
               onPress={() => setActiveSection(sec.key)}
             >
@@ -264,7 +266,9 @@ export default function ThermalRegulationScreen() {
                   {(['axillary', 'ear', 'forehead'] as const).map(type => (
                     <TouchableOpacity
                       key={type}
-                      accessibilityLabel={`Temperature type: ${type}`}
+                      accessibilityLabel={`Body temperature type ${type}`}
+                      accessibilityHint={`Set body temperature measurement type to ${type}`}
+                      accessibilityRole="button"
                       style={[styles.typeBtn, bodyTempType === type && { backgroundColor: C.accent }]}
                       onPress={() => setBodyTempType(type)}
                     >
@@ -293,6 +297,8 @@ export default function ThermalRegulationScreen() {
                   <TouchableOpacity
                     key={layer}
                     accessibilityLabel={`Clothing layer ${layer}`}
+                    accessibilityHint={`Set clothing layers to ${layer}`}
+                    accessibilityRole="button"
                     style={[styles.layerBtn, clothingLayers === layer && { backgroundColor: C.accent }]}
                     onPress={() => setClothingLayers(layer)}
                   >
@@ -306,7 +312,9 @@ export default function ThermalRegulationScreen() {
                 {(['none', 'damp', 'wet'] as const).map(level => (
                   <TouchableOpacity
                     key={level}
-                    accessibilityLabel={`Sweat level: ${level}`}
+                    accessibilityLabel={`Sweat level ${level}`}
+                    accessibilityHint={`Set sweat level to ${level}`}
+                    accessibilityRole="button"
                     style={[styles.sweatBtn, sweatLevel === level && { backgroundColor: C.accent }]}
                     onPress={() => setSweatLevel(level)}
                   >
@@ -322,6 +330,8 @@ export default function ThermalRegulationScreen() {
                 activeOpacity={0.7}
                 onPress={saveThermalEntry}
                 accessibilityLabel="Save temperature entry"
+                accessibilityHint="Saves the current temperature reading to your log"
+                accessibilityRole="button"
               >
                 <Text style={styles.saveBtnText}>{t('thermal.save')}</Text>
               </TouchableOpacity>
@@ -391,7 +401,9 @@ export default function ThermalRegulationScreen() {
                   {(['rectal', 'ear', 'axillary'] as const).map(type => (
                     <TouchableOpacity
                       key={type}
-                      accessibilityLabel={`Fever temperature type: ${type}`}
+                      accessibilityLabel={`Fever temperature type ${type}`}
+                      accessibilityHint={`Set fever temperature measurement type to ${type}`}
+                      accessibilityRole="button"
                       style={[styles.typeBtn, feverTempType === type && { backgroundColor: C.accent }]}
                       onPress={() => setFeverTempType(type)}
                     >
@@ -438,6 +450,8 @@ export default function ThermalRegulationScreen() {
                 activeOpacity={0.7}
                 onPress={saveFeverEpisode}
                 accessibilityLabel="Save fever episode"
+                accessibilityHint="Saves the fever episode to your history"
+                accessibilityRole="button"
               >
                 <Text style={styles.saveBtnText}>{t('thermal.saveFever')}</Text>
               </TouchableOpacity>
@@ -490,6 +504,8 @@ export default function ThermalRegulationScreen() {
                     else { setCoolingActive(true); setCoolingTimeLeft(600); }
                   }}
                   accessibilityLabel={coolingActive ? 'Stop cooling timer' : 'Start cooling timer'}
+                  accessibilityHint={coolingActive ? 'Stops the evaporative cooling timer' : 'Starts a 10-minute evaporative cooling timer'}
+                  accessibilityRole="button"
                 >
                   <Text style={styles.timerBtnText}>{coolingActive ? t('thermal.stopTimer') : t('thermal.startTimer')}</Text>
                 </TouchableOpacity>
@@ -546,6 +562,8 @@ export default function ThermalRegulationScreen() {
                   <TouchableOpacity
                     key={layer}
                     accessibilityLabel={`Clothing layer ${layer}`}
+                    accessibilityHint={`Set clothing layers to ${layer}`}
+                    accessibilityRole="button"
                     style={[styles.layerBtn, clothingLayers === layer && { backgroundColor: C.accent }]}
                     onPress={() => setClothingLayers(layer)}
                   >
@@ -587,6 +605,8 @@ export default function ThermalRegulationScreen() {
                   await AsyncStorage.setItem(CAR_TEMP_ALERT_KEY, JSON.stringify(newVal));
                 }}
                 accessibilityLabel={carAlertEnabled ? 'Disable car seat alert' : 'Enable car seat alert'}
+                accessibilityHint={carAlertEnabled ? 'Turns off the car seat temperature alert' : 'Turns on the car seat temperature alert'}
+                accessibilityRole="switch"
               >
                 <MaterialCommunityIcons name={carAlertEnabled ? 'bell' : 'bell-off'} size={24} color={carAlertEnabled ? '#10B981' : C.muted} />
                 <Text style={[styles.toggleText, { color: C.text }]}>
@@ -627,7 +647,7 @@ const styles = StyleSheet.create({
   typeBtn: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 6, backgroundColor: '#F3F4F6' },
   typeBtnText: { fontSize: 11, fontWeight: '600', color: '#374151' },
   layerRow: { flexDirection: 'row', gap: 8 },
-  layerBtn: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#F3F4F6', alignItems: 'center', justifyContent: 'center' },
+  layerBtn: { minWidth: 44, minHeight: 44, borderRadius: 22, backgroundColor: '#F3F4F6', alignItems: 'center', justifyContent: 'center' },
   layerBtnText: { fontSize: 14, fontWeight: '700', color: '#374151' },
   sweatRow: { flexDirection: 'row', gap: 8 },
   sweatBtn: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 8, backgroundColor: '#F3F4F6' },

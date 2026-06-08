@@ -441,8 +441,11 @@ export default function GutBrainAxis() {
       </ScrollView>
 
       {/* FAB */}
-      <TouchableOpacity style={[styles.fab, { backgroundColor: C.accent }]} onPress={() => setModalVisible(true)}>
-                      accessibilityLabel="TouchableOpacity in gut-brain-axis"
+      <TouchableOpacity style={[styles.fab, { backgroundColor: C.accent }]} onPress={() => setModalVisible(true)}
+        accessibilityLabel="Add daily gut log entry"
+        accessibilityHint="Opens the daily logging form to record feeding or symptoms"
+        accessibilityRole="button"
+      >
         <MaterialCommunityIcons name="plus" size={28} color="#fff" />
       </TouchableOpacity>
 
@@ -452,20 +455,29 @@ export default function GutBrainAxis() {
           <View style={[styles.modalContent, { backgroundColor: C.card }]}>
             <View style={styles.modalHeader}>
               <Text style={[styles.modalTitle, { color: C.text }]}>{t('gutBrainAxis.dailyLog')}</Text>
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
-                              accessibilityLabel="Close gut-brain-axis"
+              <TouchableOpacity onPress={() => setModalVisible(false)}
+                accessibilityLabel="Close daily log modal"
+                accessibilityHint="Closes the daily logging form"
+                accessibilityRole="button"
+              >
                 <MaterialCommunityIcons name="close" size={24} color={C.muted} />
               </TouchableOpacity>
             </View>
 
             {/* Tab Switcher */}
             <View style={styles.modalTabs}>
-              <TouchableOpacity style={[styles.modalTab, logTab === 'feeding' && { borderBottomColor: C.accent, borderBottomWidth: 2 }]} onPress={() => setLogTab('feeding')}>
-                              accessibilityLabel="TouchableOpacity in gut-brain-axis"
+              <TouchableOpacity style={[styles.modalTab, logTab === 'feeding' && { borderBottomColor: C.accent, borderBottomWidth: 2 }]} onPress={() => setLogTab('feeding')}
+                accessibilityLabel="Feeding log tab"
+                accessibilityHint="Switch to feeding log form"
+                accessibilityRole="tab"
+              >
                 <Text style={[styles.modalTabText, { color: logTab === 'feeding' ? C.accent : C.muted }]}>{t('gutBrainAxis.feedingLog')}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.modalTab, logTab === 'symptoms' && { borderBottomColor: C.accent, borderBottomWidth: 2 }]} onPress={() => setLogTab('symptoms')}>
-                              accessibilityLabel="TouchableOpacity in gut-brain-axis"
+              <TouchableOpacity style={[styles.modalTab, logTab === 'symptoms' && { borderBottomColor: C.accent, borderBottomWidth: 2 }]} onPress={() => setLogTab('symptoms')}
+                accessibilityLabel="Gut symptoms tab"
+                accessibilityHint="Switch to gut symptoms form"
+                accessibilityRole="tab"
+              >
                 <Text style={[styles.modalTabText, { color: logTab === 'symptoms' ? C.accent : C.muted }]}>{t('gutBrainAxis.gutSymptoms')}</Text>
               </TouchableOpacity>
             </View>
@@ -475,8 +487,11 @@ export default function GutBrainAxis() {
                 <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.feedingMethod')}</Text>
                 <View style={styles.chipRow}>
                   {FEEDING_METHODS.map(m => (
-                    <TouchableOpacity key={m.key} style={[styles.chip, feedingMethod === m.key && { backgroundColor: C.accent + '30', borderColor: C.accent }]} onPress={() => setFeedingMethod(m.key)}>
-                                    accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                    <TouchableOpacity key={m.key} style={[styles.chip, feedingMethod === m.key && { backgroundColor: C.accent + '30', borderColor: C.accent }]} onPress={() => setFeedingMethod(m.key)}
+                      accessibilityLabel={`Feeding method: ${t(m.labelKey)}`}
+                      accessibilityHint={`Select ${t(m.labelKey)} as the feeding method`}
+                      accessibilityRole="button"
+                    >
                       <Text style={[styles.chipText, { color: feedingMethod === m.key ? C.accent : C.muted }]}>{t(m.labelKey)}</Text>
                     </TouchableOpacity>
                   ))}
@@ -485,15 +500,21 @@ export default function GutBrainAxis() {
                 <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.skinToSkin')} ({skinToSkin}m)</Text>
                 <View style={styles.sliderRow}>
                   {[0, 15, 30, 45, 60, 90, 120].map(v => (
-                    <TouchableOpacity key={v} style={[styles.sliderOption, skinToSkin === v && { backgroundColor: C.accent }]} onPress={() => setSkinToSkin(v)}>
-                                    accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                    <TouchableOpacity key={v} style={[styles.sliderOption, skinToSkin === v && { backgroundColor: C.accent }]} onPress={() => setSkinToSkin(v)}
+                      accessibilityLabel={`Skin-to-skin ${v} minutes`}
+                      accessibilityHint={`Set skin-to-skin contact to ${v} minutes`}
+                      accessibilityRole="button"
+                    >
                       <Text style={[styles.sliderOptText, { color: skinToSkin === v ? '#fff' : C.muted }]}>{v}</Text>
                     </TouchableOpacity>
                   ))}
                 </View>
 
-                <TouchableOpacity style={[styles.toggleRow, probiotic && { backgroundColor: '#2ecc7120' }]} onPress={() => setProbiotic(!probiotic)}>
-                                accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                <TouchableOpacity style={[styles.toggleRow, probiotic && { backgroundColor: '#2ecc7120' }]} onPress={() => setProbiotic(!probiotic)}
+                  accessibilityLabel="Probiotic drops toggle"
+                  accessibilityHint={probiotic ? 'Disable probiotic drops' : 'Enable probiotic drops'}
+                  accessibilityRole="switch"
+                >
                   <Text style={[styles.toggleLabel, { color: C.text }]}>{t('gutBrainAxis.probiotic')}</Text>
                   <View style={[styles.toggle, probiotic && { backgroundColor: '#2ecc71' }]}>
                     <View style={[styles.toggleKnob, probiotic && { transform: [{ translateX: 16 }] }]} />
@@ -503,8 +524,11 @@ export default function GutBrainAxis() {
                 <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.prebiotic')} ({prebiotic}g)</Text>
                 <View style={styles.sliderRow}>
                   {[0, 2.5, 5, 7.5, 10, 15, 20].map(v => (
-                    <TouchableOpacity key={v} style={[styles.sliderOption, prebiotic === v && { backgroundColor: C.accent }]} onPress={() => setPrebiotic(v)}>
-                                    accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                    <TouchableOpacity key={v} style={[styles.sliderOption, prebiotic === v && { backgroundColor: C.accent }]} onPress={() => setPrebiotic(v)}
+                      accessibilityLabel={`Prebiotic ${v} grams`}
+                      accessibilityHint={`Set prebiotic supplement to ${v} grams`}
+                      accessibilityRole="button"
+                    >
                       <Text style={[styles.sliderOptText, { color: prebiotic === v ? '#fff' : C.muted }]}>{v}</Text>
                     </TouchableOpacity>
                   ))}
@@ -515,8 +539,11 @@ export default function GutBrainAxis() {
                     <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.flowRate')}</Text>
                     <View style={styles.chipRow}>
                       {FLOW_RATES.map(f => (
-                        <TouchableOpacity key={f.key} style={[styles.chip, flowRate === f.key && { backgroundColor: C.accent + '30', borderColor: C.accent }]} onPress={() => setFlowRate(f.key)}>
-                                        accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                        <TouchableOpacity key={f.key} style={[styles.chip, flowRate === f.key && { backgroundColor: C.accent + '30', borderColor: C.accent }]} onPress={() => setFlowRate(f.key)}
+                          accessibilityLabel={`Flow rate: ${t(f.labelKey)}`}
+                          accessibilityHint={`Set flow rate to ${t(f.labelKey)}`}
+                          accessibilityRole="button"
+                        >
                           <Text style={[styles.chipText, { color: flowRate === f.key ? C.accent : C.muted }]}>{t(f.labelKey)}</Text>
                         </TouchableOpacity>
                       ))}
@@ -524,8 +551,11 @@ export default function GutBrainAxis() {
                   </>
                 )}
 
-                <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={saveFeedingLog}>
-                                accessibilityLabel="Save gut-brain-axis entry"
+                <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={saveFeedingLog}
+                  accessibilityLabel="Save feeding log entry"
+                  accessibilityHint="Saves the current feeding log to your history"
+                  accessibilityRole="button"
+                >
                   <Text style={styles.saveBtnText}>{t('gutBrainAxis.saveFeeding')}</Text>
                 </TouchableOpacity>
               </ScrollView>
@@ -534,8 +564,11 @@ export default function GutBrainAxis() {
                 <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.stoolFrequency')} ({stoolFreq}x/day)</Text>
                 <View style={styles.stepperRow}>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(v => (
-                    <TouchableOpacity key={v} style={[styles.stepperOpt, stoolFreq === v && { backgroundColor: C.accent }]} onPress={() => setStoolFreq(v)}>
-                                    accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                    <TouchableOpacity key={v} style={[styles.stepperOpt, stoolFreq === v && { backgroundColor: C.accent }]} onPress={() => setStoolFreq(v)}
+                      accessibilityLabel={`Stool frequency ${v} times per day`}
+                      accessibilityHint={`Set stool frequency to ${v} times per day`}
+                      accessibilityRole="button"
+                    >
                       <Text style={[styles.stepperText, { color: stoolFreq === v ? '#fff' : C.muted }]}>{v}</Text>
                     </TouchableOpacity>
                   ))}
@@ -544,8 +577,11 @@ export default function GutBrainAxis() {
                 <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.stoolConsistency')}</Text>
                 <View style={styles.chipRow}>
                   {STOOL_CONSISTENCIES.map(s => (
-                    <TouchableOpacity key={s.key} style={[styles.chip, stoolConsistency === s.key && { backgroundColor: C.accent + '30', borderColor: C.accent }]} onPress={() => setStoolConsistency(s.key)}>
-                                    accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                    <TouchableOpacity key={s.key} style={[styles.chip, stoolConsistency === s.key && { backgroundColor: C.accent + '30', borderColor: C.accent }]} onPress={() => setStoolConsistency(s.key)}
+                      accessibilityLabel={`Stool consistency: ${t(s.labelKey)}`}
+                      accessibilityHint={`Set stool consistency to ${t(s.labelKey)}`}
+                      accessibilityRole="button"
+                    >
                       <Text style={[styles.chipText, { color: stoolConsistency === s.key ? C.accent : C.muted }]}>{t(s.labelKey)}</Text>
                     </TouchableOpacity>
                   ))}
@@ -554,8 +590,11 @@ export default function GutBrainAxis() {
                 <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.gasSeverity')} ({gasSeverity}/5)</Text>
                 <View style={styles.gasSliderRow}>
                   {[1, 2, 3, 4, 5].map(v => (
-                    <TouchableOpacity key={v} style={[styles.gasOpt, gasSeverity === v && { backgroundColor: C.accent }]} onPress={() => setGasSeverity(v as 1 | 2 | 3 | 4 | 5)}>
-                                    accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                    <TouchableOpacity key={v} style={[styles.gasOpt, gasSeverity === v && { backgroundColor: C.accent }]} onPress={() => setGasSeverity(v as 1 | 2 | 3 | 4 | 5)}
+                      accessibilityLabel={`Gas severity level ${v}`}
+                      accessibilityHint={`Set gas severity to level ${v}`}
+                      accessibilityRole="button"
+                    >
                       <Text style={[styles.gasOptText, { color: gasSeverity === v ? '#fff' : C.muted }]}>{v}</Text>
                     </TouchableOpacity>
                   ))}
@@ -568,15 +607,21 @@ export default function GutBrainAxis() {
                 <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.refluxEpisodes')} ({refluxEpisodes})</Text>
                 <View style={styles.stepperRow}>
                   {[0, 1, 2, 3, 4, 5, 6].map(v => (
-                    <TouchableOpacity key={v} style={[styles.stepperOpt, refluxEpisodes === v && { backgroundColor: C.accent }]} onPress={() => setRefluxEpisodes(v)}>
-                                    accessibilityLabel="TouchableOpacity in gut-brain-axis"
+                    <TouchableOpacity key={v} style={[styles.stepperOpt, refluxEpisodes === v && { backgroundColor: C.accent }]} onPress={() => setRefluxEpisodes(v)}
+                      accessibilityLabel={`Reflux episodes ${v}`}
+                      accessibilityHint={`Set reflux episodes to ${v}`}
+                      accessibilityRole="button"
+                    >
                       <Text style={[styles.stepperText, { color: refluxEpisodes === v ? '#fff' : C.muted }]}>{v}</Text>
                     </TouchableOpacity>
                   ))}
                 </View>
 
-                <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={saveGutSymptoms}>
-                                accessibilityLabel="Save gut-brain-axis entry"
+                <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={saveGutSymptoms}
+                  accessibilityLabel="Save gut symptoms entry"
+                  accessibilityHint="Saves the current gut symptoms to your history"
+                  accessibilityRole="button"
+                >
                   <Text style={styles.saveBtnText}>{t('gutBrainAxis.saveSymptoms')}</Text>
                 </TouchableOpacity>
               </ScrollView>
@@ -655,10 +700,10 @@ const styles = StyleSheet.create({
   toggle: { width: 36, height: 20, borderRadius: 10, padding: 2 },
   toggleKnob: { width: 16, height: 16, borderRadius: 8, backgroundColor: '#fff' },
   stepperRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  stepperOpt: { width: 32, height: 32, borderRadius: 8, backgroundColor: '#f0f0f0', justifyContent: 'center', alignItems: 'center' },
+  stepperOpt: { minWidth: 44, minHeight: 44, borderRadius: 8, backgroundColor: '#f0f0f0', justifyContent: 'center', alignItems: 'center' },
   stepperText: { fontSize: 13 },
   gasSliderRow: { flexDirection: 'row', gap: 8 },
-  gasOpt: { flex: 1, height: 36, borderRadius: 8, backgroundColor: '#f0f0f0', justifyContent: 'center', alignItems: 'center' },
+  gasOpt: { flex: 1, minHeight: 44, borderRadius: 8, backgroundColor: '#f0f0f0', justifyContent: 'center', alignItems: 'center' },
   gasOptText: { fontSize: 14 },
   gasLabels: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 4 },
   gasLabelText: { fontSize: 11 },

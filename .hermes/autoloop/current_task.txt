@@ -1,20 +1,16 @@
-# Current Dispatch — Cycle 241
+# Current Dispatch — Cycle 250
 
 ## Status
-- Todo #95 (launch-checklist) was marked pending — file was never created
-- Todo #96 (Growth Montage Generator) is new
-- Cycle 241 started: launch-checklist re-dispatched to Sisyphus
+- Todo #98 (fontanelle-hydration) completed — TSC 0 errors, i18n complete
+- Todo #99 (bilateral-coordination) is new, dispatched to Sisyphus
+- Concept #42: Bilateral Coordination and Data Portability Hub created
+- 50 keywords added to pool (now 1000)
 
 ## Completed this cycle
-- Marked todo #95 as pending (file never created)
-- Ran brainstorm: 50 keywords added to pool (now 1000)
-- Committed autoloop state
-
-## Pending (user action)
-- EAS credentials configuration
-- App Store Connect app creation
-- Play Console app creation
-- Privacy policy URL deployment
+- Verified fontanelle-hydration.tsx (file exists, registered, TSC clean)
+- Marked concept #33 Infant Thermal Regulation as implemented
+- Ran brainstorm: 50 keywords added to pool
+- Committed progress.db
 
 ## Next dispatch
-After launch-checklist.tsx is complete, dispatch Growth Montage Generator (todo #96)
+Sisyphus is implementing bilateral-coordination.tsx (todo #99)

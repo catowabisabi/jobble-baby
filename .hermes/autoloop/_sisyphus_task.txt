@@ -1,49 +1,51 @@
-# Sisyphus Task — Cycle 249
+# Sisyphus Task — Cycle 250
 
 ## Context
-Jobble Baby: TSC 0 errors, all 97 todos complete. New concept #41: Fontanelle and Hydration Sentinel tab dispatched as todo #98.
+Jobble Baby: TSC 0 errors, all 98 todos complete. New concept #42: Bilateral Coordination and Data Portability Hub dispatched as todo #99.
 
-## Task: Implement Fontanelle and Hydration Sentinel Tab
+## Task: Implement Bilateral Coordination and Data Portability Hub Tab
 
-Create a new React Native tab at `app/(tabs)/fontanelle-hydration.tsx` that helps parents monitor baby hydration status between doctor visits.
+Create a new React Native tab at `app/(tabs)/bilateral-coordination.tsx` that helps parents track their baby's left-right body coordination development and export portable development data for pediatrician visits.
 
 ### Requirements
 
 1. **Core Features**
-   - Fontanelle Softness Score: Log daily fontanelle softness as 1-5 scale (1= sunken, 3= normal, 5= bulging)
-   - Urine Concentration Tracker: Log urine color (1=pale yellow, 5=dark amber) to estimate hydration
-   - Wet Diaper Count: Daily counter tracking minimum wet diapers per age
-   - Dehydration Risk Indicator: Visual indicator (green/yellow/red) combining all signals
-   - Feeding Correlation: Link hydration logs to recent feeding sessions
-   - Hydration Tips: Context-aware tips based on current score and baby age
+   - **Bilateral Milestone Tracker**: Log symmetrical vs asymmetrical movements on a 1-5 scale (1= fully asymmetric, 5= fully symmetric) for: grasping, kicking, reaching, crawling, waving, clapping
+   - **Handedness Early Signals**: Track which hand/foot baby prefers for different activities
+   - **Hemisphere Readiness Indicators**: Display age-based readiness indicators for bilateral activities (crawling age, pointing age, waving age, clapping age) based on developmental norms
+   - **Data Export Hub**: Button to export a JSON summary of baby's growth, milestones, and feeding logs using React Native Share API — combine data from AsyncStorage keys: `@jobble/growth_log`, `@jobble/milestone_entries`, `@jobble/tracking_entries`
+   - **Milestone PDF-Ready Summary**: Generate a formatted text summary (for now, display as shareable text) of key milestones, growth stats, and recent notes — parents can copy/share with pediatrician
+   - **Cross-Tab Correlation**: Show correlation between bilateral coordination scores and recent sleep quality scores (read from `@jobble/sleep_entries` if available)
 
 2. **Data Persistence**
-   - Use AsyncStorage keys: `@jobble/fontanelle_log`, `@jobble/urine_log`, `@jobble/hydration_daily`
-   - Store entries with date, score, notes
+   - Use AsyncStorage keys: `@jobble/bilateral_log`, `@jobble/coordination_scores`
+   - Store entries with date, movement_type, symmetry_score (1-5), notes
 
 3. **UI/UX**
    - Dark theme consistent with app aesthetic (use COLORS from theme.ts)
    - i18n support (add keys to en.json/zh.json)
    - accessibilityLabel on all interactive elements
-   - Age-based guidance thresholds (newborn vs older infant)
+   - Card-based layout with clear sections for each feature
+   - Use MaterialCommunityIcons for section headers
 
 4. **Integration**
    - Import and use existing useLanguage and useTheme contexts
    - Add to `app/(tabs)/_layout.tsx` navigation stack
-   - Register in the tab bar
+   - Register in the tab bar with name "bilateral" and title from i18n
+   - Use existing badgeService for awarding badges on bilateral milestones
 
 5. **File Location**
-   - Save to: `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/fontanelle-hydration.tsx`
+   - Save to: `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/bilateral-coordination.tsx`
 
 ### Implementation Steps
-1. Read theme.ts and existing tabs (e.g., tracking.tsx) for patterns
+1. Read theme.ts and existing tabs (e.g., growth.tsx, projection.tsx) for patterns
 2. Create the tab with full functionality
-3. Add i18n keys for all user-facing strings
-4. Register in _layout.tsx
-5. Run `npx tsc --noEmit` — fix any errors
+3. Add i18n keys for all user-facing strings (add to en.json and zh.json)
+4. Register in _layout.tsx (add to tabs array with proper i18n title)
+5. Run `npx tsc --noEmit` — fix any errors before finishing
 6. DO NOT commit — just create the files
 
 ### Keywords
-tympanic_membrane_color, fontanelle_pressure_monitor, obesity_risk_flag
+quantum_biology_consciousness, bilateral coordination, developmental_data_portability
 
 ULW

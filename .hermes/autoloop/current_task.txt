@@ -1,28 +1,16 @@
-# Current Dispatch — Cycle 251
+# Current Dispatch — Cycle 261
 
 ## Status
-- Todo #99 (bilateral-coordination) completed — TSC 0 errors, i18n complete
-- Todo #100 (sleep-architecture) dispatched to Sisyphus
-- Concept #42: Sleep Architecture & Restfulness Analysis Hub created
-- Idea #63: Linked to concept #42
-- 50 keywords added to pool (now 1000)
-
-## Completed this cycle
-- Implemented bilateral-coordination.tsx (file created, registered, TSC clean)
-- Added i18n keys for bilateral tab (en.json + zh.json)
-- Marked todo #99 as completed, concept #42 as implemented
-- Ran brainstorm: 50 keywords added to pool
-- Committed progress.db
+- Todo #102 (Critical Period Development Dashboard) re-dispatched to Sisyphus after backtick syntax issue
+- Task sent via tmux set-buffer + paste-buffer
+- 46 keywords added from brainstorm (brainstorm_cycle_261)
+- Keyword pool: 1088
 
 ## Next dispatch
-Sisyphus is implementing sleep-architecture.tsx (todo #100)
+Sisyphus is implementing critical-periods.tsx (concept #40, idea #65, todo #102)
 
-## Tab count
-55 tabs registered in _layout.tsx
-
-## Pending (user action)
+## Pending (user action required)
 - EAS credentials configuration
 - App Store Connect app creation
 - Play Console app creation
-- Privacy policy URL deployment (has deployable HTML at docs/privacy-policy.html)
-- Sentry crash reporting (npm install blocked by peer deps)
+- Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)

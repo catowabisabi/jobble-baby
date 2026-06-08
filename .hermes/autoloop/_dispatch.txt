@@ -1,68 +1,58 @@
-# Sisyphus Task — Cycle 236
+# Sisyphus Task — Cycle 261
 
 ## Context
-Jobble Baby: TSC 0 errors, 50 tabs. DevOps CI/CD complete. Next priority: implement Infant Thermal Regulation Dashboard tab.
+Jobble Baby: 72 tabs, TSC 0 errors. Cycle 261 — Critical Period Development Dashboard (concept #40, idea #65).
 
-## Task: Implement Infant Thermal Regulation Dashboard tab
+## Task: Implement Critical Period Development Dashboard tab
 
-Create app/(tabs)/thermal-regulation.tsx — a new tab helping parents track and manage baby's thermal health.
+Create a new tab file: app/(tabs)/critical-periods.tsx
 
-### Features
+## Requirements
 
-1. **Temperature Log**
-   - Input: body temp (axillary/ear/forehead), ambient room temp, clothing layers (1-5), sweat level (none/damp/wet)
-   - Timestamp auto-generated
-   - Storage key: @jobble/thermal_log
+### Core Features
+1. Period Map: Visual timeline (0-12 months) with color-coded critical/sensitive period bands:
+   - Attachment: 0-6 months (green)
+   - Language: 0-12 months (blue)
+   - Motor: 2-9 months (amber)
+   - Visual: 0-4 months (purple)
+   - Gut Microbiome: 0-6 months (teal)
+   - Gut-Brain Axis: 0-12 months (pink)
 
-2. **Thermal Map Timeline**
-   - Visual timeline: body temp vs ambient temp overlaid with sleep quality
-   - Color-coded: blue (cold) to green (optimal) to red (hot)
-   - Storage key: @jobble/thermal_log
+2. Baby Current Position: Calculate from baby's birth date (AsyncStorage key: @jobble/baby_birthdate):
+   - Show which periods are ACTIVE, IMMINENT (within 2 weeks), or PASSED
+   - Visual timeline with marker at baby's current age
 
-3. **Overheating Risk Alert**
-   - When ambient >24C + clothing >2 layers -> alert: Overheating risk — remove layer
-   - Configurable threshold
-   - Storage key: @jobble/thermal_alert_threshold
+3. Period Detail Cards: Each period card shows:
+   - Period name and age range
+   - What it is and why it matters (2-3 sentences)
+   - Top 3 activities to optimize this period
+   - Signs baby is in this period
+   - Red flags for developmental delay
 
-4. **Fever Tracker**
-   - Log fever episodes: temp, duration, treatment given, feeding change
-   - Alert thresholds: >38C (rectal/ear) or >37.5C (axillary)
-   - Correlation: fever + feeding frequency drop = dehydration risk
-   - Storage key: @jobble/fever_episode
+4. Smart Activity Suggestions: Context-aware suggestions based on active periods
 
-5. **Evaporative Cooling Guide**
-   - Tepid sponging timer (10 min)
-   - Target pulse points: groin, axillae, neck
-   - Step-by-step instructional card
-   - Storage key: @jobble/fever_treatment
+5. Progress Logging: Log activities done per period. Show coverage dashboard.
 
-6. **Car Seat Temperature Alert**
-   - Ambient >28C -> notification: Car seat can reach dangerous temps in direct sun
-   - Storage key: @jobble/car_temp_alert_enabled
-
-7. **Sleep Environment Score**
-   - Composite: ambient temp + clothing + air circulation -> optimal/cooler/warmer
-   - Recommendations for optimal sleep temperature (16-20C)
-   - Storage key: @jobble/sleep_environment_score
-
-8. **Thermal Correlation Dashboard**
-   - Overlay thermal events with sleep quality and feeding
-   - Does overheating correlate with night wakings? insight card
-
-### Implementation Rules
-- New tab: app/(tabs)/thermal-regulation.tsx
-- Follow existing tab patterns: Tab -> ScrollView -> Section cards
-- Use existing theme context, language context, AsyncStorage patterns
-- TSC must pass 0 errors after changes
-- i18n: add keys to en.json + zh.json (use t() for all user-facing text)
+### Technical Requirements
+- Use existing theme: COLORS from ../theme, useTheme hook, useLanguage hook
+- AsyncStorage keys: @jobble/baby_birthdate, @jobble/period_activities
+- Follow existing tab patterns (like milestones.tsx, growth.tsx)
+- i18n: add keys to en.json and zh.json under criticalPeriods
+- TSC 0 errors required
 - Register in app/(tabs)/_layout.tsx
-- Icon: thermometer (MaterialCommunityIcons), label: t('tabs.thermalRegulation')
-- Badge: Thermal Guardian (logged temperature for 30 consecutive days)
 
-### After Implementation
-1. Run: npx tsc --noEmit (0 errors required)
-2. Verify tab appears in tab bar
-3. Commit: git add -A && git commit -m "feat(tab): add Infant Thermal Regulation Dashboard — temperature log, fever tracker, overheating alert, sleep environment score, i18n"
-4. git push
+### Data Model
+- @jobble/baby_birthdate: ISO date string
+- @jobble/period_activities: JSON { [period_id]: [{ date, activity, notes }] }
+
+## Process
+1. Create app/(tabs)/critical-periods.tsx
+2. Run npx tsc --noEmit after creation — 0 errors required
+3. Add i18n keys to en.json + zh.json
+4. Register in _layout.tsx
+5. Do NOT commit
+
+## Keywords
+contrast_sensitivity, entropy-witness, digestive_maturity
 
 ULW

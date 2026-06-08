@@ -100,7 +100,7 @@ export default function AllergensScreen() {
     container: { flex: 1, backgroundColor: C.background },
     content: { padding: 20, paddingBottom: 100 },
     header: { marginBottom: 24 },
-    greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+    greeting: { fontSize: 14, color: C.text, textTransform: 'uppercase', letterSpacing: 1 },
     title: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
     badgeBanner: {
       backgroundColor: C.card,

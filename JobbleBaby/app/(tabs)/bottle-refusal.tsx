@@ -217,10 +217,10 @@ export default function BottleRefusalScreen() {
     container: { flex: 1, backgroundColor: C.background },
     content: { padding: 20, paddingBottom: 100 },
     header: { marginBottom: 24 },
-    greeting: { fontSize: 14, color: C.muted, textTransform: 'uppercase', letterSpacing: 1 },
+    greeting: { fontSize: 14, color: C.text, textTransform: 'uppercase', letterSpacing: 1 },
     title: { fontSize: 32, fontWeight: 'bold', color: C.text, marginTop: 4 },
-    subtitle: { fontSize: 14, color: C.muted, marginTop: 4 },
-    sectionTitle: { fontSize: 12, color: C.muted, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12, marginTop: 16 },
+    subtitle: { fontSize: 14, color: C.text, marginTop: 4 },
+    sectionTitle: { fontSize: 12, fontWeight: '600', color: C.text, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12, marginTop: 16 },
     summaryCard: { backgroundColor: C.card, borderRadius: 16, padding: 16, marginBottom: 16, borderWidth: 1, borderColor: C.border },
     summaryRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
     summaryIcon: { fontSize: 28, marginRight: 12 },
@@ -265,11 +265,13 @@ export default function BottleRefusalScreen() {
       alignItems: 'center',
       gap: 6,
       paddingHorizontal: 12,
-      paddingVertical: 8,
+      paddingVertical: 16,
       borderRadius: 12,
       borderWidth: 1,
       borderColor: C.border,
       backgroundColor: C.background,
+      minHeight: 44,
+      minWidth: 44,
     },
     causeChipSelected: { backgroundColor: BOTTLE_BLUE, borderColor: BOTTLE_BLUE },
     causeChipText: { fontSize: 12, fontWeight: '600', color: C.muted },
@@ -299,9 +301,9 @@ export default function BottleRefusalScreen() {
       marginBottom: 12,
     },
     formButtonRow: { flexDirection: 'row', gap: 12 },
-    cancelBtn: { flex: 1, backgroundColor: C.card, borderRadius: 12, padding: 14, alignItems: 'center', borderWidth: 1, borderColor: C.border },
+    cancelBtn: { flex: 1, backgroundColor: C.card, borderRadius: 12, padding: 14, alignItems: 'center', borderWidth: 1, borderColor: C.border, minHeight: 44, justifyContent: 'center' },
     cancelBtnText: { fontSize: 14, fontWeight: '600', color: C.muted },
-    saveBtn: { flex: 1, backgroundColor: BOTTLE_GREEN, borderRadius: 12, padding: 14, alignItems: 'center' },
+    saveBtn: { flex: 1, backgroundColor: BOTTLE_GREEN, borderRadius: 12, padding: 14, alignItems: 'center', minHeight: 44, justifyContent: 'center' },
     saveBtnText: { fontSize: 14, fontWeight: '700', color: '#fff' },
     chartCard: { backgroundColor: C.card, borderRadius: 16, padding: 16, marginBottom: 16, borderWidth: 1, borderColor: C.border },
     chartTitle: { fontSize: 14, fontWeight: '700', color: C.text, marginBottom: 16 },
@@ -375,8 +377,7 @@ export default function BottleRefusalScreen() {
         </View>
 
         {!showLogForm ? (
-          <TouchableOpacity style={styles.logBtn} activeOpacity={0.7} onPress={() => setShowLogForm(true)}>
-                          accessibilityLabel="Toggle bottle-refusal panel"
+<TouchableOpacity style={styles.logBtn} activeOpacity={0.7} onPress={() => setShowLogForm(true)} accessibilityLabel="Open form to log bottle refusal" accessibilityRole="button">
             <Text style={styles.logBtnText}>+ {t('bottleRefusal.logRefusal') || 'Log Bottle Refusal'}</Text>
           </TouchableOpacity>
         ) : (
@@ -387,8 +388,8 @@ export default function BottleRefusalScreen() {
             <View style={styles.causeGrid}>
               {SUSPECTED_CAUSES.map((cause) => (
                 <TouchableOpacity
-                                accessibilityLabel="TouchableOpacity in bottle-refusal"
                   key={cause.id}
+                  accessibilityLabel={`${selectedCauses.has(cause.id) ? 'Deselect' : 'Select'} ${t(cause.labelKey)} cause`}
                   style={[styles.causeChip, selectedCauses.has(cause.id) && styles.causeChipSelected]}
                   activeOpacity={0.7}
                   onPress={() => toggleCause(cause.id)}
@@ -409,7 +410,7 @@ export default function BottleRefusalScreen() {
             <View style={styles.durationRow}>
               <Text style={styles.durationLabel}>{t('bottleRefusal.minutes') || 'Minutes'}</Text>
               <TouchableOpacity
-                              accessibilityLabel="TouchableOpacity in bottle-refusal"
+                accessibilityLabel="Enter refusal duration in minutes"
                 style={[styles.durationInput, { alignItems: 'center', justifyContent: 'center' }]}
                 onPress={() => {
                   Alert.prompt
@@ -442,7 +443,7 @@ export default function BottleRefusalScreen() {
 
             <Text style={styles.formNoteLabel}>{t('bottleRefusal.noteOptional') || 'Note (optional)'}</Text>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in bottle-refusal"
+                accessibilityLabel="Add optional note about bottle refusal"
               style={styles.noteInput}
               onPress={() => {
                 Alert.prompt
@@ -466,12 +467,10 @@ export default function BottleRefusalScreen() {
             </TouchableOpacity>
 
             <View style={styles.formButtonRow}>
-              <TouchableOpacity style={styles.cancelBtn} onPress={() => { setShowLogForm(false); setSelectedCauses(new Set()); setDuration(''); setNote(''); }}>
-                              accessibilityLabel="Toggle bottle-refusal panel"
+              <TouchableOpacity style={styles.cancelBtn} onPress={() => { setShowLogForm(false); setSelectedCauses(new Set()); setDuration(''); setNote(''); }} accessibilityLabel="Cancel and close form" accessibilityRole="button">
                 <Text style={styles.cancelBtnText}>{t('common.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.saveBtn} onPress={logRefusal}>
-                              accessibilityLabel="Save bottle-refusal entry"
+              <TouchableOpacity style={styles.saveBtn} onPress={logRefusal} accessibilityLabel="Save bottle refusal entry" accessibilityRole="button">
                 <Text style={styles.saveBtnText}>{t('bottleRefusal.saveRefusal') || 'Save'}</Text>
               </TouchableOpacity>
             </View>

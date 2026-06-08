@@ -428,13 +428,11 @@ export default function DoctorVisitScreen() {
           )}
         </View>
 
-        <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={handleShare}>
-                        accessibilityLabel="TouchableOpacity in doctor-visit"
+        <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={handleShare} accessibilityLabel="Export doctor visit summary to share with pediatrician">
           <Text style={styles.buttonText}>📤 {t('doctorVisit.exportBtn')}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonSecondary} activeOpacity={0.7} onPress={handleCopyToClipboard}>
-                        accessibilityLabel="TouchableOpacity in doctor-visit"
+        <TouchableOpacity style={styles.buttonSecondary} activeOpacity={0.7} onPress={handleCopyToClipboard} accessibilityLabel="Copy summary to clipboard for easy pasting">
           <Text style={styles.buttonSecondaryText}>📋 {t('doctorVisit.copyToClipboard')}</Text>
         </TouchableOpacity>
       </ScrollView>

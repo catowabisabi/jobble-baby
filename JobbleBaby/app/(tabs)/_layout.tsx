@@ -362,6 +362,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="water" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="bilateral-coordination"
+        options={{
+          title: t('tabs.bilateral'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

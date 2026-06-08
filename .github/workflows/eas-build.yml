@@ -65,7 +65,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: JobbleBaby/android/app/build/outputs/apk/**/*.apk
+          path: JobbleBaby/ios/build/**/*.ipa
           retention-days: 14
         continue-on-error: true
 

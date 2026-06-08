@@ -51,7 +51,8 @@
     "procedureRecovery": "術後護理",
     "fontanelleHydration": "水合",
     "bilateral": "雙側協調",
-    "sleepArchitecture": "睡眠結構"
+    "sleepArchitecture": "睡眠結構",
+    "appstoreChecklist": "應用商店"
   },
   "hydration": {
     "title": "顱縫與水合監測",
@@ -2178,5 +2179,27 @@
     "regression": "發育倒退預測",
     "regressionInfo": "需要注意的發育倒退時期：",
     "regressionHint": "追蹤寶寶年齡以在每個倒退窗口前收到提前提醒。"
-  }
+  },
+  "launchChecklist.items.playDevAccount": "Google Play 開發者帳戶已確認",
+  "launchChecklist.desc.playDevAccount": "確認 Google Play 開發者帳戶已啟用",
+  "launchChecklist.items.playAppCreated": "Play Console 應用已建立",
+  "launchChecklist.desc.playAppCreated": "在 Play Console 建立應用，套件名稱為 com.jobblebaby.app",
+  "launchChecklist.items.playAppSigning": "App Signing 金鑰已透過 EAS 配置",
+  "launchChecklist.desc.playAppSigning": "使用 EAS 為 Play Console 配置 App Signing",
+  "launchChecklist.items.playPrivacyUrl": "隱私政策網址已部署",
+  "launchChecklist.desc.playPrivacyUrl": "部署於 jobblebaby.com/privacy",
+  "launchChecklist.items.playScreenshots": "Play Store 截圖已上傳",
+  "launchChecklist.desc.playScreenshots": "為 Play Store 列表上傳截圖",
+  "launchChecklist.items.playListing": "Play Store 列表已完成",
+  "launchChecklist.desc.playListing": "填寫描述、標籤和聯絡資訊",
+  "launchChecklist.items.playContentRating": "內容分級問卷已完成",
+  "launchChecklist.desc.playContentRating": "在 Play Console 完成內容分級問卷",
+  "launchChecklist.items.playTargetAudience": "目標受眾已設定",
+  "launchChecklist.desc.playTargetAudience": "設定目標受眾：0-24 個月的嬰兒家長",
+  "launchChecklist.items.playEasBuildAndroid": "Android 的 EAS 構建已完成",
+  "launchChecklist.desc.playEasBuildAndroid": "運行：eas build --platform android --profile preview",
+  "launchChecklist.items.playInternalTesting": "內部測試版本已發布",
+  "launchChecklist.desc.playInternalTesting": "在 Play Console 發布至內部測試track",
+  "launchChecklist.items.playSubmission": "審查並提交應用",
+  "launchChecklist.desc.playSubmission": "審查並提交應用至 Play Store 審核"
 }

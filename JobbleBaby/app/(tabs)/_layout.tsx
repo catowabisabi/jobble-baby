@@ -376,6 +376,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="moon-waning-crescent" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="appstore-checklist"
+        options={{
+          title: t('tabs.appstoreChecklist'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="store" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

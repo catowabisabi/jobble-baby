@@ -51,7 +51,8 @@
     "procedureRecovery": "Post-Procedure",
     "fontanelleHydration": "Hydration",
     "bilateral": "Bilateral",
-    "sleepArchitecture": "Sleep Architecture"
+    "sleepArchitecture": "Sleep Architecture",
+    "appstoreChecklist": "App Stores"
   },
   "hydration": {
     "title": "Fontanelle and Hydration",
@@ -2176,5 +2177,27 @@
     "regression": "Regression Prediction",
     "regressionInfo": "Developmental regressions to watch for:",
     "regressionHint": "Track baby age to receive advance alerts before each regression window."
-  }
+  },
+  "launchChecklist.items.playDevAccount": "Google Play Developer account confirmed",
+  "launchChecklist.desc.playDevAccount": "Confirm Google Play Developer account is active",
+  "launchChecklist.items.playAppCreated": "Play Console app created",
+  "launchChecklist.desc.playAppCreated": "Create app in Play Console with package name com.jobblebaby.app",
+  "launchChecklist.items.playAppSigning": "App signing key configured via EAS",
+  "launchChecklist.desc.playAppSigning": "Configure app signing using EAS for Play Console",
+  "launchChecklist.items.playPrivacyUrl": "Privacy policy URL deployed",
+  "launchChecklist.desc.playPrivacyUrl": "Deployed at jobblebaby.com/privacy",
+  "launchChecklist.items.playScreenshots": "Play Store screenshots uploaded",
+  "launchChecklist.desc.playScreenshots": "Upload screenshots for Play Store listing",
+  "launchChecklist.items.playListing": "Play Store listing completed",
+  "launchChecklist.desc.playListing": "Fill in description, tags, and contact info",
+  "launchChecklist.items.playContentRating": "Content rating questionnaire completed",
+  "launchChecklist.desc.playContentRating": "Complete content rating questionnaire in Play Console",
+  "launchChecklist.items.playTargetAudience": "Target audience set",
+  "launchChecklist.desc.playTargetAudience": "Set target audience: Parents of infants 0-24 months",
+  "launchChecklist.items.playEasBuildAndroid": "EAS build completed for Android",
+  "launchChecklist.desc.playEasBuildAndroid": "Run: eas build --platform android --profile preview",
+  "launchChecklist.items.playInternalTesting": "Internal testing track published",
+  "launchChecklist.desc.playInternalTesting": "Publish to internal testing track in Play Console",
+  "launchChecklist.items.playSubmission": "Submission reviewed and submitted",
+  "launchChecklist.desc.playSubmission": "Review and submit app for Play Store review"
 }

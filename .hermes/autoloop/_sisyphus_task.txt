@@ -1,55 +1,40 @@
-# Sisyphus Task — Cycle 251
+# Sisyphus Task — Cycle 252
 
 ## Context
-Jobble Baby: TSC 0 errors, 99 todos complete. New concept #42: Sleep Architecture & Restfulness Analysis Hub dispatched as todo #100.
+Jobble Baby: 57 tabs, TSC 0 errors, 98 todos complete. Cycle 252 — Sleep Architecture tab just implemented (concept #42). All concepts implemented.
 
-## Task: Implement Sleep Architecture & Restfulness Analysis Hub Tab
+## Task: Review and Enhance Products Tab Data
 
-Create a new React Native tab at `app/(tabs)/sleep-architecture.tsx` that helps parents understand and optimize their baby's sleep quality beyond just duration.
+The Products tab (`app/(tabs)/products.tsx`) currently has mock JSON brand data. Review and enhance it for real HK/international baby product brands.
 
 ### Requirements
 
-1. **Core Features**
-   - **Sleep Architecture Visualizer**: Show pie chart of light/REM/deep sleep phases based on age-based typical patterns + parent inputs (night wakings, feedings, crying episodes)
-   - **Restfulness Index Score**: Daily score 0-100 combining: total sleep duration vs recommended, number of night wakings, time to fall asleep, wake after sleep onset
-   - **Circadian Entrainment Tracker**: Track light exposure timing, feeding schedules, nap transitions — identify if baby's internal clock is aligned with desired schedule
-   - **Wake Window Optimizer**: Based on age and last nap, suggest optimal wake time before next sleep. Track actual vs suggested
-   - **White Noise Calibration**: Let parent test different white noise types and log baby's settling time. Recommend optimal sound
-   - **Sleep Environment Score**: Log room temperature, humidity, noise level, light level — correlate with restfulness index
-   - **Sleep Debt Accumulator**: Track cumulative sleep debt across days. Alert when debt exceeds threshold
-   - **Regression Prediction**: Based on developmental milestones (4-month sleep regression, 8-month storm), predict upcoming sleep challenges
+1. **Data Review**
+   - Read `app/(tabs)/products.tsx` and `app/(tabs)/products-data.ts` or similar
+   - Verify each product entry has: brand name, product name, price range (HKD), age range, real retailer links (where applicable), brief description
+   - Flag any entries that are clearly mock/fake (e.g., "Sample Brand HK", generic placeholders)
 
-2. **Data Persistence**
-   - Use AsyncStorage keys: `@jobble/sleep_architecture`, `@jobble/circadian_inputs`, `@jobble/wake_windows`, `@jobble/white_noise_logs`, `@jobble/sleep_environment`, `@jobble/sleep_debt`
-   - Store entries with date, various metrics per data type
+2. **Enhancement**
+   - For each category (feeding, sleep, safety, health, transport), ensure at least 5-8 real brand entries
+   - Add real HK retail links where possible (e.g., Mothercare HK, Baby Kingdom, Watsons, Amazon HK, Shoppee)
+   - Add age suitability tags (0-3m, 3-6m, 6-12m, 12m+)
+   - Ensure pricing is realistic HKD ranges
 
-3. **UI/UX**
-   - Dark theme consistent with app aesthetic (use COLORS from theme.ts)
-   - i18n support (add keys to en.json/zh.json)
-   - accessibilityLabel on all interactive elements
-   - Card-based layout with clear sections for each feature
-   - Use MaterialCommunityIcons for section headers
-   - Restfulness score as prominent circular display
-   - Sleep phases as color-coded pie chart visualization
+3. **Categories to Cover**
+   - Feeding: bottles, breast pumps, sterilisers, high chairs, bibs
+   - Sleep: sleep sacks, baby monitors, white noise machines, blackout curtains
+   - Safety: baby gates, cabinet locks, bath thermometers, smoke detectors
+   - Health: nasal aspirators, fever thermometers, humidifiers, teething toys
+   - Transport: strollers, car seats, baby carriers, diaper bags
 
-4. **Integration**
-   - Import and use existing useLanguage and useTheme contexts
-   - Add to `app/(tabs)/_layout.tsx` navigation stack
-   - Register in the tab bar with name "sleep-architecture" and title from i18n
-   - Use existing badgeService for awarding badges
-
-5. **File Location**
-   - Save to: `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/sleep-architecture.tsx`
-
-### Implementation Steps
-1. Read theme.ts and existing tabs (e.g., fontanelle-hydration.tsx, circadian.tsx) for patterns
-2. Create the tab with full functionality
-3. Add i18n keys for all user-facing strings (add to en.json and zh.json)
-4. Register in _layout.tsx (add to tabs array with proper i18n title)
-5. Run `npx tsc --noEmit` — fix any errors before finishing
-6. DO NOT commit — just create the files
+4. **Output**
+   - Update the products data file with real brand entries
+   - If there is no separate data file, update products.tsx directly
+   - DO NOT change the tab structure or navigation — only update the data
+   - Run `npx tsc --noEmit` — fix any errors
+   - DO NOT commit — just create/update the files
 
 ### Keywords
-sleep_restfulness_index, sleep_architecture_mapping, circadian_entrainment_phase, wake_window_calculator, white_noise_calibration
+HK_baby_brands,retail_data_verification,product_database,age_suitability,pricing_HKD
 
 ULW

@@ -1,15 +1,13 @@
-# Sisyphus Task — Cycle 257
+# Sisyphus Task — Cycle 258
 
 ## Context
-Jobble Baby: 58 tabs, TSC 0 errors, 101 todos complete. Cycle 257 — Accessibility Audit Batch 4 to be implemented. 6 tabs remaining from the WCAG 2.1 AA accessibility audit.
+Jobble Baby: 58 tabs, TSC 0 errors, 102 todos complete. Cycle 258 — Accessibility Audit Batch 5 (4 remaining tabs from Batch 4).
 
-## Task: Accessibility Audit Batch 4 — 6 tabs
+## Task: Accessibility Audit Batch 5 — 4 tabs
 
-Improve accessibility for these 6 tab files:
+Improve accessibility for these 4 tab files (remaining from Batch 4):
 - app/(tabs)/cry-analyzer.tsx
 - app/(tabs)/colic-relief.tsx
-- app/(tabs)/thermal-regulation.tsx
-- app/(tabs)/gut-brain-axis.tsx
 - app/(tabs)/tongue-tie.tsx
 - app/(tabs)/hip-click.tsx
 
@@ -29,6 +27,6 @@ For each tab file:
 4. Do NOT commit — just update the files
 
 ## Keywords
-obsidian_glass_shard,cheek_muscle_tone_asymmetry,motor_milestone_clustering
+neuroception_safety,glutamate_surge,health_report
 
 ULW

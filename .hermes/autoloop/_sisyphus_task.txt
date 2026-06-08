@@ -1,65 +1,57 @@
-# Sisyphus Task — Cycle 244
+# Sisyphus Task — Cycle 248
 
 ## Context
-Jobble Baby: TSC 0 errors, 53 tabs. Todo #97: 4-Month Sleep Regression Breath Navigator tab (concept #40). Create the actual file.
+Jobble Baby: TSC 0 errors, all 97 todos complete. Privacy policy URL is still a placeholder. Concept #30 (Privacy Policy HTML Page) is in draft status.
 
-## Task: Implement 4-Month Sleep Regression Breath Navigator tab
+## Task: Create Privacy Policy HTML Page
 
-Create `app/(tabs)/regression-navigator.tsx` — a new tab helping parents understand and navigate the 4-month sleep regression with breath pattern tracking and light exposure monitoring.
+Create a standalone HTML privacy policy page at `docs/privacy-policy.html` that can be deployed to jobblebaby.com/privacy.
 
-### Features
+### Requirements
 
-1. **Regression Status Dashboard**
-   - Show: "Baby is in the 4-month sleep regression window (Weeks 1-4)"
-   - Explain what's happening: sleep cycle maturation, circadian building, REM占比变化
-   - Progress tracker: which week of regression, trend direction
-   - Input: regression start date, current week
+1. **HTML Structure**
+   - Valid HTML5 document with proper meta tags
+   - Responsive design (mobile-first)
+   - Language: English (primary)
+   - Meta viewport for mobile
 
-2. **Breath Pattern Analyzer**
-   - Track: breathing pattern per sleep session (deep regular, shallow irregular, pause, sigh)
-   - Log entry: date, sleep session (nap/night), pattern type, notes
-   - AsyncStorage key: `@jobble/breath_pattern_log`
-   - Simple wave visualization showing pattern over time
+2. **Privacy Policy Content** (based on the existing `store/privacy-policy.md` template)
+   Include sections for:
+   - Introduction / About Jobble Baby
+   - Information We Collect (manual entry by user: baby profile, tracking data)
+   - How We Use Information (tracking, logging, summaries)
+   - Data Storage (AsyncStorage local only, no server)
+   - Data Sharing (we don't share data with third parties)
+   - Cookies (none used)
+   - Children's Privacy (COPPA compliant — parental consent required)
+   - Security (device-level security, no cloud sync)
+   - Your Rights (data export, data deletion via app)
+   - Contact Us (placeholder email: privacy@jobblebaby.com)
+   - Last updated date
 
-3. **Light Dark Cue Tracker**
-   - Log: morning bright light duration, outdoor minutes, screen off time, evening dim transition
-   - Show: "Light exposure quality score" for today (0-100)
-   - Correlation: light tracking → regression duration
-   - AsyncStorage key: `@jobble/light_exposure`
+3. **Design**
+   - Clean, professional styling (inline CSS)
+   - Match the app's dark theme aesthetic (navy/dark background, warm accent)
+   - Clear typography, good readability
+   - Sections clearly delineated
+   - Table of contents at top with anchor links
 
-4. **Sleep Architecture Support Guide**
-   - Educational content explaining healthy 4-month sleep patterns
-   - Age-appropriate schedule: wake windows by week of regression
-   - "What NOT to do" / "What TO do" guidance
-   - Consistent wind-down routine recommendation
+4. **Deployment-Ready**
+   - Self-contained single HTML file (no external dependencies except Google Fonts if needed)
+   - Can be served as static file from any web server or GitHub Pages
+   - Valid HTML that passes W3C validator
 
-5. **Parent Breathing Exercise**
-   - One-tap access: physiological sigh (double inhale), 4-7-8 breathing, box breathing
-   - Haptic rhythm option if available
-   - "This is temporary" reassurance message
-   - AsyncStorage key: `@jobble/parent_calm_session`
+### File Location
+Save to: `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/docs/privacy-policy.html`
 
-6. **Regression Duration Tracker**
-   - Log: regression start date, expected end, actual end (when marked complete)
-   - Badge: "Regression Navigator" when completed
+### Implementation Steps
+1. Read `store/privacy-policy.md` for existing policy content
+2. Create the HTML file with proper structure
+3. Style it to match the app's dark theme
+4. Test: open in browser and verify rendering
+5. DO NOT commit — just create the file
 
-### Implementation Rules
-- New file: `app/(tabs)/regression-navigator.tsx`
-- Follow existing tab patterns: `Tab` → `ScrollView` → Section cards
-- Use existing theme context, language context, AsyncStorage patterns
-- TSC must pass 0 errors after changes
-- i18n: add keys to en.json + zh.json (use t() for all user-facing text)
-- Register in `app/(tabs)/_layout.tsx`
-- Icon: `sleep` or `weather-partly-cloudy` (MaterialCommunityIcons)
-- Label: t('tabs.regressionNavigator')
-
-### After Implementation
-1. Run: `cd JobbleBaby && npx tsc --noEmit` (0 errors required)
-2. Verify tab appears in tab bar
-3. Commit: `git add -A && git commit -m "feat(tab): add 4-Month Sleep Regression Breath Navigator — breath pattern tracker, light dark cue monitor, regression support, parent calm exercises, i18n"`
-4. `git push`
-
-## Keywords
-four_month_regression, breath_spectral_analysis, light_dark_cue_tracking, sleep_architecture_maturation, circadian_building, regression_duration_prediction, parent_calm_exercise, physiological_sigh
+### Keywords
+dehydration_thresholds, grounding_tactile, rooting_reflex_suppression
 
 ULW

@@ -239,7 +239,7 @@ export default function CryAnalyzer() {
       borderWidth: 1,
       borderColor: '#f1c40f',
     },
-    badgeBannerText: { fontSize: 14, fontWeight: '600', color: '#f1c40f', flex: 1, marginLeft: 10 },
+    badgeBannerText: { fontSize: 14, fontWeight: '600', color: '#D97706', flex: 1, marginLeft: 10 },
     summaryCard: {
       backgroundColor: C.card,
       borderRadius: 16,
@@ -318,9 +318,9 @@ export default function CryAnalyzer() {
     },
     durationRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 },
     durationBtn: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       backgroundColor: C.accent,
       alignItems: 'center',
       justifyContent: 'center',
@@ -345,9 +345,9 @@ export default function CryAnalyzer() {
     causeChipTextSelected: { color: '#fff' },
     intensityRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 },
     intensityBtn: {
-      width: 36,
-      height: 36,
-      borderRadius: 18,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       backgroundColor: C.background,
       borderWidth: 1,
       borderColor: C.border,
@@ -512,8 +512,10 @@ export default function CryAnalyzer() {
       </ScrollView>
 
       <View style={styles.fabContainer}>
-        <Pressable style={styles.fab} onPress={() => setShowModal(true)}>
-                        accessibilityLabel="Toggle cry-analyzer panel"
+<Pressable style={styles.fab} onPress={() => setShowModal(true)}
+          accessibilityLabel={t('cryAnalyzer.addEntry')}
+          accessibilityRole="button"
+        >
           <Text style={styles.fabText}>+</Text>
         </Pressable>
       </View>
@@ -525,19 +527,23 @@ export default function CryAnalyzer() {
 
             <Text style={styles.modalLabel}>{t('cryAnalyzer.duration')} (1-120 min)</Text>
             <View style={styles.durationRow}>
-              <TouchableOpacity
-                              accessibilityLabel="TouchableOpacity in cry-analyzer"
+<TouchableOpacity
                 style={styles.durationBtn}
                 onPress={() => setDuration((d) => String(Math.max(1, parseInt(d, 10) - 5)))}
+                accessibilityLabel={t('cryAnalyzer.decreaseDuration')}
+                accessibilityRole="button"
+                accessibilityHint={t('cryAnalyzer.decreaseDurationHint')}
               >
                 <Text style={styles.durationBtnText}>−</Text>
               </TouchableOpacity>
               <Text style={styles.durationValue}>{duration}</Text>
               <Text style={styles.durationUnit}>min</Text>
-              <TouchableOpacity
-                              accessibilityLabel="TouchableOpacity in cry-analyzer"
+<TouchableOpacity
                 style={styles.durationBtn}
                 onPress={() => setDuration((d) => String(Math.min(120, parseInt(d, 10) + 5)))}
+                accessibilityLabel={t('cryAnalyzer.increaseDuration')}
+                accessibilityRole="button"
+                accessibilityHint={t('cryAnalyzer.increaseDurationHint')}
               >
                 <Text style={styles.durationBtnText}>+</Text>
               </TouchableOpacity>
@@ -547,10 +553,12 @@ export default function CryAnalyzer() {
             <View style={styles.causeRow}>
               {CAUSE_TAGS.map((tag) => (
                 <TouchableOpacity
-                                accessibilityLabel="TouchableOpacity in cry-analyzer"
                   key={tag.key}
                   style={[styles.causeChip, selectedCause === tag.key && styles.causeChipSelected]}
                   onPress={() => setSelectedCause(tag.key)}
+                  accessibilityLabel={t(tag.labelKey)}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected: selectedCause === tag.key }}
                 >
                   <Text style={[styles.causeChipText, selectedCause === tag.key && styles.causeChipTextSelected]}>
                     {t(tag.labelKey)}
@@ -565,10 +573,12 @@ export default function CryAnalyzer() {
             <View style={styles.intensityRow}>
               {[1, 2, 3, 4, 5].map((v) => (
                 <TouchableOpacity
-                                accessibilityLabel="TouchableOpacity in cry-analyzer"
                   key={v}
                   style={[styles.intensityBtn, intensity === v && styles.intensityBtnActive]}
                   onPress={() => setIntensity(v)}
+                  accessibilityLabel={`${t('cryAnalyzer.intensity')} ${v}`}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected: intensity === v }}
                 >
                   <Text style={{ color: intensity === v ? '#fff' : C.text, fontSize: 16, fontWeight: '600' }}>{v}</Text>
                 </TouchableOpacity>
@@ -584,12 +594,16 @@ export default function CryAnalyzer() {
               multiline
             />
 
-            <TouchableOpacity style={styles.saveBtn} onPress={handleSave}>
-                            accessibilityLabel="Add cry-analyzer entry"
+            <TouchableOpacity style={styles.saveBtn} onPress={handleSave}
+              accessibilityLabel={t('cryAnalyzer.addEntry')}
+              accessibilityRole="button"
+            >
               <Text style={styles.saveBtnText}>{t('cryAnalyzer.addEntry')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowModal(false)}>
-                            accessibilityLabel="Toggle cry-analyzer panel"
+            <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowModal(false)}
+              accessibilityLabel={t('common.cancel')}
+              accessibilityRole="button"
+            >
               <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
             </TouchableOpacity>
           </View>

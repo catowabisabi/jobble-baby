@@ -179,7 +179,7 @@ export default function HipClickScreen() {
             <View style={styles.sideRow}>
               {(['left', 'right', 'both'] as HipSide[]).map(s => (
                 <TouchableOpacity key={s} style={[styles.sideBtn, side === s && styles.sideBtnActive]}
-                                accessibilityLabel="TouchableOpacity in hip-click"
+                                accessibilityLabel={s === 'left' ? t('hipClick.left') : s === 'right' ? t('hipClick.right') : t('hipClick.both')}
                   onPress={() => setSide(s)}>
                   <Text style={[styles.sideBtnText, side === s && styles.sideBtnTextActive]}>
                     {s === 'left' ? t('hipClick.left') : s === 'right' ? t('hipClick.right') : t('hipClick.both')}
@@ -192,7 +192,7 @@ export default function HipClickScreen() {
             <View style={styles.resultRow}>
               {(['clean', 'clunk', 'needsScan'] as CheckResult[]).map(r => (
                 <TouchableOpacity key={r} style={[styles.resultBtn, result === r && styles.resultBtnActive]}
-                                accessibilityLabel="TouchableOpacity in hip-click"
+                                accessibilityLabel={r === 'clean' ? t('hipClick.clean') : r === 'clunk' ? t('hipClick.clunk') : t('hipClick.needsScan')}
                   onPress={() => setResult(r)}>
                   <Text style={[styles.resultBtnText, result === r && styles.resultBtnTextActive]}>
                     {r === 'clean' ? t('hipClick.clean') : r === 'clunk' ? t('hipClick.clunk') : t('hipClick.needsScan')}
@@ -287,27 +287,29 @@ const styles = StyleSheet.create({
   fieldLabel: { fontSize: 13, color: '#9CA3AF', marginTop: 12, marginBottom: 6, fontWeight: '500' },
   sideRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
   sideBtn: {
+    minHeight: 44,
     paddingHorizontal: 14,
-    paddingVertical: 8,
+    paddingVertical: 11,
     borderRadius: 8,
     backgroundColor: '#1F2937',
     borderWidth: 1,
     borderColor: '#374151',
   },
   sideBtnActive: { backgroundColor: '#1E3A5F', borderColor: '#3B82F6' },
-  sideBtnText: { color: '#9CA3AF', fontSize: 13 },
+  sideBtnText: { color: '#4B5563', fontSize: 13 },
   sideBtnTextActive: { color: '#3B82F6' },
   resultRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
   resultBtn: {
+    minHeight: 44,
     paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingVertical: 11,
     borderRadius: 8,
     backgroundColor: '#1F2937',
     borderWidth: 1,
     borderColor: '#374151',
   },
   resultBtnActive: { backgroundColor: '#1E3A5F', borderColor: '#3B82F6' },
-  resultBtnText: { color: '#9CA3AF', fontSize: 13 },
+  resultBtnText: { color: '#4B5563', fontSize: 13 },
   resultBtnTextActive: { color: '#3B82F6' },
   input: {
     backgroundColor: '#1F2937',

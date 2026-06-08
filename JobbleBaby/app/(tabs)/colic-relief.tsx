@@ -239,9 +239,11 @@ export default function ColicReliefScreen() {
 
   const renderTab = (tab: 'tracker' | 'guide' | 'comfort' | 'education' | 'timer' | 'whitenoise', label: string) => (
     <TouchableOpacity
-                    accessibilityLabel="TouchableOpacity in colic-relief"
       style={[styles.tabBtn, activeTab === tab && styles.tabBtnActive]}
       onPress={() => setActiveTab(tab)}
+      accessibilityLabel={label}
+      accessibilityRole="tab"
+      accessibilityState={{ selected: activeTab === tab }}
     >
       <Text style={[styles.tabBtnText, activeTab === tab && styles.tabBtnTextActive]}>{label}</Text>
     </TouchableOpacity>
@@ -275,10 +277,12 @@ export default function ColicReliefScreen() {
         <View style={styles.intensityRow}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in colic-relief"
               key={n}
               style={[styles.intensityBtn, cryingIntensity === n && styles.intensityBtnActive]}
               onPress={() => setCryingIntensity(n)}
+              accessibilityLabel={`${t('colicRelief.intensity')} ${n}`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: cryingIntensity === n }}
             >
               <Text style={styles.intensityBtnText}>{n}</Text>
             </TouchableOpacity>
@@ -290,10 +294,12 @@ export default function ColicReliefScreen() {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.triggerScroll}>
           {TRIGGERS.map(tr => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in colic-relief"
               key={tr}
               style={[styles.triggerBtn, cryingTrigger === tr && styles.triggerBtnActive]}
               onPress={() => setCryingTrigger(tr)}
+              accessibilityLabel={t(`colicRelief.trigger_${tr}`)}
+              accessibilityRole="button"
+              accessibilityState={{ selected: cryingTrigger === tr }}
             >
               <Text style={[styles.triggerBtnText, cryingTrigger === tr && styles.triggerBtnTextActive]}>
                 {t(`colicRelief.trigger_${tr}`)}
@@ -302,8 +308,10 @@ export default function ColicReliefScreen() {
           ))}
         </ScrollView>
       </View>
-      <TouchableOpacity style={styles.primaryBtn} onPress={addCryingEntry}>
-                      accessibilityLabel="Add colic-relief entry"
+      <TouchableOpacity style={styles.primaryBtn} onPress={addCryingEntry}
+        accessibilityLabel={t('colicRelief.logEpisode')}
+        accessibilityRole="button"
+      >
         <Text style={styles.primaryBtnText}>{t('colicRelief.logEpisode')}</Text>
       </TouchableOpacity>
       <Text style={styles.logTitle}>{t('colicRelief.recentLog')}</Text>
@@ -344,10 +352,11 @@ export default function ColicReliefScreen() {
       <View style={styles.comfortGrid}>
         {COMFORT_ACTIONS.map(action => (
           <TouchableOpacity
-                          accessibilityLabel="TouchableOpacity in colic-relief"
             key={action.id}
             style={styles.comfortCard}
             onPress={() => addComfortEntry(action.id)}
+            accessibilityLabel={t(`colicRelief.${action.id}`)}
+            accessibilityRole="button"
           >
             <Text style={styles.comfortIcon}>{action.icon}</Text>
             <Text style={styles.comfortLabel}>{t(`colicRelief.${action.id}`)}</Text>
@@ -396,13 +405,17 @@ export default function ColicReliefScreen() {
       </View>
       <View style={styles.timerControls}>
         {!timerRunning ? (
-          <TouchableOpacity style={styles.primaryBtn} onPress={startTimer}>
-                          accessibilityLabel="Start colic-relief timer"
+          <TouchableOpacity style={styles.primaryBtn} onPress={startTimer}
+            accessibilityLabel={t('colicRelief.startTimer')}
+            accessibilityRole="button"
+          >
             <Text style={styles.primaryBtnText}>{t('colicRelief.startTimer')}</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity style={styles.stopBtn} onPress={stopTimer}>
-                          accessibilityLabel="Stop colic-relief timer"
+          <TouchableOpacity style={styles.stopBtn} onPress={stopTimer}
+            accessibilityLabel={t('colicRelief.stopTimer')}
+            accessibilityRole="button"
+          >
             <Text style={styles.stopBtnText}>{t('colicRelief.stopTimer')}</Text>
           </TouchableOpacity>
         )}
@@ -426,10 +439,12 @@ export default function ColicReliefScreen() {
       <View style={styles.soundGrid}>
         {WHITE_NOISE_SOUNDS.map(sound => (
           <TouchableOpacity
-                          accessibilityLabel="TouchableOpacity in colic-relief"
             key={sound}
             style={[styles.soundCard, playingSound === sound && styles.soundCardActive]}
             onPress={() => playingSound === sound ? stopSound() : playSound(sound, 30)}
+            accessibilityLabel={t(`colicRelief.sound_${sound}`)}
+            accessibilityRole="button"
+            accessibilityState={{ selected: playingSound === sound }}
           >
             <Text style={styles.soundIcon}>
               {sound === 'vacuum' ? '🧹' : sound === 'fan' ? '🌀' : sound === 'shusher' ? '🤫' : '🌊'}
@@ -444,10 +459,11 @@ export default function ColicReliefScreen() {
         <View style={styles.presetRow}>
           {[15, 30, 60].map(m => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in colic-relief"
               key={m}
               style={styles.presetBtn}
               onPress={() => playingSound ? playSound(playingSound, m) : null}
+              accessibilityLabel={`${m} minutes`}
+              accessibilityRole="button"
             >
               <Text style={styles.presetBtnText}>{m}m</Text>
             </TouchableOpacity>
@@ -481,9 +497,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8f4ff' },
   content: { padding: 16, paddingBottom: 40 },
   tabBar: { flexDirection: 'row', flexWrap: 'wrap', marginBottom: 16, gap: 6 },
-  tabBtn: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16, backgroundColor: '#e8e0f0', marginRight: 4, marginBottom: 4 },
+  tabBtn: { paddingHorizontal: 10, paddingVertical: 11, borderRadius: 16, backgroundColor: '#e8e0f0', marginRight: 4, marginBottom: 4 },
   tabBtnActive: { backgroundColor: '#7c3aed' },
-  tabBtnText: { fontSize: 11, color: '#666', fontWeight: '600' },
+  tabBtnText: { fontSize: 11, color: '#444', fontWeight: '600' },
   tabBtnTextActive: { color: '#fff' },
   section: { marginBottom: 24 },
   sectionTitle: { fontSize: 20, fontWeight: '700', color: '#1a1a2e', marginBottom: 16 },
@@ -496,11 +512,11 @@ const styles = StyleSheet.create({
   inputLabel: { fontSize: 14, fontWeight: '600', color: '#444', marginBottom: 8 },
   input: { backgroundColor: '#fff', borderRadius: 10, padding: 12, fontSize: 16, borderWidth: 1, borderColor: '#e0e0e0' },
   intensityRow: { flexDirection: 'row', gap: 4 },
-  intensityBtn: { flex: 1, paddingVertical: 8, backgroundColor: '#fff', borderRadius: 8, alignItems: 'center', borderWidth: 1, borderColor: '#e0e0e0' },
+  intensityBtn: { minHeight: 44, paddingHorizontal: 4, backgroundColor: '#fff', borderRadius: 8, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: '#e0e0e0' },
   intensityBtnActive: { backgroundColor: '#7c3aed', borderColor: '#7c3aed' },
   intensityBtnText: { fontSize: 12, fontWeight: '600', color: '#333' },
   triggerScroll: { flexDirection: 'row' },
-  triggerBtn: { paddingHorizontal: 12, paddingVertical: 8, backgroundColor: '#fff', borderRadius: 20, marginRight: 8, borderWidth: 1, borderColor: '#e0e0e0' },
+  triggerBtn: { minHeight: 44, paddingHorizontal: 12, paddingVertical: 11, backgroundColor: '#fff', borderRadius: 20, marginRight: 8, borderWidth: 1, borderColor: '#e0e0e0' },
   triggerBtnActive: { backgroundColor: '#7c3aed', borderColor: '#7c3aed' },
   triggerBtnText: { fontSize: 12, color: '#333' },
   triggerBtnTextActive: { color: '#fff' },
@@ -541,6 +557,6 @@ const styles = StyleSheet.create({
   soundTimer: { fontSize: 12, color: '#7c3aed', marginTop: 4, fontWeight: '700' },
   timerPresets: { marginTop: 8 },
   presetRow: { flexDirection: 'row', gap: 8, marginTop: 8 },
-  presetBtn: { flex: 1, paddingVertical: 10, backgroundColor: '#ede9fe', borderRadius: 8, alignItems: 'center' },
+  presetBtn: { flex: 1, minHeight: 44, paddingVertical: 10, backgroundColor: '#ede9fe', borderRadius: 8, alignItems: 'center' },
   presetBtnText: { fontSize: 14, fontWeight: '600', color: '#7c3aed' },
 });

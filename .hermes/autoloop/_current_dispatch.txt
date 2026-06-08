@@ -1,1 +1,16 @@
-261
+# Current Dispatch — Cycle 261
+
+## Status
+- Cycle 261 started
+- TSC 0 errors, 59 tabs
+- Todo #102 (Critical Period Dashboard) completed and committed (0248197)
+- Privacy policy HTML created and committed (603faf5)
+- 47 keywords added from brainstorm (cycle 261)
+- Keyword pool: 1135
+
+## Current dispatch
+Sisyphus fixing Profile tab privacy row (no onPress handler)
+
+## Pending
+- Village Network tab (todo #106, deferred post-launch)
+- User action: EAS credentials, App Store Connect, Play Console setup

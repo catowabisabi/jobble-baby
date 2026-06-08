@@ -511,7 +511,7 @@ export default function ProfileScreen() {
           <ThemeToggleRow rowStyles={rowStyles} />
           <LanguageToggleRow rowStyles={rowStyles} />
           <SettingRow icon="🏥" label={t('profile.doctorVisit')} onPress={() => router.push('/doctor-visit')} rowStyles={rowStyles} />
-          <SettingRow icon="🔒" label={t('profile.privacy')} rowStyles={rowStyles} />
+          <SettingRow icon="🔒" label={t('profile.privacy')} onPress={() => Linking.openURL('https://jobblebaby.com/privacy')} rowStyles={rowStyles} />
           <SettingRow icon="ℹ️" label={t('profile.about')} rowStyles={rowStyles} />
           <SettingRow
             icon="🔄"

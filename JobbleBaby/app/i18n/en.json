@@ -48,7 +48,25 @@
     "constellation": "Constellation",
     "phototherapyComfort": "Phototherapy",
     "eightMonthStorm": "8-Month Storm",
-    "procedureRecovery": "Post-Procedure"
+    "procedureRecovery": "Post-Procedure",
+    "fontanelleHydration": "Hydration"
+  },
+  "hydration": {
+    "title": "Fontanelle and Hydration",
+    "fontanelle": "Fontanelle Softness",
+    "fontanelleDesc": "How does the soft spot feel today?",
+    "urine": "Urine Color",
+    "urineDesc": "Darker urine may indicate dehydration",
+    "diapers": "Wet Diapers Today",
+    "diapersDesc": "Minimum 6 for newborns, 4+ for older infants",
+    "diapersInputLabel": "Wet diaper count today",
+    "diapersUnit": "wet diapers",
+    "notes": "Notes",
+    "notesLabel": "Hydration notes",
+    "notesPlaceholder": "Additional observations...",
+    "riskGreen": "Well hydrated",
+    "riskYellow": "Monitor closely",
+    "riskRed": "Possible dehydration"
   },
   "projection": {
     "title": "6-Month Projection",

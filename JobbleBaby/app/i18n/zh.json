@@ -48,7 +48,25 @@
     "constellation": "星圖",
     "phototherapyComfort": "光照護理",
     "eightMonthStorm": "8個月風暴",
-    "procedureRecovery": "術後護理"
+    "procedureRecovery": "術後護理",
+    "fontanelleHydration": "水合"
+  },
+  "hydration": {
+    "title": "顱縫與水合監測",
+    "fontanelle": "顱縫軟度",
+    "fontanelleDesc": "軟斑塊今天的觸感如何？",
+    "urine": "尿液顏色",
+    "urineDesc": "深色尿液可能表示脫水",
+    "diapers": "今日濕尿片",
+    "diapersDesc": "新生兒最少6片，較大嬰兒4片以上",
+    "diapersInputLabel": "今日濕尿片數量",
+    "diapersUnit": "片濕尿片",
+    "notes": "備註",
+    "notesLabel": "水合備註",
+    "notesPlaceholder": "其他觀察...",
+    "riskGreen": "水合良好",
+    "riskYellow": "密切監察",
+    "riskRed": "可能脫水"
   },
   "projection": {
     "title": "半年發育預測",

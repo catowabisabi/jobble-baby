@@ -355,6 +355,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="sleep" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="fontanelle-hydration"
+        options={{
+          title: t('tabs.fontanelleHydration'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="water" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

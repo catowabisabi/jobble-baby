@@ -1,65 +1,49 @@
-# Sisyphus Task — Cycle 244
+# Sisyphus Task — Cycle 249
 
 ## Context
-Jobble Baby: TSC 0 errors, 53 tabs. Todo #97: 4-Month Sleep Regression Breath Navigator tab (concept #40). Create the actual file.
+Jobble Baby: TSC 0 errors, all 97 todos complete. New concept #41: Fontanelle and Hydration Sentinel tab dispatched as todo #98.
 
-## Task: Implement 4-Month Sleep Regression Breath Navigator tab
+## Task: Implement Fontanelle and Hydration Sentinel Tab
 
-Create `app/(tabs)/regression-navigator.tsx` — a new tab helping parents understand and navigate the 4-month sleep regression with breath pattern tracking and light exposure monitoring.
+Create a new React Native tab at `app/(tabs)/fontanelle-hydration.tsx` that helps parents monitor baby hydration status between doctor visits.
 
-### Features
+### Requirements
 
-1. **Regression Status Dashboard**
-   - Show: "Baby is in the 4-month sleep regression window (Weeks 1-4)"
-   - Explain what's happening: sleep cycle maturation, circadian building, REM占比变化
-   - Progress tracker: which week of regression, trend direction
-   - Input: regression start date, current week
+1. **Core Features**
+   - Fontanelle Softness Score: Log daily fontanelle softness as 1-5 scale (1= sunken, 3= normal, 5= bulging)
+   - Urine Concentration Tracker: Log urine color (1=pale yellow, 5=dark amber) to estimate hydration
+   - Wet Diaper Count: Daily counter tracking minimum wet diapers per age
+   - Dehydration Risk Indicator: Visual indicator (green/yellow/red) combining all signals
+   - Feeding Correlation: Link hydration logs to recent feeding sessions
+   - Hydration Tips: Context-aware tips based on current score and baby age
 
-2. **Breath Pattern Analyzer**
-   - Track: breathing pattern per sleep session (deep regular, shallow irregular, pause, sigh)
-   - Log entry: date, sleep session (nap/night), pattern type, notes
-   - AsyncStorage key: `@jobble/breath_pattern_log`
-   - Simple wave visualization showing pattern over time
+2. **Data Persistence**
+   - Use AsyncStorage keys: `@jobble/fontanelle_log`, `@jobble/urine_log`, `@jobble/hydration_daily`
+   - Store entries with date, score, notes
 
-3. **Light Dark Cue Tracker**
-   - Log: morning bright light duration, outdoor minutes, screen off time, evening dim transition
-   - Show: "Light exposure quality score" for today (0-100)
-   - Correlation: light tracking → regression duration
-   - AsyncStorage key: `@jobble/light_exposure`
+3. **UI/UX**
+   - Dark theme consistent with app aesthetic (use COLORS from theme.ts)
+   - i18n support (add keys to en.json/zh.json)
+   - accessibilityLabel on all interactive elements
+   - Age-based guidance thresholds (newborn vs older infant)
 
-4. **Sleep Architecture Support Guide**
-   - Educational content explaining healthy 4-month sleep patterns
-   - Age-appropriate schedule: wake windows by week of regression
-   - "What NOT to do" / "What TO do" guidance
-   - Consistent wind-down routine recommendation
+4. **Integration**
+   - Import and use existing useLanguage and useTheme contexts
+   - Add to `app/(tabs)/_layout.tsx` navigation stack
+   - Register in the tab bar
 
-5. **Parent Breathing Exercise**
-   - One-tap access: physiological sigh (double inhale), 4-7-8 breathing, box breathing
-   - Haptic rhythm option if available
-   - "This is temporary" reassurance message
-   - AsyncStorage key: `@jobble/parent_calm_session`
+5. **File Location**
+   - Save to: `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/fontanelle-hydration.tsx`
 
-6. **Regression Duration Tracker**
-   - Log: regression start date, expected end, actual end (when marked complete)
-   - Badge: "Regression Navigator" when completed
+### Implementation Steps
+1. Read theme.ts and existing tabs (e.g., tracking.tsx) for patterns
+2. Create the tab with full functionality
+3. Add i18n keys for all user-facing strings
+4. Register in _layout.tsx
+5. Run `npx tsc --noEmit` — fix any errors
+6. DO NOT commit — just create the files
 
-### Implementation Rules
-- New file: `app/(tabs)/regression-navigator.tsx`
-- Follow existing tab patterns: `Tab` → `ScrollView` → Section cards
-- Use existing theme context, language context, AsyncStorage patterns
-- TSC must pass 0 errors after changes
-- i18n: add keys to en.json + zh.json (use t() for all user-facing text)
-- Register in `app/(tabs)/_layout.tsx`
-- Icon: `sleep` or `weather-partly-cloudy` (MaterialCommunityIcons)
-- Label: t('tabs.regressionNavigator')
-
-### After Implementation
-1. Run: `cd JobbleBaby && npx tsc --noEmit` (0 errors required)
-2. Verify tab appears in tab bar
-3. Commit: `git add -A && git commit -m "feat(tab): add 4-Month Sleep Regression Breath Navigator — breath pattern tracker, light dark cue monitor, regression support, parent calm exercises, i18n"`
-4. `git push`
-
-## Keywords
-four_month_regression, breath_spectral_analysis, light_dark_cue_tracking, sleep_architecture_maturation, circadian_building, regression_duration_prediction, parent_calm_exercise, physiological_sigh
+### Keywords
+tympanic_membrane_color, fontanelle_pressure_monitor, obesity_risk_flag
 
 ULW

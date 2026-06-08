@@ -1,65 +1,51 @@
-# Sisyphus Task — Cycle 253
+# Sisyphus Task — Cycle 254
 
 ## Context
-Jobble Baby: 57 tabs, TSC 0 errors, 101 todos complete. Cycle 253 — App Store Launch Checklist tab to be implemented. Products tab verified (real HK/international brands). Project is in pre-launch state.
+Jobble Baby: 57 tabs, TSC 0 errors, 101 todos complete. Cycle 254 — Accessibility audit and improvement task. The app targets parents of infants and should be WCAG 2.1 AA compliant. Project is in pre-launch state.
 
-## Task: Implement App Store Launch Checklist Tab
+## Task: Accessibility Audit & Improvement
 
-Create a new tab `app/(tabs)/appstore-checklist.tsx` that provides an interactive checklist tracking all App Store + Play Store pre-submission requirements.
+Improve accessibility across all 57 tabs for WCAG 2.1 AA compliance. Focus areas:
 
-### Requirements
+### 1. Color Contrast
+Review all text/background color combinations. Ensure:
+- Normal text (under 18pt): contrast ratio >= 4.5:1
+- Large text (18pt+ or 14pt bold): contrast ratio >= 3:1
+- Update COLORS in `app/theme.ts` or inline styles where needed
+- Do NOT change the dark mode color scheme — only improve insufficient contrast in light mode
 
-1. **New Tab**
-   - Register in `app/(tabs)/_layout.tsx` as `appstore-checklist` (use emoji 📋 or similar)
-   - Add i18n keys: `tabs.appstoreChecklist` in en.json + zh.json
-   - Run `npx tsc --noEmit` after any changes — 0 errors required
+### 2. Accessibility Labels
+Add missing `accessibilityLabel` and `accessibilityHint` to:
+- All TouchableOpacity/TouchableWithoutFeedback components
+- All custom buttons and interactive elements
+- Format: `accessibilityLabel="[clear action]"` and `accessibilityHint="[what happens when tapped]"`
 
-2. **Checklist Data** (hardcoded items with completion state in AsyncStorage)
-   Track completion status for each item — persisted in `@jobble/appstore_checklist`:
-   
-   **Apple App Store:**
-   - [ ] Apple Developer Program enrollment confirmed
-   - [ ] Bundle ID `com.jobblebaby.app` verified in App Store Connect
-   - [ ] EAS credentials configured (expo credentials:manager)
-   - [ ] Export compliance questionnaire completed (encryption)
-   - [ ] Age rating set (4+ in App Store)
-   - [ ] Privacy policy URL deployed (jobblebaby.com/privacy)
-   - [ ] App Store screenshots uploaded (17 screenshots ready in store/)
-   - [ ] App Store metadata entered (description, keywords, support URL)
-   - [ ] EAS build completed for iOS (eas build --platform ios --profile preview)
-   - [ ] TestFlight internal testing build uploaded
-   - [ ] Submission reviewed and submitted
+### 3. Touch Targets
+Ensure all interactive elements:
+- Minimum size of 44x44 points
+- Adequate spacing between adjacent targets (at least 8pt)
 
-   **Google Play Store:**
-   - [ ] Google Play Developer account confirmed
-   - [ ] Play Console app created (com.jobblebaby.app)
-   - [ ] App signing key configured via EAS
-   - [ ] Privacy policy URL deployed
-   - [ ] Play Store screenshots uploaded (17 screenshots ready)
-   - [ ] Play Store listing completed (description, tags, contact)
-   - [ ] Content rating questionnaire completed
-   - [ ] Target audience set (Parents of infants 0-24 months)
-   - [ ] EAS build completed for Android (eas build --platform android)
-   - [ ] Internal testing track published
-   - [ ] Submission reviewed and submitted
+### 4. Accessibility Roles
+Add proper `accessibilityRole`:
+- `button` for buttons, `link` for links
+- `header` for section headers
+- `image` for informative images (with accessibilityLabel)
+- `search` for search inputs, `switch` for toggles
 
-3. **UI Design**
-   - Two sections: Apple App Store / Google Play Store
-   - Each item as a checkable row (TouchableOpacity with checkmark)
-   - Completed items: strikethrough or muted color
-   - Progress indicator at top: "Apple: X/11 complete" and "Play: X/11 complete"
-   - Reset button at bottom (clear all checkmarks with confirmation alert)
-   - Use existing theme colors and styles from other tabs
-   - Dark mode compatible
+### 5. Focus Management
+Ensure navigable via VoiceOver/TalkBack:
+- All meaningful content has accessibility labels
+- Images that convey information have descriptive labels
+- Decorative images marked with `accessibilityElementsHidden={true}`
 
-4. **Implementation**
-   - Read/write completion state from AsyncStorage (`@jobble/appstore_checklist`)
-   - Load state on mount, save on each toggle
-   - Do NOT change any other files — only create appstore-checklist.tsx and update _layout.tsx
-   - Run `npx tsc --noEmit` — fix any errors
-   - DO NOT commit — just create/update the files
+### Implementation Notes
+- Work tab by tab — pick 5-6 tabs per batch
+- Run `npx tsc --noEmit` after each batch — 0 errors required
+- Do NOT change business logic or functionality
+- Do NOT commit — just update the files
+- Focus on most used tabs first: Home, Tracking, Schedule, Growth, Products, Milestones
 
 ### Keywords
-obsidian_glass_shard,cheek_muscle_tone_asymmetry,motor_milestone_clustering
+bilateral_coordination,satiety_hormone_cascade,energy_accounting_method
 
 ULW

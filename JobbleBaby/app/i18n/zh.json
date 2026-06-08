@@ -52,7 +52,8 @@
     "fontanelleHydration": "水合",
     "bilateral": "雙側協調",
     "sleepArchitecture": "睡眠結構",
-    "appstoreChecklist": "應用商店"
+    "appstoreChecklist": "應用商店",
+    "criticalPeriods": "關鍵發育期"
   },
   "hydration": {
     "title": "顱縫與水合監測",
@@ -2201,5 +2202,41 @@
   "launchChecklist.items.playInternalTesting": "內部測試版本已發布",
   "launchChecklist.desc.playInternalTesting": "在 Play Console 發布至內部測試track",
   "launchChecklist.items.playSubmission": "審查並提交應用",
-  "launchChecklist.desc.playSubmission": "審查並提交應用至 Play Store 審核"
+  "launchChecklist.desc.playSubmission": "審查並提交應用至 Play Store 審核",
+  "criticalPeriods": {
+    "title": "關鍵發育期",
+    "subtitle": "寶寶第一年嘅敏感發育窗口",
+    "timeline": "發育時間線",
+    "periods": "發育時期",
+    "active": "進行中",
+    "imminent": "即將開始",
+    "passed": "已結束",
+    "whatIsIt": "呢個係咩？",
+    "whyMatters": "點解重要？",
+    "topActivities": "三大活動",
+    "signs": "BB喺呢個時期嘅表現",
+    "redFlags": "發育遲緩紅燈",
+    "logActivity": "記錄活動",
+    "activityPlaceholder": "例如：30分鐘趴趴時間...",
+    "log": "記錄",
+    "activitiesLogged": "項活動已記錄",
+    "attachment": "依附關係",
+    "attachmentDesc": "依附關係窗口（0-6個月）係BB與主要照顧者建立基礎連結嘅時期。持續嘅回應式照顧建立安全依附，為日後嘅情緒調節奠定基礎。",
+    "attachmentWhy": "呢個窗口形成嘅安全依附，預測日後更好嘅人際關係、情緒韌性同降低焦慮風險。呢個係所有社交情緒發展嘅根基。",
+    "language": "語言",
+    "languageDesc": "語言關鍵期（0-12個月）覆蓋成個第一年。BB從語言環境吸收所有聲音、節奏同詞彙模式。",
+    "languageWhy": "BB喺頭6個月能夠區分所有人類聲音。到12個月，大腦開始修剪未接觸過嘅語言聲音。早豐富嘅語言輸入塑造神經通路，為日後所有溝通能力奠定基礎。",
+    "motor": "運動",
+    "motorDesc": "運動窗口（2-9個月）涵蓋抬頭到爬行嘅大運動發展。大運動里程碑順序建立——每個技能為下一個奠定基礎。",
+    "motorWhy": "運動發展同大腦發展密切相關。活動能力讓BB探索，驅動認知發展。趴趴時間強化頸部肌肉，為坐、伸手同最終行走做準備。",
+    "visual": "視覺",
+    "visualDesc": "視覺關鍵期（0-4個月）係視覺神經通路最快發展嘅時期。高對比圖案同面對面互動係呢個窗口必不可少嘅視覺刺激。",
+    "visualWhy": "BB出生時視覺系統未成熟。喺呢個窗口，大腦快速建立深度知覺、對焦同顏色視覺嘅通路。視覺刺激直接塑造發育中嘅視覺皮層。",
+    "gutMicrobiome": "腸道微生物群",
+    "gutMicrobiomeDesc": "腸道微生物群窗口（0-6個月）係BB腸道細菌生態系統建立嘅時期。呢個生態系統影響消化、免疫，仲有越來越多嘅大腦發育。",
+    "gutMicrobiomeWhy": "80%嘅免疫系統喺腸道。頭6個月嘅細菌定植設定免疫健康、過敏風險，甚至通過腸腦軸影響情緒嘅軌跡。",
+    "gutBrainAxis": "腸腦軸",
+    "gutBrainAxisDesc": "腸腦軸窗口（0-12個月）追蹤腸道健康同大腦發育之間嘅雙向溝通。餵養模式、腸道菌群同消化都影響神經發育。",
+    "gutBrainAxisWhy": "迷走神經直接連接腸道同大腦。腸道發炎可以影響行為同睡眠。相反，大腦發育影響消化。優化腸道健康支持身體同神經發育。"
+  }
 }

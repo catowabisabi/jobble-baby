@@ -52,7 +52,8 @@
     "fontanelleHydration": "Hydration",
     "bilateral": "Bilateral",
     "sleepArchitecture": "Sleep Architecture",
-    "appstoreChecklist": "App Stores"
+    "appstoreChecklist": "App Stores",
+    "criticalPeriods": "Critical Periods"
   },
   "hydration": {
     "title": "Fontanelle and Hydration",
@@ -2199,5 +2200,41 @@
   "launchChecklist.items.playInternalTesting": "Internal testing track published",
   "launchChecklist.desc.playInternalTesting": "Publish to internal testing track in Play Console",
   "launchChecklist.items.playSubmission": "Submission reviewed and submitted",
-  "launchChecklist.desc.playSubmission": "Review and submit app for Play Store review"
+  "launchChecklist.desc.playSubmission": "Review and submit app for Play Store review",
+  "criticalPeriods": {
+    "title": "Critical Periods",
+    "subtitle": "Sensitive windows in your baby's first year",
+    "timeline": "Development Timeline",
+    "periods": "Development Periods",
+    "active": "Active",
+    "imminent": "Imminent",
+    "passed": "Passed",
+    "whatIsIt": "What Is It?",
+    "whyMatters": "Why It Matters",
+    "topActivities": "Top 3 Activities",
+    "signs": "Signs Baby Is In This Period",
+    "redFlags": "Red Flags for Delay",
+    "logActivity": "Log Activity",
+    "activityPlaceholder": "e.g. 30min tummy time...",
+    "log": "Log",
+    "activitiesLogged": "activities logged",
+    "attachment": "Attachment",
+    "attachmentDesc": "The attachment window (0-6 months) is when your baby forms their primary bond with caregivers. Consistent responsive care builds secure attachment which supports emotional regulation throughout life.",
+    "attachmentWhy": "Secure attachment formed in this window predicts better relationships, emotional resilience, and reduced anxiety later in childhood. This is the foundation for all future social-emotional development.",
+    "language": "Language",
+    "languageDesc": "The language critical period (0-12 months) spans the entire first year. Your baby is absorbing all sounds, rhythms, and word patterns from their native language environment.",
+    "languageWhy": "Babies can distinguish all human sounds in the first 6 months. By 12 months, the brain begins pruning language sounds it hasn't heard. Early rich language input shapes neural pathways for all future communication.",
+    "motor": "Motor",
+    "motorDesc": "The motor window (2-9 months) covers the emergence of head control through crawling. Gross motor milestones build sequentially — each skill provides the foundation for the next.",
+    "motorWhy": "Motor development and brain development are tightly coupled. Movement allows babies to explore, which drives cognitive development. Tummy time strengthens neck muscles needed for sitting, reaching, and eventually walking.",
+    "visual": "Visual",
+    "visualDesc": "The visual critical period (0-4 months) is when visual neural pathways develop most rapidly. High-contrast patterns and face-to-face interaction are essential visual stimulation during this window.",
+    "visualWhy": "Babies are born with immature visual systems. During this window, the brain is rapidly building pathways for depth perception, focus, and color vision. Visual stimulation directly shapes the developing visual cortex.",
+    "gutMicrobiome": "Gut Microbiome",
+    "gutMicrobiomeDesc": "The gut microbiome window (0-6 months) is when the bacterial ecosystem in your baby's gut is established. This ecosystem influences digestion, immunity, and increasingly, brain development.",
+    "gutMicrobiomeWhy": "80% of the immune system resides in the gut. The first 6 months of bacterial colonization sets the trajectory for immune health, allergy risk, and even mood regulation through the gut-brain axis.",
+    "gutBrainAxis": "Gut-Brain Axis",
+    "gutBrainAxisDesc": "The gut-brain axis window (0-12 months) tracks the bidirectional communication between gut health and brain development. Feeding patterns, gut flora, and digestion all influence neurological development.",
+    "gutBrainAxisWhy": "The vagus nerve connects gut and brain directly. Gut inflammation can affect behavior and sleep. Conversely, brain development affects digestion. Optimizing gut health supports both physical and neurological development."
+  }
 }

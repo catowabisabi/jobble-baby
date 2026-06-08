@@ -43,6 +43,13 @@ export default function TabsLayout() {
         options={{ title: t('tabs.milestones'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="trophy-variant" size={size} color={color} /> }}
       />
       <Tabs.Screen
+        name="critical-periods"
+        options={{
+          title: t('tabs.criticalPeriods'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{ title: t('tabs.profile'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" size={size} color={color} /> }}
       />

@@ -1,33 +1,23 @@
-# Current Dispatch — Cycle 248
+# Current Dispatch — Cycle 255
 
 ## Status
-- Cycle 248 started: privacy policy HTML created directly (Hermes)
-- Sisyphus task dispatched: accessibilityLabel improvements in growth.tsx
-- All 97 todos complete, TSC: 0 errors
+- Todo #100 (sleep-architecture) completed — TSC 0 errors
+- Todo #101 (Accessibility Audit) pending — dispatched to Sisyphus
+- appstore-checklist.tsx verified — registered in _layout.tsx, i18n complete
+- 57 tabs total in _layout.tsx
 
 ## Completed this cycle
-- Created docs/privacy-policy.html (privacy policy deployable HTML page)
-- Dark theme, mobile-responsive, COPPA-compliant, self-contained
-- Sections: data collection, usage, 3rd-party services, children's privacy, storage, rights, cookies, changes, contact
-- Committed and pushed: 603faf5
-- Brainstorm: 50 keywords added to pool (pool: 1000)
-- Dispatched task to Sisyphus: accessibilityLabel improvements in growth.tsx
+- Verified appstore-checklist.tsx (exists, registered, TSC clean)
+- Verified i18n keys: tabs.appstoreChecklist + launchChecklist items
+- Todo #100 marked completed
+- Committed: 574ef6e → pushed
+
+## Next dispatch
+Sisyphus is implementing Accessibility Audit (todo #101) — first batch of 6 tabs
 
 ## Pending (user action)
 - EAS credentials configuration
 - App Store Connect app creation
 - Play Console app creation
-- Privacy policy URL deployment (now has deployable HTML at docs/privacy-policy.html)
+- Privacy policy URL deployment (has deployable HTML at docs/privacy-policy.html)
 - Sentry crash reporting (npm install blocked by peer deps)
-
-## Next dispatch
-Awaiting Sisyphus completion of growth.tsx accessibility task. Then review remaining draft concepts (#29 CI/CD is set up, #30 privacy policy HTML done by Hermes).
-
-## Tab count
-54 tabs registered in _layout.tsx
-
-## Painpoints status
-- #17 WCAG accessibility: resolved (354 labels across codebase)
-- #18 CI/CD: resolved (GitHub Actions workflows ready)
-- #19 Privacy policy URL: resolved (deployable HTML created)
-- #20 Sentry install: resolved (peer dep conflict remains)

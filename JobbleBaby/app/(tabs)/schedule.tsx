@@ -194,21 +194,22 @@ export default function ScheduleScreen() {
               <QRCode value={deepLink} size={200} backgroundColor="#ffffff" color="#000000" />
             </View>
             <TouchableOpacity
-                            accessibilityLabel="Button in schedule"
+              accessibilityLabel="Share schedule"
+              accessibilityHint="Opens the device share sheet to send the schedule"
               onPress={() => {
                 setShowQRModal(false);
                 handleShareSchedule();
               }}
-              style={{ backgroundColor: '#3B82F6', borderRadius: 12, paddingVertical: 14, paddingHorizontal: 32, width: '100%' }}
+              style={{ backgroundColor: '#3B82F6', borderRadius: 12, paddingVertical: 14, paddingHorizontal: 32, width: '100%', minHeight: 44 }}
             >
               <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', textAlign: 'center' }}>
                 {t('schedule.shareTitle') || 'Share'}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-                            accessibilityLabel="Toggle schedule panel"
+              accessibilityLabel="Cancel and close modal"
               onPress={() => setShowQRModal(false)}
-              style={{ marginTop: 12 }}
+              style={{ marginTop: 12, minHeight: 44 }}
             >
               <Text style={{ color: '#9CA3AF', fontSize: 14 }}>{t('common.cancel') || 'Cancel'}</Text>
             </TouchableOpacity>
@@ -541,14 +542,20 @@ export default function ScheduleScreen() {
       </ScrollView>
 
       {/* Share FAB */}
-      <TouchableOpacity style={styles.fabShare} activeOpacity={0.8} accessibilityLabel="Button in schedule" onPress={() => {
-        const todayEntries = scheduleData.filter(d => d.sleep);
-        if (todayEntries.length === 0) {
-          Alert.alert(t('schedule.shareNoDataTitle') || 'No Schedule Yet', t('schedule.shareNoDataMsg') || 'Add some sleep entries first before sharing.');
-        } else {
-          setShowQRModal(true);
-        }
-      }}>
+      <TouchableOpacity
+        style={[styles.fabShare, { minHeight: 44, minWidth: 44 }]}
+        activeOpacity={0.8}
+        accessibilityLabel="Share schedule via QR code"
+        accessibilityHint="Opens a QR code modal to share the baby schedule"
+        onPress={() => {
+          const todayEntries = scheduleData.filter(d => d.sleep);
+          if (todayEntries.length === 0) {
+            Alert.alert(t('schedule.shareNoDataTitle') || 'No Schedule Yet', t('schedule.shareNoDataMsg') || 'Add some sleep entries first before sharing.');
+          } else {
+            setShowQRModal(true);
+          }
+        }}
+      >
         <Text style={styles.fabShareIcon}>📤</Text>
       </TouchableOpacity>
 
@@ -556,8 +563,13 @@ export default function ScheduleScreen() {
       <ShareQRModal />
 
       {/* Add Entry FAB */}
-      <TouchableOpacity style={styles.fab} activeOpacity={0.8} onPress={handleAddEntry}>
-                      accessibilityLabel="Add schedule entry"
+      <TouchableOpacity
+        style={[styles.fab, { minHeight: 44, minWidth: 44 }]}
+        activeOpacity={0.8}
+        accessibilityLabel="Add sleep entry for today"
+        accessibilityHint="Records the current time as the start of a sleep period"
+        onPress={handleAddEntry}
+      >
         <Text style={styles.fabIcon}>🌙</Text>
       </TouchableOpacity>
     </SafeAreaView>

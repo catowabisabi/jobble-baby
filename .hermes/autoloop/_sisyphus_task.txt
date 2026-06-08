@@ -1,51 +1,44 @@
-# Sisyphus Task — Cycle 254
+# Sisyphus Task — Cycle 255
 
 ## Context
-Jobble Baby: 57 tabs, TSC 0 errors, 101 todos complete. Cycle 254 — Accessibility audit and improvement task. The app targets parents of infants and should be WCAG 2.1 AA compliant. Project is in pre-launch state.
+Jobble Baby: 57 tabs, TSC 0 errors, 98 todos complete, 1 pending (#101). Cycle 255 — Accessibility audit task to be implemented. Project is in pre-launch state, preparing for App Store submission.
 
-## Task: Accessibility Audit & Improvement
+## Task: Implement Accessibility Audit & Improvement (Todo #101)
 
-Improve accessibility across all 57 tabs for WCAG 2.1 AA compliance. Focus areas:
+### Objective
+Audit and improve accessibility across the app — focus on contrast, labels, and touch targets per WCAG 2.1 AA standards.
 
-### 1. Color Contrast
-Review all text/background color combinations. Ensure:
-- Normal text (under 18pt): contrast ratio >= 4.5:1
-- Large text (18pt+ or 14pt bold): contrast ratio >= 3:1
-- Update COLORS in `app/theme.ts` or inline styles where needed
-- Do NOT change the dark mode color scheme — only improve insufficient contrast in light mode
+### Instructions
 
-### 2. Accessibility Labels
-Add missing `accessibilityLabel` and `accessibilityHint` to:
-- All TouchableOpacity/TouchableWithoutFeedback components
-- All custom buttons and interactive elements
-- Format: `accessibilityLabel="[clear action]"` and `accessibilityHint="[what happens when tapped]"`
+1. **Scan existing tabs** for accessibility issues — pick 5-6 tabs per batch
+   - Most-used tabs first: Home (index.tsx), Tracking, Schedule, Growth, Products, Milestones
 
-### 3. Touch Targets
-Ensure all interactive elements:
-- Minimum size of 44x44 points
-- Adequate spacing between adjacent targets (at least 8pt)
+2. **For each tab, fix:**
+   - **Contrast**: Text/background color contrast ratio ≥ 4.5:1 for normal text, ≥ 3:1 for large text
+   - **Touch targets**: Minimum 44x44px for all interactive elements (TouchableOpacity, Pressable, Button)
+   - **Accessibility labels**: All meaningful content has proper labels; decorative elements have `accessibilityElementsHidden={true}`
+   - **Image labels**: Any Image that conveys information needs `accessibilityLabel`
 
-### 4. Accessibility Roles
-Add proper `accessibilityRole`:
-- `button` for buttons, `link` for links
-- `header` for section headers
-- `image` for informative images (with accessibilityLabel)
-- `search` for search inputs, `switch` for toggles
+3. **Files to check (first batch — 6 tabs):**
+   - `app/(tabs)/index.tsx` (Home)
+   - `app/(tabs)/tracking.tsx`
+   - `app/(tabs)/schedule.tsx`
+   - `app/(tabs)/growth.tsx`
+   - `app/(tabs)/products.tsx`
+   - `app/(tabs)/milestones.tsx`
 
-### 5. Focus Management
-Ensure navigable via VoiceOver/TalkBack:
-- All meaningful content has accessibility labels
-- Images that convey information have descriptive labels
-- Decorative images marked with `accessibilityElementsHidden={true}`
+4. **Fix approach:**
+   - Do NOT change business logic or functionality
+   - Only update styles for contrast/touch targets
+   - Add accessibility labels where missing
+   - Use `accessibilityHint` for complex interactions
+   - Do NOT commit — just update the files
 
-### Implementation Notes
-- Work tab by tab — pick 5-6 tabs per batch
-- Run `npx tsc --noEmit` after each batch — 0 errors required
-- Do NOT change business logic or functionality
-- Do NOT commit — just update the files
-- Focus on most used tabs first: Home, Tracking, Schedule, Growth, Products, Milestones
+5. **After each batch:**
+   - Run `npx tsc --noEmit` — 0 errors required
+   - Run `npx expo export --platform ios` (or check with Expo) to verify no build errors
 
 ### Keywords
-bilateral_coordination,satiety_hormone_cascade,energy_accounting_method
+attractor_state,sleep_latency_regression,night_wake_pattern
 
 ULW

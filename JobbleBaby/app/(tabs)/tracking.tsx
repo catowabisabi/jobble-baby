@@ -175,9 +175,10 @@ export default function TrackingScreen() {
         <View style={styles.buttonRow}>
           {DIAPER_TYPES.map((item) => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in tracking"
+              accessibilityLabel={`Add ${item.label.toLowerCase()} diaper entry`}
+              accessibilityHint={`Log a ${item.label.toLowerCase()} diaper change with current timestamp`}
               key={item.label}
-              style={[styles.button, { backgroundColor: item.color }]}
+              style={[styles.button, { backgroundColor: item.color, minHeight: 44, minWidth: 44 }]}
               activeOpacity={0.7}
               onPress={() => addEntry('diaper', item.label)}
             >
@@ -191,9 +192,10 @@ export default function TrackingScreen() {
         <View style={styles.buttonRow}>
           {FEED_TYPES.map((item) => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in tracking"
+              accessibilityLabel={`Add ${item.label.toLowerCase()} feeding entry`}
+              accessibilityHint={`Log a ${item.label.toLowerCase()} feeding with current timestamp`}
               key={item.label}
-              style={[styles.button, { backgroundColor: item.color }]}
+              style={[styles.button, { backgroundColor: item.color, minHeight: 44, minWidth: 44 }]}
               activeOpacity={0.7}
               onPress={() => addEntry('feed', item.label)}
             >
@@ -204,7 +206,11 @@ export default function TrackingScreen() {
         </View>
 
         <Link href="/feeding-timer" style={styles.feedingTimerLink}>
-          <View style={[styles.feedingTimerButton, { backgroundColor: C.accent }]}>
+          <View
+            style={[styles.feedingTimerButton, { backgroundColor: C.accent, minHeight: 44, minWidth: 44 }]}
+            accessibilityLabel="Open feeding timer"
+            accessibilityRole="button"
+          >
             <MaterialCommunityIcons name="timer-outline" size={24} color="#fff" />
             <Text style={styles.feedingTimerText}>{t('feedingTimer.title')}</Text>
           </View>
@@ -214,9 +220,10 @@ export default function TrackingScreen() {
         <View style={styles.buttonRow}>
           {SLEEP_TYPES.map((item) => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in tracking"
+              accessibilityLabel={`Add ${item.label.toLowerCase()} sleep entry`}
+              accessibilityHint={`Log a ${item.label.toLowerCase()} sleep entry with current timestamp`}
               key={item.label}
-              style={[styles.button, { backgroundColor: item.color }]}
+              style={[styles.button, { backgroundColor: item.color, minHeight: 44, minWidth: 44 }]}
               activeOpacity={0.7}
               onPress={() => addEntry('sleep', item.label)}
             >

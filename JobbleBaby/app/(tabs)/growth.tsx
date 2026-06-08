@@ -718,8 +718,9 @@ export default function GrowthScreen() {
               <Text style={styles.title}>📈 {t('growth.title')}</Text>
             </View>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in growth"
-              style={[styles.milestoneBtn, { backgroundColor: C.accent }]}
+              accessibilityLabel="View milestones"
+              accessibilityHint="Navigate to the milestones screen to capture photos"
+              style={[styles.milestoneBtn, { backgroundColor: C.accent, minHeight: 44, minWidth: 44 }]}
               onPress={() => router.push('/milestones')}
               activeOpacity={0.7}
             >
@@ -750,15 +751,19 @@ export default function GrowthScreen() {
           {/* Chart type toggle */}
           <View style={styles.toggleRow}>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in growth"
-              style={[styles.toggleBtn, chartType === 'height' && styles.toggleBtnActive]}
+              accessibilityLabel="Show height chart"
+              accessibilityRole="tab"
+              accessibilityState={{ selected: chartType === 'height' }}
+              style={[styles.toggleBtn, chartType === 'height' && styles.toggleBtnActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setChartType('height')}
             >
               <Text style={[styles.toggleBtnText, chartType === 'height' && styles.toggleBtnTextActive]}>Height</Text>
             </TouchableOpacity>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in growth"
-              style={[styles.toggleBtn, chartType === 'weight' && styles.toggleBtnActive]}
+              accessibilityLabel="Show weight chart"
+              accessibilityRole="tab"
+              accessibilityState={{ selected: chartType === 'weight' }}
+              style={[styles.toggleBtn, chartType === 'weight' && styles.toggleBtnActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setChartType('weight')}
             >
               <Text style={[styles.toggleBtnText, chartType === 'weight' && styles.toggleBtnTextActive]}>Weight</Text>
@@ -768,15 +773,19 @@ export default function GrowthScreen() {
           {/* Gender toggle */}
           <View style={styles.toggleRow}>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in growth"
-              style={[styles.toggleBtn, styles.toggleBtnSmall, gender === 'boys' && styles.toggleBtnActive]}
+              accessibilityLabel="Show boys growth data"
+              accessibilityRole="tab"
+              accessibilityState={{ selected: gender === 'boys' }}
+              style={[styles.toggleBtn, styles.toggleBtnSmall, gender === 'boys' && styles.toggleBtnActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setGender('boys')}
             >
               <Text style={[styles.toggleBtnText, styles.toggleBtnTextSmall, gender === 'boys' && styles.toggleBtnTextActive]}>Boys</Text>
             </TouchableOpacity>
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in growth"
-              style={[styles.toggleBtn, styles.toggleBtnSmall, gender === 'girls' && styles.toggleBtnActive]}
+              accessibilityLabel="Show girls growth data"
+              accessibilityRole="tab"
+              accessibilityState={{ selected: gender === 'girls' }}
+              style={[styles.toggleBtn, styles.toggleBtnSmall, gender === 'girls' && styles.toggleBtnActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setGender('girls')}
             >
               <Text style={[styles.toggleBtnText, styles.toggleBtnTextSmall, gender === 'girls' && styles.toggleBtnTextActive]}>Girls</Text>
@@ -806,8 +815,13 @@ export default function GrowthScreen() {
             value={weight}
             onChangeText={setWeight}
           />
-          <TouchableOpacity style={styles.saveButton} activeOpacity={0.7} onPress={saveEntry}>
-                          accessibilityLabel="Save growth entry"
+          <TouchableOpacity
+            style={[styles.saveButton, { minHeight: 44, minWidth: 44 }]}
+            accessibilityLabel="Save growth measurement"
+            accessibilityHint="Stores the entered height and weight for tracking"
+            activeOpacity={0.7}
+            onPress={saveEntry}
+          >
             <Text style={styles.saveButtonText}>{t('growth.saveMeasurement')}</Text>
           </TouchableOpacity>
         </View>

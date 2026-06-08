@@ -135,9 +135,11 @@ export default function ProductsScreen() {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterRow}>
           {AGE_FILTERS.map(filter => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in products"
+              accessibilityLabel={`Filter by age ${filter}`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: ageFilter === filter }}
               key={filter}
-              style={[styles.filterChip, ageFilter === filter && styles.filterChipActive]}
+              style={[styles.filterChip, ageFilter === filter && styles.filterChipActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setAgeFilter(filter)}
             >
               <Text style={[styles.filterChipText, ageFilter === filter && styles.filterChipTextActive]}>
@@ -156,9 +158,10 @@ export default function ProductsScreen() {
             </View>
             {category.products.map((product) => (
               <TouchableOpacity
-                              accessibilityLabel="TouchableOpacity in products"
+                accessibilityLabel={`${product.brand} ${product.name}, ${product.price}, ${product.age} age, ${product.rating} stars`}
+                accessibilityHint="Opens the product link in your browser"
                 key={product.id}
-                style={styles.productCard}
+                style={[styles.productCard, { minHeight: 44 }]}
                 activeOpacity={0.7}
                 onPress={() => handleProductPress(product)}
               >

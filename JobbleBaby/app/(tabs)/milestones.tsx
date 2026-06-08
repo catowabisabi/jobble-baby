@@ -487,8 +487,9 @@ export default function MilestonesScreen() {
 
             {/* Complete button */}
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in milestones"
-              style={styles.completeBtn}
+              accessibilityLabel={isDoneToday ? "Brain builder activity completed today" : "Complete brain builder activity for today"}
+              accessibilityHint={isDoneToday ? "You've already completed today's activity" : "Mark today's brain building activity as complete"}
+              style={[styles.completeBtn, { minHeight: 44, minWidth: 44 }]}
               onPress={markBrainBuilderDone}
               activeOpacity={0.8}
             >
@@ -523,11 +524,14 @@ export default function MilestonesScreen() {
         <View style={styles.typeSelector}>
           {MILESTONE_TYPES.map((type) => (
             <TouchableOpacity
-                            accessibilityLabel="TouchableOpacity in milestones"
+              accessibilityLabel={`Select ${t(`milestones.${type.labelKey}`)} milestone type`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: selectedType.id === type.id }}
               key={type.id}
               style={[
                 styles.typeChip,
                 selectedType.id === type.id && styles.typeChipActive,
+                { minHeight: 44, minWidth: 44 },
               ]}
               onPress={() => setSelectedType(type)}
             >
@@ -556,12 +560,18 @@ export default function MilestonesScreen() {
               <Text style={styles.reminderBody}>{t('milestoneReminder.firstSmileBody')}</Text>
             </View>
             <View style={{ flexDirection: 'row', gap: 8 }}>
-              <TouchableOpacity onPress={() => setShowReminder(false)} style={styles.reminderBtn}>
-                              accessibilityLabel="Toggle milestones panel"
+              <TouchableOpacity
+                onPress={() => setShowReminder(false)}
+                style={[styles.reminderBtn, { minHeight: 44, minWidth: 44 }]}
+                accessibilityLabel="Dismiss reminder"
+              >
                 <Text style={styles.reminderBtnText}>{t('milestoneReminder.dismiss')}</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { setShowReminder(false); captureMilestone(); }} style={[styles.reminderBtn, { backgroundColor: '#fff' }]}>
-                              accessibilityLabel="Toggle milestones panel"
+              <TouchableOpacity
+                onPress={() => { setShowReminder(false); captureMilestone(); }}
+                style={[styles.reminderBtn, { backgroundColor: '#fff', minHeight: 44, minWidth: 44 }]}
+                accessibilityLabel="Capture milestone photo now"
+              >
                 <Text style={[styles.reminderBtnText, { color: '#3B82F6' }]}>{t('milestoneReminder.capture')}</Text>
               </TouchableOpacity>
             </View>
@@ -570,8 +580,9 @@ export default function MilestonesScreen() {
 
         {/* Capture Button */}
         <TouchableOpacity
-                        accessibilityLabel="TouchableOpacity in milestones"
-          style={[styles.captureBtn, isCapturing && styles.captureBtnDisabled]}
+          accessibilityLabel={`Capture ${t(`milestones.${selectedType.labelKey}`)} milestone photo`}
+          accessibilityHint="Opens the camera to take a photo for this milestone"
+          style={[styles.captureBtn, isCapturing && styles.captureBtnDisabled, { minHeight: 44 }]}
           onPress={captureMilestone}
           disabled={isCapturing}
           activeOpacity={0.7}

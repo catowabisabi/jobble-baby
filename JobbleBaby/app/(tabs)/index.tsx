@@ -182,8 +182,8 @@ export default function HomeScreen() {
       flex: 1, borderRadius: 16, padding: 16, alignItems: 'center',
     },
     cardIcon: { fontSize: 28, marginBottom: 8 },
-    cardLabel: { fontSize: 13, fontWeight: '600', color: '#1a1a2e', marginBottom: 4 },
-    cardTime: { fontSize: 12, color: '#555' },
+    cardLabel: { fontSize: 13, fontWeight: '600', color: '#1a1a2e', marginBottom: 4, textShadowColor: 'rgba(255,255,255,0.3)', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 2 },
+    cardTime: { fontSize: 12, color: '#2d2d3a', fontWeight: '500' },
     reminderCard: {
       backgroundColor: C.card, borderRadius: 16, padding: 16, marginBottom: 16,
       borderWidth: 1, borderColor: C.border,
@@ -223,7 +223,7 @@ export default function HomeScreen() {
       shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 3,
     },
     fabIcon: { fontSize: 24, marginBottom: 6 },
-    fabText: { fontSize: 13, fontWeight: '600', color: '#1a1a2e' },
+    fabText: { fontSize: 13, fontWeight: '600', color: '#1a1a2e', textShadowColor: 'rgba(255,255,255,0.4)', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 2 },
     sosButton: {
       position: 'absolute',
       bottom: 100,
@@ -284,7 +284,12 @@ export default function HomeScreen() {
         {/* Summary Cards */}
         <View style={styles.summaryRow}>
           {QUICK_ENTRIES.map((entry) => (
-            <View key={entry.id} style={[styles.summaryCard, { backgroundColor: entry.color }]}>
+            <View
+              key={entry.id}
+              style={[styles.summaryCard, { backgroundColor: entry.color }]}
+              accessibilityLabel={`${entry.label}: last entry at ${lastEvents[entry.id as keyof typeof lastEvents] || '--:--'}`}
+              accessibilityRole="button"
+            >
               <Text style={styles.cardIcon}>{entry.icon}</Text>
               <Text style={styles.cardLabel}>{t(QUICK_ENTRY_I18N_KEYS[entry.id])}</Text>
               <Text style={styles.cardTime}>{lastEvents[entry.id as keyof typeof lastEvents] || '--:--'}</Text>
@@ -357,8 +362,9 @@ export default function HomeScreen() {
             {QUICK_ENTRIES.map((entry) => (
               <TouchableOpacity
                 key={entry.id}
-                accessibilityLabel={`Add ${entry.id} entry`}
-                style={[styles.fab, { backgroundColor: entry.color }]}
+                accessibilityLabel={`Add ${entry.label} entry`}
+                accessibilityHint={`Tap to log a ${entry.label.toLowerCase()} entry with current timestamp`}
+                style={[styles.fab, { backgroundColor: entry.color, minHeight: 44, minWidth: 44 }]}
                 activeOpacity={0.7}
               >
                 <Text style={styles.fabIcon}>{entry.icon}</Text>

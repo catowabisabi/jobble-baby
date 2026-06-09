@@ -58,7 +58,8 @@
     "sensoryIntegration": "Sensory",
     "strangerDanger": "Stranger Danger",
     "asymmetricGrowth": "Asymmetric Growth",
-    "jaundiceThreshold": "Jaundice Threshold"
+    "jaundiceThreshold": "Jaundice Threshold",
+    "cupFeedingTransition": "Cup Feeding"
   },
   "hydration": {
     "title": "Fontanelle and Hydration",
@@ -2498,5 +2499,40 @@
     "alertHighTitle": "alertHighTitle",
     "alertHighBody": "alertHighBody",
     "chart": "chart"
+  },
+  "cupFeeding": {
+    "title": "Cup Feeding Transition",
+    "subtitle": "Guide your baby from bottle to cup — stage by stage",
+    "readinessTitle": "Transition Readiness",
+    "readinessDesc": "Is your baby ready for cup drinking?",
+    "ready": "Ready to start",
+    "notReady": "Wait a little longer",
+    "stage1": "Stage 1 — Soft Spout (6-7mo)",
+    "stage2": "Stage 2 — Straw Cup (7-9mo)",
+    "stage3": "Stage 3 — Open Cup (9-12mo)",
+    "currentStage": "Current Stage",
+    "addPractice": "Log Practice Session",
+    "duration": "Duration (minutes)",
+    "cupType": "Cup Type",
+    "sipSuccess": "Sip Success Rate (1-5)",
+    "spillLevel": "Spill Level (1-5)",
+    "notes": "Notes",
+    "save": "Save",
+    "cancel": "Cancel",
+    "history": "Practice History",
+    "noData": "No practice sessions yet",
+    "hydrationTitle": "Hydration Score",
+    "hydrationDesc": "Track total fluid intake by source",
+    "bottle": "Bottle",
+    "breast": "Breast",
+    "cup": "Cup",
+    "milestones": "Milestones",
+    "firstOpenCup": "First open cup success",
+    "strawMastered": "Straw cup mastered (14 days)",
+    "dentalTip": "Avoid prolonged bottle/ sippy cup use to prevent tooth decay",
+    "tipTitle": "Parent Tip",
+    "gastrocolicTip": "Correlate cup timing with bowel movement patterns",
+    "successRate": "Success Rate",
+    "spillFreq": "Spill Frequency"
   }
 }

@@ -58,7 +58,8 @@
     "sensoryIntegration": "感統",
     "strangerDanger": "Stranger Danger",
     "asymmetricGrowth": "不對稱生長",
-    "jaundiceThreshold": "黃疸閾值"
+    "jaundiceThreshold": "黃疸閾值",
+    "cupFeedingTransition": "杯餵过渡"
   },
   "hydration": {
     "title": "顱縫與水合監測",
@@ -2500,5 +2501,40 @@
     "alertHighTitle": "高膽紅素警告",
     "alertHighBody": "偵測到高膽紅素水平。請立即聯繫兒科醫生。",
     "chart": "膽紅素圖表"
+  },
+  "cupFeeding": {
+    "title": "杯餵过渡",
+    "subtitle": "幫助寶寶從奶瓶過渡到杯子——按階段進行",
+    "readinessTitle": "過渡準備度",
+    "readinessDesc": "寶寶準備好使用杯子了嗎？",
+    "ready": "可以開始了",
+    "notReady": "再等一會兒",
+    "stage1": "階段一 — 軟嘴杯 (6-7個月)",
+    "stage2": "階段二 — 吸管杯 (7-9個月)",
+    "stage3": "階段三 — 開口杯 (9-12個月)",
+    "currentStage": "目前階段",
+    "addPractice": "記錄練習",
+    "duration": "時長（分鐘）",
+    "cupType": "杯子類型",
+    "sipSuccess": "吸水成功率 (1-5)",
+    "spillLevel": "濺出程度 (1-5)",
+    "notes": "備註",
+    "save": "儲存",
+    "cancel": "取消",
+    "history": "練習記錄",
+    "noData": "暫無練習記錄",
+    "hydrationTitle": "水分攝取分數",
+    "hydrationDesc": "追蹤各來源總液體攝入量",
+    "bottle": "奶瓶",
+    "breast": "母乳",
+    "cup": "杯子",
+    "milestones": "里程碑",
+    "firstOpenCup": "首次成功用開口杯",
+    "strawMastered": "掌握吸管杯（連續14天）",
+    "dentalTip": "避免長時間使用奶瓶/吸嘴杯以預防蛀牙",
+    "tipTitle": "家長提示",
+    "gastrocolicTip": "將使用杯子時間與排便模式關聯",
+    "successRate": "成功率",
+    "spillFreq": "濺出頻率"
   }
 }

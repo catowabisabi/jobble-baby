@@ -1,12 +1,11 @@
-# Current Dispatch — Cycle 275
+# Current Dispatch — Cycle 276
 
 ## Status
-- Cycle 275 running
-- TSC 0 errors, 66 tabs
-- Solid Food Progression Navigator (#114) → completed ✅ (6098835)
-- Brainstorm: 50 keywords added (pool now 1000)
-- Ideas 71 → implemented (Primitive Reflex tab already existed)
-- Idea 72 → implemented (Solid Food Navigator)
+- Cycle 276 running
+- TSC 0 errors, 67 tabs
+- Codebase Polish (cycle 275) → not completed by Sisyphus (re-dispatched as accessibility fix)
+- 3 tabs with zero accessibilityLabel: allergens.tsx, monitor-correlation.tsx, projection.tsx
+- Solid Food Navigator (#114) → completed ✅ (6098835)
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -16,13 +15,11 @@
 
 ## Pending Todos
 - #108: Deploy privacy policy HTML to live URL (P1, user action required)
-- Codebase Polish task → dispatched to Sisyphus (cycle 275)
-
-## Ideas
-- All ideas implemented/deferred. No new ideas in this cycle.
+- #115: Fix accessibility on allergens.tsx, monitor-correlation.tsx, projection.tsx (dispatched to Sisyphus, cycle 276)
 
 ## App State
-- 66 tabs complete
+- 67 tabs complete
 - TSC 0 errors
 - i18n complete (en.json + zh.json)
-- Ready for App Store submission
+- Keyword pool: 1000 keywords (max)
+- Ready for App Store submission (pending user actions)

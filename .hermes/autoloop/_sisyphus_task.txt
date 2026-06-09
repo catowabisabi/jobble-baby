@@ -1,44 +1,40 @@
-# Sisyphus Task — Cycle 275
+# Sisyphus Task — Cycle 276
 
 ## Context
-Jobble Baby: TSC 0 errors, 66 tabs. All major features implemented. App ready for App Store submission pending user actions.
+Jobble Baby: TSC 0 errors, 67 tabs. Codebase mostly clean — no console.log, @jobble/ prefix consistent, theme imports consistent. 3 tabs identified with zero accessibilityLabel attributes.
 
-## Task: Codebase Polish & Cleanup
+## Task: Fix Accessibility on 3 Tabs
 
-Perform a final polish pass across the entire tab codebase.
+Add accessibilityLabel to all interactive elements in these 3 files:
+- `JobbleBaby/app/(tabs)/allergens.tsx`
+- `JobbleBaby/app/(tabs)/monitor-correlation.tsx`
+- `JobbleBaby/app/(tabs)/projection.tsx`
 
 ## Requirements
 
-### 1. Remove Debug Code
-Search all tab files in `JobbleBaby/app/(tabs)/` for:
-- `console.log(` — remove or replace with `// debug: ...` commented block
-- `console.warn(` — remove or comment out
-- `console.error(` — keep only for genuine errors, comment out for debugging
-- `TODO` comments that are not actionable — convert to `// FIXME: [describe issue]` or remove
-- `FIXME` without a description — add description or remove
+### Per Tab
+1. Find ALL TouchableOpacity, Pressable, TouchableWithoutFeedback components
+2. Add `accessibilityLabel={t('some.key')}` — use existing i18n keys where possible; add new keys to `en.json` + `zh.json` if needed
+3. For icon-only buttons: add meaningful accessibilityLabel
+4. For images: add `accessibilityRole="image"` and alt text via accessibilityLabel
+5. Do NOT change any logic, styles, or functionality — only add accessibilityLabel props
 
-### 2. Check AsyncStorage Keys
-Verify all tabs use consistent AsyncStorage key prefix `@jobble/`. Report any tabs using non-prefixed keys or inconsistent naming.
+### i18n Keys (add if not exist)
+- `allergens.tab_title` → "Allergens"
+- `allergens.add_entry` → "Add allergen entry"
+- `allergens.allergen_card` → "Allergen: {name}"
+- `monitor-correlation.tab_title` → "Monitor Correlation"
+- `monitor-correlation.add_entry` → "Add correlation entry"
+- `projection.tab_title` → "Projection"
+- `projection.add_entry` → "Add projection entry"
 
-### 3. i18n Audit
-Check that NO tab has hardcoded Chinese or English strings that should be in i18n. Search for:
-- Chinese characters (一乙二十丁厂七卜八人入八九刁十刀又三于干上下不) in TSX files — these should be in zh.json
-- Plain English strings that should be i18n keys (button text, labels, placeholders)
+Add Chinese translations to `zh.json` for any new keys.
 
-### 4. Accessibility Spot Check
-Run accessibility audit on 5 random tabs. For each:
-- Check that all Touchable components have accessibilityLabel
-- Check that all images have accessibilityRole="image" and alt text
-
-### 5. Theme Consistency
-Verify all tabs import COLORS from `../theme` and use theme context (`useTheme()`) instead of hardcoded color values.
-
-### Output
-- List of changes made (file, change type, description)
-- Report of any issues found but not fixed (with file paths and line numbers)
-- TSC must remain 0 errors after changes
+### Verification
+- Run `cd JobbleBaby && npx tsc --noEmit` — must pass with 0 errors
+- Do NOT commit — leave changes unstaged for Hermes review
 
 ### Keywords
-delight,calm_technology,legibility,feedback_loop,affordance,resilience,constraint,playfulness,accessibility,information_design
+accessibility_label,a11y,WCAG,interactive_element,touchable,accessibilityRole,screen_reader
 
 ULW — execute without asking

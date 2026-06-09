@@ -31,6 +31,9 @@ Thumbs.db
 # Autoloop
 .hermes/autoloop/progress.db-journal
 
+# Store assets
+assets/screenshots/**
+
 # Testing
 *.log
 npm-debug.log*

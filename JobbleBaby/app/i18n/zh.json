@@ -95,7 +95,9 @@
     "noData": "數據不足，無法預測",
     "daysAway": "天後",
     "tapForDetails": "點擊查看詳情",
-    "next30days": "未來30天"
+    "next30days": "未來30天",
+    "tab_title": "發育預測",
+    "add_entry": "新增預測記錄"
   },
   "cryAnalyzer": {
     "title": "哭聲頻率分析器",
@@ -323,7 +325,10 @@
     "type": "類型",
     "symptoms": "症狀",
     "severity": "嚴重程度",
-    "noAllergens": "尚無過敏原記錄"
+    "noAllergens": "尚無過敏原記錄",
+    "tab_title": "過敏原",
+    "add_entry": "新增過敏原記錄",
+    "allergen_card": "過敏原：{name}"
   },
   "products": {
     "title": "產品",
@@ -2677,5 +2682,9 @@
       "ironTip": "每天提供含鐵食物：加鐵米粉、肉類、豆類、綠葉蔬菜",
       "allergenTip": "每次引入一種過敏原，間隔4-5天"
     }
+  },
+  "monitorCorrelation": {
+    "tab_title": "監控關聯",
+    "add_entry": "新增關聯記錄"
   }
 }

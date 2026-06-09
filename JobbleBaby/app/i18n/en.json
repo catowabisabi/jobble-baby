@@ -95,7 +95,9 @@
     "noData": "Not enough data to project",
     "daysAway": "days away",
     "tapForDetails": "Tap for details",
-    "next30days": "Next 30 Days"
+    "next30days": "Next 30 Days",
+    "tab_title": "Projection",
+    "add_entry": "Add projection entry"
   },
   "cryAnalyzer": {
     "title": "Cry Frequency Analyzer",
@@ -323,7 +325,10 @@
     "type": "Type",
     "symptoms": "Symptoms",
     "severity": "Severity",
-    "noAllergens": "No allergen entries yet"
+    "noAllergens": "No allergen entries yet",
+    "tab_title": "Allergens",
+    "add_entry": "Add allergen entry",
+    "allergen_card": "Allergen: {name}"
   },
   "products": {
     "title": "Products",
@@ -2675,5 +2680,9 @@
       "alerts": "Alerts",
       "tips": "Tips"
     }
+  },
+  "monitorCorrelation": {
+    "tab_title": "Monitor Correlation",
+    "add_entry": "Add correlation entry"
   }
 }

@@ -1,14 +1,20 @@
-# Current Dispatch — Cycle 267
+# Current Dispatch — Cycle 268
 
 ## Status
-- Cycle 267 started
-- TSC 0 errors, 61 tabs
-- Todo #104 (Post-Procedure Recovery) completed — committed as 533fdbf
-- Todo #107 (Screenshot Automation) dispatched to Sisyphus
-- Sisyphus is now working on screenshot generation script
+- Cycle 268 started
+- TSC 0 errors, 60 tabs
+- Todo #107 (Screenshot Automation) completed — committed as f9ab68d
+- Todo #111 (Jaundice Threshold Chart) dispatched to Sisyphus
+- 3 new todos added from ideas 67,68,69: Stranger Danger, Asymmetric Growth, Jaundice
+- .gitignore updated to ignore assets/screenshots/ — committed as fffeadf
 
 ## Pending (user action required)
 - EAS credentials configuration
 - App Store Connect app creation
 - Play Console app creation
 - Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
+
+## New todos
+- #109: Stranger Danger Navigator
+- #110: Asymmetric Growth Dashboard
+- #111: Jaundice Threshold Chart (now dispatched)

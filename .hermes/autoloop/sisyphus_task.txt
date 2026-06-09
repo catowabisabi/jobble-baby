@@ -1,75 +1,50 @@
-# Sisyphus Task — Cycle 267
+# Sisyphus Task — Cycle 268
 
 ## Context
-Jobble Baby: 61 tabs, TSC 0 errors. Cycle 267 — App Store + Play Store Screenshot Automation (idea #66, todo #107)
+Jobble Baby: 60 tabs, TSC 0 errors. Cycle 268 — Jaundice Threshold Chart (idea #69, todo #111)
 
-## Task: Generate App Store + Play Store Screenshots for All 61 Tabs
+## Task: Implement Jaundice Threshold Chart tab
 
-Create an automated screenshot generation system for all 61 tabs at correct store dimensions.
+Create a new tab for tracking bilirubin levels with risk zone visualization.
 
 ## Requirements
 
-### Dimensions
-- **App Store (iPhone 6.7")**: 1290×2796 px, PNG
-- **Play Store (phone)**: 1080×2340 px (or 1024×500 feature graphic), PNG
+### Tab Name
+`jaundice-threshold` — add to `app/(tabs)/` and register in `_layout.tsx`
 
-### Process
-1. **Install dependencies**:
-   ```bash
-   cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
-   npm install --legacy-peer-deps react-native-view-shot
-   ```
-   OR use `npx expo-screenshots` if available.
+### Features
+1. **Bilirubin Level Input**
+   - Input field for total serum bilirubin (TSB) in mg/dL or μmol/L
+   - Unit toggle: mg/dL ↔ μmol/L (1 mg/dL = 17.1 μmol/L)
+   - Date/time stamp for each entry
 
-2. **Create screenshot generation script**: `scripts/generate-screenshots.ts`
-   - Use `react-native-view-shot` to capture each tab screen
-   - Loop through all 61 tab files in `app/(tabs)/`
-   - Output App Store screenshots to `assets/screenshots/app-store/`
-   - Output Play Store screenshots to `assets/screenshots/play-store/`
-   - Use consistent framing: show the tab header/title and main content area
+2. **Risk Zone Chart**
+   - Plot bilirubin level on an age-based threshold chart
+   - Show 3 zones: Low Risk (green), Monitor (yellow), Treat/Exchange (red)
+   - X-axis: baby's age in hours (0-336h / 14 days)
+   - Y-axis: bilirubin level
+   - Use a simple SVG line chart (no external chart library needed)
+   - Overlay threshold curves for different risk categories (low, medium, high)
 
-3. **Run the script** to generate all screenshots
+3. **Threshold Reference**
+   - Display Bhutani nomogram-based thresholds
+   - Show zone labels and what action to take per zone
+   - Disclaimer: "Consult your pediatrician for medical decisions"
 
-4. **Fallback**: If automated capture is not feasible, create a **placeholder screenshot template** for each tab at correct dimensions using a simple colored rectangle with tab name text overlay. Save to the output directories.
+4. **History Log**
+   - Simple list of past readings with timestamp and zone
+   - Show trend arrow (↑ rising, ↓ falling, → stable)
 
-5. **Verify** all 61 tabs have screenshots in both directories
+### Technical
+- Use React Native `Svg` for the chart (from `react-native-svg`)
+- TSC 0 errors
+- Follow existing tab pattern (Expo Router file-based routing)
+- i18n keys in en.json + zh.json (add new keys)
+- Accessibility: proper labels, sufficient contrast
 
-### Tab List (61 tabs)
-```
-allergens, appstore-checklist, bilateral-coordination, bonding-journal, bottle-refusal,
-caregiver-fatigue, circadian, clinician-portal, colic-relief, constellation,
-critical-periods, cry-analyzer, doctor-visit, eight-month-storm, feeding-readiness,
-fontanelle-hydration, fontanelle, gear-check, growth-montage, growth,
-gut-brain-axis, habit-reset, hip-click, index, iot-security,
-jaundice, jet-lag, launch-checklist, medicine-dose, milestones,
-milk-prep, milk-transfer, monitor-correlation, moro-reflex, oral-motor,
-pediatric-report, phototherapy-comfort, procedure-recovery, products, profile,
-projection, reflex-integration, reflex-tracker, regression-navigator, safety-audit,
-schedule, sensory-integration, shift-handoff, sleep-architecture, sleep-association,
-sleep-debt, sleep-training, stress-cascade, teething, thermal-regulation,
-tongue-tie, tracking, tummy-time, vestibular-assessment, weaning-rash
-```
+### File
+`app/(tabs)/jaundice-threshold.tsx`
 
-### Output Structure
-```
-assets/screenshots/
-  app-store/
-    allergens.png
-    appstore-checklist.png
-    ... (all 61)
-  play-store/
-    allergens.png
-    appstore-checklist.png
-    ... (all 61)
-```
-
-### Technical Requirements
-- If using react-native-view-shot: `import { captureScreen } from 'react-native-view-shot'`
-- Script should be runnable with: `npx ts-node scripts/generate-screenshots.ts` or `npx tsx scripts/generate-screenshots.ts`
-- TSC 0 errors for any new code
-- Do NOT commit screenshots to git (add to .gitignore pattern: `assets/screenshots/**`)
-- Do NOT modify existing tab code
-
-## Keywords
-app_store_screenshot, play_store_screenshot, automated_screenshot, view_shot, expo_screenshots, app_store_listing, play_store_listing, placeholder_screenshot, screenshot_generation, store_assets
+### Keywords
+jaundice_threshold, bilirubin, Bhutani_nomogram, neonatal_jaundice, risk_zones, phototherapy_threshold, SVG_chart, zone_visualization, TSB_tracking, neonatal_hyperbilirubinemia
 ULW

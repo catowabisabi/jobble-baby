@@ -1,13 +1,13 @@
-# Current Dispatch — Cycle 268
+# Current Dispatch — Cycle 274
 
 ## Status
-- Cycle 268 running
-- TSC 0 errors, 61 tabs
-- Todo #111 (Jaundice Threshold Chart) NOT completed — jaundice-threshold.tsx not created → marked pending
-- 3 new todos added from ideas 67,68,69: Stranger Danger, Asymmetric Growth, Jaundice
-- Idea #70 (Cup Feeding Transition Navigator) sparked from brainstorm → todo #112 created
-- Brainstorm: 57 keywords added (pool now 1000)
-- Stranger Danger Navigator (#109) dispatched to Sisyphus (cycle 268)
+- Cycle 274 running
+- TSC 0 errors, 66 tabs
+- Home Safety Audit (#113) → completed ✅ (554d816)
+- Primitive Reflex Integration (#114) → completed ✅ (already existed bd4f12f)
+- Solid Food Progression Navigator (#114 new) → dispatched to Sisyphus (cycle 274)
+- Brainstorm: 48 keywords added (pool now 1048)
+- Ideas 72 → new todo created
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -16,13 +16,8 @@
 - Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
 
 ## Pending Todos
-- #109: Stranger Danger Navigator (in_progress - dispatched)
-- #110: Asymmetric Growth Dashboard (pending)
-- #111: Jaundice Threshold Chart (pending - file not created)
-- #112: Cup Feeding Transition Navigator (pending - new)
+- #108: Deploy privacy policy HTML to live URL (P1, user action required)
+- #114: Solid Food Progression Navigator (in_progress - dispatched to Sisyphus)
 
 ## Ideas
-- #67: Stranger Danger Navigator (new)
-- #68: Asymmetric Growth Dashboard (new)
-- #69: Jaundice Threshold Chart (new)
-- #70: Cup Feeding Transition Navigator (new, brainstormed)
+- #72: Solid Food Progression Navigator (new, dispatched to Sisyphus)

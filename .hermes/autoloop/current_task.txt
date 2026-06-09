@@ -1,12 +1,11 @@
-# Current Dispatch — Cycle 272
+# Current Dispatch — Cycle 273
 
 ## Status
-- Cycle 272 running
-- TSC 0 errors, 62 tabs
-- Cup Feeding (#112) → completed ✅ (f37be69)
-- Ideas 67, 68, 69, 70 → updated to implemented in DB
-- Home Safety Audit (#113) → dispatched to Sisyphus (cycle 272)
-- Brainstorm: 50 keywords added (pool now 1000)
+- Cycle 273 running
+- TSC 0 errors, 65 tabs
+- Home Safety Audit (#113) → completed ✅ (554d816)
+- Primitive Reflex Integration (#114) → dispatched to Sisyphus (cycle 273)
+- Ideas 71, 72 → new
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -16,9 +15,7 @@
 
 ## Pending Todos
 - #108: Deploy privacy policy HTML to live URL (P1, user action required)
-- #113: Home Safety Audit Tab (in_progress - dispatched to Sisyphus)
-
+- #114: Primitive Reflex Integration Dashboard (in_progress - dispatched to Sisyphus)
 ## Ideas
-- #71: Primitive Reflex Integration Dashboard (new)
+- #71: Primitive Reflex Integration Dashboard (new, dispatched to Sisyphus)
 - #72: Solid Food Progression Navigator (new)
-- #73: Home Safety Audit Tab (new, dispatched to Sisyphus)

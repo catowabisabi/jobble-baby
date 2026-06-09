@@ -1,60 +1,70 @@
-# Sisyphus Task — Cycle 271
+# Sisyphus Task — Cycle 274
 
 ## Context
-Jobble Baby: TSC 0 errors, 62 tabs. Todo #112 — Cup Feeding Transition Navigator (idea #70)
+Jobble Baby: TSC 0 errors, 66 tabs. Todo #114 — Solid Food Progression Navigator (idea #72)
 
-## Task: Implement Cup Feeding Transition Navigator Tab
+## Task: Implement Solid Food Progression Navigator Tab
 
-Create a new tab for guiding babies from bottle to cup — stage by stage.
+Create a tab for tracking a baby's solid food journey from first tastes (6mo) to family meals (12mo+).
 
 ## Requirements
 
 ### Tab Name
-`cup-feeding` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
+`solid-food` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
 
 ### Features
-1. **3-Stage Transition Model**
-   - Stage 1 (4-6mo): Sippy cup introduction — handles, soft spout
-   - Stage 2 (7-9mo): Straw cup mastery — straw drinking skill
-   - Stage 3 (9-12mo): Open cup proficiency — no lid
+1. **Stage Tracker**
+   - Stage 1 (6-7mo): Single ingredient purees, 4-6 days per food
+   - Stage 2 (7-9mo): Combined flavors, thicker textures
+   - Stage 3 (9-12mo): Finger foods, self-feeding practice
+   - Stage 4 (12mo+): Family food adaptation
+   - Visual stage indicator with months range
 
-2. **Readiness Checker**
-   - Age-appropriate indicators (4+ months adjusted)
-   - Head/neck control, sitting support, hand-mouth coordination
-   - Tongue thrust subsiding, interest in drinking from others' cups
+2. **Food Introduction Journal**
+   - Log each food: name, date introduced, amount, reaction (none/mild/moderate/severe)
+   - Timeline view of all introductions sorted by date
+   - Filter by allergen/non-allergen
 
-3. **Stage Tracker UI**
-   - Visual progress through 3 stages
-   - Days in each stage, transition criteria checklist
-   - "Stage complete" celebration moment
+3. **Allergen Introduction Tracker**
+   - Track 8 priority allergens: peanut, egg, milk, soy, wheat, tree nuts, fish, shellfish
+   - Status per allergen: not_yet/introduced/reacted
+   - Reaction log with date, food, severity
 
-4. **Cup Type Recommendations**
-   - Stage-specific cup suggestions (poachable, trainer, straw, open)
-   - Transition timeline based on baby's oral motor development
-   - Avoid prolonged bottle/sippy cup to prevent dental caries
+4. **Texture Progression Guide**
+   - Level 1: Smooth puree (6mo)
+   - Level 2: Mashed/ground (7mo)
+   - Level 3: Chopped soft (9mo)
+   - Level 4: Family texture (12mo)
+   - Red flag alerts if texture is behind schedule
 
-5. **Correlation Features**
-   - Gastrocolic reflex correlation (timing with bowel movements)
-   - Link to oral-motor tab for underlying skill assessment
-   - Dental tip: avoid prolonged bottle/sippy cup use
+5. **Iron & Nutrient Tracking**
+   - Track iron-rich foods (fortified cereal, meat, beans, leafy greens)
+   - Daily nutrient summary
+   - Gap alerts for key nutrients
 
-6. **i18n**
-   - Use existing keys from en.json/zh.json: cupFeedingTransition, cupFeeding.* (already added)
-   - Add any missing keys for this tab
+6. **Correlation Links**
+   - Link to allergens tab (shared allergen log)
+   - Link to growth tab (weight impact of solids)
+   - Link to gut-brain-axis tab (digestive reactions)
+   - Link to teething tab (teething → food refusal)
+
+7. **i18n**
+   - Add keys under `solidFood.*` in en.json + zh.json
+   - All user-facing strings must use i18n
 
 ### Technical
 - TSC 0 errors
 - Follow existing tab pattern (Expo Router file-based routing)
-- i18n keys already exist in en.json + zh.json (verify completeness)
+- AsyncStorage key: `@jobble/solid_food_journey`
 - Accessibility: proper labels, sufficient contrast
 - Use theme context for colors (COLORS from '../theme')
 - Use useTheme() from '../context/ThemeContext' and useLanguage() from '../context/LanguageContext'
 - No external dependencies beyond existing packages
 
 ### File
-`JobbleBaby/app/(tabs)/cup-feeding.tsx`
+`JobbleBaby/app/(tabs)/solid-food.tsx`
 
 ### Keywords
-cup_feeding,bottle_to_cup,transition_navigator,sippy_cup,straw_cup,open_cup,oral_motor_development,infant_feeding,weaning,dental_caries_prevention,cup_readiness,gastrocolic_reflex,feeding_transition,stage_tracker,cup_mastery,baby_drinking_skill,oral_development,trainer_cup,infant_nutrition,cup_introduction
+solid_foods,weaning,first_foods,baby_food,puree,introduction,allergen_introduction,texture_progression,finger_foods,self_feeding,iron_rich_foods,food_journal,food_stages,baby_led_weaning,blw,food_reaction,nutrient_tracking,food_timeline,pediatric_nutrition,infant_nutrition, complementary_feeding,food_safety,baby_cereal,meat_first,single_ingredient,food_allergy_tracker,dairy_introduction,peanut_introduction,egg_introduction,texture_stages
 
 ULW — execute without asking

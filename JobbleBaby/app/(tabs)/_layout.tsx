@@ -405,13 +405,6 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="vestibular-assessment"
-        options={{
-          title: t('tabs.vestibularAssessment'),
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="sensory-integration"
         options={{
           title: t('tabs.sensoryIntegration'),

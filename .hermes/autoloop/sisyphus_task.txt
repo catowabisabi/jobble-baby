@@ -1,72 +1,67 @@
-# Sisyphus Task — Cycle 270
+# Sisyphus Task — Cycle 271
 
 ## Context
-Jobble Baby: TSC 0 errors, 64 tabs. Todo #111 — Jaundice Threshold Chart (idea #69). _layout.tsx and i18n keys already registered/added. Just create the component file.
+Jobble Baby: TSC 0 errors, 64 tabs. Todo #112 — Cup Feeding Transition Navigator (idea #70). _layout.tsx and i18n keys already registered/added. Just create the component file.
 
-## Task: Implement Jaundice Threshold Chart tab — Bilirubin Level Tracking with Risk Zones
+## Task: Implement Cup Feeding Transition Navigator tab — Bottle-to-Cup Transition Guide
 
-Create `app/(tabs)/jaundice-threshold.tsx` — a new tab for tracking bilirubin levels with Bhutani nomogram risk zone visualization.
+Create `JobbleBaby/app/(tabs)/cup-feeding.tsx` — a new tab for guiding babies from bottle to cup drinking through 3 stages.
 
 ## Prerequisites (already done — do NOT modify)
-- `app/(tabs)/_layout.tsx` — jaundice-threshold Tabs.Screen already registered
-- `app/i18n/en.json` — tabs.jaundiceThreshold and jaundiceThreshold.* keys already added
+- `app/(tabs)/_layout.tsx` — cupFeedingTransition Tabs.Screen already registered
+- `app/i18n/en.json` — tabs.cupFeedingTransition and cupFeeding.* keys already added
 - `app/i18n/zh.json` — same keys in Chinese already added
 
 ## Requirements
 
 ### File
-`JobbleBaby/app/(tabs)/jaundice-threshold.tsx`
+`JobbleBaby/app/(tabs)/cup-feeding.tsx`
 
 ### Features
 
-1. **Bilirubin Level Input**
-   - Input field for total serum bilirubin (TSB) in mg/dL or μmol/L
-   - Unit toggle: mg/dL ↔ μmol/L (1 mg/dL = 17.1 μmol/L)
-   - Date/time stamp for each entry
-   - Age in hours input (calculate from baby birthdate if available from `@jobble_baby_profile`)
+1. **Stage Selector**
+   - 3 stages displayed as cards:
+     - Stage 1: Soft Spout (6-7 months)
+     - Stage 2: Straw Cup (7-9 months)
+     - Stage 3: Open Cup (9-12 months)
+   - Visual progress indicator showing current stage
+   - Tap to select and view stage details
 
-2. **Risk Zone Chart**
-   - Simple SVG line chart showing bilirubin vs age-in-hours
-   - X-axis: baby's age in hours (0–336h / 14 days)
-   - Y-axis: bilirubin level in mg/dL
-   - 3–4 zone bands: Low Risk (green), Monitor (yellow), High Risk (orange), Exchange (red)
-   - Use `react-native-svg` for the chart (already available)
-   - Plot the current reading on the chart if age is provided
+2. **Practice Session Logger**
+   - Log each practice: date, duration (minutes), cup type, sip success rate (1-5), spill level (1-5), notes
+   - Save to AsyncStorage key: `@jobble/cup_feeding_entries`
+   - Show practice history list
 
-3. **Risk Zone Reference**
-   - Display Bhutani nomogram-based thresholds for:
-     - Low risk: <8 mg/dL (breastfed) / <10 mg/dL (formula)
-     - Monitor: 8–12 / 10–15 mg/dL
-     - High risk: 12–15 / 15–18 mg/dL
-     - Exchange transfusion: >15 / >18 mg/dL
-   - Disclaimer: "Consult your pediatrician for medical decisions"
+3. **Hydration Score Tracker**
+   - Track fluid intake by source: Bottle, Breast, Cup
+   - Simple bar/section showing daily intake by source
+   - Total daily fluid goal indicator
 
-4. **History Log**
-   - List of past readings with timestamp, level, zone, and trend arrow
-   - Trend: compare to previous reading (↑ rising, ↓ falling, → stable within 1 mg/dL)
+4. **Milestones Tracker**
+   - "First open cup success" milestone
+   - "Straw cup mastered (14 consecutive days)" milestone
+   - Visual badge display for achieved milestones
 
-5. **Alert System**
-   - If bilirubin enters High Risk or Exchange zone, show Alert.alert
-   - Link to existing jaundice tab for phototherapy guidance
+5. **Parent Tips Section**
+   - "Avoid prolonged bottle/sippy cup use to prevent tooth decay"
+   - "Correlate cup timing with bowel movement patterns" (gastrocolic reflex tip)
+   - Display tips with an info icon
 
 ### Technical Rules
 - TSC 0 errors
 - Use existing theme context: `useTheme()` from `../context/ThemeContext`, `useLanguage()` from `../context/LanguageContext`
 - Use `COLORS` from `../theme`
 - Follow existing tab patterns: SafeAreaView, ScrollView, StyleSheet.create with color parameter
-- Use `@react-native-async-storage/async-storage` for persistence (key: `@jobble/jaundice_threshold_entries`)
+- Use `@react-native-async-storage/async-storage` for persistence
 - Accessibility: all interactive elements need accessibilityLabel
 - No external dependencies beyond existing packages
-- Import `Svg`, `Path`, `Rect`, `Line`, `Text` from `react-native-svg`
 
 ### i18n
-- All user-facing strings must use `t('jaundiceThreshold.key')` — keys already in en.json + zh.json
+- All user-facing strings must use `t('cupFeeding.key')` — keys already in en.json + zh.json
 
 ### After Implementation
 1. Run `cd JobbleBaby && npx tsc --noEmit` — must pass 0 errors
 2. Do NOT commit (Hermes will commit)
 
 ### Keywords
-jaundice_threshold_chart,bilirubin,Bhutani_nomogram,neonatal_jaundice,risk_zones,phototherapy_threshold,SVG_chart,zone_visualization,TSB_tracking,neonatal_hyperbilirubinemia,bilirubin_level,transcutaneous_bilirubin,exchange_transfusion,infant_jaundice
-
-ULW — execute without asking
+cup_feeding_transition,bottle_to_cup,baby_feeding,soft_spout,straw_cup,open_cup,transition_navigator,feeding_milestones,hydration_tracking,infant_feeding,cup_practice,sippy_cup_alternative,weaning,dental_hygiene,oral_motor_development,fluid_intake,gastrocolic_reflex,feeding_stage,baby_drinking

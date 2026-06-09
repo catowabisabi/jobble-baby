@@ -1,12 +1,11 @@
-# Current Dispatch — Cycle 266
+# Current Dispatch — Cycle 267
 
 ## Status
-- Cycle 266 started
+- Cycle 267 started
 - TSC 0 errors, 61 tabs
-- Todo #103 (Sensory Integration) completed by Hermes direct implementation
-- Commit: 888903f → pushed
-- Todo #104 (Post-Procedure Recovery) dispatched to Sisyphus
-- Sisyphus is working on procedure-recovery.tsx
+- Todo #104 (Post-Procedure Recovery) completed — committed as 533fdbf
+- Todo #107 (Screenshot Automation) dispatched to Sisyphus
+- Sisyphus is now working on screenshot generation script
 
 ## Pending (user action required)
 - EAS credentials configuration

@@ -439,6 +439,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="shield-home" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="solid-food"
+        options={{
+          title: t('tabs.solidFood') || 'Solid Food',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-apple" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

@@ -60,7 +60,8 @@
     "strangerDanger": "Stranger Danger",
     "asymmetricGrowth": "Asymmetric Growth",
     "jaundiceThreshold": "Jaundice Threshold",
-    "cupFeedingTransition": "Cup Feeding"
+    "cupFeedingTransition": "Cup Feeding",
+    "solidFood": "Solid Food"
   },
   "hydration": {
     "title": "Fontanelle and Hydration",
@@ -2535,6 +2536,64 @@
     "gastrocolicTip": "Correlate cup timing with bowel movement patterns",
     "successRate": "Success Rate",
     "spillFreq": "Spill Frequency"
+  },
+  "solidFood": {
+    "title": "Solid Food",
+    "subtitle": "Track baby's food journey",
+    "stages": {
+      "stage1": "Purees (6-7mo)",
+      "stage2": "Combos (7-9mo)",
+      "stage3": "Finger Foods (9-12mo)",
+      "stage4": "Family Meals (12mo+)"
+    },
+    "journal": {
+      "title": "Food Journal",
+      "addFood": "Log Food",
+      "foodName": "Food name",
+      "amount": "Amount",
+      "reaction": "Reaction",
+      "texture": "Texture Level",
+      "notes": "Notes",
+      "none": "No reaction",
+      "mild": "Mild",
+      "moderate": "Moderate",
+      "severe": "Severe",
+      "noEntries": "No food entries yet"
+    },
+    "allergens": {
+      "title": "Allergen Tracker",
+      "peanut": "Peanut",
+      "egg": "Egg",
+      "milk": "Milk/Formula",
+      "soy": "Soy",
+      "wheat": "Wheat",
+      "treeNuts": "Tree Nuts",
+      "fish": "Fish",
+      "shellfish": "Shellfish",
+      "introduced": "Introduced",
+      "notIntroduced": "Not Yet",
+      "reaction": "Reaction",
+      "tolerated": "Tolerated",
+      "viewShared": "View shared allergen log →"
+    },
+    "texture": {
+      "title": "Texture Progression",
+      "level1": "Smooth Puree",
+      "level2": "Mashed/Ground",
+      "level3": "Chopped Soft",
+      "level4": "Family Texture",
+      "behindSchedule": "Baby may be 2+ months behind schedule"
+    },
+    "nutrients": {
+      "title": "Nutrient Tracking",
+      "ironTitle": "Iron Sources",
+      "ironDesc": "Track iron-rich foods daily",
+      "noIronAlert": "No iron-rich food in 2+ days"
+    },
+    "tips": {
+      "ironTip": "Offer iron-rich foods daily: fortified cereal, meat, beans, leafy greens",
+      "allergenTip": "Introduce allergens one at a time, wait 4-5 days between each"
+    }
   },
   "homeSafety": {
     "title": "Home Safety Audit",

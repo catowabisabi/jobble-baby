@@ -60,7 +60,8 @@
     "strangerDanger": "Stranger Danger",
     "asymmetricGrowth": "不對稱生長",
     "jaundiceThreshold": "黃疸閾值",
-    "cupFeedingTransition": "杯餵过渡"
+    "cupFeedingTransition": "杯餵过渡",
+    "solidFood": "固體食物"
   },
   "hydration": {
     "title": "顱縫與水合監測",
@@ -2617,6 +2618,64 @@
       "audit": "檢查",
       "alerts": "警示",
       "tips": "提示"
+    }
+  },
+  "solidFood": {
+    "title": "固體食物",
+    "subtitle": "追蹤寶寶的食物旅程",
+    "stages": {
+      "stage1": "糊狀 (6-7個月)",
+      "stage2": "混合 (7-9個月)",
+      "stage3": "手指食物 (9-12個月)",
+      "stage4": "家庭餐 (12個月+)"
+    },
+    "journal": {
+      "title": "食物日誌",
+      "addFood": "記錄食物",
+      "foodName": "食物名稱",
+      "amount": "份量",
+      "reaction": "反應",
+      "texture": "質感級別",
+      "notes": "備註",
+      "none": "無反應",
+      "mild": "輕微",
+      "moderate": "中等",
+      "severe": "嚴重",
+      "noEntries": "尚無食物記錄"
+    },
+    "allergens": {
+      "title": "過敏原追蹤",
+      "peanut": "花生",
+      "egg": "蛋",
+      "milk": "奶/配方奶",
+      "soy": "大豆",
+      "wheat": "小麥",
+      "treeNuts": "樹堅果",
+      "fish": "魚",
+      "shellfish": "貝類",
+      "introduced": "已引入",
+      "notIntroduced": "尚未",
+      "reaction": "有反應",
+      "tolerated": "已耐受",
+      "viewShared": "查看共享過敏原日誌 →"
+    },
+    "texture": {
+      "title": "質感進度",
+      "level1": "滑滑糊狀",
+      "level2": "泥狀/碎狀",
+      "level3": "軟塊狀",
+      "level4": "家庭質感",
+      "behindSchedule": "寶寶可能落後 schedule 2個月以上"
+    },
+    "nutrients": {
+      "title": "營養追蹤",
+      "ironTitle": "鐵質來源",
+      "ironDesc": "每日追蹤含鐵食物",
+      "noIronAlert": "2天以上沒有含鐵食物"
+    },
+    "tips": {
+      "ironTip": "每天提供含鐵食物：加鐵米粉、肉類、豆類、綠葉蔬菜",
+      "allergenTip": "每次引入一種過敏原，間隔4-5天"
     }
   }
 }

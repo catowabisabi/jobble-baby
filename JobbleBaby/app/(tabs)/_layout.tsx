@@ -432,6 +432,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="cup-water" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="home-safety"
+        options={{
+          title: t('tabs.homeSafety') || 'Home Safety',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="shield-home" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

@@ -1,14 +1,12 @@
-# Current Dispatch — Cycle 271
+# Current Dispatch — Cycle 272
 
 ## Status
-- Cycle 271 running
+- Cycle 272 running
 - TSC 0 errors, 62 tabs
-- Stranger Danger (#109) → completed ✅ (e240662)
-- Asymmetric Growth (#110) → completed ✅ (e833d14)
-- Jaundice Threshold (#111) → completed ✅ (8f29d9d)
-- Cup Feeding (#112) → dispatched to Sisyphus (cycle 271)
-- Ideas 67, 68, 69 → updated to implemented in DB
-- Fixed duplicate vestibular-assessment entry in _layout.tsx → committed a0a0ea9
+- Cup Feeding (#112) → completed ✅ (f37be69)
+- Ideas 67, 68, 69, 70 → updated to implemented in DB
+- Home Safety Audit (#113) → dispatched to Sisyphus (cycle 272)
+- Brainstorm: 50 keywords added (pool now 1000)
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -17,15 +15,10 @@
 - Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
 
 ## Pending Todos
-- #112: Cup Feeding Transition Navigator (in_progress - dispatched to Sisyphus)
 - #108: Deploy privacy policy HTML to live URL (P1, user action required)
+- #113: Home Safety Audit Tab (in_progress - dispatched to Sisyphus)
 
-## New Ideas (from recent brainstorm)
-- #73: Home Safety Audit Tab (new)
-- #72: Solid Food Progression Navigator (new)
+## Ideas
 - #71: Primitive Reflex Integration Dashboard (new)
-
-## Ideas Implemented
-- #69: Jaundice Threshold Chart (implemented)
-- #68: Asymmetric Growth Dashboard (implemented)
-- #67: Stranger Danger Navigator (implemented)
+- #72: Solid Food Progression Navigator (new)
+- #73: Home Safety Audit Tab (new, dispatched to Sisyphus)

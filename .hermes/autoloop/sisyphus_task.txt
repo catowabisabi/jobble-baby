@@ -1,60 +1,66 @@
-# Sisyphus Task — Cycle 271
+# Sisyphus Task — Cycle 272
 
 ## Context
-Jobble Baby: TSC 0 errors, 62 tabs. Todo #112 — Cup Feeding Transition Navigator (idea #70)
+Jobble Baby: TSC 0 errors, 62 tabs. Todo #113 — Home Safety Audit Tab (idea #73)
 
-## Task: Implement Cup Feeding Transition Navigator Tab
+## Task: Implement Home Safety Audit Tab
 
-Create a new tab for guiding babies from bottle to cup — stage by stage.
+Create a tab for parents to systematically audit their home for baby hazards — room by room.
 
 ## Requirements
 
 ### Tab Name
-`cup-feeding` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
+`home-safety` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
 
 ### Features
-1. **3-Stage Transition Model**
-   - Stage 1 (4-6mo): Sippy cup introduction — handles, soft spout
-   - Stage 2 (7-9mo): Straw cup mastery — straw drinking skill
-   - Stage 3 (9-12mo): Open cup proficiency — no lid
+1. **Room-by-Room Audit Checklist**
+   - Rooms: Kitchen, Bathroom, Nursery, Living Room, Stairs, Outdoors
+   - Categories per room: Fall hazards, Burn hazards, Choking hazards, Poison hazards, Drowning hazards, Strangulation hazards
+   - Toggle: Safe / Unsafe / Not Applicable per item
+   - Count of unsafe items per room
 
-2. **Readiness Checker**
-   - Age-appropriate indicators (4+ months adjusted)
-   - Head/neck control, sitting support, hand-mouth coordination
-   - Tongue thrust subsiding, interest in drinking from others' cups
+2. **Safety Score**
+   - Overall home safety score (0-100%) based on completed items
+   - Score per room breakdown
+   - Color-coded: red <50%, amber 50-80%, green >80%
 
-3. **Stage Tracker UI**
-   - Visual progress through 3 stages
-   - Days in each stage, transition criteria checklist
-   - "Stage complete" celebration moment
+3. **Priority Alerts**
+   - List of unsafe items sorted by severity (high/medium/low)
+   - High-priority items highlighted
+   - "Action required" count badge
 
-4. **Cup Type Recommendations**
-   - Stage-specific cup suggestions (poachable, trainer, straw, open)
-   - Transition timeline based on baby's oral motor development
-   - Avoid prolonged bottle/sippy cup to prevent dental caries
+4. **Babyproofing Checklist with Action Tips**
+   - Specific actionable tips for each unsafe item
+   - e.g., "Outlet covers not installed" → "Insert tamper-resistant outlet covers on all accessible outlets"
+   - e.g., "Cabinet locks missing" → "Install child-resistant cabinet locks on lower cabinets"
 
-5. **Correlation Features**
-   - Gastrocolic reflex correlation (timing with bowel movements)
-   - Link to oral-motor tab for underlying skill assessment
-   - Dental tip: avoid prolonged bottle/sippy cup use
+5. **Audit Progress Tracker**
+   - Rooms completed vs total
+   - Last audit date
+   - Re-audit reminder (30/60/90 day options)
 
-6. **i18n**
-   - Use existing keys from en.json/zh.json: cupFeedingTransition, cupFeeding.* (already added)
-   - Add any missing keys for this tab
+6. **Correlation Features**
+   - Link to teething tab (baby exploring with mouth → choking hazard awareness)
+   - Link to sleep-training tab (crib safety)
+   - Link to growth tab (developmental stage affects hazard severity)
+
+7. **i18n**
+   - Add keys under `homeSafety.*` in en.json + zh.json
+   - All user-facing strings must use i18n
 
 ### Technical
 - TSC 0 errors
 - Follow existing tab pattern (Expo Router file-based routing)
-- i18n keys already exist in en.json + zh.json (verify completeness)
+- AsyncStorage key: `@jobble/home_safety_audit` for audit data
 - Accessibility: proper labels, sufficient contrast
 - Use theme context for colors (COLORS from '../theme')
 - Use useTheme() from '../context/ThemeContext' and useLanguage() from '../context/LanguageContext'
 - No external dependencies beyond existing packages
 
 ### File
-`JobbleBaby/app/(tabs)/cup-feeding.tsx`
+`JobbleBaby/app/(tabs)/home-safety.tsx`
 
 ### Keywords
-cup_feeding,bottle_to_cup,transition_navigator,sippy_cup,straw_cup,open_cup,oral_motor_development,infant_feeding,weaning,dental_caries_prevention,cup_readiness,gastrocolic_reflex,feeding_transition,stage_tracker,cup_mastery,baby_drinking_skill,oral_development,trainer_cup,infant_nutrition,cup_introduction
+childproofing,baby_gate,cabinet_lock,outlet_cover,furniture_anchoring,crib_safety,bath_safety,poison_prevention,babyproofing_checklist,home_safety,fall_hazard,burn_hazard,choking_hazard,drowning_hazard,strangulation_hazard,safety_audit,room_by_room,infant_safety,childproofing_tips,babyproofing,home_hazard,corner_protector,cabinet_latch,toilet_lock,stair_gate,window_lock,electrical_safety,bathtub_safety,kitchen_safety,nursery_safety
 
 ULW — execute without asking

@@ -1,13 +1,12 @@
-# Current Dispatch — Cycle 261
+# Current Dispatch — Cycle 266
 
 ## Status
-- Todo #102 (Critical Period Development Dashboard) re-dispatched to Sisyphus after backtick syntax issue
-- Task sent via tmux set-buffer + paste-buffer
-- 46 keywords added from brainstorm (brainstorm_cycle_261)
-- Keyword pool: 1088
-
-## Next dispatch
-Sisyphus is implementing critical-periods.tsx (concept #40, idea #65, todo #102)
+- Cycle 266 started
+- TSC 0 errors, 61 tabs
+- Todo #103 (Sensory Integration) completed by Hermes (direct implementation)
+- Commit: 888903f → pushed
+- Todo #104 (Post-Procedure Recovery) dispatched to Sisyphus
+- Sisyphus is now working on procedure-recovery.tsx
 
 ## Pending (user action required)
 - EAS credentials configuration

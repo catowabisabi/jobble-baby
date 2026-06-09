@@ -1586,11 +1586,17 @@
     },
     "alerts": {
       "noFeedingTitle": "餵奶提醒",
-      "noFeedingMsg": "已超過12小時未記錄餵奶。建議嘗試餵奶。"
+      "noFeedingMsg": "已超過12小時未記錄餵奶。建議嘗試餵奶。",
+      "noFeeding24hTitle": "餵奶提醒 - 超過24小時",
+      "noFeeding24hMsg": "已超過24小時未記錄餵奶。請立即聯絡兒科醫生。",
+      "feverTitle": "發燒提醒",
+      "feverMsg": "檢測到超過38°C發燒。請立即聯絡兒科醫生。"
     },
     "pediatrician": {
       "title": "聯絡兒科醫生",
-      "msg": "疼痛指數連續3天達4分以上。請聯絡兒科醫生。"
+      "msg": "疼痛指數連續3天達4分以上。請聯絡兒科醫生。",
+      "feverTitle": "發燒 - 聯絡兒科醫生",
+      "feverMsg": "檢測到超過38°C發燒。請立即聯絡兒科醫生。"
     },
     "errors": {
       "required": "請填寫必填欄位",

@@ -1586,11 +1586,17 @@
     },
     "alerts": {
       "noFeedingTitle": "Feeding Alert",
-      "noFeedingMsg": "No feeding logged in 12+ hours. Consider offering milk."
+      "noFeedingMsg": "No feeding logged in 12+ hours. Consider offering milk.",
+      "noFeeding24hTitle": "Feeding Alert - 24h+",
+      "noFeeding24hMsg": "No feeding logged in 24+ hours. Contact pediatrician immediately.",
+      "feverTitle": "Fever Alert",
+      "feverMsg": "Fever above 38°C detected. Contact pediatrician immediately."
     },
     "pediatrician": {
       "title": "Call Pediatrician",
-      "msg": "Pain score 4+ for 3+ days. Contact your pediatrician."
+      "msg": "Pain score 4+ for 3+ days. Contact your pediatrician.",
+      "feverTitle": "Fever - Call Pediatrician",
+      "feverMsg": "Fever above 38°C detected. Contact pediatrician immediately."
     },
     "errors": {
       "required": "Please fill in required fields",

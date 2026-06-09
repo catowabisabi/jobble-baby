@@ -1,14 +1,12 @@
-# Current Dispatch — Cycle 264
+# Current Dispatch — Cycle 266
 
 ## Status
-- Cycle 264 started
-- TSC 0 errors, 59 tabs
-- Brainstorm 50 keywords added (pool: 1000)
-- Task queued: Vestibular Development Assessment tab (vestibular-assessment.tsx)
-- Sisyphus dispatch mechanism being debugged (opencode serve running but agent not picking up tmux tasks)
-
-## Current dispatch
-Sisyphus task for vestibular-assessment.tsx written to sisyphus_task.txt — awaiting agent pickup
+- Cycle 266 started
+- TSC 0 errors, 61 tabs
+- Todo #103 (Sensory Integration) completed by Hermes direct implementation
+- Commit: 888903f → pushed
+- Todo #104 (Post-Procedure Recovery) dispatched to Sisyphus
+- Sisyphus is working on procedure-recovery.tsx
 
 ## Pending (user action required)
 - EAS credentials configuration

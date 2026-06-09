@@ -1,53 +1,75 @@
-# Sisyphus Task — Cycle 266 (RESTARTED SESSION)
+# Sisyphus Task — Cycle 267
 
 ## Context
-Jobble Baby: 60 tabs, TSC 0 errors. Cycle 266 — Sensory Integration Development Tracker (todo#103 RESTARTED due to session path error)
+Jobble Baby: 61 tabs, TSC 0 errors. Cycle 267 — App Store + Play Store Screenshot Automation (idea #66, todo #107)
 
-## Task: Implement Sensory Integration Development Tracker tab
+## Task: Generate App Store + Play Store Screenshots for All 61 Tabs
 
-Create a new tab file: app/(tabs)/sensory-integration.tsx
+Create an automated screenshot generation system for all 61 tabs at correct store dimensions.
 
 ## Requirements
 
-### Core Features
-Track 7 sensory domains with age-based milestones, cross-modal correlation, sensory diet suggestions, and red flag alerts:
-1. **Tactile** (touch processing) — milestone bands 0-2m, 2-4m, 4-6m, 6-12m
-2. **Vestibular** (balance/movement) — milestone bands 0-3m, 3-6m, 6-12m
-3. **Proprioceptive** (body awareness) — milestone bands 0-3m, 3-6m, 6-12m
-4. **Visual** (sight) — milestone bands 0-2m, 2-4m, 4-8m, 8-12m
-5. **Auditory** (sound) — milestone bands 0-3m, 3-6m, 6-12m
-6. **Oral-Motor** (mouth sensation) — milestone bands 0-3m, 3-6m, 6-12m
-7. **Interoceptive** (internal body awareness) — milestone bands 0-6m, 6-12m
+### Dimensions
+- **App Store (iPhone 6.7")**: 1290×2796 px, PNG
+- **Play Store (phone)**: 1080×2340 px (or 1024×500 feature graphic), PNG
 
-### UX Components
-- **Domain Cards**: 7 cards, each showing domain name, icon, current milestone status (ACTIVE/IMMINENT/PASSED/NOT_STARTED), age-based milestone checklist
-- **Baby Profile**: Get birth date from AsyncStorage @jobble/baby_birthdate
-- **Cross-Modal Correlation View**: Show how domains influence each other (e.g., vestibular + proprioceptive = coordination)
-- **Sensory Diet Suggestions**: Context-aware activity suggestions per active domain
-- **Red Flag Alerts**: Alert if milestones delayed >2 months past expected window. Show amber warning for 1-2 month delay, red alert for >2 months
-- **Progress Dashboard**: Coverage grid showing which milestone windows have been addressed
+### Process
+1. **Install dependencies**:
+   ```bash
+   cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+   npm install --legacy-peer-deps react-native-view-shot
+   ```
+   OR use `npx expo-screenshots` if available.
 
-### Data Model
-- @jobble/baby_birthdate: ISO date string
-- @jobble/sensory_entries: JSON { [domain_id]: [{ date, milestone_id, observed, notes }] }
-- @jobble/sensory_domain_scores: JSON { [domain_id]: current_score }
+2. **Create screenshot generation script**: `scripts/generate-screenshots.ts`
+   - Use `react-native-view-shot` to capture each tab screen
+   - Loop through all 61 tab files in `app/(tabs)/`
+   - Output App Store screenshots to `assets/screenshots/app-store/`
+   - Output Play Store screenshots to `assets/screenshots/play-store/`
+   - Use consistent framing: show the tab header/title and main content area
+
+3. **Run the script** to generate all screenshots
+
+4. **Fallback**: If automated capture is not feasible, create a **placeholder screenshot template** for each tab at correct dimensions using a simple colored rectangle with tab name text overlay. Save to the output directories.
+
+5. **Verify** all 61 tabs have screenshots in both directories
+
+### Tab List (61 tabs)
+```
+allergens, appstore-checklist, bilateral-coordination, bonding-journal, bottle-refusal,
+caregiver-fatigue, circadian, clinician-portal, colic-relief, constellation,
+critical-periods, cry-analyzer, doctor-visit, eight-month-storm, feeding-readiness,
+fontanelle-hydration, fontanelle, gear-check, growth-montage, growth,
+gut-brain-axis, habit-reset, hip-click, index, iot-security,
+jaundice, jet-lag, launch-checklist, medicine-dose, milestones,
+milk-prep, milk-transfer, monitor-correlation, moro-reflex, oral-motor,
+pediatric-report, phototherapy-comfort, procedure-recovery, products, profile,
+projection, reflex-integration, reflex-tracker, regression-navigator, safety-audit,
+schedule, sensory-integration, shift-handoff, sleep-architecture, sleep-association,
+sleep-debt, sleep-training, stress-cascade, teething, thermal-regulation,
+tongue-tie, tracking, tummy-time, vestibular-assessment, weaning-rash
+```
+
+### Output Structure
+```
+assets/screenshots/
+  app-store/
+    allergens.png
+    appstore-checklist.png
+    ... (all 61)
+  play-store/
+    allergens.png
+    appstore-checklist.png
+    ... (all 61)
+```
 
 ### Technical Requirements
-- Use existing theme: COLORS from ../theme, useTheme hook, useLanguage hook
-- Follow existing tab patterns (like critical-periods.tsx, vestibular-assessment.tsx)
-- i18n: add keys to en.json and zh.json under sensoryIntegration
-- TSC 0 errors required
-- Register in app/(tabs)/_layout.tsx
-- Links to: vestibular-assessment.tsx, reflex-tracker.tsx, feeding-readiness.tsx
-
-## Process
-1. Create app/(tabs)/sensory-integration.tsx
-2. Run npx tsc --noEmit after creation — 0 errors required
-3. Add i18n keys to en.json + zh.json under sensoryIntegration namespace
-4. Register in _layout.tsx
-5. Do NOT commit
+- If using react-native-view-shot: `import { captureScreen } from 'react-native-view-shot'`
+- Script should be runnable with: `npx ts-node scripts/generate-screenshots.ts` or `npx tsx scripts/generate-screenshots.ts`
+- TSC 0 errors for any new code
+- Do NOT commit screenshots to git (add to .gitignore pattern: `assets/screenshots/**`)
+- Do NOT modify existing tab code
 
 ## Keywords
-sensory_integration, proprioceptive_development, cross_modal_perception, deep_pressure_therapy, joint_attention, tactile_processing, auditory_discrimination, interoceptive_awareness
-
+app_store_screenshot, play_store_screenshot, automated_screenshot, view_shot, expo_screenshots, app_store_listing, play_store_listing, placeholder_screenshot, screenshot_generation, store_assets
 ULW

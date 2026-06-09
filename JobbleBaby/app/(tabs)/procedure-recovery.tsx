@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, TextInput, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
+import { Link } from 'expo-router';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -17,6 +18,8 @@ const WOUND_PHOTO_KEY = '@jobble/wound_photo';
 const RECOVERY_TIMELINE_KEY = '@jobble/recovery_timeline';
 const FOLLOW_UP_KEY = '@jobble/follow_up_alert';
 const PEDIATRICIAN_ALERT_KEY = '@jobble/pediatrician_alert';
+const BIRTHDATE_KEY = '@jobble/baby_birthdate';
+const GROWTH_KEY = '@jobble/growth_entries';
 
 // Types
 interface ProcedureEntry {
@@ -52,6 +55,7 @@ interface PainComfortEntry {
   timestamp: string;
   score: number;
   note?: string;
+  feverCelsius?: number;
 }
 
 interface WoundPhotoEntry {
@@ -70,9 +74,34 @@ interface RecoveryDayEntry {
   notes?: string;
 }
 
+interface GrowthEntry {
+  id: string;
+  date: string;
+  height: number;
+  weight: number;
+}
+
 // Helper
 const getTimestamp = () => new Date().toISOString();
 const getDateStr = () => new Date().toISOString().split('T')[0];
+
+// Calculate age in months from birthdate
+const calculateAgeInMonths = (birthDate: string): number => {
+  try {
+    const birth = new Date(birthDate);
+    const now = new Date();
+    const days = Math.floor((now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+    return Math.round(days / 30.44 * 10) / 10;
+  } catch {
+    return 0;
+  }
+};
+
+// Get latest weight from growth entries
+const getLatestWeight = (entries: GrowthEntry[]): number | null => {
+  if (entries.length === 0) return null;
+  return entries[0].weight;
+};
 
 // Procedure types
 const PROCEDURE_TYPES = [
@@ -97,6 +126,11 @@ const FRENOTOMY_TIMELINE = [
   { day: 8, label: 'Week 2', status: 'baseline', description: 'Typically back to baseline feeding' },
 ];
 
+// Alert colors
+const ALERT_GREEN = '#22C55E';
+const ALERT_AMBER = '#F59E0B';
+const ALERT_RED = '#EF4444';
+
 export default function ProcedureRecovery() {
   const { effectiveTheme } = useTheme();
   const { t, effectiveLanguage } = useLanguage();
@@ -112,6 +146,11 @@ export default function ProcedureRecovery() {
   const [woundPhotos, setWoundPhotos] = useState<WoundPhotoEntry[]>([]);
   const [recoveryTimeline, setRecoveryTimeline] = useState<RecoveryDayEntry[]>([]);
 
+  // Baby profile state
+  const [babyBirthdate, setBabyBirthdate] = useState<string | null>(null);
+  const [babyAgeMonths, setBabyAgeMonths] = useState<number>(0);
+  const [growthEntries, setGrowthEntries] = useState<GrowthEntry[]>([]);
+
   // Form state
   const [procedureType, setProcedureType] = useState<string>('frenotomy');
   const [procedureDate, setProcedureDate] = useState<string>(getDateStr());
@@ -120,9 +159,12 @@ export default function ProcedureRecovery() {
   const [bottleAcceptance, setBottleAcceptance] = useState<'yes' | 'partial' | 'no'>('yes');
   const [feedingDuration, setFeedingDuration] = useState<string>('');
   const [painScore, setPainScore] = useState<number>(3);
+  const [feverCelsius, setFeverCelsius] = useState<string>('');
   const [drugName, setDrugName] = useState<string>('Acetaminophen');
   const [doseMg, setDoseMg] = useState<string>('');
+  const [weightInput, setWeightInput] = useState<string>('');
   const [medResponse, setMedResponse] = useState<'helped' | 'not_helped'>('helped');
+  const [postOpInstructionsUri, setPostOpInstructionsUri] = useState<string>('');
 
   // Load data
   useEffect(() => {
@@ -132,8 +174,32 @@ export default function ProcedureRecovery() {
     loadData(PAIN_COMFORT_KEY, setPainLog);
     loadData(WOUND_PHOTO_KEY, setWoundPhotos);
     loadData(RECOVERY_TIMELINE_KEY, setRecoveryTimeline);
+    loadBabyProfile();
+    loadGrowthEntries();
     checkAlerts();
   }, []);
+
+  const loadBabyProfile = async () => {
+    try {
+      const bd = await AsyncStorage.getItem(BIRTHDATE_KEY);
+      if (bd) {
+        setBabyBirthdate(bd);
+        setBabyAgeMonths(calculateAgeInMonths(bd));
+      }
+    } catch { /* ignore */ }
+  };
+
+  const loadGrowthEntries = async () => {
+    try {
+      const raw = await AsyncStorage.getItem(GROWTH_KEY);
+      if (raw) {
+        const entries: GrowthEntry[] = JSON.parse(raw);
+        setGrowthEntries(entries);
+        const latestWeight = getLatestWeight(entries);
+        if (latestWeight) setWeightInput(latestWeight.toFixed(1));
+      }
+    } catch { /* ignore */ }
+  };
 
   const loadData = async (key: string, setter: (data: any[]) => void) => {
     try {
@@ -155,7 +221,13 @@ export default function ProcedureRecovery() {
       if (entries.length > 0) {
         const last = entries[entries.length - 1];
         const hoursSince = (Date.now() - new Date(last.timestamp).getTime()) / (1000 * 60 * 60);
-        if (hoursSince > 12) {
+        if (hoursSince > 24) {
+          Alert.alert(
+            t('procedureRecovery.alerts.noFeeding24hTitle') || 'Feeding Alert - 24h+',
+            t('procedureRecovery.alerts.noFeeding24hMsg') || 'No feeding logged in 24+ hours. Contact pediatrician immediately.',
+            [{ text: 'OK', style: 'destructive' }]
+          );
+        } else if (hoursSince > 12) {
           Alert.alert(
             t('procedureRecovery.alerts.noFeedingTitle') || 'Feeding Alert',
             t('procedureRecovery.alerts.noFeedingMsg') || 'No feeding logged in 12+ hours. Consider offering milk.',
@@ -164,6 +236,16 @@ export default function ProcedureRecovery() {
         }
       }
     }
+  };
+
+  // Calculate medication dose based on weight
+  const calculateDose = (drug: string, weightKg: number): number => {
+    if (drug === 'Acetaminophen') {
+      return Math.round(weightKg * 15 * 10) / 10; // 15mg/kg
+    } else if (drug === 'Ibuprofen') {
+      return Math.round(weightKg * 10 * 10) / 10; // 10mg/kg
+    }
+    return 0;
   };
 
   // Actions
@@ -224,17 +306,29 @@ export default function ProcedureRecovery() {
     setDoseMg('');
   };
 
-  const addPainScore = async (score: number) => {
+  const addPainScore = async (score: number, fever?: number) => {
     if (procedureLog.length === 0) return;
+
+    // Check fever alert
+    if (fever && fever > 38) {
+      Alert.alert(
+        t('procedureRecovery.alerts.feverTitle') || 'Fever Alert',
+        t('procedureRecovery.alerts.feverMsg') || `Fever ${fever}°C detected. Contact pediatrician immediately.`,
+        [{ text: 'Call Pediatrician', style: 'destructive' }, { text: 'OK' }]
+      );
+    }
+
     const entry: PainComfortEntry = {
       id: Date.now().toString(),
       procedureId: procedureLog[procedureLog.length - 1].id,
       timestamp: getTimestamp(),
       score,
+      feverCelsius: fever,
     };
     const updated = [...painLog, entry];
     setPainLog(updated);
     await saveData(PAIN_COMFORT_KEY, updated);
+    setFeverCelsius('');
     checkPediatricianAlert(updated);
   };
 
@@ -270,12 +364,31 @@ export default function ProcedureRecovery() {
     }
   };
 
+  const pickPostOpInstructionsPhoto = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (!permission.granted) return;
+    const result = await ImagePicker.launchCameraAsync({ allowsEditing: true, quality: 0.8 });
+    if (!result.canceled && result.assets[0]) {
+      setPostOpInstructionsUri(result.assets[0].uri);
+      // Save to procedure entry if one exists
+      if (procedureLog.length > 0) {
+        const latest = procedureLog[procedureLog.length - 1];
+        const updated: ProcedureEntry = { ...latest, photoUri: result.assets[0].uri };
+        const updatedLog = procedureLog.map(p => p.id === latest.id ? updated : p);
+        setProcedureLog(updatedLog);
+        await saveData(PROCEDURE_LOG_KEY, updatedLog);
+      }
+    }
+  };
+
   const getProcedureLabel = (type: string) => {
     const found = PROCEDURE_TYPES.find(p => p.value === type);
     return found ? (lang === 'zh' ? found.labelZh : found.label) : type;
   };
 
   const latestProcedure = procedureLog.length > 0 ? procedureLog[procedureLog.length - 1] : null;
+  const latestWeight = getLatestWeight(growthEntries);
+  const displayWeight = weightInput ? parseFloat(weightInput) : latestWeight;
 
   const renderTabButton = (tab: string, label: string) => (
     <TouchableOpacity
@@ -309,6 +422,15 @@ export default function ProcedureRecovery() {
     </View>
   );
 
+  // Get alert color based on status
+  const getAlertColor = (status: 'normal' | 'warning' | 'critical'): string => {
+    switch (status) {
+      case 'critical': return ALERT_RED;
+      case 'warning': return ALERT_AMBER;
+      default: return ALERT_GREEN;
+    }
+  };
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: C.background }]} edges={['top']}>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -319,6 +441,20 @@ export default function ProcedureRecovery() {
             {t('tabs.procedureRecovery') || 'Post-Procedure'}
           </Text>
         </View>
+
+        {/* Baby Age Banner */}
+        {babyAgeMonths > 0 && (
+          <View style={[styles.babyAgeBanner, { backgroundColor: C.card, borderColor: C.border }]}>
+            <Text style={[styles.babyAgeText, { color: C.text }]}>
+              👶 {lang === 'zh' ? `寶寶 ${babyAgeMonths} 個月大` : `Baby is ${babyAgeMonths} months old`}
+            </Text>
+            {displayWeight && (
+              <Text style={[styles.babyWeightText, { color: C.muted }]}>
+                {lang === 'zh' ? `體重 ${displayWeight} kg` : `Weight: ${displayWeight} kg`}
+              </Text>
+            )}
+          </View>
+        )}
 
         {/* Tab Navigation */}
         <View style={styles.tabNav}>
@@ -360,16 +496,13 @@ export default function ProcedureRecovery() {
             <Text style={[styles.label, { color: C.muted }]}>
               {t('procedureRecovery.procedure.clinic') || 'Surgeon / Clinic Name'}
             </Text>
-            <View style={[styles.input, { backgroundColor: C.card, borderColor: C.border }]}>
-              <Text
-                style={{ color: surgeonClinic ? C.text : C.muted }}
-                onPress={() => {
-                  // Simple prompt - in production would use TextInput modal
-                }}
-              >
-                {surgeonClinic || (lang === 'zh' ? '點擊輸入診所名稱' : 'Tap to enter clinic name')}
-              </Text>
-            </View>
+            <TextInput
+              style={[styles.input, { backgroundColor: C.card, borderColor: C.border, color: C.text }]}
+              value={surgeonClinic}
+              onChangeText={setSurgeonClinic}
+              placeholder={lang === 'zh' ? '點擊輸入診所名稱' : 'Tap to enter clinic name'}
+              placeholderTextColor={C.muted}
+            />
 
             <TouchableOpacity
               style={[styles.btn, { backgroundColor: C.accent }]}
@@ -380,6 +513,27 @@ export default function ProcedureRecovery() {
               <Text style={styles.btnText}>{t('procedureRecovery.procedure.save') || 'Save Procedure'}</Text>
             </TouchableOpacity>
 
+            {/* Post-Op Instructions Photo */}
+            <Text style={[styles.label, { color: C.muted, marginTop: 16 }]}>
+              {t('procedureRecovery.procedure.postOpPhoto') || 'Post-Op Instructions Photo'}
+            </Text>
+            <TouchableOpacity
+              style={[styles.btn, { backgroundColor: C.card, borderWidth: 1, borderColor: C.border }]}
+              onPress={pickPostOpInstructionsPhoto}
+              accessibilityLabel={t('procedureRecovery.procedure.capturePostOp') || 'Capture Post-Op Instructions'}
+              accessibilityRole="button"
+            >
+              <MaterialCommunityIcons name="camera" size={20} color={C.text} />
+              <Text style={[styles.btnText, { color: C.text }]}>
+                {postOpInstructionsUri
+                  ? (lang === 'zh' ? '已拍攝' : 'Captured')
+                  : (lang === 'zh' ? '拍攝術後說明照片' : 'Capture Post-Op Instructions')}
+              </Text>
+            </TouchableOpacity>
+            {postOpInstructionsUri && (
+              <Image source={{ uri: postOpInstructionsUri }} style={styles.postOpPreview} />
+            )}
+
             {/* Pain Score */}
             <Text style={[styles.sectionTitle, { color: C.text, marginTop: 24 }]}>
               {t('procedureRecovery.pain.title') || 'Pain & Comfort Score'}
@@ -388,9 +542,36 @@ export default function ProcedureRecovery() {
               {t('procedureRecovery.pain.hint') || 'Tap to record how baby seems to feel'}
             </Text>
             {renderScoreButtons(painScore, setPainScore)}
+
+            {/* Fever Input */}
+            <Text style={[styles.label, { color: C.muted, marginTop: 12 }]}>
+              {t('procedureRecovery.pain.fever') || 'Fever Temperature (°C)'}
+            </Text>
+            <TextInput
+              style={[styles.input, { backgroundColor: C.card, borderColor: C.border, color: C.text }]}
+              value={feverCelsius}
+              onChangeText={setFeverCelsius}
+              placeholder={lang === 'zh' ? '例如：37.5' : 'e.g. 37.5'}
+              placeholderTextColor={C.muted}
+              keyboardType="decimal-pad"
+            />
+            {feverCelsius ? (
+              <Text style={{
+                color: parseFloat(feverCelsius) > 38 ? ALERT_RED : parseFloat(feverCelsius) > 37.5 ? ALERT_AMBER : ALERT_GREEN,
+                fontSize: 12,
+                marginTop: 4
+              }}>
+                {parseFloat(feverCelsius) > 38
+                  ? (lang === 'zh' ? '⚠️ 高燒！立即就醫' : '⚠️ High fever! Seek medical attention')
+                  : parseFloat(feverCelsius) > 37.5
+                  ? (lang === 'zh' ? '⚡ 輕微發燒' : '⚡ Mild fever')
+                  : (lang === 'zh' ? '✓ 體溫正常' : '✓ Normal temperature')}
+              </Text>
+            ) : null}
+
             <TouchableOpacity
               style={[styles.btn, { backgroundColor: C.accent, marginTop: 8 }]}
-              onPress={() => addPainScore(painScore)}
+              onPress={() => addPainScore(painScore, feverCelsius ? parseFloat(feverCelsius) : undefined)}
               accessibilityLabel={t('procedureRecovery.pain.save') || 'Log Pain Score'}
               accessibilityRole="button"
             >
@@ -406,6 +587,15 @@ export default function ProcedureRecovery() {
                 {painLog.slice(-5).reverse().map(entry => (
                   <View key={entry.id} style={styles.logRow}>
                     <Text style={{ fontSize: 18 }}>{PAIN_EMOJIS[entry.score - 1]}</Text>
+                    {entry.feverCelsius && (
+                      <Text style={{
+                        color: entry.feverCelsius > 38 ? ALERT_RED : entry.feverCelsius > 37.5 ? ALERT_AMBER : C.muted,
+                        fontSize: 12,
+                        marginLeft: 8
+                      }}>
+                        🌡️{entry.feverCelsius}°C
+                      </Text>
+                    )}
                     <Text style={{ color: C.muted, marginLeft: 8 }}>
                       {new Date(entry.timestamp).toLocaleString()}
                     </Text>
@@ -413,6 +603,16 @@ export default function ProcedureRecovery() {
                 ))}
               </View>
             )}
+
+            {/* Navigation Links */}
+            <View style={styles.linkRow}>
+              <Link href="/tongue-tie" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>📋 {lang === 'zh' ? '舌繫帶資訊' : 'Tongue-tie Info'}</Text>
+              </Link>
+              <Link href="/growth" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>📈 {lang === 'zh' ? '成長記錄' : 'Growth'}</Text>
+              </Link>
+            </View>
           </View>
         )}
 
@@ -458,11 +658,14 @@ export default function ProcedureRecovery() {
             <Text style={[styles.label, { color: C.muted }]}>
               {t('procedureRecovery.feeding.duration') || 'Feeding Duration (minutes)'}
             </Text>
-            <View style={[styles.input, { backgroundColor: C.card, borderColor: C.border }]}>
-              <Text style={{ color: feedingDuration ? C.text : C.muted }}>
-                {feedingDuration || (lang === 'zh' ? '點擊輸入時長' : 'Tap to enter minutes')}
-              </Text>
-            </View>
+            <TextInput
+              style={[styles.input, { backgroundColor: C.card, borderColor: C.border, color: C.text }]}
+              value={feedingDuration}
+              onChangeText={setFeedingDuration}
+              placeholder={lang === 'zh' ? '例如：15' : 'e.g. 15'}
+              placeholderTextColor={C.muted}
+              keyboardType="number-pad"
+            />
 
             <TouchableOpacity
               style={[styles.btn, { backgroundColor: C.accent }]}
@@ -490,6 +693,36 @@ export default function ProcedureRecovery() {
                 ))}
               </View>
             )}
+
+            {/* Alert for no feeding */}
+            {feedingLog.length > 0 && (() => {
+              const last = feedingLog[feedingLog.length - 1];
+              const hoursSince = (Date.now() - new Date(last.timestamp).getTime()) / (1000 * 60 * 60);
+              const alertStatus = hoursSince > 24 ? 'critical' : hoursSince > 12 ? 'warning' : 'normal';
+              return (
+                <View style={[styles.alertCard, {
+                  backgroundColor: C.card,
+                  borderColor: getAlertColor(alertStatus),
+                  borderWidth: 2
+                }]}>
+                  <Text style={{ color: getAlertColor(alertStatus), fontWeight: 'bold' }}>
+                    {alertStatus === 'critical' ? '🚨 ' + (lang === 'zh' ? '緊急：24小時無餵食' : 'URGENT: 24h+ no feeding')
+                      : alertStatus === 'warning' ? '⚠️ ' + (lang === 'zh' ? '注意：12小時無餵食' : 'WARNING: 12h+ no feeding')
+                      : '✓ ' + (lang === 'zh' ? '餵食正常' : 'Feeding normal')}
+                  </Text>
+                </View>
+              );
+            })()}
+
+            {/* Navigation Links */}
+            <View style={styles.linkRow}>
+              <Link href="/cry-analyzer" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>🔊 {lang === 'zh' ? '哭聲分析' : 'Cry Analyzer'}</Text>
+              </Link>
+              <Link href="/medicine-dose" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>💊 {lang === 'zh' ? '劑量計算' : 'Dose Calc'}</Text>
+              </Link>
+            </View>
           </View>
         )}
 
@@ -500,6 +733,46 @@ export default function ProcedureRecovery() {
               {t('procedureRecovery.medication.title') || 'Medication Log'}
             </Text>
 
+            {/* Weight Input */}
+            <Text style={[styles.label, { color: C.muted }]}>
+              {t('procedureRecovery.medication.weight') || 'Baby Weight (kg)'}
+            </Text>
+            <TextInput
+              style={[styles.input, { backgroundColor: C.card, borderColor: C.border, color: C.text }]}
+              value={weightInput}
+              onChangeText={setWeightInput}
+              placeholder={lang === 'zh' ? '例如：5.5' : 'e.g. 5.5'}
+              placeholderTextColor={C.muted}
+              keyboardType="decimal-pad"
+            />
+            {latestWeight && !weightInput && (
+              <Text style={{ color: C.muted, fontSize: 12, marginBottom: 8 }}>
+                {lang === 'zh' ? `從成長記錄載入：${latestWeight} kg` : `Loaded from growth: ${latestWeight} kg`}
+              </Text>
+            )}
+
+            {/* Dose Calculator Info */}
+            {displayWeight && (
+              <View style={[styles.doseCalculatorCard, { backgroundColor: C.card, borderColor: C.accent }]}>
+                <Text style={{ color: C.text, fontWeight: 'bold', marginBottom: 8 }}>
+                  {lang === 'zh' ? '劑量計算參考' : 'Dose Calculator Reference'}
+                </Text>
+                <Text style={{ color: C.muted, fontSize: 12 }}>
+                  {lang === 'zh' ? 'Acetaminophen (退燒止痛)：15mg/kg' : 'Acetaminophen: 15mg/kg'}
+                </Text>
+                <Text style={{ color: C.muted, fontSize: 12 }}>
+                  {lang === 'zh' ? 'Ibuprofen (消炎止痛)：10mg/kg' : 'Ibuprofen: 10mg/kg'}
+                </Text>
+                {displayWeight && (
+                  <Text style={{ color: C.accent, fontSize: 13, marginTop: 8 }}>
+                    {lang === 'zh'
+                      ? `體重 ${displayWeight}kg：Acetaminophen ${calculateDose('Acetaminophen', displayWeight)}mg，Ibuprofen ${calculateDose('Ibuprofen', displayWeight)}mg`
+                      : `At ${displayWeight}kg: Acetaminophen ${calculateDose('Acetaminophen', displayWeight)}mg, Ibuprofen ${calculateDose('Ibuprofen', displayWeight)}mg`}
+                  </Text>
+                )}
+              </View>
+            )}
+
             <Text style={[styles.label, { color: C.muted }]}>
               {t('procedureRecovery.medication.drug') || 'Medication'}
             </Text>
@@ -507,7 +780,13 @@ export default function ProcedureRecovery() {
               {['Acetaminophen', 'Ibuprofen'].map(drug => (
                 <TouchableOpacity
                   key={drug}
-                  onPress={() => setDrugName(drug)}
+                  onPress={() => {
+                    setDrugName(drug);
+                    // Auto-suggest dose if weight is available
+                    if (displayWeight) {
+                      setDoseMg(calculateDose(drug, displayWeight).toString());
+                    }
+                  }}
                   style={[styles.optionChip, {
                     backgroundColor: drugName === drug ? C.accent : C.card
                   }]}
@@ -522,11 +801,14 @@ export default function ProcedureRecovery() {
             <Text style={[styles.label, { color: C.muted }]}>
               {t('procedureRecovery.medication.dose') || 'Dose (mg)'}
             </Text>
-            <View style={[styles.input, { backgroundColor: C.card, borderColor: C.border }]}>
-              <Text style={{ color: doseMg ? C.text : C.muted }}>
-                {doseMg || (lang === 'zh' ? '點擊輸入劑量' : 'Tap to enter dose')}
-              </Text>
-            </View>
+            <TextInput
+              style={[styles.input, { backgroundColor: C.card, borderColor: C.border, color: C.text }]}
+              value={doseMg}
+              onChangeText={setDoseMg}
+              placeholder={lang === 'zh' ? '例如：75' : 'e.g. 75'}
+              placeholderTextColor={C.muted}
+              keyboardType="number-pad"
+            />
 
             <Text style={[styles.label, { color: C.muted }]}>
               {t('procedureRecovery.medication.response') || 'Response'}
@@ -569,7 +851,7 @@ export default function ProcedureRecovery() {
                 {medicationLog.slice(-10).reverse().map(entry => (
                   <View key={entry.id} style={styles.logRow}>
                     <Text style={{ color: C.text }}>{entry.drugName} · {entry.doseMg}mg</Text>
-                    <Text style={{ color: entry.response === 'helped' ? '#2ecc71' : '#e74c3c' }}>
+                    <Text style={{ color: entry.response === 'helped' ? ALERT_GREEN : ALERT_RED }}>
                       {entry.response === 'helped' ? '✓' : '✗'}
                     </Text>
                     <Text style={{ color: C.muted }}>{new Date(entry.timeGiven).toLocaleString()}</Text>
@@ -577,6 +859,16 @@ export default function ProcedureRecovery() {
                 ))}
               </View>
             )}
+
+            {/* Navigation Links */}
+            <View style={styles.linkRow}>
+              <Link href="/medicine-dose" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>💊 {lang === 'zh' ? '劑量計算機' : 'Dose Calculator'}</Text>
+              </Link>
+              <Link href="/clinician-portal" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>👨‍⚕️ {lang === 'zh' ? '醫生聯繫' : 'Doctor Contact'}</Text>
+              </Link>
+            </View>
           </View>
         )}
 
@@ -599,27 +891,31 @@ export default function ProcedureRecovery() {
               </Text>
             </TouchableOpacity>
 
-            {/* Alert thresholds */}
-            <View style={[styles.alertCard, { backgroundColor: C.card, borderColor: '#e74c3c' }]}>
-              <Text style={{ color: '#e74c3c', fontWeight: 'bold' }}>
-                {t('procedureRecovery.wound.alertTitle') || 'Escalation Triggers'}
+            {/* Alert thresholds with color coding */}
+            <View style={[styles.alertCard, { backgroundColor: C.card, borderColor: ALERT_RED, borderWidth: 2 }]}>
+              <Text style={{ color: ALERT_RED, fontWeight: 'bold' }}>
+                🚨 {t('procedureRecovery.wound.alertTitle') || 'Escalation Triggers'}
               </Text>
-              <Text style={{ color: C.muted, marginTop: 4 }}>
-                • {lang === 'zh' ? '發燒超過38°C' : 'Fever above 38°C'}
+              <Text style={{ color: ALERT_RED, marginTop: 4 }}>
+                • {lang === 'zh' ? '發燒超過38°C - 立即就醫' : 'Fever above 38°C - Seek care'}
               </Text>
-              <Text style={{ color: C.muted }}>
+              <Text style={{ color: ALERT_AMBER }}>
                 • {lang === 'zh' ? '紅腫加重' : 'Increasing redness/swelling'}
               </Text>
-              <Text style={{ color: C.muted }}>
+              <Text style={{ color: ALERT_AMBER }}>
                 • {lang === 'zh' ? '疼痛評分持續高分' : 'Pain score persistently high'}
               </Text>
             </View>
 
+            {/* Wound Photos with actual Image rendering */}
             {woundPhotos.length > 0 && (
               <View style={styles.photoGrid}>
                 {woundPhotos.slice(-6).reverse().map(photo => (
                   <View key={photo.id} style={[styles.photoThumb, { backgroundColor: C.card }]}>
-                    <Text style={{ color: C.text }}>📷</Text>
+                    <Image
+                      source={{ uri: photo.photoUri }}
+                      style={styles.woundImage}
+                    />
                     <Text style={{ color: C.muted, fontSize: 10 }}>
                       {new Date(photo.timestamp).toLocaleDateString()}
                     </Text>
@@ -627,6 +923,16 @@ export default function ProcedureRecovery() {
                 ))}
               </View>
             )}
+
+            {/* Navigation Links */}
+            <View style={styles.linkRow}>
+              <Link href="/tongue-tie" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>📋 {lang === 'zh' ? '舌繫帶資訊' : 'Tongue-tie Info'}</Text>
+              </Link>
+              <Link href="/clinician-portal" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>👨‍⚕️ {lang === 'zh' ? '醫生聯繫' : 'Doctor Contact'}</Text>
+              </Link>
+            </View>
           </View>
         )}
 
@@ -644,8 +950,8 @@ export default function ProcedureRecovery() {
                     e => e.day === phase.day && e.procedureId === latestProcedure.id
                   );
                   const statusColor = dayEntry
-                    ? dayEntry.status === 'swelling' ? '#e74c3c'
-                      : dayEntry.status === 'improving' ? '#f39c12' : '#2ecc71'
+                    ? dayEntry.status === 'swelling' ? ALERT_RED
+                      : dayEntry.status === 'improving' ? ALERT_AMBER : ALERT_GREEN
                     : C.border;
                   return (
                     <View key={idx} style={[styles.timelineCard, { backgroundColor: C.card, borderLeftColor: statusColor }]}>
@@ -688,6 +994,29 @@ export default function ProcedureRecovery() {
               </>
             )}
 
+            {/* Recovery Status Alert */}
+            {recoveryTimeline.length > 0 && (() => {
+              const latestEntry = recoveryTimeline.filter(
+                e => e.procedureId === latestProcedure?.id
+              ).sort((a, b) => b.day - a.day)[0];
+              if (!latestEntry) return null;
+              const alertStatus = latestEntry.status === 'swelling' ? 'warning'
+                : latestEntry.status === 'improving' ? 'normal' : 'normal';
+              return (
+                <View style={[styles.alertCard, {
+                  backgroundColor: C.card,
+                  borderColor: getAlertColor(alertStatus),
+                  borderWidth: 2
+                }]}>
+                  <Text style={{ color: getAlertColor(alertStatus), fontWeight: 'bold' }}>
+                    {latestEntry.status === 'swelling' ? '⚠️ ' + (lang === 'zh' ? '康復中：仍有腫脹' : 'Recovering: Swelling present')
+                      : latestEntry.status === 'improving' ? '📈 ' + (lang === 'zh' ? '康復中：好轉中' : 'Recovering: Improving')
+                      : '✓ ' + (lang === 'zh' ? '已恢復正常' : 'Back to baseline')}
+                  </Text>
+                </View>
+              );
+            })()}
+
             {/* Follow-up alert */}
             <TouchableOpacity
               style={[styles.btn, { backgroundColor: C.accent, marginTop: 16 }]}
@@ -702,6 +1031,16 @@ export default function ProcedureRecovery() {
                 {t('procedureRecovery.recovery.followup.btn') || 'Set Follow-up Reminder'}
               </Text>
             </TouchableOpacity>
+
+            {/* Navigation Links */}
+            <View style={styles.linkRow}>
+              <Link href="/growth" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>📈 {lang === 'zh' ? '成長記錄' : 'Growth Tracking'}</Text>
+              </Link>
+              <Link href="/medicine-dose" style={[styles.linkBtn, { backgroundColor: C.card }]}>
+                <Text style={[styles.linkText, { color: C.text }]}>💊 {lang === 'zh' ? '劑量計算' : 'Dose Calculator'}</Text>
+              </Link>
+            </View>
           </View>
         )}
       </ScrollView>
@@ -750,7 +1089,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 16,
   },
   photoThumb: {
-    width: 80, height: 80, borderRadius: 8, alignItems: 'center', justifyContent: 'center',
+    width: 80, height: 90, borderRadius: 8, alignItems: 'center', justifyContent: 'center',
+  },
+  woundImage: {
+    width: 70, height: 70, borderRadius: 6,
   },
   timelineCard: {
     padding: 12, borderRadius: 12, borderLeftWidth: 4, marginBottom: 12,
@@ -759,4 +1101,23 @@ const styles = StyleSheet.create({
   statusBtn: {
     paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12, borderWidth: 1,
   },
+  // New styles for enhanced features
+  babyAgeBanner: {
+    padding: 12, borderRadius: 12, borderWidth: 1, marginBottom: 12,
+  },
+  babyAgeText: { fontSize: 14, fontWeight: '600' },
+  babyWeightText: { fontSize: 12, marginTop: 4 },
+  postOpPreview: {
+    width: '100%', height: 200, borderRadius: 8, marginTop: 8,
+  },
+  doseCalculatorCard: {
+    padding: 12, borderRadius: 12, borderWidth: 1, marginBottom: 12,
+  },
+  linkRow: {
+    flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 20,
+  },
+  linkBtn: {
+    paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12,
+  },
+  linkText: { fontSize: 12 },
 });

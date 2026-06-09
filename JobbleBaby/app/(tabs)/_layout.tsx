@@ -418,11 +418,18 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account-alert" size={size} color={color} />,
         }}
       />
-      <Tabs.Screen
+<Tabs.Screen
         name="asymmetric-growth"
         options={{
           title: t('tabs.asymmetricGrowth'),
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="scale-balance" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="scale-balance" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="cup-feeding"
+        options={{
+          title: t('tabs.cupFeedingTransition') || 'Cup Feeding',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="cup-water" size={size} color={color} />
         }}
       />
     </Tabs>

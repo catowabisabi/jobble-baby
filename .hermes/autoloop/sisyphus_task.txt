@@ -1,67 +1,60 @@
 # Sisyphus Task — Cycle 271
 
 ## Context
-Jobble Baby: TSC 0 errors, 64 tabs. Todo #112 — Cup Feeding Transition Navigator (idea #70). _layout.tsx and i18n keys already registered/added. Just create the component file.
+Jobble Baby: TSC 0 errors, 62 tabs. Todo #112 — Cup Feeding Transition Navigator (idea #70)
 
-## Task: Implement Cup Feeding Transition Navigator tab — Bottle-to-Cup Transition Guide
+## Task: Implement Cup Feeding Transition Navigator Tab
 
-Create `JobbleBaby/app/(tabs)/cup-feeding.tsx` — a new tab for guiding babies from bottle to cup drinking through 3 stages.
-
-## Prerequisites (already done — do NOT modify)
-- `app/(tabs)/_layout.tsx` — cupFeedingTransition Tabs.Screen already registered
-- `app/i18n/en.json` — tabs.cupFeedingTransition and cupFeeding.* keys already added
-- `app/i18n/zh.json` — same keys in Chinese already added
+Create a new tab for guiding babies from bottle to cup — stage by stage.
 
 ## Requirements
+
+### Tab Name
+`cup-feeding` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
+
+### Features
+1. **3-Stage Transition Model**
+   - Stage 1 (4-6mo): Sippy cup introduction — handles, soft spout
+   - Stage 2 (7-9mo): Straw cup mastery — straw drinking skill
+   - Stage 3 (9-12mo): Open cup proficiency — no lid
+
+2. **Readiness Checker**
+   - Age-appropriate indicators (4+ months adjusted)
+   - Head/neck control, sitting support, hand-mouth coordination
+   - Tongue thrust subsiding, interest in drinking from others' cups
+
+3. **Stage Tracker UI**
+   - Visual progress through 3 stages
+   - Days in each stage, transition criteria checklist
+   - "Stage complete" celebration moment
+
+4. **Cup Type Recommendations**
+   - Stage-specific cup suggestions (poachable, trainer, straw, open)
+   - Transition timeline based on baby's oral motor development
+   - Avoid prolonged bottle/sippy cup to prevent dental caries
+
+5. **Correlation Features**
+   - Gastrocolic reflex correlation (timing with bowel movements)
+   - Link to oral-motor tab for underlying skill assessment
+   - Dental tip: avoid prolonged bottle/sippy cup use
+
+6. **i18n**
+   - Use existing keys from en.json/zh.json: cupFeedingTransition, cupFeeding.* (already added)
+   - Add any missing keys for this tab
+
+### Technical
+- TSC 0 errors
+- Follow existing tab pattern (Expo Router file-based routing)
+- i18n keys already exist in en.json + zh.json (verify completeness)
+- Accessibility: proper labels, sufficient contrast
+- Use theme context for colors (COLORS from '../theme')
+- Use useTheme() from '../context/ThemeContext' and useLanguage() from '../context/LanguageContext'
+- No external dependencies beyond existing packages
 
 ### File
 `JobbleBaby/app/(tabs)/cup-feeding.tsx`
 
-### Features
-
-1. **Stage Selector**
-   - 3 stages displayed as cards:
-     - Stage 1: Soft Spout (6-7 months)
-     - Stage 2: Straw Cup (7-9 months)
-     - Stage 3: Open Cup (9-12 months)
-   - Visual progress indicator showing current stage
-   - Tap to select and view stage details
-
-2. **Practice Session Logger**
-   - Log each practice: date, duration (minutes), cup type, sip success rate (1-5), spill level (1-5), notes
-   - Save to AsyncStorage key: `@jobble/cup_feeding_entries`
-   - Show practice history list
-
-3. **Hydration Score Tracker**
-   - Track fluid intake by source: Bottle, Breast, Cup
-   - Simple bar/section showing daily intake by source
-   - Total daily fluid goal indicator
-
-4. **Milestones Tracker**
-   - "First open cup success" milestone
-   - "Straw cup mastered (14 consecutive days)" milestone
-   - Visual badge display for achieved milestones
-
-5. **Parent Tips Section**
-   - "Avoid prolonged bottle/sippy cup use to prevent tooth decay"
-   - "Correlate cup timing with bowel movement patterns" (gastrocolic reflex tip)
-   - Display tips with an info icon
-
-### Technical Rules
-- TSC 0 errors
-- Use existing theme context: `useTheme()` from `../context/ThemeContext`, `useLanguage()` from `../context/LanguageContext`
-- Use `COLORS` from `../theme`
-- Follow existing tab patterns: SafeAreaView, ScrollView, StyleSheet.create with color parameter
-- Use `@react-native-async-storage/async-storage` for persistence
-- Accessibility: all interactive elements need accessibilityLabel
-- No external dependencies beyond existing packages
-
-### i18n
-- All user-facing strings must use `t('cupFeeding.key')` — keys already in en.json + zh.json
-
-### After Implementation
-1. Run `cd JobbleBaby && npx tsc --noEmit` — must pass 0 errors
-2. Do NOT commit (Hermes will commit)
-
 ### Keywords
-cup_feeding_transition,bottle_to_cup,baby_feeding,soft_spout,straw_cup,open_cup,transition_navigator,feeding_milestones,hydration_tracking,infant_feeding,cup_practice,sippy_cup_alternative,weaning,dental_hygiene,oral_motor_development,fluid_intake,gastrocolic_reflex,feeding_stage,baby_drinking
+cup_feeding,bottle_to_cup,transition_navigator,sippy_cup,straw_cup,open_cup,oral_motor_development,infant_feeding,weaning,dental_caries_prevention,cup_readiness,gastrocolic_reflex,feeding_transition,stage_tracker,cup_mastery,baby_drinking_skill,oral_development,trainer_cup,infant_nutrition,cup_introduction
+
+ULW — execute without asking

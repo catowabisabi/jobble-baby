@@ -1,13 +1,14 @@
-# Current Dispatch — Cycle 269
+# Current Dispatch — Cycle 271
 
 ## Status
-- Cycle 269 running
+- Cycle 271 running
 - TSC 0 errors, 62 tabs
-- Stranger Danger Navigator (#109) completed by Hermes — committed as e240662
-- Asymmetric Growth Dashboard (#110) dispatched to Sisyphus
-- Jaundice Threshold Chart (#111) pending
-- Cup Feeding Transition Navigator (#112) pending
-- Privacy policy deployment (#108) pending — user action required
+- Stranger Danger (#109) → completed ✅ (e240662)
+- Asymmetric Growth (#110) → completed ✅ (e833d14)
+- Jaundice Threshold (#111) → completed ✅ (8f29d9d)
+- Cup Feeding (#112) → dispatched to Sisyphus (cycle 271)
+- Ideas 67, 68, 69 → updated to implemented in DB
+- Fixed duplicate vestibular-assessment entry in _layout.tsx → committed a0a0ea9
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -16,13 +17,15 @@
 - Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
 
 ## Pending Todos
-- #110: Asymmetric Growth Dashboard (in_progress - dispatched to Sisyphus)
-- #111: Jaundice Threshold Chart (pending)
-- #112: Cup Feeding Transition Navigator (pending)
+- #112: Cup Feeding Transition Navigator (in_progress - dispatched to Sisyphus)
 - #108: Deploy privacy policy HTML to live URL (P1, user action required)
 
-## Ideas
-- #70: Cup Feeding Transition Navigator (new)
-- #69: Jaundice Threshold Chart — Bilirubin Level Tracking with Risk Zones (new)
-- #68: Asymmetric Growth Dashboard — Left/Right Body Part Comparison (new)
-- #67: Stranger Danger Navigator — 8-Month Separation Anxiety Tracker (implemented)
+## New Ideas (from recent brainstorm)
+- #73: Home Safety Audit Tab (new)
+- #72: Solid Food Progression Navigator (new)
+- #71: Primitive Reflex Integration Dashboard (new)
+
+## Ideas Implemented
+- #69: Jaundice Threshold Chart (implemented)
+- #68: Asymmetric Growth Dashboard (implemented)
+- #67: Stranger Danger Navigator (implemented)

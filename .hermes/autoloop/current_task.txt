@@ -1,11 +1,11 @@
-# Current Dispatch — Cycle 273
+# Current Dispatch — Cycle 277
 
 ## Status
-- Cycle 273 running
-- TSC 0 errors, 65 tabs
-- Home Safety Audit (#113) → completed ✅ (554d816)
-- Primitive Reflex Integration (#114) → dispatched to Sisyphus (cycle 273)
-- Ideas 71, 72 → new
+- Cycle 277 running
+- TSC 0 errors, 67 tabs
+- Accessibility fix (#115) → dispatched to Sisyphus (cycle 277 retry)
+- Keyword pool: 1000 (max)
+- Ready for App Store submission (pending user actions)
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -15,7 +15,11 @@
 
 ## Pending Todos
 - #108: Deploy privacy policy HTML to live URL (P1, user action required)
-- #114: Primitive Reflex Integration Dashboard (in_progress - dispatched to Sisyphus)
-## Ideas
-- #71: Primitive Reflex Integration Dashboard (new, dispatched to Sisyphus)
-- #72: Solid Food Progression Navigator (new)
+- #115: Fix accessibility on allergens.tsx, monitor-correlation.tsx, projection.tsx (dispatched to Sisyphus, cycle 277 retry)
+
+## App State
+- 67 tabs complete
+- TSC 0 errors
+- i18n complete (en.json + zh.json)
+- Keyword pool: 1000 keywords (max)
+- Ready for App Store submission (pending user actions)

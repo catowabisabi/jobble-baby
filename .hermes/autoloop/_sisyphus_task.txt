@@ -1,7 +1,7 @@
-# Sisyphus Task — Cycle 276
+# Sisyphus Task — Cycle 277
 
 ## Context
-Jobble Baby: TSC 0 errors, 67 tabs. Codebase mostly clean — no console.log, @jobble/ prefix consistent, theme imports consistent. 3 tabs identified with zero accessibilityLabel attributes.
+Jobble Baby: TSC 0 errors, 67 tabs. Three tabs have zero accessibilityLabel attributes on interactive elements.
 
 ## Task: Fix Accessibility on 3 Tabs
 
@@ -23,8 +23,8 @@ Add accessibilityLabel to all interactive elements in these 3 files:
 - `allergens.tab_title` → "Allergens"
 - `allergens.add_entry` → "Add allergen entry"
 - `allergens.allergen_card` → "Allergen: {name}"
-- `monitor-correlation.tab_title` → "Monitor Correlation"
-- `monitor-correlation.add_entry` → "Add correlation entry"
+- `monitorCorrelation.tab_title` → "Monitor Correlation"
+- `monitorCorrelation.add_entry` → "Add correlation entry"
 - `projection.tab_title` → "Projection"
 - `projection.add_entry` → "Add projection entry"
 

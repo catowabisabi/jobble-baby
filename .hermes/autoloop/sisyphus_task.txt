@@ -1,59 +1,62 @@
-# Sisyphus Task — Cycle 268
+# Sisyphus Task — Cycle 269
 
 ## Context
-Jobble Baby: 61 tabs, TSC 0 errors. Cycle 268 — Stranger Danger Navigator (idea #67, todo #109)
+Jobble Baby: TSC 0 errors, 62 tabs. Todo #110 — Asymmetric Growth Dashboard (idea #68)
 
-## Task: Implement Stranger Danger Navigator — 8-Month Separation Anxiety Tracker
+## Task: Implement Asymmetric Growth Dashboard — Left/Right Body Part Comparison
 
-Create a new tab for tracking and managing stranger wariness and separation anxiety at 8-10 months.
+Create a new tab for tracking and comparing left/right body part measurements to detect asymmetric growth patterns in infants.
 
 ## Requirements
 
 ### Tab Name
-`stranger-danger` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
+`asymmetric-growth` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
 
 ### Features
-1. **Stranger Wariness Dashboard**
-   - Display baby's current stranger wariness phase (none → emerging → peak → resolving)
-   - Age-based phase prediction using AAP developmental windows
-   - Educational explanation: "Stranger wariness is a cognitive milestone — baby recognizes familiar vs unfamiliar"
+1. **Body Part Selector**
+   - List of measurable body parts: head circumference, arm length, leg length, foot length, hand width
+   - Each part has left/right measurement fields
+   - Age-appropriate measurement guidance
 
-2. **Familiar Face Registry**
-   - Log people baby knows: parents, grandparents, siblings, caregivers, daycare staff
-   - Track exposure level: daily caregiver, weekly visitor, occasional acquaintance
-   - Photo reference for caregiver identification (optional)
-   - Show which people baby has met and reaction logged
+2. **Asymmetry Index Calculator**
+   - Calculate percentage difference between left and right
+   - Formula: |L - R| / ((L + R) / 2) * 100
+   - Display as: Normal (<5%), Mild (5-10%), Moderate (10-15%), Significant (>15%)
+   - Color coding: green/yellow/orange/red
 
-3. **Gradual Introduction Protocol**
-   - Step-by-step protocol: familiar face → familiar in new place → new face in familiar place → new face in new place
-   - Progress tracker per person being introduced
-   - Tips per stage: "Let baby observe from arms length", "Let baby reach out first", "Don't force interaction"
+3. **Growth Trend Chart**
+   - Line chart showing asymmetry percentage over time
+   - Highlight when asymmetry increases or decreases
+   - Correlation with developmental milestones
 
-4. **Separation Anxiety Toolkit**
-   - Departure ritual builder: 3-step consistent goodbye routine
-   - Separation practice game: peekaboo variants for building object permanence
-   - Signal object: familiar item baby can hold during separations
-   - Reunion celebration: special greeting when parent returns
+4. **Reference Ranges**
+   - AAP normal asymmetry ranges by age
+   - When to refer to specialist (pediatric orthopedist/neurologist)
+   - Normal variants vs concerning patterns
 
-5. **Departure Tracker**
-   - Log separations: duration, caregiver, baby's reaction (1-5 distress scale), parent's anxiety level
-   - Track trend: are separations getting easier over time?
-   - Correlation: separation difficulty vs developmental storm phase
+5. **Measurement Logger**
+   - Date, body part, left measurement, right measurement, notes
+   - Photo attachment for visual reference (optional)
+   - Reminder scheduling for regular checks
 
-6. **Storm Integration Card**
-   - If 8-month storm tab exists, show current storm severity score
-   - Link separation anxiety to other storm factors (motor, sleep, circadian)
+6. **Alert System**
+   - Notify when asymmetry exceeds threshold
+   - Recommend pediatrician referral if >10%
+   - Link to 8-month storm tab if developmental factors suspected
 
 ### Technical
 - TSC 0 errors
 - Follow existing tab pattern (Expo Router file-based routing)
 - i18n keys in en.json + zh.json (add new keys)
 - Accessibility: proper labels, sufficient contrast
+- Use theme context for colors (COLORS from '../theme')
+- Use useTheme() from '../context/ThemeContext' and useLanguage() from '../context/LanguageContext'
 - No external dependencies beyond existing packages
 
 ### File
-`JobbleBaby/app/(tabs)/stranger-danger.tsx`
+`JobbleBaby/app/(tabs)/asymmetric-growth.tsx`
 
 ### Keywords
-stranger_danger,separation_anxiety,object_permanence,stranger_wariness,departure_ritual,8_month_storm,familiar_face_registry,gradual_introduction,peekaboo_object_permanence,separation_practice,stranger_anxiety_phase,departure_tracker,reunion_celebration,signal_object,infant_cognitive_development,stranger_avoidance,attachment_behavior,misidentification_protocol
-ULW
+asymmetric_growth,body_symmetry,limb_length_comparison,left_right_differential,growth_monitoring,asymmetry_index,body_part_measurement,infant_development,symmetry_check,pediatric_referral,limb_length_discrepancy,developmental_monitoring,asymmetry_alert,growth_chart,body_proportion
+
+ULW — execute without asking

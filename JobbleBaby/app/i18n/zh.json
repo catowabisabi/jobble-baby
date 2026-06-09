@@ -56,7 +56,8 @@
     "criticalPeriods": "關鍵發育期",
     "vestibularAssessment": "前庭發育評估",
     "sensoryIntegration": "感統",
-    "strangerDanger": "Stranger Danger"
+    "strangerDanger": "Stranger Danger",
+    "asymmetricGrowth": "不對稱生長"
   },
   "hydration": {
     "title": "顱縫與水合監測",
@@ -2425,5 +2426,41 @@
     "noSeparations": "No separations logged yet. Track departures to see patterns.",
     "stormIntegration": "8-Month Storm Integration",
     "stormInfo": "Separation anxiety often peaks during the 8-month developmental storm when multiple skills are emerging simultaneously."
+  },
+  "asymmetric": {
+    "title": "不對稱生長",
+    "subtitle": "左右身體部位比較，偵測生長不對稱",
+    "currentStatus": "各部位現況",
+    "headCircumference": "頭圍",
+    "armLength": "手臂長度",
+    "legLength": "腿部長度",
+    "footLength": "腳掌長度",
+    "handWidth": "手掌寬度",
+    "noData": "暂无数据",
+    "referenceGuide": "參考指南",
+    "refNormal": "正常：差異<5% — 嬰兒常見",
+    "refMild": "輕度：差異5-10% — 密切監察",
+    "refModerate": "中度：差異10-15% — 建議諮詢兒科醫生",
+    "refSignificant": "顯著：差異>15% — 建議專科轉介",
+    "refFormula": "公式：|左-右| / 平均值 × 100",
+    "refAAP": "根據美國兒科學會發育評估指南",
+    "addEntry": "新增測量",
+    "newEntry": "新增測量",
+    "leftSide": "左側",
+    "rightSide": "右側",
+    "leftValue": "左側測量值（厘米）",
+    "rightValue": "右側測量值（厘米）",
+    "notesPlaceholder": "備註（可選）",
+    "notes": "測量備註",
+    "cancel": "取消",
+    "save": "儲存",
+    "history": "測量記錄",
+    "invalidValues": "數值無效",
+    "enterPositive": "請輸入兩側的正數值",
+    "alertTitle": "不對稱警告",
+    "alertBody": "偵測到{pct}% {part}不對稱。建議諮詢兒科醫生。",
+    "alertThreshold": "警報閾值",
+    "thresholdDesc": "當不對稱超過此水平時通知",
+    "referralNote": "美國兒科學會建議當不對稱超過10%時轉介骨科/神經科。"
   }
 }

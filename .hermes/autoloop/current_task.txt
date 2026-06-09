@@ -1,15 +1,28 @@
-# Current Dispatch — Cycle 266
+# Current Dispatch — Cycle 269
 
 ## Status
-- Cycle 266 started
-- TSC 0 errors, 61 tabs
-- Todo #103 (Sensory Integration) completed by Hermes (direct implementation)
-- Commit: 888903f → pushed
-- Todo #104 (Post-Procedure Recovery) dispatched to Sisyphus
-- Sisyphus is now working on procedure-recovery.tsx
+- Cycle 269 running
+- TSC 0 errors, 62 tabs
+- Stranger Danger Navigator (#109) completed by Hermes — committed as e240662
+- Asymmetric Growth Dashboard (#110) dispatched to Sisyphus
+- Jaundice Threshold Chart (#111) pending
+- Cup Feeding Transition Navigator (#112) pending
+- Privacy policy deployment (#108) pending — user action required
 
 ## Pending (user action required)
 - EAS credentials configuration
 - App Store Connect app creation
 - Play Console app creation
 - Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
+
+## Pending Todos
+- #110: Asymmetric Growth Dashboard (in_progress - dispatched to Sisyphus)
+- #111: Jaundice Threshold Chart (pending)
+- #112: Cup Feeding Transition Navigator (pending)
+- #108: Deploy privacy policy HTML to live URL (P1, user action required)
+
+## Ideas
+- #70: Cup Feeding Transition Navigator (new)
+- #69: Jaundice Threshold Chart — Bilirubin Level Tracking with Risk Zones (new)
+- #68: Asymmetric Growth Dashboard — Left/Right Body Part Comparison (new)
+- #67: Stranger Danger Navigator — 8-Month Separation Anxiety Tracker (implemented)

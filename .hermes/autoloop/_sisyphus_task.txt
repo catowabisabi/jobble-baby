@@ -1,1 +1,62 @@
-cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit 2>&1 | tail -3 && echo "TSC_CHECK_DONE"
+# Sisyphus Task — Cycle 269
+
+## Context
+Jobble Baby: TSC 0 errors, 62 tabs. Todo #110 — Asymmetric Growth Dashboard (idea #68)
+
+## Task: Implement Asymmetric Growth Dashboard — Left/Right Body Part Comparison
+
+Create a new tab for tracking and comparing left/right body part measurements to detect asymmetric growth patterns in infants.
+
+## Requirements
+
+### Tab Name
+`asymmetric-growth` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
+
+### Features
+1. **Body Part Selector**
+   - List of measurable body parts: head circumference, arm length, leg length, foot length, hand width
+   - Each part has left/right measurement fields
+   - Age-appropriate measurement guidance
+
+2. **Asymmetry Index Calculator**
+   - Calculate percentage difference between left and right
+   - Formula: |L - R| / ((L + R) / 2) * 100
+   - Display as: Normal (<5%), Mild (5-10%), Moderate (10-15%), Significant (>15%)
+   - Color coding: green/yellow/orange/red
+
+3. **Growth Trend Chart**
+   - Line chart showing asymmetry percentage over time
+   - Highlight when asymmetry increases or decreases
+   - Correlation with developmental milestones
+
+4. **Reference Ranges**
+   - AAP normal asymmetry ranges by age
+   - When to refer to specialist (pediatric orthopedist/neurologist)
+   - Normal variants vs concerning patterns
+
+5. **Measurement Logger**
+   - Date, body part, left measurement, right measurement, notes
+   - Photo attachment for visual reference (optional)
+   - Reminder scheduling for regular checks
+
+6. **Alert System**
+   - Notify when asymmetry exceeds threshold
+   - Recommend pediatrician referral if >10%
+   - Link to 8-month storm tab if developmental factors suspected
+
+### Technical
+- TSC 0 errors
+- Follow existing tab pattern (Expo Router file-based routing)
+- i18n keys in en.json + zh.json (add new keys)
+- Accessibility: proper labels, sufficient contrast
+- Use theme context for colors (COLORS from '../theme')
+- Use useTheme() from '../context/ThemeContext' and useLanguage() from '../context/LanguageContext'
+- No external dependencies beyond existing packages
+
+### File
+`JobbleBaby/app/(tabs)/asymmetric-growth.tsx`
+
+### Keywords
+asymmetric_growth,body_symmetry,limb_length_comparison,left_right_differential,growth_monitoring,asymmetry_index,body_part_measurement,infant_development,symmetry_check,pediatric_referral,limb_length_discrepancy,developmental_monitoring,asymmetry_alert,growth_chart,body_proportion
+
+ULW — execute without asking

@@ -401,7 +401,14 @@ export default function TabsLayout() {
         name="vestibular-assessment"
         options={{
           title: t('tabs.vestibularAssessment'),
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="sensory-integration"
+        options={{
+          title: t('tabs.sensoryIntegration'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />,
         }}
       />
     </Tabs>

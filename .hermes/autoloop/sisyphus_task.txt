@@ -1,49 +1,53 @@
-# Sisyphus Task — Cycle 264
+# Sisyphus Task — Cycle 266 (RESTARTED SESSION)
 
 ## Context
-Jobble Baby: 59 tabs, TSC 0 errors. Cycle 264 — Vestibular Development Assessment (spark from brainstorm keywords)
+Jobble Baby: 60 tabs, TSC 0 errors. Cycle 266 — Sensory Integration Development Tracker (todo#103 RESTARTED due to session path error)
 
-## Task: Implement Vestibular Development Assessment tab
+## Task: Implement Sensory Integration Development Tracker tab
 
-Create a new tab file: app/(tabs)/vestibular-assessment.tsx
+Create a new tab file: app/(tabs)/sensory-integration.tsx
 
 ## Requirements
 
 ### Core Features
-1. Baby Profile Setup: Get birth date from AsyncStorage key @jobble/baby_birthdate (reuse existing key from critical-periods.tsx)
-2. Vestibular Milestone Timeline: Visual timeline (0-12 months) with color-coded milestone bands:
-   - Tilt Sensitivity: 0-2 months (purple)
-   - Head Righting: 1-3 months (blue)
-   - Labyrinthine Righting: 2-4 months (teal)
-   - Roll Reflex Integration: 3-5 months (green)
-   - Postural Security: 4-8 months (amber)
-   - Vestibular-Proprioceptive Integration: 6-12 months (pink)
-3. Baby Current Position: Calculate from baby's birth date — show which periods are ACTIVE, IMMINENT (within 2 weeks), or PASSED
-4. Milestone Check-in: Log observed behaviors per milestone with date and notes
-5. Red Flag Alerts: Alert if expected milestones are delayed >2 months past expected window
-6. Activity Suggestions: Context-aware activities based on active periods
-7. Progress Dashboard: Show coverage of all vestibular windows
+Track 7 sensory domains with age-based milestones, cross-modal correlation, sensory diet suggestions, and red flag alerts:
+1. **Tactile** (touch processing) — milestone bands 0-2m, 2-4m, 4-6m, 6-12m
+2. **Vestibular** (balance/movement) — milestone bands 0-3m, 3-6m, 6-12m
+3. **Proprioceptive** (body awareness) — milestone bands 0-3m, 3-6m, 6-12m
+4. **Visual** (sight) — milestone bands 0-2m, 2-4m, 4-8m, 8-12m
+5. **Auditory** (sound) — milestone bands 0-3m, 3-6m, 6-12m
+6. **Oral-Motor** (mouth sensation) — milestone bands 0-3m, 3-6m, 6-12m
+7. **Interoceptive** (internal body awareness) — milestone bands 0-6m, 6-12m
+
+### UX Components
+- **Domain Cards**: 7 cards, each showing domain name, icon, current milestone status (ACTIVE/IMMINENT/PASSED/NOT_STARTED), age-based milestone checklist
+- **Baby Profile**: Get birth date from AsyncStorage @jobble/baby_birthdate
+- **Cross-Modal Correlation View**: Show how domains influence each other (e.g., vestibular + proprioceptive = coordination)
+- **Sensory Diet Suggestions**: Context-aware activity suggestions per active domain
+- **Red Flag Alerts**: Alert if milestones delayed >2 months past expected window. Show amber warning for 1-2 month delay, red alert for >2 months
+- **Progress Dashboard**: Coverage grid showing which milestone windows have been addressed
 
 ### Data Model
-- @jobble/baby_birthdate: ISO date string (shared, reuse existing key)
-- @jobble/vestibular_entries: JSON { [milestone_id]: [{ date, observed_behavior, notes }] }
+- @jobble/baby_birthdate: ISO date string
+- @jobble/sensory_entries: JSON { [domain_id]: [{ date, milestone_id, observed, notes }] }
+- @jobble/sensory_domain_scores: JSON { [domain_id]: current_score }
 
 ### Technical Requirements
 - Use existing theme: COLORS from ../theme, useTheme hook, useLanguage hook
-- AsyncStorage keys: @jobble/baby_birthdate, @jobble/vestibular_entries
-- Follow existing tab patterns (like critical-periods.tsx, reflex-tracker.tsx)
-- i18n: add keys to en.json and zh.json under vestibularAssessment
+- Follow existing tab patterns (like critical-periods.tsx, vestibular-assessment.tsx)
+- i18n: add keys to en.json and zh.json under sensoryIntegration
 - TSC 0 errors required
 - Register in app/(tabs)/_layout.tsx
+- Links to: vestibular-assessment.tsx, reflex-tracker.tsx, feeding-readiness.tsx
 
 ## Process
-1. Create app/(tabs)/vestibular-assessment.tsx
+1. Create app/(tabs)/sensory-integration.tsx
 2. Run npx tsc --noEmit after creation — 0 errors required
-3. Add i18n keys to en.json + zh.json
+3. Add i18n keys to en.json + zh.json under sensoryIntegration namespace
 4. Register in _layout.tsx
 5. Do NOT commit
 
 ## Keywords
-vestibular_calibration, labyrinthine_maturation, postural_security
+sensory_integration, proprioceptive_development, cross_modal_perception, deep_pressure_therapy, joint_attention, tactile_processing, auditory_discrimination, interoceptive_awareness
 
 ULW

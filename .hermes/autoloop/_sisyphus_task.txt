@@ -1,70 +1,44 @@
-# Sisyphus Task — Cycle 274
+# Sisyphus Task — Cycle 275
 
 ## Context
-Jobble Baby: TSC 0 errors, 66 tabs. Todo #114 — Solid Food Progression Navigator (idea #72)
+Jobble Baby: TSC 0 errors, 66 tabs. All major features implemented. App ready for App Store submission pending user actions.
 
-## Task: Implement Solid Food Progression Navigator Tab
+## Task: Codebase Polish & Cleanup
 
-Create a tab for tracking a baby's solid food journey from first tastes (6mo) to family meals (12mo+).
+Perform a final polish pass across the entire tab codebase.
 
 ## Requirements
 
-### Tab Name
-`solid-food` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
+### 1. Remove Debug Code
+Search all tab files in `JobbleBaby/app/(tabs)/` for:
+- `console.log(` — remove or replace with `// debug: ...` commented block
+- `console.warn(` — remove or comment out
+- `console.error(` — keep only for genuine errors, comment out for debugging
+- `TODO` comments that are not actionable — convert to `// FIXME: [describe issue]` or remove
+- `FIXME` without a description — add description or remove
 
-### Features
-1. **Stage Tracker**
-   - Stage 1 (6-7mo): Single ingredient purees, 4-6 days per food
-   - Stage 2 (7-9mo): Combined flavors, thicker textures
-   - Stage 3 (9-12mo): Finger foods, self-feeding practice
-   - Stage 4 (12mo+): Family food adaptation
-   - Visual stage indicator with months range
+### 2. Check AsyncStorage Keys
+Verify all tabs use consistent AsyncStorage key prefix `@jobble/`. Report any tabs using non-prefixed keys or inconsistent naming.
 
-2. **Food Introduction Journal**
-   - Log each food: name, date introduced, amount, reaction (none/mild/moderate/severe)
-   - Timeline view of all introductions sorted by date
-   - Filter by allergen/non-allergen
+### 3. i18n Audit
+Check that NO tab has hardcoded Chinese or English strings that should be in i18n. Search for:
+- Chinese characters (一乙二十丁厂七卜八人入八九刁十刀又三于干上下不) in TSX files — these should be in zh.json
+- Plain English strings that should be i18n keys (button text, labels, placeholders)
 
-3. **Allergen Introduction Tracker**
-   - Track 8 priority allergens: peanut, egg, milk, soy, wheat, tree nuts, fish, shellfish
-   - Status per allergen: not_yet/introduced/reacted
-   - Reaction log with date, food, severity
+### 4. Accessibility Spot Check
+Run accessibility audit on 5 random tabs. For each:
+- Check that all Touchable components have accessibilityLabel
+- Check that all images have accessibilityRole="image" and alt text
 
-4. **Texture Progression Guide**
-   - Level 1: Smooth puree (6mo)
-   - Level 2: Mashed/ground (7mo)
-   - Level 3: Chopped soft (9mo)
-   - Level 4: Family texture (12mo)
-   - Red flag alerts if texture is behind schedule
+### 5. Theme Consistency
+Verify all tabs import COLORS from `../theme` and use theme context (`useTheme()`) instead of hardcoded color values.
 
-5. **Iron & Nutrient Tracking**
-   - Track iron-rich foods (fortified cereal, meat, beans, leafy greens)
-   - Daily nutrient summary
-   - Gap alerts for key nutrients
-
-6. **Correlation Links**
-   - Link to allergens tab (shared allergen log)
-   - Link to growth tab (weight impact of solids)
-   - Link to gut-brain-axis tab (digestive reactions)
-   - Link to teething tab (teething → food refusal)
-
-7. **i18n**
-   - Add keys under `solidFood.*` in en.json + zh.json
-   - All user-facing strings must use i18n
-
-### Technical
-- TSC 0 errors
-- Follow existing tab pattern (Expo Router file-based routing)
-- AsyncStorage key: `@jobble/solid_food_journey`
-- Accessibility: proper labels, sufficient contrast
-- Use theme context for colors (COLORS from '../theme')
-- Use useTheme() from '../context/ThemeContext' and useLanguage() from '../context/LanguageContext'
-- No external dependencies beyond existing packages
-
-### File
-`JobbleBaby/app/(tabs)/solid-food.tsx`
+### Output
+- List of changes made (file, change type, description)
+- Report of any issues found but not fixed (with file paths and line numbers)
+- TSC must remain 0 errors after changes
 
 ### Keywords
-solid_foods,weaning,first_foods,baby_food,puree,introduction,allergen_introduction,texture_progression,finger_foods,self_feeding,iron_rich_foods,food_journal,food_stages,baby_led_weaning,blw,food_reaction,nutrient_tracking,food_timeline,pediatric_nutrition,infant_nutrition, complementary_feeding,food_safety,baby_cereal,meat_first,single_ingredient,food_allergy_tracker,dairy_introduction,peanut_introduction,egg_introduction,texture_stages
+delight,calm_technology,legibility,feedback_loop,affordance,resilience,constraint,playfulness,accessibility,information_design
 
 ULW — execute without asking

@@ -1,13 +1,12 @@
-# Current Dispatch — Cycle 274
+# Current Dispatch — Cycle 275
 
 ## Status
-- Cycle 274 running
+- Cycle 275 running
 - TSC 0 errors, 66 tabs
-- Home Safety Audit (#113) → completed ✅ (554d816)
-- Primitive Reflex Integration (#114) → completed ✅ (already existed bd4f12f)
-- Solid Food Progression Navigator (#114 new) → dispatched to Sisyphus (cycle 274)
-- Brainstorm: 48 keywords added (pool now 1048)
-- Ideas 72 → new todo created
+- Solid Food Progression Navigator (#114) → completed ✅ (6098835)
+- Brainstorm: 50 keywords added (pool now 1000)
+- Ideas 71 → implemented (Primitive Reflex tab already existed)
+- Idea 72 → implemented (Solid Food Navigator)
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -17,7 +16,13 @@
 
 ## Pending Todos
 - #108: Deploy privacy policy HTML to live URL (P1, user action required)
-- #114: Solid Food Progression Navigator (in_progress - dispatched to Sisyphus)
+- Codebase Polish task → dispatched to Sisyphus (cycle 275)
 
 ## Ideas
-- #72: Solid Food Progression Navigator (new, dispatched to Sisyphus)
+- All ideas implemented/deferred. No new ideas in this cycle.
+
+## App State
+- 66 tabs complete
+- TSC 0 errors
+- i18n complete (en.json + zh.json)
+- Ready for App Store submission

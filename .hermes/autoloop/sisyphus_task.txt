@@ -1,50 +1,59 @@
 # Sisyphus Task — Cycle 268
 
 ## Context
-Jobble Baby: 60 tabs, TSC 0 errors. Cycle 268 — Jaundice Threshold Chart (idea #69, todo #111)
+Jobble Baby: 61 tabs, TSC 0 errors. Cycle 268 — Stranger Danger Navigator (idea #67, todo #109)
 
-## Task: Implement Jaundice Threshold Chart tab
+## Task: Implement Stranger Danger Navigator — 8-Month Separation Anxiety Tracker
 
-Create a new tab for tracking bilirubin levels with risk zone visualization.
+Create a new tab for tracking and managing stranger wariness and separation anxiety at 8-10 months.
 
 ## Requirements
 
 ### Tab Name
-`jaundice-threshold` — add to `app/(tabs)/` and register in `_layout.tsx`
+`stranger-danger` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
 
 ### Features
-1. **Bilirubin Level Input**
-   - Input field for total serum bilirubin (TSB) in mg/dL or μmol/L
-   - Unit toggle: mg/dL ↔ μmol/L (1 mg/dL = 17.1 μmol/L)
-   - Date/time stamp for each entry
+1. **Stranger Wariness Dashboard**
+   - Display baby's current stranger wariness phase (none → emerging → peak → resolving)
+   - Age-based phase prediction using AAP developmental windows
+   - Educational explanation: "Stranger wariness is a cognitive milestone — baby recognizes familiar vs unfamiliar"
 
-2. **Risk Zone Chart**
-   - Plot bilirubin level on an age-based threshold chart
-   - Show 3 zones: Low Risk (green), Monitor (yellow), Treat/Exchange (red)
-   - X-axis: baby's age in hours (0-336h / 14 days)
-   - Y-axis: bilirubin level
-   - Use a simple SVG line chart (no external chart library needed)
-   - Overlay threshold curves for different risk categories (low, medium, high)
+2. **Familiar Face Registry**
+   - Log people baby knows: parents, grandparents, siblings, caregivers, daycare staff
+   - Track exposure level: daily caregiver, weekly visitor, occasional acquaintance
+   - Photo reference for caregiver identification (optional)
+   - Show which people baby has met and reaction logged
 
-3. **Threshold Reference**
-   - Display Bhutani nomogram-based thresholds
-   - Show zone labels and what action to take per zone
-   - Disclaimer: "Consult your pediatrician for medical decisions"
+3. **Gradual Introduction Protocol**
+   - Step-by-step protocol: familiar face → familiar in new place → new face in familiar place → new face in new place
+   - Progress tracker per person being introduced
+   - Tips per stage: "Let baby observe from arms length", "Let baby reach out first", "Don't force interaction"
 
-4. **History Log**
-   - Simple list of past readings with timestamp and zone
-   - Show trend arrow (↑ rising, ↓ falling, → stable)
+4. **Separation Anxiety Toolkit**
+   - Departure ritual builder: 3-step consistent goodbye routine
+   - Separation practice game: peekaboo variants for building object permanence
+   - Signal object: familiar item baby can hold during separations
+   - Reunion celebration: special greeting when parent returns
+
+5. **Departure Tracker**
+   - Log separations: duration, caregiver, baby's reaction (1-5 distress scale), parent's anxiety level
+   - Track trend: are separations getting easier over time?
+   - Correlation: separation difficulty vs developmental storm phase
+
+6. **Storm Integration Card**
+   - If 8-month storm tab exists, show current storm severity score
+   - Link separation anxiety to other storm factors (motor, sleep, circadian)
 
 ### Technical
-- Use React Native `Svg` for the chart (from `react-native-svg`)
 - TSC 0 errors
 - Follow existing tab pattern (Expo Router file-based routing)
 - i18n keys in en.json + zh.json (add new keys)
 - Accessibility: proper labels, sufficient contrast
+- No external dependencies beyond existing packages
 
 ### File
-`app/(tabs)/jaundice-threshold.tsx`
+`JobbleBaby/app/(tabs)/stranger-danger.tsx`
 
 ### Keywords
-jaundice_threshold, bilirubin, Bhutani_nomogram, neonatal_jaundice, risk_zones, phototherapy_threshold, SVG_chart, zone_visualization, TSB_tracking, neonatal_hyperbilirubinemia
+stranger_danger,separation_anxiety,object_permanence,stranger_wariness,departure_ritual,8_month_storm,familiar_face_registry,gradual_introduction,peekaboo_object_permanence,separation_practice,stranger_anxiety_phase,departure_tracker,reunion_celebration,signal_object,infant_cognitive_development,stranger_avoidance,attachment_behavior,misidentification_protocol
 ULW

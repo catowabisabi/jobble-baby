@@ -1,12 +1,13 @@
 # Current Dispatch — Cycle 268
 
 ## Status
-- Cycle 268 started
-- TSC 0 errors, 60 tabs
-- Todo #107 (Screenshot Automation) completed — committed as f9ab68d
-- Todo #111 (Jaundice Threshold Chart) dispatched to Sisyphus
+- Cycle 268 running
+- TSC 0 errors, 61 tabs
+- Todo #111 (Jaundice Threshold Chart) NOT completed — jaundice-threshold.tsx not created → marked pending
 - 3 new todos added from ideas 67,68,69: Stranger Danger, Asymmetric Growth, Jaundice
-- .gitignore updated to ignore assets/screenshots/ — committed as fffeadf
+- Idea #70 (Cup Feeding Transition Navigator) sparked from brainstorm → todo #112 created
+- Brainstorm: 57 keywords added (pool now 1000)
+- Stranger Danger Navigator (#109) dispatched to Sisyphus (cycle 268)
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -14,7 +15,14 @@
 - Play Console app creation
 - Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
 
-## New todos
-- #109: Stranger Danger Navigator
-- #110: Asymmetric Growth Dashboard
-- #111: Jaundice Threshold Chart (now dispatched)
+## Pending Todos
+- #109: Stranger Danger Navigator (in_progress - dispatched)
+- #110: Asymmetric Growth Dashboard (pending)
+- #111: Jaundice Threshold Chart (pending - file not created)
+- #112: Cup Feeding Transition Navigator (pending - new)
+
+## Ideas
+- #67: Stranger Danger Navigator (new)
+- #68: Asymmetric Growth Dashboard (new)
+- #69: Jaundice Threshold Chart (new)
+- #70: Cup Feeding Transition Navigator (new, brainstormed)

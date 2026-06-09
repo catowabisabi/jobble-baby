@@ -55,7 +55,8 @@
     "appstoreChecklist": "App Stores",
     "criticalPeriods": "Critical Periods",
     "vestibularAssessment": "Vestibular Assessment",
-    "sensoryIntegration": "Sensory"
+    "sensoryIntegration": "Sensory",
+    "strangerDanger": "Stranger Danger"
   },
   "hydration": {
     "title": "Fontanelle and Hydration",
@@ -2403,5 +2404,24 @@
     "interoceptive06mDesc": "Baby shows hunger and fullness cues, calms with consistent routines, and differentiates discomfort types.",
     "interoceptive612m": "6-12m: Body Awareness",
     "interoceptive612mDesc": "Baby shows awareness of wet/dirty diaper, points to hurt body part, and shows clear emotions."
+  },
+  "stranger": {
+    "warinessPhase": "Stranger Wariness Phase",
+    "warinessInfo": "Stranger wariness is a cognitive milestone — baby recognizes familiar vs unfamiliar people.",
+    "familiarRegistry": "Familiar Face Registry",
+    "daily": "Daily caregiver",
+    "weekly": "Weekly visitor",
+    "occasional": "Occasional acquaintance",
+    "logged": "Logged",
+    "introductionProtocol": "Gradual Introduction Protocol",
+    "separationToolkit": "Separation Anxiety Toolkit",
+    "departureRitual": "Departure Ritual Builder",
+    "peekabooPractice": "Peekaboo Object Permanence Practice",
+    "peekabooDesc": "Hide and reveal games help baby understand objects exist even when hidden — building object permanence which reduces separation anxiety.",
+    "departureTracker": "Departure Tracker",
+    "avgDistress": "Average Distress",
+    "noSeparations": "No separations logged yet. Track departures to see patterns.",
+    "stormIntegration": "8-Month Storm Integration",
+    "stormInfo": "Separation anxiety often peaks during the 8-month developmental storm when multiple skills are emerging simultaneously."
   }
 }

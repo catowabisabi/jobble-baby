@@ -411,6 +411,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="stranger-danger"
+        options={{
+          title: t('tabs.strangerDanger'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account-alert" size={size} color={color} />,
+        }}
+      />
     </Tabs>
   );
 }

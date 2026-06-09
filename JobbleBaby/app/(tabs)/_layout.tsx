@@ -50,6 +50,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="vestibular-assessment"
+        options={{
+          title: t('tabs.vestibularAssessment'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{ title: t('tabs.profile'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" size={size} color={color} /> }}
       />
@@ -388,6 +395,13 @@ export default function TabsLayout() {
         options={{
           title: t('tabs.appstoreChecklist'),
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="store" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="vestibular-assessment"
+        options={{
+          title: t('tabs.vestibularAssessment'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />
         }}
       />
     </Tabs>

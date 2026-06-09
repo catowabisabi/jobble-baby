@@ -1,12 +1,49 @@
-TASK=261: Fix privacy row in Profile tab — add onPress to open privacy policy URL
+# Sisyphus Task — Cycle 264
 
-File: app/(tabs)/profile.tsx
-Find line: <SettingRow icon="🔒" label={t('profile.privacy')} rowStyles={rowStyles} />
-Change to: <SettingRow icon="🔒" label={t('profile.privacy')} onPress={() => Linking.openURL('https://jobblebaby.com/privacy')} rowStyles={rowStyles} />
+## Context
+Jobble Baby: 59 tabs, TSC 0 errors. Cycle 264 — Vestibular Development Assessment (spark from brainstorm keywords)
 
-If Linking is not imported, add: import { Linking } from 'react-native'
+## Task: Implement Vestibular Development Assessment tab
 
-Run: npx tsc --noEmit (must pass 0 errors)
-Do NOT commit
+Create a new tab file: app/(tabs)/vestibular-assessment.tsx
 
-kw: privacy_row_handler Linking_openURL settings_UX
+## Requirements
+
+### Core Features
+1. Baby Profile Setup: Get birth date from AsyncStorage key @jobble/baby_birthdate (reuse existing key from critical-periods.tsx)
+2. Vestibular Milestone Timeline: Visual timeline (0-12 months) with color-coded milestone bands:
+   - Tilt Sensitivity: 0-2 months (purple)
+   - Head Righting: 1-3 months (blue)
+   - Labyrinthine Righting: 2-4 months (teal)
+   - Roll Reflex Integration: 3-5 months (green)
+   - Postural Security: 4-8 months (amber)
+   - Vestibular-Proprioceptive Integration: 6-12 months (pink)
+3. Baby Current Position: Calculate from baby's birth date — show which periods are ACTIVE, IMMINENT (within 2 weeks), or PASSED
+4. Milestone Check-in: Log observed behaviors per milestone with date and notes
+5. Red Flag Alerts: Alert if expected milestones are delayed >2 months past expected window
+6. Activity Suggestions: Context-aware activities based on active periods
+7. Progress Dashboard: Show coverage of all vestibular windows
+
+### Data Model
+- @jobble/baby_birthdate: ISO date string (shared, reuse existing key)
+- @jobble/vestibular_entries: JSON { [milestone_id]: [{ date, observed_behavior, notes }] }
+
+### Technical Requirements
+- Use existing theme: COLORS from ../theme, useTheme hook, useLanguage hook
+- AsyncStorage keys: @jobble/baby_birthdate, @jobble/vestibular_entries
+- Follow existing tab patterns (like critical-periods.tsx, reflex-tracker.tsx)
+- i18n: add keys to en.json and zh.json under vestibularAssessment
+- TSC 0 errors required
+- Register in app/(tabs)/_layout.tsx
+
+## Process
+1. Create app/(tabs)/vestibular-assessment.tsx
+2. Run npx tsc --noEmit after creation — 0 errors required
+3. Add i18n keys to en.json + zh.json
+4. Register in _layout.tsx
+5. Do NOT commit
+
+## Keywords
+vestibular_calibration, labyrinthine_maturation, postural_security
+
+ULW

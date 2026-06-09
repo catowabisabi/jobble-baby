@@ -1,16 +1,17 @@
-# Current Dispatch — Cycle 261
+# Current Dispatch — Cycle 264
 
 ## Status
-- Cycle 261 started
+- Cycle 264 started
 - TSC 0 errors, 59 tabs
-- Todo #102 (Critical Period Dashboard) completed and committed (0248197)
-- Privacy policy HTML created and committed (603faf5)
-- 47 keywords added from brainstorm (cycle 261)
-- Keyword pool: 1135
+- Brainstorm 50 keywords added (pool: 1000)
+- Task queued: Vestibular Development Assessment tab (vestibular-assessment.tsx)
+- Sisyphus dispatch mechanism being debugged (opencode serve running but agent not picking up tmux tasks)
 
 ## Current dispatch
-Sisyphus fixing Profile tab privacy row (no onPress handler)
+Sisyphus task for vestibular-assessment.tsx written to sisyphus_task.txt — awaiting agent pickup
 
-## Pending
-- Village Network tab (todo #106, deferred post-launch)
-- User action: EAS credentials, App Store Connect, Play Console setup
+## Pending (user action required)
+- EAS credentials configuration
+- App Store Connect app creation
+- Play Console app creation
+- Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)

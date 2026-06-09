@@ -57,7 +57,8 @@
     "vestibularAssessment": "前庭發育評估",
     "sensoryIntegration": "感統",
     "strangerDanger": "Stranger Danger",
-    "asymmetricGrowth": "不對稱生長"
+    "asymmetricGrowth": "不對稱生長",
+    "jaundiceThreshold": "黃疸閾值"
   },
   "hydration": {
     "title": "顱縫與水合監測",
@@ -2462,5 +2463,42 @@
     "alertThreshold": "警報閾值",
     "thresholdDesc": "當不對稱超過此水平時通知",
     "referralNote": "美國兒科學會建議當不對稱超過10%時轉介骨科/神經科。"
+  },
+  "jaundiceThreshold": {
+    "title": "黃疸閾值圖表",
+    "subtitle": "追蹤膽紅素水平並顯示Bhutani圖譜風險區域",
+    "addEntry": "新增讀數",
+    "newReading": "新增膽紅素讀數",
+    "bilirubinLevel": "膽紅素水平",
+    "unit": "單位",
+    "mgdL": "毫克/分升",
+    "umolL": "微摩爾/升",
+    "method": "測量方式",
+    "blood": "血清膽紅素（血液測試）",
+    "transcutaneous": "經皮膽紅素（TcB）",
+    "ageHours": "嬰兒年齡（小時）",
+    "save": "儲存",
+    "cancel": "取消",
+    "history": "膽紅素歷史",
+    "noData": "暫無讀數",
+    "riskZones": "風險區域圖表",
+    "lowRisk": "低風險區",
+    "monitor": "觀察區",
+    "highRisk": "高風險 / 治療區",
+    "exchangeTransfusion": "換血區",
+    "currentLevel": "目前水平",
+    "zone": "區域",
+    "trend": "趨勢",
+    "rising": "上升",
+    "falling": "下降",
+    "stable": "穩定",
+    "disclaimer": "所有醫療決定請諮詢兒科醫生。此應用僅用於追蹤記錄。",
+    "refBhutani": "根據美國兒科學會Bhutani圖譜指南",
+    "alertHigh": "偵測到高膽紅素水平。請立即聯繫兒科醫生。",
+    "invalidValues": "數值無效",
+    "enterPositive": "請輸入正數值",
+    "alertHighTitle": "高膽紅素警告",
+    "alertHighBody": "偵測到高膽紅素水平。請立即聯繫兒科醫生。",
+    "chart": "膽紅素圖表"
   }
 }

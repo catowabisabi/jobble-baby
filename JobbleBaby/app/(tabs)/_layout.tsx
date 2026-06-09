@@ -272,6 +272,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="jaundice-threshold"
+        options={{
+          title: t('tabs.jaundiceThreshold'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="chart-bell-curve" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="iot-security"
         options={{
           title: t('tabs.iotSecurity'),

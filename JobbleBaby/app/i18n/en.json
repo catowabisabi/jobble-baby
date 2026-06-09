@@ -57,7 +57,8 @@
     "vestibularAssessment": "Vestibular Assessment",
     "sensoryIntegration": "Sensory",
     "strangerDanger": "Stranger Danger",
-    "asymmetricGrowth": "Asymmetric Growth"
+    "asymmetricGrowth": "Asymmetric Growth",
+    "jaundiceThreshold": "Jaundice Threshold"
   },
   "hydration": {
     "title": "Fontanelle and Hydration",
@@ -2460,5 +2461,42 @@
     "alertThreshold": "Alert Threshold",
     "thresholdDesc": "Get notified when asymmetry exceeds this level",
     "referralNote": "AAP recommends pediatric orthopedist/neurologist referral when asymmetry exceeds 10%."
+  },
+  "jaundiceThreshold": {
+    "title": "Jaundice Threshold Chart",
+    "subtitle": "Track bilirubin levels with Bhutani nomogram risk zones",
+    "addEntry": "Add Reading",
+    "newReading": "New Bilirubin Reading",
+    "bilirubinLevel": "Bilirubin Level",
+    "unit": "Unit",
+    "mgdL": "mg/dL",
+    "umolL": "umol/L",
+    "method": "Measurement Method",
+    "blood": "Serum Bilirubin (blood test)",
+    "transcutaneous": "Transcutaneous Bilirubin (TcB)",
+    "ageHours": "Baby Age (hours)",
+    "save": "Save",
+    "cancel": "Cancel",
+    "history": "Bilirubin History",
+    "noData": "No readings yet",
+    "riskZones": "Risk Zone Chart",
+    "lowRisk": "Low Risk Zone",
+    "monitor": "Monitor Zone",
+    "highRisk": "High Risk / Treat",
+    "exchangeTransfusion": "Exchange Transfusion Zone",
+    "currentLevel": "Current Level",
+    "zone": "Zone",
+    "trend": "Trend",
+    "rising": "Rising",
+    "falling": "Falling",
+    "stable": "Stable",
+    "disclaimer": "Consult your pediatrician for all medical decisions. This app is for tracking only.",
+    "refBhutani": "Based on Bhutani nomogram (AAP guidelines)",
+    "alertHigh": "High bilirubin level detected. Contact your pediatrician immediately.",
+    "invalidValues": "invalidValues",
+    "enterPositive": "enterPositive",
+    "alertHighTitle": "alertHighTitle",
+    "alertHighBody": "alertHighBody",
+    "chart": "chart"
   }
 }

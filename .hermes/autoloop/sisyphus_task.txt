@@ -1,62 +1,72 @@
-# Sisyphus Task — Cycle 269
+# Sisyphus Task — Cycle 270
 
 ## Context
-Jobble Baby: TSC 0 errors, 62 tabs. Todo #110 — Asymmetric Growth Dashboard (idea #68)
+Jobble Baby: TSC 0 errors, 64 tabs. Todo #111 — Jaundice Threshold Chart (idea #69). _layout.tsx and i18n keys already registered/added. Just create the component file.
 
-## Task: Implement Asymmetric Growth Dashboard — Left/Right Body Part Comparison
+## Task: Implement Jaundice Threshold Chart tab — Bilirubin Level Tracking with Risk Zones
 
-Create a new tab for tracking and comparing left/right body part measurements to detect asymmetric growth patterns in infants.
+Create `app/(tabs)/jaundice-threshold.tsx` — a new tab for tracking bilirubin levels with Bhutani nomogram risk zone visualization.
+
+## Prerequisites (already done — do NOT modify)
+- `app/(tabs)/_layout.tsx` — jaundice-threshold Tabs.Screen already registered
+- `app/i18n/en.json` — tabs.jaundiceThreshold and jaundiceThreshold.* keys already added
+- `app/i18n/zh.json` — same keys in Chinese already added
 
 ## Requirements
 
-### Tab Name
-`asymmetric-growth` — add to `JobbleBaby/app/(tabs)/` and register in `_layout.tsx`
+### File
+`JobbleBaby/app/(tabs)/jaundice-threshold.tsx`
 
 ### Features
-1. **Body Part Selector**
-   - List of measurable body parts: head circumference, arm length, leg length, foot length, hand width
-   - Each part has left/right measurement fields
-   - Age-appropriate measurement guidance
 
-2. **Asymmetry Index Calculator**
-   - Calculate percentage difference between left and right
-   - Formula: |L - R| / ((L + R) / 2) * 100
-   - Display as: Normal (<5%), Mild (5-10%), Moderate (10-15%), Significant (>15%)
-   - Color coding: green/yellow/orange/red
+1. **Bilirubin Level Input**
+   - Input field for total serum bilirubin (TSB) in mg/dL or μmol/L
+   - Unit toggle: mg/dL ↔ μmol/L (1 mg/dL = 17.1 μmol/L)
+   - Date/time stamp for each entry
+   - Age in hours input (calculate from baby birthdate if available from `@jobble_baby_profile`)
 
-3. **Growth Trend Chart**
-   - Line chart showing asymmetry percentage over time
-   - Highlight when asymmetry increases or decreases
-   - Correlation with developmental milestones
+2. **Risk Zone Chart**
+   - Simple SVG line chart showing bilirubin vs age-in-hours
+   - X-axis: baby's age in hours (0–336h / 14 days)
+   - Y-axis: bilirubin level in mg/dL
+   - 3–4 zone bands: Low Risk (green), Monitor (yellow), High Risk (orange), Exchange (red)
+   - Use `react-native-svg` for the chart (already available)
+   - Plot the current reading on the chart if age is provided
 
-4. **Reference Ranges**
-   - AAP normal asymmetry ranges by age
-   - When to refer to specialist (pediatric orthopedist/neurologist)
-   - Normal variants vs concerning patterns
+3. **Risk Zone Reference**
+   - Display Bhutani nomogram-based thresholds for:
+     - Low risk: <8 mg/dL (breastfed) / <10 mg/dL (formula)
+     - Monitor: 8–12 / 10–15 mg/dL
+     - High risk: 12–15 / 15–18 mg/dL
+     - Exchange transfusion: >15 / >18 mg/dL
+   - Disclaimer: "Consult your pediatrician for medical decisions"
 
-5. **Measurement Logger**
-   - Date, body part, left measurement, right measurement, notes
-   - Photo attachment for visual reference (optional)
-   - Reminder scheduling for regular checks
+4. **History Log**
+   - List of past readings with timestamp, level, zone, and trend arrow
+   - Trend: compare to previous reading (↑ rising, ↓ falling, → stable within 1 mg/dL)
 
-6. **Alert System**
-   - Notify when asymmetry exceeds threshold
-   - Recommend pediatrician referral if >10%
-   - Link to 8-month storm tab if developmental factors suspected
+5. **Alert System**
+   - If bilirubin enters High Risk or Exchange zone, show Alert.alert
+   - Link to existing jaundice tab for phototherapy guidance
 
-### Technical
+### Technical Rules
 - TSC 0 errors
-- Follow existing tab pattern (Expo Router file-based routing)
-- i18n keys in en.json + zh.json (add new keys)
-- Accessibility: proper labels, sufficient contrast
-- Use theme context for colors (COLORS from '../theme')
-- Use useTheme() from '../context/ThemeContext' and useLanguage() from '../context/LanguageContext'
+- Use existing theme context: `useTheme()` from `../context/ThemeContext`, `useLanguage()` from `../context/LanguageContext`
+- Use `COLORS` from `../theme`
+- Follow existing tab patterns: SafeAreaView, ScrollView, StyleSheet.create with color parameter
+- Use `@react-native-async-storage/async-storage` for persistence (key: `@jobble/jaundice_threshold_entries`)
+- Accessibility: all interactive elements need accessibilityLabel
 - No external dependencies beyond existing packages
+- Import `Svg`, `Path`, `Rect`, `Line`, `Text` from `react-native-svg`
 
-### File
-`JobbleBaby/app/(tabs)/asymmetric-growth.tsx`
+### i18n
+- All user-facing strings must use `t('jaundiceThreshold.key')` — keys already in en.json + zh.json
+
+### After Implementation
+1. Run `cd JobbleBaby && npx tsc --noEmit` — must pass 0 errors
+2. Do NOT commit (Hermes will commit)
 
 ### Keywords
-asymmetric_growth,body_symmetry,limb_length_comparison,left_right_differential,growth_monitoring,asymmetry_index,body_part_measurement,infant_development,symmetry_check,pediatric_referral,limb_length_discrepancy,developmental_monitoring,asymmetry_alert,growth_chart,body_proportion
+jaundice_threshold_chart,bilirubin,Bhutani_nomogram,neonatal_jaundice,risk_zones,phototherapy_threshold,SVG_chart,zone_visualization,TSB_tracking,neonatal_hyperbilirubinemia,bilirubin_level,transcutaneous_bilirubin,exchange_transfusion,infant_jaundice
 
 ULW — execute without asking

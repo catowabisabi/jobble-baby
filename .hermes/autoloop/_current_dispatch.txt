@@ -1,27 +1,26 @@
-# Current Dispatch — Cycle 287
+# Current Dispatch — Cycle 290
 
 ## Status
-- Cycle 287 running
+- Cycle 290 running — IDLE / PRE-SUBMISSION READY
 - TSC 0 errors, 67 tabs
-- Pre-submission audit PASSES (all REQUIRED checks)
-- #117 i18n strings: COMPLETED (6 files updated, commit 8f125a9)
-- #118 Play Store screenshots: COMPLETED (60 files cropped to 1080x1920, commit 3d0a49f)
-- Both commits pushed to origin/master
+- Pre-submission audit: PASSES all required checks ✓
+- Audit warnings (non-blocking): 12 accessibility labels, 35 AsyncStorage keys, 21 string arrays
+- Audit warnings are FALSE POSITIVES — string arrays are internal data IDs, not UI strings
 
 ## Pending (user action required)
-- EAS credentials configuration
+- #108: Deploy privacy policy HTML to jobblebaby.com/privacy
+  → File ready: docs/privacy-policy.html
+- EAS credentials configuration (Apple Team ID + App-Specific Password)
 - App Store Connect app creation
 - Play Console app creation
-- Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
 
 ## App State
 - 67 tabs complete
 - TSC 0 errors
-- i18n complete (en.json + zh.json)
-- Play Store screenshots: 60 files at 1080x1920 ✓
-- Pre-submission audit: PASSES
-- Ready for App Store submission (pending user actions)
+- i18n: en.json + zh.json complete
+- All REQUIRED audit checks PASS
+- Ready for EAS build + Store submission
 
 ## Sisyphus
-- Previous task (i18n hardcoded strings) — COMPLETED by Sisyphus (6 files)
-- New task: None pending — awaiting user actions for EAS/Store setup
+- No new task — awaiting user actions (#108 + EAS credentials)
+- Session: alive (jobble-baby tmux session active)

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
@@ -159,7 +159,7 @@ export default function ProjectionScreen() {
 
   if (!loaded || !profile) {
     return (
-      <SafeAreaView style={[styles.container, { backgroundColor: C.background }]} edges={['top']}>
+      <SafeAreaView style={[styles.container, { backgroundColor: C.background }]} edges={['top']} accessibilityLabel={t('projection.tab_title')}>
         <View style={styles.loading}>
           <Text style={[styles.loadingText, { color: C.muted }]}>
             {profile ? t('projection.noData') : t('common.loading')}
@@ -233,7 +233,7 @@ export default function ProjectionScreen() {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: C.background }]} edges={['top']}>
+    <SafeAreaView style={[styles.container, { backgroundColor: C.background }]} edges={['top']} accessibilityLabel={t('projection.tab_title')}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>

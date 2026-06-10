@@ -1,40 +1,58 @@
-# Sisyphus Task — Cycle 277
+# Sisyphus Task — Cycle 278
 
 ## Context
-Jobble Baby: TSC 0 errors, 67 tabs. Three tabs have zero accessibilityLabel attributes on interactive elements.
+Jobble Baby: TSC 0 errors, 67 tabs. Four files have zero accessibilityLabel on interactive elements. The i18n keys were added in cycle 277 but the actual accessibilityLabel props were NOT added to the tab files. Task is incomplete.
 
-## Task: Fix Accessibility on 3 Tabs
+## Task: Fix Accessibility on 4 Files
 
-Add accessibilityLabel to all interactive elements in these 3 files:
+Add accessibilityLabel to all interactive elements in these 4 files:
 - `JobbleBaby/app/(tabs)/allergens.tsx`
 - `JobbleBaby/app/(tabs)/monitor-correlation.tsx`
 - `JobbleBaby/app/(tabs)/projection.tsx`
+- `JobbleBaby/app/(tabs)/_layout.tsx`
 
-## Requirements
+## Detailed Instructions
 
-### Per Tab
-1. Find ALL TouchableOpacity, Pressable, TouchableWithoutFeedback components
-2. Add `accessibilityLabel={t('some.key')}` — use existing i18n keys where possible; add new keys to `en.json` + `zh.json` if needed
-3. For icon-only buttons: add meaningful accessibilityLabel
-4. For images: add `accessibilityRole="image"` and alt text via accessibilityLabel
-5. Do NOT change any logic, styles, or functionality — only add accessibilityLabel props
+### 1. allergens.tsx
+- The screen uses `AllergenCard` component which already has internal accessibilityLabel
+- Add a top-level `accessibilityLabel={t('allergens.tab_title')}` to the SafeAreaView wrapper
+- Add `accessibilityLabel={t('allergens.add_entry')}` to the FAB or add-entry button if present
 
-### i18n Keys (add if not exist)
-- `allergens.tab_title` → "Allergens"
-- `allergens.add_entry` → "Add allergen entry"
-- `allergens.allergen_card` → "Allergen: {name}"
-- `monitorCorrelation.tab_title` → "Monitor Correlation"
-- `monitorCorrelation.add_entry` → "Add correlation entry"
-- `projection.tab_title` → "Projection"
-- `projection.add_entry` → "Add projection entry"
+### 2. monitor-correlation.tsx
+- Remove unused `TouchableOpacity` import (line 2) — it's imported but never used
+- The event cards (View components) are NOT interactive — they're display-only
+- If any card should be touchable, wrap with TouchableOpacity + accessibilityLabel
+- Add `accessibilityLabel={t('monitorCorrelation.tab_title')}` to SafeAreaView
+- Add `accessibilityLabel={t('monitorCorrelation.add_entry')}` to any add buttons
 
-Add Chinese translations to `zh.json` for any new keys.
+### 3. projection.tsx
+- Check if TouchableOpacity is imported and unused — remove if so
+- Add `accessibilityLabel={t('projection.tab_title')}` to SafeAreaView
+- Add `accessibilityLabel={t('projection.add_entry')}` to any add buttons
+
+### 4. _layout.tsx (Tab Navigator)
+- For each Tabs.Screen, add `accessibilityLabel` to the options:
+  - `allergens`: `accessibilityLabel: t('tabs.allergens')`
+  - `monitor-correlation`: `accessibilityLabel: t('tabs.monitorCorrelation') || 'Monitor Correlation'`
+  - `projection`: `accessibilityLabel: t('tabs.projection') || 'Projection'`
+- Add to ALL other Tabs.Screen entries too for consistency
+
+### i18n Keys (already added — use them)
+```
+allergens.tab_title → "Allergens"
+allergens.add_entry → "Add allergen entry"  
+allergens.allergen_card → "Allergen: {name}"
+monitorCorrelation.tab_title → "Monitor Correlation"
+monitorCorrelation.add_entry → "Add correlation entry"
+projection.tab_title → "Projection"
+projection.add_entry → "Add projection entry"
+```
 
 ### Verification
 - Run `cd JobbleBaby && npx tsc --noEmit` — must pass with 0 errors
 - Do NOT commit — leave changes unstaged for Hermes review
 
 ### Keywords
-accessibility_label,a11y,WCAG,interactive_element,touchable,accessibilityRole,screen_reader
+accessibility_label,a11y,WCAG,interactive_element,touchable,accessibilityRole,screen_reader,expo_router,Tabs.Screen
 
 ULW — execute without asking

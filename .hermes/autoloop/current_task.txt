@@ -1,11 +1,11 @@
-# Current Dispatch — Cycle 277
+# Current Dispatch — Cycle 278
 
 ## Status
-- Cycle 277 running
+- Cycle 278 running
 - TSC 0 errors, 67 tabs
-- Accessibility fix (#115) → dispatched to Sisyphus (cycle 277 retry)
-- Keyword pool: 1000 (max)
-- Ready for App Store submission (pending user actions)
+- i18n keys added for allergens/monitorCorrelation/projection ✅ (commit 6b8931d)
+- Actual accessibilityLabel props NOT yet added to tab files — task incomplete from cycle 277
+- Loop state updated to cycle 278
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -14,8 +14,8 @@
 - Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
 
 ## Pending Todos
+- #115: Fix accessibility on allergens.tsx, monitor-correlation.tsx, projection.tsx, _layout.tsx (dispatched to Sisyphus, cycle 278)
 - #108: Deploy privacy policy HTML to live URL (P1, user action required)
-- #115: Fix accessibility on allergens.tsx, monitor-correlation.tsx, projection.tsx (dispatched to Sisyphus, cycle 277 retry)
 
 ## App State
 - 67 tabs complete
@@ -23,3 +23,9 @@
 - i18n complete (en.json + zh.json)
 - Keyword pool: 1000 keywords (max)
 - Ready for App Store submission (pending user actions)
+
+## Sisyphus Task
+- Fix accessibility on 4 files: allergens.tsx, monitor-correlation.tsx, projection.tsx, _layout.tsx
+- Use existing i18n keys (allergens.tab_title, monitorCorrelation.tab_title, projection.tab_title, etc.)
+- Clean up unused TouchableOpacity imports
+- TSC 0 errors required before completion

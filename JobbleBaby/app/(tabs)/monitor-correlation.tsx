@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -205,7 +205,7 @@ export default function MonitorCorrelationScreen() {
   };
 
   return (
-    <SafeAreaView style={[styles.safe, { backgroundColor: C.background }]} edges={['top']}>
+    <SafeAreaView style={[styles.safe, { backgroundColor: C.background }]} edges={['top']} accessibilityLabel={t('monitorCorrelation.tab_title')}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
           <Text style={styles.greeting}>{t('monitor.greeting') || 'Monitor'}</Text>

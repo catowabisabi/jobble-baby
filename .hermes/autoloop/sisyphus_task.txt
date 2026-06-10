@@ -1,51 +1,41 @@
-Sisyphus Task - Cycle 284
+# Sisyphus Task — Cycle 285
 
-Context:
-Jobble Baby: App PASSES pre-submission audit (TSC 0 errors, all REQUIRED checks passed).
-The audit script correctly runs from JobbleBaby/ directory.
-Remaining issue: 10 TouchableOpacity elements missing accessibilityLabel in 4 tab files.
+## Context
+Jobble Baby: Pre-submission audit PASSES all required checks (TSC 0 errors, 67 tabs). App is ready for App Store / Play Console submission pending user actions (EAS credentials, app creation, privacy policy URL).
 
-Task: Fix Accessibility Labels - 4 Files (10 elements)
+The audit flagged NON-BLOCKING warnings: 22 hardcoded string arrays in UI components. These need i18n keys.
 
-Add accessibilityLabel to each TouchableOpacity at the exact lines below.
-Use existing i18n keys where available (check the t() calls in each file for appropriate keys),
-or use descriptive English strings otherwise.
+## Task: Fix Non-i18n UI Strings in 3 Tabs
 
-File 1: app/(tabs)/asymmetric-growth.tsx
-- Line 247: <TouchableOpacity style={styles.saveButton} onPress={handleAdd}>
-  → Add: accessibilityLabel={t('asymmetric.save')}
+The pre-submission-audit.js flags hardcoded string arrays in several files. Fix these three files:
 
-File 2: app/(tabs)/circadian.tsx
-- Line 565: <TouchableOpacity style={styles.expandBtn} onPress={() => setShowLightLogger(!showLightLogger)}>
-  → Add: accessibilityLabel={showLightLogger ? (t('duskLight.hideLogger') || 'Hide Logger') : (t('duskLight.logLight') || 'Log Light Exposure')}
-- Line 590: <TouchableOpacity style={styles.logBtn} onPress={handleLogLight}>
-  → Add: accessibilityLabel={t('duskLight.saveLog') || 'Save Light Log'}
-- Line 603: <TouchableOpacity style={[styles.alarmBtn, ...]} onPress={() => handleSaveAlarm(...)}>
-  → Add: accessibilityLabel={duskAlarm.enabled ? (t('duskLight.enabled') || 'Alarm is ON') : (t('duskLight.disabled') || 'Alarm is OFF')}
-- Line 609: <TouchableOpacity style={[styles.alarmBtn, { flex: 1 }]} onPress={() => handleSaveAlarm(Math.max(0, duskAlarm.hour - 1), ...)}>
-  → Add: accessibilityLabel={t('duskLight.decreaseHour') || 'Decrease alarm hour by 1'}
-- Line 612: <TouchableOpacity style={[styles.alarmBtn, { flex: 1 }]} onPress={() => handleSaveAlarm(Math.min(23, duskAlarm.hour + 1), ...)}>
-  → Add: accessibilityLabel={t('duskLight.increaseHour') || 'Increase alarm hour by 1'}
-- Line 656: <TouchableOpacity style={styles.calcBtn} onPress={handleCalculatePhaseShift}>
-  → Add: accessibilityLabel={t('duskLight.calculate') || 'Calculate Phase Shift'}
+### File 1: app/(tabs)/bonding-journal.tsx
+Lines 59-60: Rating labels ('Struggling', 'Low', 'Neutral') and color hex values are hardcoded.
+- Add i18n keys for the rating labels (e.g., bonding.journal.rating.struggling, bonding.journal.rating.low, bonding.journal.rating.neutral)
+- Add keys to both en.json and zh.json
+- Color hex values (data array) can stay hardcoded as they are not UI-displayed strings
 
-File 3: app/(tabs)/eight-month-storm.tsx
-- Line 180: <TouchableOpacity style={[styles.modalBtn, { backgroundColor: '#666' }]} onPress={() => setShowAdd(false)}>
-  → Add: accessibilityLabel={language === 'zh' ? '取消添加' : 'Cancel add entry'}
-- Line 183: <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} onPress={() => setShowAdd(false)}>
-  → Add: accessibilityLabel={language === 'zh' ? '保存記錄' : 'Save entry'}
+### File 2: app/(tabs)/colic-relief.tsx
+Lines 16-17: Cause categories ('hunger', 'wind', 'overtired') and sound types ('vacuum', 'fan', 'shusher') are hardcoded.
+- Add i18n keys: colic.cause.hunger, colic.cause.wind, colic.cause.overtired, etc.
+- Add keys to both en.json and zh.json
 
-File 4: app/(tabs)/jaundice-threshold.tsx
-- Line 297: <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-  → Add: accessibilityLabel={t('jaundiceThreshold.save')}
+### File 3: app/(tabs)/cry-analyzer.tsx
+Line 74: Weekday labels ('Sun', 'Mon', 'Tue'...) are hardcoded.
+- Use the existing day name pattern or add i18n keys for cry.analyzer.day.sun through cry.analyzer.day.sat
+- Or better: replace hardcoded array with useMemo deriving from Intl.DateTimeFormat
 
-Requirements:
-- TSC must pass with 0 errors after changes (run: cd JobbleBaby && npx tsc --noEmit)
-- No console.log/debug/error statements added
-- Keep all existing functionality intact
+## Requirements
+- TSC must pass with 0 errors after changes
+- No console.log/debug/error statements
+- Keep existing functionality intact
+- Add keys to BOTH en.json AND zh.json in app/i18n/
 
-Verification:
+## Verification
 After fixing, run: cd JobbleBaby && node scripts/pre-submission-audit.js
-All REQUIRED checks should pass. The hardcoded strings warning is non-blocking.
+The Hardcoded Strings check should show fewer warnings (color arrays and numeric data are expected to remain).
 
-ULW - execute without asking
+## Keywords
+stress_response,clogged_milk_gland,body_awareness
+
+ULW — execute without asking

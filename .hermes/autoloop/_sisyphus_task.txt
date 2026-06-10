@@ -1,37 +1,41 @@
-# Sisyphus Task — Cycle 283
+# Sisyphus Task — Cycle 285
 
 ## Context
-Jobble Baby: Pre-submission audit now PASSING (TSC 0 errors, 0 console.log, 0 missing i18n keys). Commit 6280e19 pushed.
-Accessibility WARNING: 12 elements missing labels in 4 files.
+Jobble Baby: Pre-submission audit PASSES all required checks (TSC 0 errors, 67 tabs). App is ready for App Store / Play Console submission pending user actions (EAS credentials, app creation, privacy policy URL).
 
-## Task: Fix Accessibility Warnings — 4 Files
+The audit flagged NON-BLOCKING warnings: 22 hardcoded string arrays in UI components. These need i18n keys.
 
-Fix the 12 accessibility label warnings reported by pre-submission-audit.js:
+## Task: Fix Non-i18n UI Strings in 3 Tabs
 
-### File 1: app/(tabs)/asymmetric-growth.tsx:247
-Add accessibilityLabel to the element at line 247.
+The pre-submission-audit.js flags hardcoded string arrays in several files. Fix these three files:
 
-### File 2: app/(tabs)/circadian.tsx
-Lines 565, 590, 603, 609, 612, 656 — add accessibilityLabel to these elements.
+### File 1: app/(tabs)/bonding-journal.tsx
+Lines 59-60: Rating labels ('Struggling', 'Low', 'Neutral') and color hex values are hardcoded.
+- Add i18n keys for the rating labels (e.g., bonding.journal.rating.struggling, bonding.journal.rating.low, bonding.journal.rating.neutral)
+- Add keys to both en.json and zh.json
+- Color hex values (data array) can stay hardcoded as they are not UI-displayed strings
 
-### File 3: app/(tabs)/eight-month-storm.tsx
-Lines 180, 183 — add accessibilityLabel to these elements.
+### File 2: app/(tabs)/colic-relief.tsx
+Lines 16-17: Cause categories ('hunger', 'wind', 'overtired') and sound types ('vacuum', 'fan', 'shusher') are hardcoded.
+- Add i18n keys: colic.cause.hunger, colic.cause.wind, colic.cause.overtired, etc.
+- Add keys to both en.json and zh.json
 
-### File 4: app/(tabs)/jaundice-threshold.tsx
-Line 297 — add accessibilityLabel to this element.
+### File 3: app/(tabs)/cry-analyzer.tsx
+Line 74: Weekday labels ('Sun', 'Mon', 'Tue'...) are hardcoded.
+- Use the existing day name pattern or add i18n keys for cry.analyzer.day.sun through cry.analyzer.day.sat
+- Or better: replace hardcoded array with useMemo deriving from Intl.DateTimeFormat
 
 ## Requirements
-- Use existing i18n keys where appropriate (e.g., t('asymmetricGrowth.title') or similar)
-- If no suitable i18n key exists, use a descriptive string in English
 - TSC must pass with 0 errors after changes
 - No console.log/debug/error statements
 - Keep existing functionality intact
+- Add keys to BOTH en.json AND zh.json in app/i18n/
 
 ## Verification
-After fixing, run: node scripts/pre-submission-audit.js
-The Accessibility Labels check should show 0 warnings.
+After fixing, run: cd JobbleBaby && node scripts/pre-submission-audit.js
+The Hardcoded Strings check should show fewer warnings (color arrays and numeric data are expected to remain).
 
 ## Keywords
-retained_atnr,bioluminescence,lactation_suppression
+stress_response,clogged_milk_gland,body_awareness
 
 ULW — execute without asking

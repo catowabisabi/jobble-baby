@@ -69,10 +69,10 @@ const formatDate = (iso: string) => {
   return iso.split('T')[0];
 };
 
-const getDayLabel = (dateStr: string): string => {
+const getDayLabel = (dateStr: string, t: (key: string) => string): string => {
   const d = new Date(dateStr);
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  return days[d.getDay()];
+  const dayKeys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+  return t(`cryAnalyzer.day.${dayKeys[d.getDay()]}`);
 };
 
 const SEVERITY_COLORS = { green: '#2ecc71', yellow: '#f1c40f', red: '#e74c3c' };
@@ -470,7 +470,7 @@ export default function CryAnalyzer() {
                     },
                   ]}
                 />
-                <Text style={styles.chartLabel}>{getDayLabel(d.date)}</Text>
+                <Text style={styles.chartLabel}>{getDayLabel(d.date, t)}</Text>
               </View>
             ))}
           </View>

@@ -135,7 +135,16 @@
     "decreaseDuration": "Decrease duration",
     "decreaseDurationHint": "Reduce session length by 5 minutes",
     "increaseDuration": "Increase duration",
-    "increaseDurationHint": "Increase session length by 5 minutes"
+    "increaseDurationHint": "Increase session length by 5 minutes",
+    "day": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    }
   },
   "pediatricReport": {
     "title": "Medical",
@@ -1269,7 +1278,15 @@
     "startPlan": "Start Plan",
     "history": "History",
     "noPlan": "No travel plan set",
-    "save": "Save"
+    "save": "Save",
+    "timezone": {
+      "utc8": "UTC+8",
+      "utc530": "UTC+5:30",
+      "utc9": "UTC+9",
+      "utc_5": "UTC-5",
+      "utc_8": "UTC-8",
+      "utc1": "UTC+1"
+    }
   },
   "reflexIntegration": {
     "title": "Reflex Integration Timeline",
@@ -1668,7 +1685,13 @@
     "save": "Save",
     "cancel": "Cancel",
     "notesPlaceholder": "Any notes...",
-    "noEntriesTapLogReading": "No entries yet. Tap \"Log Reading\" to add."
+    "noEntriesTapLogReading": "No entries yet. Tap \"Log Reading\" to add.",
+    "light": {
+      "led": "LED",
+      "halogen": "Halogen",
+      "fiber_optic": "Fiber Optic",
+      "bili_blanket": "BiliBlanket"
+    }
   },
   "procedureRecovery": {
     "tabs": {
@@ -1789,7 +1812,14 @@
     "milestoneFirstKiss": "First Kiss",
     "milestoneFirstStory": "First Story",
     "milestoneFirstBath": "First Bath",
-    "milestoneFirstSolidReaction": "First Solid Reaction"
+    "milestoneFirstSolidReaction": "First Solid Reaction",
+    "mood": {
+      "struggling": "Struggling",
+      "low": "Low",
+      "neutral": "Neutral",
+      "good": "Good",
+      "great": "Great"
+    }
   },
   "habitReset": {
     "regressionSurvey": "Post-Regression Impact Survey",
@@ -1806,7 +1836,14 @@
     "domainExercise": "Exercise",
     "domainNutrition": "Nutrition",
     "domainSelfCare": "Self-care",
-    "domainSocial": "Social"
+    "domainSocial": "Social",
+    "category": {
+      "sleep": "sleep",
+      "exercise": "exercise",
+      "nutrition": "nutrition",
+      "selfCare": "selfCare",
+      "social": "social"
+    }
   },
   "caregiverFatigue": {
     "title": "Resilience",
@@ -2567,41 +2604,48 @@
     "stormIntegration": "8-Month Storm Integration",
     "stormInfo": "Separation anxiety often peaks during the 8-month developmental storm when multiple skills are emerging simultaneously."
   },
-  "asymmetric": {
-    "title": "Asymmetric Growth",
-    "subtitle": "Left/right body part comparison to detect growth asymmetries",
-    "currentStatus": "Current Status by Body Part",
+"asymmetric": {
+    "title": "Asymmetric Growth Tracker",
+    "subtitle": "Monitor and track asymmetry in your baby's growth",
+    "currentStatus": "Current Status",
+    "referenceGuide": "Reference Guide",
+    "refNormal": "Normal (<5%)",
+    "refMild": "Mild (5-10%)",
+    "refModerate": "Moderate (10-15%)",
+    "refSignificant": "Significant (>15%)",
+    "refFormula": "Formula: |L-R| / avg(L,R) × 100",
+    "refAAP": "Source: AAP Guidelines",
+    "addEntry": "Add Entry",
+    "newEntry": "New Entry",
+    "leftSide": "Left Side",
+    "rightSide": "Right Side",
+    "leftValue": "Left value (cm)",
+    "rightValue": "Right value (cm)",
+    "notesPlaceholder": "Additional observations...",
+    "notes": "Notes",
+    "cancel": "Cancel",
+    "save": "Save",
+    "history": "History",
+    "noData": "No data yet",
+    "alertThreshold": "Alert Threshold",
+    "thresholdDesc": "Alert when asymmetry exceeds threshold",
+    "referralNote": "Above 10% — consider pediatrician referral",
+    "invalidValues": "Invalid Values",
+    "enterPositive": "Please enter positive numbers for both sides",
+    "alertTitle": "Asymmetry Alert",
+    "alertBody": "{part} asymmetry of {pct}% detected — consult your pediatrician",
     "headCircumference": "Head Circumference",
     "armLength": "Arm Length",
     "legLength": "Leg Length",
     "footLength": "Foot Length",
     "handWidth": "Hand Width",
-    "noData": "No data",
-    "referenceGuide": "Reference Guide",
-    "refNormal": "Normal: <5% difference — typical in infants",
-    "refMild": "Mild: 5-10% difference — monitor closely",
-    "refModerate": "Moderate: 10-15% difference — consult pediatrician",
-    "refSignificant": "Significant: >15% difference — seek specialist referral",
-    "refFormula": "Formula: |L-R| / avg(L,R) × 100",
-    "refAAP": "Based on AAP developmental assessment guidelines",
-    "addEntry": "Add Measurement",
-    "newEntry": "New Measurement",
-    "leftSide": "Left Side",
-    "rightSide": "Right Side",
-    "leftValue": "Left measurement value in cm",
-    "rightValue": "Right measurement value in cm",
-    "notesPlaceholder": "Notes (optional)",
-    "notes": "Measurement notes",
-    "cancel": "Cancel",
-    "save": "Save",
-    "history": "Measurement History",
-    "invalidValues": "Invalid Values",
-    "enterPositive": "Please enter positive numbers for both sides",
-    "alertTitle": "Asymmetry Alert",
-    "alertBody": "Asymmetry of {pct}% detected for {part}. Consider consulting your pediatrician.",
-    "alertThreshold": "Alert Threshold",
-    "thresholdDesc": "Get notified when asymmetry exceeds this level",
-    "referralNote": "AAP recommends pediatric orthopedist/neurologist referral when asymmetry exceeds 10%."
+    "body": {
+      "head": "head",
+      "arm": "arm",
+      "leg": "leg",
+      "foot": "foot",
+      "hand": "hand"
+    }
   },
   "jaundiceThreshold": {
     "title": "Jaundice Threshold Chart",

@@ -262,7 +262,7 @@ export default function HabitResetScreen() {
               </TouchableOpacity>
               <View style={styles.habitInfo}>
                 <Text style={[styles.habitLabel, done && styles.habitLabelDone]}>{mh.label}</Text>
-                <Text style={styles.habitDomain}>{DOMAIN_LABELS[mh.domain]}</Text>
+                <Text style={styles.habitDomain}>{t(DOMAIN_KEYS[mh.domain])}</Text>
               </View>
               <View style={styles.streakBadge}>
                 <Text style={styles.streakText}>🔥 {streak}</Text>
@@ -389,7 +389,7 @@ export default function HabitResetScreen() {
                   onPress={() => setNewHabitDomain(d)}
                 >
                   <Text style={[styles.domainChipText, newHabitDomain === d && styles.domainChipTextActive]}>
-                    {DOMAIN_LABELS[d]}
+                    {t(DOMAIN_KEYS[d])}
                   </Text>
                 </TouchableOpacity>
               ))}

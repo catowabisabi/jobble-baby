@@ -37,7 +37,7 @@ interface BabyProfile {
   gender?: string;
 }
 
-const LAMP_TYPES = ['LED', 'Halogen', 'Fiber Optic', 'BiliBlanket'];
+const LAMP_TYPES = ['led', 'halogen', 'fiber_optic', 'bili_blanket'];
 
 const RISK_THRESHOLDS = {
   breastfed: { low: 8, medium: 12, high: 15, exchange: 20 },
@@ -367,7 +367,7 @@ export default function JaundiceScreen() {
               {LAMP_TYPES.map(lamp => (
                 <TouchableOpacity key={lamp} style={[styles.lampBtn, photoLamp === lamp && { backgroundColor: C.accent }]} onPress={() => setPhotoLamp(lamp)}>
                                 accessibilityLabel="TouchableOpacity in jaundice"
-                  <Text style={[styles.lampBtnText, photoLamp === lamp && { color: '#fff' }]}>{lamp}</Text>
+                  <Text style={[styles.lampBtnText, photoLamp === lamp && { color: '#fff' }]}>{t(`jaundice.light.${lamp}`)}</Text>
                 </TouchableOpacity>
               ))}
             </View>

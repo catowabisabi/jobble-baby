@@ -56,7 +56,7 @@ const BONDING_MILESTONES = [
   { id: 'first_solid_reaction', labelKey: 'bondingJournal.milestoneFirstSolidReaction', icon: 'food-apple' },
 ] as const;
 
-const MOOD_LABELS = ['Struggling', 'Low', 'Neutral', 'Good', 'Great'];
+const MOOD_LABELS = ['struggling', 'low', 'neutral', 'good', 'great'];
 const MOOD_COLORS = ['#EF4444', '#F97316', '#EAB308', '#22C55E', '#10B981'];
 
 function calculateAgeInMonths(birthDate: string): number {
@@ -533,7 +533,7 @@ export default function BondingJournalScreen() {
                   onPress={() => handleMoodSelect(score)}
                 >
                   <Text style={styles.moodEmoji}>{['', '😔', '😕', '😐', '😊', '😄'][score]}</Text>
-                  <Text style={[styles.moodLabel, todayMood === score && { color: MOOD_COLORS[score - 1] }]}>{MOOD_LABELS[score - 1]}</Text>
+                  <Text style={[styles.moodLabel, todayMood === score && { color: MOOD_COLORS[score - 1] }]}>{t(`bondingJournal.mood.${MOOD_LABELS[score - 1]}`)}</Text>
                 </TouchableOpacity>
               ))}
             </View>

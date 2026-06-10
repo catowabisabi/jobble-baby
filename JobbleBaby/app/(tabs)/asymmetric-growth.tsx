@@ -41,14 +41,7 @@ function asymmetryLabel(pct: number): { label: string; color: string; bgColor: s
 }
 
 function getBodyPartLabel(t: (key: string) => string, part: BodyPart): string {
-  const labels: Record<BodyPart, string> = {
-    head: t('asymmetric.headCircumference'),
-    arm: t('asymmetric.armLength'),
-    leg: t('asymmetric.legLength'),
-    foot: t('asymmetric.footLength'),
-    hand: t('asymmetric.handWidth'),
-  };
-  return labels[part];
+  return t(`asymmetric.body.${part}`);
 }
 
 export default function AsymmetricGrowthScreen() {

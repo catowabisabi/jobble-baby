@@ -36,13 +36,34 @@ function buildPlan(dep: string, arr: string, baby_age: number): Plan {
   return { departure_zone: dep, arrival_zone: arr, shift_hours: Math.round(shift_min / 60 * 10) / 10, baby_age_months: baby_age, start_date: now.toISOString(), daily_shift_minutes: daily, days: dayPlans };
 }
 
+const COMMON_TIMEZONES = [
+  { key: 'utc8', display: 'UTC+8' },
+  { key: 'utc530', display: 'UTC+5:30' },
+  { key: 'utc9', display: 'UTC+9' },
+  { key: 'utc_5', display: 'UTC-5' },
+  { key: 'utc_8', display: 'UTC-8' },
+  { key: 'utc1', display: 'UTC+1' },
+];
+
 function getDefaultZones(): [string, string] {
   const now = new Date();
   const offset = -now.getTimezoneOffset() / 60;
-  const local = `UTC${offset >= 0 ? '+' : ''}${offset}`;
-  const common = ['UTC+8', 'UTC+5:30', 'UTC+9', 'UTC-5', 'UTC-8', 'UTC+1'];
-  const nearest = common.sort((a, b) => Math.abs(parseFloat(a.slice(3)) - offset) - Math.abs(parseFloat(b.slice(3)) - offset))[0];
-  return [local, nearest];
+  const localDisplay = `UTC${offset >= 0 ? '+' : ''}${offset}`;
+  const nearest = COMMON_TIMEZONES.slice().sort((a, b) => Math.abs(parseFloat(a.display.slice(3)) - offset) - Math.abs(parseFloat(b.display.slice(3)) - offset))[0];
+  return [localDisplay, nearest.display];
+}
+
+function zoneToKey(zone: string): string {
+  const found = COMMON_TIMEZONES.find(z => z.display === zone);
+  return found ? found.key : zone;
+}
+
+function zoneToDisplay(zone: string, t: (key: string) => string): string {
+  const found = COMMON_TIMEZONES.find(z => z.display === zone || z.key === zone);
+  if (found) {
+    return t(`jetLag.timezone.${found.key}`);
+  }
+  return zone;
 }
 
 export default function JetLagScreen() {
@@ -95,7 +116,7 @@ export default function JetLagScreen() {
             <View style={styles.summaryCard}>
               <Text style={styles.summaryLabel}>{t('jetLag.shiftHours')}</Text>
               <Text style={styles.shiftNum}>{shift_hours}h</Text>
-              <Text style={styles.summarySub}>{plan.departure_zone} → {plan.arrival_zone}</Text>
+              <Text style={styles.summarySub}>{zoneToDisplay(plan.departure_zone, t)} → {zoneToDisplay(plan.arrival_zone, t)}</Text>
               <Text style={styles.summarySub}>{t('jetLag.dailyShift')}: {plan.daily_shift_minutes}min/day</Text>
             </View>
 
@@ -140,10 +161,10 @@ export default function JetLagScreen() {
             <Text style={styles.modalTitle}>{t('jetLag.startPlan')}</Text>
 
             <Text style={styles.fieldLabel}>{t('jetLag.departureZone')}</Text>
-            <TextInput style={styles.input} value={dep} onChangeText={setDep} placeholder="e.g. UTC+8" placeholderTextColor="#6B7280" />
+            <TextInput style={styles.input} value={dep} onChangeText={setDep} placeholder={t('jetLag.timezone.utc8')} placeholderTextColor="#6B7280" />
 
             <Text style={styles.fieldLabel}>{t('jetLag.arrivalZone')}</Text>
-            <TextInput style={styles.input} value={arr} onChangeText={setArr} placeholder="e.g. UTC-8" placeholderTextColor="#6B7280" />
+            <TextInput style={styles.input} value={arr} onChangeText={setArr} placeholder={t('jetLag.timezone.utc_8')} placeholderTextColor="#6B7280" />
 
             <Text style={styles.fieldLabel}>{t('jetLag.babyAge')}</Text>
             <TextInput style={styles.input} value={age} onChangeText={setAge} keyboardType="numeric" placeholder="e.g. 6" placeholderTextColor="#6B7280" />

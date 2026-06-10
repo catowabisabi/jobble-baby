@@ -148,7 +148,7 @@ export default function SleepArchitectureScreen() {
       if (wn) setWhiteNoiseLog(JSON.parse(wn));
       if (env) setEnvironmentLog(JSON.parse(env));
       if (debt) setSleepDebtLog(JSON.parse(debt));
-    } catch (e) { console.error('Failed to load sleep architecture data', e); }
+    } catch (e) { /* silently fail */ }
   };
 
   const saveArchitecture = async () => {

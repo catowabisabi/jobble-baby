@@ -109,9 +109,7 @@ export default function HabitResetScreen() {
       if (microRaw) setMicroHabits(JSON.parse(microRaw));
       if (streakRaw) setStreaks(JSON.parse(streakRaw));
       if (profileRaw) setBabyProfile(JSON.parse(profileRaw));
-    } catch (e) {
-      console.error('habit-reset load error', e);
-    }
+    } catch (e) { /* silently fail */ }
   }, []);
 
   useEffect(() => { loadData(); }, [loadData]);

@@ -173,7 +173,7 @@ export default function GutBrainAxis() {
       if (trackRaw) setTracking(JSON.parse(trackRaw));
       if (cryRaw) setCryEntries(JSON.parse(cryRaw));
       if (profRaw) setProfile(JSON.parse(profRaw));
-    } catch (e) { console.error(e); }
+    } catch (e) { /* silently fail */ }
   };
 
   const saveFeedingLog = async () => {

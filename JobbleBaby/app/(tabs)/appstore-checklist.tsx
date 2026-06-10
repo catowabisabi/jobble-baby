@@ -64,7 +64,7 @@ export default function AppstoreChecklistScreen() {
         setChecked(JSON.parse(stored) as CheckedState);
       }
     } catch (e) {
-      console.error('Failed to load appstore checklist state', e);
+      // silently fail
     }
   };
 
@@ -72,7 +72,7 @@ export default function AppstoreChecklistScreen() {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newChecked));
     } catch (e) {
-      console.error('Failed to save appstore checklist state', e);
+      // silently fail
     }
   };
 

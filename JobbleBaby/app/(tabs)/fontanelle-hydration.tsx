@@ -71,7 +71,7 @@ export default function FontanelleHydrationScreen() {
         const todayEntry = parsed.find(e => e.date === today);
         if (todayEntry) setTodayDiapers(String(todayEntry.count));
       }
-    } catch (e) { console.error('Failed to load hydration data', e); }
+    } catch (e) { /* silently fail */ }
   };
 
   const getDehydrationRisk = (): { level: 'green' | 'yellow' | 'red'; label: string } => {

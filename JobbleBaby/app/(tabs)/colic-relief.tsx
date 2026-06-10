@@ -111,7 +111,7 @@ export default function ColicReliefScreen() {
       if (comfort) setComfortLog(JSON.parse(comfort));
       if (wn) setWhiteNoise(JSON.parse(wn));
       if (badgeData === 'true') setBadge(true);
-    } catch (e) { console.error('Failed to load colic data', e); }
+    } catch (e) { /* silently fail */ }
   };
 
   const saveCryingLog = async (log: CryingEntry[]) => {

@@ -77,7 +77,7 @@ export default function BilateralCoordinationScreen() {
         const parsed: CoordinationScore[] = JSON.parse(s);
         setScores(parsed);
       }
-    } catch (e) { console.error('Failed to load bilateral data', e); }
+    } catch (e) { /* silently fail */ }
   };
 
   const calculateAvgSymmetry = (): number => {
@@ -161,8 +161,7 @@ export default function BilateralCoordinationScreen() {
         title: t('bilateral.exportTitle') || 'Jobble Baby Development Data',
       });
     } catch (e) {
-      console.error('Export failed', e);
-      Alert.alert(t('bilateral.exportFailed') || 'Export failed');
+      // silently fail
     }
   };
 

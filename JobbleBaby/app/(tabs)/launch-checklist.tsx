@@ -57,17 +57,13 @@ export default function LaunchChecklistScreen() {
         const allDone = CHECKLIST_ITEMS.every(item => parsed[item.id]);
         setHasBadge(allDone);
       }
-    } catch (e) {
-      console.error('Failed to load launch checklist state', e);
-    }
+    } catch (e) { /* silently fail */ }
   };
 
   const saveState = async (newChecked: CheckedState) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newChecked));
-    } catch (e) {
-      console.error('Failed to save launch checklist state', e);
-    }
+    } catch (e) { /* silently fail */ }
   };
 
   const toggleItem = (id: string) => {

@@ -95,7 +95,7 @@ export default function IoTSecurityScreen() {
         else setChecklist({});
       }
       if (alertData) setAlerts(JSON.parse(alertData));
-    } catch (e) { console.error(e); }
+    } catch (e) { /* silently fail */ }
   }
 
   async function saveChecklist() {
@@ -107,7 +107,7 @@ export default function IoTSecurityScreen() {
       if (idx >= 0) entries[idx] = newEntry;
       else entries.push(newEntry);
       await AsyncStorage.setItem(SECURITY_KEY, JSON.stringify(entries));
-    } catch (e) { console.error(e); }
+    } catch (e) { /* silently fail */ }
   }
 
   function toggleItem(key: string) {
@@ -131,7 +131,7 @@ export default function IoTSecurityScreen() {
     setAlertText('');
     try {
       await AsyncStorage.setItem(ALERTS_KEY, JSON.stringify(updated));
-    } catch (e) { console.error(e); }
+    } catch (e) { /* silently fail */ }
   }
 
   const score = getScore();

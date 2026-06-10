@@ -52,18 +52,14 @@ export default function GrowthMontageScreen() {
       if (stored) setProjects(JSON.parse(stored));
       const storedSettings = await AsyncStorage.getItem(SETTINGS_KEY);
       if (storedSettings) setSettings(JSON.parse(storedSettings));
-    } catch (e) {
-      console.error('Failed to load montage data', e);
-    }
+    } catch (e) { /* silently fail */ }
   };
 
   const saveProjects = async (newProjects: MontageProject[]) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newProjects));
       setProjects(newProjects);
-    } catch (e) {
-      console.error('Failed to save montage projects', e);
-    }
+    } catch (e) { /* silently fail */ }
   };
 
   const checkBadge = async () => {

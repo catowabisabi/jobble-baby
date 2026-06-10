@@ -129,9 +129,7 @@ export default function CaregiverFatigueScreen() {
       if (respiteData) setRespiteGoal(JSON.parse(respiteData));
       if (scoreData) setResilienceScore(JSON.parse(scoreData));
       else setShowSurvey(true);
-    } catch (e) {
-      console.error('Failed to load data', e);
-    }
+    } catch (e) { /* silently fail */ }
   }
 
   async function saveSurvey() {

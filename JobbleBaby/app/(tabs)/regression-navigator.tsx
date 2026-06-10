@@ -84,9 +84,7 @@ export default function RegressionNavigatorScreen() {
       if (lightStr) setLightLog(JSON.parse(lightStr));
       if (calmStr) setCalmSessions(JSON.parse(calmStr));
       if (badgeStr) setHasBadge(true);
-    } catch (e) {
-      console.error('Failed to load regression data', e);
-    }
+    } catch (e) { /* silently fail */ }
   };
 
   const saveRegression = async (data: RegressionStatus) => {

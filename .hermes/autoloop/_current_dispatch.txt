@@ -1,15 +1,22 @@
-# Current Dispatch — Cycle 291
+# Current Dispatch — Cycle 293
 
 ## Status
-- Cycle 291 running
+- Cycle 293 running
 - TSC 0 errors, 67 tabs
-- Pre-submission audit: PASSES all required checks ✓
-- Issue found: Task #117 was marked completed but i18n keys were NOT added
-- Re-dispatching #117 fix for 6 files: asymmetric-growth, bonding-journal, colic-relief, feeding-readiness, habit-reset, jaundice
+- i18n keys fixed: asymmetric.body (5 keys), bondingJournal.mood (5 keys) ✅
+- Pre-submission audit PASS ✅
+- Todo #117 marked completed ✅
+
+## Task Dispatched to Sisyphus
+Fix hardcoded UI strings in 4 tabs:
+1. colic-relief.tsx: TRIGGERS + WHITE_NOISE_SOUNDS display → i18n
+2. feeding-readiness.tsx: FLAVOR_CATEGORIES display → i18n
+3. habit-reset.tsx: HABIT_DOMAINS display → i18n
+4. jaundice.tsx: LAMP_TYPES display → i18n
+Full task: .hermes/autoloop/sisyphus_task.txt
 
 ## Pending (user action required)
 - #108: Deploy privacy policy HTML to jobblebaby.com/privacy
-  → File ready: docs/privacy-policy.html
 - EAS credentials configuration (Apple Team ID + App-Specific Password)
 - App Store Connect app creation
 - Play Console app creation
@@ -17,10 +24,6 @@
 ## App State
 - 67 tabs complete
 - TSC 0 errors
-- i18n: en.json + zh.json — 6 files need keys added (re-dispatch #117)
-- All REQUIRED audit checks PASS
-- Ready for EAS build + Store submission (after #117 fix)
-
-## Sisyphus
-- Task #117 re-dispatched: add missing i18n keys to 6 files
-- Session: alive (jobble-baby tmux session active)
+- i18n: en.json (295 keys) + zh.json (295 keys)
+- Pre-submission audit PASSES all required checks
+- Ready for EAS build + Store submission (after #108 user action)

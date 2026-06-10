@@ -1,59 +1,8 @@
-# Sisyphus Task — Cycle 286
-
-## Context
-Jobble Baby pre-submission audit PASSES required checks but has 22 hardcoded string warnings. Need to add i18n keys before App Store submission.
-
-## Task: Fix Hardcoded i18n Strings — 8 Files
-
-The pre-submission-audit.js flags hardcoded string arrays. Fix these files:
-
-### File 1: app/(tabs)/asymmetric-growth.tsx
-Line 19: Body part labels ('head', 'arm', 'leg') are hardcoded.
-- Add i18n keys: asymmetric.body.head, asymmetric.body.arm, asymmetric.body.leg (etc.)
-- Add to both en.json and zh.json
-
-### File 2: app/(tabs)/bonding-journal.tsx
-Line 59: Mood labels ('Struggling', 'Low', 'Neutral', 'Good', 'Great') hardcoded.
-Line 60: Color hex values - can stay hardcoded (not UI-displayed strings)
-- Add keys: bonding.journal.mood.struggling, bonding.journal.mood.low, bonding.journal.mood.neutral, bonding.journal.mood.good, bonding.journal.mood.great
-
-### File 3: app/(tabs)/colic-relief.tsx
-Line 16: Trigger categories ('hunger', 'wind', 'overtired', 'overstimulated', 'reflux', 'teething', 'unknown')
-Line 17: Sound types ('vacuum', 'fan', 'shusher', 'ocean')
-- Add i18n keys for all trigger and sound names
-
-### File 4: app/(tabs)/cry-analyzer.tsx
-Line 74: Weekday labels ('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') hardcoded.
-- Use useMemo with Intl.DateTimeFormat to derive day names from locale, OR add keys cry.analyzer.day.sun through cry.analyzer.day.sat
-
-### File 5: app/(tabs)/feeding-readiness.tsx
-Line 26: Taste categories ('bland', 'umami', 'sweet') hardcoded.
-- Add i18n keys: feeding.readiness.taste.bland, feeding.readiness.taste.umami, feeding.readiness.taste.sweet
-
-### File 6: app/(tabs)/habit-reset.tsx
-Line 29: Habit categories ('sleep', 'exercise', 'nutrition') hardcoded.
-- Add i18n keys: habit.reset.category.sleep, habit.reset.category.exercise, habit.reset.category.nutrition
-
-### File 7: app/(tabs)/jaundice.tsx
-Line 40: Light types ('LED', 'Halogen', 'Fiber Optic') hardcoded.
-- Add i18n keys: jaundice.light.led, jaundice.light.halogen, jaundice.light.fiber_optic
-
-### File 8: app/(tabs)/jet-lag.tsx
-Line 43: Timezone strings ('UTC+8', 'UTC+5:30', 'UTC+9'...) hardcoded.
-- Add i18n keys: jetlag.timezone.utc8, jetlag.timezone.utc530, jetlag.timezone.utc9 (etc.)
-
-## Requirements
-- TSC must pass with 0 errors after changes
-- No console.log/debug/error statements
-- Keep existing functionality intact
-- Add keys to BOTH en.json AND zh.json in app/i18n/
-- Color hex arrays and numeric data arrays can remain hardcoded (not UI-displayed)
-
-## Verification
-After fixing, run: cd JobbleBaby && node scripts/pre-submission-audit.js
-The Hardcoded Strings check should show fewer warnings.
-
-## Keywords
-procedural_generation,coherent_breathing,uv_radiation_dna_repair
-
-ULW — execute without asking
+# Task: Fix hardcoded UI strings in 4 files
+# 1. colic-relief.tsx: TRIGGERS[] + WHITE_NOISE_SOUNDS[] used in .map() — replace display text with t('colicRelief.trigger_' + ...) and t('colicRelief.sound_' + ...)
+# 2. feeding-readiness.tsx: FLAVOR_CATEGORIES[] in flavor form — use existing t('feedingReadiness.catBland') etc
+# 3. habit-reset.tsx: HABIT_DOMAINS[] in survey — use t('habitReset.category.' + domain)
+# 4. jaundice.tsx: LAMP_TYPES[] in lamp picker — use t('jaundice.light.' + lamp)
+# Internal arrays stay as-is. TSC 0 errors required. Run pre-submission-audit.js after.
+# Keywords: lactose_thresholds,cochlear_implant_mapping,prenatal_throat_structure
+# ULW

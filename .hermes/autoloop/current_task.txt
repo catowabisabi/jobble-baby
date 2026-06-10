@@ -1,31 +1,27 @@
-# Current Dispatch — Cycle 278
+# Current Dispatch — Cycle 295
 
 ## Status
-- Cycle 278 running
+- Cycle 295 running
 - TSC 0 errors, 67 tabs
-- i18n keys added for allergens/monitorCorrelation/projection ✅ (commit 6b8931d)
-- Actual accessibilityLabel props NOT yet added to tab files — task incomplete from cycle 277
-- Loop state updated to cycle 278
+- Pre-submission audit PASS (required checks)
+- i18n: en.json (295 keys) + zh.json (295 keys)
+- Keyword pool: 1000 (max)
+- Brainstorm complete — concept #46 Bottle Feeding Navigator added
+
+## Pending Task Dispatched
+- Todo #117: Fix Hardcoded i18n Strings (22 warnings across 8 files)
+  - Files: asymmetric-growth, bonding-journal, colic-relief, cry-analyzer, feeding-readiness, habit-reset, jaundice, jet-lag
+  - Color hex arrays can stay hardcoded
+  - Full task: sisyphus_task.txt
 
 ## Pending (user action required)
-- EAS credentials configuration
+- #108: Deploy privacy policy HTML to jobblebaby.com/privacy
+- EAS credentials configuration (Apple Team ID + App-Specific Password)
 - App Store Connect app creation
 - Play Console app creation
-- Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
-
-## Pending Todos
-- #115: Fix accessibility on allergens.tsx, monitor-correlation.tsx, projection.tsx, _layout.tsx (dispatched to Sisyphus, cycle 278)
-- #108: Deploy privacy policy HTML to live URL (P1, user action required)
 
 ## App State
 - 67 tabs complete
 - TSC 0 errors
-- i18n complete (en.json + zh.json)
-- Keyword pool: 1000 keywords (max)
-- Ready for App Store submission (pending user actions)
-
-## Sisyphus Task
-- Fix accessibility on 4 files: allergens.tsx, monitor-correlation.tsx, projection.tsx, _layout.tsx
-- Use existing i18n keys (allergens.tab_title, monitorCorrelation.tab_title, projection.tab_title, etc.)
-- Clean up unused TouchableOpacity imports
-- TSC 0 errors required before completion
+- Pre-submission audit PASSES all required checks
+- Ready for EAS build + Store submission (after #108 user action)

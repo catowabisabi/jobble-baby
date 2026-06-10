@@ -1,32 +1,55 @@
-# Task: Fix hardcoded UI strings in 4 files
+# Task: Fix Hardcoded i18n Strings (Todo #117)
 
-## File 1: colic-relief.tsx
-TRIGGERS array and WHITE_NOISE_SOUNDS array are used in .map() render loops.
-Currently displays raw string values. Replace display text with i18n calls:
-- For trigger: t('colicRelief.trigger_hunger') etc for each TRIGGERS value
-- For sound: t('colicRelief.sound_vacuum') etc for each WHITE_NOISE_SOUNDS value
-Arrays themselves stay as internal data (do not change).
+Pre-submission audit reports 22 hardcoded string array warnings across 8 files.
+Color hex arrays can stay hardcoded. String arrays used in display (.map()) need i18n.
 
-## File 2: feeding-readiness.tsx
-FLAVOR_CATEGORIES array used in flavor journal form category selector.
-Currently displays raw values like 'bland'. Replace with:
-t('feedingReadiness.catBland'), t('feedingReadiness.catUmami'), etc.
-Array stays as internal data.
+## Files to Fix
 
-## File 3: habit-reset.tsx
-HABIT_DOMAINS array used in daily check-in survey domain selector.
-Currently displays raw values. Replace with t('habitReset.category.' + domain).
-Array stays as internal data.
+### 1. colic-relief.tsx
+TRIGGERS = ['hunger', 'wind', 'overtired', 'reflux', 'teething']
+WHITE_NOISE_SOUNDS = ['vacuum', 'fan', 'shusher', 'rain', 'ocean']
+→ Replace display text with t('colicRelief.trigger_hunger'), t('colicRelief.sound_vacuum') etc
+→ Add keys to en.json/zh.json under colicRelief.trigger_* and colicRelief.sound_*
 
-## File 4: jaundice.tsx
-LAMP_TYPES array used in phototherapy lamp picker.
-Currently displays raw values. Replace with t('jaundice.light.' + lamp).
-Array stays as internal data.
+### 2. feeding-readiness.tsx
+FLAVOR_CATEGORIES = ['bland', 'umami', 'sweet', 'sour', 'salty']
+→ Replace with t('feedingReadiness.catBland') etc
+→ Add keys to en.json/zh.json under feedingReadiness.cat_*
+
+### 3. habit-reset.tsx
+HABIT_DOMAINS = ['sleep', 'exercise', 'nutrition', 'mindfulness', 'social']
+→ Replace with t('habitReset.category.sleep') etc
+→ Add keys to en.json/zh.json under habitReset.category_*
+
+### 4. jaundice.tsx
+LAMP_TYPES = ['led', 'halogen', 'fiber_optic', 'natural']
+→ Replace with t('jaundice.light.led') etc
+→ Add keys to en.json/zh.json under jaundice.light_*
+
+### 5. asymmetric-growth.tsx
+HEAD_LANDMARKS = ['head', 'arm', 'leg'] (line ~19)
+→ Replace with t('asymmetricGrowth.headLabel') etc
+→ Add keys to en.json/zh.json
+
+### 6. bonding-journal.tsx
+MOOD_LABELS = ['struggling', 'low', 'neutral', 'good', 'great'] (line ~59)
+→ Replace with t('bondingJournal.moodLabel.struggling') etc
+→ Add keys to en.json/zh.json
+
+### 7. cry-analyzer.tsx
+WEEKDAY_LABELS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
+→ Replace with t('cryAnalyzer.weekday.sun') etc
+→ Add keys to en.json/zh.json
+
+### 8. jet-lag.tsx
+Check for similar string arrays
+→ Apply same pattern
 
 ## Verification
-1. cd JobbleBaby && npx tsc --noEmit (0 errors required)
-2. node scripts/pre-submission-audit.js (PASS required)
-3. Commit: git add -A && git commit -m "fix(i18n): replace hardcoded array display strings with i18n calls in 4 tabs" && git push
+1. node scripts/pre-submission-audit.js → hardcoded strings warnings should decrease
+2. i18n keys validation should PASS
+3. TSC 0 errors
 
-Keywords: lactose_thresholds,cochlear_implant_mapping,prenatal_throat_structure
+## Keywords
+attractor_state_machine, cardiac_vagal_tone, temperature_monitoring
 ULW

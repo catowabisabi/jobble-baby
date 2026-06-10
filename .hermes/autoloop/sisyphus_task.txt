@@ -1,59 +1,55 @@
-# Sisyphus Task — Cycle 286
+# Sisyphus Task — Cycle 291
 
 ## Context
-Jobble Baby pre-submission audit PASSES required checks but has 22 hardcoded string warnings. Need to add i18n keys before App Store submission.
+Task #117 was marked completed but i18n keys were NOT actually added. Verification shows 6 files still missing keys. cry-analyzer.tsx and jet-lag.tsx already have their keys — ignore those.
 
-## Task: Fix Hardcoded i18n Strings — 8 Files
-
-The pre-submission-audit.js flags hardcoded string arrays. Fix these files:
+## Task: Add Missing i18n Keys — 6 Files
 
 ### File 1: app/(tabs)/asymmetric-growth.tsx
-Line 19: Body part labels ('head', 'arm', 'leg') are hardcoded.
-- Add i18n keys: asymmetric.body.head, asymmetric.body.arm, asymmetric.body.leg (etc.)
-- Add to both en.json and zh.json
+Line 19: `BODY_PARTS = ['head', 'arm', 'leg', 'foot', 'hand']`
+Code uses `t('asymmetric.body.${part}')` — keys missing from en.json/zh.json.
+Add to en.json: `asymmetric.body.head`, `asymmetric.body.arm`, `asymmetric.body.leg`, `asymmetric.body.foot`, `asymmetric.body.hand`
+Add same keys to zh.json with Chinese translations.
 
 ### File 2: app/(tabs)/bonding-journal.tsx
-Line 59: Mood labels ('Struggling', 'Low', 'Neutral', 'Good', 'Great') hardcoded.
-Line 60: Color hex values - can stay hardcoded (not UI-displayed strings)
-- Add keys: bonding.journal.mood.struggling, bonding.journal.mood.low, bonding.journal.mood.neutral, bonding.journal.mood.good, bonding.journal.mood.great
+Line 59: `MOOD_LABELS = ['struggling', 'low', 'neutral', 'good', 'great']`
+Code uses `t('bondingJournal.mood.${MOOD_LABELS[score-1]}')` — keys missing.
+Add: `bondingJournal.mood.struggling`, `bondingJournal.mood.low`, `bondingJournal.mood.neutral`, `bondingJournal.mood.good`, `bondingJournal.mood.great`
+Chinese: struggling=挣扎, low=低落, neutral=平静, good=良好, great=很棒
 
 ### File 3: app/(tabs)/colic-relief.tsx
-Line 16: Trigger categories ('hunger', 'wind', 'overtired', 'overstimulated', 'reflux', 'teething', 'unknown')
-Line 17: Sound types ('vacuum', 'fan', 'shusher', 'ocean')
-- Add i18n keys for all trigger and sound names
+Line 16: `TRIGGERS = ['hunger', 'wind', 'overtired', 'overstimulated', 'reflux', 'teething', 'unknown']`
+Line 17: `WHITE_NOISE_SOUNDS = ['vacuum', 'fan', 'shusher', 'ocean']`
+Add keys: `colicRelief.trigger.hunger`, `colicRelief.trigger.wind`, `colicRelief.trigger.overtired`, `colicRelief.trigger.overstimulated`, `colicRelief.trigger.reflux`, `colicRelief.trigger.teething`, `colicRelief.trigger.unknown`
+Add keys: `colicRelief.sound.vacuum`, `colicRelief.sound.fan`, `colicRelief.sound.shusher`, `colicRelief.sound.ocean`
+Chinese translations needed.
 
-### File 4: app/(tabs)/cry-analyzer.tsx
-Line 74: Weekday labels ('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') hardcoded.
-- Use useMemo with Intl.DateTimeFormat to derive day names from locale, OR add keys cry.analyzer.day.sun through cry.analyzer.day.sat
+### File 4: app/(tabs)/feeding-readiness.tsx
+Line 26: Taste categories `'bland', 'umami', 'sweet'`
+Add: `feedingReadiness.taste.bland`, `feedingReadiness.taste.umami`, `feedingReadiness.taste.sweet`
+Chinese: bland=清淡, umami=鲜味, sweet=甜味
 
-### File 5: app/(tabs)/feeding-readiness.tsx
-Line 26: Taste categories ('bland', 'umami', 'sweet') hardcoded.
-- Add i18n keys: feeding.readiness.taste.bland, feeding.readiness.taste.umami, feeding.readiness.taste.sweet
+### File 5: app/(tabs)/habit-reset.tsx
+Line 29: Habit categories `'sleep', 'exercise', 'nutrition'`
+Add: `habitReset.category.sleep`, `habitReset.category.exercise`, `habitReset.category.nutrition`
+Chinese: sleep=睡眠, exercise=运动, nutrition=营养
 
-### File 6: app/(tabs)/habit-reset.tsx
-Line 29: Habit categories ('sleep', 'exercise', 'nutrition') hardcoded.
-- Add i18n keys: habit.reset.category.sleep, habit.reset.category.exercise, habit.reset.category.nutrition
-
-### File 7: app/(tabs)/jaundice.tsx
-Line 40: Light types ('LED', 'Halogen', 'Fiber Optic') hardcoded.
-- Add i18n keys: jaundice.light.led, jaundice.light.halogen, jaundice.light.fiber_optic
-
-### File 8: app/(tabs)/jet-lag.tsx
-Line 43: Timezone strings ('UTC+8', 'UTC+5:30', 'UTC+9'...) hardcoded.
-- Add i18n keys: jetlag.timezone.utc8, jetlag.timezone.utc530, jetlag.timezone.utc9 (etc.)
+### File 6: app/(tabs)/jaundice.tsx
+Line 40: Light types `'led', 'halogen', 'fiber_optic'`
+Add: `jaundice.light.led`, `jaundice.light.halogen`, `jaundice.light.fiber_optic`
+Chinese: led=LED灯, halogen=卤素灯, fiber_optic=光纤灯
 
 ## Requirements
 - TSC must pass with 0 errors after changes
 - No console.log/debug/error statements
-- Keep existing functionality intact
 - Add keys to BOTH en.json AND zh.json in app/i18n/
-- Color hex arrays and numeric data arrays can remain hardcoded (not UI-displayed)
+- Color hex arrays (bonding-journal.tsx:60) can stay hardcoded — already flagged as acceptable
+- Run: `cd JobbleBaby && node scripts/pre-submission-audit.js` after fixing — hardcoded string count should decrease
 
 ## Verification
-After fixing, run: cd JobbleBaby && node scripts/pre-submission-audit.js
-The Hardcoded Strings check should show fewer warnings.
+After fixing all 6 files, run the pre-submission audit. The Hardcoded Strings check should show significantly fewer warnings (from 21 down to ~9 for the remaining internal data arrays).
 
 ## Keywords
-procedural_generation,coherent_breathing,uv_radiation_dna_repair
+caloric_thresholds,fetal_adaptation_syndrome,early_intervention_hearing
 
 ULW — execute without asking

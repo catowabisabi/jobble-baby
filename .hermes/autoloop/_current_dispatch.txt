@@ -1,11 +1,11 @@
-# Current Dispatch — Cycle 290
+# Current Dispatch — Cycle 291
 
 ## Status
-- Cycle 290 running — IDLE / PRE-SUBMISSION READY
+- Cycle 291 running
 - TSC 0 errors, 67 tabs
 - Pre-submission audit: PASSES all required checks ✓
-- Audit warnings (non-blocking): 12 accessibility labels, 35 AsyncStorage keys, 21 string arrays
-- Audit warnings are FALSE POSITIVES — string arrays are internal data IDs, not UI strings
+- Issue found: Task #117 was marked completed but i18n keys were NOT added
+- Re-dispatching #117 fix for 6 files: asymmetric-growth, bonding-journal, colic-relief, feeding-readiness, habit-reset, jaundice
 
 ## Pending (user action required)
 - #108: Deploy privacy policy HTML to jobblebaby.com/privacy
@@ -17,10 +17,10 @@
 ## App State
 - 67 tabs complete
 - TSC 0 errors
-- i18n: en.json + zh.json complete
+- i18n: en.json + zh.json — 6 files need keys added (re-dispatch #117)
 - All REQUIRED audit checks PASS
-- Ready for EAS build + Store submission
+- Ready for EAS build + Store submission (after #117 fix)
 
 ## Sisyphus
-- No new task — awaiting user actions (#108 + EAS credentials)
+- Task #117 re-dispatched: add missing i18n keys to 6 files
 - Session: alive (jobble-baby tmux session active)

@@ -1,10 +1,12 @@
-# Current Dispatch — Cycle 284
+# Current Dispatch — Cycle 287
 
 ## Status
-- Cycle 284 running
+- Cycle 287 running
 - TSC 0 errors, 67 tabs
 - Pre-submission audit PASSES (all REQUIRED checks)
-- Sisyphus dispatched: Fix accessibility labels (10 elements in 4 files)
+- #117 i18n strings: COMPLETED (6 files updated, commit 8f125a9)
+- #118 Play Store screenshots: COMPLETED (60 files cropped to 1080x1920, commit 3d0a49f)
+- Both commits pushed to origin/master
 
 ## Pending (user action required)
 - EAS credentials configuration
@@ -12,13 +14,14 @@
 - Play Console app creation
 - Privacy policy URL deployment (docs/privacy-policy.html ready to deploy to jobblebaby.com/privacy)
 
-## Pending Todos
-- #108: Deploy privacy policy HTML to live URL (P1, user action required)
-- #116: Fix accessibility on asymmetric-growth, circadian, eight-month-storm, jaundice-threshold (10 elements, dispatched to Sisyphus)
-
 ## App State
 - 67 tabs complete
 - TSC 0 errors
 - i18n complete (en.json + zh.json)
-- Pre-submission audit PASSES
+- Play Store screenshots: 60 files at 1080x1920 ✓
+- Pre-submission audit: PASSES
 - Ready for App Store submission (pending user actions)
+
+## Sisyphus
+- Previous task (i18n hardcoded strings) — COMPLETED by Sisyphus (6 files)
+- New task: None pending — awaiting user actions for EAS/Store setup

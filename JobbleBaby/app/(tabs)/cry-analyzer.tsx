@@ -69,10 +69,15 @@ const formatDate = (iso: string) => {
   return iso.split('T')[0];
 };
 
+// i18n-derived (no longer hardcoded)
+const WEEKDAY_KEYS = (() => {
+  const day = require('../i18n/en.json').cryAnalyzer.day as Record<string, string>;
+  return day ? Object.keys(day) : [];
+})();
+
 const getDayLabel = (dateStr: string, t: (key: string) => string): string => {
   const d = new Date(dateStr);
-  const dayKeys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-  return t(`cryAnalyzer.day.${dayKeys[d.getDay()]}`);
+  return t(`cryAnalyzer.day.${WEEKDAY_KEYS[d.getDay()]}`);
 };
 
 const SEVERITY_COLORS = { green: '#2ecc71', yellow: '#f1c40f', red: '#e74c3c' };

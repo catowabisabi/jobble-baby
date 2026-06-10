@@ -23,7 +23,11 @@ const READINESS_SIGNS = [
   { id: 'pincer_grasp',      icon: 'hand-pointing-up',  label: 'signPincerGrasp',      desc: 'signPincerGraspDesc' },
 ];
 
-const FLAVOR_CATEGORIES = ['bland', 'umami', 'sweet', 'sour'] as const;
+// i18n-derived (no longer hardcoded)
+const FLAVOR_CATEGORIES = (() => {
+  const fr = require('../i18n/en.json').feedingReadiness as Record<string, string>;
+  return Object.keys(fr).filter(k => k.startsWith('cat') && k !== 'category').map(k => k.replace('cat', '').toLowerCase());
+})();
 type FlavorCategory = typeof FLAVOR_CATEGORIES[number];
 
 const TEXTURE_STAGES = [

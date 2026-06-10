@@ -13,8 +13,15 @@ const STORAGE_KEYS = {
   colicBadge: '@jobble/colic_badge',
 };
 
-const TRIGGERS = ['hunger', 'wind', 'overtired', 'overstimulated', 'reflux', 'teething', 'unknown'];
-const WHITE_NOISE_SOUNDS = ['vacuum', 'fan', 'shusher', 'ocean'];
+// i18n-derived arrays (no longer hardcoded)
+const TRIGGERS = ((): string[] => {
+  const i18n = require('../i18n/en.json').colicRelief;
+  return Object.keys(i18n).filter(k => k.startsWith('trigger_')).map(k => k.replace('trigger_', ''));
+})();
+const WHITE_NOISE_SOUNDS = ((): string[] => {
+  const i18n = require('../i18n/en.json').colicRelief;
+  return Object.keys(i18n).filter(k => k.startsWith('sound_')).map(k => k.replace('sound_', ''));
+})();
 const COMFORT_ACTIONS = [
   { id: 'bicycle', label: 'Bicycle Legs', icon: '🫠' },
   { id: 'massage', label: 'Belly Massage', icon: '🤚' },

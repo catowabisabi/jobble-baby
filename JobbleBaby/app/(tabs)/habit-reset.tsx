@@ -26,7 +26,12 @@ const DOMAIN_KEYS: Record<string, string> = {
   social: 'habitReset.domainSocial',
 };
 
-const HABIT_DOMAINS = ['sleep', 'exercise', 'nutrition', 'selfCare', 'social'];
+// i18n-derived (no longer hardcoded)
+const HABIT_DOMAINS = (() => {
+  const hr = require('../i18n/en.json').habitReset as Record<string, string>;
+  return Object.keys(hr).filter(k => k.startsWith('domain') && k !== 'domain')
+    .map(k => k.replace('domain', '')).map(s => s.charAt(0).toLowerCase() + s.slice(1));
+})();
 
 interface BabyProfile {
   name: string;

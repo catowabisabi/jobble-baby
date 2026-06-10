@@ -37,7 +37,11 @@ interface BabyProfile {
   gender?: string;
 }
 
-const LAMP_TYPES = ['led', 'halogen', 'fiber_optic', 'bili_blanket'];
+// i18n-derived (no longer hardcoded)
+const LAMP_TYPES = ((): string[] => {
+  const light = require('../i18n/en.json').jaundice.light as Record<string, string>;
+  return light ? Object.keys(light) : [];
+})();
 
 const RISK_THRESHOLDS = {
   breastfed: { low: 8, medium: 12, high: 15, exchange: 20 },

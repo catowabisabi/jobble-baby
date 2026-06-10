@@ -16,7 +16,11 @@ import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble/asymmetric_entries';
-const BODY_PARTS = ['head', 'arm', 'leg', 'foot', 'hand'] as const;
+// i18n-derived (no longer hardcoded)
+const BODY_PARTS: string[] = (() => {
+  const body = require('../i18n/en.json').asymmetric.body as Record<string, string>;
+  return body ? Object.keys(body) : [];
+})();
 type BodyPart = typeof BODY_PARTS[number];
 
 interface AsymmetryEntry {

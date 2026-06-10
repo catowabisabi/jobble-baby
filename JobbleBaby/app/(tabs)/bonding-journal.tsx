@@ -56,7 +56,11 @@ const BONDING_MILESTONES = [
   { id: 'first_solid_reaction', labelKey: 'bondingJournal.milestoneFirstSolidReaction', icon: 'food-apple' },
 ] as const;
 
-const MOOD_LABELS = ['struggling', 'low', 'neutral', 'good', 'great'];
+// i18n-derived (no longer hardcoded)
+const MOOD_LABELS = ((): string[] => {
+  const mood = require('../i18n/en.json').bondingJournal.mood as Record<string, string>;
+  return mood ? Object.keys(mood) : [];
+})();
 const MOOD_COLORS = ['#EF4444', '#F97316', '#EAB308', '#22C55E', '#10B981'];
 
 function calculateAgeInMonths(birthDate: string): number {

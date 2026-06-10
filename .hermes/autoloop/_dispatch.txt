@@ -1,25 +1,47 @@
-# Sisyphus Task — Cycle 261
+# Dispatch — Cycle 287
 
 ## Context
-Jobble Baby: 59 tabs, TSC 0 errors. Cycle 261 — Privacy policy row in Profile tab has no onPress handler.
+Jobble Baby pre-submission audit PASSES all required checks. TSC 0 errors. 67 tabs complete. Next: fix Play Store screenshot dimensions.
 
-## Task: Fix Profile tab privacy row — add onPress to open privacy policy
+## Task: Fix Play Store Screenshot Dimensions
 
-## Problem
-In `app/(tabs)/profile.tsx` line ~514, the privacy SettingRow has no onPress handler:
+Google Play requires 1080×1920 (9:16 portrait). Current screenshots are 1080×2340 (approximately 9.8:16) — wrong aspect ratio.
+
+### Files
+All 60 PNG files in `JobbleBaby/assets/screenshots/play-store/`
+
+### Approach
+Use ImageMagick `convert` to crop each image to 1080×1920:
+- Crop from center: `convert input.png -gravity center -crop 1080x1920+0+0 output.png`
+- The 1080×2340 → 1080×1920 means cropping 420px from height
+- Use `-gravity center` to crop from center vertically
+- Overwrite original files (or save to temp, then replace)
+
+### Command (batch)
+```bash
+cd JobbleBaby/assets/screenshots/play-store/
+for f in *.png; do
+  convert "$f" -gravity center -crop 1080x1920+0+0 "$f"
+done
 ```
-<SettingRow icon="🔒" label={t('profile.privacy')} rowStyles={rowStyles} />
+
+### Verification
+After cropping, run:
+```bash
+python3 -c "
+import struct, os
+for f in os.listdir('.'):
+    if f.endswith('.png'):
+        with open(f,'rb') as fh:
+            data = fh.read(24)
+        w = struct.unpack('>I',data[16:20])[0]
+        h = struct.unpack('>I',data[20:24])[0]
+        print(f'{f}: {w}x{h}')
+"
 ```
-Users cannot view the privacy policy from within the app. Need to add onPress that opens `https://jobblebaby.com/privacy` (or the docs/privacy-policy.html page).
+All should show 1080x1920.
 
-## Requirements
-1. Find the privacy SettingRow in `app/(tabs)/profile.tsx`
-2. Add `onPress={() => Linking.openURL('https://jobblebaby.com/privacy')}` 
-3. Also update the i18n key `profile.privacy` if it doesn't already include a hint that it's tappable (optional)
-4. Run `npx tsc --noEmit` — must pass with 0 errors
-5. Do NOT commit
+### Keywords
+aspect_ratio_crop, imagemagick_batch, portrait_screenshot, google_play_requirement, play_store_asset
 
-## Keywords
-privacy_row_handler, Linking.openURL, settings UX
-
-ULW
+ULW — execute without asking

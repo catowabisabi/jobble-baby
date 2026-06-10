@@ -1,41 +1,59 @@
-# Sisyphus Task — Cycle 285
+# Sisyphus Task — Cycle 286
 
 ## Context
-Jobble Baby: Pre-submission audit PASSES all required checks (TSC 0 errors, 67 tabs). App is ready for App Store / Play Console submission pending user actions (EAS credentials, app creation, privacy policy URL).
+Jobble Baby pre-submission audit PASSES required checks but has 22 hardcoded string warnings. Need to add i18n keys before App Store submission.
 
-The audit flagged NON-BLOCKING warnings: 22 hardcoded string arrays in UI components. These need i18n keys.
+## Task: Fix Hardcoded i18n Strings — 8 Files
 
-## Task: Fix Non-i18n UI Strings in 3 Tabs
+The pre-submission-audit.js flags hardcoded string arrays. Fix these files:
 
-The pre-submission-audit.js flags hardcoded string arrays in several files. Fix these three files:
+### File 1: app/(tabs)/asymmetric-growth.tsx
+Line 19: Body part labels ('head', 'arm', 'leg') are hardcoded.
+- Add i18n keys: asymmetric.body.head, asymmetric.body.arm, asymmetric.body.leg (etc.)
+- Add to both en.json and zh.json
 
-### File 1: app/(tabs)/bonding-journal.tsx
-Lines 59-60: Rating labels ('Struggling', 'Low', 'Neutral') and color hex values are hardcoded.
-- Add i18n keys for the rating labels (e.g., bonding.journal.rating.struggling, bonding.journal.rating.low, bonding.journal.rating.neutral)
-- Add keys to both en.json and zh.json
-- Color hex values (data array) can stay hardcoded as they are not UI-displayed strings
+### File 2: app/(tabs)/bonding-journal.tsx
+Line 59: Mood labels ('Struggling', 'Low', 'Neutral', 'Good', 'Great') hardcoded.
+Line 60: Color hex values - can stay hardcoded (not UI-displayed strings)
+- Add keys: bonding.journal.mood.struggling, bonding.journal.mood.low, bonding.journal.mood.neutral, bonding.journal.mood.good, bonding.journal.mood.great
 
-### File 2: app/(tabs)/colic-relief.tsx
-Lines 16-17: Cause categories ('hunger', 'wind', 'overtired') and sound types ('vacuum', 'fan', 'shusher') are hardcoded.
-- Add i18n keys: colic.cause.hunger, colic.cause.wind, colic.cause.overtired, etc.
-- Add keys to both en.json and zh.json
+### File 3: app/(tabs)/colic-relief.tsx
+Line 16: Trigger categories ('hunger', 'wind', 'overtired', 'overstimulated', 'reflux', 'teething', 'unknown')
+Line 17: Sound types ('vacuum', 'fan', 'shusher', 'ocean')
+- Add i18n keys for all trigger and sound names
 
-### File 3: app/(tabs)/cry-analyzer.tsx
-Line 74: Weekday labels ('Sun', 'Mon', 'Tue'...) are hardcoded.
-- Use the existing day name pattern or add i18n keys for cry.analyzer.day.sun through cry.analyzer.day.sat
-- Or better: replace hardcoded array with useMemo deriving from Intl.DateTimeFormat
+### File 4: app/(tabs)/cry-analyzer.tsx
+Line 74: Weekday labels ('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') hardcoded.
+- Use useMemo with Intl.DateTimeFormat to derive day names from locale, OR add keys cry.analyzer.day.sun through cry.analyzer.day.sat
+
+### File 5: app/(tabs)/feeding-readiness.tsx
+Line 26: Taste categories ('bland', 'umami', 'sweet') hardcoded.
+- Add i18n keys: feeding.readiness.taste.bland, feeding.readiness.taste.umami, feeding.readiness.taste.sweet
+
+### File 6: app/(tabs)/habit-reset.tsx
+Line 29: Habit categories ('sleep', 'exercise', 'nutrition') hardcoded.
+- Add i18n keys: habit.reset.category.sleep, habit.reset.category.exercise, habit.reset.category.nutrition
+
+### File 7: app/(tabs)/jaundice.tsx
+Line 40: Light types ('LED', 'Halogen', 'Fiber Optic') hardcoded.
+- Add i18n keys: jaundice.light.led, jaundice.light.halogen, jaundice.light.fiber_optic
+
+### File 8: app/(tabs)/jet-lag.tsx
+Line 43: Timezone strings ('UTC+8', 'UTC+5:30', 'UTC+9'...) hardcoded.
+- Add i18n keys: jetlag.timezone.utc8, jetlag.timezone.utc530, jetlag.timezone.utc9 (etc.)
 
 ## Requirements
 - TSC must pass with 0 errors after changes
 - No console.log/debug/error statements
 - Keep existing functionality intact
 - Add keys to BOTH en.json AND zh.json in app/i18n/
+- Color hex arrays and numeric data arrays can remain hardcoded (not UI-displayed)
 
 ## Verification
 After fixing, run: cd JobbleBaby && node scripts/pre-submission-audit.js
-The Hardcoded Strings check should show fewer warnings (color arrays and numeric data are expected to remain).
+The Hardcoded Strings check should show fewer warnings.
 
 ## Keywords
-stress_response,clogged_milk_gland,body_awareness
+procedural_generation,coherent_breathing,uv_radiation_dna_repair
 
 ULW — execute without asking

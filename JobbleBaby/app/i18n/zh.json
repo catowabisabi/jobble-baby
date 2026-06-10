@@ -1816,9 +1816,9 @@
     "mood": {
       "struggling": "掙扎",
       "low": "低落",
-      "neutral": "一般",
+      "neutral": "平靜",
       "good": "良好",
-      "great": "很好"
+      "great": "很棒"
     }
   },
   "habitReset": {
@@ -2605,7 +2605,7 @@
     "stormIntegration": "8-Month Storm Integration",
     "stormInfo": "Separation anxiety often peaks during the 8-month developmental storm when multiple skills are emerging simultaneously."
   },
-"asymmetric": {
+  "asymmetric": {
     "title": "不對稱生長追蹤",
     "subtitle": "監察並追蹤寶寶生長的不對稱情況",
     "currentStatus": "目前狀態",
@@ -2641,9 +2641,9 @@
     "footLength": "腳掌長度",
     "handWidth": "手掌寬度",
     "body": {
-      "head": "頭",
+      "head": "頭部",
       "arm": "手臂",
-      "leg": "腿",
+      "leg": "腿部",
       "foot": "腳",
       "hand": "手"
     }

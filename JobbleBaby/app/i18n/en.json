@@ -2604,7 +2604,7 @@
     "stormIntegration": "8-Month Storm Integration",
     "stormInfo": "Separation anxiety often peaks during the 8-month developmental storm when multiple skills are emerging simultaneously."
   },
-"asymmetric": {
+  "asymmetric": {
     "title": "Asymmetric Growth Tracker",
     "subtitle": "Monitor and track asymmetry in your baby's growth",
     "currentStatus": "Current Status",
@@ -2640,11 +2640,11 @@
     "footLength": "Foot Length",
     "handWidth": "Hand Width",
     "body": {
-      "head": "head",
-      "arm": "arm",
-      "leg": "leg",
-      "foot": "foot",
-      "hand": "hand"
+      "head": "Head",
+      "arm": "Arm",
+      "leg": "Leg",
+      "foot": "Foot",
+      "hand": "Hand"
     }
   },
   "jaundiceThreshold": {

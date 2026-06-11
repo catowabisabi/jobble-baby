@@ -1,30 +1,50 @@
-# Task: Final Pre-Submission Code Sweep (cycle 308)
+# Task: Implement Pre-Submission Validation Script (todo #123)
 
 ## Overview
-All 118 todos complete. App is submission-ready. Do one final sweep to catch any remaining issues before App Store / Play Store submission.
+Create an automated pre-submission validation script to gate App Store / Play Store submissions. This is a quality tool — it does NOT change app functionality.
 
-## Steps
-1. Run: cd JobbleBaby && npx tsc --noEmit → must pass 0 errors
-2. Search for any remaining console.log in app/ directory (exclude node_modules) → must find 0
-3. Check for any hardcoded display strings NOT wrapped in t() in these specific files that were recently created/modified:
-   - app/(tabs)/procedure-recovery.tsx
-   - app/(tabs)/regulatory-fitness.tsx
-   - app/(tabs)/bottle-feeding.tsx
-   - app/(tabs)/cup-feeding.tsx
-4. Check app/i18n/en.json and zh.json key counts via python3 -c "import json; ..." → must match
-5. Count Tabs.Screen entries in app/(tabs)/_layout.tsx vs .tsx files → must match
-6. Report findings: if all clean, say "App submission-ready — no issues found"
+## Files to Create
+
+### 1. `scripts/pre-submission-audit.js` (new Node.js script)
+Comprehensive validation checks:
+
+1. **Tab Navigator Check** — Verify all `app/(tabs)/*.tsx` files (excluding `_layout.tsx`) have a corresponding `Tabs.Screen` entry in `app/(tabs)/_layout.tsx`
+2. **i18n Coverage Check** — Scan all tab `.tsx` files for `t('...')` calls, verify every key exists in both `app/i18n/en.json` and `app/i18n/zh.json`
+3. **AsyncStorage Key Registry** — Scan all tab files for `AsyncStorage.setItem/getItem` calls, collect keys, check for consistency (set without get, etc.)
+4. **app.json Completeness** — Verify required fields: `bundleId`, `version`, `permissions`, `ios.androidPackage` 
+5. **Screenshot Dimension Check** — Verify all screenshots in `store/` are correct dimensions:
+   - iPhone: 1290×2796 px
+   - Android: 1080×1920 px
+6. **TSC Validation** — Run `npx tsc --noEmit` in JobbleBaby dir, capture exit code
+7. **Hardcoded String Audit** — Scan tab files for display strings NOT wrapped in `t()` or `<Text>` with i18n (exclude color hex arrays, numbers, file paths)
+
+Output:
+- JSON report: `scripts/pre-submission-audit.json`
+- Console summary: pass/fail per check, total issues count
+- Exit code: 0 if all pass, non-zero if any fail
+
+### 2. `docs/PRE_SUBMISSION_CHECKLIST.md` (new human-readable doc)
+Markdown checklist version of all checks above, with:
+- What to verify
+- How to fix each failure type
+- Before-you-submit checklist items (App Store Connect app creation, EAS credentials, privacy policy URL, etc.)
+
+## Technical Notes
+- Run from REPO root: `node scripts/pre-submission-audit.js`
+- JobbleBaby source is at `JobbleBaby/app/`
+- i18n files: `JobbleBaby/app/i18n/en.json` and `zh.json`
+- Store screenshots: `store/` (at repo root, not inside JobbleBaby)
+- Use Node.js `fs` + `path` modules (no external deps needed)
 
 ## Keywords
-final_sweep,submission_ready,zero_errors
+pre_submission_audit,validation_script,quality_gate,store_submission,automation
 
 ## Context
-- 68 tabs complete
-- TSC 0 errors (verified in cycle 307)
-- i18n: en.json 297 keys, zh.json 297 keys (verified matched)
-- Pre-submission audit PASS (verified cycle 307)
-- Privacy policy HTML: ready at docs/privacy-policy.html
-- #108 pending: user needs to deploy privacy policy URL
+- 68 tabs complete in JobbleBaby/app/(tabs)/
+- TSC 0 errors (verified cycle 308)
+- i18n: 297 keys each, matched (verified cycle 308)
+- Privacy policy HTML ready at docs/privacy-policy.html
+- Pending user action: #108 (privacy policy URL deployment)
 
 ## Signal
 ULW

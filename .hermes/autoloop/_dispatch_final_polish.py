@@ -1,4 +1,10 @@
-# Final Pre-Submission Polish — Sisyphus Task
+#!/usr/bin/env python3
+"""
+Dispatch for Sisyphus — Final Pre-Submission Polish
+Cycle 305 dispatch
+"""
+
+task = """# Final Pre-Submission Polish — Sisyphus Task
 
 ## Context
 Jobble Baby app is feature-complete (69 tabs, TSC 0 errors, pre-submission audit PASS).
@@ -51,3 +57,9 @@ Should return 0.
 privacyPolicyHTML, i18nConsistency, preSubmissionCheck, privacyPolicyReady, COPPACompliance
 
 ULW
+"""
+
+with open('/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_task.txt', 'w') as f:
+    f.write(task)
+
+print("Dispatch written to sisyphus_task.txt")

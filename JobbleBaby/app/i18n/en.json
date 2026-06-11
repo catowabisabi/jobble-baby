@@ -2000,7 +2000,8 @@
     "alertStartSolids": "Start solids at 6 months — most babies are ready",
     "alertAllergenTiming": "Introduce allergens one at a time, 3-5 days apart",
     "alertIronRich": "Iron-rich foods needed at 6m+ — breast milk alone is insufficient",
-    "badgeFlavorExplorer": "Badge earned: Flavor Explorer — 20+ distinct foods logged!"
+    "badgeFlavorExplorer": "Badge earned: Flavor Explorer — 20+ distinct foods logged!",
+    "tabs.feedingReadiness": "Feeding"
   },
   "safetyAudit": {
     "title": "Baby Safety Audit",

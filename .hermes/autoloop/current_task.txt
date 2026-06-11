@@ -1,29 +1,34 @@
-# Current Dispatch — Cycle 305
+# Current Dispatch — Cycle 306
 
 ## Status
-- Cycle 305 complete
+- Cycle 306 running
 - TSC 0 errors, 69 tabs
+- i18n fix: feedingReadiness.tabs.feedingReadiness added to en.json ✅
 - Pre-submission audit: PASS (all required checks)
 - Todo #121: completed (regulatory-fitness dashboard)
 
 ## Completed This Cycle
-- #121: Infant Regulatory Fitness Dashboard (69th tab)
-  - Hermes fix: register in _layout.tsx, a11y labels, console.error removal, i18n structure
-  - Commit: e8d80c4
+- #121: Infant Regulatory Fitness Dashboard (69th tab) - completed prev cycle
+- i18n fix: added missing feedingReadiness.tabs.feedingReadiness key to en.json (zh had 2798 keys, en had 2797 - 1 key mismatch fixed)
+- Privacy policy HTML audit: docs/privacy-policy.html exists and is complete
+- Commit: 974ebd3
 
 ## Audit Results
 - TSC: PASS (0 errors)
-- i18n Key Validation: PASS (0 missing)
-- Accessibility Labels: PASS (0 missing)
+- i18n Key Validation: PASS (now matched: 2798 keys each)
+- Accessibility Labels: PASS (0 missing across 69 tabs)
 - Tabs.Screen Alignment: PASS (68 tab files, 68 Tabs.Screen entries)
 - Console.log Detection: PASS (0 found)
 
 ## Pending Tasks
 - #108 (p=1): Deploy privacy policy HTML to live URL (jobblebaby.com/privacy) — user action required
+  - HTML file ready at: docs/privacy-policy.html
+  - Needs: actual hosting URL on jobblebaby.com
 
 ## Ready for Store Submission
 - 69 tabs complete
 - TSC 0 errors
+- i18n: en.json (2798 keys) + zh.json (2798 keys) - perfectly matched
 - Pre-submission audit: PASS
-- i18n: en.json + zh.json properly nested
-- Remaining: #108 (user action: privacy URL + EAS creds)
+- Privacy policy HTML: complete and ready for deployment
+- Remaining: #108 (user action: deploy privacy URL + configure EAS creds)

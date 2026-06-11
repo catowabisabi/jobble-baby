@@ -1,85 +1,31 @@
-# Task: Implement Bottle Feeding Navigator tab (Todo #118)
+# Task: Fix accessibility on bottle-feeding.tsx (Todo #119)
 
 ## Overview
-Create a new tab `bottle-feeding.tsx` to help parents track bottle feeding mechanics, nipple flow rates, paced feeding practice, and feeding efficiency. This complements the existing `bottle-refusal.tsx` and `feeding-readiness.tsx` tabs.
+The bottle-feeding.tsx tab has 9 TouchableOpacity elements with zero accessibilityLabel. All other tabs have been WCAG 2.1 AA compliant, but the newest tab (bottle-feeding) was missed. Fix all interactive elements.
 
-## Features to Implement
+## Files
+- app/(tabs)/bottle-feeding.tsx (557 lines, 9 touchable elements without accessibilityLabel)
 
-### 1. Nipple Level Tracker
-- 6 levels: 0=preemie, 1=newborn, 2=3mo, 3=6mo, 4=variable, 5=toddler
-- Log current level + start date + notes
-- Alert prompts at 3mo and 6mo to reassess level
-- Storage key: `@jobble/nipple_level` → `{ level: number, started_at: string, notes: string }`
+## What to Fix
+Add `accessibilityLabel` prop to ALL of these TouchableOpacity elements:
+1. Nipple level selector item (line ~183)
+2. Each nipple level option in modal (line ~241, ~265)
+3. "Log Session" add button (line ~281)
+4. "Log Practice" add button (line ~335)
+5. Each pace step item (line ~383)
+6. Modal close buttons (lines ~393, ~461, ~489)
+7. Any other TouchableOpacity/Pressable without label
 
-### 2. Feeding Efficiency Log
-- Log: date, duration_min, volume_ml, nipple_level, pace_score (1-5), notes
-- Calculate intake rate (ml/min) displayed per entry
-- Storage key: `@jobble/bottle_session` → array of session objects
-
-### 3. Paced Bottle Feeding Guide
-- Step-by-step technique display (5 steps)
-- Practice session logger: date, duration_min, notes
-- Track total practice sessions count
-- Storage key: `@jobble/pace_practice` → array of practice objects
-
-### 4. Flow Mismatch Signals
-- Checklist: coughing, gulping, underfeeding, excessive gas, refusal, choking
-- Each signal shows "Consider advancing" or "Consider slowing down" guidance
-- Educational summary card
-
-### 5. Summary Dashboard
-- Current nipple level with age-appropriate recommendation
-- Recent efficiency trend (last 7 sessions)
-- Paced feeding streak (consecutive days practiced)
-- Next milestone alert (next level recommendation)
-
-## UI/UX
-- Use `MaterialCommunityIcons name="baby-bottle-outline"` for tab icon
-- Clean card-based layout
-- One-hand friendly logging
-- i18n keys under `bottleFeeding.*` in en.json/zh.json
-
-## Tab Registration
-Add to `app/(tabs)/_layout.tsx`:
-- name: `bottle-feeding`
-- title: t('tabs.bottleFeeding')
-- icon: baby-bottle-outline
-
-## i18n Keys (add to en.json + zh.json)
-bottleFeeding.title = "Bottle Feeding"
-bottleFeeding.nippleLevel = "Nipple Level"
-bottleFeeding.feedingLog = "Feeding Log"
-bottleFeeding.pacedFeeding = "Paced Feeding"
-bottleFeeding.flowMismatch = "Flow Mismatch Signs"
-bottleFeeding.addSession = "Log Session"
-bottleFeeding.intakeRate = "Intake Rate"
-bottleFeeding.nippleLevel0 = "Preemie"
-bottleFeeding.nippleLevel1 = "Newborn"
-bottleFeeding.nippleLevel2 = "3 months"
-bottleFeeding.nippleLevel3 = "6 months"
-bottleFeeding.nippleLevel4 = "Variable"
-bottleFeeding.nippleLevel5 = "Toddler"
-bottleFeeding.paceStep1 = "Hold baby semi-upright"
-bottleFeeding.paceStep2 = "Use slow-flow nipple"
-bottleFeeding.paceStep3 = " Pause every 30-60ml"
-bottleFeeding.paceStep4 = "Watch for hunger cues"
-bottleFeeding.paceStep5 = "Burp between sides"
-bottleFeeding.signalCoughing = "Coughing"
-bottleFeeding.signalGulping = "Gulping"
-bottleFeeding.signalUnderfeeding = "Underfeeding"
-bottleFeeding.signalGas = "Excessive gas"
-bottleFeeding.signalRefusal = "Refusal"
-bottleFeeding.signalChoking = "Choking"
-bottleFeeding.considerAdvancing = "Consider advancing nipple level"
-bottleFeeding.considerSlowing = "Consider slowing flow"
-(use existing tabs like feeding-readiness.tsx as style reference)
+## Rules
+- Use existing i18n keys where possible (e.g., t('bottleFeeding.nippleLevel0'))
+- For buttons without existing keys, add new keys to en.json + zh.json
+- Keep existing onPress handlers intact
+- TSC must pass with 0 errors after changes
 
 ## Verification
 1. npx tsc --noEmit → 0 errors
-2. Tab appears in app/(tabs)/ list
-3. Tab registered in _layout.tsx
-4. i18n keys present in en.json + zh.json
-5. All AsyncStorage keys use @jobble/ prefix
+2. Count accessibilityLabel occurrences in file → should be 15+
+3. All TouchableOpacity/Pressable elements have labels
 
 ## Keywords
 bottleNippleFlow, pacedBottleFeeding, feedingEfficiency, slowFlowNipple, fastFlowTransition

@@ -1,53 +1,46 @@
-# Final Pre-Submission Polish — Sisyphus Task
+# Task: Implement Post-Procedure Feeding & Recovery Navigator (concept #49, todo #122)
 
-## Context
-Jobble Baby app is feature-complete (69 tabs, TSC 0 errors, pre-submission audit PASS).
-Only pending item is #108: deploy privacy policy to jobblebaby.com/privacy (user action required).
-Your job: ensure the privacy policy HTML is complete and ready, and do a final i18n sanity check.
+## Overview
+Create a new tab `procedure-recovery.tsx` in `app/(tabs)/` that helps parents track infant recovery after minor procedures (frenotomy, frenulectomy, ear tubes, hernia repair).
 
-## Tasks
+## UX Flow
+1. **Procedure Log**: procedure type picker, date, surgeon/clinic name, photo-capture of discharge instructions
+2. **Feeding Recovery Tracker**: latch quality (1-5), bottle acceptance, feeding duration, pain response during feeds. Alert if no feeding for 12+ hours
+3. **Pain & Comfort Score**: 1-5 scale, correlates with feeding willingness
+4. **Medication Log**: drug picker (acetaminophen/ibuprofen), dose calculator (mg/kg), timing log, response tracking
+5. **Wound Monitoring Guide**: photo-log surgical site, healing status picker (normal/suspicious), date
+6. **Recovery Timeline**: procedure-type-specific expected curve (Day 1-3 swelling, Day 4-7 feeding improves, Week 2 baseline), track actual vs expected milestones
+7. **Follow-up Alert**: set reminder, pre-visit checklist
+8. **Doctor Alert**: if pain >3 for 3+ days OR fever >38C OR no feeding for 24hrs → prompt to call pediatrician
 
-### 1. Privacy Policy HTML Audit
-Check that the privacy policy HTML at `privacy-policy/` (or wherever it lives) includes ALL required sections:
-- Data collection (tracking, analytics)
-- Camera/photo access usage
-- Data storage and retention
-- Third-party sharing (Expo, Sentry, etc.)
-- Children's data (COPPA compliance)
-- Parent rights (access, deletion, correction)
-- Contact info placeholder (email/URL to fill in)
-- Effective date placeholder
+## Data Model (use @jobble/ namespaced AsyncStorage keys)
+- `@jobble/procedure_log`: {date, procedure_type, clinic, surgeon, photo_uri}
+- `@jobble/feeding_recovery`: [{date, latch_quality, duration_min, pain_score, notes}]
+- `@jobble/medication_log`: [{date, drug, dose_mg, weight_kg, response}]
+- `@jobble/wound_photo`: [{date, procedure_type, photo_uri, healing_status}]
+- `@jobble/recovery_timeline`: {procedure_type, milestones: [{day, expected, actual}]}
 
-If any section is missing or placeholder text remains, add proper content using the app's i18n keys where appropriate.
+## Integration Points
+- Links to: tongue-tie tab, medicine-dose tab, clinician-portal tab, cry-analyzer tab, growth tab
+- Badge: "Recovery Champion" (completed full post-procedure tracking)
 
-### 2. i18n Key Consistency Check
-Run a quick sanity check on the i18n files:
-- Count total keys in en.json and zh.json — they should match
-- Check for any orphan keys (keys in zh.json not in en.json or vice versa)
-- Verify key naming consistency (no typos in key names)
-- Report findings in sisyphus_response.txt
+## Technical Requirements
+- TSC 0 errors
+- i18n: add keys to en.json + zh.json (use t() for all display strings)
+- All strings internationalized
+- No console.log
+- No hardcoded display strings
+- Follow existing tab patterns (like procedure-recovery.tsx if it exists, or similar recovery-style tabs)
+- Register in app/(tabs)/_layout.tsx Tabs.Screen array
+- Run pre-submission audit after
 
-### 3. Verify All 69 Tabs in _layout.tsx
-Run this check:
-```bash
-cd JobbleBaby
-grep -c "name=" app/(tabs)/_layout.tsx
-```
-Should return 69 tab entries.
-
-### 4. Check for console.log / debug statements
-```bash
-grep -r "console.log" app/ --include="*.tsx" | wc -l
-```
-Should return 0.
-
-## Rules
-- Do NOT modify any tab components (all 69 are complete and working)
-- Only audit/fix privacy-policy HTML and i18n files
-- TSC must still pass 0 errors after any changes
-- Report findings in .hermes/autoloop/sisyphus_response.txt
+## Implementation
+1. Create `app/(tabs)/procedure-recovery.tsx` with full UI per UX Flow above
+2. Add i18n keys to en.json + zh.json (procedureRecovery.* namespace)
+3. Register in `app/(tabs)/_layout.tsx`
+4. Run TSC --noEmit → fix any errors
+5. Run pre-submission audit (if script exists in /scripts/)
 
 ## Keywords
-privacyPolicyHTML, i18nConsistency, preSubmissionCheck, privacyPolicyReady, COPPACompliance
-
+post_procedure_feeding,frenotomy_recovery,feeding_restoration,post_op_pain_management,wound_monitoring,recovery_timeline,follow_up_alert,pediatrician_alert
 ULW

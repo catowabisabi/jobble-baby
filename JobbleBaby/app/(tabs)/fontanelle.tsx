@@ -260,7 +260,7 @@ export default function FontanelleScreen() {
             </View>
             {entries.length > 0 ? (
               <View style={styles.chartContainer}>
-                <Text style={styles.sectionTitle}>Fontanelle Size History</Text>
+                <Text style={styles.sectionTitle}>{t('fontanelle.sizeHistory')}</Text>
                 {entries.slice(0, 10).map((entry) => (
                   <View key={entry.id} style={styles.entryCard}>
                     <View style={styles.entryHeader}>
@@ -269,12 +269,12 @@ export default function FontanelleScreen() {
                     </View>
                     <View style={styles.entryStats}>
                       <View style={styles.entryStat}>
-                        <Text style={styles.entryStatLabel}>Fontanelle</Text>
+                        <Text style={styles.entryStatLabel}>{t('fontanelle.fontanelle')}</Text>
                         <Text style={styles.entryStatValue}>{entry.fontanelle_size_mm}</Text>
                         <Text style={styles.entryStatUnit}>mm</Text>
                       </View>
                       <View style={styles.entryStat}>
-                        <Text style={styles.entryStatLabel}>Head Circ.</Text>
+                        <Text style={styles.entryStatLabel}>{t('fontanelle.headCirc')}</Text>
                         <Text style={styles.entryStatValue}>{entry.head_circumference_cm}</Text>
                         <Text style={styles.entryStatUnit}>cm</Text>
                       </View>
@@ -327,10 +327,10 @@ export default function FontanelleScreen() {
               </View>
             </View>
 
-            <Text style={styles.sectionTitle}>New Measurement</Text>
+            <Text style={styles.sectionTitle}>{t('fontanelle.newMeasurement')}</Text>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Fontanelle Size (mm)</Text>
+              <Text style={styles.inputLabel}>{t('fontanelle.sizeMm')}</Text>
               <View style={{ position: 'relative' }}>
                 <TextInput
                   style={styles.textInput}
@@ -345,7 +345,7 @@ export default function FontanelleScreen() {
             </View>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Head Circumference (cm)</Text>
+              <Text style={styles.inputLabel}>{t('fontanelle.headCircCm')}</Text>
               <View style={{ position: 'relative' }}>
                 <TextInput
                   style={styles.textInput}
@@ -368,7 +368,7 @@ export default function FontanelleScreen() {
             </TouchableOpacity>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Notes (optional)</Text>
+              <Text style={styles.inputLabel}>{t('fontanelle.notesOptional')}</Text>
               <View style={styles.noteInput}>
                 <TextInput
                   style={styles.noteInputText}
@@ -388,7 +388,7 @@ export default function FontanelleScreen() {
 
             {todayEntries.length > 0 && (
               <>
-                <Text style={styles.historyTitle}>Today's Entries ({todayEntries.length})</Text>
+                <Text style={styles.historyTitle}>{t('fontanelle.todaysEntries').replace('{count}', todayEntries.length.toString())}</Text>
                 {todayEntries.map((entry) => (
                   <View key={entry.id} style={styles.historyItem}>
                     <Ionicons name="checkmark-circle" size={18} color={FONTANELLE_BLUE} style={styles.historyIcon} />

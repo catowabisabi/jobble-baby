@@ -256,7 +256,7 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <Text style={styles.greeting}>{t('home.greetingMorning')}</Text>
           <Text style={styles.babyName}>{t('home.title')}</Text>
-          <Text style={styles.date}>Friday, May 29, 2026</Text>
+          <Text style={styles.date}>{t('home.mockDate')}</Text>
         </View>
 
         
@@ -329,7 +329,7 @@ export default function HomeScreen() {
           </View>
           <View style={styles.projectionRow}>
             <Text style={styles.projectionLabel}>🦷 Teething forecast</Text>
-            <Text style={styles.projectionValue}>Next 3 teeth expected</Text>
+            <Text style={styles.projectionValue}>{t('home.nextTeethExpected')}</Text>
           </View>
           <View style={styles.projectionRow}>
             <Text style={styles.projectionLabel}>📈 Growth velocity</Text>

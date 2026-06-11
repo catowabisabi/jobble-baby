@@ -1,50 +1,103 @@
-# Task: Implement Pre-Submission Validation Script (todo #123)
+# Task: Fix Remaining Hardcoded i18n Strings (todo #124)
 
 ## Overview
-Create an automated pre-submission validation script to gate App Store / Play Store submissions. This is a quality tool — it does NOT change app functionality.
+Fix hardcoded display strings in 4 tab files flagged by `scripts/pre-submission-audit.js` HardcodedStrings check. Add i18n keys to en.json + zh.json, update .tsx files to use `t('...')`.
 
-## Files to Create
+## Files + Strings to Fix
 
-### 1. `scripts/pre-submission-audit.js` (new Node.js script)
-Comprehensive validation checks:
+### 1. `JobbleBaby/app/(tabs)/constellation.tsx`
+- Line 168: `"Logged"` → `t('constellation.logged')`
+- Line 172: `"Total"` → `t('constellation.total')`
+- Line 176: `"Remaining"` → `t('constellation.remaining')`
 
-1. **Tab Navigator Check** — Verify all `app/(tabs)/*.tsx` files (excluding `_layout.tsx`) have a corresponding `Tabs.Screen` entry in `app/(tabs)/_layout.tsx`
-2. **i18n Coverage Check** — Scan all tab `.tsx` files for `t('...')` calls, verify every key exists in both `app/i18n/en.json` and `app/i18n/zh.json`
-3. **AsyncStorage Key Registry** — Scan all tab files for `AsyncStorage.setItem/getItem` calls, collect keys, check for consistency (set without get, etc.)
-4. **app.json Completeness** — Verify required fields: `bundleId`, `version`, `permissions`, `ios.androidPackage` 
-5. **Screenshot Dimension Check** — Verify all screenshots in `store/` are correct dimensions:
-   - iPhone: 1290×2796 px
-   - Android: 1080×1920 px
-6. **TSC Validation** — Run `npx tsc --noEmit` in JobbleBaby dir, capture exit code
-7. **Hardcoded String Audit** — Scan tab files for display strings NOT wrapped in `t()` or `<Text>` with i18n (exclude color hex arrays, numbers, file paths)
+### 2. `JobbleBaby/app/(tabs)/cup-feeding.tsx`
+- Line 391: `"Feeding Journey"` → `t('cupFeeding.feedingJourney')`
+- Line 485: `"Soft Spout Trainer Cup"` → `t('cupFeeding.softSpoutTrainerCup')`
+- Line 492: `"Straw Cup"` → `t('cupFeeding.strawCup')`
+- Line 499: `"Open Cup"` → `t('cupFeeding.openCup')`
+- Line 517: `"Sessions"` → `t('cupFeeding.sessions')`
+- Line 554: `"Pending"` → `t('cupFeeding.pending')`
+- Line 563: `"Pending"` → `t('cupFeeding.pending')`
+- Line 581: `"Correlation tip for cup timing with bowel movements."` → `t('cupFeeding.correlationTip')`
+- Line 587: `"Oral Motor Assessment →"` → `t('cupFeeding.oralMotorAssessmentLink')`
+- Line 594: `"Feeding Tracking →"` → `t('cupFeeding.feedingTrackingLink')`
 
-Output:
-- JSON report: `scripts/pre-submission-audit.json`
-- Console summary: pass/fail per check, total issues count
-- Exit code: 0 if all pass, non-zero if any fail
+### 3. `JobbleBaby/app/(tabs)/fontanelle.tsx`
+- Line 263: `"Fontanelle Size History"` → `t('fontanelle.sizeHistory')`
+- Line 272: `"Fontanelle"` → `t('fontanelle.fontanelle')`
+- Line 277: `"Head Circ."` → `t('fontanelle.headCirc')`
+- Line 333: `"Fontanelle Size (mm)"` → `t('fontanelle.sizeMm')`
+- Line 348: `"Head Circumference (cm)"` → `t('fontanelle.headCircCm')`
+- Line 371: `"Notes (optional)"` → `t('fontanelle.notesOptional')`
 
-### 2. `docs/PRE_SUBMISSION_CHECKLIST.md` (new human-readable doc)
-Markdown checklist version of all checks above, with:
-- What to verify
-- How to fix each failure type
-- Before-you-submit checklist items (App Store Connect app creation, EAS credentials, privacy policy URL, etc.)
+### 4. `JobbleBaby/app/(tabs)/growth.tsx`
+- Line 760: `"Height"` → `t('growth.height')` (if not already i18n)
 
-## Technical Notes
-- Run from REPO root: `node scripts/pre-submission-audit.js`
-- JobbleBaby source is at `JobbleBaby/app/`
-- i18n files: `JobbleBaby/app/i18n/en.json` and `zh.json`
-- Store screenshots: `store/` (at repo root, not inside JobbleBaby)
-- Use Node.js `fs` + `path` modules (no external deps needed)
+## i18n Keys to Add
+
+### en.json — add to existing sections
+```json
+"constellation": {
+  "logged": "Logged",
+  "total": "Total",
+  "remaining": "Remaining"
+},
+"cupFeeding": {
+  "feedingJourney": "Feeding Journey",
+  "softSpoutTrainerCup": "Soft Spout Trainer Cup",
+  "strawCup": "Straw Cup",
+  "openCup": "Open Cup",
+  "sessions": "Sessions",
+  "pending": "Pending",
+  "correlationTip": "Correlation tip for cup timing with bowel movements.",
+  "oralMotorAssessmentLink": "Oral Motor Assessment →",
+  "feedingTrackingLink": "Feeding Tracking →"
+},
+"fontanelle": {
+  "sizeHistory": "Fontanelle Size History",
+  "fontanelle": "Fontanelle",
+  "headCirc": "Head Circ.",
+  "sizeMm": "Fontanelle Size (mm)",
+  "headCircCm": "Head Circumference (cm)",
+  "notesOptional": "Notes (optional)"
+}
+```
+
+### zh.json — same structure with Chinese translations
+```json
+"constellation": {
+  "logged": "已記錄",
+  "total": "總計",
+  "remaining": "剩餘"
+},
+"cupFeeding": {
+  "feedingJourney": "餵養歷程",
+  "softSpoutTrainerCup": "軟嘴訓練杯",
+  "strawCup": "吸管杯",
+  "openCup": "開口杯",
+  "sessions": "記錄",
+  "pending": "待完成",
+  "correlationTip": "杯子時機與排便關聯提示。",
+  "oralMotorAssessmentLink": "口腔肌肉評估 →",
+  "feedingTrackingLink": "餵養追蹤 →"
+},
+"fontanelle": {
+  "sizeHistory": "顱縫大小歷史",
+  "fontanelle": "顱縫",
+  "headCirc": "頭圍",
+  "sizeMm": "顱縫大小（毫米）",
+  "headCircCm": "頭圍（厘米）",
+  "notesOptional": "備註（可選）"
+}
+```
+
+## Verification
+After fixing, run: `cd JobbleBaby && node ../scripts/pre-submission-audit.js`
+- HardcodedStrings check should show 0 issues (or fewer if some are false positives like placeholder text in TextInput)
+- TSC: `npx tsc --noEmit` → 0 errors
 
 ## Keywords
-pre_submission_audit,validation_script,quality_gate,store_submission,automation
-
-## Context
-- 68 tabs complete in JobbleBaby/app/(tabs)/
-- TSC 0 errors (verified cycle 308)
-- i18n: 297 keys each, matched (verified cycle 308)
-- Privacy policy HTML ready at docs/privacy-policy.html
-- Pending user action: #108 (privacy policy URL deployment)
+hardcoded_strings,i18n,constellation,cup_feeding,fontanelle,growth,localization
 
 ## Signal
 ULW

@@ -165,15 +165,15 @@ export default function ConstellationScreen() {
       <View style={styles.statsRow}>
         <View style={styles.statCard}>
           <Text style={styles.statNumber}>{loggedMilestones.size}</Text>
-          <Text style={styles.statLabel}>Logged</Text>
+          <Text style={styles.statLabel}>{t('constellation.logged')}</Text>
         </View>
         <View style={styles.statCard}>
           <Text style={styles.statNumber}>{cluster.milestones.length}</Text>
-          <Text style={styles.statLabel}>Total</Text>
+          <Text style={styles.statLabel}>{t('constellation.total')}</Text>
         </View>
         <View style={styles.statCard}>
           <Text style={styles.statNumber}>{cluster.milestones.length - loggedMilestones.size}</Text>
-          <Text style={styles.statLabel}>Remaining</Text>
+          <Text style={styles.statLabel}>{t('constellation.remaining')}</Text>
         </View>
       </View>
 

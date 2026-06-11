@@ -388,7 +388,7 @@ export default function CupFeedingScreen() {
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Feeding Journey</Text>
+          <Text style={styles.greeting}>{t('cupFeeding.feedingJourney')}</Text>
           <Text style={styles.title}>🥤 {t('cupFeeding.title')}</Text>
           <Text style={styles.subtitle}>
             {babyAgeMonths > 0
@@ -478,25 +478,25 @@ export default function CupFeedingScreen() {
         )}
 
         <View style={styles.cupRecCard}>
-          <Text style={styles.cupRecTitle}>Cup Recommendations</Text>
+          <Text style={styles.cupRecTitle}>{t('cupFeeding.cupRecommendations')}</Text>
           <View style={styles.cupRecItem}>
             <Text style={styles.cupRecIcon}>🍼</Text>
             <View>
-              <Text style={styles.cupRecLabel}>Soft Spout Trainer Cup</Text>
+              <Text style={styles.cupRecLabel}>{t('cupFeeding.softSpoutTrainerCup')}</Text>
               <Text style={styles.cupRecStage}>{t('cupFeeding.stage1')} · e.g., Munchkin 360 Trainer</Text>
             </View>
           </View>
           <View style={styles.cupRecItem}>
             <Text style={styles.cupRecIcon}>🥤</Text>
             <View>
-              <Text style={styles.cupRecLabel}>Straw Cup</Text>
+              <Text style={styles.cupRecLabel}>{t('cupFeeding.strawCup')}</Text>
               <Text style={styles.cupRecStage}>{t('cupFeeding.stage2')} · e.g., Take & Toss, .zipZorb</Text>
             </View>
           </View>
           <View style={styles.cupRecItem}>
             <Text style={styles.cupRecIcon}>🥛</Text>
             <View>
-              <Text style={styles.cupRecLabel}>Open Cup</Text>
+              <Text style={styles.cupRecLabel}>{t('cupFeeding.openCup')}</Text>
               <Text style={styles.cupRecStage}>{t('cupFeeding.stage3')} · e.g., ezp-0, haakaa</Text>
             </View>
           </View>
@@ -514,7 +514,7 @@ export default function CupFeedingScreen() {
             </View>
             <View style={styles.statCard}>
               <Text style={styles.statValue}>{entries.length}</Text>
-              <Text style={styles.statLabel}>Sessions</Text>
+              <Text style={styles.statLabel}>{t('cupFeeding.sessions')}</Text>
             </View>
           </View>
         )}
@@ -551,7 +551,7 @@ export default function CupFeedingScreen() {
             {firstOpenCup ? (
               <Text style={styles.milestoneBadge}>✓ Achieved</Text>
             ) : (
-              <Text style={styles.milestonePending}>Pending</Text>
+              <Text style={styles.milestonePending}>{t('cupFeeding.pending')}</Text>
             )}
           </View>
           <View style={styles.milestoneItem}>
@@ -560,7 +560,7 @@ export default function CupFeedingScreen() {
             {strawMastered ? (
               <Text style={styles.milestoneBadge}>✓ Achieved</Text>
             ) : (
-              <Text style={styles.milestonePending}>Pending</Text>
+              <Text style={styles.milestonePending}>{t('cupFeeding.pending')}</Text>
             )}
           </View>
         </View>
@@ -578,20 +578,20 @@ export default function CupFeedingScreen() {
             <MaterialCommunityIcons name="food-apple" size={16} color="#F59E0B" />
             <Text style={styles.tipTitle}>{t('cupFeeding.gastrocolicTip')}</Text>
           </View>
-          <Text style={styles.tipText}>Correlation tip for cup timing with bowel movements.</Text>
+          <Text style={styles.tipText}>{t('cupFeeding.correlationTip')}</Text>
         </View>
 
         <Link href="/oral-motor" style={styles.navLink} asChild>
           <TouchableOpacity accessibilityLabel="Go to oral motor assessment" accessibilityRole="link">
             <MaterialCommunityIcons name="brain" size={18} color={CUP_BLUE} />
-            <Text style={styles.navLinkText}>Oral Motor Assessment →</Text>
+            <Text style={styles.navLinkText}>{t('cupFeeding.oralMotorAssessmentLink')}</Text>
           </TouchableOpacity>
         </Link>
 
         <Link href="/tracking" style={styles.navLink} asChild>
           <TouchableOpacity accessibilityLabel="Go to feeding tracking" accessibilityRole="link">
             <MaterialCommunityIcons name="chart-line" size={18} color={CUP_BLUE} />
-            <Text style={styles.navLinkText}>Feeding Tracking →</Text>
+            <Text style={styles.navLinkText}>{t('cupFeeding.feedingTrackingLink')}</Text>
           </TouchableOpacity>
         </Link>
 

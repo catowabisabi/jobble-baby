@@ -600,8 +600,8 @@ export default function GutBrainAxis() {
                   ))}
                 </View>
                 <View style={styles.gasLabels}>
-                  <Text style={[styles.gasLabelText, { color: C.muted }]}>None</Text>
-                  <Text style={[styles.gasLabelText, { color: C.muted }]}>Severe</Text>
+                  <Text style={[styles.gasLabelText, { color: C.muted }]}>{t('gutBrainAxis.none')}</Text>
+                  <Text style={[styles.gasLabelText, { color: C.muted }]}>{t('gutBrainAxis.severe')}</Text>
                 </View>
 
                 <Text style={[styles.formLabel, { color: C.muted }]}>{t('gutBrainAxis.refluxEpisodes')} ({refluxEpisodes})</Text>

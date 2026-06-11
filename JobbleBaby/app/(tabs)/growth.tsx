@@ -757,7 +757,7 @@ export default function GrowthScreen() {
               style={[styles.toggleBtn, chartType === 'height' && styles.toggleBtnActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setChartType('height')}
             >
-              <Text style={[styles.toggleBtnText, chartType === 'height' && styles.toggleBtnTextActive]}>Height</Text>
+              <Text style={[styles.toggleBtnText, chartType === 'height' && styles.toggleBtnTextActive]}>{t('growth.height')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               accessibilityLabel="Show weight chart"
@@ -766,7 +766,7 @@ export default function GrowthScreen() {
               style={[styles.toggleBtn, chartType === 'weight' && styles.toggleBtnActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setChartType('weight')}
             >
-              <Text style={[styles.toggleBtnText, chartType === 'weight' && styles.toggleBtnTextActive]}>Weight</Text>
+              <Text style={[styles.toggleBtnText, chartType === 'weight' && styles.toggleBtnTextActive]}>{t('growth.weight')}</Text>
             </TouchableOpacity>
           </View>
 
@@ -779,7 +779,7 @@ export default function GrowthScreen() {
               style={[styles.toggleBtn, styles.toggleBtnSmall, gender === 'boys' && styles.toggleBtnActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setGender('boys')}
             >
-              <Text style={[styles.toggleBtnText, styles.toggleBtnTextSmall, gender === 'boys' && styles.toggleBtnTextActive]}>Boys</Text>
+              <Text style={[styles.toggleBtnText, styles.toggleBtnTextSmall, gender === 'boys' && styles.toggleBtnTextActive]}>{t('growth.boys')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               accessibilityLabel="Show girls growth data"
@@ -788,7 +788,7 @@ export default function GrowthScreen() {
               style={[styles.toggleBtn, styles.toggleBtnSmall, gender === 'girls' && styles.toggleBtnActive, { minHeight: 44, minWidth: 44 }]}
               onPress={() => setGender('girls')}
             >
-              <Text style={[styles.toggleBtnText, styles.toggleBtnTextSmall, gender === 'girls' && styles.toggleBtnTextActive]}>Girls</Text>
+              <Text style={[styles.toggleBtnText, styles.toggleBtnTextSmall, gender === 'girls' && styles.toggleBtnTextActive]}>{t('growth.girls')}</Text>
             </TouchableOpacity>
           </View>
 

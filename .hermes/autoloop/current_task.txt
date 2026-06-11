@@ -1,25 +1,29 @@
-# Current Dispatch — Cycle 304
+# Current Dispatch — Cycle 305
 
 ## Status
-- Cycle 304 running
-- TSC 0 errors, 67 tabs
-- Sisyphus session: alive (recovered from paste-buffer issue)
-- Todo #120: completed (12 accessibility labels fixed — commit f32a803)
-- Pre-submission audit: PASS (a11y, TSC, i18n)
+- Cycle 305 complete
+- TSC 0 errors, 69 tabs
+- Pre-submission audit: PASS (all required checks)
+- Todo #121: completed (regulatory-fitness dashboard)
+
+## Completed This Cycle
+- #121: Infant Regulatory Fitness Dashboard (69th tab)
+  - Hermes fix: register in _layout.tsx, a11y labels, console.error removal, i18n structure
+  - Commit: e8d80c4
+
+## Audit Results
+- TSC: PASS (0 errors)
+- i18n Key Validation: PASS (0 missing)
+- Accessibility Labels: PASS (0 missing)
+- Tabs.Screen Alignment: PASS (68 tab files, 68 Tabs.Screen entries)
+- Console.log Detection: PASS (0 found)
 
 ## Pending Tasks
 - #108 (p=1): Deploy privacy policy HTML to live URL (jobblebaby.com/privacy) — user action required
 
-## Pre-Submission Audit Status
-- TSC: PASS (0 errors)
-- i18n Key Validation: PASS (0 missing)
-- Accessibility Labels: PASS (0 missing — #120 completed)
-- AsyncStorage: WARNING (35 non-standard keys — lower priority, not blocking)
-- Hardcoded strings: WARNING (13 potential — mostly color hex/numeric arrays, acceptable)
-
-## Ready for Store
-- 67 tabs complete
+## Ready for Store Submission
+- 69 tabs complete
 - TSC 0 errors
-- Pre-submission audit: PASS (a11y fixed)
-- i18n: en.json + zh.json 295 keys each
+- Pre-submission audit: PASS
+- i18n: en.json + zh.json properly nested
 - Remaining: #108 (user action: privacy URL + EAS creds)

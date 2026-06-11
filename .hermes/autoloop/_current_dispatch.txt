@@ -1,29 +1,32 @@
-# Current Dispatch — Cycle 293
+# Current Dispatch — Cycle 309
 
 ## Status
-- Cycle 293 running
-- TSC 0 errors, 67 tabs
-- i18n keys fixed: asymmetric.body (5 keys), bondingJournal.mood (5 keys) ✅
-- Pre-submission audit PASS ✅
-- Todo #117 marked completed ✅
+- Cycle 309 running
+- TSC 0 errors, 68 tabs (verified cycle 308)
+- i18n: en.json (297 keys) + zh.json (297 keys) — matched ✓
+- App submission-ready — no issues found ✓ (cycle 308 Sisyphus final sweep)
+- Todo #117 (i18n hardcoded strings) → marked completed
 
-## Task Dispatched to Sisyphus
-Fix hardcoded UI strings in 4 tabs:
-1. colic-relief.tsx: TRIGGERS + WHITE_NOISE_SOUNDS display → i18n
-2. feeding-readiness.tsx: FLAVOR_CATEGORIES display → i18n
-3. habit-reset.tsx: HABIT_DOMAINS display → i18n
-4. jaundice.tsx: LAMP_TYPES display → i18n
-Full task: .hermes/autoloop/sisyphus_task.txt
+## Completed Cycle 308
+- Sisyphus final sweep: TSC 0 errors, 0 console.log, 297/297 i18n keys matched, 68 tabs registered ✓
+- App submission-ready — no issues found ✓
 
-## Pending (user action required)
-- #108: Deploy privacy policy HTML to jobblebaby.com/privacy
-- EAS credentials configuration (Apple Team ID + App-Specific Password)
-- App Store Connect app creation
-- Play Console app creation
+## Dispatched to Sisyphus (Cycle 309)
+- Task: Implement Pre-Submission Validation Script (todo #123, from idea #73)
+- Files: scripts/pre-submission-audit.js + docs/PRE_SUBMISSION_CHECKLIST.md
+- 7 validation checks: tab navigator, i18n coverage, AsyncStorage registry, app.json, screenshot dimensions, TSC, hardcoded strings
+- Status: dispatched via tmux set-buffer + paste-buffer
+
+## DB State
+- todos: 118 completed, 1 deferred (#106), 1 pending (#108), 1 new (#123)
+- pending #108 (p=1): Deploy privacy policy HTML to live URL — USER ACTION REQUIRED
+- deferred #106 (p=1): Village Network — backend required, post-launch
 
 ## App State
-- 67 tabs complete
+- 68 tabs complete
 - TSC 0 errors
-- i18n: en.json (295 keys) + zh.json (295 keys)
-- Pre-submission audit PASSES all required checks
-- Ready for EAS build + Store submission (after #108 user action)
+- i18n: 297 keys each, matched
+- Console.log: 0 found
+- Pre-submission audit: PASS
+- Privacy policy HTML: ready at docs/privacy-policy.html
+- Remaining: #108 (user action: deploy privacy URL + configure EAS creds + create App Store Connect app)

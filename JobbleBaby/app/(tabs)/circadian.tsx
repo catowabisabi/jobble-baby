@@ -275,20 +275,20 @@ export default function CircadianScreen() {
           <View style={styles.wakeWindowRow}>
             <Text style={styles.wakeWindowIcon}>☀</Text>
             <View style={styles.wakeWindowInfo}>
-              <Text style={styles.wakeWindowTitle}>Optimal Wake Window: {optimalWakeWindow} min</Text>
-              <Text style={styles.wakeWindowSub}>For {babyAge.days}-day-old baby</Text>
+              <Text style={styles.wakeWindowTitle}>{t('circadian.optimalWakeWindow')}: {optimalWakeWindow} min</Text>
+              <Text style={styles.wakeWindowSub}>{t('circadian.forBabyAge').replace('{days}', String(babyAge.days))}</Text>
             </View>
           </View>
         </View>
 
         {/* Handoff Card */}
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Optimal Handoff</Text>
+          <Text style={styles.sectionTitle}>{t('circadian.optimalHandoff')}</Text>
           <View style={styles.handoffRow}>
             <View>
-              <Text style={styles.handoffLabel}>Last sleep ended</Text>
+              <Text style={styles.handoffLabel}>{t('circadian.lastSleepEnded')}</Text>
               <Text style={styles.handoffValue}>{nextNapEnd}</Text>
-              <Text style={styles.handoffNext}>+ {optimalWakeWindow}min wake window</Text>
+              <Text style={styles.handoffNext}>+ {optimalWakeWindow}min {t('circadian.wakeWindow')}</Text>
             </View>
             <MaterialCommunityIcons name="arrow-right-circle" size={32} color={C.muted} />
           </View>
@@ -296,21 +296,21 @@ export default function CircadianScreen() {
 
         {/* Last Events Summary */}
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Handoff Summary</Text>
+          <Text style={styles.sectionTitle}>{t('circadian.handoffSummary')}</Text>
           <View style={styles.summaryGrid}>
             <View style={styles.summaryItem}>
               <Text style={styles.summaryIcon}>🍼</Text>
-              <Text style={styles.summaryLabel}>Last feed</Text>
+              <Text style={styles.summaryLabel}>{t('circadian.lastFeed')}</Text>
               <Text style={styles.summaryValue}>{lastFeed?.time || '--:--'}</Text>
             </View>
             <View style={styles.summaryItem}>
               <Text style={styles.summaryIcon}>🧷</Text>
-              <Text style={styles.summaryLabel}>Last diaper</Text>
+              <Text style={styles.summaryLabel}>{t('circadian.lastDiaper')}</Text>
               <Text style={styles.summaryValue}>{lastDiaper?.time || '--:--'}</Text>
             </View>
             <View style={styles.summaryItem}>
               <Text style={styles.summaryIcon}>🌙</Text>
-              <Text style={styles.summaryLabel}>Last sleep</Text>
+              <Text style={styles.summaryLabel}>{t('circadian.lastSleep')}</Text>
               <Text style={styles.summaryValue}>{lastSleep?.time || '--:--'}</Text>
             </View>
           </View>
@@ -318,21 +318,21 @@ export default function CircadianScreen() {
 
         {/* Tummy Time Tracker */}
         <View style={styles.tummySection}>
-          <Text style={styles.sectionTitle}>Tummy Time</Text>
+          <Text style={styles.sectionTitle}>{t('circadian.tummyTime')}</Text>
           <View style={styles.tummyRow}>
             <View style={styles.tummyStat}>
               <Text style={styles.tummyStatValue}>{todayTummyTotal}</Text>
-              <Text style={styles.tummyStatLabel}>min today</Text>
+              <Text style={styles.tummyStatLabel}>{t('circadian.minToday')}</Text>
             </View>
             <View style={styles.tummyStat}>
               <Text style={styles.tummyStatValue}>{weekTummyTotal}</Text>
-              <Text style={styles.tummyStatLabel}>min this week</Text>
+              <Text style={styles.tummyStatLabel}>{t('circadian.minThisWeek')}</Text>
             </View>
           </View>
           {isTummyTimerRunning ? (
             <View>
               <View style={styles.runningBadge}>
-                <Text style={styles.runningText}>● Timer running</Text>
+                <Text style={styles.runningText}>{t('circadian.timerRunning')}</Text>
               </View>
               <View style={styles.tummyButtonRow}>
                 <TouchableOpacity
@@ -341,7 +341,7 @@ export default function CircadianScreen() {
                   style={[styles.tummyBtn, { backgroundColor: '#EF4444' }]}
                   onPress={handleEndTummy}
                 >
-                  <Text style={styles.tummyBtnText}>End Session</Text>
+                  <Text style={styles.tummyBtnText}>{t('circadian.endSession')}</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -353,7 +353,7 @@ export default function CircadianScreen() {
                   style={[styles.tummyBtn, { backgroundColor: '#3B82F6' }]}
                   onPress={handleStartTummy}
                 >
-                  <Text style={styles.tummyBtnText}>Start Tummy Time</Text>
+                  <Text style={styles.tummyBtnText}>{t('circadian.startTummyTime')}</Text>
                 </TouchableOpacity>
             </View>
           )}

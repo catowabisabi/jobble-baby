@@ -1,0 +1,66 @@
+{
+  "checks": [
+    {
+      "name": "TabNavigator",
+      "pass": true,
+      "issues": []
+    },
+    {
+      "name": "i18nCoverage",
+      "pass": true,
+      "issues": {
+        "missingZh": [],
+        "missingEn": []
+      },
+      "meta": {
+        "enCount": 297,
+        "zhCount": 297
+      }
+    },
+    {
+      "name": "appJson",
+      "pass": true,
+      "issues": []
+    },
+    {
+      "name": "ScreenshotDimensions",
+      "pass": true,
+      "issues": [],
+      "meta": {
+        "count": 0
+      }
+    },
+    {
+      "name": "TSCParse",
+      "pass": true,
+      "issues": []
+    },
+    {
+      "name": "HardcodedStrings",
+      "pass": false,
+      "issues": [
+        "constellation.tsx:168: \"Logged\"",
+        "constellation.tsx:172: \"Total\"",
+        "constellation.tsx:176: \"Remaining\"",
+        "cup-feeding.tsx:391: \"Feeding Journey\"",
+        "cup-feeding.tsx:485: \"Soft Spout Trainer Cup\"",
+        "cup-feeding.tsx:492: \"Straw Cup\"",
+        "cup-feeding.tsx:499: \"Open Cup\"",
+        "cup-feeding.tsx:517: \"Sessions\"",
+        "cup-feeding.tsx:554: \"Pending\"",
+        "cup-feeding.tsx:563: \"Pending\"",
+        "cup-feeding.tsx:581: \"Correlation tip for cup timing with bowel movements.\"",
+        "cup-feeding.tsx:587: \"Oral Motor Assessment →\"",
+        "cup-feeding.tsx:594: \"Feeding Tracking →\"",
+        "fontanelle.tsx:263: \"Fontanelle Size History\"",
+        "fontanelle.tsx:272: \"Fontanelle\"",
+        "fontanelle.tsx:277: \"Head Circ.\"",
+        "fontanelle.tsx:333: \"Fontanelle Size (mm)\"",
+        "fontanelle.tsx:348: \"Head Circumference (cm)\"",
+        "fontanelle.tsx:371: \"Notes (optional)\"",
+        "growth.tsx:760: \"Height\""
+      ]
+    }
+  ],
+  "exitCode": 1
+}

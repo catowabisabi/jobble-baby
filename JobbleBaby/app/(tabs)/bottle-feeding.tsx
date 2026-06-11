@@ -337,15 +337,15 @@ export default function BottleFeedingScreen() {
               </View>
             ))}
             <View style={[styles.paceDivider, { backgroundColor: C.border }]} />
-            <Text style={[styles.paceSubtitle, { color: C.muted }]}>Practice Sessions ({paceSessions.length})</Text>
+            <Text style={[styles.paceSubtitle, { color: C.muted }]}>{t('bottleFeeding.practiceSessions')} ({paceSessions.length})</Text>
             <TouchableOpacity style={[styles.addBtn, { backgroundColor: '#10B981' }]} onPress={() => setShowPaceModal(true)} accessibilityLabel="Log practice session" accessibilityRole="button">
               <MaterialCommunityIcons name="plus" size={16} color="#fff" />
-              <Text style={styles.addBtnText}>Log Practice Session</Text>
+              <Text style={styles.addBtnText}>{t('bottleFeeding.logPracticeSession')}</Text>
             </TouchableOpacity>
             {paceSessions.slice(0, 5).map(p => (
               <View key={p.id} style={[styles.paceSessionRow, { borderBottomColor: C.border }]}>
                 <Text style={[styles.paceSessionDate, { color: C.text }]}>{new Date(p.date).toLocaleDateString()}</Text>
-                <Text style={[styles.paceSessionDur, { color: C.muted }]}>{p.duration_min} min practice</Text>
+                <Text style={[styles.paceSessionDur, { color: C.muted }]}>{p.duration_min} {t('bottleFeeding.minPractice')}</Text>
               </View>
             ))}
           </Card>
@@ -399,7 +399,7 @@ export default function BottleFeedingScreen() {
               ))}
             </View>
             <TouchableOpacity style={[styles.modalClose, { backgroundColor: C.accent }]} onPress={() => setShowNippleModal(false)} accessibilityLabel="Close nipple level editor" accessibilityRole="button">
-              <Text style={styles.modalCloseText}>Done</Text>
+              <Text style={styles.modalCloseText}>{t('bottleFeeding.close')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -412,7 +412,7 @@ export default function BottleFeedingScreen() {
             <Text style={[styles.modalTitle, { color: C.text }]}>{t('bottleFeeding.addSession')}</Text>
             <View style={styles.formRow}>
               <View style={styles.formField}>
-                <Text style={[styles.formLabel, { color: C.muted }]}>Duration (min)</Text>
+                <Text style={[styles.formLabel, { color: C.muted }]}>{t('bottleFeeding.durationMin')}</Text>
                 <TextInput
                   style={[styles.textInput, { backgroundColor: C.card, color: C.text, borderColor: C.border }]}
                   placeholder="15"
@@ -423,7 +423,7 @@ export default function BottleFeedingScreen() {
                 />
               </View>
               <View style={styles.formField}>
-                <Text style={[styles.formLabel, { color: C.muted }]}>Volume (ml)</Text>
+                <Text style={[styles.formLabel, { color: C.muted }]}>{t('bottleFeeding.volumeMl')}</Text>
                 <TextInput
                   style={[styles.textInput, { backgroundColor: C.card, color: C.text, borderColor: C.border }]}
                   placeholder="120"
@@ -436,7 +436,7 @@ export default function BottleFeedingScreen() {
             </View>
             <View style={styles.formRow}>
               <View style={styles.formField}>
-                <Text style={[styles.formLabel, { color: C.muted }]}>Nipple Level</Text>
+                <Text style={[styles.formLabel, { color: C.muted }]}>{t('bottleFeeding.nippleLevelLabel')}</Text>
                 <TextInput
                   style={[styles.textInput, { backgroundColor: C.card, color: C.text, borderColor: C.border }]}
                   placeholder="1"
@@ -447,7 +447,7 @@ export default function BottleFeedingScreen() {
                 />
               </View>
               <View style={styles.formField}>
-                <Text style={[styles.formLabel, { color: C.muted }]}>Pace Score (1-5)</Text>
+                <Text style={[styles.formLabel, { color: C.muted }]}>{t('bottleFeeding.paceScore')}</Text>
                 <TextInput
                   style={[styles.textInput, { backgroundColor: C.card, color: C.text, borderColor: C.border }]}
                   placeholder="3"
@@ -477,7 +477,7 @@ export default function BottleFeedingScreen() {
       <Modal visible={showPaceModal} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={[styles.modalBox, { backgroundColor: C.card }]}>
-            <Text style={[styles.modalTitle, { color: C.text }]}>Log Paced Feeding Practice</Text>
+            <Text style={[styles.modalTitle, { color: C.text }]}>{t('bottleFeeding.logPacedFeedingPractice')}</Text>
             <TextInput
               style={[styles.textInput, { backgroundColor: C.card, color: C.text, borderColor: C.border }]}
               placeholder="Duration (minutes)"
@@ -495,7 +495,7 @@ export default function BottleFeedingScreen() {
               multiline
             />
             <TouchableOpacity style={[styles.modalClose, { backgroundColor: '#10B981' }]} onPress={savePace} accessibilityLabel="Save practice session" accessibilityRole="button">
-              <Text style={styles.modalCloseText}>Save Practice</Text>
+              <Text style={styles.modalCloseText}>{t('bottleFeeding.savePractice')}</Text>
             </TouchableOpacity>
           </View>
         </View>

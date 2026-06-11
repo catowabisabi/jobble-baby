@@ -6,7 +6,8 @@ import en from '../i18n/en.json';
 import zh from '../i18n/zh.json';
 
 type Language = 'en' | 'zh';
-type TranslationKeys = typeof en;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TranslationKeys = { [key: string]: any };
 
 const translations: Record<Language, TranslationKeys> = { en, zh };
 

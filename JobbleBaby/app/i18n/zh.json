@@ -3065,5 +3065,40 @@
     "signalChoking": "窒息",
     "considerAdvancing": "考慮提升奶嘴流量",
     "considerSlowing": "考慮減慢流速"
+  },
+  "regulatory_fitness": {
+    "title": "調節健身",
+    "tab": "健身",
+    "composite": "綜合",
+    "domains": "調節範疇",
+    "no_data": "暫無數據。記錄今天的狀態以開始。",
+    "log_today": "記錄今天狀態",
+    "update_today": "更新今天狀態",
+    "daily_checkin": "每日檢查",
+    "domain": {
+      "autonomic": "自主神經",
+      "sensory": "感覺",
+      "motor": "運動",
+      "social": "社交/情緒"
+    },
+    "status": {
+      "optimal": "理想",
+      "developing": "發展中",
+      "concerning": "關注"
+    },
+    "parent_calm": "家長平静指數",
+    "suggestions": "活動建議",
+    "suggestion": {
+      "tummy_time": "不同姿勢的趴臥時間 — 刺激前庭+本體+觸覺",
+      "sensory_play": "不同質地的感覺遊戲 — 支持感覺整合"
+    },
+    "decrease_autonomic": "降低自主神經分數",
+    "increase_autonomic": "增加自主神經分數",
+    "decrease_sensory": "降低感覺分數",
+    "increase_sensory": "增加感覺分數",
+    "decrease_motor": "降低運動分數",
+    "increase_motor": "增加運動分數",
+    "decrease_social": "降低社交分數",
+    "increase_social": "增加社交分數"
   }
 }

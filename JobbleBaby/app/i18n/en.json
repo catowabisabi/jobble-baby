@@ -3064,5 +3064,40 @@
     "signalChoking": "Choking",
     "considerAdvancing": "Consider advancing nipple level",
     "considerSlowing": "Consider slowing flow"
+  },
+  "regulatory_fitness": {
+    "title": "Regulatory Fitness",
+    "tab": "Fitness",
+    "composite": "Composite",
+    "domains": "Regulatory Domains",
+    "no_data": "No data yet. Log today's fitness to get started.",
+    "log_today": "Log Today's Fitness",
+    "update_today": "Update Today's Fitness",
+    "daily_checkin": "Daily Check-in",
+    "domain": {
+      "autonomic": "Autonomic",
+      "sensory": "Sensory",
+      "motor": "Motor",
+      "social": "Social/Emotional"
+    },
+    "status": {
+      "optimal": "optimal",
+      "developing": "developing",
+      "concerning": "concerning"
+    },
+    "parent_calm": "Parent Calm Score",
+    "suggestions": "Activity Suggestions",
+    "suggestion": {
+      "tummy_time": "Tummy time in different positions — addresses vestibular + proprioceptive + tactile",
+      "sensory_play": "Sensory play with different textures — supports sensory integration"
+    },
+    "decrease_autonomic": "Decrease autonomic score",
+    "increase_autonomic": "Increase autonomic score",
+    "decrease_sensory": "Decrease sensory score",
+    "increase_sensory": "Increase sensory score",
+    "decrease_motor": "Decrease motor score",
+    "increase_motor": "Increase motor score",
+    "decrease_social": "Decrease social score",
+    "increase_social": "Increase social score"
   }
 }

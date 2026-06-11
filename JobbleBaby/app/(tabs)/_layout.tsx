@@ -453,6 +453,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-apple" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="regulatory-fitness"
+        options={{
+          title: t('regulatory_fitness.tab') || 'Fitness',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="trending-up" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

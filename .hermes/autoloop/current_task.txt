@@ -1,27 +1,20 @@
-# Current Dispatch — Cycle 295
+# Current Dispatch — Cycle 301
 
 ## Status
-- Cycle 295 running
+- Cycle 301 running
 - TSC 0 errors, 67 tabs
-- Pre-submission audit PASS (required checks)
-- i18n: en.json (295 keys) + zh.json (295 keys)
-- Keyword pool: 1000 (max)
-- Brainstorm complete — concept #46 Bottle Feeding Navigator added
+- Sisyphus session: alive
+- Todo #119: Fix bottle-feeding accessibility — dispatched (retry)
 
-## Pending Task Dispatched
-- Todo #117: Fix Hardcoded i18n Strings (22 warnings across 8 files)
-  - Files: asymmetric-growth, bonding-journal, colic-relief, cry-analyzer, feeding-readiness, habit-reset, jaundice, jet-lag
-  - Color hex arrays can stay hardcoded
-  - Full task: sisyphus_task.txt
+## Pending Tasks
+- #119 (p=2): Fix accessibility on bottle-feeding.tsx — 9 touchable elements missing accessibilityLabel
+- #108 (p=1): Deploy privacy policy HTML to live URL (jobblebaby.com/privacy) — user action required
 
-## Pending (user action required)
-- #108: Deploy privacy policy HTML to jobblebaby.com/privacy
-- EAS credentials configuration (Apple Team ID + App-Specific Password)
-- App Store Connect app creation
-- Play Console app creation
-
-## App State
+## Ready for Store
 - 67 tabs complete
 - TSC 0 errors
-- Pre-submission audit PASSES all required checks
-- Ready for EAS build + Store submission (after #108 user action)
+- Pre-submission audit PASS
+- i18n: en.json + zh.json 295 keys each
+- Keyword pool: 1049
+- Concept #47 sparked
+- Pending user action: privacy policy URL + EAS credentials

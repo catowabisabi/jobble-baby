@@ -183,6 +183,8 @@ export default function BottleFeedingScreen() {
     <TouchableOpacity
       style={[styles.tab, activeSection === id && { backgroundColor: C.accent + '22', borderColor: C.accent }]}
       onPress={() => setActiveSection(id)}
+      accessibilityLabel={label}
+      accessibilityRole="button"
     >
       <MaterialCommunityIcons name={icon as any} size={18} color={activeSection === id ? C.accent : C.muted} />
       <Text style={[styles.tabLabel, { color: activeSection === id ? C.accent : C.muted }]}>{label}</Text>
@@ -246,6 +248,8 @@ export default function BottleFeedingScreen() {
                     nippleData?.level === n.level && { backgroundColor: C.accent + '22', borderColor: C.accent },
                   ]}
                   onPress={() => { setNippleNotes(nippleData?.notes || ''); setShowNippleModal(true); saveNippleLevel(n.level); }}
+                  accessibilityLabel={`${t(`bottleFeeding.${n.labelKey}`)} nipple level`}
+                  accessibilityRole="button"
                 >
                   <Text style={[styles.nippleChipText, { color: C.text }]}>{t(`bottleFeeding.${n.labelKey}`)}</Text>
                   <Text style={[styles.nippleChipAge, { color: C.muted }]}>{n.age}</Text>
@@ -265,6 +269,8 @@ export default function BottleFeedingScreen() {
             <TouchableOpacity
               style={[styles.addBtn, { backgroundColor: C.accent }]}
               onPress={() => { setNippleNotes(nippleData?.notes || ''); setShowNippleModal(true); }}
+              accessibilityLabel={t('bottleFeeding.addSession')}
+              accessibilityRole="button"
             >
               <MaterialCommunityIcons name="pencil" size={16} color="#fff" />
               <Text style={styles.addBtnText}>{t('bottleFeeding.addSession')}</Text>
@@ -278,7 +284,7 @@ export default function BottleFeedingScreen() {
             <Card>
               <View style={styles.cardHeader}>
                 <Text style={[styles.sectionTitle, { color: C.text }]}>{t('bottleFeeding.feedingLog')}</Text>
-                <TouchableOpacity style={[styles.addBtnSmall, { backgroundColor: C.accent }]} onPress={() => setShowSessionModal(true)}>
+                <TouchableOpacity style={[styles.addBtnSmall, { backgroundColor: C.accent }]} onPress={() => setShowSessionModal(true)} accessibilityLabel={t('bottleFeeding.addSession')} accessibilityRole="button">
                   <MaterialCommunityIcons name="plus" size={14} color="#fff" />
                   <Text style={styles.addBtnSmallText}>{t('bottleFeeding.addSession')}</Text>
                 </TouchableOpacity>
@@ -332,7 +338,7 @@ export default function BottleFeedingScreen() {
             ))}
             <View style={[styles.paceDivider, { backgroundColor: C.border }]} />
             <Text style={[styles.paceSubtitle, { color: C.muted }]}>Practice Sessions ({paceSessions.length})</Text>
-            <TouchableOpacity style={[styles.addBtn, { backgroundColor: '#10B981' }]} onPress={() => setShowPaceModal(true)}>
+            <TouchableOpacity style={[styles.addBtn, { backgroundColor: '#10B981' }]} onPress={() => setShowPaceModal(true)} accessibilityLabel="Log practice session" accessibilityRole="button">
               <MaterialCommunityIcons name="plus" size={16} color="#fff" />
               <Text style={styles.addBtnText}>Log Practice Session</Text>
             </TouchableOpacity>
@@ -385,12 +391,14 @@ export default function BottleFeedingScreen() {
                   style={[styles.nippleChip, { backgroundColor: C.card, borderColor: C.border },
                     nippleData?.level === n.level && { backgroundColor: C.accent + '22', borderColor: C.accent }]}
                   onPress={() => saveNippleLevel(n.level)}
+                  accessibilityLabel={`${t(`bottleFeeding.${n.labelKey}`)} nipple level`}
+                  accessibilityRole="button"
                 >
                   <Text style={[styles.nippleChipText, { color: C.text }]}>{t(`bottleFeeding.${n.labelKey}`)}</Text>
                 </TouchableOpacity>
               ))}
             </View>
-            <TouchableOpacity style={[styles.modalClose, { backgroundColor: C.accent }]} onPress={() => setShowNippleModal(false)}>
+            <TouchableOpacity style={[styles.modalClose, { backgroundColor: C.accent }]} onPress={() => setShowNippleModal(false)} accessibilityLabel="Close nipple level editor" accessibilityRole="button">
               <Text style={styles.modalCloseText}>Done</Text>
             </TouchableOpacity>
           </View>
@@ -458,7 +466,7 @@ export default function BottleFeedingScreen() {
               onChangeText={v => setSessionForm(f => ({ ...f, notes: v }))}
               multiline
             />
-            <TouchableOpacity style={[styles.modalClose, { backgroundColor: C.accent }]} onPress={saveSession}>
+            <TouchableOpacity style={[styles.modalClose, { backgroundColor: C.accent }]} onPress={saveSession} accessibilityLabel={t('bottleFeeding.addSession')} accessibilityRole="button">
               <Text style={styles.modalCloseText}>{t('bottleFeeding.addSession')}</Text>
             </TouchableOpacity>
           </View>
@@ -486,7 +494,7 @@ export default function BottleFeedingScreen() {
               onChangeText={v => setPaceForm(f => ({ ...f, notes: v }))}
               multiline
             />
-            <TouchableOpacity style={[styles.modalClose, { backgroundColor: '#10B981' }]} onPress={savePace}>
+            <TouchableOpacity style={[styles.modalClose, { backgroundColor: '#10B981' }]} onPress={savePace} accessibilityLabel="Save practice session" accessibilityRole="button">
               <Text style={styles.modalCloseText}>Save Practice</Text>
             </TouchableOpacity>
           </View>

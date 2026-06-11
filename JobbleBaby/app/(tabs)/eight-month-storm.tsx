@@ -177,10 +177,10 @@ export default function EightMonthStorm() {
               accessibilityLabel={language === 'zh' ? '運動技能輸入' : 'Motor skills input'}
             />
             <View style={styles.modalButtons}>
-              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: '#666' }]} onPress={() => setShowAdd(false)}>
+              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: '#666' }]} onPress={() => setShowAdd(false)} accessibilityLabel={language === 'zh' ? '取消' : 'Cancel'}>
                 <Text style={styles.modalBtnText}>{language === 'zh' ? '取消' : 'Cancel'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} onPress={() => setShowAdd(false)}>
+              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} onPress={() => setShowAdd(false)} accessibilityLabel={language === 'zh' ? '保存' : 'Save'}>
                 <Text style={styles.modalBtnText}>{language === 'zh' ? '保存' : 'Save'}</Text>
               </TouchableOpacity>
             </View>

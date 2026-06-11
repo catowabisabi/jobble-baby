@@ -186,7 +186,7 @@ export default function PhototherapyComfortScreen() {
             <Text style={[styles.stressTitle, { color: C.text }]}>{t('photoComfort.parentWellness') || 'Parent Wellness'}</Text>
             <View style={styles.stressBar}>
               {[1, 2, 3, 4, 5].map(n => (
-                <TouchableOpacity key={n} onPress={() => setParentStress(n)} style={styles.stressDotWrap}>
+                <TouchableOpacity key={n} onPress={() => setParentStress(n)} style={styles.stressDotWrap} accessibilityLabel={`Parent stress level ${n}`}>
                   <View style={[
                     styles.stressDot,
                     { backgroundColor: n <= parentStress ? (parentStress <= 2 ? '#22C55E' : parentStress <= 3 ? '#F59E0B' : '#EF4444') : C.border }
@@ -355,7 +355,7 @@ export default function PhototherapyComfortScreen() {
             <Text style={[styles.modalLabel, { color: C.muted }]}>{t('photoComfort.parentStress') || 'Parent stress (1=great, 5=overwhelmed)'}</Text>
             <View style={styles.stressInputRow}>
               {[1, 2, 3, 4, 5].map(n => (
-                <TouchableOpacity key={n} onPress={() => setParentStress(n)} style={styles.stressInputDot}>
+                <TouchableOpacity key={n} onPress={() => setParentStress(n)} style={styles.stressInputDot} accessibilityLabel={`Parent stress level ${n}`}>
                   <View style={[
                     styles.stressInputDotInner,
                     { backgroundColor: n === parentStress ? (n <= 2 ? '#22C55E' : n <= 3 ? '#F59E0B' : '#EF4444') : C.border }

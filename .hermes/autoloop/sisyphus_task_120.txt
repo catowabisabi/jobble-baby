@@ -1,0 +1,24 @@
+# Task: Fix Remaining 12 Accessibility Labels (Todo #120)
+
+## Overview
+Pre-submission audit found 12 elements missing accessibilityLabel across 4 tab files. Fix all of them to achieve WCAG 2.1 AA compliance.
+
+## Files + Line Numbers
+1. **app/(tabs)/asymmetric-growth.tsx** — line 244 (1 element)
+2. **app/(tabs)/circadian.tsx** — lines 565, 590, 603, 609, 612, 656 (6 elements)
+3. **app/(tabs)/eight-month-storm.tsx** — lines 180, 183 (2 elements)
+4. **app/(tabs)/jaundice-threshold.tsx** — line 297 (1 element)
+5. **+ 2 more** from audit (check full audit output below)
+
+## Verification
+Run: `node scripts/pre-submission-audit.js`
+Section [4/9] Accessibility Labels should show: PASS (0 found)
+
+## Rules
+- Use existing i18n keys where applicable, or add new keys to en.json/zh.json
+- TSC must pass: `npx tsc --noEmit` → 0 errors
+- Do NOT change any functionality — only add accessibilityLabel
+
+## Keywords
+circadian_phase_shift, rem_cycle_stacking, clogged_milk_gland
+ULW

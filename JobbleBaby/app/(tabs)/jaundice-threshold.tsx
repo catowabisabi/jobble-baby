@@ -294,7 +294,7 @@ export default function JaundiceThresholdScreen() {
               >
                 <Text style={styles.cancelButtonText}>{t('jaundiceThreshold.cancel')}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+              <TouchableOpacity style={styles.saveButton} onPress={handleSave} accessibilityLabel={t('jaundiceThreshold.save')}>
                 <Text style={styles.saveButtonText}>{t('jaundiceThreshold.save')}</Text>
               </TouchableOpacity>
             </View>

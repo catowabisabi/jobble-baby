@@ -562,7 +562,7 @@ function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
             <Text style={styles.lightValue}>{todayTotal} min</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.expandBtn} onPress={() => setShowLightLogger(!showLightLogger)}>
+        <TouchableOpacity style={styles.expandBtn} onPress={() => setShowLightLogger(!showLightLogger)} accessibilityLabel={showLightLogger ? t('duskLight.hideLogger') : t('duskLight.logLight')}>
           <Text style={styles.expandBtnText}>{showLightLogger ? (t('duskLight.hideLogger') || 'Hide Logger') : (t('duskLight.logLight') || '+ Log Light Exposure')}</Text>
         </TouchableOpacity>
         {showLightLogger && (
@@ -587,7 +587,7 @@ function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
               <Text style={styles.lightInputLabel}>{t('duskLight.screenTime') || 'Screen Time (min)'}</Text>
               <TextInput style={styles.lightInput} keyboardType="numeric" value={logForm.screenTime} onChangeText={(v) => setLogForm({ ...logForm, screenTime: v })} placeholder="0" placeholderTextColor={C.muted} />
             </View>
-            <TouchableOpacity style={styles.logBtn} onPress={handleLogLight}>
+            <TouchableOpacity style={styles.logBtn} onPress={handleLogLight} accessibilityLabel={t('duskLight.saveLog')}>
               <Text style={styles.logBtnText}>{t('duskLight.saveLog') || 'Save Log'}</Text>
             </TouchableOpacity>
           </View>
@@ -600,16 +600,16 @@ function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
         <View style={styles.alarmRow}>
           <Text style={styles.alarmTime}>{duskAlarm.hour.toString().padStart(2, '0')}:{duskAlarm.minute.toString().padStart(2, '0')}</Text>
           <View style={styles.alarmToggle}>
-            <TouchableOpacity style={[styles.alarmBtn, { backgroundColor: duskAlarm.enabled ? '#10B981' : C.background }]} onPress={() => handleSaveAlarm(duskAlarm.hour, duskAlarm.minute, !duskAlarm.enabled)}>
+            <TouchableOpacity style={[styles.alarmBtn, { backgroundColor: duskAlarm.enabled ? '#10B981' : C.background }]} onPress={() => handleSaveAlarm(duskAlarm.hour, duskAlarm.minute, !duskAlarm.enabled)} accessibilityLabel={duskAlarm.enabled ? t('duskLight.enabled') : t('duskLight.disabled')}>
               <Text style={[styles.alarmBtnText, { color: duskAlarm.enabled ? '#fff' : C.text }]}>{duskAlarm.enabled ? (t('duskLight.enabled') || 'ON') : (t('duskLight.disabled') || 'OFF')}</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={{ flexDirection: 'row', gap: 8 }}>
-          <TouchableOpacity style={[styles.alarmBtn, { flex: 1 }]} onPress={() => handleSaveAlarm(Math.max(0, duskAlarm.hour - 1), duskAlarm.minute, duskAlarm.enabled)}>
+          <TouchableOpacity style={[styles.alarmBtn, { flex: 1 }]} onPress={() => handleSaveAlarm(Math.max(0, duskAlarm.hour - 1), duskAlarm.minute, duskAlarm.enabled)} accessibilityLabel="Decrease alarm hour by 1">
             <Text style={styles.alarmBtnText}>-1h</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.alarmBtn, { flex: 1 }]} onPress={() => handleSaveAlarm(Math.min(23, duskAlarm.hour + 1), duskAlarm.minute, duskAlarm.enabled)}>
+          <TouchableOpacity style={[styles.alarmBtn, { flex: 1 }]} onPress={() => handleSaveAlarm(Math.min(23, duskAlarm.hour + 1), duskAlarm.minute, duskAlarm.enabled)} accessibilityLabel="Increase alarm hour by 1">
             <Text style={styles.alarmBtnText}>+1h</Text>
           </TouchableOpacity>
         </View>
@@ -653,7 +653,7 @@ function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
           <Text style={styles.inputLabel}>{t('duskLight.daysToShift') || 'Days to shift'}</Text>
           <TextInput style={styles.textInput} keyboardType="numeric" value={shiftForm.daysToShift} onChangeText={(v) => setShiftForm({ ...shiftForm, daysToShift: v })} placeholder="3" placeholderTextColor={C.muted} />
         </View>
-        <TouchableOpacity style={styles.calcBtn} onPress={handleCalculatePhaseShift}>
+        <TouchableOpacity style={styles.calcBtn} onPress={handleCalculatePhaseShift} accessibilityLabel={t('duskLight.calculate')}>
           <Text style={styles.calcBtnText}>{t('duskLight.calculate') || 'Calculate Schedule'}</Text>
         </TouchableOpacity>
         {phaseShiftPlan?.active && (

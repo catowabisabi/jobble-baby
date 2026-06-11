@@ -241,7 +241,7 @@ export default function AsymmetricGrowthScreen() {
               >
                 <Text style={styles.cancelButtonText}>{t('asymmetric.cancel')}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.saveButton} onPress={handleAdd}>
+              <TouchableOpacity style={styles.saveButton} onPress={handleAdd} accessibilityLabel={t('asymmetric.save')}>
                 <Text style={styles.saveButtonText}>{t('asymmetric.save')}</Text>
               </TouchableOpacity>
             </View>

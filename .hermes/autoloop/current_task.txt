@@ -1,20 +1,27 @@
-# Current Dispatch — Cycle 301
+# Current Dispatch — Cycle 303
 
 ## Status
-- Cycle 301 running
+- Cycle 303 running
 - TSC 0 errors, 67 tabs
 - Sisyphus session: alive
-- Todo #119: Fix bottle-feeding accessibility — dispatched (retry)
+- Todo #119: completed (bottle-feeding a11y fixed — commit ed4cfb4)
+- Todo #120: dispatched to Sisyphus (fix remaining 12 accessibility labels)
 
 ## Pending Tasks
-- #119 (p=2): Fix accessibility on bottle-feeding.tsx — 9 touchable elements missing accessibilityLabel
+- #120 (p=2): Fix remaining 12 accessibility labels (asymmetric-growth, circadian, eight-month-storm, jaundice-threshold) — dispatched
 - #108 (p=1): Deploy privacy policy HTML to live URL (jobblebaby.com/privacy) — user action required
+
+## Pre-Submission Audit Status
+- TSC: PASS (0 errors)
+- i18n Key Validation: PASS (0 missing)
+- Accessibility Labels: WARNING (12 elements — #120 dispatched to fix)
+- AsyncStorage: WARNING (35 non-standard keys — lower priority, not blocking)
+- Hardcoded strings: WARNING (13 potential — mostly color hex/numeric arrays, acceptable)
 
 ## Ready for Store
 - 67 tabs complete
 - TSC 0 errors
-- Pre-submission audit PASS
+- Pre-submission audit: near-PASS (a11y fix in progress)
 - i18n: en.json + zh.json 295 keys each
-- Keyword pool: 1049
-- Concept #47 sparked
-- Pending user action: privacy policy URL + EAS credentials
+- Bottle-feeding accessibility: COMPLETED
+- Remaining: #120 (12 a11y elements), #108 (user action: privacy URL + EAS creds)

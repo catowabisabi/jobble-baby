@@ -1609,7 +1609,8 @@
       "halogen": "鹵素燈",
       "fiber_optic": "光纖燈",
       "bili_blanket": "光照毯"
-    }
+    },
+    "bilirubinLog": "膽紅素記錄"
   },
   "procedureRecovery": {
     "tabs": {

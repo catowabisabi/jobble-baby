@@ -1,0 +1,37 @@
+# Task: Fix Remaining Hardcoded i18n Strings — Round 2 (todo #125)
+
+## Overview
+Fix remaining hardcoded display strings flagged by pre-submission-audit.js HardcodedStrings check. Also improve the audit script to exclude TextInput placeholder text.
+
+## Files + Strings to Fix
+
+### 1. jaundice.tsx
+- Line 246: Phototherapy button text — add i18n key jaundice.phototherapy
+- Line 252: Bilirubin Log section title — add i18n key jaundice.bilirubinLog
+- Line 277: Phototherapy section title — use existing jaundice.phototherapy key
+
+### 2. gut-brain-axis.tsx
+- Line 604: Severe label — verify gutBrainAxis.severe key is used
+
+## i18n Keys to Add
+
+### en.json
+jaundice.phototherapy = "Phototherapy"
+jaundice.bilirubinLog = "Bilirubin Log"
+
+### zh.json
+jaundice.phototherapy = "光照治療"
+jaundice.bilirubinLog = "膽紅素記錄"
+
+## Audit Script Fix
+In scripts/pre-submission-audit.js, update checkHardcodedStrings() to skip lines containing "placeholder" or "TextInput" — placeholders do not need i18n.
+
+## Verification
+- cd JobbleBaby && node ../scripts/pre-submission-audit.js — HardcodedStrings PASS
+- npx tsc --noEmit — 0 errors
+
+## Keywords
+hardcoded_strings,i18n,jaundice,phototherapy,bilirubin,gut_brain_axis,audit_script
+
+## Signal
+ULW

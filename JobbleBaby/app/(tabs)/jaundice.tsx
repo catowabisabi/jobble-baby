@@ -243,13 +243,13 @@ export default function JaundiceScreen() {
           <TouchableOpacity style={[styles.actionBtn, { backgroundColor: C.accent }]} onPress={() => setShowPhotoModal(true)}>
                           accessibilityLabel="Toggle jaundice panel"
             <MaterialCommunityIcons name="lightbulb-outline" size={20} color="#fff" />
-            <Text style={styles.actionBtnText}>Phototherapy</Text>
+            <Text style={styles.actionBtnText}>{t('jaundice.phototherapy')}</Text>
           </TouchableOpacity>
         </View>
 
         {/* Bilirubin Entries */}
         <View style={[styles.section, { backgroundColor: C.card }]}>
-          <Text style={[styles.sectionTitle, { color: C.text }]}>Bilirubin Log</Text>
+          <Text style={[styles.sectionTitle, { color: C.text }]}>{t('jaundice.bilirubinLog')}</Text>
           {entries.length === 0 ? (
             <Text style={[styles.emptyText, { color: C.muted }]}>{t('jaundice.noEntriesTapLogReading')}</Text>
           ) : (
@@ -274,7 +274,7 @@ export default function JaundiceScreen() {
 
         {/* Phototherapy Sessions */}
         <View style={[styles.section, { backgroundColor: C.card }]}>
-          <Text style={[styles.sectionTitle, { color: C.text }]}>Phototherapy</Text>
+          <Text style={[styles.sectionTitle, { color: C.text }]}>{t('jaundice.phototherapy')}</Text>
           {photoEntries.length === 0 ? (
             <Text style={[styles.emptyText, { color: C.muted }]}>No sessions recorded.</Text>
           ) : (

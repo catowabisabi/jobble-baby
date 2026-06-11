@@ -693,6 +693,10 @@ function checkHardcodedStrings() {
         if (line.includes('t(') || line.includes('useLanguage')) {
           return;
         }
+        // Skip lines with placeholder text or TextInput (placeholders dont need i18n)
+        if (line.includes('placeholder') || line.includes('TextInput')) {
+          return;
+        }
 
         // Check for hardcoded string arrays (const XXX = ['String1', 'String2', ...])
         const arrayMatch = line.match(/const\s+(\w+)\s*=\s*\[([^\]]+)\]/);

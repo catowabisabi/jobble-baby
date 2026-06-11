@@ -1608,7 +1608,8 @@
       "halogen": "Halogen",
       "fiber_optic": "Fiber Optic",
       "bili_blanket": "BiliBlanket"
-    }
+    },
+    "bilirubinLog": "Bilirubin Log"
   },
   "procedureRecovery": {
     "tabs": {

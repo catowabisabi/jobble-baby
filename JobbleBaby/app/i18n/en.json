@@ -65,7 +65,8 @@
     "thermalRegulation": "Thermal",
     "launchChecklist": "Launch",
     "growthMontage": "Montage",
-    "regressionNavigator": "Regression"
+    "regressionNavigator": "Regression",
+    "bottleFeeding": "Bottle Feeding"
   },
   "hydration": {
     "title": "Fontanelle and Hydration",
@@ -3035,5 +3036,33 @@
     "tempLog": "Temperature Log",
     "timeline": "Timeline",
     "treatment": "Treatment"
+  },
+  "bottleFeeding": {
+    "title": "Bottle Feeding",
+    "nippleLevel": "Nipple Level",
+    "feedingLog": "Feeding Log",
+    "pacedFeeding": "Paced Feeding",
+    "flowMismatch": "Flow Mismatch Signs",
+    "addSession": "Log Session",
+    "intakeRate": "Intake Rate",
+    "nippleLevel0": "Preemie",
+    "nippleLevel1": "Newborn",
+    "nippleLevel2": "3 months",
+    "nippleLevel3": "6 months",
+    "nippleLevel4": "Variable",
+    "nippleLevel5": "Toddler",
+    "paceStep1": "Hold baby semi-upright",
+    "paceStep2": "Use slow-flow nipple",
+    "paceStep3": "Pause every 30-60ml",
+    "paceStep4": "Watch for hunger cues",
+    "paceStep5": "Burp between sides",
+    "signalCoughing": "Coughing",
+    "signalGulping": "Gulping",
+    "signalUnderfeeding": "Underfeeding",
+    "signalGas": "Excessive gas",
+    "signalRefusal": "Refusal",
+    "signalChoking": "Choking",
+    "considerAdvancing": "Consider advancing nipple level",
+    "considerSlowing": "Consider slowing flow"
   }
 }

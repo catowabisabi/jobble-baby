@@ -65,7 +65,8 @@
     "thermalRegulation": "體溫調節",
     "launchChecklist": "發布清單",
     "growthMontage": "成長蒙太奇",
-    "regressionNavigator": "倒退導航"
+    "regressionNavigator": "倒退導航",
+    "bottleFeeding": "奶瓶餵養"
   },
   "hydration": {
     "title": "顱縫與水合監測",
@@ -3036,5 +3037,33 @@
     "tempLog": "溫度記錄",
     "timeline": "時間線",
     "treatment": "治療"
+  },
+  "bottleFeeding": {
+    "title": "奶瓶餵養",
+    "nippleLevel": "奶嘴流量級別",
+    "feedingLog": "餵養記錄",
+    "pacedFeeding": "節奏餵養",
+    "flowMismatch": "流量不匹配徵兆",
+    "addSession": "記錄餵養",
+    "intakeRate": "攝入速率",
+    "nippleLevel0": "早產兒",
+    "nippleLevel1": "新生兒",
+    "nippleLevel2": "3個月",
+    "nippleLevel3": "6個月",
+    "nippleLevel4": "彈性",
+    "nippleLevel5": "幼兒",
+    "paceStep1": "讓寶寶半坐",
+    "paceStep2": "使用慢流奶嘴",
+    "paceStep3": "每30-60毫升暫停",
+    "paceStep4": "觀察飢餓信號",
+    "paceStep5": "兩側之間拍嗝",
+    "signalCoughing": "嗆咳",
+    "signalGulping": "吞嚥急促",
+    "signalUnderfeeding": "攝入不足",
+    "signalGas": "脹氣過多",
+    "signalRefusal": "拒絕",
+    "signalChoking": "窒息",
+    "considerAdvancing": "考慮提升奶嘴流量",
+    "considerSlowing": "考慮減慢流速"
   }
 }

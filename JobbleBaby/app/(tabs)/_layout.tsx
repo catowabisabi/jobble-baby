@@ -132,6 +132,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="bottle-feeding"
+        options={{
+          title: t('tabs.bottleFeeding'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="baby-bottle-outline" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="gear-check"
         options={{
           title: t('tabs.gearCheck'),

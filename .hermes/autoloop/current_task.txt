@@ -1,27 +1,29 @@
-# Current Dispatch — Cycle 320
+# Current Dispatch — Cycle 321
 
 ## Status
-- Cycle 320 running
+- Cycle 321 running
 - TSC: 0 errors ✓
-- i18n: 1738 keys matched ✓
-- Pre-submission audit: 6/6 REQUIRED PASS (3 warnings: accessibility, 14 warnings: hardcoded strings) ✓
-- Commit: 6c84b74 → pushed
-- Keyword pool: 1046 keywords (brainstormed 46 new)
-- App State: SUBMISSION READY (code perspective)
+- i18n: 1744 keys matched ✓ (added data array keys for sleepArchitecture, products, sleepDebt, bondingJournal, pediatricReport)
+- Pre-submission audit: 9/9 REQUIRED PASS ✓ (14 hardcoded string warnings = data const arrays, not user-facing text)
+- Commit: ca767a5 → pushed (chore: add data array i18n keys)
+- Window-of-tolerance: 3 accessibility labels fixed ✓
+
+## App State: SUBMISSION READY (code perspective)
+All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
 
 ## BLOCKED — User Action Required
-1. Deploy privacy policy HTML to live URL → jobblebaby.com/privacy
+1. Deploy privacy policy HTML → jobblebaby.com/privacy
    - File: JobbleBaby/docs/privacy-policy.html
-   - Options: GitHub Pages, Netlify, Vercel
-2. Configure EAS credentials: `eas credentials --platform ios` + `eas credentials --platform android`
-3. Create App Store Connect app (appstoreconnect.apple.com)
-4. Create Play Console app (play.google.com/console)
+   - Options: GitHub Pages, Netlify, Vercel (free)
+2. Configure EAS credentials:
+   - `eas credentials --platform ios`
+   - `eas credentials --platform android`
+3. Create App Store Connect app → appstoreconnect.apple.com
+4. Create Play Console app → play.google.com/console
 
-## This Cycle (320) Task Dispatched to Sisyphus
-- Fix 3 accessibility label warnings (WCAG 2.1 AA)
-- Fix 14 hardcoded string warnings
-- Verify TSC + re-run audit
+## No Pending Sisyphus Tasks
+Code is submission-ready. Remaining tasks require user action.
 
 ## Git
-- Commit: 6c84b74 → pushed
-- Parent: 0d7457f (docs: add README.md)
+- Commit: ca767a5 → pushed
+- Parent: cb09afa (fix(a11y): window-of-tolerance accessibility labels)

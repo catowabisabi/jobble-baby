@@ -1,12 +1,19 @@
-# Current Dispatch — Cycle 321
+# Current Dispatch — Cycle 322
 
 ## Status
-- Cycle 321 running
-- TSC: 0 errors ✓
-- i18n: 1744 keys matched ✓ (added data array keys for sleepArchitecture, products, sleepDebt, bondingJournal, pediatricReport)
-- Pre-submission audit: 9/9 REQUIRED PASS ✓ (14 hardcoded string warnings = data const arrays, not user-facing text)
-- Commit: ca767a5 → pushed (chore: add data array i18n keys)
-- Window-of-tolerance: 3 accessibility labels fixed ✓
+- Cycle 322 running
+- TSC: 0 errors (verified)
+- Pre-submission audit: 9/9 REQUIRED PASS
+- Commit: b7e558b → pushed (chore: brainstorm 50 kw + 3 concepts)
+- Brainstorm: 50 new keywords added to pool (pool = 1000, max)
+- 3 new concepts added to DB:
+  1. HRV Co-Regulation Monitor (hrv_synchronization, polyvagal_state)
+  2. Cortisol Dynamics Tracker (cortisol_dynamics, stress_recovery_rate)
+  3. Critical Period Navigator (critical_period, myelination_timeline)
+
+## Dispatched to Sisyphus
+- Write concept spec: docs/concepts/hrv-co-regulation-monitor.md
+- Keywords used: thermoregulation_development, motor_milestone_prerequiste, information_overload
 
 ## App State: SUBMISSION READY (code perspective)
 All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
@@ -16,14 +23,11 @@ All REQUIRED audit checks pass. App is ready for App Store / Play Console submis
    - File: JobbleBaby/docs/privacy-policy.html
    - Options: GitHub Pages, Netlify, Vercel (free)
 2. Configure EAS credentials:
-   - `eas credentials --platform ios`
-   - `eas credentials --platform android`
+   - eas credentials --platform ios
+   - eas credentials --platform android
 3. Create App Store Connect app → appstoreconnect.apple.com
 4. Create Play Console app → play.google.com/console
 
-## No Pending Sisyphus Tasks
-Code is submission-ready. Remaining tasks require user action.
-
 ## Git
-- Commit: ca767a5 → pushed
-- Parent: cb09afa (fix(a11y): window-of-tolerance accessibility labels)
+- Commit: b7e558b → pushed
+- Parent: 93b2930 (chore(autoloop): cycle 321 — app submission-ready state)

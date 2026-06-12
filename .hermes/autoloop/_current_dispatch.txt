@@ -1,32 +1,33 @@
-# Current Dispatch — Cycle 309
+# Current Dispatch — Cycle 322
 
 ## Status
-- Cycle 309 running
-- TSC 0 errors, 68 tabs (verified cycle 308)
-- i18n: en.json (297 keys) + zh.json (297 keys) — matched ✓
-- App submission-ready — no issues found ✓ (cycle 308 Sisyphus final sweep)
-- Todo #117 (i18n hardcoded strings) → marked completed
+- Cycle 322 running
+- TSC: 0 errors (verified)
+- Pre-submission audit: 9/9 REQUIRED PASS
+- Commit: b7e558b → pushed (chore: brainstorm 50 kw + 3 concepts)
+- Brainstorm: 50 new keywords added to pool (pool = 1000, max)
+- 3 new concepts added to DB:
+  1. HRV Co-Regulation Monitor (hrv_synchronization, polyvagal_state)
+  2. Cortisol Dynamics Tracker (cortisol_dynamics, stress_recovery_rate)
+  3. Critical Period Navigator (critical_period, myelination_timeline)
 
-## Completed Cycle 308
-- Sisyphus final sweep: TSC 0 errors, 0 console.log, 297/297 i18n keys matched, 68 tabs registered ✓
-- App submission-ready — no issues found ✓
+## Dispatched to Sisyphus
+- Write concept spec: docs/concepts/hrv-co-regulation-monitor.md
+- Keywords used: thermoregulation_development, motor_milestone_prerequiste, information_overload
 
-## Dispatched to Sisyphus (Cycle 309)
-- Task: Implement Pre-Submission Validation Script (todo #123, from idea #73)
-- Files: scripts/pre-submission-audit.js + docs/PRE_SUBMISSION_CHECKLIST.md
-- 7 validation checks: tab navigator, i18n coverage, AsyncStorage registry, app.json, screenshot dimensions, TSC, hardcoded strings
-- Status: dispatched via tmux set-buffer + paste-buffer
+## App State: SUBMISSION READY (code perspective)
+All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
 
-## DB State
-- todos: 118 completed, 1 deferred (#106), 1 pending (#108), 1 new (#123)
-- pending #108 (p=1): Deploy privacy policy HTML to live URL — USER ACTION REQUIRED
-- deferred #106 (p=1): Village Network — backend required, post-launch
+## BLOCKED — User Action Required
+1. Deploy privacy policy HTML → jobblebaby.com/privacy
+   - File: JobbleBaby/docs/privacy-policy.html
+   - Options: GitHub Pages, Netlify, Vercel (free)
+2. Configure EAS credentials:
+   - eas credentials --platform ios
+   - eas credentials --platform android
+3. Create App Store Connect app → appstoreconnect.apple.com
+4. Create Play Console app → play.google.com/console
 
-## App State
-- 68 tabs complete
-- TSC 0 errors
-- i18n: 297 keys each, matched
-- Console.log: 0 found
-- Pre-submission audit: PASS
-- Privacy policy HTML: ready at docs/privacy-policy.html
-- Remaining: #108 (user action: deploy privacy URL + configure EAS creds + create App Store Connect app)
+## Git
+- Commit: b7e558b → pushed
+- Parent: 93b2930 (chore(autoloop): cycle 321 — app submission-ready state)

@@ -172,7 +172,14 @@
     "ageAtMilestone": "Age",
     "name": "Name",
     "birthDate": "Birth date",
-    "gender": "Gender"
+    "gender": "Gender",
+    "percentiles": [
+      "3rd",
+      "15th",
+      "50th",
+      "85th",
+      "97th"
+    ]
   },
   "home": {
     "title": "Home",
@@ -320,7 +327,14 @@
     "all": "All",
     "items": "{{count}} items",
     "reviews": "{{count}} reviews",
-    "noProducts": "No products found"
+    "noProducts": "No products found",
+    "filterLabels": [
+      "All",
+      "0m+",
+      "3m+",
+      "6m+",
+      "12m+"
+    ]
   },
   "profile": {
     "title": "Profile",
@@ -816,7 +830,16 @@
     "date": "Date (YYYY-MM-DD)",
     "hoursSlept": "Hours Slept",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "dayAbbr": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ]
   },
   "sleepAssociation": {
     "title": "Sleep Association Map",
@@ -1820,7 +1843,14 @@
       "neutral": "Neutral",
       "good": "Good",
       "great": "Great"
-    }
+    },
+    "colors": [
+      "#EF4444",
+      "#F97316",
+      "#EAB308",
+      "#22C55E",
+      "#3B82F6"
+    ]
   },
   "habitReset": {
     "regressionSurvey": "Post-Regression Impact Survey",
@@ -2444,7 +2474,22 @@
     "timerRunning": "● Timer running",
     "endSession": "End Session",
     "startTummyTime": "Start Tummy Time",
-    "deep": "Deep"
+    "deep": "Deep",
+    "noiseTypes": [
+      "White Noise",
+      "Pink Noise",
+      "Brown Noise"
+    ],
+    "environments": [
+      "Fully dark",
+      "Dim",
+      "Night light"
+    ],
+    "soundLevels": [
+      "Silent",
+      "Very quiet",
+      "Quiet"
+    ]
   },
   "launchChecklist.items.playDevAccount": "Google Play Developer account confirmed",
   "launchChecklist.desc.playDevAccount": "Confirm Google Play Developer account is active",

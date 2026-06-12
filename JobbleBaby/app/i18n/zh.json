@@ -172,7 +172,14 @@
     "ageAtMilestone": "月齡",
     "name": "姓名",
     "birthDate": "出生日期",
-    "gender": "性別"
+    "gender": "性別",
+    "percentiles": [
+      "第3百分位",
+      "第15百分位",
+      "第50百分位",
+      "第85百分位",
+      "第97百分位"
+    ]
   },
   "home": {
     "title": "主頁",
@@ -320,7 +327,14 @@
     "all": "全部",
     "items": "{{count}} 件",
     "reviews": "{{count}} 個評價",
-    "noProducts": "找不到產品"
+    "noProducts": "找不到產品",
+    "filterLabels": [
+      "全部",
+      "0m+",
+      "3m+",
+      "6m+",
+      "12m+"
+    ]
   },
   "profile": {
     "title": "個人檔案",
@@ -816,7 +830,16 @@
     "date": "日期 (YYYY-MM-DD)",
     "hoursSlept": "睡眠時數",
     "cancel": "取消",
-    "save": "儲存"
+    "save": "儲存",
+    "dayAbbr": [
+      "週一",
+      "週二",
+      "週三",
+      "週四",
+      "週五",
+      "週六",
+      "週日"
+    ]
   },
   "sleepAssociation": {
     "title": "睡眠關聯圖",
@@ -1820,7 +1843,14 @@
       "neutral": "平靜",
       "good": "良好",
       "great": "很棒"
-    }
+    },
+    "colors": [
+      "#EF4444",
+      "#F97316",
+      "#EAB308",
+      "#22C55E",
+      "#3B82F6"
+    ]
   },
   "habitReset": {
     "regressionSurvey": "回歸後影響調查",
@@ -2444,7 +2474,22 @@
     "timerRunning": "● 計時器運行中",
     "endSession": "結束",
     "startTummyTime": "開始趴趴時間",
-    "deep": "深層"
+    "deep": "深層",
+    "noiseTypes": [
+      "白噪音",
+      "粉紅噪音",
+      "棕噪音"
+    ],
+    "environments": [
+      "全黑",
+      "昏暗",
+      "夜燈"
+    ],
+    "soundLevels": [
+      "寂靜",
+      "非常安靜",
+      "安靜"
+    ]
   },
   "launchChecklist.items.playDevAccount": "Google Play 開發者帳戶已確認",
   "launchChecklist.desc.playDevAccount": "確認 Google Play 開發者帳戶已啟用",

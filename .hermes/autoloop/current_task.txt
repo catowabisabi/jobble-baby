@@ -1,17 +1,26 @@
-# Current Task — Cycle 323
+# Current Task — Cycle 325
 
 ## This Cycle
-- ✅ Write HRV Co-Regulation Monitor concept spec (by Hermes)
-- ✅ Dispatch Dyadic Synchrony Playground concept spec to Sisyphus (COMPLETED)
-- ✅ 3 new concepts added to DB (Dyadic Synchrony Playground, Interoceptive Precision Training, Behavioral Rehearsal Protocol)
-- ✅ 50 brainstorm keywords added to pool (pool = 1000, max)
+- ✅ Concept 52 (Interoceptive Precision Training): spec written directly by Hermes
+- ✅ 36 i18n keys added (en + zh)
+- ✅ README.md created
+- ✅ Git commit + push: 5b17367
+- 🔧 Dispatched: Infant Regulatory Fitness Dashboard (concept #47) → Sisyphus
 
 ## Next Task
-- Review Dyadic Synchrony Playground concept spec
-- Consider dispatching implementation task for highest-priority concept
+- Wait for Sisyphus to implement concept #47 (regulatory-fitness.tsx tab)
+- Review TSC result when done
+- Consider dispatching implementation for next draft concept
 
 ## Blocked
 - Privacy policy deployment (user action)
 - EAS credentials (user action)
 - App Store Connect creation (user action)
 - Play Console creation (user action)
+
+## App State: SUBMISSION READY (code perspective)
+All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
+
+## Git
+- Commit: 5b17367 → pushed
+- Parent: 94c51d5 (chore(autoloop): cycle 324 — concept 51 implemented, TSC 0 errors, app submission-ready)

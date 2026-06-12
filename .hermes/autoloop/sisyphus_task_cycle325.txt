@@ -1,0 +1,32 @@
+Implement the Infant Regulatory Fitness Dashboard tab (concept #47 in DB).
+
+SPEC: JobbleBaby/docs/concepts/hrv-co-regulation-monitor.md — the Regulatory Fitness Dashboard concept (polyvagal theory, 4-domain composite score, radar chart, cascade alerts).
+
+KEYWORDS: autonomic_regulation, polyvagal_theory, vagus_nerve_tone, regulatory_fitness, cascade_alert
+
+FEATURES TO BUILD:
+1. Regulatory Fitness Score (0–100) — composite from 4 domains: autonomic, sensory, motor, emotional/social
+2. Domain Radar Chart — spider/radar chart with color bands (green=optimal, amber=developing, red=concerning)
+3. Cascade Alert — when one domain drops, show cascading effects on other domains
+4. 7/30-day Regulatory Timeline — trend line with annotated events
+5. Cross-Domain Suggestions — context-aware activity suggestions
+6. Parent Calm Score — parallel parent regulatory state alongside baby
+
+DATA MODEL (AsyncStorage):
+- @jobble/regulatory_fitness: { date, composite_score, autonomic_score, sensory_score, motor_score, social_score }
+- @jobble/regulatory_cascade_log: { date, trigger_domain, affected_domains[], latency_days }
+- @jobble/regulatory_suggestions: { date, domain, suggestion_key, completed }
+
+TAB LOCATION: JobbleBaby/app/(tabs)/regulatory-fitness.tsx
+REGISTER IN: app/(tabs)/_layout.tsx — add to TabNavigator
+STORAGE REGISTRY: Add new keys to store/storage-keys.ts
+
+i18n: Use existing keys where possible. Add new keys to app/i18n/en.json + zh.json if needed.
+TSC: Run npx tsc --noEmit — must pass 0 errors before marking done.
+
+After implementing:
+1. Run: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit
+2. If TSC passes, mark concept #47 as 'implemented' in DB
+3. Write "DONE" to stdout
+
+ULW

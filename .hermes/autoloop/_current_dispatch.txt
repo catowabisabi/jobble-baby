@@ -1,16 +1,13 @@
-# Current Dispatch — Cycle 323
+# Current Dispatch — Cycle 325
 
 ## Status
-- Cycle 323 running
-- TSC: 0 errors (verified)
-- Commit: c1fda51 → pushed (chore: cycle 323 initial — HRV spec + 3 concepts)
-- Sisyphus: completed concept spec for Dyadic Synchrony Playground (concept #51)
-- i18n: 23 dyadicSynchrony.* keys added
-- Concept spec: docs/concepts/dyadic-synchrony-playground.md written
-
-## Dispatched to Sisyphus
-- Write concept spec: docs/concepts/dyadic-synchrony-playground.md (COMPLETED)
-- Keywords used: gaze_synchronization, heartbeat_synchrony, breath_coupling
+- Cycle 325 running
+- TSC: 0 errors (verified after i18n update)
+- Commit: 5b17367 → pushed
+- Concept 52 (Interoceptive Precision Training): spec written + 36 i18n keys added
+- README.md created
+- Sisyphus: dispatched concept #47 implementation (regulatory-fitness.tsx)
+- Keywords used: autonomic_regulation, polyvagal_theory, vagus_nerve_tone, regulatory_fitness, cascade_alert
 
 ## App State: SUBMISSION READY (code perspective)
 All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
@@ -26,5 +23,6 @@ All REQUIRED audit checks pass. App is ready for App Store / Play Console submis
 4. Create Play Console app → play.google.com/console
 
 ## Git
-- Commit: c1fda51 → pushed
-- Parent: b7e558b (chore(autoloop): cycle 322 — brainstorm 50 kw, 3 concepts)
+- Commit: 5b17367 → pushed
+- Parent: 94c51d5 (chore(autoloop): cycle 324 — concept 51 implemented, TSC 0 errors, app submission-ready)
+- New files: README.md, interoceptive-precision-training.md, 36 new i18n keys

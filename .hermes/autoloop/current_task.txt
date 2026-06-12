@@ -1,34 +1,27 @@
-# Current Dispatch — Cycle 316
+# Current Dispatch — Cycle 320
 
 ## Status
-- Cycle 316 running
+- Cycle 320 running
 - TSC: 0 errors ✓
-- i18n: 1738 keys (en + zh matched) ✓
-- Pre-submission audit: 5/6 PASS (HardcodedStrings = non-blocking warnings) ✓
-- Commit: ab96f98 → pushed
-- Keyword pool: 1000 keywords (brainstormed 50 new)
-- Tab Navigator: 68/68 registered, 0 orphaned, TSC 0 errors ✓
-
-## App State — SUBMISSION READY (AWAITING USER)
-- 68 tabs all registered
-- TSC 0 errors
-- i18n: 1738 keys matched
-- Pre-submission audit: 5/6 checks PASS
+- i18n: 1738 keys matched ✓
+- Pre-submission audit: 6/6 REQUIRED PASS (3 warnings: accessibility, 14 warnings: hardcoded strings) ✓
+- Commit: 6c84b74 → pushed
+- Keyword pool: 1046 keywords (brainstormed 46 new)
+- App State: SUBMISSION READY (code perspective)
 
 ## BLOCKED — User Action Required
 1. Deploy privacy policy HTML to live URL → jobblebaby.com/privacy
-   - File ready: docs/privacy-policy.html
+   - File: JobbleBaby/docs/privacy-policy.html
    - Options: GitHub Pages, Netlify, Vercel
 2. Configure EAS credentials: `eas credentials --platform ios` + `eas credentials --platform android`
 3. Create App Store Connect app (appstoreconnect.apple.com)
 4. Create Play Console app (play.google.com/console)
 
-## Brainstorm (Cycle 316)
-- Sources: phase_transition, entrainment drift, landau_equation, catch-up growth trajectory, oral_motor_tone
-- Added 50 free-association keywords → pool 1000
-- Keywords: state change, chronobiology, allometric growth, metabolic compensation, tongue thrust, speech articulation, etc.
-- Prompt3: overheating_prevention, moro_reflex_monitoring, cause-effect_reasoning
+## This Cycle (320) Task Dispatched to Sisyphus
+- Fix 3 accessibility label warnings (WCAG 2.1 AA)
+- Fix 14 hardcoded string warnings
+- Verify TSC + re-run audit
 
 ## Git
-- Commit: ab96f98 → pushed
-- Parent: 89257f1 (chore autoloop cycle 315)
+- Commit: 6c84b74 → pushed
+- Parent: 0d7457f (docs: add README.md)

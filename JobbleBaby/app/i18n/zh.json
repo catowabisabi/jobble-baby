@@ -4631,5 +4631,8 @@
     "promptGround": "Ground yourself: feet on floor, 5 senses",
     "promptReachOut": "Reach out to your support network",
     "promptRest": "Rest when baby rests"
-  }
+  },
+  "jaundice.riskChart": "風險圖表 (WHO/NICE)",
+  "jaundice.medium": "中等",
+  "jaundice.high": "高"
 }

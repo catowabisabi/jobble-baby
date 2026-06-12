@@ -1,40 +1,31 @@
-# Current Dispatch — Cycle 314
+# Current Dispatch — Cycle 315
 
 ## Status
-- Cycle 314 running
-- TSC 0 errors ✓
+- Cycle 315 running
+- TSC: 0 errors ✓
 - i18n: 1738 keys (en + zh matched) ✓
-- Pre-submission audit: TSCParse FIXED ✓ (other checks PASS)
-- Commit pushed: 85abea7 ✓
-
-## Critical Fix This Cycle
-- regulatory-fitness.tsx: TrendChart was using t() without t prop → TS2304 error
-- Fixed: added `t: (key: string) => string` prop to TrendChart component type
-- Fixed: passed `t={t}` at call site (line 321)
-- TSC now passes 0 errors
-
-## Cycle 310 Sisyphus Work (now committed)
-- jaundice.tsx: fixed hardcoded strings (Risk Chart, Medium, High, Share Report, modal fields)
-- Added jaundice.i18n keys (phototherapy, bilirubinLog, bloodTest, etc.)
-- pre-submission-audit.json updated with 1738 keys count
+- Pre-submission audit: 5/6 PASS (HardcodedStrings = non-blocking warnings) ✓
+- Commit: 89257f1 → pushed
+- Keyword pool: 1000 keywords (brainstormed 50 new)
 
 ## App State — SUBMISSION READY
-- 68 tabs complete
+- 68 tabs
 - TSC 0 errors
 - i18n: 1738 keys
-- Pre-submission audit: 5/6 checks PASS (HardcodedStrings = non-blocking warnings)
+- Pre-submission audit: 5/6 checks PASS
 - Privacy policy HTML: ready at docs/privacy-policy.html
 
 ## Remaining (USER ACTION REQUIRED)
-- Deploy privacy policy HTML to live URL (jobblebaby.com/privacy)
-- Configure EAS credentials: `eas credentials --platform ios` + `eas credentials --platform android`
-- Create App Store Connect app (App Store Connect website)
-- Create Play Console app (Google Play Console website)
+1. Deploy privacy policy HTML to live URL (jobblebaby.com/privacy)
+2. Configure EAS credentials: `eas credentials --platform ios` + `eas credentials --platform android`
+3. Create App Store Connect app (App Store Connect website)
+4. Create Play Console app (Google Play Console website)
 
-## Hardcoded Strings Warnings (Non-blocking)
-~14 warnings in sleep-association.tsx + solid-food.tsx — technical labels, not user-facing text
-Does not block submission.
+## Brainstorm (Cycle 315)
+- Sources: object_permanence_emergence, leap_visualization, development_symphony_dashboard, crying_attractor, social_cognition_baseline
+- Added 50 free-association keywords → pool 1000
+- Focus: regulatory fitness, primitive reflex integration, polyvagal theory, interoceptive development, vestibular/proprioceptive maturation
 
 ## Git
-- Commit: 85abea7 → pushed
-- Parent: 67be9bb (cycle 313)
+- Commit: 89257f1 → pushed
+- Parent: 85abea7 (fix regulatory-fitness TrendChart)

@@ -1,37 +1,27 @@
-# Task: Fix Remaining Hardcoded i18n Strings - Round 2 (todo #125)
+# Sisyphus Task — Cycle 315: Tab Navigator Integrity Check
 
-## Overview
-Fix remaining hardcoded display strings flagged by pre-submission-audit.js HardcodedStrings check. Also improve the audit script to exclude TextInput placeholder text.
+## Context
+Jobble Baby has 68 tabs. We need to verify ALL tab .tsx files are registered in _layout.tsx Tabs.Screen — no orphaned screens.
 
-## Files + Strings to Fix
-
-### 1. jaundice.tsx
-- Line 246: Phototherapy button text - add i18n key jaundice.phototherapy
-- Line 252: Bilirubin Log section title - add i18n key jaundice.bilirubinLog
-- Line 277: Phototherapy section title - use existing jaundice.phototherapy key
-
-### 2. gut-brain-axis.tsx
-- Line 604: Severe label - verify gutBrainAxis.severe key is used
-
-## i18n Keys to Add
-
-### en.json
-jaundice.phototherapy = "Phototherapy"
-jaundice.bilirubinLog = "Bilirubin Log"
-
-### zh.json
-jaundice.phototherapy = "光照治療"
-jaundice.bilirubinLog = "膽紅素記錄"
-
-## Audit Script Fix
-In scripts/pre-submission-audit.js, update checkHardcodedStrings() to skip lines containing placeholder or TextInput.
+## Your Task
+1. Read `app/(tabs)/_layout.tsx` — extract ALL Tabs.Screen names
+2. List ALL .tsx files in `app/(tabs)/`
+3. Compare: which .tsx files are NOT in Tabs.Screen? List them.
+4. For each unregistered file: check if it has a valid component (not empty stub)
+5. If any unregistered files have real content → add them to _layout.tsx Tabs.Screen
 
 ## Verification
-- cd JobbleBaby && node ../scripts/pre-submission-audit.js - HardcodedStrings PASS
-- npx tsc --noEmit - 0 errors
+- After any fixes: run `npx tsc --noEmit` — must pass 0 errors
+- Report: registered count, unregistered count, orphaned files
 
-## Keywords
-hardcoded_strings,i18n,jaundice,phototherapy,bilirubin,gut_brain_axis,audit_script
+## Output Format
+```
+=== Tab Navigator Integrity ===
+Registered: N/68
+Unregistered: [list]
+Fixed: [list or "none needed"]
+TSC: PASS/FAIL
+```
 
-## Signal
+Start in: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
 ULW

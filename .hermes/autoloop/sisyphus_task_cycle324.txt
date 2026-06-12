@@ -1,0 +1,36 @@
+Write the concept spec for "Interoceptive Precision Training" (concept #52 in DB).
+
+Keywords: interoception, interoceptive_accuracy, body_awareness
+
+Background: The parent-baby dyad shares an interoceptive ecosystem. Interoceptive precision — the ability to perceive and act on internal bodily signals — develops from birth and is critical for emotion regulation, hunger/satiety awareness, and pain tolerance. A parent with high interoceptive precision can detect baby distress cues earlier. A baby with developing interoceptive precision learns to self-regulate.
+
+Research basis:
+- Interoceptive accuracy declines under stress (cortisol overload)
+- Polyvagal theory: vagal tone is measurable via HRV and correlates with interoceptive precision
+- Infants are born with coarse interoception but refine it through caregiver co-regulation
+- Gut-brain axis awareness is a missing construct in baby apps
+
+Write the full concept spec at: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/docs/concepts/interoceptive-precision-training.md
+
+Follow the same format as docs/concepts/dyadic-synchrony-playground.md:
+- Concept ID + Status + Keywords + Created
+- 1. Problem Statement
+- 2. Solution Overview
+- 3. Feature Specification (with named features, conditions, i18n keys)
+- 4. UX / UI Notes
+- 5. Technical Notes (data model, storage keys, dependencies)
+
+Include these features:
+1. Body Scan Sessions — guided parent body awareness exercises (progressive relaxation)
+2. Interoceptive Diary — log gut feelings, hunger signals, emotional states alongside baby state
+3. Interoceptive Precision Score — composite score from diary consistency + HRV correlation
+4. Baby Signal Matching — parent logs what they think baby needs; system compares to actual outcome
+5. Interoceptive Training Games — simple awareness games for older infants/toddlers
+
+Also add i18n keys for any new strings (en.json + zh.json in src/i18n/).
+
+After writing the spec:
+- Run: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit
+- If TSC passes, write "DONE" to stdout
+
+ULW

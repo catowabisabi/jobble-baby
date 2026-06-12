@@ -311,7 +311,7 @@ export default function TeethingScreen() {
 
       {nextExpected.length > 0 && eruptedCount < 20 && (
         <View style={styles.expectedSoonCard}>
-          <Text style={styles.sectionTitle}>Expected Soon</Text>
+            <Text style={styles.sectionTitle}>{t('teething.expectedSoon')}</Text>
           {nextExpected.map((tooth) => (
             <View key={tooth.typicalMonths} style={styles.expectedSoonRow}>
               <Text style={styles.expectedSoonEmoji}>{tooth.emoji}</Text>
@@ -347,7 +347,7 @@ export default function TeethingScreen() {
                   <Text style={[styles.toothMeta, erupted && styles.toothMetaErupted]}>
                     {erupted ? `✓ ${formatDate(erupted.eruptingAt!)}` : `~${tooth.typicalMonths} mo`}
                   </Text>
-                  {erupted && <Text style={styles.erupting}>ERUPTED</Text>}
+                  {erupted && <Text style={styles.erupting}>{t('teething.erupted')}</Text>}
                 </TouchableOpacity>
               );
             })}

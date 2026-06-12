@@ -364,7 +364,7 @@ export default function SolidFoodScreen() {
     <SafeAreaView style={styles.safe}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Feeding Journey</Text>
+            <Text style={styles.greeting}>{t('solidFood.feedingJourney')}</Text>
           <Text style={styles.title}>🥗 {t('solidFood.title')}</Text>
           <Text style={styles.subtitle}>
             {babyAgeMonths > 0
@@ -594,7 +594,7 @@ export default function SolidFoodScreen() {
                   </View>
                   {textureLevel === tl.level && (
                     <View style={styles.textureCurrent}>
-                      <Text style={styles.textureCurrentText}>Current</Text>
+                      <Text style={styles.textureCurrentText}>{t('solidFood.current')}</Text>
                     </View>
                   )}
                 </View>
@@ -653,7 +653,7 @@ export default function SolidFoodScreen() {
             <Link href="/growth" style={styles.navLink} asChild>
               <TouchableOpacity accessibilityLabel="View growth impact" accessibilityRole="link">
                 <MaterialCommunityIcons name="chart-line" size={18} color={STAGE_BLUE} />
-                <Text style={styles.navLinkText}>Growth Impact →</Text>
+                <Text style={styles.navLinkText}>{t('solidFood.growthImpact')} →</Text>
               </TouchableOpacity>
             </Link>
             <Link href="/gut-brain-axis" style={styles.navLink} asChild>
@@ -665,7 +665,7 @@ export default function SolidFoodScreen() {
             <Link href="/teething" style={styles.navLink} asChild>
               <TouchableOpacity accessibilityLabel="View teething" accessibilityRole="link">
                 <MaterialCommunityIcons name="tooth" size={18} color={STAGE_BLUE} />
-                <Text style={styles.navLinkText}>Teething → Food Refusal →</Text>
+                <Text style={styles.navLinkText}>{t('solidFood.teethingFoodRefusal')} →</Text>
               </TouchableOpacity>
             </Link>
           </>

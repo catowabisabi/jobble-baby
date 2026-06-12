@@ -606,7 +606,9 @@
     "tipNightWakingBody": "出牙疼痛在夜間加劇。睡前嘗試冷牙齦按摩，保持房間涼爽（20-22°C）。",
     "tipFirstToothTitle": "第一顆牙齒護理",
     "tipFirstToothBody": "第一顆牙長出後開始刷牙。用軟嬰兒牙刷沾少量含氟牙膏。",
-    "darkMode": "深色模式"
+    "darkMode": "深色模式",
+    "expectedSoon": "Expected Soon",
+    "erupted": "ERUPTED"
   },
   "monitor": {
     "lastEvent": "最後監控事件",
@@ -710,7 +712,9 @@
     "checkinBetter": "你做得很好！💜",
     "checkinStillStressed": "仍然感到壓力",
     "interventionsCompleted": "已完成 {{count}} 次干預",
-    "interventions": "干預措施"
+    "interventions": "干預措施",
+    "optionalInputs": "Optional inputs",
+    "comeBackIn5Minutes": "Come back in 5 minutes"
   },
   "doctorVisit": {
     "title": "就診摘要",
@@ -857,7 +861,13 @@
     "currentUsage": "目前使用情況",
     "feedingUsage": "在 {count}/{total} 次記錄中使用",
     "noHistory": "尚無記錄。今晚開始追蹤吧！",
-    "noteOptional": "添加備註（選填）"
+    "noteOptional": "添加備註（選填）",
+    "todayLog": "Today's Log",
+    "fallAsleep": "Fall asleep:",
+    "wakings": "Wakings:",
+    "longest": "Longest:",
+    "editEntry": "Edit Entry",
+    "fall": "Fall:"
   },
   "reflexTracker": {
     "title": "原始反射追蹤",
@@ -1137,7 +1147,11 @@
     "save": "儲存",
     "history": "歷史",
     "noRecords": "尚無記項",
-    "feedingImprovedBadge": "餵養改善"
+    "feedingImprovedBadge": "餵養改善",
+    "latch": "Latch",
+    "milk": "Milk",
+    "flow": "Flow",
+    "cancel": "Cancel"
   },
   "clinician": {
     "title": "醫療共享",
@@ -2879,7 +2893,11 @@
     "tips": {
       "ironTip": "每天提供含鐵食物：加鐵米粉、肉類、豆類、綠葉蔬菜",
       "allergenTip": "每次引入一種過敏原，間隔4-5天"
-    }
+    },
+    "feedingJourney": "Feeding Journey",
+    "current": "Current",
+    "growthImpact": "Growth Impact",
+    "teethingFoodRefusal": "Teething → Food Refusal"
   },
   "launchChecklist": {
     "resetAlertTitle": "重設清單",

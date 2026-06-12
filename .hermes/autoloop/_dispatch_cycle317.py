@@ -1,4 +1,9 @@
-# Task: Fix Hardcoded Strings — 20 remaining i18n keys
+#!/usr/bin/env python3
+"""Dispatch Cycle 317 — Fix remaining hardcoded strings"""
+import subprocess
+import sys
+
+TASK = """# Task: Fix Hardcoded Strings — 20 remaining i18n keys
 
 ## Context
 App is submission-ready (68 tabs, TSC 0, i18n 1738 keys matched) but pre-submission audit still reports 20 hardcoded strings across 5 files.
@@ -51,4 +56,28 @@ prompt3: sleep_association_log, solid_food_journey, stress_cascade_inputs, teeth
 - TSC: 0 errors
 - Audit: HardcodedStrings PASS
 
-ULW
+ULW"""
+
+def main():
+    # Write task to sisyphus_task.txt
+    with open('/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_task.txt', 'w') as f:
+        f.write(TASK)
+
+    # Copy to current dispatch
+    with open('/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/_current_dispatch.txt', 'w') as f:
+        f.write(TASK)
+
+    # Set tmux buffer and paste
+    with open('/tmp/task_buffer.txt', 'w') as f:
+        f.write(TASK)
+
+    # Use tmux set-buffer and paste
+    subprocess.run(['tmux', 'set-buffer', '-b', 'sisyphus_task', '-f', 'copy-mode', 'task_buffer.txt'], check=False)
+    subprocess.run(['tmux', 'paste-buffer', '-b', 'sisyphus_task', '-t', 'sisyphus'], check=False)
+    subprocess.run(['tmux', 'send-keys', '-t', 'sisyphus', 'C-m'], check=False)
+
+    print("Dispatched: Fix 20 hardcoded strings across 5 files")
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())

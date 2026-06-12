@@ -311,7 +311,7 @@ export default function SleepAssociationScreen() {
     <View>
       {todayEntry ? (
         <View style={[styles.card, { borderColor: SLEEP_ASSOC_GREEN }]}>
-          <Text style={styles.cardTitle}>Today's Log</Text>
+            <Text style={styles.cardTitle}>{t('sleepAssociation.todayLog')}</Text>
           <View style={styles.historyAssocs}>
             {todayEntry.associations.map(assoc => (
               <View key={assoc} style={styles.historyChip}>
@@ -321,15 +321,15 @@ export default function SleepAssociationScreen() {
           </View>
           <View style={styles.historyStats}>
             <View style={styles.historyStat}>
-              <Text style={styles.historyStatText}>Fall asleep:</Text>
+              <Text style={styles.historyStatText}>{t('sleepAssociation.fallAsleep')}</Text>
               <Text style={styles.historyStatValue}>{todayEntry.fallingAsleepMinutes}m</Text>
             </View>
             <View style={styles.historyStat}>
-              <Text style={styles.historyStatText}>Wakings:</Text>
+              <Text style={styles.historyStatText}>{t('sleepAssociation.wakings')}</Text>
               <Text style={styles.historyStatValue}>{todayEntry.nightWakings}x</Text>
             </View>
             <View style={styles.historyStat}>
-              <Text style={styles.historyStatText}>Longest:</Text>
+              <Text style={styles.historyStatText}>{t('sleepAssociation.longest')}</Text>
               <Text style={styles.historyStatValue}>{todayEntry.longestStretch}h</Text>
             </View>
           </View>
@@ -346,7 +346,7 @@ export default function SleepAssociationScreen() {
             setQualityRating(todayEntry.qualityRating);
             setNotes(todayEntry.notes || '');
           }}>
-            <Text style={{ fontSize: 13, color: SLEEP_ASSOC_BLUE, fontWeight: '600' }}>Edit Entry</Text>
+            <Text style={{ fontSize: 13, color: SLEEP_ASSOC_BLUE, fontWeight: '600' }}>{t('sleepAssociation.editEntry')}</Text>
           </TouchableOpacity>
         </View>
       ) : (
@@ -555,15 +555,15 @@ export default function SleepAssociationScreen() {
                   </View>
                   <View style={styles.historyStats}>
                     <View style={styles.historyStat}>
-                      <Text style={styles.historyStatText}>Fall:</Text>
+                      <Text style={styles.historyStatText}>{t('sleepAssociation.fall')}</Text>
                       <Text style={styles.historyStatValue}>{entry.fallingAsleepMinutes}m</Text>
                     </View>
                     <View style={styles.historyStat}>
-                      <Text style={styles.historyStatText}>Wakings:</Text>
+                      <Text style={styles.historyStatText}>{t('sleepAssociation.wakings')}</Text>
                       <Text style={styles.historyStatValue}>{entry.nightWakings}x</Text>
                     </View>
                     <View style={styles.historyStat}>
-                      <Text style={styles.historyStatText}>Longest:</Text>
+                      <Text style={styles.historyStatText}>{t('sleepAssociation.longest')}</Text>
                       <Text style={styles.historyStatValue}>{entry.longestStretch}h</Text>
                     </View>
                   </View>

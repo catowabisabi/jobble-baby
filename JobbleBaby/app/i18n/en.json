@@ -606,7 +606,9 @@
     "tipNightWakingBody": "Teething pain peaks at night. Try cold gum massage before bed, and keep the room cool (68-72°F / 20-22°C).",
     "tipFirstToothTitle": "First Tooth Care",
     "tipFirstToothBody": "Start brushing when first tooth erupts. Use a tiny smear of fluoride toothpaste on a soft infant toothbrush.",
-    "darkMode": "Dark Mode"
+    "darkMode": "Dark Mode",
+    "expectedSoon": "Expected Soon",
+    "erupted": "ERUPTED"
   },
   "monitor": {
     "lastEvent": "Last monitor event",
@@ -710,7 +712,9 @@
     "checkinBetter": "You are doing great! 💜",
     "checkinStillStressed": "Still feeling overwhelmed",
     "interventionsCompleted": "{{count}} interventions completed",
-    "interventions": "Interventions"
+    "interventions": "Interventions",
+    "optionalInputs": "Optional inputs",
+    "comeBackIn5Minutes": "Come back in 5 minutes"
   },
   "doctorVisit": {
     "title": "Doctor Visit Summary",
@@ -857,7 +861,13 @@
     "currentUsage": "Current Usage",
     "feedingUsage": "Used in {count} of {total} entries",
     "noHistory": "No entries yet. Start tracking tonight!",
-    "noteOptional": "Add note (optional)"
+    "noteOptional": "Add note (optional)",
+    "todayLog": "Today's Log",
+    "fallAsleep": "Fall asleep:",
+    "wakings": "Wakings:",
+    "longest": "Longest:",
+    "editEntry": "Edit Entry",
+    "fall": "Fall:"
   },
   "reflexTracker": {
     "title": "Reflex Tracker",
@@ -1079,7 +1089,11 @@
     "save": "Save",
     "history": "History",
     "noRecords": "No records yet",
-    "feedingImprovedBadge": "Feeding Improved"
+    "feedingImprovedBadge": "Feeding Improved",
+    "latch": "Latch",
+    "milk": "Milk",
+    "flow": "Flow",
+    "cancel": "Cancel"
   },
   "clinician": {
     "title": "Clinician Portal",
@@ -2798,7 +2812,11 @@
     "tips": {
       "ironTip": "Offer iron-rich foods daily: fortified cereal, meat, beans, leafy greens",
       "allergenTip": "Introduce allergens one at a time, wait 4-5 days between each"
-    }
+    },
+    "feedingJourney": "Feeding Journey",
+    "current": "Current",
+    "growthImpact": "Growth Impact",
+    "teethingFoodRefusal": "Teething → Food Refusal"
   },
   "homeSafety": {
     "title": "Home Safety Audit",

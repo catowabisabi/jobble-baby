@@ -413,7 +413,7 @@ export default function StressCascade() {
         </TouchableOpacity>
 
         <View style={styles.optionalInputs}>
-          <Text style={{ fontSize: 14, fontWeight: '600', color: C.text, marginBottom: 12 }}>Optional inputs</Text>
+            <Text style={{ fontSize: 14, fontWeight: '600', color: C.text, marginBottom: 12 }}>{t('stressCascade.optionalInputs')}</Text>
           <View style={styles.inputRow}>
             <Text style={styles.inputLabel}>{t('stressCascade.parentSleepHours')}</Text>
             <TextInput
@@ -481,7 +481,7 @@ export default function StressCascade() {
             </View>
             <View style={styles.checklistItem}>
               <Text>☑️</Text>
-              <Text style={styles.checklistText}>Come back in 5 minutes</Text>
+              <Text style={styles.checklistText}>{t('stressCascade.comeBackIn5Minutes')}</Text>
             </View>
           </View>
 

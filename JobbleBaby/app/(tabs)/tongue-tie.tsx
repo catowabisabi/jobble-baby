@@ -428,10 +428,10 @@ export default function TongueTieScreen() {
               <View key={f.id} style={styles.card}>
                 <Text style={styles.dateText}>{f.date}</Text>
                 <View style={styles.scoreRow}>
-                  <Text style={styles.scoreLabel}>Latch: <Text style={{color:'#3B82F6'}}>{f.latchQuality}/5</Text></Text>
+                  <Text style={styles.scoreLabel}>{t('tongueTie.latch')}: <Text style={{color:'#3B82F6'}}>{f.latchQuality}/5</Text></Text>
                   <Text style={styles.scoreLabel}>Dur: <Text style={{color:'#3B82F6'}}>{f.durationMin}m</Text></Text>
-                  {f.milkMl && <Text style={styles.scoreLabel}>Milk: <Text style={{color:'#3B82F6'}}>{f.milkMl}ml</Text></Text>}
-                  <Text style={styles.scoreLabel}>Flow: <Text style={{color:'#3B82F6'}}>{f.bottleFlowRate}</Text></Text>
+                  {f.milkMl && <Text style={styles.scoreLabel}>{t('tongueTie.milk')}: <Text style={{color:'#3B82F6'}}>{f.milkMl}ml</Text></Text>}
+                  <Text style={styles.scoreLabel}>{t('tongueTie.flow')}: <Text style={{color:'#3B82F6'}}>{f.bottleFlowRate}</Text></Text>
                 </View>
               </View>
             ))}
@@ -511,7 +511,7 @@ export default function TongueTieScreen() {
                   accessibilityLabel={t('common.cancel')}
                   accessibilityRole="button"
                 >
-                  <Text style={styles.cancelBtnText}>Cancel</Text>
+                  <Text style={styles.cancelBtnText}>{t('tongueTie.cancel')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.saveBtn} onPress={saveAssessment}
                   accessibilityLabel={t('common.save')}

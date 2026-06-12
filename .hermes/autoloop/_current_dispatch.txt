@@ -1,27 +1,33 @@
-# Cycle 328 Dispatch — Interoceptive Precision Training (concept #52)
+Implement the Behavioral Rehearsal Protocol tab (concept #53 in DB).
 
-## Status
-- Concept 54 (Infant Thermal-Metabolic Navigator): IMPLEMENTED ✅
-- TSC: 0 errors
-- Git: 4ef2049 → pushed
-- OpenCode: UNAVAILABLE in WSL sisyphus session (Windows executable can't run in WSL)
+SPEC: JobbleBaby/docs/concepts/behavioral-rehearsal-protocol.md — guided mental rehearsal, exposure hierarchy, outcome logger, partner sharing.
 
-## This Cycle
-- Direct implementation of thermal-metabolic.tsx (8 features)
-- Registered in _layout.tsx, i18n keys added (en + zh)
-- App: SUBMISSION READY
+KEYWORDS: mental_rehearsal_protocol, cognitive_dress_rehearsal, scenario_simulation, role_play_exposure, exposure_hierarchy, behavioral_priming, progressive_rehearsal, mental_practice, anxiety_desensitization, rehearsal_frequency_optimization
 
-## BLOCKED (user action required)
-1. Privacy policy → jobblebaby.com/privacy
-2. EAS credentials
-3. App Store Connect
-4. Play Console
+FEATURES TO BUILD:
+1. Rehearsal Scenario Library — 5 pre-built scenario categories (medical, feeding, sleep, social, developmental), each with situation description, challenge list, step-by-step mental rehearsal script, co-regulation cues
+2. Mental Rehearsal Session (guided timer 3-7 min) — Situation Presentation → Sensory Visualization → Internal Role Play → Coping Visualization → Outcome Anchoring. Logs pre/post confidence scores (1-10)
+3. Exposure Hierarchy Builder — parent ranks scenarios by anxiety level (1-10), tracks tier completion, shows progression
+4. Rehearsal Frequency Tracker — weekly goal (1-7), calendar heatmap, streak counter, "Preparedness Score" = rolling post-confidence average
+5. Real-World Outcome Logger — after rehearsed scenario occurs: outcome (better/expected/worse), real confidence (1-10), co-regulation rating (poor/fair/good/excellent)
+6. Partner Rehearsal Sharing — generate one-page text summary of scenario script, share via share sheet
 
-## Next Candidate
-- Concept #52: Interoceptive Precision Training (spec_done)
-  - 5 features: Body Scan, Interoceptive Diary, Precision Score, Signal Match, Games
-  - Requires OpenCode fix OR direct implementation
+DATA MODEL (AsyncStorage):
+- @jobble/rehearsal_sessions: { id, date, scenario_id, duration_sec, pre_confidence, post_confidence, notes }
+- @jobble/rehearsal_scenarios: { id, category, title_key, anxiety_level, is_custom, script }
+- @jobble/outcome_logs: { id, scenario_id, date, outcome, real_confidence, co_regulation, notes }
+- @jobble/hierarchy: { scenario_id, tier, completed, last_rehearsed }
 
-## Git
-- Latest: 4ef2049 → pushed
-- Parent: 2a81dea
+TAB LOCATION: JobbleBaby/app/(tabs)/behavioral-rehearsal.tsx
+REGISTER IN: app/(tabs)/_layout.tsx — add to TabNavigator
+STORAGE REGISTRY: Add new keys to store/storage-keys.ts
+
+i18n: Use existing keys where possible. Add new keys to app/i18n/en.json + zh.json if needed.
+TSC: Run npx tsc --noEmit — must pass 0 errors before marking done.
+
+After implementing:
+1. Run: cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit
+2. If TSC passes, mark concept #53 as 'implemented' in DB
+3. Write DONE to stdout
+
+ULW

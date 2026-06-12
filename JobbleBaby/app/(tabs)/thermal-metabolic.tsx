@@ -301,7 +301,7 @@ export default function ThermalMetabolic() {
           keyboardType="numeric"
         />
       </View>
-      <TouchableOpacity style={styles.addBtn} onPress={handleAddThermalReading}>
+      <TouchableOpacity style={styles.addBtn} onPress={handleAddThermalReading} accessibilityLabel={t('thermalMetabolic.logReading')}>
         <Text style={styles.addBtnText}>{t('thermalMetabolic.logReading')}</Text>
       </TouchableOpacity>
 
@@ -349,7 +349,7 @@ export default function ThermalMetabolic() {
         <Text style={styles.inputLabel}>{t('thermalMetabolic.postTemp')}</Text>
         <TextInput style={styles.input} value={bfPostTemp} onChangeText={setBfPostTemp} placeholder="36.8" placeholderTextColor="#64748B" keyboardType="numeric" />
       </View>
-      <TouchableOpacity style={styles.addBtn} onPress={handleAddBrownFatSession}>
+      <TouchableOpacity style={styles.addBtn} onPress={handleAddBrownFatSession} accessibilityLabel={t('thermalMetabolic.logSession')}>
         <Text style={styles.addBtnText}>{t('thermalMetabolic.logSession')}</Text>
       </TouchableOpacity>
 
@@ -498,7 +498,7 @@ export default function ThermalMetabolic() {
         <TextInput style={[styles.input, styles.textArea]} value={corrNotes} onChangeText={setCorrNotes} placeholder={t('thermalMetabolic.notesPlaceholder')} placeholderTextColor="#64748B" multiline />
       </View>
 
-      <TouchableOpacity style={styles.addBtn} onPress={handleAddThermalCorr}>
+      <TouchableOpacity style={styles.addBtn} onPress={handleAddThermalCorr} accessibilityLabel={t('thermalMetabolic.logCorr')}>
         <Text style={styles.addBtnText}>{t('thermalMetabolic.logCorr')}</Text>
       </TouchableOpacity>
 
@@ -568,7 +568,7 @@ export default function ThermalMetabolic() {
         <TextInput style={styles.input} value={kcPostTemp} onChangeText={setKcPostTemp} placeholder="36.6" placeholderTextColor="#64748B" keyboardType="numeric" />
       </View>
 
-      <TouchableOpacity style={styles.addBtn} onPress={handleAddKCSession}>
+      <TouchableOpacity style={styles.addBtn} onPress={handleAddKCSession} accessibilityLabel={t('thermalMetabolic.logKCSession')}>
         <Text style={styles.addBtnText}>{t('thermalMetabolic.logKCSession')}</Text>
       </TouchableOpacity>
 

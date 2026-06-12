@@ -137,7 +137,7 @@ export default function Interoceptive() {
       if (b) setBodyScanSessions(JSON.parse(b));
       if (s) setSignalMatches(JSON.parse(s));
       if (g) setGameEntries(JSON.parse(g));
-    } catch (e) { console.error(e); }
+    } catch (e) { }
   };
 
   const saveDiary = async (entry: DiaryEntry) => {

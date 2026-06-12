@@ -4611,26 +4611,25 @@
     "dataRequired": "Need at least 2 days of data for trend"
   },
   "windowOfTolerance": {
-    "tab": "Window",
+    "tab": "Window of Tolerance",
     "title": "Window of Tolerance",
-    "subtitle": "Polyvagal theory based stress/arousal tracking for caregiver and infant",
+    "subtitle": "Polyvagal stress tracker for caregiver and infant",
     "infant": "Infant",
     "caregiver": "Caregiver",
     "window": "Window",
     "hyperarousal": "Hyperarousal",
     "hypoarousal": "Hypoarousal",
-    "dissociation": "Dissociation",
     "logState": "Log State",
-    "coRegulation": "Co-Regulation Prompt",
+    "coRegulation": "Co-Regulation Prompts",
     "sessionLog": "Session Log",
-    "noLogs": "No entries yet. Log your first state above.",
+    "noLogs": "No sessions logged yet",
     "promptSkinToSkin": "Try skin-to-skin contact",
-    "promptSwaddle": "Swaddle and rock gently",
-    "promptGentleRouse": "Gently rouse baby",
-    "promptFeed": "Offer a feed",
-    "promptBreathe": "Take 3 deep breaths",
-    "promptGround": "Ground yourself: feel your feet",
-    "promptReachOut": "Reach out to a support person",
-    "promptRest": "Rest: you cannot pour from an empty cup"
+    "promptSwaddle": "Try swaddling with gentle pressure",
+    "promptGentleRouse": "Gently rouse baby with light touch",
+    "promptFeed": "Offer a feed to ground baby",
+    "promptBreathe": "Take 3 deep breaths together",
+    "promptGround": "Ground yourself: feet on floor, 5 senses",
+    "promptReachOut": "Reach out to your support network",
+    "promptRest": "Rest when baby rests"
   }
 }

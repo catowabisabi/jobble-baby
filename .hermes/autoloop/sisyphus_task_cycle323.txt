@@ -1,0 +1,35 @@
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+
+# Task: Write Concept Spec — Dyadic Synchrony Playground
+
+## Background
+We brainstormed a new feature: Dyadic Synchrony Playground (concept #51).
+Write a proper spec document at docs/concepts/dyadic-synchrony-playground.md
+
+## Your Task
+Write a comprehensive concept spec including:
+1. Problem: Parent-baby co-regulation relies on synchronized behaviors (gaze, breath, touch, voice). When synchrony breaks down (teething pain, colic, overtiredness), both parent and baby escalate. No app helps families practice and measure dyadic synchrony.
+2. Solution: A structured synchrony practice module with guided co-regulation activities, HRV/heartbeat tracking for both parties, and a synchrony score.
+3. Features:
+   - Synchrony activities: eye-gaze game, synchronized breathing, mirroring faces, co-regulated rocking, shared哼唱
+   - Dual tracking: parent + baby state (HRV or heart rate if camera available)
+   - Synchrony score: 0-100 based on correlation of heart rate / HRV / movement over session
+   - Session timer: 3/5/10 min guided sessions
+   - Progress tracking: daily/weekly synchrony score history
+   - Tips library: evidence-based tips for maintaining synchrony during stress
+4. Technical: new tab dyadic-synchrony.tsx, AsyncStorage key @jobble/synchrony_entries, i18n keys dyadicSynchrony.*
+5. Mock data: 7 days of mock session data (date, parentHR, babyHR, synchronyScore, activityType)
+6. Connections: links to hrv-monitor (HRV data), bonding-journal (logged activities), stress-cascade (co-regulation)
+
+## Output
+Write to: docs/concepts/dyadic-synchrony-playground.md
+Format: Markdown with proper heading hierarchy, feature list, technical spec section.
+
+## Constraints
+- Stay within the JobbleBaby subdirectory
+- TSC must pass after any code changes (npx tsc --noEmit)
+- i18n keys added to en.json + zh.json
+- No user accounts / backend -- all local storage only
+
+Start!
+ULW

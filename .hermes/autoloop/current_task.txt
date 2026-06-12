@@ -1,33 +1,17 @@
-# Current Dispatch — Cycle 322
+# Current Task — Cycle 323
 
-## Status
-- Cycle 322 running
-- TSC: 0 errors (verified)
-- Pre-submission audit: 9/9 REQUIRED PASS
-- Commit: b7e558b → pushed (chore: brainstorm 50 kw + 3 concepts)
-- Brainstorm: 50 new keywords added to pool (pool = 1000, max)
-- 3 new concepts added to DB:
-  1. HRV Co-Regulation Monitor (hrv_synchronization, polyvagal_state)
-  2. Cortisol Dynamics Tracker (cortisol_dynamics, stress_recovery_rate)
-  3. Critical Period Navigator (critical_period, myelination_timeline)
+## This Cycle
+- ✅ Write HRV Co-Regulation Monitor concept spec (by Hermes)
+- ✅ Dispatch Dyadic Synchrony Playground concept spec to Sisyphus (COMPLETED)
+- ✅ 3 new concepts added to DB (Dyadic Synchrony Playground, Interoceptive Precision Training, Behavioral Rehearsal Protocol)
+- ✅ 50 brainstorm keywords added to pool (pool = 1000, max)
 
-## Dispatched to Sisyphus
-- Write concept spec: docs/concepts/hrv-co-regulation-monitor.md
-- Keywords used: thermoregulation_development, motor_milestone_prerequiste, information_overload
+## Next Task
+- Review Dyadic Synchrony Playground concept spec
+- Consider dispatching implementation task for highest-priority concept
 
-## App State: SUBMISSION READY (code perspective)
-All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
-
-## BLOCKED — User Action Required
-1. Deploy privacy policy HTML → jobblebaby.com/privacy
-   - File: JobbleBaby/docs/privacy-policy.html
-   - Options: GitHub Pages, Netlify, Vercel (free)
-2. Configure EAS credentials:
-   - eas credentials --platform ios
-   - eas credentials --platform android
-3. Create App Store Connect app → appstoreconnect.apple.com
-4. Create Play Console app → play.google.com/console
-
-## Git
-- Commit: b7e558b → pushed
-- Parent: 93b2930 (chore(autoloop): cycle 321 — app submission-ready state)
+## Blocked
+- Privacy policy deployment (user action)
+- EAS credentials (user action)
+- App Store Connect creation (user action)
+- Play Console creation (user action)

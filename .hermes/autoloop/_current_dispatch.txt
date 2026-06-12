@@ -1,19 +1,16 @@
-# Current Dispatch — Cycle 322
+# Current Dispatch — Cycle 323
 
 ## Status
-- Cycle 322 running
+- Cycle 323 running
 - TSC: 0 errors (verified)
-- Pre-submission audit: 9/9 REQUIRED PASS
-- Commit: b7e558b → pushed (chore: brainstorm 50 kw + 3 concepts)
-- Brainstorm: 50 new keywords added to pool (pool = 1000, max)
-- 3 new concepts added to DB:
-  1. HRV Co-Regulation Monitor (hrv_synchronization, polyvagal_state)
-  2. Cortisol Dynamics Tracker (cortisol_dynamics, stress_recovery_rate)
-  3. Critical Period Navigator (critical_period, myelination_timeline)
+- Commit: c1fda51 → pushed (chore: cycle 323 initial — HRV spec + 3 concepts)
+- Sisyphus: completed concept spec for Dyadic Synchrony Playground (concept #51)
+- i18n: 23 dyadicSynchrony.* keys added
+- Concept spec: docs/concepts/dyadic-synchrony-playground.md written
 
 ## Dispatched to Sisyphus
-- Write concept spec: docs/concepts/hrv-co-regulation-monitor.md
-- Keywords used: thermoregulation_development, motor_milestone_prerequiste, information_overload
+- Write concept spec: docs/concepts/dyadic-synchrony-playground.md (COMPLETED)
+- Keywords used: gaze_synchronization, heartbeat_synchrony, breath_coupling
 
 ## App State: SUBMISSION READY (code perspective)
 All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
@@ -29,5 +26,5 @@ All REQUIRED audit checks pass. App is ready for App Store / Play Console submis
 4. Create Play Console app → play.google.com/console
 
 ## Git
-- Commit: b7e558b → pushed
-- Parent: 93b2930 (chore(autoloop): cycle 321 — app submission-ready state)
+- Commit: c1fda51 → pushed
+- Parent: b7e558b (chore(autoloop): cycle 322 — brainstorm 50 kw, 3 concepts)

@@ -4681,5 +4681,30 @@
   },
   "jaundice.riskChart": "風險圖表 (WHO/NICE)",
   "jaundice.medium": "中等",
-  "jaundice.high": "高"
+  "jaundice.high": "高",
+  "dyadicSynchrony": {
+    "title": "Dyadic Synchrony Playground",
+    "activityLibrary": "Activity Library",
+    "startSession": "Start Session",
+    "sessionTimer": "Session Timer",
+    "synchronyScore": "Synchrony Score",
+    "dualTracking": "Dual Tracking",
+    "progressChart": "Progress Chart",
+    "tipsLibrary": "Tips Library",
+    "parentBaseline": "Parent Baseline",
+    "babyBaseline": "Baby Baseline",
+    "excellentSynchrony": "Excellent synchrony — both trending together",
+    "goodCoRegulation": "Good co-regulation",
+    "moderateDivergence": "Moderate divergence",
+    "lowSynchrony": "Low synchrony — consider calmer environment",
+    "eyeGaze": "Eye-Gaze Game",
+    "synchronizedBreathing": "Synchronized Breathing",
+    "faceMirroring": "Face Mirroring",
+    "coRegulatedRocking": "Co-Regulated Rocking",
+    "sharedHumming": "Shared Humming",
+    "skinToSkin": "Skin-to-Skin Heartbeat",
+    "minutes3": "3 minutes",
+    "minutes5": "5 minutes",
+    "minutes10": "10 minutes"
+  }
 }

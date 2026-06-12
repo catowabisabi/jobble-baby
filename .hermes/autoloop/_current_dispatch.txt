@@ -1,13 +1,13 @@
-# Current Dispatch — Cycle 325
+# Current Dispatch — Cycle 326
 
 ## Status
-- Cycle 325 running
-- TSC: 0 errors (verified after i18n update)
-- Commit: 5b17367 → pushed
-- Concept 52 (Interoceptive Precision Training): spec written + 36 i18n keys added
-- README.md created
-- Sisyphus: dispatched concept #47 implementation (regulatory-fitness.tsx)
-- Keywords used: autonomic_regulation, polyvagal_theory, vagus_nerve_tone, regulatory_fitness, cascade_alert
+- Cycle 326 running
+- TSC: 0 errors (verified)
+- Commit: 91c1220 → pushed
+- Concept 53 (Thermal-Metabolic Navigator): spec written + saved to DB as concept #43
+- Sisyphus: dispatched concept #43 implementation (thermal-metabolic.tsx)
+- Keywords used: thermal_gradient, hunger_hormone_rhythm, thermoregulation_development, metabolic_imprint, brown_fat_thermogenesis
+- Brainstorm: 50 kw added to pool (now full at 1000)
 
 ## App State: SUBMISSION READY (code perspective)
 All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
@@ -23,6 +23,6 @@ All REQUIRED audit checks pass. App is ready for App Store / Play Console submis
 4. Create Play Console app → play.google.com/console
 
 ## Git
-- Commit: 5b17367 → pushed
-- Parent: 94c51d5 (chore(autoloop): cycle 324 — concept 51 implemented, TSC 0 errors, app submission-ready)
-- New files: README.md, interoceptive-precision-training.md, 36 new i18n keys
+- Commit: 91c1220 → pushed
+- Parent: 5b17367 (chore(autoloop): cycle 325 — concept 52 spec + 36 i18n keys + README.md)
+- New files: thermal-metabolic-navigator.md, _dispatch_cycle326.sh, sisyphus_task_cycle326.txt

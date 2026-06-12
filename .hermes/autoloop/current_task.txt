@@ -1,14 +1,14 @@
-# Current Task — Cycle 325
+# Current Task — Cycle 326
 
 ## This Cycle
-- ✅ Concept 52 (Interoceptive Precision Training): spec written directly by Hermes
-- ✅ 36 i18n keys added (en + zh)
-- ✅ README.md created
-- ✅ Git commit + push: 5b17367
-- 🔧 Dispatched: Infant Regulatory Fitness Dashboard (concept #47) → Sisyphus
+- ✅ Brainstorm 50 kw → pool full (1000)
+- ✅ Concept 53 (Thermal-Metabolic Navigator) spec written directly by Hermes
+- ✅ Concept #43 + Todo #129 saved to DB
+- ✅ Git commit + push: 91c1220
+- 🔧 Dispatched: Infant Thermal-Metabolic Navigator (concept #43) → Sisyphus
 
 ## Next Task
-- Wait for Sisyphus to implement concept #47 (regulatory-fitness.tsx tab)
+- Wait for Sisyphus to implement concept #43 (thermal-metabolic.tsx tab)
 - Review TSC result when done
 - Consider dispatching implementation for next draft concept
 
@@ -22,5 +22,5 @@
 All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
 
 ## Git
-- Commit: 5b17367 → pushed
-- Parent: 94c51d5 (chore(autoloop): cycle 324 — concept 51 implemented, TSC 0 errors, app submission-ready)
+- Commit: 91c1220 → pushed
+- Parent: 5b17367 (chore(autoloop): cycle 325 — concept 52 spec + 36 i18n keys + README.md)

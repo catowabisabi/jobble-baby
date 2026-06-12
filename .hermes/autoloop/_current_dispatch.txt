@@ -1,26 +1,27 @@
-# Current Dispatch — Cycle 327
+# Cycle 328 Dispatch — Interoceptive Precision Training (concept #52)
 
 ## Status
-- Cycle 327 running
-- TSC: 0 errors (verified at cycle 326 end)
-- Commit: a0a2370 → pushed
-- Concept 54 (Infant Thermal-Metabolic Navigator): spec exists + saved to DB as concept #54
-- Sisyphus: dispatched concept #54 implementation (thermal-metabolic.tsx)
-- Keywords used: thermal_gradient, hunger_hormone_rhythm, thermoregulation_development, metabolic_imprint, brown_fat_thermogenesis
+- Concept 54 (Infant Thermal-Metabolic Navigator): IMPLEMENTED ✅
+- TSC: 0 errors
+- Git: 4ef2049 → pushed
+- OpenCode: UNAVAILABLE in WSL sisyphus session (Windows executable can't run in WSL)
 
-## App State: SUBMISSION READY (code perspective)
-All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
+## This Cycle
+- Direct implementation of thermal-metabolic.tsx (8 features)
+- Registered in _layout.tsx, i18n keys added (en + zh)
+- App: SUBMISSION READY
 
-## BLOCKED — User Action Required
-1. Deploy privacy policy HTML → jobblebaby.com/privacy
-   - File: JobbleBaby/docs/privacy-policy.html
-   - Options: GitHub Pages, Netlify, Vercel (free)
-2. Configure EAS credentials:
-   - eas credentials --platform ios
-   - eas credentials --platform android
-3. Create App Store Connect app → appstoreconnect.apple.com
-4. Create Play Console app → play.google.com/console
+## BLOCKED (user action required)
+1. Privacy policy → jobblebaby.com/privacy
+2. EAS credentials
+3. App Store Connect
+4. Play Console
+
+## Next Candidate
+- Concept #52: Interoceptive Precision Training (spec_done)
+  - 5 features: Body Scan, Interoceptive Diary, Precision Score, Signal Match, Games
+  - Requires OpenCode fix OR direct implementation
 
 ## Git
-- Latest: a0a237b → pushed
-- Parent: a0a237b (chore(autoloop): cycle 326 — dispatch files + current_task update)
+- Latest: 4ef2049 → pushed
+- Parent: 2a81dea

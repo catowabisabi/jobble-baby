@@ -1,24 +1,32 @@
-# Current Task — Cycle 327
+# Current Task — Cycle 328
 
 ## This Cycle
-- ✅ Concept 54 (Infant Thermal-Metabolic Navigator) spec found + saved to DB as concept #54
-- ✅ Sisyphus: dispatched concept #54 implementation (thermal-metabolic.tsx tab)
-- ✅ Git commit + push: 2a81dea
-
-## Next Task
-- Wait for Sisyphus to implement thermal-metabolic.tsx (concept #54)
-- Review TSC result when done
-- Consider dispatching implementation for next draft concept
-
-## Blocked
-- Privacy policy deployment (user action required)
-- EAS credentials (user action required)
-- App Store Connect creation (user action required)
-- Play Console creation (user action required)
+- ✅ Concept 54 (Infant Thermal-Metabolic Navigator) — implemented directly (OpenCode unavailable in WSL/sisyphus)
+- ✅ thermal-metabolic.tsx created with 8 sub-features
+- ✅ Registered in _layout.tsx TabNavigator
+- ✅ i18n keys added (en.json + zh.json)
+- ✅ TSC: 0 errors
+- ✅ Git commit + push: 4ef2049
 
 ## App State: SUBMISSION READY (code perspective)
 All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
 
+## BLOCKED — User Action Required
+1. Deploy privacy policy HTML → jobblebaby.com/privacy
+   - File: JobbleBaby/docs/privacy-policy.html
+   - Options: GitHub Pages, Netlify, Vercel (free)
+2. Configure EAS credentials:
+   - eas credentials --platform ios
+   - eas credentials --platform android
+3. Create App Store Connect app → appstoreconnect.apple.com
+4. Create Play Console app → play.google.com/console
+
+## Automation Issue
+- OpenCode is a Windows executable at /mnt/c/Users/enoma/AppData/Roaming/npm/opencode
+- It cannot be invoked from WSL sisyphus session (POSIX shell script tries to run Windows .exe)
+- Dispatches to sisyphus have been failing silently for 2+ cycles
+- Implementing features directly until automation is fixed
+
 ## Git
-- Commit: 2a81dea → pushed
-- Parent: a0a237b (chore(autoloop): cycle 326 — dispatch files + current_task update)
+- Commit: 4ef2049 → pushed
+- Parent: 2a81dea (chore(autoloop): cycle 327)

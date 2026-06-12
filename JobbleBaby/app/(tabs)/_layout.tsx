@@ -474,6 +474,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="thermometer" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="interoceptive"
+        options={{
+          title: t('interoceptive.tabTitle') || 'Interoceptive',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

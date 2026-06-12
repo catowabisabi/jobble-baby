@@ -4609,5 +4609,28 @@
   },
   "regulatoryFitness": {
     "dataRequired": "Need at least 2 days of data for trend"
+  },
+  "windowOfTolerance": {
+    "tab": "Window",
+    "title": "Window of Tolerance",
+    "subtitle": "Polyvagal theory based stress/arousal tracking for caregiver and infant",
+    "infant": "Infant",
+    "caregiver": "Caregiver",
+    "window": "Window",
+    "hyperarousal": "Hyperarousal",
+    "hypoarousal": "Hypoarousal",
+    "dissociation": "Dissociation",
+    "logState": "Log State",
+    "coRegulation": "Co-Regulation Prompt",
+    "sessionLog": "Session Log",
+    "noLogs": "No entries yet. Log your first state above.",
+    "promptSkinToSkin": "Try skin-to-skin contact",
+    "promptSwaddle": "Swaddle and rock gently",
+    "promptGentleRouse": "Gently rouse baby",
+    "promptFeed": "Offer a feed",
+    "promptBreathe": "Take 3 deep breaths",
+    "promptGround": "Ground yourself: feel your feet",
+    "promptReachOut": "Reach out to a support person",
+    "promptRest": "Rest: you cannot pour from an empty cup"
   }
 }

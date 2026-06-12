@@ -4609,5 +4609,28 @@
   },
   "regulatoryFitness": {
     "dataRequired": "需要至少2天數據才能顯示趨勢"
+  },
+  "windowOfTolerance": {
+    "tab": "窗口",
+    "title": "Window of Tolerance",
+    "subtitle": "基於迷走神經理論的照顧者與嬰兒壓力/覺醒追蹤",
+    "infant": "嬰兒",
+    "caregiver": "照顧者",
+    "window": "窗口",
+    "hyperarousal": "過度覺醒",
+    "hypoarousal": "過低覺醒",
+    "dissociation": "解離狀態",
+    "logState": "記錄狀態",
+    "coRegulation": "共同調節提示",
+    "sessionLog": "環節記錄",
+    "noLogs": "尚無記錄。在上方記錄你的第一個狀態。",
+    "promptSkinToSkin": "嘗試肌膚接觸",
+    "promptSwaddle": "包裹並輕柔搖晃",
+    "promptGentleRouse": "輕柔唤醒嬰兒",
+    "promptFeed": "餵奶",
+    "promptBreathe": "做3次深呼吸",
+    "promptGround": "安定下來：感受雙腳",
+    "promptReachOut": "聯繫支援人員",
+    "promptRest": "休息：你無法從空杯中倒水"
   }
 }

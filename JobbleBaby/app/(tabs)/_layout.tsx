@@ -460,6 +460,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="trending-up" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="window-of-tolerance"
+        options={{
+          title: t('windowOfTolerance.tab') || 'Window',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="refresh" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

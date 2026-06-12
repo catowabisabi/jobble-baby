@@ -4630,7 +4630,9 @@
     "promptBreathe": "Take 3 deep breaths together",
     "promptGround": "Ground yourself: feet on floor, 5 senses",
     "promptReachOut": "Reach out to your support network",
-    "promptRest": "Rest when baby rests"
+    "promptRest": "Rest when baby rests",
+    "decrease": "減少",
+    "increase": "增加"
   },
   "jaundice.riskChart": "風險圖表 (WHO/NICE)",
   "jaundice.medium": "中等",

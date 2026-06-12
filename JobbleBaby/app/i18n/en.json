@@ -4630,7 +4630,9 @@
     "promptBreathe": "Take 3 deep breaths together",
     "promptGround": "Ground yourself: feet on floor, 5 senses",
     "promptReachOut": "Reach out to your support network",
-    "promptRest": "Rest when baby rests"
+    "promptRest": "Rest when baby rests",
+    "decrease": "Decrease",
+    "increase": "Increase"
   },
   "jaundice.riskChart": "Risk Chart (WHO/NICE)",
   "jaundice.medium": "Medium",

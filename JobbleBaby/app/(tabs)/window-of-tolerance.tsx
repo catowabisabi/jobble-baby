@@ -43,15 +43,15 @@ export default function WindowOfTolerance() {
         <Text style={styles.zoneLabel}>{t('windowOfTolerance.hyperarousal')}</Text>
       </View>
       <View style={styles.sliderRow}>
-        <Pressable style={styles.sliderBtn} onPress={() => onChange(Math.max(0, value - 10))}>
+        <Pressable style={styles.sliderBtn} onPress={() => onChange(Math.max(0, value - 10))} accessibilityLabel={t('windowOfTolerance.decrease') || 'Decrease slider value'}>
           <Text style={styles.sliderBtnText}>−</Text>
         </Pressable>
         <Text style={styles.sliderValue}>{value}%</Text>
-        <Pressable style={styles.sliderBtn} onPress={() => onChange(Math.min(100, value + 10))}>
+        <Pressable style={styles.sliderBtn} onPress={() => onChange(Math.min(100, value + 10))} accessibilityLabel={t('windowOfTolerance.increase') || 'Increase slider value'}>
           <Text style={styles.sliderBtnText}>+</Text>
         </Pressable>
       </View>
-      <Pressable style={styles.logBtn} onPress={() => logState('infant', value)}>
+      <Pressable style={styles.logBtn} onPress={() => logState('infant', value)} accessibilityLabel={t('windowOfTolerance.logState') || 'Log current state'}>
         <Text style={styles.logBtnText}>{t('windowOfTolerance.logState')}</Text>
       </Pressable>
     </View>

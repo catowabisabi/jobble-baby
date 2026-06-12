@@ -467,6 +467,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="refresh" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="thermal-metabolic"
+        options={{
+          title: t('thermalMetabolic.tab') || 'Thermal-Metabolic',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="thermometer" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

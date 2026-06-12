@@ -447,8 +447,8 @@ export default function ProfileScreen() {
             </TouchableOpacity>
           </View>
           <View style={styles.parentInfo}>
-            <Text style={styles.parentName}>Jamie & Sam</Text>
-            <Text style={styles.parentEmail}>jamie@jobble.app</Text>
+            <Text style={styles.parentName}>{t('profile.parentName')}</Text>
+            <Text style={styles.parentEmail}>{t('profile.parentEmail')}</Text>
           </View>
         </View>
 

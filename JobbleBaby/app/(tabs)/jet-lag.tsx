@@ -172,7 +172,7 @@ export default function JetLagScreen() {
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
                               accessibilityLabel="Cancel jet-lag action"
-                <Text style={styles.cancelBtnText}>Cancel</Text>
+                <Text style={styles.cancelBtnText}>{t('jetLag.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={start}>
                               accessibilityLabel="Start jet-lag timer"

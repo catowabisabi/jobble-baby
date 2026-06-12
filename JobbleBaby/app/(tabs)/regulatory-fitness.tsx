@@ -190,10 +190,10 @@ const QuickLogModal: React.FC<{
   );
 };
 
-const TrendChart: React.FC<{ entries: RegulatoryEntry[] }> = ({ entries }) => {
+const TrendChart: React.FC<{ entries: RegulatoryEntry[]; t: (key: string) => string }> = ({ entries, t }) => {
   const last7 = entries.slice(-7);
   if (last7.length < 2) {
-    return <Text style={styles.noDataText}>Need at least 2 days of data for trend</Text>;
+    return <Text style={styles.noDataText}>{t('regulatoryFitness.dataRequired')}</Text>;
   }
   const chartHeight = 80;
   return (
@@ -318,7 +318,7 @@ export default function RegulatoryFitnessScreen() {
         </Text>
       </TouchableOpacity>
 
-      <TrendChart entries={entries} />
+      <TrendChart entries={entries} t={t} />
       <ParentCalmScore t={t} />
 
       <View style={styles.suggestionsContainer}>

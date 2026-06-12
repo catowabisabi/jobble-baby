@@ -343,7 +343,7 @@ export default function SleepArchitectureScreen() {
           <Text style={s.infoText}>{t('sleepArchitecture.phasesInfo') || `Age-based typical distribution for ${babyAge}-month-old`}</Text>
           <View style={{ marginTop: 10 }}>
             <View style={s.phaseRow}>
-              <Text style={s.phaseLabel}>Light</Text>
+              <Text style={s.phaseLabel}>{t('sleepArchitecture.light')}</Text>
               <View style={{ flex: 1, flexDirection: 'row', borderRadius: 4, overflow: 'hidden' }}>
                 <View style={{ flex: phases.light, height: 20, backgroundColor: '#90CAF9' }} />
                 <View style={{ flex: phases.rem, height: 20, backgroundColor: '#CE93D8' }} />
@@ -357,7 +357,7 @@ export default function SleepArchitectureScreen() {
               <Text style={[s.phasePct, { marginLeft: 8 }]}>{phases.rem}%</Text>
             </View>
             <View style={s.phaseRow}>
-              <Text style={s.phaseLabel}>Deep</Text>
+              <Text style={s.phaseLabel}>{t('sleepArchitecture.deep')}</Text>
               <View style={{ flex: 1 }} />
               <Text style={[s.phasePct, { marginLeft: 8 }]}>{phases.deep}%</Text>
             </View>

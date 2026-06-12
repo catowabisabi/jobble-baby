@@ -102,7 +102,10 @@
     "tapForDetails": "點擊查看詳情",
     "next30days": "未來30天",
     "tab_title": "發育預測",
-    "add_entry": "新增預測記錄"
+    "add_entry": "新增預測記錄",
+    "current": "目前",
+    "highConfidence": "高（4+一致的數據點）",
+    "mediumConfidence": "中（2-3個數據點）"
   },
   "cryAnalyzer": {
     "title": "哭聲頻率分析器",
@@ -166,7 +169,10 @@
     "headCirc": "頭圍",
     "date": "日期",
     "milestone": "里程碑",
-    "ageAtMilestone": "月齡"
+    "ageAtMilestone": "月齡",
+    "name": "姓名",
+    "birthDate": "出生日期",
+    "gender": "性別"
   },
   "home": {
     "title": "主頁",
@@ -346,7 +352,9 @@
     "changePhoto": "更改照片",
     "takePhoto": "拍攝照片",
     "chooseLibrary": "從相簿選擇",
-    "removePhoto": "移除照片"
+    "removePhoto": "移除照片",
+    "parentName": "Jamie & Sam",
+    "parentEmail": "jamie@jobble.app"
   },
   "onboarding": {
     "welcome": "歡迎使用 Jobble Baby",
@@ -1079,7 +1087,8 @@
     "addEntry": "新增記項",
     "notes": "備註",
     "save": "儲存",
-    "nippleLevel": "奶嘴階段"
+    "nippleLevel": "奶嘴階段",
+    "cancel": "取消"
   },
   "moroReflex": {
     "title": "莫羅反射監測",
@@ -1106,7 +1115,8 @@
     "alertRed": "過度驚跳 — 請諮詢兒科醫生",
     "history": "歷史",
     "noEvents": "尚未記錄驚跳",
-    "badgeCalm": "冷靜寶寶"
+    "badgeCalm": "冷靜寶寶",
+    "cancel": "取消"
   },
   "tongueTie": {
     "title": "舌繫帶追蹤",
@@ -1300,7 +1310,8 @@
       "utc_5": "UTC-5",
       "utc_8": "UTC-8",
       "utc1": "UTC+1"
-    }
+    },
+    "cancel": "取消"
   },
   "reflexIntegration": {
     "title": "原始反射整合時間線",
@@ -1313,7 +1324,8 @@
     "timeline": "整合時間線",
     "noRecords": "尚無記項",
     "notes": "備註",
-    "save": "儲存"
+    "save": "儲存",
+    "cancel": "取消"
   },
   "hipClick": {
     "title": "髖關節點擊 / 奧爾托蘭尼",
@@ -1658,7 +1670,15 @@
       "fiber_optic": "光纖燈",
       "bili_blanket": "光照毯"
     },
-    "bilirubinLog": "膽紅素記錄"
+    "bilirubinLog": "膽紅素記錄",
+    "riskChart": "風險圖表 (WHO/NICE)",
+    "medium": "中等",
+    "date": "日期",
+    "bilirubinLevel": "膽紅素 (mg/dL)",
+    "notesOptional": "備註（可選）",
+    "phototherapySession": "光照治療療程",
+    "startTimeHHMM": "開始時間 (HH:MM)",
+    "endTimeHHMM": "結束時間 (HH:MM)"
   },
   "procedureRecovery": {
     "tabs": {
@@ -2379,7 +2399,7 @@
     "temp": "溫度",
     "humidity": "濕度",
     "noise": "噪音",
-    "light": "光線",
+    "light": "淺層",
     "tempC": "溫度（°C）",
     "humidityPct": "濕度（%）",
     "noiseLevel": "噪音水平",
@@ -2409,7 +2429,8 @@
     "minThisWeek": "分鐘本週",
     "timerRunning": "● 計時器運行中",
     "endSession": "結束",
-    "startTummyTime": "開始趴趴時間"
+    "startTummyTime": "開始趴趴時間",
+    "deep": "深層"
   },
   "launchChecklist.items.playDevAccount": "Google Play 開發者帳戶已確認",
   "launchChecklist.desc.playDevAccount": "確認 Google Play 開發者帳戶已啟用",
@@ -2907,7 +2928,13 @@
   },
   "monitorCorrelation": {
     "tab_title": "監控關聯",
-    "add_entry": "新增關聯記錄"
+    "add_entry": "新增關聯記錄",
+    "sound": "聲音",
+    "motion": "動作",
+    "cry": "哭聲",
+    "monitorEvents": "監控事件",
+    "sleepDisruptions": "睡眠中斷",
+    "correlations": "關聯性（哭聲在中斷後30分鐘內）"
   },
   "appName": "Jobble Baby",
   "accepted": "已接受",
@@ -4561,5 +4588,8 @@
     "timerRunning": "[Timerrunning]",
     "tummyTime": "[Tummytime]",
     "wakeWindow": "[Wakewindow]"
+  },
+  "regulatoryFitness": {
+    "dataRequired": "需要至少2天數據才能顯示趨勢"
   }
 }

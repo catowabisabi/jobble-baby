@@ -151,7 +151,7 @@ export default function ReflexIntegrationScreen() {
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
                               accessibilityLabel="Cancel reflex-integration action"
-                <Text style={styles.cancelBtnText}>Cancel</Text>
+                <Text style={styles.cancelBtnText}>{t('reflexIntegration.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={save}>
                               accessibilityLabel="Save reflex-integration entry"

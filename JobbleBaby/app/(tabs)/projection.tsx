@@ -339,7 +339,7 @@ export default function ProjectionScreen() {
           <View>
             <View style={styles.row}>
               <Text style={[styles.projectionValue, { color: C.text }]}>{currentWake.label}</Text>
-              <Text style={[styles.currentTag, { backgroundColor: C.accent + '33', color: C.accent }]}>current</Text>
+              <Text style={[styles.currentTag, { backgroundColor: C.accent + '33', color: C.accent }]}>{t('projection.current')}</Text>
             </View>
             <Text style={[styles.projectionLabel, { color: C.muted }]}>
               Next age window ({nextWakeKey}): {nextWake.label}
@@ -375,11 +375,11 @@ export default function ProjectionScreen() {
           <Text style={[styles.legendTitle, { color: C.muted }]}>{t('projection.confidenceHigh').split(' ')[0]} Confidence Legend</Text>
           <View style={styles.legendRow}>
             <View style={[styles.legendDot, { backgroundColor: '#2ecc71' }]} />
-            <Text style={[styles.legendText, { color: C.muted }]}>High (4+ consistent data points)</Text>
+            <Text style={[styles.legendText, { color: C.muted }]}>{t('projection.highConfidence')}</Text>
           </View>
           <View style={styles.legendRow}>
             <View style={[styles.legendDot, { backgroundColor: '#f1c40f' }]} />
-            <Text style={[styles.legendText, { color: C.muted }]}>Medium (2-3 data points)</Text>
+            <Text style={[styles.legendText, { color: C.muted }]}>{t('projection.mediumConfidence')}</Text>
           </View>
           <View style={styles.legendRow}>
             <View style={[styles.legendDot, { backgroundColor: '#e74c3c' }]} />

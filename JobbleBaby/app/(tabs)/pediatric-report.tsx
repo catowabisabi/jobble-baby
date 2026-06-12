@@ -239,11 +239,11 @@ export default function PediatricReportScreen() {
         <View style={styles.card}>
           <Text style={[styles.sectionTitle, { marginTop: 0 }]}>{t('pediatricReport.babyInfo') || 'Baby Info'}</Text>
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Name</Text>
+            <Text style={styles.infoLabel}>{t('pediatricReport.name')}</Text>
             <Text style={styles.infoValue}>{profile?.name || '—'}</Text>
           </View>
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Birth date</Text>
+            <Text style={styles.infoLabel}>{t('pediatricReport.birthDate')}</Text>
             <Text style={styles.infoValue}>{profile?.birthDate ? formatDate(profile.birthDate) : '—'}</Text>
           </View>
           <View style={styles.infoRow}>
@@ -251,7 +251,7 @@ export default function PediatricReportScreen() {
             <Text style={styles.infoValue}>{babyAgeMonths} months</Text>
           </View>
           <View style={[styles.infoRow, { borderBottomWidth: 0 }]}>
-            <Text style={styles.infoLabel}>Gender</Text>
+            <Text style={styles.infoLabel}>{t('pediatricReport.gender')}</Text>
             <Text style={styles.infoValue}>{profile?.gender || '—'}</Text>
           </View>
         </View>

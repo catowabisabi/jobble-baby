@@ -13,8 +13,8 @@
         "missingEn": []
       },
       "meta": {
-        "enCount": 297,
-        "zhCount": 297
+        "enCount": 1738,
+        "zhCount": 1738
       }
     },
     {
@@ -39,26 +39,26 @@
       "name": "HardcodedStrings",
       "pass": false,
       "issues": [
-        "jaundice.tsx:296: \"Risk Chart (WHO/NICE)\"",
-        "jaundice.tsx:302: \"Medium\"",
-        "jaundice.tsx:303: \"High\"",
-        "jaundice.tsx:320: \"Share Report\"",
-        "jaundice.tsx:329: \"Date\"",
-        "jaundice.tsx:331: \"Bilirubin (mg/dL)\"",
-        "jaundice.tsx:333: \"Method\"",
-        "jaundice.tsx:337: \"Blood Test\"",
-        "jaundice.tsx:344: \"Notes (optional)\"",
-        "jaundice.tsx:349: \"Cancel\"",
-        "jaundice.tsx:353: \"Save\"",
-        "jaundice.tsx:364: \"Phototherapy Session\"",
-        "jaundice.tsx:365: \"Start Time (HH:MM)\"",
-        "jaundice.tsx:369: \"Lamp Type\"",
-        "jaundice.tsx:381: \"Cancel\"",
-        "jaundice.tsx:385: \"Save\"",
-        "jet-lag.tsx:175: \"Cancel\"",
-        "monitor-correlation.tsx:105: \"Sound\"",
-        "monitor-correlation.tsx:109: \"Motion\"",
-        "monitor-correlation.tsx:135: \"Monitor Events\""
+        "sleep-association.tsx:314: \"Today's Log\"",
+        "sleep-association.tsx:324: \"Fall asleep:\"",
+        "sleep-association.tsx:328: \"Wakings:\"",
+        "sleep-association.tsx:332: \"Longest:\"",
+        "sleep-association.tsx:349: \"Edit Entry\"",
+        "sleep-association.tsx:558: \"Fall:\"",
+        "sleep-association.tsx:562: \"Wakings:\"",
+        "sleep-association.tsx:566: \"Longest:\"",
+        "solid-food.tsx:367: \"Feeding Journey\"",
+        "solid-food.tsx:597: \"Current\"",
+        "solid-food.tsx:656: \"Growth Impact →\"",
+        "solid-food.tsx:668: \"Teething → Food Refusal →\"",
+        "stress-cascade.tsx:416: \"Optional inputs\"",
+        "stress-cascade.tsx:484: \"Come back in 5 minutes\"",
+        "teething.tsx:314: \"Expected Soon\"",
+        "teething.tsx:350: \"ERUPTED\"",
+        "tongue-tie.tsx:431: \"Latch:\"",
+        "tongue-tie.tsx:433: \"Milk:\"",
+        "tongue-tie.tsx:434: \"Flow:\"",
+        "tongue-tie.tsx:514: \"Cancel\""
       ]
     }
   ],

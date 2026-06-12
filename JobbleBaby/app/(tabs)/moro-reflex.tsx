@@ -196,7 +196,7 @@ export default function MoroReflexScreen() {
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
                               accessibilityLabel="Cancel moro-reflex action"
-                <Text style={styles.cancelBtnText}>Cancel</Text>
+                <Text style={styles.cancelBtnText}>{t('moroReflex.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={save}>
                               accessibilityLabel="Save moro-reflex entry"

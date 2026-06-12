@@ -102,15 +102,15 @@ export default function MonitorCorrelationScreen() {
     <View style={styles.legend}>
       <View style={styles.legendItem}>
         <MaterialCommunityIcons name="microphone" size={16} color={EVENT_COLORS.sound} />
-        <Text style={[styles.legendText, { color: C.muted }]}>Sound</Text>
+        <Text style={[styles.legendText, { color: C.muted }]}>{t('monitorCorrelation.sound')}</Text>
       </View>
       <View style={styles.legendItem}>
         <MaterialCommunityIcons name="vibrate" size={16} color={EVENT_COLORS.motion} />
-        <Text style={[styles.legendText, { color: C.muted }]}>Motion</Text>
+        <Text style={[styles.legendText, { color: C.muted }]}>{t('monitorCorrelation.motion')}</Text>
       </View>
       <View style={styles.legendItem}>
         <MaterialCommunityIcons name="baby-face-outline" size={16} color={EVENT_COLORS.cry} />
-        <Text style={[styles.legendText, { color: C.muted }]}>Cry</Text>
+        <Text style={[styles.legendText, { color: C.muted }]}>{t('monitorCorrelation.cry')}</Text>
       </View>
     </View>
   );
@@ -132,7 +132,7 @@ export default function MonitorCorrelationScreen() {
     return (
       <View>
         {/* Monitor Events Column */}
-        <Text style={[styles.sectionTitle, { color: C.text }]}>Monitor Events</Text>
+        <Text style={[styles.sectionTitle, { color: C.text }]}>{t('monitorCorrelation.monitorEvents')}</Text>
         <View style={styles.eventList}>
           {monitorEvents.slice(0, 20).map((event) => (
             <View key={event.id} style={[styles.eventCard, { backgroundColor: C.card, borderColor: C.border }]}>
@@ -153,7 +153,7 @@ export default function MonitorCorrelationScreen() {
         </View>
 
         {/* Sleep Disruptions Column */}
-        <Text style={[styles.sectionTitle, { color: C.text }]}>Sleep Disruptions</Text>
+        <Text style={[styles.sectionTitle, { color: C.text }]}>{t('monitorCorrelation.sleepDisruptions')}</Text>
         <View style={styles.eventList}>
           {disruptions.slice(0, 20).map((disruption) => (
             <View key={disruption.id} style={[styles.eventCard, { backgroundColor: C.card, borderColor: C.border }]}>
@@ -176,7 +176,7 @@ export default function MonitorCorrelationScreen() {
         {/* Correlations */}
         {correlations.length > 0 && (
           <>
-            <Text style={[styles.sectionTitle, { color: C.text }]}>Correlations (Cry within 30 min of disruption)</Text>
+            <Text style={[styles.sectionTitle, { color: C.text }]}>{t('monitorCorrelation.correlations')}</Text>
             {correlations.map((corr) => (
               <View key={`${corr.event.id}-${corr.disruption.id}`} style={[styles.correlationCard, { backgroundColor: C.card, borderColor: '#3B82F6' }]}>
                 <View style={styles.correlationRow}>

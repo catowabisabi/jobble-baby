@@ -102,7 +102,10 @@
     "tapForDetails": "Tap for details",
     "next30days": "Next 30 Days",
     "tab_title": "Projection",
-    "add_entry": "Add projection entry"
+    "add_entry": "Add projection entry",
+    "current": "current",
+    "highConfidence": "High (4+ consistent data points)",
+    "mediumConfidence": "Medium (2-3 data points)"
   },
   "cryAnalyzer": {
     "title": "Cry Frequency Analyzer",
@@ -166,7 +169,10 @@
     "headCirc": "Head Circ.",
     "date": "Date",
     "milestone": "Milestone",
-    "ageAtMilestone": "Age"
+    "ageAtMilestone": "Age",
+    "name": "Name",
+    "birthDate": "Birth date",
+    "gender": "Gender"
   },
   "home": {
     "title": "Home",
@@ -346,7 +352,9 @@
     "changePhoto": "Change Photo",
     "takePhoto": "Take Photo",
     "chooseLibrary": "Choose from Library",
-    "removePhoto": "Remove Photo"
+    "removePhoto": "Remove Photo",
+    "parentName": "Jamie & Sam",
+    "parentEmail": "jamie@jobble.app"
   },
   "onboarding": {
     "welcome": "Welcome to Jobble Baby",
@@ -1021,7 +1029,8 @@
     "addEntry": "Add Entry",
     "notes": "Notes",
     "save": "Save",
-    "nippleLevel": "Nipple Level"
+    "nippleLevel": "Nipple Level",
+    "cancel": "Cancel"
   },
   "moroReflex": {
     "title": "Moro Reflex Monitor",
@@ -1048,7 +1057,8 @@
     "alertRed": "Excessive startles — consult pediatrician",
     "history": "History",
     "noEvents": "No startles logged yet",
-    "badgeCalm": "Calm Baby"
+    "badgeCalm": "Calm Baby",
+    "cancel": "Cancel"
   },
   "tongueTie": {
     "title": "Tongue Tie Tracker",
@@ -1242,7 +1252,8 @@
       "utc_5": "UTC-5",
       "utc_8": "UTC-8",
       "utc1": "UTC+1"
-    }
+    },
+    "cancel": "Cancel"
   },
   "reflexIntegration": {
     "title": "Reflex Integration Timeline",
@@ -1255,7 +1266,8 @@
     "timeline": "Integration Timeline",
     "noRecords": "No records yet",
     "notes": "Notes",
-    "save": "Save"
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "hipClick": {
     "title": "Hip Click / Ortolani",
@@ -1658,7 +1670,15 @@
       "fiber_optic": "Fiber Optic",
       "bili_blanket": "BiliBlanket"
     },
-    "bilirubinLog": "Bilirubin Log"
+    "bilirubinLog": "Bilirubin Log",
+    "riskChart": "Risk Chart (WHO/NICE)",
+    "medium": "Medium",
+    "date": "Date",
+    "bilirubinLevel": "Bilirubin (mg/dL)",
+    "notesOptional": "Notes (optional)",
+    "phototherapySession": "Phototherapy Session",
+    "startTimeHHMM": "Start Time (HH:MM)",
+    "endTimeHHMM": "End Time (HH:MM)"
   },
   "procedureRecovery": {
     "tabs": {
@@ -2409,7 +2429,8 @@
     "minThisWeek": "min this week",
     "timerRunning": "● Timer running",
     "endSession": "End Session",
-    "startTummyTime": "Start Tummy Time"
+    "startTummyTime": "Start Tummy Time",
+    "deep": "Deep"
   },
   "launchChecklist.items.playDevAccount": "Google Play Developer account confirmed",
   "launchChecklist.desc.playDevAccount": "Confirm Google Play Developer account is active",
@@ -2907,7 +2928,13 @@
   },
   "monitorCorrelation": {
     "tab_title": "Monitor Correlation",
-    "add_entry": "Add correlation entry"
+    "add_entry": "Add correlation entry",
+    "sound": "Sound",
+    "motion": "Motion",
+    "cry": "Cry",
+    "monitorEvents": "Monitor Events",
+    "sleepDisruptions": "Sleep Disruptions",
+    "correlations": "Correlations (Cry within 30 min of disruption)"
   },
   "appName": "Jobble Baby",
   "accepted": "Accepted",
@@ -4561,5 +4588,8 @@
     "timerRunning": "Timerrunning",
     "tummyTime": "Tummytime",
     "wakeWindow": "Wakewindow"
+  },
+  "regulatoryFitness": {
+    "dataRequired": "Need at least 2 days of data for trend"
   }
 }

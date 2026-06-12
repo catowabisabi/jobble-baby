@@ -293,14 +293,14 @@ export default function JaundiceScreen() {
 
         {/* Risk Chart */}
         <View style={[styles.section, { backgroundColor: C.card }]}>
-          <Text style={[styles.sectionTitle, { color: C.text }]}>Risk Chart (WHO/NICE)</Text>
+          <Text style={[styles.sectionTitle, { color: C.text }]}>{t('jaundice.riskChart')}</Text>
           <Text style={[styles.chartNote, { color: C.muted }]}>Age-adjusted bilirubin thresholds (mg/dL)</Text>
           <View style={styles.chartTable}>
             <View style={[styles.chartRow, styles.chartHeader]}>
               <Text style={[styles.chartCell, { color: C.text }]}>Age (days)</Text>
               <Text style={[styles.chartCell, { color: C.text }]}>Low</Text>
-              <Text style={[styles.chartCell, { color: C.text }]}>Medium</Text>
-              <Text style={[styles.chartCell, { color: C.text }]}>High</Text>
+              <Text style={[styles.chartCell, { color: C.text }]}>{t('jaundice.medium')}</Text>
+              <Text style={[styles.chartCell, { color: C.text }]}>{t('jaundice.high')}</Text>
             </View>
             {[0, 1, 2, 3, 4, 5, 6, 7].map(age => (
               <View key={age} style={[styles.chartRow, age === ageDays % 7 && { backgroundColor: C.accent + '15' }]}>
@@ -317,7 +317,7 @@ export default function JaundiceScreen() {
         <TouchableOpacity style={[styles.shareBtn, { backgroundColor: C.accent }]} onPress={shareReport}>
                         accessibilityLabel="TouchableOpacity in jaundice"
           <MaterialCommunityIcons name="share-variant" size={20} color="#fff" />
-          <Text style={styles.shareBtnText}>Share Report</Text>
+          <Text style={styles.shareBtnText}>{t('jaundice.shareReport')}</Text>
         </TouchableOpacity>
       </ScrollView>
 
@@ -326,31 +326,31 @@ export default function JaundiceScreen() {
         <View style={[styles.modalOverlay]}>
           <View style={[styles.modal, { backgroundColor: C.card }]}>
             <Text style={[styles.modalTitle, { color: C.text }]}>Log Bilirubin Reading</Text>
-            <Text style={[styles.modalLabel, { color: C.muted }]}>Date</Text>
+            <Text style={[styles.modalLabel, { color: C.muted }]}>{t('jaundice.date')}</Text>
             <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text }]} value={logDate} onChangeText={setLogDate} placeholder="YYYY-MM-DD" placeholderTextColor={C.muted} />
-            <Text style={[styles.modalLabel, { color: C.muted }]}>Bilirubin (mg/dL)</Text>
+            <Text style={[styles.modalLabel, { color: C.muted }]}>{t('jaundice.bilirubinLevel')}</Text>
             <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text }]} value={logBilirubin} onChangeText={setLogBilirubin} placeholder="e.g. 10.5" placeholderTextColor={C.muted} keyboardType="decimal-pad" />
-            <Text style={[styles.modalLabel, { color: C.muted }]}>Method</Text>
+            <Text style={[styles.modalLabel, { color: C.muted }]}>{t('jaundice.method')}</Text>
             <View style={styles.toggleRow}>
               <TouchableOpacity style={[styles.toggleBtn, logMethod === 'blood' && { backgroundColor: C.accent }]} onPress={() => setLogMethod('blood')}>
                               accessibilityLabel="TouchableOpacity in jaundice"
-                <Text style={[styles.toggleText, logMethod === 'blood' && { color: '#fff' }]}>Blood Test</Text>
+                <Text style={[styles.toggleText, logMethod === 'blood' && { color: '#fff' }]}>{t('jaundice.bloodTest')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.toggleBtn, logMethod === 'transcutaneous' && { backgroundColor: C.accent }]} onPress={() => setLogMethod('transcutaneous')}>
                               accessibilityLabel="TouchableOpacity in jaundice"
                 <Text style={[styles.toggleText, logMethod === 'transcutaneous' && { color: '#fff' }]}>Tc Meter</Text>
               </TouchableOpacity>
             </View>
-            <Text style={[styles.modalLabel, { color: C.muted }]}>Notes (optional)</Text>
+            <Text style={[styles.modalLabel, { color: C.muted }]}>{t('jaundice.notesOptional')}</Text>
             <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text }]} value={logNotes} onChangeText={setLogNotes}            placeholder={t('jaundice.notesPlaceholder')} placeholderTextColor={C.muted} />
             <View style={styles.modalActions}>
               <TouchableOpacity style={[styles.cancelBtn, { borderColor: C.border }]} onPress={() => setShowLogModal(false)}>
                               accessibilityLabel="Toggle jaundice panel"
-                <Text style={[styles.cancelBtnText, { color: C.text }]}>Cancel</Text>
+                <Text style={[styles.cancelBtnText, { color: C.text }]}>{t('jaundice.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={addJaundiceEntry}>
                               accessibilityLabel="Add jaundice entry"
-                <Text style={styles.saveBtnText}>Save</Text>
+                <Text style={styles.saveBtnText}>{t('jaundice.save')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -361,12 +361,12 @@ export default function JaundiceScreen() {
       {showPhotoModal && (
         <View style={[styles.modalOverlay]}>
           <View style={[styles.modal, { backgroundColor: C.card }]}>
-            <Text style={[styles.modalTitle, { color: C.text }]}>Phototherapy Session</Text>
-            <Text style={[styles.modalLabel, { color: C.muted }]}>Start Time (HH:MM)</Text>
+            <Text style={[styles.modalTitle, { color: C.text }]}>{t('jaundice.phototherapySession')}</Text>
+            <Text style={[styles.modalLabel, { color: C.muted }]}>{t('jaundice.startTimeHHMM')}</Text>
             <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text }]} value={photoStart} onChangeText={setPhotoStart} placeholder="e.g. 09:00" placeholderTextColor={C.muted} />
             <Text style={[styles.modalLabel, { color: C.muted }]}>End Time (HH:MM)</Text>
             <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text }]} value={photoEnd} onChangeText={setPhotoEnd} placeholder="e.g. 12:00" placeholderTextColor={C.muted} />
-            <Text style={[styles.modalLabel, { color: C.muted }]}>Lamp Type</Text>
+            <Text style={[styles.modalLabel, { color: C.muted }]}>{t('jaundice.lampType')}</Text>
             <View style={styles.lampRow}>
               {LAMP_TYPES.map(lamp => (
                 <TouchableOpacity key={lamp} style={[styles.lampBtn, photoLamp === lamp && { backgroundColor: C.accent }]} onPress={() => setPhotoLamp(lamp)}>
@@ -378,11 +378,11 @@ export default function JaundiceScreen() {
             <View style={styles.modalActions}>
               <TouchableOpacity style={[styles.cancelBtn, { borderColor: C.border }]} onPress={() => setShowPhotoModal(false)}>
                               accessibilityLabel="Toggle jaundice panel"
-                <Text style={[styles.cancelBtnText, { color: C.text }]}>Cancel</Text>
+                <Text style={[styles.cancelBtnText, { color: C.text }]}>{t('jaundice.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={addPhotoEntry}>
                               accessibilityLabel="Add jaundice entry"
-                <Text style={styles.saveBtnText}>Save</Text>
+                <Text style={styles.saveBtnText}>{t('jaundice.save')}</Text>
               </TouchableOpacity>
             </View>
           </View>

@@ -1,26 +1,29 @@
-# Sisyphus Task — Cycle 315: Tab Navigator Integrity Check
+# Sisyphus Task — Cycle 316: Final Pre-Submission Readiness Check
 
 ## Context
-Jobble Baby has 68 tabs. We need to verify ALL tab .tsx files are registered in _layout.tsx Tabs.Screen — no orphaned screens.
+Jobble Baby is submission-ready (68 tabs, TSC 0 errors, i18n matched, audit 5/6 PASS).
+All code work is complete. The remaining blockers are USER ACTIONS:
+- Privacy policy deployment to jobblebaby.com/privacy
+- EAS credentials configuration
+- App Store Connect + Play Console app creation
 
 ## Your Task
-1. Read `app/(tabs)/_layout.tsx` — extract ALL Tabs.Screen names
-2. List ALL .tsx files in `app/(tabs)/`
-3. Compare: which .tsx files are NOT in Tabs.Screen? List them.
-4. For each unregistered file: check if it has a valid component (not empty stub)
-5. If any unregistered files have real content → add them to _layout.tsx Tabs.Screen
+Since there are no pending code tasks for Sisyphus right now,
+perform a final validation pass on the codebase:
 
-## Verification
-- After any fixes: run `npx tsc --noEmit` — must pass 0 errors
-- Report: registered count, unregistered count, orphaned files
+1. Run `npx tsc --noEmit` in the JobbleBaby directory — confirm 0 errors
+2. Run the pre-submission audit: `node scripts/pre-submission-audit.js`
+3. Verify docs/privacy-policy.html exists and is complete
+4. Check app.json for: bundleId, version, buildNumber, ios/android package names
 
-## Output Format
+Report back:
 ```
-=== Tab Navigator Integrity ===
-Registered: N/68
-Unregistered: [list]
-Fixed: [list or "none needed"]
+=== Final Readiness ===
 TSC: PASS/FAIL
+Audit: X/6 PASS
+Privacy Policy: present/missing
+app.json: complete/incomplete
+Status: READY FOR SUBMISSION / BLOCKED
 ```
 
 Start in: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby

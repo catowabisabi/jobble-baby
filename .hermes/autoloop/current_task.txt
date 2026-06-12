@@ -1,31 +1,34 @@
-# Current Dispatch — Cycle 315
+# Current Dispatch — Cycle 316
 
 ## Status
-- Cycle 315 running
+- Cycle 316 running
 - TSC: 0 errors ✓
 - i18n: 1738 keys (en + zh matched) ✓
 - Pre-submission audit: 5/6 PASS (HardcodedStrings = non-blocking warnings) ✓
-- Commit: 89257f1 → pushed
+- Commit: ab96f98 → pushed
 - Keyword pool: 1000 keywords (brainstormed 50 new)
+- Tab Navigator: 68/68 registered, 0 orphaned, TSC 0 errors ✓
 
-## App State — SUBMISSION READY
-- 68 tabs
+## App State — SUBMISSION READY (AWAITING USER)
+- 68 tabs all registered
 - TSC 0 errors
-- i18n: 1738 keys
+- i18n: 1738 keys matched
 - Pre-submission audit: 5/6 checks PASS
-- Privacy policy HTML: ready at docs/privacy-policy.html
 
-## Remaining (USER ACTION REQUIRED)
-1. Deploy privacy policy HTML to live URL (jobblebaby.com/privacy)
+## BLOCKED — User Action Required
+1. Deploy privacy policy HTML to live URL → jobblebaby.com/privacy
+   - File ready: docs/privacy-policy.html
+   - Options: GitHub Pages, Netlify, Vercel
 2. Configure EAS credentials: `eas credentials --platform ios` + `eas credentials --platform android`
-3. Create App Store Connect app (App Store Connect website)
-4. Create Play Console app (Google Play Console website)
+3. Create App Store Connect app (appstoreconnect.apple.com)
+4. Create Play Console app (play.google.com/console)
 
-## Brainstorm (Cycle 315)
-- Sources: object_permanence_emergence, leap_visualization, development_symphony_dashboard, crying_attractor, social_cognition_baseline
+## Brainstorm (Cycle 316)
+- Sources: phase_transition, entrainment drift, landau_equation, catch-up growth trajectory, oral_motor_tone
 - Added 50 free-association keywords → pool 1000
-- Focus: regulatory fitness, primitive reflex integration, polyvagal theory, interoceptive development, vestibular/proprioceptive maturation
+- Keywords: state change, chronobiology, allometric growth, metabolic compensation, tongue thrust, speech articulation, etc.
+- Prompt3: overheating_prevention, moro_reflex_monitoring, cause-effect_reasoning
 
 ## Git
-- Commit: 89257f1 → pushed
-- Parent: 85abea7 (fix regulatory-fitness TrendChart)
+- Commit: ab96f98 → pushed
+- Parent: 89257f1 (chore autoloop cycle 315)

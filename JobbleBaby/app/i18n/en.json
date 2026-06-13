@@ -98,7 +98,8 @@
     "antiRefluxGuide": "Anti-Reflux Protocol Guide",
     "step1": "Keep baby semi-upright (30-45) during entire feed",
     "step2": "Use football hold or wedge pillow for consistent incline",
-    "step3": "Keep baby upright 20-30 min after feeding before lying down"
+    "step3": "Keep baby upright 20-30 min after feeding before lying down",
+    "saveLog": "Save Log"
   },
   "hydration": {
     "title": "Fontanelle and Hydration",

@@ -4882,5 +4882,15 @@
   "score.visualMotorPct": "Visual-Motor %",
   "score.bodyComp": "Body Comp",
   "alert.reflexRetained": "Reflex still present beyond expected age — consult your pediatrician",
-  "alert.visualDelayed": "Visual tracking may be delayed — consult your pediatrician"
+  "alert.visualDelayed": "Visual tracking may be delayed — consult your pediatrician",
+  "visual.title": "Visual-Motor Assessment",
+  "skinfold.title": "Skinfold Measurement",
+  "reflex.integrationTimeline": "Integration Timeline",
+  "reflexIntegration.cancel": "Cancel",
+  "moroReflex.cancel": "Cancel",
+  "interoceptive.precisionScoreDesc": "Precision score based on interoceptive awareness",
+  "interoceptive.precisionScoreTitle": "Precision Score",
+  "interoceptive.scoreAlert": "Score alert threshold",
+  "interoceptive.scoreTrend": "Score trend over time",
+  "thermalMetabolic.feedingQualityScore": "Feeding Quality Score"
 }

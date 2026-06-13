@@ -1074,7 +1074,9 @@
     "history": "History",
     "addFood": "Add Food",
     "notes": "Notes",
-    "save": "Save"
+    "save": "Save",
+    "window": "Window",
+    "rash": "Rash"
   },
   "oralMotor": {
     "title": "Oral Motor Roadmap",
@@ -4809,7 +4811,8 @@
     "optimal": "Optimal",
     "warm": "Warm",
     "error": "Error",
-    "enterValidData": "Please enter valid data"
+    "enterValidData": "Please enter valid data",
+    "high": "High"
   },
   "interoceptive": {
     "tabTitle": "Interoceptive Training",
@@ -4849,7 +4852,20 @@
     "scanThroat": "Throat",
     "scanPelvis": "Pelvis",
     "scanLimbs": "Limbs",
-    "bodyScanComplete": "Scan Complete"
+    "bodyScanComplete": "Scan Complete",
+    "duration": "Duration",
+    "recentSessions": "Recent Sessions",
+    "diaryConsistency": "Diary Consistency",
+    "bodyScanEngagement": "Body Scan Engagement",
+    "babyAgeMonths": "Baby Age (months)",
+    "reaction": "Reaction",
+    "notes": "Notes",
+    "completeHrvEntry": "Complete HRV Entry",
+    "saveSession": "Save Session",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "saveEntry": "Save Entry",
+    "whatResolvedIt": "What resolved it?"
   },
   "reflexIntegration.cancel": "Cancel",
   "moroReflex.cancel": "Cancel",
@@ -4875,7 +4891,10 @@
     "reflexIntegration": "Reflex Integration",
     "visualMotor": "Visual-Motor",
     "bodyComposition": "Body Composition",
-    "integrationTimeline": "Integration Timeline"
+    "integrationTimeline": "Integration Timeline",
+    "reflexStatus": "Reflex Status",
+    "cancel": "Cancel",
+    "save": "Save"
   },
   "visual": {
     "horizontalSweep": "Horizontal Sweep",
@@ -4884,14 +4903,16 @@
     "focusTracking": "Focus Tracking",
     "qualityScore": "Quality Score",
     "expectedAge": "Expected Age",
-    "title": "Visual-Motor Assessment"
+    "title": "Visual-Motor Assessment",
+    "visualMotorScore": "Visual-Motor Score"
   },
   "skinfold": {
     "triceps": "Triceps",
     "subscapular": "Subscapular",
     "mm": "mm",
     "trend": "Trend",
-    "title": "Skinfold Measurement"
+    "title": "Skinfold Measurement",
+    "measurement": "Measurement"
   },
   "score": {
     "integratedScore": "Integrated Score",

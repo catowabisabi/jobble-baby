@@ -1,0 +1,81 @@
+HERMES TASK: Fix 16 missing accessibilityLabel attributes across gravity-feeding.tsx and reflex-visual-motor.tsx.
+
+Keywords: reflex_status_picker, skinfold_site_picker, visual_score_picker, gravity_feeding_angle, tactile_symbol_grid
+
+GOAL: Add accessibilityLabel to all TouchableOpacity elements that are missing them, based on the pre-submission audit.
+
+STEP 1 — gravity-feeding.tsx (6 elements need accessibilityLabel):
+
+Line ~154 — angle picker chip:
+Find: <TouchableOpacity key={angle} style={[styles.angleButton, selectedAngle === angle && { backgroundColor: colors.accent }]} onPress={() => setSelectedAngle(angle)}>
+Add accessibilityLabel={`Angle ${angle} degrees`} prop
+
+Line ~179 — position picker chip:
+Find: <TouchableOpacity key={pos} style={[styles.posButton, selectedPosition === pos && { backgroundColor: colors.accent }]} onPress={() => setSelectedPosition(pos)}>
+Add accessibilityLabel={`Position: ${pos}`} prop
+
+Line ~193 — outcome picker chip:
+Find: <TouchableOpacity key={out} style={[styles.optionChip, selectedOutcome === out && { backgroundColor: colors.accent }]} onPress={() => setSelectedOutcome(out)}>
+Add accessibilityLabel={`Outcome: ${outcomeLabels[out]}`} prop
+
+Line ~204 — save button:
+Find: <TouchableOpacity style={[styles.saveButton, { backgroundColor: colors.accent }]} onPress={saveLog}>
+Add accessibilityLabel={t('gravityFeeding.saveLog') || 'Save Log'} prop
+
+Line ~237 — leap row:
+Find: <TouchableOpacity key={leap.leapId} style={styles.leapRow} onPress={() => setSelectedLeap(leap)}>
+Add accessibilityLabel={`Leap ${leap.leapId}: ${leap.name}`} prop
+
+Line ~260 — tactile symbol:
+Find: <TouchableOpacity key={symbol.id} style={styles.tactileSymbolBtn} onPress={() => toggleSymbol(symbol.id)}>
+Add accessibilityLabel={`Tactile symbol: ${symbol.name}`} prop
+
+STEP 2 — reflex-visual-motor.tsx (10 elements need accessibilityLabel):
+
+Line ~138 — reflex row:
+Find: <TouchableOpacity key={r.id} style={styles.row} onPress={() => openAddReflex(r.id)}>
+Add accessibilityLabel={t(r.nameKey) + ' reflex row'} prop
+
+Line ~157 — visual milestone row:
+Find: <TouchableOpacity key={m.id} style={styles.row} onPress={() => openAddVisual(m.id)}>
+Add accessibilityLabel={t(m.nameKey) + ' milestone row'} prop
+
+Line ~173 — skinfold triceps button:
+Find: <TouchableOpacity style={[styles.skinfoldBtn, { backgroundColor: bg }]} onPress={() => openAddSkinfold('triceps')}>
+Add accessibilityLabel={t('skinfold.triceps') + ' measurement'} prop
+
+Line ~177 — skinfold subscapular button:
+Find: <TouchableOpacity style={[styles.skinfoldBtn, { backgroundColor: bg }]} onPress={() => openAddSkinfold('subscapular')}>
+Add accessibilityLabel={t('skinfold.subscapular') + ' measurement'} prop
+
+Line ~207 — reflex status picker option:
+Find: <TouchableOpacity key={opt} style={[styles.pickerBtn, selectedReflex.status === opt && { backgroundColor: accent }]} onPress={() => setSelectedReflex({ ...selectedReflex, status: opt })}>
+Add accessibilityLabel={`Reflex status: ${t('reflex.' + opt)}`} prop
+
+Line ~216 — reflex modal save button:
+Find: <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveReflexModal}>
+Add accessibilityLabel={t('reflex.save') || 'Save'} prop
+
+Line ~234 — visual score picker option:
+Find: <TouchableOpacity key={s} style={[styles.pickerBtn, selectedVisual.score === s && { backgroundColor: accent }]} onPress={() => setSelectedVisual({ ...selectedVisual, score: s })}>
+Add accessibilityLabel={`Score ${s} out of 5`} prop
+
+Line ~243 — visual modal save button:
+Find: <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveVisualModal}>
+Add accessibilityLabel={t('reflex.save') || 'Save'} prop
+
+Line ~260 — skinfold site picker option:
+Find: <TouchableOpacity key={site} style={[styles.pickerBtn, selectedSkinfold.site === site && { backgroundColor: accent }]} onPress={() => setSelectedSkinfold({ ...selectedSkinfold, site })}>
+Add accessibilityLabel={`Site: ${t('skinfold.' + site)}`} prop
+
+Line ~270 — skinfold modal save button:
+Find: <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveSkinfoldModal}>
+Add accessibilityLabel={t('reflex.save') || 'Save'} prop
+
+STEP 3 — Verify:
+cd JobbleBaby && npx tsc --noEmit (0 errors)
+cd JobbleBaby && node scripts/pre-submission-audit.js
+Accessibility Labels section should show fewer warnings.
+
+DONE
+ULW

@@ -155,6 +155,7 @@ export default function GravityFeedingScreen() {
                 key={angle}
                 style={[styles.angleButton, selectedAngle === angle && { backgroundColor: colors.accent }]}
                 onPress={() => setSelectedAngle(angle)}
+                accessibilityLabel={`Angle ${angle} degrees`}
               >
                 <Text style={[styles.angleText, { color: selectedAngle === angle ? '#fff' : colors.text }]}>{angle}°</Text>
               </TouchableOpacity>
@@ -180,6 +181,7 @@ export default function GravityFeedingScreen() {
                     key={pos}
                     style={[styles.optionChip, selectedPosition === pos && { backgroundColor: colors.accent }]}
                     onPress={() => setSelectedPosition(pos)}
+                    accessibilityLabel={`Position: ${pos}`}
                   >
                     <Text style={[styles.optionChipText, { color: selectedPosition === pos ? '#fff' : colors.text }]}>
                       {positionLabels[pos]}
@@ -194,6 +196,7 @@ export default function GravityFeedingScreen() {
                     key={out}
                     style={[styles.optionChip, selectedOutcome === out && { backgroundColor: colors.accent }]}
                     onPress={() => setSelectedOutcome(out)}
+                    accessibilityLabel={`Outcome: ${outcomeLabels[out]}`}
                   >
                     <Text style={[styles.optionChipText, { color: selectedOutcome === out ? '#fff' : colors.text }]}>
                       {outcomeLabels[out]}
@@ -201,7 +204,7 @@ export default function GravityFeedingScreen() {
                   </TouchableOpacity>
                 ))}
               </View>
-              <TouchableOpacity style={[styles.saveButton, { backgroundColor: colors.accent }]} onPress={saveLog}>
+              <TouchableOpacity style={[styles.saveButton, { backgroundColor: colors.accent }]} onPress={saveLog} accessibilityLabel={t('gravityFeeding.saveLog') || 'Save Log'}>
                 <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
               </TouchableOpacity>
             </View>
@@ -239,6 +242,7 @@ export default function GravityFeedingScreen() {
               style={[styles.leapRow, leap.passed && { opacity: 0.6 }]}
               onPress={() => !leap.passed && markLeapPassed(leap.leapId)}
               disabled={leap.passed}
+              accessibilityLabel={`Leap ${leap.leapId}: ${leap.name}`}
             >
               <View style={[styles.leapDot, { backgroundColor: leap.passed ? '#22C55E' : colors.accent }]} />
               <View style={styles.leapInfo}>
@@ -261,6 +265,7 @@ export default function GravityFeedingScreen() {
                 key={symbol.id}
                 style={[styles.tactileButton, { backgroundColor: symbol.color + '20', borderColor: symbol.color }]}
                 onPress={() => handleTactileTap(symbol.id)}
+                accessibilityLabel={`Tactile symbol: ${symbol.label}`}
               >
                 <Text style={styles.tactileEmoji}>{symbol.emoji}</Text>
                 <Text style={[styles.tactileLabel, { color: colors.text }]}>{symbol.label}</Text>

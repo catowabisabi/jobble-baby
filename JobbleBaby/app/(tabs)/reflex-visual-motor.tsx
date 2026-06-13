@@ -135,7 +135,7 @@ export default function ReflexVisualMotor() {
             const entry = reflexes.find(x => x.reflexId === r.id);
             const color = getReflexColor(r.id, r.minMo, r.maxMo);
             return (
-              <TouchableOpacity key={r.id} style={styles.row} onPress={() => openAddReflex(r.id)}>
+              <TouchableOpacity key={r.id} style={styles.row} onPress={() => openAddReflex(r.id)} accessibilityLabel={t(r.nameKey) + ' reflex row'}>
                 <View style={{ flex: 1 }}>
                   <Text style={{ color: text, fontWeight: '600' }}>{t(r.nameKey)}</Text>
                   <Text style={{ color: '#9CA3AF', fontSize: 12 }}>{t('reflex.expectedAge')}: {r.minMo}-{r.maxMo} mo</Text>
@@ -154,7 +154,7 @@ export default function ReflexVisualMotor() {
           {VISUAL_MILESTONES.map(m => {
             const entry = visual.find(v => v.milestoneId === m.id);
             return (
-              <TouchableOpacity key={m.id} style={styles.row} onPress={() => openAddVisual(m.id)}>
+              <TouchableOpacity key={m.id} style={styles.row} onPress={() => openAddVisual(m.id)} accessibilityLabel={t(m.nameKey) + ' milestone row'}>
                 <View style={{ flex: 1 }}>
                   <Text style={{ color: text, fontWeight: '600' }}>{t(m.nameKey)}</Text>
                   <Text style={{ color: '#9CA3AF', fontSize: 12 }}>{t('visual.expectedAge')}: {m.minMo}-{m.maxMo} mo</Text>
@@ -170,11 +170,11 @@ export default function ReflexVisualMotor() {
         <View style={[styles.card, { backgroundColor: card }]}>
           <Text style={styles.sectionTitle}>{t('skinfold.title')}</Text>
           <View style={styles.row}>
-            <TouchableOpacity style={[styles.skinfoldBtn, { backgroundColor: bg }]} onPress={() => openAddSkinfold('triceps')}>
+            <TouchableOpacity style={[styles.skinfoldBtn, { backgroundColor: bg }]} onPress={() => openAddSkinfold('triceps')} accessibilityLabel={t('skinfold.triceps') + ' measurement'}>
               <Text style={{ color: text }}>{t('skinfold.triceps')}</Text>
               <Text style={{ color: '#9CA3AF', fontSize: 12 }}>{skinfolds.find(s => s.site === 'triceps')?.mm ?? '—'} mm</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.skinfoldBtn, { backgroundColor: bg }]} onPress={() => openAddSkinfold('subscapular')}>
+            <TouchableOpacity style={[styles.skinfoldBtn, { backgroundColor: bg }]} onPress={() => openAddSkinfold('subscapular')} accessibilityLabel={t('skinfold.subscapular') + ' measurement'}>
               <Text style={{ color: text }}>{t('skinfold.subscapular')}</Text>
               <Text style={{ color: '#9CA3AF', fontSize: 12 }}>{skinfolds.find(s => s.site === 'subscapular')?.mm ?? '—'} mm</Text>
             </TouchableOpacity>
@@ -204,7 +204,7 @@ export default function ReflexVisualMotor() {
               <>
                 <View style={styles.pickerRow}>
                   {REFLEX_STATUS_OPTIONS.map(opt => (
-                    <TouchableOpacity key={opt} style={[styles.pickerBtn, selectedReflex.status === opt && { backgroundColor: accent }]} onPress={() => setSelectedReflex({ ...selectedReflex, status: opt })}>
+                    <TouchableOpacity key={opt} style={[styles.pickerBtn, selectedReflex.status === opt && { backgroundColor: accent }]} onPress={() => setSelectedReflex({ ...selectedReflex, status: opt })} accessibilityLabel={`Reflex status: ${t('reflex.' + opt)}`}>
                       <Text style={{ color: selectedReflex.status === opt ? '#fff' : text, fontSize: 13 }}>{t('reflex.' + opt)}</Text>
                     </TouchableOpacity>
                   ))}
@@ -213,7 +213,7 @@ export default function ReflexVisualMotor() {
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedReflex.notes} onChangeText={v => setSelectedReflex({ ...selectedReflex, notes: v })} />
                 <View style={styles.modalBtns}>
                   <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalReflex(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveReflexModal}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
+                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveReflexModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
                 </View>
               </>
             )}
@@ -231,7 +231,7 @@ export default function ReflexVisualMotor() {
                 <Text style={{ color: text, marginBottom: 8 }}>{t('visual.qualityScore')}</Text>
                 <View style={styles.pickerRow}>
                   {[1,2,3,4,5].map(s => (
-                    <TouchableOpacity key={s} style={[styles.pickerBtn, selectedVisual.score === s && { backgroundColor: accent }]} onPress={() => setSelectedVisual({ ...selectedVisual, score: s })}>
+                    <TouchableOpacity key={s} style={[styles.pickerBtn, selectedVisual.score === s && { backgroundColor: accent }]} onPress={() => setSelectedVisual({ ...selectedVisual, score: s })} accessibilityLabel={`Score ${s} out of 5`}>
                       <Text style={{ color: selectedVisual.score === s ? '#fff' : text }}>{s}</Text>
                     </TouchableOpacity>
                   ))}
@@ -240,7 +240,7 @@ export default function ReflexVisualMotor() {
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedVisual.notes} onChangeText={v => setSelectedVisual({ ...selectedVisual, notes: v })} />
                 <View style={styles.modalBtns}>
                   <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalVisual(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveVisualModal}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
+                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveVisualModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
                 </View>
               </>
             )}
@@ -257,7 +257,7 @@ export default function ReflexVisualMotor() {
               <>
                 <View style={styles.pickerRow}>
                   {(['triceps', 'subscapular'] as const).map(site => (
-                    <TouchableOpacity key={site} style={[styles.pickerBtn, selectedSkinfold.site === site && { backgroundColor: accent }]} onPress={() => setSelectedSkinfold({ ...selectedSkinfold, site })}>
+                    <TouchableOpacity key={site} style={[styles.pickerBtn, selectedSkinfold.site === site && { backgroundColor: accent }]} onPress={() => setSelectedSkinfold({ ...selectedSkinfold, site })} accessibilityLabel={`Site: ${t('skinfold.' + site)}`}>
                       <Text style={{ color: selectedSkinfold.site === site ? '#fff' : text, fontSize: 13 }}>{t('skinfold.' + site)}</Text>
                     </TouchableOpacity>
                   ))}
@@ -267,7 +267,7 @@ export default function ReflexVisualMotor() {
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedSkinfold.notes} onChangeText={v => setSelectedSkinfold({ ...selectedSkinfold, notes: v })} />
                 <View style={styles.modalBtns}>
                   <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalSkinfold(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveSkinfoldModal}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
+                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveSkinfoldModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
                 </View>
               </>
             )}

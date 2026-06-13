@@ -139,6 +139,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="gravity-feeding"
+        options={{
+          title: t('tabs.gravityFeeding'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="weight-lifter" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="gear-check"
         options={{
           title: t('tabs.gearCheck'),

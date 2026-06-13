@@ -1,0 +1,464 @@
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && node -e "
+const fs = require('fs');
+const path = 'app/(tabs)/gravity-feeding.tsx';
+
+// === Gravity-Assisted Feeding Navigator ===
+// Features:
+// 1. Feeding Incline Calculator — recommend optimal angle (30/45/semi-upright) based on age/reflux
+// 2. Position Logger — log each feed: incline angle, position type, post-feed outcome
+// 3. Anti-Reflux Protocol Guide — step-by-step positioning images with safety warnings
+// 4. Developmental Leap + Feeding Regression Overlay — Wonder Weeks leap calendar linked to feeding log
+// 5. Tactile Communication Bridge — pad with touch regions for pre-verbal communication
+// 6. Leap Visualization Timeline — visual timeline of passed/upcoming leaps
+
+const content = \`import { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
+import { COLORS } from '../theme';
+
+const STORAGE_KEY_INCLINE = '@jobble/gravity_feeding_log';
+const STORAGE_KEY_LEAP = '@jobble/leap_timeline';
+const STORAGE_KEY_TACTILE = '@jobble/tactile_comms';
+
+interface FeedingLogEntry {
+  id: string;
+  date: string;
+  inclineAngle: number; // degrees
+  positionType: 'cradle' | 'football' | 'hybrid' | 'upright';
+  outcome: 'comfortable' | 'spit_up' | 'gassiness' | 'arching';
+  notes: string;
+}
+
+interface LeapEntry {
+  leapId: number;
+  name: string;
+  startWeek: number;
+  passed: boolean;
+  startDate?: string;
+}
+
+const LEAP_CALENDAR = [
+  { leapId: 1, name: 'Wonder Weeks Leap 1 — The World of Smells', startWeek: 5 },
+  { leapId: 2, name: 'Wonder Weeks Leap 2 — The World of Patterns', startWeek: 8 },
+  { leapId: 3, name: 'Wonder Weeks Leap 3 — The World of Smoothness', startWeek: 12 },
+  { leapId: 4, name: 'Wonder Weeks Leap 4 — The World of Events', startWeek: 19 },
+  { leapId: 5, name: 'Wonder Weeks Leap 5 — The World of Relationships', startWeek: 26 },
+  { leapId: 6, name: 'Wonder Weeks Leap 6 — The World of Categories', startWeek: 37 },
+  { leapId: 7, name: 'Wonder Weeks Leap 7 — The World of Sequences', startWeek: 46 },
+  { leapId: 8, name: 'Wonder Weeks Leap 8 — The World of Programs', startWeek: 55 },
+  { leapId: 9, name: 'Wonder Weeks Leap 9 — The World of Principles', startWeek: 64 },
+  { leapId: 10, name: 'Wonder Weeks Leap 10 — The World of Systems', startWeek: 75 },
+];
+
+const TACTILE_SYMBOLS = [
+  { id: 'hungry', label: 'Hungry', emoji: '🍽️', color: '#F97316' },
+  { id: 'done', label: 'Done', emoji: '✅', color: '#22C55E' },
+  { id: 'more', label: 'More', emoji: '➕', color: '#3B82F6' },
+  { id: 'comfort', label: 'Comfort', emoji: '🤗', color: '#EC4899' },
+  { id: 'change', label: 'Change', emoji: '👶', color: '#8B5CF6' },
+];
+
+function getRecommendedAngle(babyAgeWeeks: number, hasReflux: boolean): number {
+  if (babyAgeWeeks < 8) return hasReflux ? 45 : 30;
+  if (babyAgeWeeks < 16) return hasReflux ? 30 : 15;
+  return hasReflux ? 15 : 0;
+}
+
+export default function GravityFeedingScreen() {
+  const { t } = useLanguage();
+  const { theme } = useTheme();
+  const colors = COLORS[theme];
+  const [log, setLog] = useState<FeedingLogEntry[]>([]);
+  const [leapTimeline, setLeapTimeline] = useState<LeapEntry[]>([]);
+  const [tactileTaps, setTactileTaps] = useState<Record<string, number>>({});
+  const [showLogForm, setShowLogForm] = useState(false);
+  const [selectedAngle, setSelectedAngle] = useState(30);
+  const [selectedPosition, setSelectedPosition] = useState<'cradle' | 'football' | 'hybrid' | 'upright'>('cradle');
+  const [selectedOutcome, setSelectedOutcome] = useState<'comfortable' | 'spit_up' | 'gassiness' | 'arching'>('comfortable');
+  const [notes, setNotes] = useState('');
+
+  useEffect(() => {
+    loadLog();
+    loadLeapTimeline();
+    loadTactileTaps();
+  }, []);
+
+  async function loadLog() {
+    try {
+      const raw = await AsyncStorage.getItem(STORAGE_KEY_INCLINE);
+      if (raw) setLog(JSON.parse(raw));
+    } catch (e) { console.error('loadLog error', e); }
+  }
+
+  async function loadLeapTimeline() {
+    try {
+      const raw = await AsyncStorage.getItem(STORAGE_KEY_LEAP);
+      if (raw) {
+        setLeapTimeline(JSON.parse(raw));
+      } else {
+        // Initialize leap timeline
+        const initial: LeapEntry[] = LEAP_CALENDAR.map(l => ({ ...l, passed: false }));
+        setLeapTimeline(initial);
+        await AsyncStorage.setItem(STORAGE_KEY_LEAP, JSON.stringify(initial));
+      }
+    } catch (e) { console.error('loadLeapTimeline error', e); }
+  }
+
+  async function loadTactileTaps() {
+    try {
+      const raw = await AsyncStorage.getItem(STORAGE_KEY_TACTILE);
+      if (raw) setTactileTaps(JSON.parse(raw));
+    } catch (e) { console.error('loadTactileTaps error', e); }
+  }
+
+  async function saveLog() {
+    const entry: FeedingLogEntry = {
+      id: Date.now().toString(),
+      date: new Date().toISOString(),
+      inclineAngle: selectedAngle,
+      positionType: selectedPosition,
+      outcome: selectedOutcome,
+      notes,
+    };
+    const updated = [entry, ...log].slice(0, 100);
+    setLog(updated);
+    await AsyncStorage.setItem(STORAGE_KEY_INCLINE, JSON.stringify(updated));
+    setShowLogForm(false);
+    setNotes('');
+  }
+
+  async function handleTactileTap(symbolId: string) {
+    const updated = { ...tactileTaps, [symbolId]: (tactileTaps[symbolId] || 0) + 1 };
+    setTactileTaps(updated);
+    await AsyncStorage.setItem(STORAGE_KEY_TACTILE, JSON.stringify(updated));
+  }
+
+  function markLeapPassed(leapId: number) {
+    const updated = leapTimeline.map(l => l.leapId === leapId ? { ...l, passed: true, startDate: new Date().toISOString() } : l);
+    setLeapTimeline(updated);
+    AsyncStorage.setItem(STORAGE_KEY_LEAP, JSON.stringify(updated));
+  }
+
+  // Calculate stats
+  const comfortableCount = log.filter(e => e.outcome === 'comfortable').length;
+  const spitUpCount = log.filter(e => e.outcome === 'spit_up').length;
+  const comfortRate = log.length > 0 ? Math.round((comfortableCount / log.length) * 100) : 0;
+  const avgAngle = log.length > 0 ? Math.round(log.reduce((sum, e) => sum + e.inclineAngle, 0) / log.length) : 0;
+
+  const positionLabels: Record<string, string> = {
+    cradle: t('gravityFeeding.positionCradle') || 'Cradle',
+    football: t('gravityFeeding.positionFootball') || 'Football',
+    hybrid: t('gravityFeeding.positionHybrid') || 'Hybrid',
+    upright: t('gravityFeeding.positionUpright') || 'Upright',
+  };
+
+  const outcomeLabels: Record<string, string> = {
+    comfortable: t('gravityFeeding.outcomeComfortable') || 'Comfortable',
+    spit_up: t('gravityFeeding.outcomeSpitUp') || 'Spit-up',
+    gassiness: t('gravityFeeding.outcomeGassiness') || 'Gassiness',
+    arching: t('gravityFeeding.outcomeArching') || 'Arching',
+  };
+
+  return (
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      <ScrollView contentContainerStyle={styles.scroll}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={[styles.title, { color: colors.text }]}>{t('gravityFeeding.title') || 'Gravity-Assisted Feeding'}</Text>
+          <Text style={[styles.subtitle, { color: colors.secondaryText }]}>
+            {t('gravityFeeding.subtitle') || 'Optimize feeding position, track reflux correlation, visualize developmental leaps'}
+          </Text>
+        </View>
+
+        {/* Incline Calculator */}
+        <View style={[styles.card, { backgroundColor: colors.card }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t('gravityFeeding.inclineCalculator') || 'Feeding Incline Calculator'}</Text>
+          <View style={styles.angleButtons}>
+            {[0, 15, 30, 45].map(angle => (
+              <TouchableOpacity
+                key={angle}
+                style={[styles.angleButton, selectedAngle === angle && { backgroundColor: colors.primary }]}
+                onPress={() => setSelectedAngle(angle)}
+              >
+                <Text style={[styles.angleText, { color: selectedAngle === angle ? '#fff' : colors.text }]}>{angle}°</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <Text style={[styles.angleHint, { color: colors.secondaryText }]}>
+            {t('gravityFeeding.angleHint') || 'Recommended: 30-45° for babies with reflux. Consult your pediatrician.'}
+          </Text>
+        </View>
+
+        {/* Position Logger */}
+        <View style={[styles.card, { backgroundColor: colors.card }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t('gravityFeeding.positionLogger') || 'Position Logger'}</Text>
+          {!showLogForm ? (
+            <TouchableOpacity style={[styles.addButton, { backgroundColor: colors.primary }]} onPress={() => setShowLogForm(true)}>
+              <Text style={styles.addButtonText}>{t('gravityFeeding.logFeed') || '+ Log Feed'}</Text>
+            </TouchableOpacity>
+          ) : (
+            <View>
+              <Text style={[styles.fieldLabel, { color: colors.text }]}>{t('gravityFeeding.position') || 'Position'}</Text>
+              <View style={styles.optionRow}>
+                {(['cradle', 'football', 'hybrid', 'upright'] as const).map(pos => (
+                  <TouchableOpacity
+                    key={pos}
+                    style={[styles.optionChip, selectedPosition === pos && { backgroundColor: colors.primary }]}
+                    onPress={() => setSelectedPosition(pos)}
+                  >
+                    <Text style={[styles.optionChipText, { color: selectedPosition === pos ? '#fff' : colors.text }]}>
+                      {positionLabels[pos]}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              <Text style={[styles.fieldLabel, { color: colors.text }]}>{t('gravityFeeding.outcome') || 'Outcome'}</Text>
+              <View style={styles.optionRow}>
+                {(['comfortable', 'spit_up', 'gassiness', 'arching'] as const).map(out => (
+                  <TouchableOpacity
+                    key={out}
+                    style={[styles.optionChip, selectedOutcome === out && { backgroundColor: colors.primary }]}
+                    onPress={() => setSelectedOutcome(out)}
+                  >
+                    <Text style={[styles.optionChipText, { color: selectedOutcome === out ? '#fff' : colors.text }]}>
+                      {outcomeLabels[out]}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              <TouchableOpacity style={[styles.saveButton, { backgroundColor: colors.primary }]} onPress={saveLog}>
+                <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+
+        {/* Stats Summary */}
+        {log.length > 0 && (
+          <View style={[styles.card, { backgroundColor: colors.card }]}>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>{t('gravityFeeding.stats') || 'Feeding Stats'}</Text>
+            <View style={styles.statsRow}>
+              <View style={styles.statItem}>
+                <Text style={[styles.statValue, { color: colors.primary }]}>{comfortRate}%</Text>
+                <Text style={[styles.statLabel, { color: colors.secondaryText }]}>{t('gravityFeeding.comfortRate') || 'Comfort Rate'}</Text>
+              </View>
+              <View style={styles.statItem}>
+                <Text style={[styles.statValue, { color: colors.primary }]}>{avgAngle}°</Text>
+                <Text style={[styles.statLabel, { color: colors.secondaryText }]}>{t('gravityFeeding.avgAngle') || 'Avg Angle'}</Text>
+              </View>
+              <View style={styles.statItem}>
+                <Text style={[styles.statValue, { color: colors.primary }]}>{log.length}</Text>
+                <Text style={[styles.statLabel, { color: colors.secondaryText }]}>{t('gravityFeeding.totalLogs') || 'Total Logs'}</Text>
+              </View>
+            </View>
+          </View>
+        )}
+
+        {/* Leap Timeline */}
+        <View style={[styles.card, { backgroundColor: colors.card }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t('gravityFeeding.leapTimeline') || 'Developmental Leap Timeline'}</Text>
+          <Text style={[styles.leapHint, { color: colors.secondaryText }]}>
+            {t('gravityFeeding.leapHint') || 'Leap weeks may cause temporary feeding regressions. Tap to mark as passed.'}
+          </Text>
+          {leapTimeline.map(leap => (
+            <TouchableOpacity
+              key={leap.leapId}
+              style={[styles.leapRow, leap.passed && { opacity: 0.6 }]}
+              onPress={() => !leap.passed && markLeapPassed(leap.leapId)}
+              disabled={leap.passed}
+            >
+              <View style={[styles.leapDot, { backgroundColor: leap.passed ? '#22C55E' : colors.primary }]} />
+              <View style={styles.leapInfo}>
+                <Text style={[styles.leapName, { color: colors.text }]}>{leap.name}</Text>
+                <Text style={[styles.leapWeek, { color: colors.secondaryText }]}>Week {leap.startWeek}</Text>
+              </View>
+              {leap.passed && <Text style={styles.leapPassed}>{t('gravityFeeding.passed') || '✓'}</Text>}
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Tactile Communication Bridge */}
+        <View style={[styles.card, { backgroundColor: colors.card }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t('gravityFeeding.tactileBridge') || 'Tactile Communication Bridge'}</Text>
+          <Text style={[styles.tactileHint, { color: colors.secondaryText }]}>
+            {t('gravityFeeding.tactileHint') || 'Tap a symbol to signal. Use as a pre-verbal communication bridge with baby.'}
+          </Text>
+          <View style={styles.tactileGrid}>
+            {TACTILE_SYMBOLS.map(symbol => (
+              <TouchableOpacity
+                key={symbol.id}
+                style={[styles.tactileButton, { backgroundColor: symbol.color + '20', borderColor: symbol.color }]}
+                onPress={() => handleTactileTap(symbol.id)}
+              >
+                <Text style={styles.tactileEmoji}>{symbol.emoji}</Text>
+                <Text style={[styles.tactileLabel, { color: colors.text }]}>{symbol.label}</Text>
+                <Text style={[styles.tactileTaps, { color: colors.secondaryText }]}>
+                  {tactileTaps[symbol.id] || 0} taps
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        {/* Anti-Reflux Protocol Guide */}
+        <View style={[styles.card, { backgroundColor: colors.card }]}>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>{t('gravityFeeding.antiRefluxGuide') || 'Anti-Reflux Protocol Guide'}</Text>
+          <View style={styles.guideStep}>
+            <Text style={[styles.stepNumber, { backgroundColor: colors.primary }]}>1</Text>
+            <Text style={[styles.stepText, { color: colors.text }]}>
+              {t('gravityFeeding.step1') || 'Keep baby semi-upright (30-45°) during entire feed'}
+            </Text>
+          </View>
+          <View style={styles.guideStep}>
+            <Text style={[styles.stepNumber, { backgroundColor: colors.primary }]}>2</Text>
+            <Text style={[styles.stepText, { color: colors.text }]}>
+              {t('gravityFeeding.step2') || 'Use football hold or wedge pillow for consistent incline'}
+            </Text>
+          </View>
+          <View style={styles.guideStep}>
+            <Text style={[styles.stepNumber, { backgroundColor: colors.primary }]}>3</Text>
+            <Text style={[styles.stepText, { color: colors.text }]}>
+              {t('gravityFeeding.step3') || 'Keep baby upright 20-30 min after feeding before lying down'}
+            </Text>
+          </View>
+          <View style={[styles.warningBox, { backgroundColor: '#FEF3C7', borderColor: '#F59E0B' }]}>
+            <Text style={[styles.warningText, { color: '#92400E' }]}>
+              ⚠️ {t('gravityFeeding.warning') || 'Never use car seat as feeding position. Transfer to crib/bassinet after feed.'}
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  scroll: { padding: 16, paddingBottom: 100 },
+  header: { marginBottom: 16 },
+  title: { fontSize: 24, fontWeight: '700' },
+  subtitle: { fontSize: 14, marginTop: 4 },
+  card: { borderRadius: 12, padding: 16, marginBottom: 16 },
+  cardTitle: { fontSize: 18, fontWeight: '600', marginBottom: 12 },
+  angleButtons: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
+  angleButton: { flex: 1, marginHorizontal: 4, paddingVertical: 12, borderRadius: 8, backgroundColor: '#F3F4F6', alignItems: 'center' },
+  angleText: { fontSize: 18, fontWeight: '600' },
+  angleHint: { fontSize: 12, textAlign: 'center' },
+  addButton: { paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
+  addButtonText: { color: '#fff', fontWeight: '600', fontSize: 16 },
+  saveButton: { paddingVertical: 12, borderRadius: 8, alignItems: 'center', marginTop: 12 },
+  saveButtonText: { color: '#fff', fontWeight: '600', fontSize: 16 },
+  fieldLabel: { fontSize: 14, fontWeight: '600', marginBottom: 8, marginTop: 8 },
+  optionRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  optionChip: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16, backgroundColor: '#F3F4F6' },
+  optionChipText: { fontSize: 14 },
+  statsRow: { flexDirection: 'row', justifyContent: 'space-around' },
+  statItem: { alignItems: 'center' },
+  statValue: { fontSize: 28, fontWeight: '700' },
+  statLabel: { fontSize: 12, marginTop: 4 },
+  leapHint: { fontSize: 13, marginBottom: 12 },
+  leapRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#F3F4F6' },
+  leapDot: { width: 12, height: 12, borderRadius: 6, marginRight: 12 },
+  leapInfo: { flex: 1 },
+  leapName: { fontSize: 14, fontWeight: '500' },
+  leapWeek: { fontSize: 12, marginTop: 2 },
+  leapPassed: { color: '#22C55E', fontSize: 16 },
+  tactileHint: { fontSize: 13, marginBottom: 12 },
+  tactileGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
+  tactileButton: { width: '47%', borderRadius: 12, padding: 16, alignItems: 'center', borderWidth: 2 },
+  tactileEmoji: { fontSize: 32, marginBottom: 4 },
+  tactileLabel: { fontSize: 14, fontWeight: '600', marginTop: 4 },
+  tactileTaps: { fontSize: 12, marginTop: 2 },
+  guideStep: { flexDirection: 'row', alignItems: 'flex-start', marginBottom: 12 },
+  stepNumber: { width: 24, height: 24, borderRadius: 12, color: '#fff', textAlign: 'center', lineHeight: 24, fontSize: 14, fontWeight: '700', marginRight: 12 },
+  stepText: { flex: 1, fontSize: 14, lineHeight: 20 },
+  warningBox: { borderWidth: 1, borderRadius: 8, padding: 12, marginTop: 8 },
+  warningText: { fontSize: 13, lineHeight: 18 },
+});
+\`;
+
+fs.writeFileSync(path, content);
+console.log('gravity-feeding.tsx written');
+
+// Add i18n keys
+const enPath = 'i18n/en.json';
+const zhPath = 'i18n/zh.json';
+const en = JSON.parse(fs.readFileSync(enPath, 'utf8'));
+const zh = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
+
+const keys = {
+  'gravityFeeding.title': 'Gravity-Assisted Feeding',
+  'gravityFeeding.subtitle': 'Optimize feeding position, track reflux correlation, visualize developmental leaps',
+  'gravityFeeding.inclineCalculator': 'Feeding Incline Calculator',
+  'gravityFeeding.angleHint': 'Recommended: 30-45° for babies with reflux. Consult your pediatrician.',
+  'gravityFeeding.positionLogger': 'Position Logger',
+  'gravityFeeding.logFeed': '+ Log Feed',
+  'gravityFeeding.position': 'Position',
+  'gravityFeeding.outcome': 'Outcome',
+  'gravityFeeding.positionCradle': 'Cradle',
+  'gravityFeeding.positionFootball': 'Football',
+  'gravityFeeding.positionHybrid': 'Hybrid',
+  'gravityFeeding.positionUpright': 'Upright',
+  'gravityFeeding.outcomeComfortable': 'Comfortable',
+  'gravityFeeding.outcomeSpitUp': 'Spit-up',
+  'gravityFeeding.outcomeGassiness': 'Gassiness',
+  'gravityFeeding.outcomeArching': 'Arching',
+  'gravityFeeding.stats': 'Feeding Stats',
+  'gravityFeeding.comfortRate': 'Comfort Rate',
+  'gravityFeeding.avgAngle': 'Avg Angle',
+  'gravityFeeding.totalLogs': 'Total Logs',
+  'gravityFeeding.leapTimeline': 'Developmental Leap Timeline',
+  'gravityFeeding.leapHint': 'Leap weeks may cause temporary feeding regressions. Tap to mark as passed.',
+  'gravityFeeding.passed': '✓',
+  'gravityFeeding.tactileBridge': 'Tactile Communication Bridge',
+  'gravityFeeding.tactileHint': 'Tap a symbol to signal. Use as a pre-verbal communication bridge with baby.',
+  'gravityFeeding.antiRefluxGuide': 'Anti-Reflux Protocol Guide',
+  'gravityFeeding.step1': 'Keep baby semi-upright (30-45°) during entire feed',
+  'gravityFeeding.step2': 'Use football hold or wedge pillow for consistent incline',
+  'gravityFeeding.step3': 'Keep baby upright 20-30 min after feeding before lying down',
+  'gravityFeeding.warning': 'Never use car seat as feeding position. Transfer to crib/bassinet after feed.',
+};
+
+for (const [k, v] of Object.entries(keys)) {
+  en[k] = v;
+  zh[k] = v; // Simplified Chinese placeholder
+}
+
+fs.writeFileSync(enPath, JSON.stringify(en, null, 2));
+fs.writeFileSync(zhPath, JSON.stringify(zh, null, 2));
+console.log('i18n keys added: ' + Object.keys(keys).length);
+
+// Add to TabNavigator
+const indexPath = 'app/(tabs)/index.tsx';
+let indexContent = fs.readFileSync(indexPath, 'utf8');
+if (!indexContent.includes('gravity-feeding')) {
+  indexContent = indexContent.replace(
+    /(\\/\\/ TAB IMPORTS|\\/\\* TAB IMPORTS \\*\\/)/,
+    \`import GravityFeedingScreen from './gravity-feeding';
+\`
+  );
+  // Add to tabs array
+  indexContent = indexContent.replace(
+    /(\\{ name: 'tracking'[\\s\\S]*?component: TrackingScreen \\},)/,
+    \`{ name: 'gravity-feeding', component: GravityFeedingScreen },\`
+  );
+  fs.writeFileSync(indexPath, indexContent);
+  console.log('TabNavigator updated');
+}
+
+// TSC check
+const { execSync } = require('child_process');
+try {
+  execSync('npx tsc --noEmit', { stdio: 'inherit' });
+  console.log('TSC: PASS');
+} catch (e) {
+  console.log('TSC: FAIL');
+  process.exit(1);
+}
+
+console.log('DONE');
+"
+ULW

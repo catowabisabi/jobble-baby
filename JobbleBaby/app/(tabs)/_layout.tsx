@@ -495,6 +495,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="galant-latch-navigator"
+        options={{
+          title: t('galantLatch.title') || 'Galant + Latch',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

@@ -1,32 +1,24 @@
-# Current Task — Cycle 328
+# Current Task — Cycle 330
 
-## This Cycle
-- ✅ Concept 54 (Infant Thermal-Metabolic Navigator) — implemented directly (OpenCode unavailable in WSL/sisyphus)
-- ✅ thermal-metabolic.tsx created with 8 sub-features
-- ✅ Registered in _layout.tsx TabNavigator
-- ✅ i18n keys added (en.json + zh.json)
-- ✅ TSC: 0 errors
-- ✅ Git commit + push: 4ef2049
+## Previous Cycle (329) Status
+- Todo #131 (AsyncStorage naming) — dispatched to Sisyphus but completion unconfirmed
+- Sisyphus showed DONE but storage-keys.ts not created → task likely failed silently
+- Re-dispatching Todo #131 in this cycle
 
 ## App State: SUBMISSION READY (code perspective)
-All REQUIRED audit checks pass. App is ready for App Store / Play Console submission.
+- TSC: 0 errors (verified)
+- Pre-submission audit: PASS
+- BLOCKED: User action needed for EAS credentials + App Store/Play Console setup
+
+## This Cycle Actions
+1. ✅ TSC verified clean
+2. 📋 Dispatching Todo #131 (AsyncStorage naming) → Sisyphus
+3. 🔍 Review: check for hardcoded strings, accessibility issues
+4. 💡 Brainstorm: 5 keywords → 50联想 → new concept spark
+5. 📦 Git commit + push
 
 ## BLOCKED — User Action Required
 1. Deploy privacy policy HTML → jobblebaby.com/privacy
-   - File: JobbleBaby/docs/privacy-policy.html
-   - Options: GitHub Pages, Netlify, Vercel (free)
-2. Configure EAS credentials:
-   - eas credentials --platform ios
-   - eas credentials --platform android
+2. Configure EAS credentials: eas credentials --platform ios + android
 3. Create App Store Connect app → appstoreconnect.apple.com
 4. Create Play Console app → play.google.com/console
-
-## Automation Issue
-- OpenCode is a Windows executable at /mnt/c/Users/enoma/AppData/Roaming/npm/opencode
-- It cannot be invoked from WSL sisyphus session (POSIX shell script tries to run Windows .exe)
-- Dispatches to sisyphus have been failing silently for 2+ cycles
-- Implementing features directly until automation is fixed
-
-## Git
-- Commit: 4ef2049 → pushed
-- Parent: 2a81dea (chore(autoloop): cycle 327)

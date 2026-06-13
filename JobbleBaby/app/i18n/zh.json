@@ -4902,5 +4902,24 @@
   "alert": {
     "reflexRetained": "Reflex still present beyond expected age — consult your pediatrician",
     "visualDelayed": "Visual tracking may be delayed — consult your pediatrician"
-  }
+  },
+  "interoceptive.duration": "時長",
+  "interoceptive.recentSessions": "最近記錄",
+  "interoceptive.diaryConsistency": "日記持續性",
+  "interoceptive.bodyScanEngagement": "身體掃描參與度",
+  "interoceptive.babyAgeMonths": "嬰兒月齡",
+  "interoceptive.reaction": "反應",
+  "interoceptive.notes": "備註",
+  "interoceptive.completeHrvEntry": "完成HRV記錄",
+  "interoceptive.saveSession": "儲存記錄",
+  "interoceptive.cancel": "取消",
+  "interoceptive.saveEntry": "儲存項目",
+  "interoceptive.whatResolvedIt": "什麼方法真正解決了？",
+  "interoceptive.submit": "提交",
+  "reflex.reflexStatus": "反射狀態",
+  "reflex.cancel": "取消",
+  "reflex.save": "儲存",
+  "visual.visualMotorScore": "視覺動作分數",
+  "visual.qualityScore": "質量分數 (1-5)",
+  "skinfold.measurement": "皮褶測量"
 }

@@ -4902,5 +4902,24 @@
   "alert": {
     "reflexRetained": "Reflex still present beyond expected age — consult your pediatrician",
     "visualDelayed": "Visual tracking may be delayed — consult your pediatrician"
-  }
+  },
+  "interoceptive.duration": "Duration",
+  "interoceptive.recentSessions": "Recent Sessions",
+  "interoceptive.diaryConsistency": "Diary consistency",
+  "interoceptive.bodyScanEngagement": "Body scan engagement",
+  "interoceptive.babyAgeMonths": "Baby age (months)",
+  "interoceptive.reaction": "Reaction",
+  "interoceptive.notes": "Notes",
+  "interoceptive.completeHrvEntry": "Complete HRV Entry",
+  "interoceptive.saveSession": "Save Session",
+  "interoceptive.cancel": "Cancel",
+  "interoceptive.saveEntry": "Save Entry",
+  "interoceptive.whatResolvedIt": "What actually resolved it?",
+  "interoceptive.submit": "Submit",
+  "reflex.reflexStatus": "Reflex Status",
+  "reflex.cancel": "Cancel",
+  "reflex.save": "Save",
+  "visual.visualMotorScore": "Visual-Motor Score",
+  "visual.qualityScore": "Quality Score (1-5)",
+  "skinfold.measurement": "Skinfold Measurement"
 }

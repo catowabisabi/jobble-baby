@@ -199,7 +199,7 @@ export default function ReflexVisualMotor() {
       <Modal visible={modalReflex} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={[styles.modal, { backgroundColor: card }]}>
-            <Text style={[styles.modalTitle, { color: text }]}>Reflex Status</Text>
+            <Text style={[styles.modalTitle, { color: text }]}>{t('reflex.reflexStatus')}</Text>
             {selectedReflex && (
               <>
                 <View style={styles.pickerRow}>
@@ -212,8 +212,8 @@ export default function ReflexVisualMotor() {
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Date (YYYY-MM-DD)" placeholderTextColor="#9CA3AF" value={selectedReflex.date} onChangeText={v => setSelectedReflex({ ...selectedReflex, date: v })} />
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedReflex.notes} onChangeText={v => setSelectedReflex({ ...selectedReflex, notes: v })} />
                 <View style={styles.modalBtns}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalReflex(false)}><Text style={{ color: text }}>Cancel</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveReflexModal}><Text style={{ color: '#fff' }}>Save</Text></TouchableOpacity>
+                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalReflex(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
+                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveReflexModal}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
                 </View>
               </>
             )}
@@ -225,10 +225,10 @@ export default function ReflexVisualMotor() {
       <Modal visible={modalVisual} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={[styles.modal, { backgroundColor: card }]}>
-            <Text style={[styles.modalTitle, { color: text }]}>Visual-Motor Score</Text>
+            <Text style={[styles.modalTitle, { color: text }]}>{t('visual.visualMotorScore')}</Text>
             {selectedVisual && (
               <>
-                <Text style={{ color: text, marginBottom: 8 }}>Quality Score (1-5)</Text>
+                <Text style={{ color: text, marginBottom: 8 }}>{t('visual.qualityScore')}</Text>
                 <View style={styles.pickerRow}>
                   {[1,2,3,4,5].map(s => (
                     <TouchableOpacity key={s} style={[styles.pickerBtn, selectedVisual.score === s && { backgroundColor: accent }]} onPress={() => setSelectedVisual({ ...selectedVisual, score: s })}>
@@ -239,8 +239,8 @@ export default function ReflexVisualMotor() {
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Date (YYYY-MM-DD)" placeholderTextColor="#9CA3AF" value={selectedVisual.date} onChangeText={v => setSelectedVisual({ ...selectedVisual, date: v })} />
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedVisual.notes} onChangeText={v => setSelectedVisual({ ...selectedVisual, notes: v })} />
                 <View style={styles.modalBtns}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalVisual(false)}><Text style={{ color: text }}>Cancel</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveVisualModal}><Text style={{ color: '#fff' }}>Save</Text></TouchableOpacity>
+                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalVisual(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
+                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveVisualModal}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
                 </View>
               </>
             )}
@@ -252,7 +252,7 @@ export default function ReflexVisualMotor() {
       <Modal visible={modalSkinfold} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={[styles.modal, { backgroundColor: card }]}>
-            <Text style={[styles.modalTitle, { color: text }]}>Skinfold Measurement</Text>
+            <Text style={[styles.modalTitle, { color: text }]}>{t('skinfold.measurement')}</Text>
             {selectedSkinfold && (
               <>
                 <View style={styles.pickerRow}>
@@ -266,8 +266,8 @@ export default function ReflexVisualMotor() {
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Date (YYYY-MM-DD)" placeholderTextColor="#9CA3AF" value={selectedSkinfold.date} onChangeText={v => setSelectedSkinfold({ ...selectedSkinfold, date: v })} />
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedSkinfold.notes} onChangeText={v => setSelectedSkinfold({ ...selectedSkinfold, notes: v })} />
                 <View style={styles.modalBtns}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalSkinfold(false)}><Text style={{ color: text }}>Cancel</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveSkinfoldModal}><Text style={{ color: '#fff' }}>Save</Text></TouchableOpacity>
+                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalSkinfold(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
+                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveSkinfoldModal}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
                 </View>
               </>
             )}

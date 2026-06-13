@@ -349,7 +349,7 @@ export default function Interoceptive() {
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{t('interoceptive.bodyScanTitle')}</Text>
       <View style={styles.durationPicker}>
-        <Text style={styles.label}>Duration:</Text>
+        <Text style={styles.label}>{t('interoceptive.duration')}</Text>
         {[3, 5, 10].map(d => (
           <TouchableOpacity
             key={d}
@@ -366,7 +366,7 @@ export default function Interoceptive() {
       </TouchableOpacity>
       {bodyScanSessions.length > 0 && (
         <>
-          <Text style={styles.sectionTitle}>Recent Sessions</Text>
+          <Text style={styles.sectionTitle}>{t('interoceptive.recentSessions')}</Text>
           {bodyScanSessions.slice(0, 5).map(s => (
             <View key={s.id} style={styles.entryRow}>
               <Text style={styles.entryDate}>{new Date(s.date).toLocaleDateString()}</Text>
@@ -410,7 +410,7 @@ export default function Interoceptive() {
       </View>
       <View style={styles.scoreBreakdown}>
         <View style={styles.scoreItem}>
-          <Text style={styles.scoreItemLabel}>Diary consistency</Text>
+          <Text style={styles.scoreItemLabel}>{t('interoceptive.diaryConsistency')}</Text>
           <Text style={styles.scoreItemValue}>{diaryEntries.length > 0 ? Math.round(diaryEntries.slice(0, 30).filter(e => e.matched).length / Math.min(diaryEntries.length, 30) * 100) : 0}%</Text>
         </View>
         <View style={styles.scoreItem}>
@@ -418,7 +418,7 @@ export default function Interoceptive() {
           <Text style={styles.scoreItemValue}>{Math.round(computeHrvTrend() * 100)}%</Text>
         </View>
         <View style={styles.scoreItem}>
-          <Text style={styles.scoreItemLabel}>Body scan engagement</Text>
+          <Text style={styles.scoreItemLabel}>{t('interoceptive.bodyScanEngagement')}</Text>
           <Text style={styles.scoreItemValue}>{Math.round(Math.min(bodyScanSessions.length / 7, 1) * 100)}%</Text>
         </View>
       </View>
@@ -456,7 +456,7 @@ export default function Interoceptive() {
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{t('interoceptive.gameTitle')}</Text>
       <View style={styles.ageInput}>
-        <Text style={styles.label}>Baby age (months):</Text>
+        <Text style={styles.label}>{t('interoceptive.babyAgeMonths')}</Text>
         <TextInput
           style={styles.textInput}
           value={String(babyAgeMonths)}
@@ -480,7 +480,7 @@ export default function Interoceptive() {
         ))}
       </View>
       <View style={styles.gameInput}>
-        <Text style={styles.label}>Reaction:</Text>
+        <Text style={styles.label}>{t('interoceptive.reaction')}</Text>
         <TextInput
           style={[styles.textInput, { height: 60 }]}
           value={gameReaction}
@@ -491,7 +491,7 @@ export default function Interoceptive() {
         />
       </View>
       <View style={styles.gameInput}>
-        <Text style={styles.label}>Notes:</Text>
+        <Text style={styles.label}>{t('interoceptive.notes')}</Text>
         <TextInput
           style={[styles.textInput, { height: 60 }]}
           value={gameNotes}
@@ -553,7 +553,7 @@ export default function Interoceptive() {
               </>
             ) : (
               <>
-                <Text style={styles.modalTitle}>Complete HRV Entry</Text>
+                <Text style={styles.modalTitle}>{t('interoceptive.completeHrvEntry')}</Text>
                 <View style={styles.hrvInput}>
                   <Text style={styles.label}>{t('interoceptive.hrvBefore')}:</Text>
                   <TextInput
@@ -577,12 +577,12 @@ export default function Interoceptive() {
                   />
                 </View>
                 <TouchableOpacity style={styles.addBtn} onPress={completeBodyScan} accessibilityLabel="Save body scan">
-                  <Text style={styles.addBtnText}>Save Session</Text>
+                  <Text style={styles.addBtnText}>{t('interoceptive.saveSession')}</Text>
                 </TouchableOpacity>
               </>
             )}
             <TouchableOpacity style={styles.closeBtn} onPress={() => setShowBodyScan(false)} accessibilityLabel="Close">
-              <Text style={styles.closeBtnText}>Cancel</Text>
+              <Text style={styles.closeBtnText}>{t('interoceptive.cancel')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -665,10 +665,10 @@ export default function Interoceptive() {
               </View>
             </View>
             <TouchableOpacity style={styles.addBtn} onPress={addDiaryEntry} accessibilityLabel="Save diary entry">
-              <Text style={styles.addBtnText}>Save Entry</Text>
+              <Text style={styles.addBtnText}>{t('interoceptive.saveEntry')}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.closeBtn} onPress={() => setShowDiaryEntry(false)} accessibilityLabel="Close">
-              <Text style={styles.closeBtnText}>Cancel</Text>
+              <Text style={styles.closeBtnText}>{t('interoceptive.cancel')}</Text>
             </TouchableOpacity>
           </ScrollView>
         </View>
@@ -692,7 +692,7 @@ export default function Interoceptive() {
                 </TouchableOpacity>
               ))}
             </View>
-            <Text style={styles.modalSubtitle}>What actually resolved it?</Text>
+            <Text style={styles.modalSubtitle}>{t('interoceptive.whatResolvedIt')}</Text>
             <View style={styles.optionGrid}>
               {NEED_OPTIONS.map(o => (
                 <TouchableOpacity
@@ -706,10 +706,10 @@ export default function Interoceptive() {
               ))}
             </View>
             <TouchableOpacity style={styles.addBtn} onPress={addSignalChallenge} accessibilityLabel="Submit challenge">
-              <Text style={styles.addBtnText}>Submit</Text>
+              <Text style={styles.addBtnText}>{t('interoceptive.submit')}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.closeBtn} onPress={() => { setShowSignalChallenge(false); setChallengeIndex(1); }} accessibilityLabel="Close">
-              <Text style={styles.closeBtnText}>Cancel</Text>
+              <Text style={styles.closeBtnText}>{t('interoceptive.cancel')}</Text>
             </TouchableOpacity>
           </View>
         </View>

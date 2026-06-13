@@ -1,25 +1,20 @@
-# Current Task — Cycle 336
+# Current Task — Cycle 338
 
-## Previous Cycle (335) Status
-- ✅ Todo #131 (reflex-visual-motor.tsx) — COMPLETED, TSC 0, Audit PASS
-- ✅ Fixed TSC errors: COLORS usage (bg=background, accent not primary)
-- ✅ Added 33+ i18n keys (reflex.*, visual.*, skinfold.*, score.*, alert.*)
-- ✅ Added reflex-visual-motor tab to _layout.tsx
-- ✅ Restructured i18n: moved 35 flat keys into nested dicts (reflex, visual, skinfold, score, alert)
-- ✅ Audit: PASS — All REQUIRED checks passed
+## Previous Cycle (337) Status
+- ✅ Todo #131 (reflex-visual-motor.tsx) — COMPLETED, TSC 0
+- ✅ Commits: 4a6cc21, 86f3415, ee243e2, 3a0d24e, 521d332
 
-## This Cycle Actions
-1. ✅ Fixed reflex-visual-motor.tsx TSC errors (COLORS destructuring)
-2. ✅ Added missing i18n keys
-3. ✅ Fixed i18n nesting structure
-4. ✅ TSC verified: 0 errors
-5. ✅ Pre-submission audit: PASS
-6. ✅ Commits: 08faf6b (fix), 521d332 (i18n), 3a0d24e (restructure)
+## This Cycle (338) Actions
+1. ✅ TSC: 0 errors
+2. ⚠️ Audit: FAIL — HardcodedStrings found in 2 files:
+   - interoceptive.tsx: 16 hardcoded strings (lines 352,369,413,421,459,483,494,556,580,585,668,671,695,709,712)
+   - reflex-visual-motor.tsx: 6 hardcoded strings (lines 202,215,216,228,231)
+3. ✅ Created Todo #132: Fix hardcoded i18n strings
 
-## App State: SUBMISSION READY (code perspective)
+## App State: SUBMISSION READY (but audit fix needed)
 - TSC: 0 errors
-- Pre-submission audit: PASS
-- BLOCKED: User action needed for EAS credentials + App Store/Play Console setup
+- Audit: FAIL — hardcoded strings block submission
+- 74 tabs total, 22 dependencies
 
 ## BLOCKED — User Action Required
 1. Deploy privacy policy HTML → jobblebaby.com/privacy (Todo #108)
@@ -27,7 +22,11 @@
 3. Create App Store Connect app → appstoreconnect.apple.com
 4. Create Play Console app → play.google.com/console
 
-## Next Cycle Priority
-- Todo #108: Deploy privacy policy (requires user action — user must provide hosting)
-- Review codebase for any remaining hardcoded strings flagged by audit
-- Consider additional tab features if time permits
+## Cycle 338 Decision
+- Dispatching Todo #132 to Sisyphus for hardcoded strings fix
+- Privacy policy (#108) requires user hosting action — cannot dispatch
+
+## Stats
+- Ideas: 76 total
+- Todos: 132 total (127 completed, 1 new pending)
+- Concepts: 39 (17 implemented)

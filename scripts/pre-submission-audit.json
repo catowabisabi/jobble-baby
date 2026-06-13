@@ -13,8 +13,8 @@
         "missingEn": []
       },
       "meta": {
-        "enCount": 1738,
-        "zhCount": 1738
+        "enCount": 1758,
+        "zhCount": 1758
       }
     },
     {
@@ -39,26 +39,26 @@
       "name": "HardcodedStrings",
       "pass": false,
       "issues": [
-        "sleep-association.tsx:314: \"Today's Log\"",
-        "sleep-association.tsx:324: \"Fall asleep:\"",
-        "sleep-association.tsx:328: \"Wakings:\"",
-        "sleep-association.tsx:332: \"Longest:\"",
-        "sleep-association.tsx:349: \"Edit Entry\"",
-        "sleep-association.tsx:558: \"Fall:\"",
-        "sleep-association.tsx:562: \"Wakings:\"",
-        "sleep-association.tsx:566: \"Longest:\"",
-        "solid-food.tsx:367: \"Feeding Journey\"",
-        "solid-food.tsx:597: \"Current\"",
-        "solid-food.tsx:656: \"Growth Impact →\"",
-        "solid-food.tsx:668: \"Teething → Food Refusal →\"",
-        "stress-cascade.tsx:416: \"Optional inputs\"",
-        "stress-cascade.tsx:484: \"Come back in 5 minutes\"",
-        "teething.tsx:314: \"Expected Soon\"",
-        "teething.tsx:350: \"ERUPTED\"",
-        "tongue-tie.tsx:431: \"Latch:\"",
-        "tongue-tie.tsx:433: \"Milk:\"",
-        "tongue-tie.tsx:434: \"Flow:\"",
-        "tongue-tie.tsx:514: \"Cancel\""
+        "interoceptive.tsx:352: \"Duration:\"",
+        "interoceptive.tsx:369: \"Recent Sessions\"",
+        "interoceptive.tsx:413: \"Diary consistency\"",
+        "interoceptive.tsx:421: \"Body scan engagement\"",
+        "interoceptive.tsx:459: \"Baby age (months):\"",
+        "interoceptive.tsx:483: \"Reaction:\"",
+        "interoceptive.tsx:494: \"Notes:\"",
+        "interoceptive.tsx:556: \"Complete HRV Entry\"",
+        "interoceptive.tsx:580: \"Save Session\"",
+        "interoceptive.tsx:585: \"Cancel\"",
+        "interoceptive.tsx:668: \"Save Entry\"",
+        "interoceptive.tsx:671: \"Cancel\"",
+        "interoceptive.tsx:695: \"What actually resolved it?\"",
+        "interoceptive.tsx:709: \"Submit\"",
+        "interoceptive.tsx:712: \"Cancel\"",
+        "reflex-visual-motor.tsx:202: \"Reflex Status\"",
+        "reflex-visual-motor.tsx:215: \"Cancel\"",
+        "reflex-visual-motor.tsx:216: \"Save\"",
+        "reflex-visual-motor.tsx:228: \"Visual-Motor Score\"",
+        "reflex-visual-motor.tsx:231: \"Quality Score (1-5)\""
       ]
     }
   ],

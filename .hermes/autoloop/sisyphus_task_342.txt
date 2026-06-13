@@ -1,0 +1,36 @@
+=== CYCLE 342 — SISYPHUS TASK ===
+TASK: Implement Galant Reflex + Latch Asymmetry Correlation Navigator
+
+CONCEPT: #56 — Dashboard correlating Galant spinal reflex retention with breastfeeding latch asymmetry + ambient temperature rhythm.
+
+FILE: app/(tabs)/galant-latch-navigator.tsx (NEW)
+
+FEATURES:
+1. Galant reflex timeline: tracks persistence beyond 6-month expected window. Input: reflex_present (boolean), months_age (number), trunk_extension_score (1-5)
+2. Latch asymmetry quality log: latch_score (1-5), asymmetry_direction (left/right/none), side_preference (left/right/both)
+3. Temperature rhythm overlay: ambient_temp (°C), tracking period (days)
+4. Correlation matrix: cross-tabulate Galant retention vs latch quality vs temp rhythm — simple 3x3 grid with color coding
+5. Alerts: if reflex_present=true at 7+ months AND latch_score < 3 → show alert banner "Consider professional review"
+6. Combined score: (galant_integration_pct * 0.4) + (latch_quality_pct * 0.4) + (temp_rhythm_stability * 0.2) → display as percentage
+
+STORAGE KEYS:
+- @jobble/galant_reflex_log: GalantReflexEntry[]
+- @jobble/latch_asymmetry_log: LatchAsymmetryEntry[]
+- @jobble/temp_rhythm_log: TempRhythmEntry[]
+
+UI REQUIREMENTS:
+- Use existing COLORS and layout patterns from other tabs (see bonding-journal.tsx as reference)
+- Include accessibilityLabel on all interactive elements
+- Use i18n t() for all user-facing strings (add keys to en.json/zh.json)
+- All inputs via Pressable/TouchableOpacity (no TextInput for data entry)
+- Show summary cards at top: reflex status, latch score, combined score
+- Scrollable log below with entries
+
+DATA TYPES:
+type GalantReflexEntry = { id: string; date: string; months_age: number; reflex_present: boolean; trunk_extension_score: number; notes?: string }
+type LatchAsymmetryEntry = { id: string; date: string; latch_score: number; asymmetry_direction: 'left' | 'right' | 'none'; side_preference: 'left' | 'right' | 'both' }
+type TempRhythmEntry = { id: string; date: string; ambient_temp: number; period_days: number }
+
+IMPORTANCE: medium
+PRIORITY: normal
+KEYWORDS: galant_reflex, latch_asymmetry, temperature_rhythm, reflex_integration, infant_development

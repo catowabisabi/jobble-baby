@@ -7,8 +7,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const REFLEX_KEY = '@jobble/reflex_entries';
+const REFLEX_KEY = STORAGE_KEYS.REFLEX_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 const REFLEXES = [

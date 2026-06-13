@@ -7,9 +7,10 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const HISTORY_KEY = '@jobble/milk_transfer_history';
-const STATS_KEY = '@jobble/milk_transfer_stats';
+const HISTORY_KEY = STORAGE_KEYS.MILK_TRANSFER_HISTORY;
+const STATS_KEY = STORAGE_KEYS.MILK_TRANSFER_STATS;
 
 type BreastSide = 'left' | 'right' | 'both';
 

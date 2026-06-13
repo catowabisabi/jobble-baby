@@ -8,8 +8,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/sleep_association_entries';
+const STORAGE_KEY = STORAGE_KEYS.SLEEP_ASSOCIATION_ENTRIES;
 
 const SLEEP_ASSOC_AMBER = '#F59E0B';
 const SLEEP_ASSOC_BLUE = '#3B82F6';

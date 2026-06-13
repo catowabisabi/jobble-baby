@@ -8,8 +8,9 @@ import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
 import * as ImagePicker from 'expo-image-picker';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const FONTANELLE_KEY = '@jobble/fontanelle_entries';
+const FONTANELLE_KEY = STORAGE_KEYS.FONTANELLE_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 const FONTANELLE_BLUE = '#60A5FA';

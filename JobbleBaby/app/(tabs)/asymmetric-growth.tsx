@@ -14,8 +14,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/asymmetric_entries';
+const STORAGE_KEY = STORAGE_KEYS.ASYMMETRIC_ENTRIES;
 // i18n-derived (no longer hardcoded)
 const BODY_PARTS: string[] = (() => {
   const body = require('../i18n/en.json').asymmetric.body as Record<string, string>;
@@ -75,7 +76,7 @@ export default function AsymmetricGrowthScreen() {
 
   async function loadThreshold() {
     try {
-      const raw = await AsyncStorage.getItem('@jobble/asymmetry_alert_threshold');
+      const raw = await AsyncStorage.getItem(STORAGE_KEYS.ASYMMETRY_ALERT_THRESHOLD);
       if (raw) setAlertThreshold(JSON.parse(raw));
     } catch {}
   }
@@ -290,7 +291,7 @@ export default function AsymmetricGrowthScreen() {
                 style={[styles.thresholdBtn, alertThreshold === v && styles.thresholdBtnActive]}
                 onPress={async () => {
                   setAlertThreshold(v);
-                  await AsyncStorage.setItem('@jobble/asymmetry_alert_threshold', JSON.stringify(v));
+                  await AsyncStorage.setItem(STORAGE_KEYS.ASYMMETRY_ALERT_THRESHOLD, JSON.stringify(v));
                 }}
                 accessibilityLabel={`${v}%`}
               >

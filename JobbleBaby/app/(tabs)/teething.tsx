@@ -7,9 +7,10 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const SYMPTOMS_KEY = '@jobble/teething_symptoms';
-const TEETH_KEY = '@jobble/teething_teeth';
+const SYMPTOMS_KEY = STORAGE_KEYS.TEETHING_SYMPTOMS;
+const TEETH_KEY = STORAGE_KEYS.TEETHING_TEETH;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 const TEETHING_BLUE = '#60A5FA';

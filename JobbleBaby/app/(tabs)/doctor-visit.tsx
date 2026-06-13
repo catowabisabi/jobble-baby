@@ -6,11 +6,12 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const TRACKING_KEY = '@jobble/tracking_entries';
-const GROWTH_KEY = '@jobble/growth_entries';
-const SCHEDULE_KEY = '@jobble/schedule_entries';
-const MILESTONE_KEY = '@jobble/milestone_photos';
+const TRACKING_KEY = STORAGE_KEYS.TRACKING_ENTRIES;
+const GROWTH_KEY = STORAGE_KEYS.GROWTH_ENTRIES;
+const SCHEDULE_KEY = STORAGE_KEYS.SCHEDULE_ENTRIES;
+const MILESTONE_KEY = STORAGE_KEYS.MILESTONE_PHOTOS;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 interface TrackingEntry {

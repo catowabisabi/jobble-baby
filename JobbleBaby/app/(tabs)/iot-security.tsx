@@ -6,9 +6,10 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const SECURITY_KEY = '@jobble/iot_security_entries';
-const ALERTS_KEY = '@jobble/iot_alerts';
+const SECURITY_KEY = STORAGE_KEYS.IOT_SECURITY_ENTRIES;
+const ALERTS_KEY = STORAGE_KEYS.IOT_ALERTS;
 
 const BRANDS = [
   { id: 'nanit', name: 'Nanit', privacyUrl: 'https://nanit.com/privacy' },

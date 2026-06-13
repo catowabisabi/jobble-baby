@@ -4,8 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const ENTRIES_KEY = '@jobble/oral_motor_entries';
+const ENTRIES_KEY = STORAGE_KEYS.ORAL_MOTOR_ENTRIES;
 
 const NIPPLE_LEVELS = [
   { level: 1, label: 'Newborn',   flow: 'Slow (0-1 mL/min)',    desc: 'For preemies & newborns' },
@@ -42,7 +43,7 @@ export default function OralMotorScreen() {
     setEntries(next);
     await AsyncStorage.setItem(ENTRIES_KEY, JSON.stringify(next));
     const uniqueLevels = new Set(next.map(e => e.level));
-    if (uniqueLevels.size >= 4) await AsyncStorage.setItem('@jobble/badge_nipple_navigator', 'true');
+    if (uniqueLevels.size >= 4) await AsyncStorage.setItem(STORAGE_KEYS.BADGE_NIPPLE_NAVIGATOR, 'true');
     setModal(false); setSelLevel(1); setAccept('accepted'); setNotes('');
   };
 

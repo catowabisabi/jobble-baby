@@ -5,13 +5,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const PROFILE_KEY = '@jobble_baby_profile';
-const GROWTH_KEY = '@jobble/growth_entries';
-const TEETHING_KEY = '@jobble/teething_entries';
-const TRACKING_KEY = '@jobble/tracking_entries';
-const SLEEP_KEY = '@jobble/sleep_training_entries';
-const MILESTONE_KEY = '@jobble/milestone_entries';
+const GROWTH_KEY = STORAGE_KEYS.GROWTH_ENTRIES;
+const TEETHING_KEY = STORAGE_KEYS.TEETHING_ENTRIES;
+const TRACKING_KEY = STORAGE_KEYS.TRACKING_ENTRIES;
+const SLEEP_KEY = STORAGE_KEYS.SLEEP_TRAINING_ENTRIES;
+const MILESTONE_KEY = STORAGE_KEYS.MILESTONE_ENTRIES;
 
 type BabyProfile = { name: string; birthDate: string; gender: 'boy' | 'girl' | 'prefer_not_to_say' };
 type GrowthEntry = { date: string; weight?: number; height?: number; headCirc?: number };

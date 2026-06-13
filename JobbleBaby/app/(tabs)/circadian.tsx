@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 type CaregiverShift = 'day' | 'night';
 
@@ -102,13 +103,13 @@ export default function CircadianScreen() {
       }
 
       // Load tummy time entries
-      const tummyStr = await AsyncStorage.getItem('@jobble/tummy_time_entries');
+      const tummyStr = await AsyncStorage.getItem(STORAGE_KEYS.TUMMY_TIME_ENTRIES);
       if (tummyStr) {
         setTummyTimeEntries(JSON.parse(tummyStr));
       }
 
       // Load schedule entries
-      const scheduleStr = await AsyncStorage.getItem('@jobble/schedule_entries');
+      const scheduleStr = await AsyncStorage.getItem(STORAGE_KEYS.SCHEDULE_ENTRIES);
       if (scheduleStr) {
         setScheduleEntries(JSON.parse(scheduleStr));
       }
@@ -179,7 +180,7 @@ export default function CircadianScreen() {
     };
     const updated = [entry, ...tummyTimeEntries];
     setTummyTimeEntries(updated);
-    await AsyncStorage.setItem('@jobble/tummy_time_entries', JSON.stringify(updated));
+    await AsyncStorage.setItem(STORAGE_KEYS.TUMMY_TIME_ENTRIES, JSON.stringify(updated));
     setIsTummyTimerRunning(false);
     setTummyStartTime(null);
     Alert.alert('Tummy Time Logged', `${duration} minutes recorded!`);
@@ -416,13 +417,13 @@ function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
 
   const loadDuskData = async () => {
     try {
-      const lightStr = await AsyncStorage.getItem('@jobble/light_exposure_log');
+      const lightStr = await AsyncStorage.getItem(STORAGE_KEYS.LIGHT_EXPOSURE_LOG);
       if (lightStr) setLightLog(JSON.parse(lightStr));
-      const alarmStr = await AsyncStorage.getItem('@jobble/dusk_alarm_time');
+      const alarmStr = await AsyncStorage.getItem(STORAGE_KEYS.DUSK_ALARM_TIME);
       if (alarmStr) setDuskAlarm(JSON.parse(alarmStr));
-      const melStr = await AsyncStorage.getItem('@jobble/melatonin_settings');
+      const melStr = await AsyncStorage.getItem(STORAGE_KEYS.MELATONIN_SETTINGS);
       if (melStr) setMelatoninSettings(JSON.parse(melStr));
-      const phaseStr = await AsyncStorage.getItem('@jobble/phase_shift_plan');
+      const phaseStr = await AsyncStorage.getItem(STORAGE_KEYS.PHASE_SHIFT_PLAN);
       if (phaseStr) setPhaseShiftPlan(JSON.parse(phaseStr));
     } catch (e) { /* silent */ }
   };
@@ -440,7 +441,7 @@ function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
     };
     const updated = [entry, ...lightLog].slice(0, 30);
     setLightLog(updated);
-    await AsyncStorage.setItem('@jobble/light_exposure_log', JSON.stringify(updated));
+    await AsyncStorage.setItem(STORAGE_KEYS.LIGHT_EXPOSURE_LOG, JSON.stringify(updated));
     setLogForm({ outdoorSun: '', outdoorShade: '', indoorBright: '', indoorDim: '', screenTime: '' });
     setShowLightLogger(false);
     Alert.alert(t('duskLight.logSaved') || 'Light Log Saved', `${entry.outdoorSun + entry.outdoorShade + entry.indoorBright + entry.indoorDim + entry.screenTime} min total logged`);
@@ -449,7 +450,7 @@ function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
   const handleSaveAlarm = async (hour: number, minute: number, enabled: boolean) => {
     const settings = { enabled, hour, minute };
     setDuskAlarm(settings);
-    await AsyncStorage.setItem('@jobble/dusk_alarm_time', JSON.stringify(settings));
+    await AsyncStorage.setItem(STORAGE_KEYS.DUSK_ALARM_TIME, JSON.stringify(settings));
     Alert.alert(t('duskLight.alarmSaved') || 'Alarm Saved', enabled ? `${hour}:${minute.toString().padStart(2, '0')} ${t('duskLight.dailyReminder') || 'daily reminder'}` : t('duskLight.alarmDisabled') || 'Alarm disabled');
   };
 
@@ -473,7 +474,7 @@ function DuskLightNavigator({ C, t }: { C: any; t: (key: string) => string }) {
       active: true,
     };
     setPhaseShiftPlan(plan);
-    await AsyncStorage.setItem('@jobble/phase_shift_plan', JSON.stringify(plan));
+    await AsyncStorage.setItem(STORAGE_KEYS.PHASE_SHIFT_PLAN, JSON.stringify(plan));
     setShowPhaseShift(false);
     Alert.alert(t('duskLight.phaseShiftCalculated') || 'Phase Shift Calculated', `${t('duskLight.brightLightMorning') || 'Bright light'}: ${brightStart}-${brightEnd}\n${t('duskLight.dimLightEvening') || 'Dim light'}: ${dimStart}-${dimEnd}`);
   };

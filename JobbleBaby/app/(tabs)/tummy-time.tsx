@@ -7,8 +7,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const TUMMY_TIME_KEY = '@jobble/tummy_time_entries';
+const TUMMY_TIME_KEY = STORAGE_KEYS.TUMMY_TIME_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 const POSITIONS = [

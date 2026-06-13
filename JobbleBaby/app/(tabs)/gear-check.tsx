@@ -6,8 +6,9 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const GEAR_KEY = '@jobble/gear_check_entries';
+const GEAR_KEY = STORAGE_KEYS.GEAR_CHECK_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 interface GearItem {

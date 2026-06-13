@@ -14,8 +14,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/jaundice_threshold_entries';
+const STORAGE_KEY = STORAGE_KEYS.JAUNDICE_THRESHOLD_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 interface JaundiceEntry {

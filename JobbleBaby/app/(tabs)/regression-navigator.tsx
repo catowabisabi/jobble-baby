@@ -4,12 +4,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS, STATUS_COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY_REGRESSION = '@jobble/regression_status';
-const STORAGE_KEY_BREATH = '@jobble/breath_pattern_log';
-const STORAGE_KEY_LIGHT = '@jobble/light_exposure';
-const STORAGE_KEY_CALM = '@jobble/parent_calm_session';
-const STORAGE_KEY_BADGE = '@jobble/regression_navigator_badge';
+const STORAGE_KEY_REGRESSION = STORAGE_KEYS.REGRESSION_STATUS;
+const STORAGE_KEY_BREATH = STORAGE_KEYS.BREATH_PATTERN_LOG;
+const STORAGE_KEY_LIGHT = STORAGE_KEYS.LIGHT_EXPOSURE;
+const STORAGE_KEY_CALM = STORAGE_KEYS.PARENT_CALM_SESSION;
+const STORAGE_KEY_BADGE = STORAGE_KEYS.REGRESSION_NAVIGATOR_BADGE;
 
 interface RegressionStatus {
   startedAt: string;

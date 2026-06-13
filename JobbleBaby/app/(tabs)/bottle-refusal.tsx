@@ -7,8 +7,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const BOTTLE_REFUSAL_KEY = '@jobble/bottle_refusal_entries';
+const BOTTLE_REFUSAL_KEY = STORAGE_KEYS.BOTTLE_REFUSAL_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 const SUSPECTED_CAUSES = [

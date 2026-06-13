@@ -4,8 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const EVENTS_KEY = '@jobble/moro_reflex_events';
+const EVENTS_KEY = STORAGE_KEYS.MORO_REFLEX_EVENTS;
 
 type Trigger = 'loud_noise' | 'movement' | 'light' | 'temperature' | 'other';
 type Severity = 'mild' | 'moderate' | 'severe';
@@ -75,7 +76,7 @@ export default function MoroReflexScreen() {
     const yesterdayEvents = next.filter(e => new Date(e.timestamp).toDateString() === yesterday);
     const todayEvents = next.filter(e => new Date(e.timestamp).toDateString() === today);
     if (yesterdayEvents.length === 0 && todayEvents.length === 0) {
-      await AsyncStorage.setItem('@jobble/badge_calm_baby', 'true');
+      await AsyncStorage.setItem(STORAGE_KEYS.BADGE_CALM_BABY, 'true');
     }
     setModal(false); setTrigger('loud_noise'); setSeverity('mild'); setDisruption(false); setNotes('');
   };

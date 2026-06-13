@@ -9,11 +9,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const { width: SCREEN_W } = Dimensions.get('window');
 
-const BIRTHDATE_KEY = '@jobble/baby_birthdate';
-const VESTIBULAR_KEY = '@jobble/vestibular_entries';
+const BIRTHDATE_KEY = STORAGE_KEYS.BABY_BIRTHDATE;
+const VESTIBULAR_KEY = STORAGE_KEYS.VESTIBULAR_ENTRIES;
 
 interface Milestone {
   id: string;

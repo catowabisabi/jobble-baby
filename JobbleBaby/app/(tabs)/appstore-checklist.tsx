@@ -4,8 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS, STATUS_COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/appstore_checklist';
+const STORAGE_KEY = STORAGE_KEYS.APPSTORE_CHECKLIST;
 
 interface ChecklistItem {
   id: string;

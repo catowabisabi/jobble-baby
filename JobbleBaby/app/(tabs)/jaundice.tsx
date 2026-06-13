@@ -7,11 +7,12 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const JAUNDICE_KEY = '@jobble/jaundice_entries';
-const PHOTO_KEY = '@jobble/phototherapy_entries';
+const JAUNDICE_KEY = STORAGE_KEYS.JAUNDICE_ENTRIES;
+const PHOTO_KEY = STORAGE_KEYS.PHOTOTHERAPY_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
-const TRACKING_KEY = '@jobble/tracking_entries';
+const TRACKING_KEY = STORAGE_KEYS.TRACKING_ENTRIES;
 
 interface JaundiceEntry {
   id: string;

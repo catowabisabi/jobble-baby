@@ -9,19 +9,20 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 // ─── Storage Keys ─────────────────────────────────────────────────────────────
-const VISIT_HISTORY_KEY   = '@jobble/visit_history';
-const REPORT_CONFIG_KEY  = '@jobble/clinician_report_config';
-const CHECKLIST_KEY      = '@jobble/visit_checklist';
-const GROWTH_KEY         = '@jobble/growth_entries';
-const MILESTONE_KEY      = '@jobble/milestone_photos';
-const TRACKING_KEY       = '@jobble/tracking_entries';
-const ALLERGEN_KEY       = '@jobble/allergen_entries';
+const VISIT_HISTORY_KEY   = STORAGE_KEYS.VISIT_HISTORY;
+const REPORT_CONFIG_KEY  = STORAGE_KEYS.CLINICIAN_REPORT_CONFIG;
+const CHECKLIST_KEY      = STORAGE_KEYS.VISIT_CHECKLIST;
+const GROWTH_KEY         = STORAGE_KEYS.GROWTH_ENTRIES;
+const MILESTONE_KEY      = STORAGE_KEYS.MILESTONE_PHOTOS;
+const TRACKING_KEY       = STORAGE_KEYS.TRACKING_ENTRIES;
+const ALLERGEN_KEY       = STORAGE_KEYS.ALLERGEN_ENTRIES;
 const PROFILE_KEY        = '@jobble_baby_profile';
-const TONGUE_KEY         = '@jobble/tongue_assessment';
-const CRY_KEY            = '@jobble/cry_entries';
-const REFLEX_KEY         = '@jobble/reflex_entries';
+const TONGUE_KEY         = STORAGE_KEYS.TONGUE_ASSESSMENT;
+const CRY_KEY            = STORAGE_KEYS.CRY_ENTRIES;
+const REFLEX_KEY         = STORAGE_KEYS.REFLEX_ENTRIES;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface BabyProfile {

@@ -4,11 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const THERMAL_READINGS_KEY = '@jobble/thermal_readings';
-const BROWN_FAT_SESSIONS_KEY = '@jobble/brown_fat_sessions';
-const METABOLIC_MEAL_LOG_KEY = '@jobble/metabolic_meal_log';
-const THERMAL_FEEDING_CORR_KEY = '@jobble/thermal_feeding_correlation';
+const THERMAL_READINGS_KEY = STORAGE_KEYS.THERMAL_READINGS;
+const BROWN_FAT_SESSIONS_KEY = STORAGE_KEYS.BROWN_FAT_SESSIONS;
+const METABOLIC_MEAL_LOG_KEY = STORAGE_KEYS.METABOLIC_MEAL_LOG;
+const THERMAL_FEEDING_CORR_KEY = STORAGE_KEYS.THERMAL_FEEDING_CORRELATION;
 
 interface ThermalReading {
   id: string;

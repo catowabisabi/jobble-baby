@@ -9,13 +9,14 @@ import { Badge } from '../data/badges';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/growth_entries';
-const VELOCITY_STORAGE_KEY = '@jobble/growth_velocity_data';
-const ALERT_THRESHOLD_KEY = '@jobble/velocity_alert_threshold';
-const SKINFOLD_KEY = '@jobble/skinfold_entries';
-const PONDERAL_KEY = '@jobble/ponderal_index';
-const PARENTAL_KEY = '@jobble/parental_heights';
+const STORAGE_KEY = STORAGE_KEYS.GROWTH_ENTRIES;
+const VELOCITY_STORAGE_KEY = STORAGE_KEYS.GROWTH_VELOCITY_DATA;
+const ALERT_THRESHOLD_KEY = STORAGE_KEYS.VELOCITY_ALERT_THRESHOLD;
+const SKINFOLD_KEY = STORAGE_KEYS.SKINFOLD_ENTRIES;
+const PONDERAL_KEY = STORAGE_KEYS.PONDERAL_INDEX;
+const PARENTAL_KEY = STORAGE_KEYS.PARENTAL_HEIGHTS;
 
 // WHO Child Growth Standards — ages 0 to 24 months
 const AGES_MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 18, 21, 24];
@@ -673,7 +674,7 @@ export default function GrowthScreen() {
     };
     const loadGender = async () => {
       try {
-        const saved = await AsyncStorage.getItem('@jobble/gender_preference');
+        const saved = await AsyncStorage.getItem(STORAGE_KEYS.GENDER_PREFERENCE);
         if (saved === 'boys' || saved === 'girls') {
           setGender(saved);
         }
@@ -685,7 +686,7 @@ export default function GrowthScreen() {
 
   // Persist gender preference when it changes
   useEffect(() => {
-    AsyncStorage.setItem('@jobble/gender_preference', gender).catch(() => {});
+    AsyncStorage.setItem(STORAGE_KEYS.GENDER_PREFERENCE, gender).catch(() => {});
   }, [gender]);
 
   const saveEntry = async () => {

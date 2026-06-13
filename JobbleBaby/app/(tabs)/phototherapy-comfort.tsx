@@ -6,10 +6,11 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const PHOTO_COMFORT_KEY = '@jobble/photo_comfort_sessions';
+const PHOTO_COMFORT_KEY = STORAGE_KEYS.PHOTO_COMFORT_SESSIONS;
 const PROFILE_KEY = '@jobble_baby_profile';
-const JAUNDICE_KEY = '@jobble/jaundice_entries';
+const JAUNDICE_KEY = STORAGE_KEYS.JAUNDICE_ENTRIES;
 
 interface PhotoComfortEntry {
   id: string;

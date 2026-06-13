@@ -9,6 +9,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const PROFILE_KEY = '@jobble_baby_profile';
 const DOMAIN_LABELS: Record<string, string> = {
@@ -95,10 +96,10 @@ export default function HabitResetScreen() {
   const loadData = useCallback(async () => {
     try {
       const [surveyRaw, dailyRaw, microRaw, streakRaw, profileRaw] = await Promise.all([
-        AsyncStorage.getItem('@jobble/habit_reset_survey'),
-        AsyncStorage.getItem('@jobble/habit_reset_daily'),
-        AsyncStorage.getItem('@jobble/habit_reset_micro'),
-        AsyncStorage.getItem('@jobble/habit_reset_streaks'),
+        AsyncStorage.getItem(STORAGE_KEYS.HABIT_RESET_SURVEY),
+        AsyncStorage.getItem(STORAGE_KEYS.HABIT_RESET_DAILY),
+        AsyncStorage.getItem(STORAGE_KEYS.HABIT_RESET_MICRO),
+        AsyncStorage.getItem(STORAGE_KEYS.HABIT_RESET_STREAKS),
         AsyncStorage.getItem(PROFILE_KEY),
       ]);
       if (surveyRaw) setSurvey(JSON.parse(surveyRaw));
@@ -128,13 +129,13 @@ export default function HabitResetScreen() {
   }, [survey]);
 
   const saveSurvey = async (data: SurveyData) => {
-    await AsyncStorage.setItem('@jobble/habit_reset_survey', JSON.stringify(data));
+    await AsyncStorage.setItem(STORAGE_KEYS.HABIT_RESET_SURVEY, JSON.stringify(data));
     setSurvey(data);
     setSurveyModal(false);
   };
 
   const saveDaily = async (entries: DailyEntry[]) => {
-    await AsyncStorage.setItem('@jobble/habit_reset_daily', JSON.stringify(entries));
+    await AsyncStorage.setItem(STORAGE_KEYS.HABIT_RESET_DAILY, JSON.stringify(entries));
     setDailyEntries(entries);
   };
 
@@ -172,7 +173,7 @@ export default function HabitResetScreen() {
     }
     const newStreaks = { ...streaks, [habitId]: streak };
     setStreaks(newStreaks);
-    await AsyncStorage.setItem('@jobble/habit_reset_streaks', JSON.stringify(newStreaks));
+    await AsyncStorage.setItem(STORAGE_KEYS.HABIT_RESET_STREAKS, JSON.stringify(newStreaks));
   };
 
   const addMicroHabit = async () => {
@@ -181,7 +182,7 @@ export default function HabitResetScreen() {
     const habit: MicroHabit = { id, domain: newHabitDomain, label: newHabitLabel.trim() };
     const updated = [...microHabits, habit];
     setMicroHabits(updated);
-    await AsyncStorage.setItem('@jobble/habit_reset_micro', JSON.stringify(updated));
+    await AsyncStorage.setItem(STORAGE_KEYS.HABIT_RESET_MICRO, JSON.stringify(updated));
     setNewHabitLabel('');
     setAddHabitModal(false);
   };

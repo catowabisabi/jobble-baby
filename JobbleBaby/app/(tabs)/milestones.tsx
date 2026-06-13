@@ -11,6 +11,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { onNewGrowthEntry, awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const { width: SCREEN_W } = Dimensions.get('window');
 const GRID_COLS = 2;
@@ -25,8 +26,8 @@ const MILESTONE_TYPES = [
   { id: 'custom', labelKey: 'custom', icon: 'star' },
 ];
 
-const STORAGE_KEY = '@jobble/milestone_photos';
-const BRAIN_BUILDER_KEY = '@jobble/brain_builder_week';
+const STORAGE_KEY = STORAGE_KEYS.MILESTONE_PHOTOS;
+const BRAIN_BUILDER_KEY = STORAGE_KEYS.BRAIN_BUILDER_WEEK;
 
 interface BabyProfile {
   name: string;
@@ -237,7 +238,7 @@ export default function MilestonesScreen() {
       let height: number | undefined;
       let weight: number | undefined;
       try {
-        const growthRaw = await AsyncStorage.getItem('@jobble/growth_entries');
+        const growthRaw = await AsyncStorage.getItem(STORAGE_KEYS.GROWTH_ENTRIES);
         if (growthRaw) {
           const entries = JSON.parse(growthRaw);
           if (entries.length > 0) {

@@ -6,10 +6,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const NIPPLE_KEY     = '@jobble/nipple_level';
-const SESSION_KEY   = '@jobble/bottle_session';
-const PACE_KEY       = '@jobble/pace_practice';
+const NIPPLE_KEY     = STORAGE_KEYS.NIPPLE_LEVEL;
+const SESSION_KEY   = STORAGE_KEYS.BOTTLE_SESSION;
+const PACE_KEY       = STORAGE_KEYS.PACE_PRACTICE;
 
 const NIPPLE_LEVELS = [
   { level: 0, labelKey: 'nippleLevel0', age: 'Preemie' },

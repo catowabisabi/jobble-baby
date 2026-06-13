@@ -6,8 +6,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/cry_entries';
+const STORAGE_KEY = STORAGE_KEYS.CRY_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 type BabyProfile = {

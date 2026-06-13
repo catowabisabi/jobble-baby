@@ -7,11 +7,12 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { onNewGrowthEntry } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const THERMAL_LOG_KEY = '@jobble/thermal_log';
-const THERMAL_ALERT_THRESHOLD_KEY = '@jobble/thermal_alert_threshold';
-const FEVER_EPISODE_KEY = '@jobble/fever_episode';
-const CAR_TEMP_ALERT_KEY = '@jobble/car_temp_alert_enabled';
+const THERMAL_LOG_KEY = STORAGE_KEYS.THERMAL_LOG;
+const THERMAL_ALERT_THRESHOLD_KEY = STORAGE_KEYS.THERMAL_ALERT_THRESHOLD;
+const FEVER_EPISODE_KEY = STORAGE_KEYS.FEVER_EPISODE;
+const CAR_TEMP_ALERT_KEY = STORAGE_KEYS.CAR_TEMP_ALERT_ENABLED;
 
 interface ThermalEntry {
   id: string;

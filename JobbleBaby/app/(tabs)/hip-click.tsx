@@ -4,8 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const RECORDS_KEY = '@jobble/hip_click_records';
+const RECORDS_KEY = STORAGE_KEYS.HIP_CLICK_RECORDS;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 type HipSide = 'left' | 'right' | 'both';

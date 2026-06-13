@@ -1,49 +1,89 @@
-# Task: Fix AsyncStorage key naming — create storage-keys.ts
-# Pre-submission audit WARNING: 38 non-standard AsyncStorage keys across 18 tab files.
-# NOTE: Sisyphus previously wrote DONE but storage-keys.ts was NOT created. This is a re-dispatch.
-# You MUST actually create the file and verify it exists before writing DONE.
+# Task: Update all tab files to use STORAGE_KEYS constants (NOT create storage-keys.ts)
+# storage-keys.ts ALREADY EXISTS at JobbleBaby/store/storage-keys.ts with 147 keys
+# PROBLEM: 26 hardcoded @jobble/ string literals remain in tab files
+# GOAL: Replace all hardcoded '@jobble/...' strings with STORAGE_KEYS.X constants
 
-# GOAL: Audit all AsyncStorage keys, create central constants file, update all tab files.
-
-# STEP 1 — Audit all AsyncStorage keys
+# STEP 1 — Audit remaining hardcoded keys
 cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
-grep -rn "AsyncStorage" app/(tabs)/ --include="*.tsx" | grep -E "getItem|setItem|removeItem" | grep -oP "@jobble/[^'\"]+" | sort -u > /tmp/async_keys.txt
-cat /tmp/async_keys.txt
+grep -rn "AsyncStorage" app/\(tabs\)/ --include="*.tsx" | grep -oP "@jobble/[^'\";)+ ,]+" | sort -u > /tmp/hardcoded_keys.txt
+cat /tmp/hardcoded_keys.txt
+# Expected: 26 keys including asymmetry_alert_threshold, badge_calm_baby, dusk_alarm_time, etc.
 
-# STEP 2 — Create store/ directory and storage-keys.ts
-mkdir -p /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/store/
-# Parse keys from /tmp/async_keys.txt and create constants
-python3 -c "
-import re
-keys = open('/tmp/async_keys.txt').read().splitlines()
-constants = []
-for k in keys:
-    name = k.replace('@jobble/', '').replace('/', '_').upper()
-    constants.append(f'  {name}: \"{k}\"')
-content = 'export const STORAGE_KEYS = {\\n' + ',\\n'.join(constants) + '\\n} as const;\\n'
-open('/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/store/storage-keys.ts', 'w').write(content)
-print('Created storage-keys.ts with', len(constants), 'keys')
-"
+# STEP 2 — Build a Python replacement script
+python3 << 'PYEOF'
+import re, os
 
-# STEP 3 — Verify file exists
-ls -la /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/store/storage-keys.ts
+BASE = "/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby"
+KEYS_FILE = f"{BASE}/store/storage-keys.ts"
 
-# STEP 4 — Update tab files to use STORAGE_KEYS
-# For each tab file, replace hardcoded '@jobble/...' with STORAGE_KEYS.X
-# Use sed replacement carefully — only replace the string literal part
-# Example: '@jobble/profile' → STORAGE_KEYS.PROFILE
+# Parse STORAGE_KEYS from storage-keys.ts
+with open(KEYS_FILE) as f:
+    content = f.read()
+
+key_map = {}  # '@jobble/xxx' -> 'XXX' (constant name)
+for match in re.finditer(r'^\s+(\w+):\s+"(@jobble/[^"]+)"', content, re.MULTILINE):
+    const_name = match.group(1)
+    key_val = match.group(2)
+    key_map[key_val] = const_name
+
+print(f"Loaded {len(key_map)} keys from storage-keys.ts")
+
+# Find all tab files with hardcoded @jobble/ keys
+tabs_dir = f"{BASE}/app/(tabs)"
+hardcoded = set()
+for fname in os.listdir(tabs_dir):
+    if not fname.endswith('.tsx'):
+        continue
+    fpath = f"{tabs_dir}/{fname}"
+    with open(fpath) as f:
+        text = f.read()
+    for key_val in key_map:
+        if key_val in text:
+            hardcoded.add((fname, key_val, key_map[key_val]))
+
+print(f"\nFiles needing updates ({len(set(f[0] for f in hardcoded))} files):")
+for fname, key_val, const_name in sorted(hardcoded):
+    print(f"  {fname}: {key_val} -> STORAGE_KEYS.{const_name}")
+
+# STEP 3 — Update each tab file
+for fname, key_val, const_name in hardcoded:
+    fpath = f"{tabs_dir}/{fname}"
+    with open(fpath) as f:
+        text = f.read()
+    
+    # Replace the key string with STORAGE_KEYS constant
+    # Only replace in AsyncStorage.getItem/setItem/removeItem calls
+    # Pattern: '@jobble/xxx' (with word boundary before)
+    new_text = text.replace(f"'{key_val}'", f'STORAGE_KEYS.{const_name}')
+    new_text = new_text.replace(f'"{key_val}"', f'STORAGE_KEYS.{const_name}')
+    
+    if new_text != text:
+        with open(fpath, 'w') as f:
+            f.write(new_text)
+        print(f"Updated: {fname}")
+
+print("\nDone updating tab files.")
+PYEOF
+
+# STEP 4 — Verify: count remaining hardcoded keys (should be 0)
+echo "Remaining hardcoded @jobble/ keys:"
+grep -rn "AsyncStorage" app/\(tabs\)/ --include="*.tsx" | grep -oP "@jobble/[^'\";)+ ,]+" | sort -u | wc -l
+echo "Files with remaining hardcoded keys:"
+grep -rn "AsyncStorage" app/\(tabs\)/ --include="*.tsx" | grep -oP "@jobble/[^'\";)+ ,]+" | sort -u
 
 # STEP 5 — TSC verify
 cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit
-# Must pass 0 errors
+echo "TSC exit: $?"
 
-# STEP 6 — Run pre-submission audit
-cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && node scripts/pre-submission-audit.js
+# STEP 6 — Pre-submission audit
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && node scripts/pre-submission-audit.js 2>&1 | grep -A2 "HardcodedStrings"
 
-# Write DONE only if:
-# - storage-keys.ts exists with content
-# - TSC passes 0 errors
-# - HardcodedStrings in audit shows FEWER warnings (improvement)
-echo "DONE"
-# Keywords: rotational_movement_logging,feeding_diary_export,cortisol_shadow
+# Write DONE only if hardcoded key count is 0 AND TSC passes
+KEY_COUNT=$(grep -rn "AsyncStorage" app/\(tabs\)/ --include="*.tsx" | grep -oP "@jobble/[^'\";)+ ,]+" | sort -u | wc -l)
+if [ "$KEY_COUNT" = "0" ]; then
+    echo "DONE"
+else
+    echo "NOT_DONE: $KEY_COUNT keys remaining"
+fi
+# Keywords: asymmetry_alert_threshold, badge_calm_baby, circadian_inputs, regulatory_fitness
 ULW

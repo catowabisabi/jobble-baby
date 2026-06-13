@@ -6,12 +6,13 @@ import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const SURVEY_KEY = '@jobble/caregiver_survey';
-const DAILY_KEY = '@jobble/resilience_daily';
-const MENTAL_LOAD_KEY = '@jobble/mental_load_tasks';
-const RESPITE_KEY = '@jobble/respite_goal';
-const SCORE_KEY = '@jobble/resilience_score';
+const SURVEY_KEY = STORAGE_KEYS.CAREGIVER_SURVEY;
+const DAILY_KEY = STORAGE_KEYS.RESILIENCE_DAILY;
+const MENTAL_LOAD_KEY = STORAGE_KEYS.MENTAL_LOAD_TASKS;
+const RESPITE_KEY = STORAGE_KEYS.RESPITE_GOAL;
+const SCORE_KEY = STORAGE_KEYS.RESILIENCE_SCORE;
 
 interface CaregiverSurvey {
   date: string;

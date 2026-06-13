@@ -4,12 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 // ─── Storage Keys ─────────────────────────────────────────────────────────────
-const ASSESSMENT_KEY   = '@jobble/tongue_assessment';
-const FEEDING_KEY      = '@jobble/feeding_efficiency';
-const CHEWING_KEY      = '@jobble/chewing_milestone';
-const BADGE_KEY        = '@jobble/badge_latcher';
+const ASSESSMENT_KEY   = STORAGE_KEYS.TONGUE_ASSESSMENT;
+const FEEDING_KEY      = STORAGE_KEYS.FEEDING_EFFICIENCY;
+const CHEWING_KEY      = STORAGE_KEYS.CHEWING_MILESTONE;
+const BADGE_KEY        = STORAGE_KEYS.BADGE_LATCHER;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface AssessmentRecord {
@@ -125,7 +126,7 @@ export default function TongueTieScreen() {
     setAssessments(next);
     await AsyncStorage.setItem(ASSESSMENT_KEY, JSON.stringify(next));
     // Badge: tongue-tie-aware = completed assessment
-    await AsyncStorage.setItem('@jobble/badge_tongue_tie_aware', 'true');
+    await AsyncStorage.setItem(STORAGE_KEYS.BADGE_TONGUE_TIE_AWARE, 'true');
     setAssessModal(false);
     setHazelbaker([1,1,1,1,1,1]); setJawSymmetry({}); setJawNotes('');
     Alert.alert(t('tabs.tongueTie'), t('assessment.saved') || 'Assessment saved');

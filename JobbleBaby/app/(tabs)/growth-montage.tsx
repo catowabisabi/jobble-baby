@@ -4,9 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/montage_projects';
-const SETTINGS_KEY = '@jobble/montage_settings';
+const STORAGE_KEY = STORAGE_KEYS.MONTAGE_PROJECTS;
+const SETTINGS_KEY = STORAGE_KEYS.MONTAGE_SETTINGS;
 
 interface MontageProject {
   id: string;

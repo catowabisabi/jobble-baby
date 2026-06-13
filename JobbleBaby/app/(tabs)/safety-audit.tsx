@@ -4,8 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/safety_audit_entries';
+const STORAGE_KEY = STORAGE_KEYS.SAFETY_AUDIT_ENTRIES;
 
 const ZONES = [
   {

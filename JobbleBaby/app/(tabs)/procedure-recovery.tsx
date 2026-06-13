@@ -8,18 +8,19 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 // Storage keys
-const PROCEDURE_LOG_KEY = '@jobble/procedure_log';
-const FEEDING_RECOVERY_KEY = '@jobble/feeding_recovery';
-const PAIN_COMFORT_KEY = '@jobble/pain_comfort_score';
-const MEDICATION_LOG_KEY = '@jobble/medication_log';
-const WOUND_PHOTO_KEY = '@jobble/wound_photo';
-const RECOVERY_TIMELINE_KEY = '@jobble/recovery_timeline';
-const FOLLOW_UP_KEY = '@jobble/follow_up_alert';
-const PEDIATRICIAN_ALERT_KEY = '@jobble/pediatrician_alert';
-const BIRTHDATE_KEY = '@jobble/baby_birthdate';
-const GROWTH_KEY = '@jobble/growth_entries';
+const PROCEDURE_LOG_KEY = STORAGE_KEYS.PROCEDURE_LOG;
+const FEEDING_RECOVERY_KEY = STORAGE_KEYS.FEEDING_RECOVERY;
+const PAIN_COMFORT_KEY = STORAGE_KEYS.PAIN_COMFORT_SCORE;
+const MEDICATION_LOG_KEY = STORAGE_KEYS.MEDICATION_LOG;
+const WOUND_PHOTO_KEY = STORAGE_KEYS.WOUND_PHOTO;
+const RECOVERY_TIMELINE_KEY = STORAGE_KEYS.RECOVERY_TIMELINE;
+const FOLLOW_UP_KEY = STORAGE_KEYS.FOLLOW_UP_ALERT;
+const PEDIATRICIAN_ALERT_KEY = STORAGE_KEYS.PEDIATRICIAN_ALERT;
+const BIRTHDATE_KEY = STORAGE_KEYS.BABY_BIRTHDATE;
+const GROWTH_KEY = STORAGE_KEYS.GROWTH_ENTRIES;
 
 // Types
 interface ProcedureEntry {

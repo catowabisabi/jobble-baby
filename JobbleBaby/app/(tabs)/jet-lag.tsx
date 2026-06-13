@@ -4,9 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const PLAN_KEY = '@jobble/jet_lag_plan';
-const HISTORY_KEY = '@jobble/jet_lag_history';
+const PLAN_KEY = STORAGE_KEYS.JET_LAG_PLAN;
+const HISTORY_KEY = STORAGE_KEYS.JET_LAG_HISTORY;
 
 interface Plan {
   departure_zone: string; arrival_zone: string; shift_hours: number; baby_age_months: number;

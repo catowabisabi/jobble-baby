@@ -10,8 +10,9 @@ import { checkFirstAllergenBadge } from '../utils/badgeService';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/allergen_entries';
+const STORAGE_KEY = STORAGE_KEYS.ALLERGEN_ENTRIES;
 
 export default function AllergensScreen() {
   const [entries, setEntries] = useState<Record<string, AllergenEntry>>({});

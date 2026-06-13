@@ -6,11 +6,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const FEEDING_KEY       = '@jobble/feeding_readiness';
-const FLAVOR_KEY        = '@jobble/flavor_journal';
-const TEXTURE_KEY       = '@jobble/texture_stage';
-const ALLERGEN_KEY      = '@jobble/allergen_log';
+const FEEDING_KEY       = STORAGE_KEYS.FEEDING_READINESS;
+const FLAVOR_KEY        = STORAGE_KEYS.FLAVOR_JOURNAL;
+const TEXTURE_KEY       = STORAGE_KEYS.TEXTURE_STAGE;
+const ALLERGEN_KEY      = STORAGE_KEYS.ALLERGEN_LOG;
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -171,7 +172,7 @@ export default function FeedingReadinessScreen() {
     // Check Flavor Explorer badge (20+ distinct foods)
     const distinctFoods = new Set(updated.map(e => e.food.toLowerCase())).size;
     if (distinctFoods >= 20) {
-      await AsyncStorage.setItem('@jobble/badge_flavor_explorer', 'true');
+      await AsyncStorage.setItem(STORAGE_KEYS.BADGE_FLAVOR_EXPLORER, 'true');
       setShowBadge(true);
       setTimeout(() => setShowBadge(false), 4000);
     }

@@ -7,9 +7,10 @@ import { useMonitorLink, MonitorEvent } from '../hooks/useMonitorLink';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const TRACKING_KEY = '@jobble/tracking_entries';
-const DISRUPTION_KEY = '@jobble/sleep_disruptions';
+const TRACKING_KEY = STORAGE_KEYS.TRACKING_ENTRIES;
+const DISRUPTION_KEY = STORAGE_KEYS.SLEEP_DISRUPTIONS;
 
 interface TrackingEntry {
   id: string;

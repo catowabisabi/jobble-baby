@@ -9,12 +9,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const { width: SCREEN_W } = Dimensions.get('window');
 
-const BIRTHDATE_KEY = '@jobble/baby_birthdate';
-const SENSORY_ENTRIES_KEY = '@jobble/sensory_entries';
-const SENSORY_SCORES_KEY = '@jobble/sensory_domain_scores';
+const BIRTHDATE_KEY = STORAGE_KEYS.BABY_BIRTHDATE;
+const SENSORY_ENTRIES_KEY = STORAGE_KEYS.SENSORY_ENTRIES;
+const SENSORY_SCORES_KEY = STORAGE_KEYS.SENSORY_DOMAIN_SCORES;
 
 interface Milestone {
   id: string;

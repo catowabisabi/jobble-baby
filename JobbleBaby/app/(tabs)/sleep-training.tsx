@@ -7,9 +7,10 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const SESSION_KEY = '@jobble/sleep_training_session';
-const NIGHTS_KEY = '@jobble/sleep_training_nights';
+const SESSION_KEY = STORAGE_KEYS.SLEEP_TRAINING_SESSION;
+const NIGHTS_KEY = STORAGE_KEYS.SLEEP_TRAINING_NIGHTS;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 const AMBER = '#F59E0B';

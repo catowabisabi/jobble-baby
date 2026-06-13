@@ -10,8 +10,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import MonitorWidget from '../components/MonitorWidget';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/schedule_entries';
+const STORAGE_KEY = STORAGE_KEYS.SCHEDULE_ENTRIES;
 
 interface SleepData {
   start: string;

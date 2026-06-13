@@ -5,9 +5,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY_BILATERAL = '@jobble/bilateral_log';
-const STORAGE_KEY_SCORES = '@jobble/coordination_scores';
+const STORAGE_KEY_BILATERAL = STORAGE_KEYS.BILATERAL_LOG;
+const STORAGE_KEY_SCORES = STORAGE_KEYS.COORDINATION_SCORES;
 
 interface BilateralEntry {
   date: string;
@@ -140,10 +141,10 @@ export default function BilateralCoordinationScreen() {
   const exportData = async () => {
     try {
       const [growthRaw, milestoneRaw, trackingRaw, sleepRaw] = await Promise.all([
-        AsyncStorage.getItem('@jobble/growth_log'),
-        AsyncStorage.getItem('@jobble/milestone_entries'),
-        AsyncStorage.getItem('@jobble/tracking_entries'),
-        AsyncStorage.getItem('@jobble/sleep_entries'),
+        AsyncStorage.getItem(STORAGE_KEYS.GROWTH_LOG),
+        AsyncStorage.getItem(STORAGE_KEYS.MILESTONE_ENTRIES),
+        AsyncStorage.getItem(STORAGE_KEYS.TRACKING_ENTRIES),
+        AsyncStorage.getItem(STORAGE_KEYS.SLEEP_ENTRIES),
       ]);
       const exportObj = {
         exportedAt: new Date().toISOString(),

@@ -6,6 +6,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 interface StressEntry {
   id: string;
@@ -20,12 +21,12 @@ interface SleepNight {
   wasRegression?: boolean;
 }
 
-const STRESS_LOG_KEY = '@jobble/stress_log';
-const STRESS_CHECKIN_KEY = '@jobble/stress_checkin_date';
-const SLEEP_TRAINING_NIGHTS_KEY = '@jobble/sleep_training_nights';
-const EMERGENCY_CONTACTS_KEY = '@jobble/emergency_contacts';
-const INTERVENTIONS_COUNT_KEY = '@jobble/stress_interventions_count';
-const SHIFT_HANDOFF_KEY = '@jobble/shift_state';
+const STRESS_LOG_KEY = STORAGE_KEYS.STRESS_LOG;
+const STRESS_CHECKIN_KEY = STORAGE_KEYS.STRESS_CHECKIN_DATE;
+const SLEEP_TRAINING_NIGHTS_KEY = STORAGE_KEYS.SLEEP_TRAINING_NIGHTS;
+const EMERGENCY_CONTACTS_KEY = STORAGE_KEYS.EMERGENCY_CONTACTS;
+const INTERVENTIONS_COUNT_KEY = STORAGE_KEYS.STRESS_INTERVENTIONS_COUNT;
+const SHIFT_HANDOFF_KEY = STORAGE_KEYS.SHIFT_STATE;
 
 const PLACEHOLDER_PHONE = '12345678';
 

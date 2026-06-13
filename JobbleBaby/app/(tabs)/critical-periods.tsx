@@ -9,11 +9,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const { width: SCREEN_W } = Dimensions.get('window');
 
-const BIRTHDATE_KEY = '@jobble/baby_birthdate';
-const ACTIVITIES_KEY = '@jobble/period_activities';
+const BIRTHDATE_KEY = STORAGE_KEYS.BABY_BIRTHDATE;
+const ACTIVITIES_KEY = STORAGE_KEYS.PERIOD_ACTIVITIES;
 
 interface Period {
   id: string;

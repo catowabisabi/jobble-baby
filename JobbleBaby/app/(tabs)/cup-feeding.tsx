@@ -8,8 +8,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const CUP_FEEDING_KEY = '@jobble/cup_feeding_entries';
+const CUP_FEEDING_KEY = STORAGE_KEYS.CUP_FEEDING_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 const STAGES = [

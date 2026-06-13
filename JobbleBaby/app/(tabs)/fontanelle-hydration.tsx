@@ -4,10 +4,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY_FONTANELLE = '@jobble/fontanelle_log';
-const STORAGE_KEY_URINE = '@jobble/urine_log';
-const STORAGE_KEY_DIAPER = '@jobble/hydration_daily';
+const STORAGE_KEY_FONTANELLE = STORAGE_KEYS.FONTANELLE_LOG;
+const STORAGE_KEY_URINE = STORAGE_KEYS.URINE_LOG;
+const STORAGE_KEY_DIAPER = STORAGE_KEYS.HYDRATION_DAILY;
 
 interface FontanelleEntry { date: string; score: number; notes: string; }
 interface UrineEntry { date: string; color: number; }

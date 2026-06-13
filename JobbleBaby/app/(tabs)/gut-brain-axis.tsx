@@ -7,11 +7,12 @@ import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const MICROBIOME_KEY = '@jobble/microbiome_log';
-const GUT_SYMPTOMS_KEY = '@jobble/gut_symptoms';
-const TRACKING_KEY = '@jobble/tracking_entries';
-const CRY_KEY = '@jobble/cry_entries';
+const MICROBIOME_KEY = STORAGE_KEYS.MICROBIOME_LOG;
+const GUT_SYMPTOMS_KEY = STORAGE_KEYS.GUT_SYMPTOMS;
+const TRACKING_KEY = STORAGE_KEYS.TRACKING_ENTRIES;
+const CRY_KEY = STORAGE_KEYS.CRY_ENTRIES;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 type BabyProfile = { name: string; birthDate: string; gender: 'boy' | 'girl' | 'prefer_not_to_say' };

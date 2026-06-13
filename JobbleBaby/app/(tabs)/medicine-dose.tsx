@@ -8,11 +8,12 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const PROFILE_KEY = '@jobble_baby_profile';
-const GROWTH_KEY = '@jobble/growth_entries';
-const DOSE_HISTORY_KEY = '@jobble/medicine_dose_history';
-const CALC_COUNT_KEY = '@jobble/medicine_calc_count';
+const GROWTH_KEY = STORAGE_KEYS.GROWTH_ENTRIES;
+const DOSE_HISTORY_KEY = STORAGE_KEYS.MEDICINE_DOSE_HISTORY;
+const CALC_COUNT_KEY = STORAGE_KEYS.MEDICINE_CALC_COUNT;
 
 const MEDICINE_BLUE = '#60A5FA';
 const MEDICINE_GREEN = '#10B981';

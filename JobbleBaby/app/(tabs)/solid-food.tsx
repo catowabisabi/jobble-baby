@@ -6,9 +6,10 @@ import { Link } from 'expo-router';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const JOURNAL_KEY = '@jobble/solid_food_journal';
-const ALLERGENS_KEY = '@jobble/solid_food_allergens';
+const JOURNAL_KEY = STORAGE_KEYS.SOLID_FOOD_JOURNAL;
+const ALLERGENS_KEY = STORAGE_KEYS.SOLID_FOOD_ALLERGENS;
 const PROFILE_KEY = '@jobble_baby_profile';
 
 const STAGES = [

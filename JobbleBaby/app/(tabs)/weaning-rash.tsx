@@ -4,9 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const ENTRIES_KEY = '@jobble/weaning_rash_entries';
-const FOODS_KEY   = '@jobble/weaning_foods_list';
+const ENTRIES_KEY = STORAGE_KEYS.WEANING_RASH_ENTRIES;
+const FOODS_KEY   = STORAGE_KEYS.WEANING_FOODS_LIST;
 
 const WINDOW_LABELS = ['Days 1-2','Days 3-4','Days 5-7','Week 2','Week 3','Week 4'];
 
@@ -58,7 +59,7 @@ export default function WeaningRashScreen() {
     setFoods(newFoods);
     await AsyncStorage.setItem(ENTRIES_KEY, JSON.stringify(next));
     await AsyncStorage.setItem(FOODS_KEY, JSON.stringify(newFoods));
-    if (newFoods.length >= 3) await AsyncStorage.setItem('@jobble/badge_food_explorer', 'true');
+    if (newFoods.length >= 3) await AsyncStorage.setItem(STORAGE_KEYS.BADGE_FOOD_EXPLORER, 'true');
     setModal(false); setFood(''); setWin(1); setRash('none'); setLocs([]); setGis([]); setStool('normal'); setNotes('');
   };
 

@@ -9,8 +9,9 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY = '@jobble/tracking_entries';
+const STORAGE_KEY = STORAGE_KEYS.TRACKING_ENTRIES;
 
 interface Entry {
   id: string;

@@ -4,13 +4,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
-const STORAGE_KEY_ARCHITECTURE = '@jobble/sleep_architecture';
-const STORAGE_KEY_CIRCADIAN = '@jobble/circadian_inputs';
-const STORAGE_KEY_WAKE_WINDOWS = '@jobble/wake_windows';
-const STORAGE_KEY_WHITE_NOISE = '@jobble/white_noise_logs';
-const STORAGE_KEY_ENVIRONMENT = '@jobble/sleep_environment';
-const STORAGE_KEY_SLEEP_DEBT = '@jobble/sleep_debt';
+const STORAGE_KEY_ARCHITECTURE = STORAGE_KEYS.SLEEP_ARCHITECTURE;
+const STORAGE_KEY_CIRCADIAN = STORAGE_KEYS.CIRCADIAN_INPUTS;
+const STORAGE_KEY_WAKE_WINDOWS = STORAGE_KEYS.WAKE_WINDOWS;
+const STORAGE_KEY_WHITE_NOISE = STORAGE_KEYS.WHITE_NOISE_LOGS;
+const STORAGE_KEY_ENVIRONMENT = STORAGE_KEYS.SLEEP_ENVIRONMENT;
+const STORAGE_KEY_SLEEP_DEBT = STORAGE_KEYS.SLEEP_DEBT;
 
 interface ArchitectureEntry {
   date: string;

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 interface CareLogEntry {
   id: string;
@@ -33,9 +34,9 @@ interface ShiftState {
   lastSwitchTimestamp: string;
 }
 
-const SHIFT_LOG_KEY = '@jobble/shift_log';
-const SHIFT_STATE_KEY = '@jobble/shift_state';
-const HANDOVER_NOTES_KEY = '@jobble/handover_notes';
+const SHIFT_LOG_KEY = STORAGE_KEYS.SHIFT_LOG;
+const SHIFT_STATE_KEY = STORAGE_KEYS.SHIFT_STATE;
+const HANDOVER_NOTES_KEY = STORAGE_KEYS.HANDOVER_NOTES;
 
 export default function ShiftHandoff() {
   const { effectiveTheme } = useTheme();

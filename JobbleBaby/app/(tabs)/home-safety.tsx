@@ -5,10 +5,11 @@ import { Link } from 'expo-router';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 type SafetyStatus = 'safe' | 'unsafe' | 'na';
 
-const STORAGE_KEY = '@jobble/home_safety_audit';
+const STORAGE_KEY = STORAGE_KEYS.HOME_SAFETY_AUDIT;
 
 const HAZARD_SEVERITY: { [key: string]: number } = {
   poison: 1,

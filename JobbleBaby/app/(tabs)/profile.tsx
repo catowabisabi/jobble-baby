@@ -14,6 +14,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { useMonitorLink, MonitorApp } from '../hooks/useMonitorLink';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 interface BabyProfile {
   name: string;
@@ -35,13 +36,13 @@ interface ThemeToggleRowProps {
   rowStyles: ReturnType<typeof StyleSheet.create>;
 }
 
-const STORAGE_KEYS = [
-  '@jobble/tracking_entries',
-  '@jobble/growth_entries',
+const PROFILE_WIPE_KEYS = [
+  STORAGE_KEYS.TRACKING_ENTRIES,
+  STORAGE_KEYS.GROWTH_ENTRIES,
   '@jobble/badges',
-  '@jobble/schedule_entries',
+  STORAGE_KEYS.SCHEDULE_ENTRIES,
   '@jobble_baby_profile',
-  '@jobble/allergen_entries',
+  STORAGE_KEYS.ALLERGEN_ENTRIES,
   '@jobble/milestones',
 ];
 
@@ -273,7 +274,7 @@ export default function ProfileScreen() {
     setIsExportLoading(true);
     try {
       const exportData: Record<string, unknown> = {};
-      for (const key of STORAGE_KEYS) {
+      for (const key of Object.keys(STORAGE_KEYS)) {
         const raw = await AsyncStorage.getItem(key);
         exportData[key] = raw ? JSON.parse(raw) : null;
       }

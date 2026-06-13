@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const SLEEP_TARGET_HOURS = 8;
 const WEEKLY_TARGET = SLEEP_TARGET_HOURS * 7;
@@ -30,9 +31,9 @@ interface SleepEntry {
   duration?: number;
 }
 
-const PARENT_SLEEP_KEY = '@jobble/parent_sleep_entries';
-const SHIFT_STATE_KEY = '@jobble/shift_state';
-const SCHEDULE_KEY = '@jobble/schedule_entries';
+const PARENT_SLEEP_KEY = STORAGE_KEYS.PARENT_SLEEP_ENTRIES;
+const SHIFT_STATE_KEY = STORAGE_KEYS.SHIFT_STATE;
+const SCHEDULE_KEY = STORAGE_KEYS.SCHEDULE_ENTRIES;
 
 function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);

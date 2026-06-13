@@ -8,6 +8,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { TrackingEntry } from '../utils/weeklySummary';
 import EmergencySOSScreen from '../components/EmergencySOSScreen';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 type BabyProfile = {
   name: string;
@@ -98,7 +99,7 @@ export default function HomeScreen() {
     };
     const loadTracking = async () => {
       try {
-        const raw = await AsyncStorage.getItem('@jobble/tracking_entries');
+        const raw = await AsyncStorage.getItem(STORAGE_KEYS.TRACKING_ENTRIES);
         if (!raw) return;
         const entries: TrackingEntry[] = JSON.parse(raw);
         const today = new Date().toISOString().split('T')[0];
@@ -136,8 +137,8 @@ export default function HomeScreen() {
     const loadStressData = async () => {
       try {
         const [logRaw, nightsRaw] = await Promise.all([
-          AsyncStorage.getItem('@jobble/stress_log'),
-          AsyncStorage.getItem('@jobble/sleep_training_nights'),
+          AsyncStorage.getItem(STORAGE_KEYS.STRESS_LOG),
+          AsyncStorage.getItem(STORAGE_KEYS.SLEEP_TRAINING_NIGHTS),
         ]);
         const log = logRaw ? JSON.parse(logRaw) : [];
         const nights = nightsRaw ? JSON.parse(nightsRaw) : [];

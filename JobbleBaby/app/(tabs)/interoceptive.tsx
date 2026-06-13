@@ -3,16 +3,17 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert,
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLanguage } from '../context/LanguageContext';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 const COLORS = {
   primary: '#3B82F6',
   teal: '#14B8A6',
   amber: '#F59E0B',
 };
 
-const DIARY_KEY = '@jobble/interoceptive_diary';
-const BODY_SCAN_KEY = '@jobble/body_scan_session';
-const SIGNAL_MATCH_KEY = '@jobble/signal_match';
-const GAMES_KEY = '@jobble/interoceptive_games';
+const DIARY_KEY = STORAGE_KEYS.INTEROCEPTIVE_DIARY;
+const BODY_SCAN_KEY = STORAGE_KEYS.BODY_SCAN_SESSION;
+const SIGNAL_MATCH_KEY = STORAGE_KEYS.SIGNAL_MATCH;
+const GAMES_KEY = STORAGE_KEYS.INTEROCEPTIVE_GAMES;
 
 type NeedType = 'feed' | 'diaper' | 'sleep' | 'comfort' | 'play' | 'stimulation_reduction' | 'nothing';
 type BodyRegion = 'head' | 'chest' | 'abdomen' | 'pelvis' | 'limbs' | 'throat';

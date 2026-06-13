@@ -5,12 +5,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const PROFILE_KEY = '@jobble_baby_profile';
-const ENTRIES_KEY = '@jobble/bonding_entries';
-const SKIN_TO_SKIN_KEY = '@jobble/skin_to_skin';
-const MOOD_KEY = '@jobble/mood_checkins';
-const MILESTONES_KEY = '@jobble/bonding_milestones';
+const ENTRIES_KEY = STORAGE_KEYS.BONDING_ENTRIES;
+const SKIN_TO_SKIN_KEY = STORAGE_KEYS.SKIN_TO_SKIN;
+const MOOD_KEY = STORAGE_KEYS.MOOD_CHECKINS;
+const MILESTONES_KEY = STORAGE_KEYS.BONDING_MILESTONES;
 
 interface BabyProfile {
   name: string;

@@ -1,8 +1,49 @@
-# Task: Fix hardcoded UI strings in 4 files
-# 1. colic-relief.tsx: TRIGGERS[] + WHITE_NOISE_SOUNDS[] used in .map() — replace display text with t('colicRelief.trigger_' + ...) and t('colicRelief.sound_' + ...)
-# 2. feeding-readiness.tsx: FLAVOR_CATEGORIES[] in flavor form — use existing t('feedingReadiness.catBland') etc
-# 3. habit-reset.tsx: HABIT_DOMAINS[] in survey — use t('habitReset.category.' + domain)
-# 4. jaundice.tsx: LAMP_TYPES[] in lamp picker — use t('jaundice.light.' + lamp)
-# Internal arrays stay as-is. TSC 0 errors required. Run pre-submission-audit.js after.
-# Keywords: lactose_thresholds,cochlear_implant_mapping,prenatal_throat_structure
-# ULW
+# Task: Fix AsyncStorage key naming — create storage-keys.ts
+# Pre-submission audit WARNING: 38 non-standard AsyncStorage keys across 18 tab files.
+# NOTE: Sisyphus previously wrote DONE but storage-keys.ts was NOT created. This is a re-dispatch.
+# You MUST actually create the file and verify it exists before writing DONE.
+
+# GOAL: Audit all AsyncStorage keys, create central constants file, update all tab files.
+
+# STEP 1 — Audit all AsyncStorage keys
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+grep -rn "AsyncStorage" app/(tabs)/ --include="*.tsx" | grep -E "getItem|setItem|removeItem" | grep -oP "@jobble/[^'\"]+" | sort -u > /tmp/async_keys.txt
+cat /tmp/async_keys.txt
+
+# STEP 2 — Create store/ directory and storage-keys.ts
+mkdir -p /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/store/
+# Parse keys from /tmp/async_keys.txt and create constants
+python3 -c "
+import re
+keys = open('/tmp/async_keys.txt').read().splitlines()
+constants = []
+for k in keys:
+    name = k.replace('@jobble/', '').replace('/', '_').upper()
+    constants.append(f'  {name}: \"{k}\"')
+content = 'export const STORAGE_KEYS = {\\n' + ',\\n'.join(constants) + '\\n} as const;\\n'
+open('/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/store/storage-keys.ts', 'w').write(content)
+print('Created storage-keys.ts with', len(constants), 'keys')
+"
+
+# STEP 3 — Verify file exists
+ls -la /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/store/storage-keys.ts
+
+# STEP 4 — Update tab files to use STORAGE_KEYS
+# For each tab file, replace hardcoded '@jobble/...' with STORAGE_KEYS.X
+# Use sed replacement carefully — only replace the string literal part
+# Example: '@jobble/profile' → STORAGE_KEYS.PROFILE
+
+# STEP 5 — TSC verify
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit
+# Must pass 0 errors
+
+# STEP 6 — Run pre-submission audit
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && node scripts/pre-submission-audit.js
+
+# Write DONE only if:
+# - storage-keys.ts exists with content
+# - TSC passes 0 errors
+# - HardcodedStrings in audit shows FEWER warnings (improvement)
+echo "DONE"
+# Keywords: rotational_movement_logging,feeding_diary_export,cortisol_shadow
+ULW

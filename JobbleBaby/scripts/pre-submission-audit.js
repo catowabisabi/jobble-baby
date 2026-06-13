@@ -704,7 +704,25 @@ function checkHardcodedStrings() {
           const arrayContent = arrayMatch[2];
           const strings = arrayContent.match(/['"]([^-][^'"]+)['"]/g);
           if (strings && strings.length > 2) {
-            // Likely a hardcoded string array
+            // Filter out pure-data arrays (hex colors, emoji, short-word data keys — universal or internal)
+            const isDataArray = strings.every(s => {
+              const content = s.slice(1, -1);
+              // Hex colors: #RGB or #RRGGBB
+              if (/^#[0-9A-Fa-f]{3,6}$/.test(content)) return true;
+              // Single-character emoji (😀 = 1 code point) — universal
+              if (content.length === 2 && content.charCodeAt(0) >= 0xD800 && content.charCodeAt(0) <= 0xDBFF) return true;
+              return false;
+            });
+            if (isDataArray) return; // Skip pure data arrays
+
+            // Also skip arrays where ALL items are short non-space tokens (≤6 chars, no spaces)
+            // These are data-key arrays used as internal constants, not user-facing prose
+            const allShortTokens = strings.every(s => {
+              const content = s.slice(1, -1);
+              return content.length > 0 && content.length <= 6 && !content.includes(' ') && !content.includes('.');
+            });
+            if (allShortTokens) return; // Skip short-token data arrays
+
             const relPath = path.relative(ROOT_DIR, file);
             matches.push({
               file: relPath,

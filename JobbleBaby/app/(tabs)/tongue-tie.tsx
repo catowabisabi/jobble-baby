@@ -587,7 +587,7 @@ export default function TongueTieScreen() {
                   accessibilityLabel={t('common.cancel')}
                   accessibilityRole="button"
                 >
-                  <Text style={styles.cancelBtnText}>Cancel</Text>
+                  <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.saveBtn} onPress={saveFeeding}
                   accessibilityLabel={t('common.save')}
@@ -645,7 +645,7 @@ export default function TongueTieScreen() {
                   accessibilityLabel={t('common.cancel')}
                   accessibilityRole="button"
                 >
-                  <Text style={styles.cancelBtnText}>Cancel</Text>
+                  <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.saveBtn} onPress={saveChewing}
                   accessibilityLabel={t('common.save')}

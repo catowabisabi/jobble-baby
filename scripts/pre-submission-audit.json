@@ -37,16 +37,9 @@
     },
     {
       "name": "HardcodedStrings",
-      "pass": false,
-      "issues": [
-        "thermal-metabolic.tsx:387: \"High\"",
-        "tongue-tie.tsx:590: \"Cancel\"",
-        "tongue-tie.tsx:648: \"Cancel\"",
-        "weaning-rash.tsx:148: \"Window\"",
-        "weaning-rash.tsx:159: \"Rash\"",
-        "weaning-rash.tsx:210: \"Cancel\""
-      ]
+      "pass": true,
+      "issues": []
     }
   ],
-  "exitCode": 1
+  "exitCode": 0
 }

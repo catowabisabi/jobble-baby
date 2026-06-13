@@ -145,7 +145,7 @@ export default function WeaningRashScreen() {
             <Text style={styles.fieldLabel}>{t('weaningRash.foodName')}</Text>
             <TextInput style={styles.input} value={food} onChangeText={setFood} placeholder="e.g. banana" placeholderTextColor="#6B7280" />
 
-            <Text style={styles.fieldLabel}>Window</Text>
+            <Text style={styles.fieldLabel}>{t('weaningRash.window')}</Text>
             <View style={styles.winRow}>
               {WINDOW_LABELS.map((label, i) => (
                 <TouchableOpacity key={i+1} style={[styles.winOpt, win === i+1 && styles.winOptActive]}
@@ -156,7 +156,7 @@ export default function WeaningRashScreen() {
               ))}
             </View>
 
-            <Text style={styles.fieldLabel}>Rash</Text>
+            <Text style={styles.fieldLabel}>{t('weaningRash.rash')}</Text>
             <View style={styles.rashRow}>
               {(['none','mild','moderate','severe'] as RashType[]).map(r => (
                 <TouchableOpacity key={r} style={[styles.rashBtn, { backgroundColor: RASH_COLORS[r] }]}
@@ -207,7 +207,7 @@ export default function WeaningRashScreen() {
             <View style={styles.modalBtns}>
               <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
                               accessibilityLabel="Cancel weaning-rash action"
-                <Text style={styles.cancelBtnText}>Cancel</Text>
+                <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.saveBtn} onPress={save}>
                               accessibilityLabel="Save weaning-rash entry"

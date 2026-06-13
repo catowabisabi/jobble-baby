@@ -1,32 +1,35 @@
-# Current Task — Cycle 338
+# Todo #133: Fix 6 remaining hardcoded strings in audit
+# Keywords: thermal_metabolic_chart, weaning_rash_tracker, tongue_tie_severity, window_of_reaction, rash_severity, cancel_button_i18n
 
-## Previous Cycle (337) Status
-- ✅ Todo #131 (reflex-visual-motor.tsx) — COMPLETED, TSC 0
-- ✅ Commits: 4a6cc21, 86f3415, ee243e2, 3a0d24e, 521d332
+GOAL: Fix 6 hardcoded strings blocking pre-submission audit.
 
-## This Cycle (338) Actions
-1. ✅ TSC: 0 errors
-2. ⚠️ Audit: FAIL — HardcodedStrings found in 2 files:
-   - interoceptive.tsx: 16 hardcoded strings (lines 352,369,413,421,459,483,494,556,580,585,668,671,695,709,712)
-   - reflex-visual-motor.tsx: 6 hardcoded strings (lines 202,215,216,228,231)
-3. ✅ Created Todo #132: Fix hardcoded i18n strings
+STEP 1 — Add missing i18n keys to app/i18n/en.json + zh.json:
+- thermalMetabolic.high → "High" / "高"
+- thermalMetabolic.low → "Low" / "低"
+- weaningRash.window → "Window" / "窗口"
+- weaningRash.rash → "Rash" / "皮疹"
+- common.cancel → "Cancel" / "取消"
 
-## App State: SUBMISSION READY (but audit fix needed)
-- TSC: 0 errors
-- Audit: FAIL — hardcoded strings block submission
-- 74 tabs total, 22 dependencies
+STEP 2 — Fix thermal-metabolic.tsx line ~387:
+Change: <Text style={styles.curveAxisLabel}>High</Text>
+To: <Text style={styles.curveAxisLabel}>{t('thermalMetabolic.high')}</Text>
 
-## BLOCKED — User Action Required
-1. Deploy privacy policy HTML → jobblebaby.com/privacy (Todo #108)
-2. Configure EAS credentials: eas credentials --platform ios + android
-3. Create App Store Connect app → appstoreconnect.apple.com
-4. Create Play Console app → play.google.com/console
+STEP 3 — Fix weaning-rash.tsx lines ~148, ~159:
+- Change: <Text style={styles.fieldLabel}>Window</Text>
+  To: <Text style={styles.fieldLabel}>{t('weaningRash.window')}</Text>
+- Change: <Text style={styles.fieldLabel}>Rash</Text>
+  To: <Text style={styles.fieldLabel}>{t('weaningRash.rash')}</Text>
 
-## Cycle 338 Decision
-- Dispatching Todo #132 to Sisyphus for hardcoded strings fix
-- Privacy policy (#108) requires user hosting action — cannot dispatch
+STEP 4 — Fix weaning-rash.tsx Cancel button (~line 210):
+Change: <Text style={styles.cancelBtnText}>Cancel</Text>
+To: <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
 
-## Stats
-- Ideas: 76 total
-- Todos: 132 total (127 completed, 1 new pending)
-- Concepts: 39 (17 implemented)
+STEP 5 — Fix tongue-tie.tsx Cancel buttons (~lines 590, 648):
+Change: <Text style={styles.cancelBtnText}>Cancel</Text>
+To: <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
+
+STEP 6 — Verify: cd JobbleBaby && node ../scripts/pre-submission-audit.js
+HardcodedStrings should show 0 issues (or only unrelated files).
+
+DONE
+ULW

@@ -384,7 +384,7 @@ export default function ThermalMetabolic() {
 
         <View style={styles.curveContainer}>
           <View style={styles.curveYAxis}>
-            <Text style={styles.curveAxisLabel}>High</Text>
+            <Text style={styles.curveAxisLabel}>{t('thermalMetabolic.high')}</Text>
             <Text style={styles.curveAxisLabel}>Low</Text>
           </View>
           <View style={styles.curveChart}>

@@ -1,11 +1,13 @@
-Implement Primitive Reflex Integration Tracker with Visual-Motor Assessment
+# Task: Implement Primitive Reflex Integration Tracker with Visual-Motor Assessment
+# Todo #131 from Idea #76
+# Keywords: visual_sweep_tracking, skinfold_thickness, moro_reflex_monitoring, landau_reflex, parachute_reflex_emergence
 
 GOAL: Create new tab reflex-visual-motor.tsx tracking primitive reflex integration + visual-motor development + body composition.
 
 STEP 1 — Create JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
 Design:
 - SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
-- Header: "Reflex & Visual-Motor Tracker" (i18n)
+- Header: Reflex & Visual-Motor Tracker (i18n)
 
 SECTION A — Reflex Integration Timeline
 - List primitive reflexes with expected integration age:
@@ -41,33 +43,13 @@ SECTION E — Alerts
 - Alert if any reflex still present beyond expected age
 - Alert if visual tracking delayed beyond expected age
 
-STEP 2 — Add i18n keys
-Add to i18n/en.json and i18n/zh.json:
-- tabs.reflexVisualMotor
-- reflex.moro, reflex.tonicLabyrinthine, reflex.atnr, reflex.galant, reflex.landau, reflex.parachute
-- reflex.present, reflex.partially, reflex.integrated
-- reflex.expectedAge, reflex.currentStatus, reflex.observedDate
-- visual.horizontalSweep, visual.verticalSweep, visual.circularPursuit, visual.focusTracking
-- visual.qualityScore, visual.expectedAge
-- skinfold.triceps, skinfold.subscapular, skinfold.mm, skinfold.trend
-- score.integratedScore, score.reflexPct, score.visualMotorPct, score.bodyComp
-- alert.reflexRetained, alert.visualDelayed
+STEP 2 — Add i18n keys to i18n/en.json and i18n/zh.json
 
-STEP 3 — Update _layout.tsx
-Add TabNavigator entry:
-  name="reflex-visual-motor"
-  title: t('tabs.reflexVisualMotor')
-  tabBarIcon: reflex icon
+STEP 3 — Update _layout.tsx with TabNavigator entry
 
-STEP 4 — Update store/storage-keys.ts
-Add keys:
-  REFLEX_ASSESSMENT: '@jobble/reflex_assessment'
-  VISUAL_MOTOR_LOG: '@jobble/visual_motor_log'
-  SKINFOLD_LOG: '@jobble/skinfold_log'
+STEP 4 — Update store/storage-keys.ts with 3 new keys
 
-STEP 5 — Verify
-- TSC: npx tsc --noEmit (0 errors)
-- Audit: node scripts/pre-submission-audit.js
+STEP 5 — Verify: npx tsc --noEmit (0 errors)
 
 DONE
 ULW

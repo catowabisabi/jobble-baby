@@ -1,24 +1,29 @@
-# Current Task — Cycle 330
+# Current Task — Cycle 335
 
-## Previous Cycle (329) Status
-- Todo #131 (AsyncStorage naming) — dispatched to Sisyphus but completion unconfirmed
-- Sisyphus showed DONE but storage-keys.ts not created → task likely failed silently
-- Re-dispatching Todo #131 in this cycle
+## Previous Cycle (334) Status
+- ✅ Todo #130 (AsyncStorage key naming) — completed, TSC 0
+- ✅ TSC verified clean (0 errors)
+- ⚠️ Sisyphus pane: ULW command error + i18n path error (partial state)
+- ✅ New tab gravity-feeding.tsx added (commit ad81749)
+- ⚠️ Todo #131 (reflex-visual-motor.tsx) — NOT completed, still pending
+
+## This Cycle Actions
+1. ✅ Brainstorm: skipped (already did in cycle 334)
+2. ✅ Todo #131 re-dispatched to Sisyphus (was in new, now in_progress)
+3. ✅ TSC verified: 0 errors
+4. 📋 Waiting for Sisyphus to complete reflex-visual-motor.tsx
 
 ## App State: SUBMISSION READY (code perspective)
-- TSC: 0 errors (verified)
+- TSC: 0 errors
 - Pre-submission audit: PASS
 - BLOCKED: User action needed for EAS credentials + App Store/Play Console setup
 
-## This Cycle Actions
-1. ✅ TSC verified clean
-2. 📋 Dispatching Todo #131 (AsyncStorage naming) → Sisyphus
-3. 🔍 Review: check for hardcoded strings, accessibility issues
-4. 💡 Brainstorm: 5 keywords → 50联想 → new concept spark
-5. 📦 Git commit + push
-
 ## BLOCKED — User Action Required
-1. Deploy privacy policy HTML → jobblebaby.com/privacy
+1. Deploy privacy policy HTML → jobblebaby.com/privacy (Todo #108)
 2. Configure EAS credentials: eas credentials --platform ios + android
 3. Create App Store Connect app → appstoreconnect.apple.com
 4. Create Play Console app → play.google.com/console
+
+## Sisyphus Task
+- Todo #131: Implement Primitive Reflex Integration Tracker with Visual-Motor Assessment
+- New tab: reflex-visual-motor.tsx

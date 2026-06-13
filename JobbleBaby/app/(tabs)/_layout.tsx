@@ -426,6 +426,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="reflex-visual-motor"
+        options={{
+          title: t('tabs.reflexVisualMotor'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="stranger-danger"
         options={{
           title: t('tabs.strangerDanger'),

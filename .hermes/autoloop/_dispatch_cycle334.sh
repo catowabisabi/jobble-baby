@@ -1,11 +1,18 @@
-Implement Primitive Reflex Integration Tracker with Visual-Motor Assessment
+#!/bin/bash
+# Dispatch Cycle 334 — Todo #131: reflex-visual-motor.tsx
+set -e
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+
+TASK="# Task: Implement Primitive Reflex Integration Tracker with Visual-Motor Assessment
+# Todo #131 from Idea #76
+# Keywords: visual_sweep_tracking, skinfold_thickness, moro_reflex_monitoring, landau_reflex, parachute_reflex_emergence
 
 GOAL: Create new tab reflex-visual-motor.tsx tracking primitive reflex integration + visual-motor development + body composition.
 
 STEP 1 — Create JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
 Design:
 - SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
-- Header: "Reflex & Visual-Motor Tracker" (i18n)
+- Header: \"Reflex & Visual-Motor Tracker\" (i18n)
 
 SECTION A — Reflex Integration Timeline
 - List primitive reflexes with expected integration age:
@@ -55,7 +62,7 @@ Add to i18n/en.json and i18n/zh.json:
 
 STEP 3 — Update _layout.tsx
 Add TabNavigator entry:
-  name="reflex-visual-motor"
+  name=\"reflex-visual-motor\"
   title: t('tabs.reflexVisualMotor')
   tabBarIcon: reflex icon
 
@@ -70,4 +77,8 @@ STEP 5 — Verify
 - Audit: node scripts/pre-submission-audit.js
 
 DONE
-ULW
+ULW"
+
+printf '%s\n' "$TASK" | tmux set-buffer - && tmux paste-buffer -t sisyphus
+sleep 1
+tmux send-keys -t sisyphus Enter

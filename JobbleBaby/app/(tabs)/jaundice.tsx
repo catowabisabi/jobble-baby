@@ -299,7 +299,7 @@ export default function JaundiceScreen() {
           <View style={styles.chartTable}>
             <View style={[styles.chartRow, styles.chartHeader]}>
               <Text style={[styles.chartCell, { color: C.text }]}>Age (days)</Text>
-              <Text style={[styles.chartCell, { color: C.text }]}>Low</Text>
+              <Text style={[styles.chartCell, { color: C.text }]}>{t('jaundice.low')}</Text>
               <Text style={[styles.chartCell, { color: C.text }]}>{t('jaundice.medium')}</Text>
               <Text style={[styles.chartCell, { color: C.text }]}>{t('jaundice.high')}</Text>
             </View>

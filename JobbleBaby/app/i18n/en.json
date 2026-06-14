@@ -4766,6 +4766,7 @@
     "increase": "Increase"
   },
   "jaundice.riskChart": "Risk Chart (WHO/NICE)",
+  "jaundice.low": "Low",
   "jaundice.medium": "Medium",
   "jaundice.high": "High",
   "dyadicSynchrony": {

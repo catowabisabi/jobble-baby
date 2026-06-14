@@ -1,0 +1,56 @@
+# Todo #350: Audit + Register All Unregistered Tabs in _layout.tsx
+# Keywords: tab_registration_audit, tab_navigator, Tabs.Screen, unregistered_tabs, i18n_complete
+
+## Task for Sisyphus
+
+74 tab .tsx files exist in `JobbleBaby/app/(tabs)/` but only 12 are registered in `JobbleBaby/app/_layout.tsx` Tabs.Screen.
+
+### Currently registered (12): index, tracking, schedule, allergens, milestones, sleep-training, teething, products, growth, constellation, reflex-visual-motor, profile
+
+### Unregistered tabs (62):
+allergens.tsx, appstore-checklist.tsx, asymmetric-growth.tsx, bilateral-coordination.tsx, bonding-journal.tsx, bottle-feeding.tsx, bottle-refusal.tsx, caregiver-fatigue.tsx, circadian.tsx, clinician-portal.tsx, colic-relief.tsx, critical-periods.tsx, cry-analyzer.tsx, cup-feeding.tsx, doctor-visit.tsx, eight-month-storm.tsx, feeding-readiness.tsx, fontanelle-hydration.tsx, fontanelle.tsx, galant-latch-navigator.tsx, gear-check.tsx, gravity-feeding.tsx, growth-montage.tsx, gut-brain-axis.tsx, habit-reset.tsx, hip-click.tsx, home-safety.tsx, interoceptive.tsx, iot-security.tsx, jaundice-threshold.tsx, jaundice.tsx, jet-lag.tsx, launch-checklist.tsx, medicine-dose.tsx, milk-prep.tsx, milk-transfer.tsx, monitor-correlation.tsx, moro-reflex.tsx, oral-motor.tsx, pediatric-report.tsx, phototherapy-comfort.tsx, procedure-recovery.tsx, projection.tsx, reflex-integration.tsx, reflex-tracker.tsx, regression-navigator.tsx, regulatory-fitness.tsx, safety-audit.tsx, sensory-integration.tsx, shift-handoff.tsx, sleep-architecture.tsx, sleep-association.tsx, sleep-debt.tsx, solid-food.tsx, stranger-danger.tsx, stress-cascade.tsx, thermal-metabolic.tsx, thermal-regulation.tsx, tongue-tie.tsx, tummy-time.tsx, vestibular-assessment.tsx, weaning-rash.tsx, window-of-tolerance.tsx
+
+### STEP 1 — Audit each unregistered tab
+
+For each of the 62 unregistered tabs, check:
+- File has content (not empty stub)
+- File has a default/exported React component
+- File uses i18n keys (no hardcoded English strings visible in the component body — quick scan)
+- File compiles without TypeScript errors (check key imports/exports)
+
+### STEP 2 — Group by readiness
+
+Divide into:
+- **READY**: Has full component, uses i18n, no obvious TS errors
+- **NEEDS_WORK**: Missing i18n, hardcoded strings, incomplete component, etc.
+
+### STEP 3 — Register all READY tabs
+
+For each READY tab, add a `Tabs.Screen` entry in `JobbleBaby/app/_layout.tsx`. Use MaterialIcons for the icon (find a relevant icon name from the existing icon usage pattern). Add after the existing 12 tabs, before the closing `</Tabs>`.
+
+Example pattern:
+```tsx
+<Tabs.Screen
+  name="tab-name"
+  options={{
+    title: 'Tab Name',
+    tabBarIcon: ({ color }) => <MaterialIcons name="icon-name" size={24} color={color} />,
+    headerShown: false,
+  }}
+/>
+```
+
+### STEP 4 — For NEEDS_WORK tabs
+
+Create a new idea in the DB for each (with title = tab name, source='tab_audit', keywords='tab_registration_audit'). Use the Python script at `.hermes/autoloop/dispatch_task.py` to add ideas to the DB.
+
+### STEP 5 — Verify
+
+Run: `cd JobbleBaby && npx tsc --noEmit` — must still pass 0 errors after all registrations.
+
+### STEP 6 — Commit
+
+Git add + commit: "feat(nav): register N ready tabs in navigation, flag M incomplete tabs for follow-up"
+
+DONE
+ULW

@@ -1,5 +1,5 @@
-# Todo #346: Fix hardcoded strings in jaundice.tsx
+# Todo #350: Audit + Register All Unregistered Tabs in _layout.tsx
 # Status: DISPATCHED
 # Dispatched: opencode run via tmux → Sisyphus
-# Keywords: bilirubin_level_risk_chart, medium_high_threshold, who_nice_standard
-# Cycle: 346
+# Keywords: tab_registration_audit, unregistered_tabs, Tabs.Screen, i18n_complete
+# Cycle: 350

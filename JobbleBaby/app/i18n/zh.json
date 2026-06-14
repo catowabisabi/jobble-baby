@@ -68,7 +68,11 @@
     "growthMontage": "成長蒙太奇",
     "regressionNavigator": "倒退導航",
     "bottleFeeding": "奶瓶餵養",
-    "reflexVisualMotor": "Reflex & Visual-Motor"
+    "reflexVisualMotor": "Reflex & Visual-Motor",
+    "galantLatch": "Galant+銜乳導航",
+    "interoceptive": "內感受追蹤",
+    "regulatoryFitness": "調節健身",
+    "windowOfTolerance": "容忍窗口"
   },
   "gravityFeeding": {
     "title": "重力輔助餵養",
@@ -5081,7 +5085,6 @@
   "visual.focusTracking": "注視追蹤",
   "visual.visualMotorScore": "視覺動作分數",
   "visual.qualityScore": "質量分數 (1-5)",
-  "skinfold.measurement": "皮褶測量",
   "galantLatch": {
     "title": "加蘭+含乳",
     "greeting": "反射與含乳",

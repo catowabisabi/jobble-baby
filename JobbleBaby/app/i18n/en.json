@@ -68,7 +68,11 @@
     "growthMontage": "Montage",
     "regressionNavigator": "Regression",
     "bottleFeeding": "Bottle Feeding",
-    "reflexVisualMotor": "Reflex & Visual-Motor"
+    "reflexVisualMotor": "Reflex & Visual-Motor",
+    "galantLatch": "Galant + Latch",
+    "interoceptive": "Interoceptive",
+    "regulatoryFitness": "Regulatory Fitness",
+    "windowOfTolerance": "Window of Tolerance"
   },
   "gravityFeeding": {
     "title": "Gravity-Assisted Feeding",
@@ -5081,7 +5085,6 @@
   "visual.focusTracking": "Focus Tracking",
   "visual.visualMotorScore": "Visual-Motor Score",
   "visual.qualityScore": "Quality Score (1-5)",
-  "skinfold.measurement": "Skinfold Measurement",
   "galantLatch": {
     "title": "Galant + Latch",
     "greeting": "Reflex & Latch",

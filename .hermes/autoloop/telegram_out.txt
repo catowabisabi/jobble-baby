@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 16:07
-✅ Done: #349 launch-checklist App Store submission guidance (committed 93f5fa6)
-🔧 Dispatched: #350 audit + register 62 unregistered tabs in _layout.tsx
-📋 TODO: 1 pending · 0 new (in_progress: #350)
-📦 Commit: 5b950bc → pushed
-📝 Desc: TSC 0 errors ✅ · 74 tab files exist but only 12/74 registered in navigation · 發現呢個問題後主動新增 todo #350 派 Sisyphus 審計所有未注册 tabs，分 Ready / NeedsWork 兩組，Ready 全部加入導航。呢個係 App Store 提交前必須修復，否則大部分功能用戶根本訪問唔到。
+🍼 Jobble Baby · 17:04
+✅ Done: #350 audit + register 62 unregistered tabs in _layout.tsx (committed a560641)
+🔧 Dispatched: #351 fix eight-month-storm.tsx i18n — convert language===zh conditionals to t() keys
+📋 TODO: 1 pending · 0 new (in_progress: #351)
+📦 Commit: fe6d851 → pushed
+📝 Desc: Sisyphus 完成導航審計，61 tabs 已注册，發現 eight-month-storm.tsx 用 language===zh 硬編碼中文/英文而非 i18n t() keys。新 todo #351 已派去做 i18n 修復。

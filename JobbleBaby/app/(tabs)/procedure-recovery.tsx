@@ -81,7 +81,7 @@ export default function ProcedureRecoveryScreen() {
       if (feed) setFeedingLog(JSON.parse(feed));
       if (med) setMedicationLog(JSON.parse(med));
       if (wound) setWoundLog(JSON.parse(wound));
-    } catch (e) { console.error('loadAll error', e); }
+    } catch (_) { /* silent fail */ }
   }
 
   async function saveProcedure() {

@@ -1,5 +1,5 @@
-# Todo #350: Audit + Register All Unregistered Tabs in _layout.tsx
+# Todo #351: Fix eight-month-storm.tsx i18n — convert language===zh conditionals to t() keys
 # Status: DISPATCHED
 # Dispatched: opencode run via tmux → Sisyphus
-# Keywords: tab_registration_audit, unregistered_tabs, Tabs.Screen, i18n_complete
-# Cycle: 350
+# Keywords: eight_month_storm, i18n, language_conditional, zh_hardcoded, t_function
+# Cycle: 351

@@ -1,0 +1,59 @@
+# Todo #349: Enhance launch-checklist tab with App Store submission guidance
+# Keywords: launch_checklist, appstore_submission, eas_credentials, privacy_policy
+
+## Task for Sisyphus
+
+The file `app/(tabs)/launch-checklist.tsx` exists (229 lines) but lacks detailed actionable guidance for App Store submission.
+
+### STEP 1 — Read current launch-checklist.tsx
+
+Read `app/(tabs)/launch-checklist.tsx` and understand its current structure and i18n keys used.
+
+### STEP 2 — Enhance with submission checklist sections
+
+Add these sections with actionable steps:
+
+**Section A — Apple App Store Submission**
+- EAS credentials setup (link to EAS docs)
+- App Store Connect app creation (step-by-step)
+- Bundle ID confirmation: com.jobblebaby.app
+- TestFlight internal testing setup
+- Required: privacy policy URL (placeholder until user deploys)
+- Required: contact email setup
+- Screenshots checklist (17 tab versions ready)
+
+**Section B — Google Play Submission**
+- Play Console app creation
+- Bundle: com.jobblebaby.app
+- AAB build requirement
+- Privacy policy URL placeholder
+- Screenshots + feature graphic checklist
+
+**Section C — Pre-submission Checklist**
+- Run: npx tsc --noEmit (verify 0 errors)
+- Run: node scripts/pre-submission-audit.js
+- Verify all 74 tabs registered in _layout.tsx
+- Verify i18n complete for all tabs
+- Privacy policy deployed to live URL
+- EAS credentials configured
+
+### STEP 3 — Add i18n keys
+
+Add to `app/i18n/en.json` and `app/i18n/zh.json`:
+- launchChecklist.appleSection, launchChecklist.googleSection, launchChecklist.presubmission
+- launchChecklist.easCredentials, launchChecklist.appStoreConnect, launchChecklist.testFlight
+- launchChecklist.bundleId, launchChecklist.privacyPolicy, launchChecklist.screenshots
+- launchChecklist.playConsole, launchChecklist.aabBuild
+- launchChecklist.tabsRegistered, launchChecklist.i18nComplete
+- launchChecklist.todo, launchChecklist.inProgress, launchChecklist.done
+
+### STEP 4 — Verify
+
+Run: npx tsc --noEmit — must pass with 0 errors
+
+### STEP 5 — Commit
+
+Git add + commit with message: "feat(tab): enhance launch-checklist with App Store submission guidance"
+
+DONE
+ULW

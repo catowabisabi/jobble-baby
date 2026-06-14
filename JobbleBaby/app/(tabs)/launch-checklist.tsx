@@ -14,23 +14,49 @@ interface ChecklistItem {
   descriptionKey?: string;
 }
 
-const CHECKLIST_ITEMS: ChecklistItem[] = [
-  { id: 'app_store_connect', labelKey: 'launchChecklist.items.appStoreConnect', descriptionKey: 'launchChecklist.desc.appStoreConnect' },
-  { id: 'bundle_id', labelKey: 'launchChecklist.items.bundleId', descriptionKey: 'launchChecklist.desc.bundleId' },
-  { id: 'export_compliance', labelKey: 'launchChecklist.items.exportCompliance', descriptionKey: 'launchChecklist.desc.exportCompliance' },
-  { id: 'content_rights', labelKey: 'launchChecklist.items.contentRights', descriptionKey: 'launchChecklist.desc.contentRights' },
-  { id: 'age_rating', labelKey: 'launchChecklist.items.ageRating', descriptionKey: 'launchChecklist.desc.ageRating' },
-  { id: 'screenshots', labelKey: 'launchChecklist.items.screenshotSpecs', descriptionKey: 'launchChecklist.desc.screenshotSpecs' },
-  { id: 'metadata_review', labelKey: 'launchChecklist.items.metadataReview', descriptionKey: 'launchChecklist.desc.metadataReview' },
-  { id: 'eas_build', labelKey: 'launchChecklist.items.easBuild', descriptionKey: 'launchChecklist.desc.easBuild' },
-  { id: 'testflight', labelKey: 'launchChecklist.items.testflightBeta', descriptionKey: 'launchChecklist.desc.testflightBeta' },
-  { id: 'privacy_policy', labelKey: 'launchChecklist.items.privacyPolicyUrl', descriptionKey: 'launchChecklist.desc.privacyPolicyUrl' },
-  { id: 'description', labelKey: 'launchChecklist.items.appDescription', descriptionKey: 'launchChecklist.desc.appDescription' },
-  { id: 'keywords', labelKey: 'launchChecklist.items.keywords', descriptionKey: 'launchChecklist.desc.keywords' },
-  { id: 'support_url', labelKey: 'launchChecklist.items.supportUrl', descriptionKey: 'launchChecklist.desc.supportUrl' },
-  { id: 'category', labelKey: 'launchChecklist.items.category', descriptionKey: 'launchChecklist.desc.category' },
-  { id: 'pricing', labelKey: 'launchChecklist.items.pricing', descriptionKey: 'launchChecklist.desc.pricing' },
-  { id: 'submit', labelKey: 'launchChecklist.items.submitApp', descriptionKey: 'launchChecklist.desc.submitApp' },
+interface Section {
+  id: string;
+  titleKey: string;
+  items: ChecklistItem[];
+}
+
+const SECTIONS: Section[] = [
+  {
+    id: 'apple',
+    titleKey: 'launchChecklist.appleSection',
+    items: [
+      { id: 'eas_credentials', labelKey: 'launchChecklist.items.easCredentials', descriptionKey: 'launchChecklist.desc.easCredentials' },
+      { id: 'appstore_connect', labelKey: 'launchChecklist.items.appStoreConnect', descriptionKey: 'launchChecklist.desc.appStoreConnect' },
+      { id: 'bundle_id', labelKey: 'launchChecklist.items.bundleId', descriptionKey: 'launchChecklist.desc.bundleId' },
+      { id: 'testflight', labelKey: 'launchChecklist.items.testflightBeta', descriptionKey: 'launchChecklist.desc.testflightBeta' },
+      { id: 'privacy_policy', labelKey: 'launchChecklist.items.privacyPolicyUrl', descriptionKey: 'launchChecklist.desc.privacyPolicyUrl' },
+      { id: 'contact_email', labelKey: 'launchChecklist.items.contactEmail', descriptionKey: 'launchChecklist.desc.contactEmail' },
+      { id: 'screenshots', labelKey: 'launchChecklist.items.screenshotSpecs', descriptionKey: 'launchChecklist.desc.screenshotSpecs' },
+    ],
+  },
+  {
+    id: 'google',
+    titleKey: 'launchChecklist.googleSection',
+    items: [
+      { id: 'play_console', labelKey: 'launchChecklist.items.playConsole', descriptionKey: 'launchChecklist.desc.playConsole' },
+      { id: 'bundle_id_g', labelKey: 'launchChecklist.items.bundleId', descriptionKey: 'launchChecklist.desc.bundleId' },
+      { id: 'aab_build', labelKey: 'launchChecklist.items.aabBuild', descriptionKey: 'launchChecklist.desc.aabBuild' },
+      { id: 'privacy_policy_g', labelKey: 'launchChecklist.items.privacyPolicyUrl', descriptionKey: 'launchChecklist.desc.privacyPolicyUrl' },
+      { id: 'screenshots_g', labelKey: 'launchChecklist.items.screenshotSpecs', descriptionKey: 'launchChecklist.desc.screenshotSpecs' },
+    ],
+  },
+  {
+    id: 'presubmission',
+    titleKey: 'launchChecklist.presubmissionSection',
+    items: [
+      { id: 'tsc_check', labelKey: 'launchChecklist.items.tscCheck', descriptionKey: 'launchChecklist.desc.tscCheck' },
+      { id: 'audit_script', labelKey: 'launchChecklist.items.auditScript', descriptionKey: 'launchChecklist.desc.auditScript' },
+      { id: 'tabs_registered', labelKey: 'launchChecklist.items.tabsRegistered', descriptionKey: 'launchChecklist.desc.tabsRegistered' },
+      { id: 'i18n_complete', labelKey: 'launchChecklist.items.i18nComplete', descriptionKey: 'launchChecklist.desc.i18nComplete' },
+      { id: 'privacy_deployed', labelKey: 'launchChecklist.items.privacyDeployed', descriptionKey: 'launchChecklist.desc.privacyDeployed' },
+      { id: 'eas_credentials_ps', labelKey: 'launchChecklist.items.easCredentialsConfigured', descriptionKey: 'launchChecklist.desc.easCredentialsConfigured' },
+    ],
+  },
 ];
 
 interface CheckedState {
@@ -55,7 +81,8 @@ export default function LaunchChecklistScreen() {
       if (stored) {
         const parsed = JSON.parse(stored) as CheckedState;
         setChecked(parsed);
-        const allDone = CHECKLIST_ITEMS.every(item => parsed[item.id]);
+        const allItems = SECTIONS.flatMap(s => s.items);
+        const allDone = allItems.every(item => parsed[item.id]);
         setHasBadge(allDone);
       }
     } catch (e) { /* silently fail */ }
@@ -71,7 +98,8 @@ export default function LaunchChecklistScreen() {
     const newChecked = { ...checked, [id]: !checked[id] };
     setChecked(newChecked);
     saveState(newChecked);
-    if (Object.values(newChecked).every(Boolean)) {
+    const allItems = SECTIONS.flatMap(s => s.items);
+    if (allItems.every(item => newChecked[item.id])) {
       setHasBadge(true);
     } else {
       setHasBadge(false);
@@ -97,9 +125,9 @@ export default function LaunchChecklistScreen() {
     );
   };
 
+  const totalItems = SECTIONS.flatMap(s => s.items).length;
   const completedCount = Object.values(checked).filter(Boolean).length;
-  const totalCount = CHECKLIST_ITEMS.length;
-  const percent = Math.round((completedCount / totalCount) * 100);
+  const percent = Math.round((completedCount / totalItems) * 100);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: C.background }]}>
@@ -116,7 +144,7 @@ export default function LaunchChecklistScreen() {
         <View style={[styles.progressCard, { backgroundColor: C.card }]}>
           <View style={styles.progressHeader}>
             <Text style={[styles.progressLabel, { color: C.text }]}>{t('launchChecklist.progress') || 'Progress'}</Text>
-            <Text style={[styles.progressCount, { color: C.accent }]}>{completedCount}/{totalCount}</Text>
+            <Text style={[styles.progressCount, { color: C.accent }]}>{completedCount}/{totalItems}</Text>
           </View>
           <View style={[styles.progressBarBg, { backgroundColor: C.border }]}>
             <View style={[styles.progressBarFill, { backgroundColor: C.accent, width: `${percent}%` }]} />
@@ -137,40 +165,57 @@ export default function LaunchChecklistScreen() {
           </View>
         )}
 
-        {/* Checklist Items */}
-        <View style={[styles.checklistCard, { backgroundColor: C.card }]}>
-          {CHECKLIST_ITEMS.map((item, index) => {
-            const isChecked = !!checked[item.id];
-            return (
-              <TouchableOpacity
-                key={item.id}
-                style={[
-                  styles.checklistItem,
-                  index < CHECKLIST_ITEMS.length - 1 && { borderBottomWidth: 1, borderBottomColor: C.border },
-                ]}
-                onPress={() => toggleItem(item.id)}
-                accessibilityLabel={t(item.labelKey) || item.id}
-                accessibilityRole="checkbox"
-                accessibilityState={{ checked: isChecked }}
-              >
-                <View style={[styles.checkbox, isChecked && { backgroundColor: C.accent, borderColor: C.accent }]}>
-                  {isChecked && <Text style={styles.checkmark}>✓</Text>}
-                </View>
-                <View style={styles.itemContent}>
-                  <Text style={[styles.itemLabel, { color: C.text }, isChecked && { textDecorationLine: 'line-through', opacity: 0.6 }]}>
-                    {t(item.labelKey) || item.id}
-                  </Text>
-                  {item.descriptionKey && (
-                    <Text style={[styles.itemDesc, { color: C.muted }]}>
-                      {t(item.descriptionKey)}
-                    </Text>
-                  )}
-                </View>
-                <Text style={[styles.itemNumber, { color: C.muted }]}>{index + 1}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
+        {/* Sections */}
+        {SECTIONS.map((section) => {
+          const sectionItems = section.items;
+          const sectionDone = sectionItems.filter(item => checked[item.id]).length;
+          const sectionTotal = sectionItems.length;
+          return (
+            <View key={section.id} style={[styles.sectionCard, { backgroundColor: C.card }]}>
+              {/* Section Header */}
+              <View style={[styles.sectionHeader, { borderBottomColor: C.border }]}>
+                <Text style={[styles.sectionTitle, { color: C.text }]}>
+                  {t(section.titleKey)}
+                </Text>
+                <Text style={[styles.sectionCount, { color: C.muted }]}>
+                  {sectionDone}/{sectionTotal}
+                </Text>
+              </View>
+
+              {/* Section Items */}
+              {sectionItems.map((item, index) => {
+                const isChecked = !!checked[item.id];
+                return (
+                  <TouchableOpacity
+                    key={item.id}
+                    style={[
+                      styles.checklistItem,
+                      index < sectionItems.length - 1 && { borderBottomWidth: 1, borderBottomColor: C.border },
+                    ]}
+                    onPress={() => toggleItem(item.id)}
+                    accessibilityLabel={t(item.labelKey) || item.id}
+                    accessibilityRole="checkbox"
+                    accessibilityState={{ checked: isChecked }}
+                  >
+                    <View style={[styles.checkbox, isChecked && { backgroundColor: C.accent, borderColor: C.accent }]}>
+                      {isChecked && <Text style={styles.checkmark}>✓</Text>}
+                    </View>
+                    <View style={styles.itemContent}>
+                      <Text style={[styles.itemLabel, { color: C.text }, isChecked && { textDecorationLine: 'line-through', opacity: 0.6 }]}>
+                        {t(item.labelKey) || item.id}
+                      </Text>
+                      {item.descriptionKey && (
+                        <Text style={[styles.itemDesc, { color: C.muted }]}>
+                          {t(item.descriptionKey)}
+                        </Text>
+                      )}
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          );
+        })}
 
         {/* Reset Button */}
         <TouchableOpacity
@@ -214,7 +259,10 @@ const styles = StyleSheet.create({
   badgeEmoji: { fontSize: 32, marginBottom: 8 },
   badgeTitle: { fontSize: 20, fontWeight: '700', marginBottom: 4 },
   badgeDesc: { fontSize: 14, textAlign: 'center' },
-  checklistCard: { borderRadius: 12, overflow: 'hidden', marginBottom: 16 },
+  sectionCard: { borderRadius: 12, overflow: 'hidden', marginBottom: 12 },
+  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 14, paddingVertical: 12, borderBottomWidth: 1 },
+  sectionTitle: { fontSize: 17, fontWeight: '700' },
+  sectionCount: { fontSize: 13, fontWeight: '600' },
   checklistItem: { flexDirection: 'row', alignItems: 'center', padding: 14, borderBottomWidth: 0 },
   checkbox: {
     width: 24, height: 24, borderRadius: 6, borderWidth: 2, borderColor: '#D1D5DB',
@@ -224,7 +272,6 @@ const styles = StyleSheet.create({
   itemContent: { flex: 1 },
   itemLabel: { fontSize: 15, fontWeight: '500' },
   itemDesc: { fontSize: 12, marginTop: 2 },
-  itemNumber: { fontSize: 12, fontWeight: '600', marginLeft: 8 },
   resetButton: { borderWidth: 1.5, borderRadius: 8, padding: 14, alignItems: 'center' },
   resetButtonText: { fontSize: 15, fontWeight: '600' },
 });

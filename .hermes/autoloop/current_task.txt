@@ -1,35 +1,7 @@
-# Todo #133: Fix 6 remaining hardcoded strings in audit
-# Keywords: thermal_metabolic_chart, weaning_rash_tracker, tongue_tie_severity, window_of_reaction, rash_severity, cancel_button_i18n
-
-GOAL: Fix 6 hardcoded strings blocking pre-submission audit.
-
-STEP 1 — Add missing i18n keys to app/i18n/en.json + zh.json:
-- thermalMetabolic.high → "High" / "高"
-- thermalMetabolic.low → "Low" / "低"
-- weaningRash.window → "Window" / "窗口"
-- weaningRash.rash → "Rash" / "皮疹"
-- common.cancel → "Cancel" / "取消"
-
-STEP 2 — Fix thermal-metabolic.tsx line ~387:
-Change: <Text style={styles.curveAxisLabel}>High</Text>
-To: <Text style={styles.curveAxisLabel}>{t('thermalMetabolic.high')}</Text>
-
-STEP 3 — Fix weaning-rash.tsx lines ~148, ~159:
-- Change: <Text style={styles.fieldLabel}>Window</Text>
-  To: <Text style={styles.fieldLabel}>{t('weaningRash.window')}</Text>
-- Change: <Text style={styles.fieldLabel}>Rash</Text>
-  To: <Text style={styles.fieldLabel}>{t('weaningRash.rash')}</Text>
-
-STEP 4 — Fix weaning-rash.tsx Cancel button (~line 210):
-Change: <Text style={styles.cancelBtnText}>Cancel</Text>
-To: <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
-
-STEP 5 — Fix tongue-tie.tsx Cancel buttons (~lines 590, 648):
-Change: <Text style={styles.cancelBtnText}>Cancel</Text>
-To: <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
-
-STEP 6 — Verify: cd JobbleBaby && node ../scripts/pre-submission-audit.js
-HardcodedStrings should show 0 issues (or only unrelated files).
+# Todo #135: Implement Post-Procedure Feeding and Recovery Navigator
+# Status: COMPLETED (Hermes fixed TSC type errors: theme->effectiveTheme, primary->accent, secondaryText->muted)
+# Commit: 4be8254
+# Audit: all PASS (TSC 0, HardcodedStrings PASS, i18n 1826 keys)
 
 DONE
 ULW

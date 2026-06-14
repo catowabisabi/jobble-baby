@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 23:14
-✅ Done: #343 GitHub Actions CI/CD Pipeline
-🔧 Dispatched: #344 Critical Period Navigator
-📋 TODO: 0 pending · 0 new · 1 in_progress
-📦 Commit: 5ba835f → pushed
-📝 Desc: CI/CD workflows 檢討發現4個問題並修復：expo-github-actions 加入 devDependencies、iOS EAS secrets 加入 eas-build.yml、working-directory 修正、artifact path 修正。已 push。下一個 Sisyphus 任務係 #344 Critical Period Navigator 發育關鍵期追蹤。
+🍼 Jobble Baby · 00:15
+✅ Done: #344 Critical Period Navigator
+✅ Done: #345 zh.json procedureRecovery Chinese translations
+📋 TODO: 1 pending · 0 new
+📦 Commit: 9e0645a → pushed
+📝 Desc: #344 Sisyphus 完成 critical-periods.tsx（574行，tabs.criticalPeriods，i18n keys 存在，TSC 0 errors）。#345 Hermes 直接修復 zh.json — procedureRecovery  keys 中文翻譯（之前係英文）。備忘：Sisyphus tmux dispatch 復雜文本有問題，未來考慮直接自己修。

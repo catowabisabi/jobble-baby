@@ -1,4 +1,5 @@
-# Todo #344: Critical Period Navigator
-# Status: DISPATCHED → Sisyphus implementing
-# Keywords: glucose_curve, sympathetic_activation_threshold, feeding_posture_fluid_mechanics
-# Dispatched: Cycle 344
+# Todo #345: Fix zh.json Chinese translations for procedure-recovery.tsx i18n keys
+# Status: COMPLETED
+# Fixed: zh.json procedureRecovery keys → proper Chinese
+# Committed: 9e0645a
+# Cycle: 345

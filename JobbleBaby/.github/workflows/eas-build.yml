@@ -1,78 +1,55 @@
-name: EAS Build
+name: EAS Build & Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      platform:
-        description: 'Build platform'
-        required: true
-        type: choice
-        options:
-          - ios
-          - android
-          - all
-      profile:
-        description: 'EAS build profile'
-        required: false
-        type: choice
-        default: preview
-        options:
-          - preview
-          - production
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
           cache: 'npm'
           cache-dependency-path: JobbleBaby/package-lock.json
-
-      - name: Install dependencies
-        run: |
-          cd JobbleBaby
-          npm ci
-
-      - name: Setup Expo
-        uses: expo/expo-github-action@v8
+      - run: npm ci
+        working-directory: JobbleBaby
+      - uses: expo/expo-github-actions@v1
         with:
           eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Install EAS CLI
-        run: npm install -g eas-cli
-
-      - name: EAS Build
-        run: |
-          cd JobbleBaby
-          eas build --platform ${{ github.event.inputs.platform }} --profile ${{ github.event.inputs.profile }} --non-interactive
+          packager: npm
+      - name: EAS Build iOS
+        run: eas build --platform ios --profile preview --non-interactive
+        working-directory: JobbleBaby
         env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          EXPO_APPLE_TEAM_ID: ${{ secrets.EXPO_APPLE_TEAM_ID }}
+          EXPO_APPLE_ID: ${{ secrets.EXPO_APPLE_ID }}
+          EXPO_APPLE_APP_PASSWORD: ${{ secrets.EXPO_APPLE_APP_PASSWORD }}
+      - name: EAS Build Android
+        run: eas build --platform android --profile preview --non-interactive
+        working-directory: JobbleBaby
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: eas-android-apk
+          path: android/app/build/outputs/apk/**/*.apk
+          retention-days: 7
 
-      - name: Notify Telegram on failure
-        if: failure()
-        run: |
-          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-            -d "chat_id=$TELEGRAM_CHAT_ID" \
-            -d "text=❌ EAS Build Failed: Jobble Baby (${{ github.event.inputs.platform }})" \
-            -d "parse_mode=Markdown"
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
-      - name: Notify Telegram on success
-        if: success()
-        run: |
-          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-            -d "chat_id=$TELEGRAM_CHAT_ID" \
-            -d "text=✅ EAS Build Success: Jobble Baby (${{ github.event.inputs.platform }})" \
-            -d "parse_mode=Markdown"
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: JobbleBaby/package-lock.json
+      - run: npm ci
+        working-directory: JobbleBaby
+      - run: npm test --if-present
+        working-directory: JobbleBaby

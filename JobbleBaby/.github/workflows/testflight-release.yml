@@ -1,0 +1,28 @@
+name: TestFlight Internal Testing
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+        working-directory: JobbleBaby
+      - uses: expo/expo-github-actions@v1
+        with:
+          eas-version: latest
+          packager: npm
+      - name: Submit to TestFlight
+        run: eas submit --platform ios --profile preview --latest --non-interactive
+        working-directory: JobbleBaby
+        env:
+          EXPO_APPLE_TEAM_ID: ${{ secrets.EXPO_APPLE_TEAM_ID }}
+          EXPO_APPLE_ID: ${{ secrets.EXPO_APPLE_ID }}
+          EXPO_APPLE_APP_PASSWORD: ${{ secrets.EXPO_APPLE_APP_PASSWORD }}

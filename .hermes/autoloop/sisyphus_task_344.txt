@@ -1,0 +1,124 @@
+# Todo #344: Critical Period Navigator
+# Status: DISPATCHED → Sisyphus implementing
+# Keywords: glucose_curve, sympathetic_activation_threshold, feeding_posture_fluid_mechanics
+
+## Task for Sisyphus
+
+Implement the **Critical Period Navigator** tab — a new tab `JobbleBaby/app/(tabs)/critical-period.tsx` tracking developmental windows for early childhood.
+
+---
+
+### STEP 1 — Create `JobbleBaby/app/(tabs)/critical-period.tsx`
+
+Design with:
+- `SafeAreaView` + `ScrollView`, themed (COLORS, useLanguage, useTheme)
+- Header: "Critical Period Navigator" (i18n key: `tabs.criticalPeriod`)
+
+---
+
+### SECTION A — Developmental Windows Overview
+
+List critical periods with visual timeline:
+
+| Domain | Window | Status Logic |
+|--------|--------|--------------|
+| Language | 0–12 months | Open if baby < 1yr |
+| Vision | 0–4 years | Open if < 4yr |
+| Sensory Integration | 0–3 years | Open if < 3yr |
+| Motor | 0–2 years | Open if < 2yr |
+| Emotional Regulation | 0–3 years | Open if < 3yr |
+| Social Bonding (Bowlby) | 0–2 years | Open if < 2yr |
+
+Each row:
+- Domain name (i18n)
+- Window range
+- Progress bar: % of window elapsed
+- Status badge: OPEN (green) / CLOSING (yellow) / CLOSED (red)
+- Age-appropriate activity suggestions (collapsible)
+
+Use baby birth date from `@jobble_baby_profile` to calculate current age.
+
+AsyncStorage key: `@jobble/critical_periods`
+
+---
+
+### SECTION B — Window Detail Cards
+
+For each open/closing window, show expandable card with:
+- Description of why this period matters
+- 3 suggested stimulation activities appropriate to baby's current age in months
+- "Activity completed" checkbox (persisted per activity)
+- Visual: colored timeline bar showing elapsed vs remaining time
+
+---
+
+### SECTION C — Global Development Health Score
+
+Composite score (0–100):
+- % of open windows being actively stimulated (activities completed)
+- Color: green >70, yellow 40–70, red <40
+- Text: "Development Engagement Score"
+
+---
+
+### SECTION D — Pediatric Milestone Link
+
+At bottom, link to Milestones tab:
+- Button: "View Milestones Tab"
+- Text: "Critical periods are informed by milestone achievements. Keep tracking!"
+
+---
+
+### STEP 2 — Add i18n Keys
+
+Add to `JobbleBaby/app/i18n/en.json` AND `JobbleBaby/app/i18n/zh.json`:
+
+```
+tabs.criticalPeriod
+criticalPeriod.developmentalWindows
+criticalPeriod.language, criticalPeriod.vision, criticalPeriod.sensoryIntegration
+criticalPeriod.motor, criticalPeriod.emotionalRegulation, criticalPeriod.socialBonding
+criticalPeriod.windowOpen, criticalPeriod.windowClosing, criticalPeriod.windowClosed
+criticalPeriod.activitiesCompleted, criticalPeriod.developmentScore
+criticalPeriod.suggestedActivities, criticalPeriod.viewMilestones
+criticalPeriod.remaining, criticalPeriod.elapsed
+criticalPeriod.languageDesc, criticalPeriod.visionDesc, criticalPeriod.sensoryDesc
+criticalPeriod.motorDesc, criticalPeriod.emotionDesc, criticalPeriod.bondingDesc
+```
+
+(Add Chinese translations — use same keys, Chinese values matching app tone)
+
+---
+
+### STEP 3 — Update `_layout.tsx`
+
+Add to TabNavigator:
+```tsx
+{
+  name: 'critical-period',
+  title: t('tabs.criticalPeriod'),
+  tabBarIcon: ({ color }) => <MaterialCommunityIcons name="brain" size={24} color={color} />
+}
+```
+
+---
+
+### STEP 4 — Update `store/storage-keys.ts`
+
+Add:
+```ts
+export const CRITICAL_PERIODS = '@jobble/critical_periods';
+export const ACTIVITY_COMPLETION = '@jobble/activity_completion';
+```
+
+---
+
+### STEP 5 — Verify
+
+- `npx tsc --noEmit` — must be 0 errors
+- Run audit: `node scripts/pre-submission-audit.js`
+
+---
+
+DONE
+ULW

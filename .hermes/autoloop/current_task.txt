@@ -1,4 +1,4 @@
-# Todo #343: GitHub Actions CI/CD Pipeline
-# Status: DISPATCHED → Sisyphus reviewing .github/workflows/ files
-# Files created: eas-build.yml, testflight-release.yml
-# Keywords: bottle_teat_flow_rate, sleepregression, developmental_trajectory
+# Todo #344: Critical Period Navigator
+# Status: DISPATCHED → Sisyphus implementing
+# Keywords: glucose_curve, sympathetic_activation_threshold, feeding_posture_fluid_mechanics
+# Dispatched: Cycle 344

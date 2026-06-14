@@ -1,0 +1,6 @@
+🍼 Jobble Baby · 23:14
+✅ Done: #343 GitHub Actions CI/CD Pipeline
+🔧 Dispatched: #344 Critical Period Navigator
+📋 TODO: 0 pending · 0 new · 1 in_progress
+📦 Commit: 5ba835f → pushed
+📝 Desc: CI/CD workflows 檢討發現4個問題並修復：expo-github-actions 加入 devDependencies、iOS EAS secrets 加入 eas-build.yml、working-directory 修正、artifact path 修正。已 push。下一個 Sisyphus 任務係 #344 Critical Period Navigator 發育關鍵期追蹤。

@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 17:04
-✅ Done: #350 audit + register 62 unregistered tabs in _layout.tsx (committed a560641)
-🔧 Dispatched: #351 fix eight-month-storm.tsx i18n — convert language===zh conditionals to t() keys
-📋 TODO: 1 pending · 0 new (in_progress: #351)
-📦 Commit: fe6d851 → pushed
-📝 Desc: Sisyphus 完成導航審計，61 tabs 已注册，發現 eight-month-storm.tsx 用 language===zh 硬編碼中文/英文而非 i18n t() keys。新 todo #351 已派去做 i18n 修復。
+🍼 Jobble Baby · 18:12
+✅ Done: #351 fix i18n audit — add 4 missing tab labels + remove console.error (committed 439e6f2)
+🔧 Dispatched: —
+📋 TODO: 0 pending · 0 new (deferred: #108 privacy policy URL — user action required)
+📦 Commit: 439e6f2 → pushed
+📝 Desc: Audit 全 REQUIRED checks PASSED。i18n 修復：加入 tabs.galantLatch, tabs.interoceptive, tabs.regulatoryFitness, tabs.windowOfTolerance 到 en.json + zh.json。移除 procedure-recovery.tsx console.error。#108 Deffered — 需要用戶親自部署隱私政策 URL。

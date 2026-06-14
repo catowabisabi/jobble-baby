@@ -34,11 +34,11 @@ export default function EightMonthStorm() {
   };
 
   const tracks = [
-    { name: language === 'zh' ? '運動' : 'Motor', status: 'amber', label: language === 'zh' ? '爬行/站立' : 'crawling/standing' },
-    { name: language === 'zh' ? '社交情緒' : 'Social/Emotional', status: 'red', label: language === 'zh' ? '陌生人焦慮巔峰' : 'stranger wariness peak' },
-    { name: language === 'zh' ? '認知' : 'Cognitive', status: 'green', label: language === 'zh' ? '物體永恆' : 'object permanence' },
-    { name: language === 'zh' ? '睡眠' : 'Sleep', status: 'red', label: language === 'zh' ? 'Wolke回歸#3' : 'Wolke regression #3' },
-    { name: language === 'zh' ? '生理節律' : 'Circadian', status: 'amber', label: language === 'zh' ? '晝夜節律轉變' : 'circadian shift' },
+    { name: t('eightMonthStorm.motor'), status: 'amber', label: t('eightMonthStorm.crawlingStanding') },
+    { name: t('eightMonthStorm.socialEmotional'), status: 'red', label: t('eightMonthStorm.strangerWarinessPeak') },
+    { name: t('eightMonthStorm.cognitive'), status: 'green', label: t('eightMonthStorm.objectPermanence') },
+    { name: t('eightMonthStorm.sleep'), status: 'red', label: t('eightMonthStorm.wolkeRegression3') },
+    { name: t('eightMonthStorm.circadian'), status: 'amber', label: t('eightMonthStorm.circadianShift') },
   ];
 
   const trackColor = (status: string) => {
@@ -53,12 +53,12 @@ export default function EightMonthStorm() {
         <View style={[styles.header, { backgroundColor: C.card }]}>
           <Text style={[styles.title, { color: C.text }]}>8-Month Storm</Text>
           <Text style={[styles.subtitle, { color: C.text, opacity: 0.7 }]}>
-            {language === 'zh' ? '發育系統 convergence Navigator' : 'Developmental Systems Convergence Navigator'}
+            {t('eightMonthStorm.developmentalSystemsConvergenceNavigator')}
           </Text>
         </View>
 
         <View style={[styles.card, { backgroundColor: C.card }]}>
-          <Text style={[styles.cardTitle, { color: C.text }]}>{language === 'zh' ? '發育時間線' : 'Convergence Timeline'}</Text>
+          <Text style={[styles.cardTitle, { color: C.text }]}>{t('eightMonthStorm.convergenceTimeline')}</Text>
           <View style={styles.timeline}>
             {[6, 7, 8, 9, 10].map(month => (
               <View key={month} style={styles.timelineMonth}>
@@ -68,12 +68,12 @@ export default function EightMonthStorm() {
             ))}
           </View>
           <View style={styles.stormZone}>
-            <Text style={styles.stormZoneLabel}>{language === 'zh' ? '風暴區 (7-9個月)' : 'Storm Zone (7-9mo)'}</Text>
+            <Text style={styles.stormZoneLabel}>{t('eightMonthStorm.stormZone')}</Text>
           </View>
         </View>
 
         <View style={[styles.card, { backgroundColor: C.card }]}>
-          <Text style={[styles.cardTitle, { color: C.text }]}>{language === 'zh' ? '風暴嚴重程度' : 'Storm Severity Score'}</Text>
+          <Text style={[styles.cardTitle, { color: C.text }]}>{t('eightMonthStorm.stormSeverity')}</Text>
           <View style={styles.severityContainer}>
             <Text style={[styles.severityScore, { color: getStormColor(severityScore) }]}>{severityScore}</Text>
             <View style={[styles.severityBar, { backgroundColor: effectiveTheme === 'dark' ? '#333' : '#eee' }]}>
@@ -81,12 +81,12 @@ export default function EightMonthStorm() {
             </View>
           </View>
           <Text style={[styles.severityDesc, { color: C.text, opacity: 0.7 }]}>
-            {language === 'zh' ? '複合哭鬧分鐘數 + 夜間醒來 + 分離痛苦 + 陌生人反應' : 'Composite: cry mins + night wakings + separation distress + stranger reactions'}
+            {t('eightMonthStorm.compositeDescription')}
           </Text>
         </View>
 
         <View style={[styles.card, { backgroundColor: C.card }]}>
-          <Text style={[styles.cardTitle, { color: C.text }]}>{language === 'zh' ? '5軌發育狀態' : '5-Track Developmental Status'}</Text>
+          <Text style={[styles.cardTitle, { color: C.text }]}>{t('eightMonthStorm.fiveTrackStatus')}</Text>
           {tracks.map((track, i) => (
             <View key={i} style={styles.trackRow}>
               <View style={[styles.trackIndicator, { backgroundColor: trackColor(track.status) }]} />
@@ -99,38 +99,38 @@ export default function EightMonthStorm() {
         </View>
 
         <View style={[styles.card, { backgroundColor: C.card }]}>
-          <Text style={[styles.cardTitle, { color: C.text }]}>{language === 'zh' ? '分離焦慮工具包' : 'Separation Anxiety Toolkit'}</Text>
-          <TouchableOpacity style={[styles.button, { backgroundColor: C.accent }]} accessibilityLabel={language === 'zh' ? '建立分離儀式' : 'Build departure ritual'}>
-            <Text style={styles.buttonText}>{language === 'zh' ? '建立告別儀式 (3步)' : 'Build Departure Ritual (3 steps)'}</Text>
+          <Text style={[styles.cardTitle, { color: C.text }]}>{t('eightMonthStorm.separationAnxietyToolkit')}</Text>
+          <TouchableOpacity style={[styles.button, { backgroundColor: C.accent }]} accessibilityLabel={t('eightMonthStorm.buildDepartureRitual')}>
+            <Text style={styles.buttonText}>{t('eightMonthStorm.buildDepartureRitualSteps')}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: C.accent, marginTop: 8 }]} accessibilityLabel={language === 'zh' ? '記錄躲貓貓遊戲' : 'Log peekaboo games'}>
-            <Text style={styles.buttonText}>{language === 'zh' ? '躲貓貓遊戲追蹤' : 'Peekaboo Game Tracker'}</Text>
+          <TouchableOpacity style={[styles.button, { backgroundColor: C.accent, marginTop: 8 }]} accessibilityLabel={t('eightMonthStorm.logPeekabooGames')}>
+            <Text style={styles.buttonText}>{t('eightMonthStorm.peekabooGameTracker')}</Text>
           </TouchableOpacity>
         </View>
 
         <View style={[styles.card, { backgroundColor: C.card }]}>
-          <Text style={[styles.cardTitle, { color: C.text }]}>{language === 'zh' ? '陌生人焦慮指南' : 'Stranger Wariness Guide'}</Text>
+          <Text style={[styles.cardTitle, { color: C.text }]}>{t('eightMonthStorm.strangerWarinessGuide')}</Text>
           <Text style={[styles.infoText, { color: C.text, opacity: 0.7 }]}>
-            {language === 'zh' ? '陌生人焦慮是認知里程碑，不是行為問題' : 'Stranger wariness is a cognitive milestone, not a behavior problem'}
+              {t('eightMonthStorm.strangerWarinessIsCognitive')}
           </Text>
-          <TouchableOpacity style={[styles.button, { backgroundColor: C.accent, marginTop: 8 }]} accessibilityLabel={language === 'zh' ? '漸進介紹協議' : 'Gradual introduction protocol'}>
-            <Text style={styles.buttonText}>{language === 'zh' ? '4階段漸進介紹' : '4-Stage Gradual Introduction'}</Text>
+          <TouchableOpacity style={[styles.button, { backgroundColor: C.accent, marginTop: 8 }]} accessibilityLabel={t('eightMonthStorm.fourStageGradualIntroduction')}>
+            <Text style={styles.buttonText}>{t('eightMonthStorm.fourStageGradualIntroduction')}</Text>
           </TouchableOpacity>
         </View>
 
         <View style={[styles.card, { backgroundColor: C.card }]}>
-          <Text style={[styles.cardTitle, { color: C.text }]}>{language === 'zh' ? '睡眠風暴協議' : 'Sleep Storm Protocol'}</Text>
+          <Text style={[styles.cardTitle, { color: C.text }]}>{t('eightMonthStorm.sleepStormProtocol')}</Text>
           <View style={[styles.infoBox, { backgroundColor: effectiveTheme === 'dark' ? '#1a1a2e' : '#e3f2fd' }]}>
             <Text style={[styles.infoText, { color: C.text }]}>
-              {language === 'zh' ? '三重打擊：晝夜節律轉變 + 分離焦慮 + 運動里程碑' : 'Triple hit: circadian shift + separation anxiety + motor milestone'}
+              {t('eightMonthStorm.tripleHit')}
             </Text>
           </View>
           <View style={styles.strategies}>
             {[
-              language === 'zh' ? '提前就寢時間' : 'Earlier bedtime',
-              language === 'zh' ? '臨時睡袋' : 'Temporary sleep sack',
-              language === 'zh' ? '遮光窗帘' : 'Blackout curtains',
-              language === 'zh' ? '白噪音' : 'White noise',
+              t('eightMonthStorm.earlierBedtime'),
+              t('eightMonthStorm.temporarySleepSack'),
+              t('eightMonthStorm.blackoutCurtains'),
+              t('eightMonthStorm.whiteNoise'),
             ].map((s, i) => (
               <View key={i} style={[styles.strategyChip, { backgroundColor: effectiveTheme === 'dark' ? '#333' : '#eee' }]}>
                 <Text style={[styles.strategyText, { color: C.text }]}>{s}</Text>
@@ -138,12 +138,12 @@ export default function EightMonthStorm() {
             ))}
           </View>
           <Text style={[styles.reassurance, { color: '#4CAF50' }]}>
-            {language === 'zh' ? '回歸通常持續 2-4 週，不是永久性的' : 'Regression typically lasts 2-4 weeks, not permanent'}
+            {t('eightMonthStorm.regressionTemporary')}
           </Text>
         </View>
 
         <View style={[styles.card, { backgroundColor: C.card }]}>
-          <Text style={[styles.cardTitle, { color: C.text }]}>{language === 'zh' ? '運動里程碑集群' : 'Motor Milestone Cluster'}</Text>
+          <Text style={[styles.cardTitle, { color: C.text }]}>{t('eightMonthStorm.motorMilestoneCluster')}</Text>
           <View style={styles.motorGrid}>
             {['crawling', 'pulling to stand', 'cruising', 'pincer grasp'].map((skill, i) => (
               <View key={i} style={[styles.motorChip, { backgroundColor: effectiveTheme === 'dark' ? '#333' : '#eee' }]}>
@@ -153,35 +153,35 @@ export default function EightMonthStorm() {
           </View>
         </View>
 
-        <TouchableOpacity style={[styles.emergencyCard, { backgroundColor: '#1a1a2e' }]} accessibilityLabel={language === 'zh' ? '緊急冷靜模式' : 'Emergency calm mode'}>
+        <TouchableOpacity style={[styles.emergencyCard, { backgroundColor: '#1a1a2e' }]} accessibilityLabel={t('eightMonthStorm.emergencyCalmMode')}>
           <Text style={styles.emergencyEmoji}>🌬️</Text>
-          <Text style={styles.emergencyText}>{language === 'zh' ? '緊急冷靜模式' : 'Emergency Calm Mode'}</Text>
-          <Text style={styles.emergencySubtext}>{language === 'zh' ? '點擊啟動呼吸練習' : 'Tap for breathing exercise'}</Text>
+          <Text style={styles.emergencyText}>{t('eightMonthStorm.emergencyCalmMode')}</Text>
+          <Text style={styles.emergencySubtext}>{t('eightMonthStorm.tapForBreathingExercise')}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.addButton, { backgroundColor: C.accent }]} onPress={() => setShowAdd(true)} accessibilityLabel={language === 'zh' ? '添加風暴記錄' : 'Add storm entry'}>
-          <Text style={styles.addButtonText}>+ {language === 'zh' ? '添加記錄' : 'Add Entry'}</Text>
+        <TouchableOpacity style={[styles.addButton, { backgroundColor: C.accent }]} onPress={() => setShowAdd(true)} accessibilityLabel={t('eightMonthStorm.addStormEntry')}>
+          <Text style={styles.addButtonText}>+ {t('eightMonthStorm.addEntry')}</Text>
         </TouchableOpacity>
       </ScrollView>
 
       <Modal visible={showAdd} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={[styles.modalContent, { backgroundColor: C.card }]}>
-            <Text style={[styles.modalTitle, { color: C.text }]}>{language === 'zh' ? '添加風暴記錄' : 'Add Storm Entry'}</Text>
+            <Text style={[styles.modalTitle, { color: C.text }]}>{t('eightMonthStorm.addStormEntry')}</Text>
             <TextInput
               style={[styles.input, { borderColor: effectiveTheme === 'dark' ? '#555' : '#ddd', color: C.text, backgroundColor: effectiveTheme === 'dark' ? '#333' : '#f9f9f9' }]}
-              placeholder={language === 'zh' ? '運動技能 (逗號分隔)' : 'Motor skills (comma-separated)'}
+              placeholder={t('eightMonthStorm.motorSkillsPlaceholder')}
               placeholderTextColor={effectiveTheme === 'dark' ? '#888' : '#999'}
               value={newEntry.motorSkills}
               onChangeText={text => setNewEntry({ ...newEntry, motorSkills: text })}
-              accessibilityLabel={language === 'zh' ? '運動技能輸入' : 'Motor skills input'}
+              accessibilityLabel={t('eightMonthStorm.motorSkillsInput')}
             />
             <View style={styles.modalButtons}>
-              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: '#666' }]} onPress={() => setShowAdd(false)} accessibilityLabel={language === 'zh' ? '取消' : 'Cancel'}>
-                <Text style={styles.modalBtnText}>{language === 'zh' ? '取消' : 'Cancel'}</Text>
+              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: '#666' }]} onPress={() => setShowAdd(false)} accessibilityLabel={t('common.cancel')}>
+                <Text style={styles.modalBtnText}>{t('common.cancel')}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} onPress={() => setShowAdd(false)} accessibilityLabel={language === 'zh' ? '保存' : 'Save'}>
-                <Text style={styles.modalBtnText}>{language === 'zh' ? '保存' : 'Save'}</Text>
+              <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} onPress={() => setShowAdd(false)} accessibilityLabel={t('common.save')}>
+                <Text style={styles.modalBtnText}>{t('common.save')}</Text>
               </TouchableOpacity>
             </View>
           </View>

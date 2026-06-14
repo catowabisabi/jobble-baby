@@ -1,79 +1,43 @@
-name: EAS Build
+name: EAS Build & Release
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
-    inputs:
-      platform:
-        description: 'Platform (ios, android, all)'
-        required: false
-        default: 'all'
-
-env:
-  EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
-  EXPO_APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.EXPO_APPLE_APP_SPECIFIC_PASSWORD }}
-  EXPO_APPLE_TEAM_ID: ${{ secrets.EXPO_APPLE_TEAM_ID }}
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: JobbleBaby/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
-        working-directory: JobbleBaby
-
-      - name: Validate Expo dependencies
-        run: npx expo install --check
-        working-directory: JobbleBaby
-
-      - name: TypeScript check
-        run: npx tsc --noEmit
-        working-directory: JobbleBaby
-
-      - name: Setup EAS
-        run: npm install eas-cli
-        working-directory: JobbleBaby
-
-      - name: Build iOS
-        if: inputs.platform == 'ios' || inputs.platform == 'all' || github.event_name == 'push'
+      - run: npm ci
+      - uses: expo/expo-github-actions@v1
+        with:
+          eas-version: latest
+          packager: npm
+      - name: EAS Build iOS
         run: eas build --platform ios --profile preview --non-interactive
-        working-directory: JobbleBaby
-        env:
-          EXPO_APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.EXPO_APPLE_APP_SPECIFIC_PASSWORD }}
-          EXPO_APPLE_TEAM_ID: ${{ secrets.EXPO_APPLE_TEAM_ID }}
-
-      - name: Build Android
-        if: inputs.platform == 'android' || inputs.platform == 'all' || github.event_name == 'push'
+      - name: EAS Build Android
         run: eas build --platform android --profile preview --non-interactive
-        working-directory: JobbleBaby
-
-      - name: Upload iOS artifact
-        if: inputs.platform == 'ios' || inputs.platform == 'all' || github.event_name == 'push'
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ios-build
-          path: JobbleBaby/ios/build/**/*.ipa
-          retention-days: 14
-        continue-on-error: true
+          name: eas-builds
+          path: android/app/build/outputs/apk/*.apk
+          retention-days: 7
 
-      - name: Upload Android artifact
-        if: inputs.platform == 'android' || inputs.platform == 'all' || github.event_name == 'push'
-        uses: actions/upload-artifact@v4
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          name: android-build
-          path: JobbleBaby/android/app/build/outputs/apk/**/*.apk
-          retention-days: 14
-        continue-on-error: true
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test --if-present

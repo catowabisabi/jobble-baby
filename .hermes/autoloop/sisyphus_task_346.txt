@@ -1,0 +1,41 @@
+# Todo #346: Fix remaining HardcodedStrings in jaundice.tsx
+# Status: DISPATCHED
+# Keywords: bilirubin_level_risk_chart, medium_high_threshold, who_nice_standard
+
+## Task for Sisyphus
+
+Fix remaining hardcoded strings in `JobbleBaby/app/(tabs)/jaundice.tsx`.
+
+The pre-submission-audit script reports these failures:
+
+```
+jaundice.tsx:296: "Risk Chart (WHO/NICE)"
+jaundice.tsx:302: "Medium"
+jaundice.tsx:303: "High"
+```
+
+---
+
+### STEP 1 — Find and Fix Hardcoded Strings
+
+Read `jaundice.tsx` and find ALL remaining hardcoded English strings (text not wrapped in `<Text>` with `t()` or `i18nKey`).
+
+Lines 296 and 302-303 are the reported failures but check the whole file.
+
+For any hardcoded strings found:
+1. Add an i18n key to `app/i18n/en.json` (e.g., `jaundice.riskChartWhoNice`, `jaundice.riskMedium`, `jaundice.riskHigh`)
+2. Add Chinese translation to `app/i18n/zh.json`
+3. Replace hardcoded `<Text>` content with `<Text style...>{t('jaundice.xxx')}</Text>` or equivalent
+
+### STEP 2 — Verify
+
+Run: `npx tsc --noEmit` — must pass with 0 errors
+
+Run the pre-submission audit if available, confirm HardcodedStrings passes.
+
+### STEP 3 — Commit
+
+Git add + commit with message: "fix(i18n): jaundice.tsx remaining hardcoded strings"
+
+DONE
+ULW

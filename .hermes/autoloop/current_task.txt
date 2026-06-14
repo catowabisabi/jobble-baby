@@ -1,5 +1,5 @@
-# Todo #345: Fix zh.json Chinese translations for procedure-recovery.tsx i18n keys
-# Status: COMPLETED (Hermes direct fix)
-# Fixed: Added 13 missing i18n keys to en.json + zh.json (procedureTypes/healingStatuses/bottleOptions)
-# Committed: (pending commit)
-# Cycle: 345
+# Todo #346: Fix hardcoded strings in jaundice.tsx
+# Status: DISPATCHED
+# Dispatched: opencode run via tmux → Sisyphus
+# Keywords: bilirubin_level_risk_chart, medium_high_threshold, who_nice_standard
+# Cycle: 346

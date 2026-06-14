@@ -135,6 +135,10 @@ function TabNavigator() {
         options={{ title: t('tabs.constellation'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="stars" color={color} /> }}
       />
       <Tabs.Screen
+        name="reflex-visual-motor"
+        options={{ title: t('tabs.reflexVisualMotor'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="psychology" color={color} /> }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{ title: t('tabs.profile'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="person" color={color} /> }}
       />

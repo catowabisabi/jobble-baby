@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 01:15
-✅ Done: #345 procedure-recovery.tsx i18n (Hermes直接修補)
-🔧 Dispatched: (none — #108需用戶操作)
-📋 TODO: 1 pending · 1 new
-📦 Commit: d27b036 → pushed
-📝 Desc: #345 Sisyphus dispatch失敗（heredoc問題），Hermes親自修補procedure-recovery.tsx：新增nested i18n keys（procedureTypes/healingStatuses/bottleOptions）→ en.json+zh.json，替換hardcoded arrays為i18n-aware {value,labelKey} objects。TSC 0 errors。發現dispatch機制bug：_dispatch_345_v2.sh尾端`bash /tmp/sisyphus_task.txt`將任務內容當shell script執行，已建dispatch_task.py修復。#346 Dispatch機制修復已加入DB。
+🍼 Jobble Baby · 03:05
+✅ Done: #345 procedure-recovery.tsx i18n (Hermes direct fix)
+🔧 Dispatched: #346 jaundice.tsx hardcoded strings
+📋 TODO: 1 pending · 1 deferred
+📦 Commit: c64c563 → pushed
+📝 Desc: #345 Sisyphus dispatch再次失敗（_dispatch_345_v2.sh heredoc問題），Hermes親自修補：新增13個nested i18n keys（procedureTypes/healingStatuses/bottleOptions）→ en.json+zh.json，TSC 0 errors。#346 已派Sisyphus修復jaundice.tsx其餘hardcoded strings（"Risk Chart WHO/NICE", "Medium", "High"）。Painpoint #22（Sisyphus heredoc dispatch bug）仍未解決，需重建dispatch_proper.py派任務機制。

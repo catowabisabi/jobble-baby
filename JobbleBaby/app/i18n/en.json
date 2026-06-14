@@ -5058,5 +5058,18 @@
   "procedureRecovery.normal": "Normal",
   "procedureRecovery.mild_swelling": "Mild Swelling",
   "procedureRecovery.infection_signs": "Infection Signs",
-  "procedureRecovery.bleeding": "Bleeding"
+  "procedureRecovery.bleeding": "Bleeding",
+  "procedureRecovery.procedureTypes.frenotomy": "Frenotomy/Tongue-tie release",
+  "procedureRecovery.procedureTypes.frenulectomy": "Frenulectomy",
+  "procedureRecovery.procedureTypes.ear_tubes": "Ear tubes (PE tubes)",
+  "procedureRecovery.procedureTypes.hernia_repair": "Hernia repair",
+  "procedureRecovery.procedureTypes.other": "Other procedure",
+  "procedureRecovery.healingStatuses.normal": "Normal healing",
+  "procedureRecovery.healingStatuses.mild_swelling": "Mild swelling",
+  "procedureRecovery.healingStatuses.infection_signs": "Signs of infection",
+  "procedureRecovery.healingStatuses.bleeding": "Bleeding",
+  "procedureRecovery.healingStatuses.other": "Other",
+  "procedureRecovery.bottleOptions.accept": "Accepts fully",
+  "procedureRecovery.bottleOptions.partial": "Partial acceptance",
+  "procedureRecovery.bottleOptions.refuse": "Refuses bottle"
 }

@@ -1,5 +1,5 @@
 # Todo #345: Fix zh.json Chinese translations for procedure-recovery.tsx i18n keys
-# Status: COMPLETED
-# Fixed: zh.json procedureRecovery keys → proper Chinese
-# Committed: 9e0645a
+# Status: COMPLETED (Hermes direct fix)
+# Fixed: Added 13 missing i18n keys to en.json + zh.json (procedureTypes/healingStatuses/bottleOptions)
+# Committed: (pending commit)
 # Cycle: 345

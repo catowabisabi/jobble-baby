@@ -5058,5 +5058,18 @@
   "procedureRecovery.normal": "正常",
   "procedureRecovery.mild_swelling": "輕微腫脹",
   "procedureRecovery.infection_signs": "感染跡象",
-  "procedureRecovery.bleeding": "出血"
+  "procedureRecovery.bleeding": "出血",
+  "procedureRecovery.procedureTypes.frenotomy": "舌結板分裂术",
+  "procedureRecovery.procedureTypes.frenulectomy": "舌結分移术",
+  "procedureRecovery.procedureTypes.ear_tubes": "絞管通鈔置手術",
+  "procedureRecovery.procedureTypes.hernia_repair": "疊瘊修覆手術",
+  "procedureRecovery.procedureTypes.other": "其他手術",
+  "procedureRecovery.healingStatuses.normal": "正常恢復",
+  "procedureRecovery.healingStatuses.mild_swelling": "輕度胃胀",
+  "procedureRecovery.healingStatuses.infection_signs": "感染症證照",
+  "procedureRecovery.healingStatuses.bleeding": "出血",
+  "procedureRecovery.healingStatuses.other": "其他",
+  "procedureRecovery.bottleOptions.accept": "完全接受",
+  "procedureRecovery.bottleOptions.partial": "郡郡接受",
+  "procedureRecovery.bottleOptions.refuse": "拒绝"
 }

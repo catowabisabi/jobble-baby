@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 00:15
-✅ Done: #344 Critical Period Navigator
-✅ Done: #345 zh.json procedureRecovery Chinese translations
-📋 TODO: 1 pending · 0 new
-📦 Commit: 9e0645a → pushed
-📝 Desc: #344 Sisyphus 完成 critical-periods.tsx（574行，tabs.criticalPeriods，i18n keys 存在，TSC 0 errors）。#345 Hermes 直接修復 zh.json — procedureRecovery  keys 中文翻譯（之前係英文）。備忘：Sisyphus tmux dispatch 復雜文本有問題，未來考慮直接自己修。
+🍼 Jobble Baby · 01:15
+✅ Done: #345 procedure-recovery.tsx i18n (Hermes直接修補)
+🔧 Dispatched: (none — #108需用戶操作)
+📋 TODO: 1 pending · 1 new
+📦 Commit: d27b036 → pushed
+📝 Desc: #345 Sisyphus dispatch失敗（heredoc問題），Hermes親自修補procedure-recovery.tsx：新增nested i18n keys（procedureTypes/healingStatuses/bottleOptions）→ en.json+zh.json，替換hardcoded arrays為i18n-aware {value,labelKey} objects。TSC 0 errors。發現dispatch機制bug：_dispatch_345_v2.sh尾端`bash /tmp/sisyphus_task.txt`將任務內容當shell script執行，已建dispatch_task.py修復。#346 Dispatch機制修復已加入DB。

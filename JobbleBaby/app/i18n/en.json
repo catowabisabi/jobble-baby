@@ -1856,7 +1856,26 @@
     "day47": "Feeding should improve",
     "week2Label": "Week 2",
     "week2": "Back to baseline expected",
-    "checkAlerts": "Check Doctor Alerts"
+    "checkAlerts": "Check Doctor Alerts",
+    "procedureTypes": {
+      "frenotomy": "Frenotomy/Tongue-tie release",
+      "frenulectomy": "Frenulectomy",
+      "ear_tubes": "Ear tubes",
+      "hernia_repair": "Hernia repair",
+      "other": "Other"
+    },
+    "healingStatuses": {
+      "normal": "Normal healing",
+      "mild_swelling": "Mild swelling",
+      "infection_signs": "Signs of infection",
+      "bleeding": "Bleeding",
+      "other": "Other"
+    },
+    "bottleOptions": {
+      "accept": "Accepts fully",
+      "partial": "Partial acceptance",
+      "refuse": "Refuses"
+    }
   },
   "iotSecurity": {
     "networkScore": "Network Security Score",

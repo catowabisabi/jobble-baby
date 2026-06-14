@@ -25,9 +25,25 @@ interface WoundEntry {
   id: string; date: string; healingStatus: string; notes: string;
 }
 
-const PROCEDURE_TYPES = ['frenotomy', 'frenulectomy', 'ear_tubes', 'hernia_repair', 'other'];
-const HEALING_STATUSES = ['normal', 'mild_swelling', 'infection_signs', 'bleeding', 'other'];
-const BOTTLE_OPTIONS = ['accept', 'partial', 'refuse'];
+const PROCEDURE_TYPES = [
+  { value: 'frenotomy', labelKey: 'procedureRecovery.procedureTypes.frenotomy' },
+  { value: 'frenulectomy', labelKey: 'procedureRecovery.procedureTypes.frenulectomy' },
+  { value: 'ear_tubes', labelKey: 'procedureRecovery.procedureTypes.ear_tubes' },
+  { value: 'hernia_repair', labelKey: 'procedureRecovery.procedureTypes.hernia_repair' },
+  { value: 'other', labelKey: 'procedureRecovery.procedureTypes.other' },
+];
+const HEALING_STATUSES = [
+  { value: 'normal', labelKey: 'procedureRecovery.healingStatuses.normal' },
+  { value: 'mild_swelling', labelKey: 'procedureRecovery.healingStatuses.mild_swelling' },
+  { value: 'infection_signs', labelKey: 'procedureRecovery.healingStatuses.infection_signs' },
+  { value: 'bleeding', labelKey: 'procedureRecovery.healingStatuses.bleeding' },
+  { value: 'other', labelKey: 'procedureRecovery.healingStatuses.other' },
+];
+const BOTTLE_OPTIONS = [
+  { value: 'accept', labelKey: 'procedureRecovery.bottleOptions.accept' },
+  { value: 'partial', labelKey: 'procedureRecovery.bottleOptions.partial' },
+  { value: 'refuse', labelKey: 'procedureRecovery.bottleOptions.refuse' },
+];
 
 export default function ProcedureRecoveryScreen() {
   const { t } = useLanguage();
@@ -138,8 +154,8 @@ export default function ProcedureRecoveryScreen() {
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.procedureType') || 'Procedure Type'}</Text>
             <View style={styles.optionRow}>
               {PROCEDURE_TYPES.map(pt => (
-                <TouchableOpacity key={pt} style={[styles.optionChip, procedureType === pt && { backgroundColor: C.accent }]} onPress={() => setProcedureType(pt)}>
-                  <Text style={[styles.optionChipText, { color: procedureType === pt ? '#fff' : C.text }]}>{t('procedureRecovery.' + pt) || pt}</Text>
+                <TouchableOpacity key={pt.value} style={[styles.optionChip, procedureType === pt.value && { backgroundColor: C.accent }]} onPress={() => setProcedureType(pt.value)}>
+                  <Text style={[styles.optionChipText, { color: procedureType === pt.value ? '#fff' : C.text }]}>{t(pt.labelKey)}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -167,8 +183,8 @@ export default function ProcedureRecoveryScreen() {
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.bottleAcceptance') || 'Bottle Acceptance'}</Text>
             <View style={styles.optionRow}>
               {BOTTLE_OPTIONS.map(ba => (
-                <TouchableOpacity key={ba} style={[styles.optionChip, bottleAcceptance === ba && { backgroundColor: C.accent }]} onPress={() => setBottleAcceptance(ba)}>
-                  <Text style={[styles.optionChipText, { color: bottleAcceptance === ba ? '#fff' : C.text }]}>{t('procedureRecovery.' + ba) || ba}</Text>
+                <TouchableOpacity key={ba.value} style={[styles.optionChip, bottleAcceptance === ba.value && { backgroundColor: C.accent }]} onPress={() => setBottleAcceptance(ba.value)}>
+                  <Text style={[styles.optionChipText, { color: bottleAcceptance === ba.value ? '#fff' : C.text }]}>{t(ba.labelKey)}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -220,8 +236,8 @@ export default function ProcedureRecoveryScreen() {
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.healingStatus') || 'Healing Status'}</Text>
             <View style={styles.optionRow}>
               {HEALING_STATUSES.map(hs => (
-                <TouchableOpacity key={hs} style={[styles.optionChip, { backgroundColor: '#F3F4F6' }]}>
-                  <Text style={[styles.optionChipText, { color: C.text }]}>{t('procedureRecovery.' + hs) || hs}</Text>
+                <TouchableOpacity key={hs.value} style={[styles.optionChip, { backgroundColor: '#F3F4F6' }]}>
+                  <Text style={[styles.optionChipText, { color: C.text }]}>{t(hs.labelKey)}</Text>
                 </TouchableOpacity>
               ))}
             </View>

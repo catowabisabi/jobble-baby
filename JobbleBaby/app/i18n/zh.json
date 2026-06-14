@@ -1856,7 +1856,26 @@
     "day47": "Feeding should improve",
     "week2Label": "Week 2",
     "week2": "Back to baseline expected",
-    "checkAlerts": "Check Doctor Alerts"
+    "checkAlerts": "Check Doctor Alerts",
+    "procedureTypes": {
+      "frenotomy": "舌繫帶切除術",
+      "frenulectomy": "繫帶切除術",
+      "ear_tubes": "耳管置入術",
+      "hernia_repair": "疝氣修復手術",
+      "other": "其他"
+    },
+    "healingStatuses": {
+      "normal": "正常",
+      "mild_swelling": "輕微腫脹",
+      "infection_signs": "感染跡象",
+      "bleeding": "出血",
+      "other": "其他"
+    },
+    "bottleOptions": {
+      "accept": "接受",
+      "partial": "部分接受",
+      "refuse": "拒絕"
+    }
   },
   "iotSecurity": {
     "networkScore": "網絡安全評分",

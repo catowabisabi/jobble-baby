@@ -1,0 +1,38 @@
+# Todo #348: Fix Sisyphus dispatch mechanism (painpoint #22)
+# Status: DISPATCHED
+# Keywords: dispatch_mechanism, tmux_send_keys, opencode_run, python_task_writer
+
+## Task for Sisyphus
+
+Painpoint #22: The _dispatch_345_v2.sh script ends with `bash /tmp/sisyphus_task.txt` which tries to execute TypeScript/markdown task content as a shell script. This is wrong.
+
+Your job:
+
+### STEP 1 — Audit all dispatch scripts
+
+List all files in `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/` that match `_dispatch*.sh` or `_dispatch*.py`.
+
+Check each one for the pattern `bash.*sisyphus_task` or `bash \$TASK_FILE` or any pattern that would execute the task file as a bash script.
+
+Flag any that have this pattern. Do NOT modify them yet — just list which ones are broken.
+
+### STEP 2 — Verify the fix
+
+The file `_dispatch_proper.py` was already created by Hermes. Verify it:
+- Reads task content via Python (not shell heredoc)
+- Writes to /tmp/sisyphus_task.txt via Python file write
+- Dispatches via `opencode run "$(cat /tmp/sisyphus_task.txt)"` in tmux
+
+Confirm this is the correct pattern. If there are any issues, report them.
+
+### STEP 3 — Report
+
+Return a summary:
+1. Which dispatch scripts are broken (have bash execution pattern)
+2. Whether _dispatch_proper.py is correct
+3. Recommended action for the broken scripts (rename with .broken extension, or delete)
+
+Do NOT modify any files. Just report.
+
+DONE
+ULW

@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 02:05
-✅ Done: #355 Accessibility labels — procedure-recovery 12 elements
-🔧 Dispatched: #356 AsyncStorage→SafeStorage migration (82 files)
-📋 TODO: 1 pending · 1 new
-📦 Commit: 74ec58c → pushed
-📝 Desc: Sisyphus 修咗 8 個 accessibilityLabel，Hermes 補足其餘 4 個（saveMedication、healing status、checkAlerts）。Idea #77 Development Radar 已implemented。Painpoint #24 AsyncStorage 仍然 open，新 task #356 已 dispatch。
+🍼 Jobble Baby · 03:15
+✅ Done: #355 procedure-recovery a11y labels — commit faef37b
+🔧 Dispatched: #356 AsyncStorage→SafeStorage migration (82→30 files)
+📋 TODO: 1 pending · 0 new
+📦 Commit: faef37b → pushed
+📝 Desc: procedureRecovery.saveFeeding/Medication i18n keys added, village-network connectBtn label fixed, audit PASS

@@ -1,0 +1,38 @@
+[0m
+> Sisyphus - Ultraworker · MiniMax-M2.7
+[0m
+**ULTRAWORK MODE ENABLED!**
+
+I detect **implementation intent** - the user wants me to complete a full AsyncStorage→SafeStorage migration across 82 files. This is a complex, multi-step task requiring:
+1. Understanding the SafeStorage API
+2. Finding all AsyncStorage usages
+3. Batch migrating ~82 files
+4. Continuous verification
+
+**My approach**:- Fire parallel exploration agents to gather context
+- Invoke Plan Agent to create structured work breakdown
+- Delegate migration work to specialized agents
+
+Let me start by gathering context:
+[0m→ [0mRead app/utils/SafeStorage.ts
+[0m✱ [0mGrep "AsyncStorage"[90m in app[0m
+I have the context I need:
+- **SafeStorage API**: `safeGetItem` (returns `null` on error), `safeSetItem`/`safeRemoveItem` (return `false` on error)
+- **82 files** still using AsyncStorage
+
+Now invoking Plan Agent to create the structured work breakdown:
+[0m• [0mPlan Task
+[0m✓ [0mPlan Task
+The Plan Agent launched background exploration agents. Let me wait for their results:
+[0m
+[0m# [0mTodos
+[•] Explore SafeStorage patterns and AsyncStorage usage across codebase
+[ ] Create parallel task graph with migration waves
+[ ] Wave 1: Migrate context/*.tsx + utils/*.ts (9 files)
+[ ] Wave 2: Migrate screens/ and hooks/ files (~5 files)
+[ ] Wave 3: Migrate first batch of tabs/*.tsx (~15 files)
+[ ] Wave 4: Migrate second batch of tabs/*.tsx (~15 files)
+[ ] Wave 5: Migrate remaining tabs/*.tsx (~38 files)
+[ ] Verify: TSC clean, grep count reduced to 0
+[0m
+Waiting for background exploration agents to complete before proceeding with plan agent...

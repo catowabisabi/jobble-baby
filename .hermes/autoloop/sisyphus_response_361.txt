@@ -1,3 +1,68 @@
 [0m
 > Sisyphus - Ultraworker · MiniMax-M2.7
 [0m
+ULTRAWORK MODE ENABLED!
+
+**My approach for this task:**
+1. **Explore** - Grep for all AsyncStorage imports (excluding SafeStorage.ts)
+2. **Analyze** - For each file, check if it actually calls AsyncStorage.getItem/setItem/removeItem directly
+3. **Execute** - Remove only the dead imports (files that import but don't use AsyncStorage directly)
+4. **Verify** - Run `npx tsc --noEmit` to confirm0 errors
+
+Let me start by gathering the full scope of files with AsyncStorage imports:
+[0m✱ [0mGrep "from '@react-native-async-storage/async-storage'"[90m in app[0m
+[0m✱ [0mGrep "AsyncStorage\.(getItem|setItem|removeItem|clear|getAllKeys)"[90m in app[0m
+**Excellent!** This is very clear:
+- **81 files** have the AsyncStorage import
+- **Only 1 file** actually calls AsyncStorage methods directly: `SafeStorage.ts`
+
+So80 files import AsyncStorage but don't use it directly. SafeStorage.ts is the only legitimate user.
+
+Let me verify SafeStorage.ts and then proceed to remove the dead imports:
+[0m→ [0mRead app/utils/SafeStorage.ts
+[0m
+[0m# [0mTodos
+[✓] Verify SafeStorage.ts uses AsyncStorage directly (confirmed - only file that does)
+[•] Remove dead AsyncStorage import from 80 files (excluding SafeStorage.ts)
+[ ] Run npx tsc --noEmit to verify 0 errors
+[0m
+Let me verify by checking one of the tab files to confirm it only imports but doesn't use AsyncStorage directly:
+[0m✱ [0mGrep "AsyncStorage\.(getItem|setItem|removeItem|clear|getAllKeys)"[90m in app/(tabs)/milk-transfer.tsx[0m
+[0m✱ [0mGrep "AsyncStorage\.(getItem|setItem|removeItem|clear|getAllKeys)"[90m in app/(tabs)/profile.tsx[0m
+Confirmed - only SafeStorage.ts uses AsyncStorage directly. All 80 other files have dead imports.
+
+Now I'll remove the AsyncStorage import from all 80 files using `ast_grep_replace`. I'll pass all file paths at once:
+[0m⚙ [0mast_grep_replace {"pattern":"import AsyncStorage from '@react-native-async-storage/async-storage';","rewrite":"","lang":"typescript","paths":["/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/_layout.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/context/ThemeContext.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/context/LanguageContext.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/data/regulatoryFitness.ts","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/utils/weeklySummary.ts","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/components/EmergencySOSScreen.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/hooks/useMonitorLink.ts","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/utils/milkPrepStorage.ts","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/utils/badgeService.ts","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/screens/DaycareViewScreen.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/screens/OnboardingScreen.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/screens/FeedingTimerScreen.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/bonding-journal.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/appstore-checklist.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/bilateral-coordination.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/allergens.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/asymmetric-growth.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/colic-relief.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/cry-analyzer.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/clinician-portal.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/critical-periods.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/circadian.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/caregiver-fatigue.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/feeding-readiness.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/bottle-refusal.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/bottle-feeding.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/doctor-visit.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/cup-feeding.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/gut-brain-axis.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/interoceptive.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/galant-latch-navigator.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/growth.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/fontanelle.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/index.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/growth-montage.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/home-safety.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/gravity-feeding.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/fontanelle-hydration.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/hip-click.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/gear-check.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/habit-reset.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/milestones.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/iot-security.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/jaundice.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/medicine-dose.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/jaundice-threshold.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/jet-lag.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/launch-checklist.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/pediatric-report.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/oral-motor.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-integration.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/procedure-recovery.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/moro-reflex.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/projection.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/regulatory-fitness.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/monitor-correlation.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/profile.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/regression-navigator.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/sensory-integration.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/milk-transfer.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/schedule.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-tracker.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/safety-audit.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/sleep-debt.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/stress-cascade.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/sleep-association.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/thermal-metabolic.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/solid-food.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/sleep-architecture.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/teething.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/sleep-training.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/shift-handoff.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/tracking.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/thermal-regulation.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/tongue-tie.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/tummy-time.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/vestibular-assessment.tsx","/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/weaning-rash.tsx"],"dryRun":false}
+Only 5 files processed. Let me check how many still have the import:
+[0m✱ [0mGrep "from '@react-native-async-storage/async-storage'"[90m in app[0m
+Let me check if the replacements actually took effect by reading one of the modified files:
+[0m→ [0mRead app/data/regulatoryFitness.ts[90m [limit=20][0m
+The ast_grep_replace didn't actually modify the file. Let me try using the edit tool directly to verify the approach works:
+[0m
+[0m← [0mEdit app/data/regulatoryFitness.ts
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/data/regulatoryFitness.ts
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/data/regulatoryFitness.ts
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/data/regulatoryFitness.ts
+@@ -1,5 +1,4 @@
+-import AsyncStorage from '@react-native-async-storage/async-storage';
+ import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
+ 
+ export interface RegulatoryEntry {
+   date: string;
+
+[0m
+[0m→ [0mRead app/data/regulatoryFitness.ts[90m [limit=10][0m
+Edit works. Now I'll use a bash script to remove the import from all 80 files at once (excluding SafeStorage.ts):
+[0m
+[0m$ [0mcd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && find app -type f \( -name "*.tsx" -o -name "*.ts" \) -exec grep -l "from '@react-native-async-storage/async-storage'" {} \; | grep -v "SafeStorage.ts" | xargs sed -i "/import AsyncStorage from '@react-native-async-storage\/async-storage';/d"
+(no output)
+[0m
+[0m✱ [0mGrep "from '@react-native-async-storage/async-storage'"[90m in app[0m
+**80 dead imports removed.** Only SafeStorage.ts retains the import (correct - it's the only file that uses AsyncStorage directly).
+
+Now let me verify with TypeScript:
+[0m
+[0m$ [0mcd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit 2>&1 | head -50
+(no output)
+[0m

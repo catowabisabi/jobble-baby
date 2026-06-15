@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Pressable, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useRouter } from 'expo-router';
 import { useTheme } from '../context/ThemeContext';

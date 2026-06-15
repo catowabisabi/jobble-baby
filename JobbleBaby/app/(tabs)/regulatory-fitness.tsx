@@ -10,7 +10,6 @@ import {
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
 import { useLanguage } from '../context/LanguageContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { STORAGE_KEYS } from '../../store/storage-keys';
 

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Share, Alert, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import QRCode from 'react-native-qrcode-svg';
 import { getWeeklySummary, WeeklyTrend } from '../utils/weeklySummary';

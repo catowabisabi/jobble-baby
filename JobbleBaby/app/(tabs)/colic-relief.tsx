@@ -4,7 +4,6 @@ import {
   StyleSheet, Alert, Platform
 } from 'react-native';
 import { useLanguage } from '../context/LanguageContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 
 const STORAGE_KEYS = {

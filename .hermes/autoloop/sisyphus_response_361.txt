@@ -69,3 +69,22 @@ Now let me verify with TypeScript:
 [0m$ [0mcd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit; echo "Exit code: $?"
 Exit code: 0
 [0m
+[0m# [0mTodos
+[✓] Verify SafeStorage.ts uses AsyncStorage directly (confirmed - only file that does)
+[✓] Remove dead AsyncStorage import from 80 files (excluding SafeStorage.ts)
+[✓] Run npx tsc --noEmit to verify 0 errors
+[0m
+**Done.**
+
+| Result | Value |
+|--------|-------|
+| Files with AsyncStorage import before | 81 |
+| Files with AsyncStorage import after |1 (SafeStorage.ts only) |
+| Dead imports removed | 80 |
+| TypeScript errors | 0 |
+
+**Verification:**
+- `grep` confirms only `SafeStorage.ts` retains the import
+- `npx tsc --noEmit` exits with code 0 — no errors
+
+**Files modified:** All 80 files in `app/(tabs)/` and `app/` (excluding `SafeStorage.ts`) had the dead `import AsyncStorage from '@react-native-async-storage/async-storage';` line removed.

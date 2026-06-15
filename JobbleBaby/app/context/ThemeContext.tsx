@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
 import { useColorScheme } from 'react-native';
 
 type ThemeMode = 'dark' | 'light' | 'system';

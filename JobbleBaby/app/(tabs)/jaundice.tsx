@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert, Share } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem } from '@/app/utils/SafeStorage';
 import { Link } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
@@ -96,8 +96,8 @@ export default function FeedingTimerScreen() {
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const profileRaw = await AsyncStorage.getItem(PROFILE_KEY);
-        if (profileRaw) {
+        const profileRaw = await safeGetItem(PROFILE_KEY);
+        if (profileRaw !== null) {
           const profile = JSON.parse(profileRaw);
           if (profile.birthDate) {
             setBirthDate(profile.birthDate);
@@ -111,8 +111,8 @@ export default function FeedingTimerScreen() {
   useEffect(() => {
     const loadTodayFeeds = async () => {
       try {
-        const raw = await AsyncStorage.getItem(TRACKING_KEY);
-        if (raw) {
+        const raw = await safeGetItem(TRACKING_KEY);
+        if (raw !== null) {
           const allEntries: TrackingEntry[] = JSON.parse(raw);
           setTodayFeeds(getTodayEntries(allEntries));
         }
@@ -155,10 +155,10 @@ export default function FeedingTimerScreen() {
     };
 
     try {
-      const raw = await AsyncStorage.getItem(TRACKING_KEY);
-      const allEntries: TrackingEntry[] = raw ? JSON.parse(raw) : [];
+      const raw = await safeGetItem(TRACKING_KEY);
+      const allEntries: TrackingEntry[] = raw !== null ? JSON.parse(raw) : [];
       const updated = [newEntry, ...allEntries];
-      await AsyncStorage.setItem(TRACKING_KEY, JSON.stringify(updated));
+      await safeSetItem(TRACKING_KEY, JSON.stringify(updated));
       setTodayFeeds(getTodayEntries(updated));
     } catch { /* silent */ }
   };

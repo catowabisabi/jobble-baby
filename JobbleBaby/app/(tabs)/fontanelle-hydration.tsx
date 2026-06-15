@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
@@ -50,23 +50,23 @@ export default function FontanelleHydrationScreen() {
   const loadData = async () => {
     try {
       const [f, u, d] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEY_FONTANELLE),
-        AsyncStorage.getItem(STORAGE_KEY_URINE),
-        AsyncStorage.getItem(STORAGE_KEY_DIAPER),
+        safeGetItem(STORAGE_KEY_FONTANELLE),
+        safeGetItem(STORAGE_KEY_URINE),
+        safeGetItem(STORAGE_KEY_DIAPER),
       ]);
-      if (f) {
+      if (f !== null) {
         const parsed: FontanelleEntry[] = JSON.parse(f);
         setFontanelleLog(parsed);
         const todayEntry = parsed.find(e => e.date === today);
         if (todayEntry) setTodayFontanelle(todayEntry.score);
       }
-      if (u) {
+      if (u !== null) {
         const parsed: UrineEntry[] = JSON.parse(u);
         setUrineLog(parsed);
         const todayEntry = parsed.find(e => e.date === today);
         if (todayEntry) setTodayUrine(todayEntry.color);
       }
-      if (d) {
+      if (d !== null) {
         const parsed: DiaperEntry[] = JSON.parse(d);
         setDiaperLog(parsed);
         const todayEntry = parsed.find(e => e.date === today);
@@ -90,7 +90,7 @@ export default function FontanelleHydrationScreen() {
     const updated = fontanelleLog.filter(e => e.date !== today);
     updated.push({ date: today, score, notes });
     setFontanelleLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_FONTANELLE, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_FONTANELLE, JSON.stringify(updated));
   };
 
   const saveUrine = async (color: number) => {
@@ -98,7 +98,7 @@ export default function FontanelleHydrationScreen() {
     const updated = urineLog.filter(e => e.date !== today);
     updated.push({ date: today, color });
     setUrineLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_URINE, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_URINE, JSON.stringify(updated));
   };
 
   const saveDiapers = async () => {
@@ -106,7 +106,7 @@ export default function FontanelleHydrationScreen() {
     const updated = diaperLog.filter(e => e.date !== today);
     updated.push({ date: today, count });
     setDiaperLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_DIAPER, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_DIAPER, JSON.stringify(updated));
   };
 
   const risk = getDehydrationRisk();

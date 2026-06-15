@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, SafeAreaView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
 import { ALLERGENS, AllergenEntry, Allergen } from '../data/allergens';
 import AllergenCard from '../components/AllergenCard';
 import { AllergenDetailModal } from '../components/AllergenDetailModal';

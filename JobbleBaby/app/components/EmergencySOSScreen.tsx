@@ -12,7 +12,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem } from '@/app/utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import {
   EMERGENCY_CONTACTS,
@@ -72,8 +72,8 @@ export default function EmergencySOSScreen() {
 
   const loadBabyData = async () => {
     try {
-      const stored = await AsyncStorage.getItem('@jobble_baby_profile');
-      if (stored) {
+      const stored = await safeGetItem('@jobble_baby_profile');
+      if (stored !== null) {
         const profile: BabyProfile = JSON.parse(stored);
         const birth = new Date(profile.birthDate);
         const now = new Date();

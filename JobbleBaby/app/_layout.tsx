@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem } from '@/app/utils/SafeStorage';
 import { Tabs } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import * as Linking from 'expo-linking';
@@ -35,8 +35,8 @@ export default function RootLayout() {
 
   const checkProfile = async () => {
     try {
-      const profile = await AsyncStorage.getItem(PROFILE_KEY);
-      if (!profile) {
+      const profile = await safeGetItem(PROFILE_KEY);
+      if (profile === null) {
         setShowOnboarding(true);
       }
       setHasProfile(!!profile);

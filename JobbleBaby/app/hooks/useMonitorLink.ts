@@ -1,5 +1,5 @@
 import { Linking, Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
 
 const PREFERRED_APP_KEY = '@jobble/preferred_monitor_app';
 const LAST_EVENT_KEY = '@jobble/last_monitor_event';

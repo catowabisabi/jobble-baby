@@ -1,5 +1,5 @@
 // Badge award service — checks conditions and awards badges
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
 import * as Notifications from 'expo-notifications';
 import { BADGES, Badge } from '../data/badges';
 

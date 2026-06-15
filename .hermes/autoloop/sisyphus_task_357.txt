@@ -1,0 +1,32 @@
+# Todo #354: AsyncStorage SafeStorage Wrapper
+# Keywords: thermal_conduction_skin_contact, state_co_regulation, latch_asymmetry_heatmap
+
+## Task for Sisyphus
+
+Wrap ALL AsyncStorage calls across the app with proper error handling.
+
+STEP 1 — Explore the codebase:
+- Find ALL files that use AsyncStorage (grep "AsyncStorage" in JobbleBaby/)
+- Check how useStorage or similar hooks are used
+- Read app/theme.ts for COLORS usage pattern
+
+STEP 2 — Create SafeStorage utility:
+- File: JobbleBaby/utils/SafeStorage.ts
+- Export async functions: safeGetItem(key), safeSetItem(key, value), safeRemoveItem(key)
+- Each wraps try-catch around AsyncStorage calls
+- On error: log warning, return null (get) or false (set/remove)
+- No silent crashes — errors always handled
+
+STEP 3 — Replace all AsyncStorage usage:
+- For every file using AsyncStorage.getItem/setItem/removeItem:
+  - Replace with SafeStorage equivalents
+  - Handle null/false returns gracefully
+- Do NOT modify package.json or install new deps
+
+STEP 4 — Verify:
+- TSC: npx tsc --noEmit (0 errors)
+- No "AsyncStorage" direct calls remain (grep check)
+
+Report how many files were updated and any edge cases you found.
+
+ULW

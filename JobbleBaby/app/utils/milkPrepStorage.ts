@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
 
 export interface MilkBag {
   id: string;
@@ -18,7 +18,7 @@ const TIMER_KEY = '@jobble/milk_timer';
 
 export const saveStash = async (stash: MilkBag[]): Promise<void> => {
   try {
-    await AsyncStorage.setItem(STASH_KEY, JSON.stringify(stash));
+    await safeSetItem(STASH_KEY, JSON.stringify(stash));
   } catch (error) {
     console.error('Failed to save milk stash:', error);
   }
@@ -26,8 +26,8 @@ export const saveStash = async (stash: MilkBag[]): Promise<void> => {
 
 export const loadStash = async (): Promise<MilkBag[]> => {
   try {
-    const raw = await AsyncStorage.getItem(STASH_KEY);
-    return raw ? JSON.parse(raw) : [];
+    const raw = await safeGetItem(STASH_KEY);
+    return raw !== null ? JSON.parse(raw) : [];
   } catch (error) {
     console.error('Failed to load milk stash:', error);
     return [];
@@ -36,7 +36,7 @@ export const loadStash = async (): Promise<MilkBag[]> => {
 
 export const saveTimer = async (timer: MilkTimer): Promise<void> => {
   try {
-    await AsyncStorage.setItem(TIMER_KEY, JSON.stringify(timer));
+    await safeSetItem(TIMER_KEY, JSON.stringify(timer));
   } catch (error) {
     console.error('Failed to save milk timer:', error);
   }
@@ -44,8 +44,8 @@ export const saveTimer = async (timer: MilkTimer): Promise<void> => {
 
 export const loadTimer = async (): Promise<MilkTimer | null> => {
   try {
-    const raw = await AsyncStorage.getItem(TIMER_KEY);
-    return raw ? JSON.parse(raw) : null;
+    const raw = await safeGetItem(TIMER_KEY);
+    return raw !== null ? JSON.parse(raw) : null;
   } catch (error) {
     console.error('Failed to load milk timer:', error);
     return null;
@@ -54,7 +54,7 @@ export const loadTimer = async (): Promise<MilkTimer | null> => {
 
 export const clearTimer = async (): Promise<void> => {
   try {
-    await AsyncStorage.removeItem(TIMER_KEY);
+    await safeRemoveItem(TIMER_KEY);
   } catch (error) {
     console.error('Failed to clear milk timer:', error);
   }

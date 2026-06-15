@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Platform, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeSetItem } from '@/app/utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
 
@@ -58,7 +58,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
       birthDate: birthDate.toISOString(),
       gender,
     };
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+    await safeSetItem(STORAGE_KEY, JSON.stringify(profile));
     onComplete?.();
   };
 

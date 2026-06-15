@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem } from '@/app/utils/SafeStorage';
 
 export interface RegulatoryEntry {
   date: string;
@@ -15,7 +15,7 @@ const MAX_ENTRIES = 90;
 
 export const loadRegulatoryData = async (): Promise<RegulatoryEntry[]> => {
   try {
-    const data = await AsyncStorage.getItem(STORAGE_KEY);
+    const data = await safeGetItem(STORAGE_KEY);
     if (data) {
       const parsed: RegulatoryEntry[] = JSON.parse(data);
       const cutoff = new Date();
@@ -33,7 +33,7 @@ export const saveRegulatoryEntry = async (entry: RegulatoryEntry): Promise<void>
     const allEntries = await loadRegulatoryData();
     const filtered = allEntries.filter((e) => e.date !== entry.date);
     const updated = [...filtered, entry].slice(-MAX_ENTRIES);
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
   } catch (error) {
     console.error('Error saving regulatory entry:', error);
     throw error;

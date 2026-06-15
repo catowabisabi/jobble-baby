@@ -1,3 +1,15 @@
 [0m
 > Sisyphus - Ultraworker · MiniMax-M2.7
 [0m
+ULTRAWORK MODE ENABLED!
+
+I detect **implementation intent** - creating a complete new tab feature with multiple components, data models, and integrations. This is non-trivial and requires exploration + planning first.
+
+**My approach**: Explore codebase patterns → Plan agent creates work breakdown → Delegate implementation to specialized agents.
+
+Let me gather context first by exploring the existing patterns in parallel:
+[0m• [0mExplore tab structure patterns[90m Explore Agent[0m
+[0m• [0mFind i18n and data model patterns[90m Explore Agent[0m
+[0m✓ [0mExplore tab structure patterns[90m Explore Agent[0m
+[0m✓ [0mFind i18n and data model patterns[90m Explore Agent[0m
+Waiting for exploration agents to complete. I'll then invoke the Plan agent to create a structured work breakdown.

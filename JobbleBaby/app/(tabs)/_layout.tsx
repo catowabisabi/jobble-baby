@@ -45,6 +45,13 @@ export default function TabsLayout() {
         options={{ title: t('tabs.milestones'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="trophy-variant" size={size} color={color} /> }}
       />
       <Tabs.Screen
+        name="gesture-milestone"
+        options={{
+          title: t('gestureMilestone.title') || 'Gesture Bridge',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="hand-pointing-right" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="critical-periods"
         options={{
           title: t('tabs.criticalPeriods'),

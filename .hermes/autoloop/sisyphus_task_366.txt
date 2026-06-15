@@ -1,0 +1,68 @@
+# Todo #347: Implement Gesture-Milestone Bridge Tracker tab
+Keywords: proto_declarative_pointing, joint_attention_bridge, word_burst_tracker
+
+## Task for Sisyphus
+
+Create a new tab `gesture-milestone.tsx` implementing a gesture-to-language bridge tracker.
+
+STEP 1 — Read these files first:
+- JobbleBaby/app/(tabs)/_layout.tsx (for tab registration pattern)
+- JobbleBaby/app/(tabs)/milestones.tsx (for milestone tracking style reference)
+- JobbleBaby/app/(tabs)/growth-montage.tsx (for visualization patterns)
+- JobbleBaby/i18n/en.json and zh.json (search for "gestureMilestone" section — i18n keys already exist, DO NOT re-add them)
+
+STEP 2 — Create `JobbleBaby/app/(tabs)/gesture-milestone.tsx`
+Design: SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
+Header: "Gesture-Milestone Bridge" (i18n key: gestureMilestone.title)
+
+SECTION A — Gesture Timeline
+- Log pointing events: date/time picker, who (caregiver/baby), object name (text input), joint attention observed (Yes/No toggle)
+- List of logged gesture events sorted by date (most recent first)
+- Each entry shows: date, who pointed, object, joint attention status
+- Storage key: @jobble/gesture_events
+
+SECTION B — Milestone Correlation
+- List of gesture milestones with expected age windows:
+  - Social smile (0-2mo)
+  - Object tracking (2-4mo)
+  - Reaching for objects (3-5mo)
+  - Proto-declarative pointing (9-14mo)
+  - Joint attention established (9-14mo)
+  - Symbolic gestures (wave bye-bye, etc.) (9-14mo)
+- Each milestone: name, expected age range, achieved Yes/No, date achieved (if yes)
+- Storage key: @jobble/gesture_milestones
+
+SECTION C — Development Bridge Visualization
+- Simple horizontal timeline showing the progression: proto-declarative pointing → joint attention → first words
+- Mark current position on the bridge
+- Storage key: @jobble/bridge_progress
+
+SECTION D — Word Burst Tracker
+- Log first words: date, word, context (spontaneous/elicited)
+- List of logged words
+- Storage key: @jobble/word_bursts
+
+SECTION E — Early Warning
+- Check if any gesture milestone is overdue (beyond expected window but not achieved)
+- Show alert banner if overdue milestones exist
+- Alert threshold: if any milestone from 9-14mo window not achieved by 15mo
+
+Use SafeStorage (NOT raw AsyncStorage). Import from @/app/utils/SafeStorage.
+Define safe versions at top: constGESTURE_EVENTS = '@jobble/gesture_events' etc.
+
+STEP 3 — Verify i18n keys already exist
+Search en.json for "gestureMilestone" — keys should already be there from previous cycle staging. DO NOT add new i18n keys. Just use the existing ones.
+
+STEP 4 — Register in _layout.tsx
+Add Tabs.Screen entry for gesture-milestone after milestones tab.
+Name: "gesture-milestone"
+options: title: t('gestureMilestone.title'), tabBarIcon: MaterialCommunityIcons hand-pointing-right
+
+STEP 5 — Verify
+- TSC: npx tsc --noEmit → 0 errors
+- Audit: node scripts/pre-submission-audit.js
+
+Do NOT run npm install or modify package.json. Just create the tab file, add i18n keys, register the tab.
+
+DONE
+ULW

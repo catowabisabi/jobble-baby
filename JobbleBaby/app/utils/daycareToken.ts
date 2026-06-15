@@ -1,6 +1,5 @@
 // Daycare Token Utility — encode/decode baby profile tokens for sharing with daycare
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from './SafeStorage';
 
 export const DAYCARE_TOKEN_KEY = '@jobble/daycare_token';
 

@@ -174,7 +174,7 @@ export default function VillageNetworkScreen() {
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.greeting}>Village Network</Text>
+          <Text style={styles.greeting}>{t('villageNetwork.greeting')}</Text>
           <Text style={styles.title}>{t('villageNetwork.title')}</Text>
           <Text style={styles.subtitle}>{t('villageNetwork.subtitle')}</Text>
         </View>

@@ -1,0 +1,17 @@
+## Task: Review village-network.tsx implementation
+
+STEP 1 — Read the newly created file:
+- JobbleBaby/app/(tabs)/village-network.tsx
+
+STEP 2 — Verify the following:
+1. The file uses `useLanguage()` and `t()` for ALL user-facing text strings (no hardcoded English/Chinese)
+2. All i18n keys exist in both en.json and zh.json (check i18n files)
+3. The tab is registered in _layout.tsx with a valid icon
+4. TSC passes: run `npx tsc --noEmit` in JobbleBaby/ — fix any TypeScript errors found
+
+STEP 3 — If any issues found, fix them directly in the file.
+
+Do NOT run npm install. Do NOT modify package.json.
+
+Report what you found and what (if anything) was fixed.
+ULW

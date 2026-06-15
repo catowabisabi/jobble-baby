@@ -5205,6 +5205,7 @@
       "tw": "Taiwan Emergency",
       "sg": "Singapore Emergency"
     },
-    "connect": "Connect"
+    "connect": "Connect",
+    "greeting": "Village Network"
   }
 }

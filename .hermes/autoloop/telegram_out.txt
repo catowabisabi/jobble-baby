@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 19:04
-✅ Done: #343 GitHub Actions CI/CD workflow review
-🔧 Dispatched: #106 Village Network tab (idea deferred)
+🍼 Jobble Baby · 20:08
+✅ Done: #106 Village Network tab (Hermes created — Sisyphus cycle 353 no-op)
+🔧 Dispatched: #354 Review village-network.tsx (i18n + TSC check)
 📋 TODO: 0 pending · 0 new
-📦 Commit: 046d5dc → pushed
-📝 Desc: Workflow files 正常 ✓ · 50 關鍵詞加入 pool · 派 Sisyphus 做 Village Network tab（#106 deferred）· 等待用戶：隱私政策 URL + EAS credentials
+📦 Commit: b6bd14a → pushed
+📝 Desc: Cycle 353 dispatch 失效（tmux piping 問題），我親自創建 village-network.tsx。派 #354 審查 i18n + TSC。

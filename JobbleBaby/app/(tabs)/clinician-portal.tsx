@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TextInput, Alert, Share } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -175,17 +176,17 @@ export default function ClinicianPortalScreen() {
   const loadData = useCallback(async () => {
     try {
       const [profileRaw, visitRaw, configRaw, checklistRaw, growthRaw, milestoneRaw, trackingRaw, allergenRaw, tongueRaw, cryRaw, reflexRaw] = await Promise.all([
-        AsyncStorage.getItem(PROFILE_KEY),
-        AsyncStorage.getItem(VISIT_HISTORY_KEY),
-        AsyncStorage.getItem(REPORT_CONFIG_KEY),
-        AsyncStorage.getItem(CHECKLIST_KEY),
-        AsyncStorage.getItem(GROWTH_KEY),
-        AsyncStorage.getItem(MILESTONE_KEY),
-        AsyncStorage.getItem(TRACKING_KEY),
-        AsyncStorage.getItem(ALLERGEN_KEY),
-        AsyncStorage.getItem(TONGUE_KEY),
-        AsyncStorage.getItem(CRY_KEY),
-        AsyncStorage.getItem(REFLEX_KEY),
+        safeGetItem(PROFILE_KEY),
+        safeGetItem(VISIT_HISTORY_KEY),
+        safeGetItem(REPORT_CONFIG_KEY),
+        safeGetItem(CHECKLIST_KEY),
+        safeGetItem(GROWTH_KEY),
+        safeGetItem(MILESTONE_KEY),
+        safeGetItem(TRACKING_KEY),
+        safeGetItem(ALLERGEN_KEY),
+        safeGetItem(TONGUE_KEY),
+        safeGetItem(CRY_KEY),
+        safeGetItem(REFLEX_KEY),
       ]);
       if (profileRaw) setProfile(JSON.parse(profileRaw));
       if (visitRaw) setVisitHistory(JSON.parse(visitRaw));
@@ -224,7 +225,7 @@ export default function ClinicianPortalScreen() {
     };
     const updated = [visit, ...visitHistory];
     setVisitHistory(updated);
-    await AsyncStorage.setItem(VISIT_HISTORY_KEY, JSON.stringify(updated));
+    await safeSetItem(VISIT_HISTORY_KEY, JSON.stringify(updated));
     setShowAddVisit(false);
     setNewVisit({ date: '', doctorName: '', clinic: '', notes: '', actionItems: '' });
     // Award badge after 4 visits
@@ -235,7 +236,7 @@ export default function ClinicianPortalScreen() {
   const deleteVisit = async (id: string) => {
     const updated = visitHistory.filter(v => v.id !== id);
     setVisitHistory(updated);
-    await AsyncStorage.setItem(VISIT_HISTORY_KEY, JSON.stringify(updated));
+    await safeSetItem(VISIT_HISTORY_KEY, JSON.stringify(updated));
   };
 
   // ── Toggle Checklist ─────────────────────────────────────────────────────────
@@ -244,7 +245,7 @@ export default function ClinicianPortalScreen() {
       item.id === itemId ? { ...item, checked: !item.checked } : item
     );
     setChecklist(updated);
-    await AsyncStorage.setItem(CHECKLIST_KEY, JSON.stringify(updated));
+    await safeSetItem(CHECKLIST_KEY, JSON.stringify(updated));
   };
 
   // ── Generate Report ─────────────────────────────────────────────────────────

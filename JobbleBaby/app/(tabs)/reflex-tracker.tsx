@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -104,8 +105,8 @@ export default function ReflexTrackerScreen() {
   const loadData = async () => {
     try {
       const [raw, profileRaw] = await Promise.all([
-        AsyncStorage.getItem(REFLEX_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(REFLEX_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (raw) setEntries(JSON.parse(raw));
       if (profileRaw) {
@@ -144,7 +145,7 @@ export default function ReflexTrackerScreen() {
     setShowForm(false);
 
     try {
-      await AsyncStorage.setItem(REFLEX_KEY, JSON.stringify(updated));
+      await safeSetItem(REFLEX_KEY, JSON.stringify(updated));
       if (updated.length >= 3 && !newBadge) {
         await awardBadge('reflex_tracker');
         setNewBadge(true);

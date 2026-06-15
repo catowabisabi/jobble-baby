@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, SafeAreaView } from 'react-native';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { ALLERGENS, AllergenEntry, Allergen } from '../data/allergens';
 import AllergenCard from '../components/AllergenCard';
 import { AllergenDetailModal } from '../components/AllergenDetailModal';
@@ -27,7 +28,7 @@ export default function AllergensScreen() {
   useEffect(() => {
     const loadEntries = async () => {
       try {
-        const stored = await AsyncStorage.getItem(STORAGE_KEY);
+        const stored = await safeGetItem(STORAGE_KEY);
         if (stored) {
           setEntries(JSON.parse(stored));
         }
@@ -49,7 +50,7 @@ export default function AllergensScreen() {
     setEntries(updated);
 
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
 
       if (prevEntry?.status === 'not_introduced' && entry.status !== 'not_introduced') {
         const awarded = await checkFirstAllergenBadge();

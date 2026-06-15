@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, FlatList, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -163,11 +164,11 @@ export default function GutBrainAxis() {
   const loadData = async () => {
     try {
       const [mbRaw, symRaw, trackRaw, cryRaw, profRaw] = await Promise.all([
-        AsyncStorage.getItem(MICROBIOME_KEY),
-        AsyncStorage.getItem(GUT_SYMPTOMS_KEY),
-        AsyncStorage.getItem(TRACKING_KEY),
-        AsyncStorage.getItem(CRY_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(MICROBIOME_KEY),
+        safeGetItem(GUT_SYMPTOMS_KEY),
+        safeGetItem(TRACKING_KEY),
+        safeGetItem(CRY_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (mbRaw) setMicrobiome(JSON.parse(mbRaw));
       if (symRaw) setSymptoms(JSON.parse(symRaw));
@@ -184,7 +185,7 @@ export default function GutBrainAxis() {
       prebiotic_grams: prebiotic, flow_rate: flowRate,
     };
     const updated = [...microbiome.filter(e => e.date !== getDateStr()), entry];
-    await AsyncStorage.setItem(MICROBIOME_KEY, JSON.stringify(updated));
+    await safeSetItem(MICROBIOME_KEY, JSON.stringify(updated));
     setMicrobiome(updated);
     checkBadge(updated);
     setModalVisible(false);
@@ -197,7 +198,7 @@ export default function GutBrainAxis() {
       reflux_episodes: refluxEpisodes,
     };
     const updated = [...symptoms.filter(e => e.date !== getDateStr()), entry];
-    await AsyncStorage.setItem(GUT_SYMPTOMS_KEY, JSON.stringify(updated));
+    await safeSetItem(GUT_SYMPTOMS_KEY, JSON.stringify(updated));
     setSymptoms(updated);
     setModalVisible(false);
   };

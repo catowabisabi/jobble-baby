@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, Modal, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import { STORAGE_KEYS } from '../../store/storage-keys';
@@ -62,21 +63,21 @@ export default function MoroReflexScreen() {
   const [notes, setNotes]         = useState('');
 
   useEffect(() => {
-    AsyncStorage.getItem(EVENTS_KEY).then(d => d && setEvents(JSON.parse(d)));
+    safeGetItem(EVENTS_KEY).then(d => d && setEvents(JSON.parse(d)));
   }, []);
 
   const save = async () => {
     const event: StartleEvent = { id: uid(), timestamp: new Date().toISOString(), trigger, severity, sleep_disruption: disruption, notes };
     const next = [event, ...events];
     setEvents(next);
-    await AsyncStorage.setItem(EVENTS_KEY, JSON.stringify(next));
+    await safeSetItem(EVENTS_KEY, JSON.stringify(next));
     // Badge: Calm Baby — 24h with 0 startles
     const today = new Date().toDateString();
     const yesterday = new Date(Date.now() - 86400000).toDateString();
     const yesterdayEvents = next.filter(e => new Date(e.timestamp).toDateString() === yesterday);
     const todayEvents = next.filter(e => new Date(e.timestamp).toDateString() === today);
     if (yesterdayEvents.length === 0 && todayEvents.length === 0) {
-      await AsyncStorage.setItem(STORAGE_KEYS.BADGE_CALM_BABY, 'true');
+      await safeSetItem(STORAGE_KEYS.BADGE_CALM_BABY, 'true');
     }
     setModal(false); setTrigger('loud_noise'); setSeverity('mild'); setDisruption(false); setNotes('');
   };

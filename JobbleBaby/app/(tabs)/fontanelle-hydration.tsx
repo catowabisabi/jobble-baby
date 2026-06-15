@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
@@ -54,19 +55,19 @@ export default function FontanelleHydrationScreen() {
         safeGetItem(STORAGE_KEY_URINE),
         safeGetItem(STORAGE_KEY_DIAPER),
       ]);
-      if (f !== null) {
+      if (f) {
         const parsed: FontanelleEntry[] = JSON.parse(f);
         setFontanelleLog(parsed);
         const todayEntry = parsed.find(e => e.date === today);
         if (todayEntry) setTodayFontanelle(todayEntry.score);
       }
-      if (u !== null) {
+      if (u) {
         const parsed: UrineEntry[] = JSON.parse(u);
         setUrineLog(parsed);
         const todayEntry = parsed.find(e => e.date === today);
         if (todayEntry) setTodayUrine(todayEntry.color);
       }
-      if (d !== null) {
+      if (d) {
         const parsed: DiaperEntry[] = JSON.parse(d);
         setDiaperLog(parsed);
         const todayEntry = parsed.find(e => e.date === today);

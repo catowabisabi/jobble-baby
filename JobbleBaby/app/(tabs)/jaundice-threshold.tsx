@@ -9,7 +9,8 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -79,14 +80,14 @@ export default function JaundiceThresholdScreen() {
 
   async function loadEntries() {
     try {
-      const raw = await AsyncStorage.getItem(STORAGE_KEY);
+      const raw = await safeGetItem(STORAGE_KEY);
       if (raw) setEntries(JSON.parse(raw));
     } catch {}
   }
 
   async function loadProfile() {
     try {
-      const raw = await AsyncStorage.getItem(PROFILE_KEY);
+      const raw = await safeGetItem(PROFILE_KEY);
       if (raw) {
         const p = JSON.parse(raw);
         if (p.birthDate) {
@@ -120,7 +121,7 @@ export default function JaundiceThresholdScreen() {
     };
     const updated = [...entries, entry].sort((a, b) => a.date.localeCompare(b.date));
     setEntries(updated);
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
     setBiliInput('');
     setShowForm(false);
   }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -139,12 +140,12 @@ export default function ProjectionScreen() {
     const load = async () => {
       try {
         const [p, g, th, tr, sl, ml] = await Promise.all([
-          AsyncStorage.getItem(PROFILE_KEY).then(r => (r ? JSON.parse(r) : null)),
-          AsyncStorage.getItem(GROWTH_KEY).then(r => (r ? JSON.parse(r) : [])),
-          AsyncStorage.getItem(TEETHING_KEY).then(r => (r ? JSON.parse(r) : [])),
-          AsyncStorage.getItem(TRACKING_KEY).then(r => (r ? JSON.parse(r) : [])),
-          AsyncStorage.getItem(SLEEP_KEY).then(r => (r ? JSON.parse(r) : [])),
-          AsyncStorage.getItem(MILESTONE_KEY).then(r => (r ? JSON.parse(r) : [])),
+          safeGetItem(PROFILE_KEY).then(r => (r ? JSON.parse(r) : null)),
+          safeGetItem(GROWTH_KEY).then(r => (r ? JSON.parse(r) : [])),
+          safeGetItem(TEETHING_KEY).then(r => (r ? JSON.parse(r) : [])),
+          safeGetItem(TRACKING_KEY).then(r => (r ? JSON.parse(r) : [])),
+          safeGetItem(SLEEP_KEY).then(r => (r ? JSON.parse(r) : [])),
+          safeGetItem(MILESTONE_KEY).then(r => (r ? JSON.parse(r) : [])),
         ]);
         setProfile(p);
         setGrowthEntries(g);

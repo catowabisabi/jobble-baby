@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -76,9 +77,9 @@ export default function GalantLatchNavigatorScreen() {
   const loadData = async () => {
     try {
       const [galant, latch, temp] = await Promise.all([
-        AsyncStorage.getItem(GALANT_KEY),
-        AsyncStorage.getItem(LATCH_KEY),
-        AsyncStorage.getItem(TEMP_KEY),
+        safeGetItem(GALANT_KEY),
+        safeGetItem(LATCH_KEY),
+        safeGetItem(TEMP_KEY),
       ]);
       if (galant) setGalantEntries(JSON.parse(galant));
       if (latch) setLatchEntries(JSON.parse(latch));
@@ -88,19 +89,19 @@ export default function GalantLatchNavigatorScreen() {
 
   const saveGalant = async (entries: GalantReflexEntry[]) => {
     try {
-      await AsyncStorage.setItem(GALANT_KEY, JSON.stringify(entries));
+      await safeSetItem(GALANT_KEY, JSON.stringify(entries));
     } catch {}
   };
 
   const saveLatch = async (entries: LatchAsymmetryEntry[]) => {
     try {
-      await AsyncStorage.setItem(LATCH_KEY, JSON.stringify(entries));
+      await safeSetItem(LATCH_KEY, JSON.stringify(entries));
     } catch {}
   };
 
   const saveTemp = async (entries: TempRhythmEntry[]) => {
     try {
-      await AsyncStorage.setItem(TEMP_KEY, JSON.stringify(entries));
+      await safeSetItem(TEMP_KEY, JSON.stringify(entries));
     } catch {}
   };
 

@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Modal, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -89,8 +90,8 @@ export default function GearCheckScreen() {
   const loadData = async () => {
     try {
       const [gearData, profileData] = await Promise.all([
-        AsyncStorage.getItem(GEAR_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(GEAR_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (gearData) {
         const all: GearEntry[] = JSON.parse(gearData);
@@ -121,7 +122,7 @@ export default function GearCheckScreen() {
   };
 
   const saveEntries = async (newEntries: GearEntry[]) => {
-    await AsyncStorage.setItem(GEAR_KEY, JSON.stringify(newEntries));
+    await safeSetItem(GEAR_KEY, JSON.stringify(newEntries));
     setEntries(newEntries);
   };
 

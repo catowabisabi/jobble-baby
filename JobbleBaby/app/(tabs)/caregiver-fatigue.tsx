@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { awardBadge } from '../utils/badgeService';
@@ -117,11 +118,11 @@ export default function CaregiverFatigueScreen() {
   async function loadData() {
     try {
       const [surveyData, dailyData, mentalLoadData, respiteData, scoreData] = await Promise.all([
-        AsyncStorage.getItem(SURVEY_KEY),
-        AsyncStorage.getItem(DAILY_KEY),
-        AsyncStorage.getItem(MENTAL_LOAD_KEY),
-        AsyncStorage.getItem(RESPITE_KEY),
-        AsyncStorage.getItem(SCORE_KEY),
+        safeGetItem(SURVEY_KEY),
+        safeGetItem(DAILY_KEY),
+        safeGetItem(MENTAL_LOAD_KEY),
+        safeGetItem(RESPITE_KEY),
+        safeGetItem(SCORE_KEY),
       ]);
 
       if (surveyData) setSurvey(JSON.parse(surveyData));
@@ -135,7 +136,7 @@ export default function CaregiverFatigueScreen() {
 
   async function saveSurvey() {
     const data: CaregiverSurvey = { date: getDateStr(), ...surveyForm };
-    await AsyncStorage.setItem(SURVEY_KEY, JSON.stringify(data));
+    await safeSetItem(SURVEY_KEY, JSON.stringify(data));
     setSurvey(data);
     setShowSurvey(false);
     await updateScore();
@@ -144,7 +145,7 @@ export default function CaregiverFatigueScreen() {
   async function saveDailyCheckIn() {
     const entry: DailyCheckIn = { date: getDateStr(), ...todayCheckIn };
     const updated = dailyLogs.filter(l => l.date !== entry.date).concat(entry);
-    await AsyncStorage.setItem(DAILY_KEY, JSON.stringify(updated));
+    await safeSetItem(DAILY_KEY, JSON.stringify(updated));
     setDailyLogs(updated);
     await updateScore();
   }
@@ -180,7 +181,7 @@ export default function CaregiverFatigueScreen() {
       consecutiveLowDays: consecutiveLow,
     };
 
-    await AsyncStorage.setItem(SCORE_KEY, JSON.stringify(updated));
+    await safeSetItem(SCORE_KEY, JSON.stringify(updated));
     setResilienceScore(updated);
 
     // Badge check
@@ -201,13 +202,13 @@ export default function CaregiverFatigueScreen() {
   async function updateMentalLoad(taskId: string, hours: number) {
     const updated = mentalLoadTasks.map(t => t.id === taskId ? { ...t, estimatedHours: hours } : t);
     setMentalLoadTasks(updated);
-    await AsyncStorage.setItem(MENTAL_LOAD_KEY, JSON.stringify(updated));
+    await safeSetItem(MENTAL_LOAD_KEY, JSON.stringify(updated));
     await updateScore();
   }
 
   async function saveRespite() {
     const data = { weeklyHoursGoal: respiteForm.goalHours, totalWeeks: respiteGoal.totalWeeks + 1 };
-    await AsyncStorage.setItem(RESPITE_KEY, JSON.stringify(data));
+    await safeSetItem(RESPITE_KEY, JSON.stringify(data));
     setRespiteGoal(data);
     setShowRespite(false);
   }

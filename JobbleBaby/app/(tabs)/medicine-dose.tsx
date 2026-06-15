@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
@@ -152,10 +153,10 @@ export default function MedicineDoseScreen() {
     const load = async () => {
       try {
         const [profileRaw, growthRaw, historyRaw, countRaw] = await Promise.all([
-          AsyncStorage.getItem(PROFILE_KEY),
-          AsyncStorage.getItem(GROWTH_KEY),
-          AsyncStorage.getItem(DOSE_HISTORY_KEY),
-          AsyncStorage.getItem(CALC_COUNT_KEY),
+          safeGetItem(PROFILE_KEY),
+          safeGetItem(GROWTH_KEY),
+          safeGetItem(DOSE_HISTORY_KEY),
+          safeGetItem(CALC_COUNT_KEY),
         ]);
         if (profileRaw) setBabyProfile(JSON.parse(profileRaw));
         if (growthRaw) {
@@ -202,7 +203,7 @@ export default function MedicineDoseScreen() {
     // Track calculation count for badge
     const newCount = calcCount + 1;
     setCalcCount(newCount);
-    await AsyncStorage.setItem(CALC_COUNT_KEY, newCount.toString());
+    await safeSetItem(CALC_COUNT_KEY, newCount.toString());
 
     // Award badge if first 5 calculations
     if (newCount === 5) {
@@ -224,7 +225,7 @@ export default function MedicineDoseScreen() {
 
     const updated = [entry, ...doseHistory].slice(0, 50);
     setDoseHistory(updated);
-    await AsyncStorage.setItem(DOSE_HISTORY_KEY, JSON.stringify(updated));
+    await safeSetItem(DOSE_HISTORY_KEY, JSON.stringify(updated));
 
     Alert.alert(t('common.success') || 'Saved', `Recorded ${calculatedDose.ml} ml ${selectedMed}.`);
   };

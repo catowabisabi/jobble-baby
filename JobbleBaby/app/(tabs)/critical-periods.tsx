@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -225,7 +226,7 @@ export default function CriticalPeriodsScreen() {
 
   const loadBirthDate = async () => {
     try {
-      const bd = await AsyncStorage.getItem(BIRTHDATE_KEY);
+      const bd = await safeGetItem(BIRTHDATE_KEY);
       if (bd) {
         setBirthDate(bd);
         setBabyAgeMonths(getMonthsFromBirth(bd));
@@ -235,14 +236,14 @@ export default function CriticalPeriodsScreen() {
 
   const loadActivities = async () => {
     try {
-      const raw = await AsyncStorage.getItem(ACTIVITIES_KEY);
+      const raw = await safeGetItem(ACTIVITIES_KEY);
       if (raw) setActivities(JSON.parse(raw));
     } catch {}
   };
 
   const saveActivities = async (updated: Record<string, PeriodActivity[]>) => {
     setActivities(updated);
-    await AsyncStorage.setItem(ACTIVITIES_KEY, JSON.stringify(updated));
+    await safeSetItem(ACTIVITIES_KEY, JSON.stringify(updated));
   };
 
   const openPeriodDetail = (period: Period) => {

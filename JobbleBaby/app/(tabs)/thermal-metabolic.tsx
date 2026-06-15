@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 import { STORAGE_KEYS } from '../../store/storage-keys';
@@ -94,10 +95,10 @@ export default function ThermalMetabolic() {
   const loadAllData = async () => {
     try {
       const [tr, bf, mm, tc] = await Promise.all([
-        AsyncStorage.getItem(THERMAL_READINGS_KEY),
-        AsyncStorage.getItem(BROWN_FAT_SESSIONS_KEY),
-        AsyncStorage.getItem(METABOLIC_MEAL_LOG_KEY),
-        AsyncStorage.getItem(THERMAL_FEEDING_CORR_KEY),
+        safeGetItem(THERMAL_READINGS_KEY),
+        safeGetItem(BROWN_FAT_SESSIONS_KEY),
+        safeGetItem(METABOLIC_MEAL_LOG_KEY),
+        safeGetItem(THERMAL_FEEDING_CORR_KEY),
       ]);
       if (tr) setThermalReadings(JSON.parse(tr));
       if (bf) setBrownFatSessions(JSON.parse(bf));
@@ -107,22 +108,22 @@ export default function ThermalMetabolic() {
   };
 
   const saveThermalReadings = async (data: ThermalReading[]) => {
-    await AsyncStorage.setItem(THERMAL_READINGS_KEY, JSON.stringify(data));
+    await safeSetItem(THERMAL_READINGS_KEY, JSON.stringify(data));
     setThermalReadings(data);
   };
 
   const saveBrownFatSessions = async (data: BrownFatSession[]) => {
-    await AsyncStorage.setItem(BROWN_FAT_SESSIONS_KEY, JSON.stringify(data));
+    await safeSetItem(BROWN_FAT_SESSIONS_KEY, JSON.stringify(data));
     setBrownFatSessions(data);
   };
 
   const saveMetabolicMeals = async (data: MetabolicMealEntry[]) => {
-    await AsyncStorage.setItem(METABOLIC_MEAL_LOG_KEY, JSON.stringify(data));
+    await safeSetItem(METABOLIC_MEAL_LOG_KEY, JSON.stringify(data));
     setMetabolicMeals(data);
   };
 
   const saveThermalCorrs = async (data: ThermalFeedingCorr[]) => {
-    await AsyncStorage.setItem(THERMAL_FEEDING_CORR_KEY, JSON.stringify(data));
+    await safeSetItem(THERMAL_FEEDING_CORR_KEY, JSON.stringify(data));
     setThermalCorrs(data);
   };
 

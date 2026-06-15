@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, SafeAreaView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useTheme } from '../context/ThemeContext';
@@ -131,9 +132,9 @@ export default function SolidFoodScreen() {
   const loadData = async () => {
     try {
       const [raw, allergenRaw, profileRaw] = await Promise.all([
-        AsyncStorage.getItem(JOURNAL_KEY),
-        AsyncStorage.getItem(ALLERGENS_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(JOURNAL_KEY),
+        safeGetItem(ALLERGENS_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (raw) setEntries(JSON.parse(raw));
       if (allergenRaw) setAllergenEntries(JSON.parse(allergenRaw));
@@ -180,7 +181,7 @@ export default function SolidFoodScreen() {
     setNotes('');
     setShowAddForm(false);
     try {
-      await AsyncStorage.setItem(JOURNAL_KEY, JSON.stringify(updated));
+      await safeSetItem(JOURNAL_KEY, JSON.stringify(updated));
     } catch {}
   };
 
@@ -202,7 +203,7 @@ export default function SolidFoodScreen() {
       },
     };
     setAllergenEntries(updated);
-    AsyncStorage.setItem(ALLERGENS_KEY, JSON.stringify(updated)).catch(() => {});
+    safeSetItem(ALLERGENS_KEY, JSON.stringify(updated)).catch(() => {});
   };
 
   const toggleIronSource = (sourceId: string) => {

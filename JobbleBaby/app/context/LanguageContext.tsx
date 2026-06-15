@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { Platform } from 'react-native';
 
 import en from '../i18n/en.json';
@@ -46,7 +47,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const load = async () => {
       try {
-        const stored = await AsyncStorage.getItem(STORAGE_KEY);
+        const stored = await safeGetItem(STORAGE_KEY);
         if (stored === 'en' || stored === 'zh') {
           setLanguageState(stored);
         }
@@ -70,7 +71,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    AsyncStorage.setItem(STORAGE_KEY, lang).catch(() => {});
+    safeSetItem(STORAGE_KEY, lang).catch(() => {});
   };
 
   const toggleLanguage = () => {

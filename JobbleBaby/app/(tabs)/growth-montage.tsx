@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, Image, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
@@ -49,23 +50,23 @@ export default function GrowthMontageScreen() {
 
   const loadData = async () => {
     try {
-      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      const stored = await safeGetItem(STORAGE_KEY);
       if (stored) setProjects(JSON.parse(stored));
-      const storedSettings = await AsyncStorage.getItem(SETTINGS_KEY);
+      const storedSettings = await safeGetItem(SETTINGS_KEY);
       if (storedSettings) setSettings(JSON.parse(storedSettings));
     } catch (e) { /* silently fail */ }
   };
 
   const saveProjects = async (newProjects: MontageProject[]) => {
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newProjects));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(newProjects));
       setProjects(newProjects);
     } catch (e) { /* silently fail */ }
   };
 
   const checkBadge = async () => {
     try {
-      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      const stored = await safeGetItem(STORAGE_KEY);
       if (stored) {
         const projects: MontageProject[] = JSON.parse(stored);
         const sharedCount = projects.filter(p => p.outputUri).length;

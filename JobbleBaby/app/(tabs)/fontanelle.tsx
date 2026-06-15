@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -91,8 +92,8 @@ export default function FontanelleScreen() {
     const load = async () => {
       try {
         const [profileRaw, entriesRaw] = await Promise.all([
-          AsyncStorage.getItem(PROFILE_KEY),
-          AsyncStorage.getItem(FONTANELLE_KEY),
+          safeGetItem(PROFILE_KEY),
+          safeGetItem(FONTANELLE_KEY),
         ]);
         if (profileRaw) setBabyProfile(JSON.parse(profileRaw));
         if (entriesRaw) setEntries(JSON.parse(entriesRaw));
@@ -144,7 +145,7 @@ export default function FontanelleScreen() {
 
     const updated = [entry, ...entries].slice(0, 100);
     setEntries(updated);
-    await AsyncStorage.setItem(FONTANELLE_KEY, JSON.stringify(updated));
+    await safeSetItem(FONTANELLE_KEY, JSON.stringify(updated));
 
     const isFirstEntry = entries.length === 0;
     if (isFirstEntry) {

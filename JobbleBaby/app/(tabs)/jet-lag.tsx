@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import { STORAGE_KEYS } from '../../store/storage-keys';
@@ -76,14 +77,14 @@ export default function JetLagScreen() {
   const [age, setAge]      = useState('');
 
   useEffect(() => {
-    AsyncStorage.getItem(PLAN_KEY).then(d => d && setPlan(JSON.parse(d)));
+    safeGetItem(PLAN_KEY).then(d => d && setPlan(JSON.parse(d)));
   }, []);
 
   const start = async () => {
     const baby_age = parseInt(age) || 6;
     const newPlan = buildPlan(dep, arr, baby_age);
     setPlan(newPlan);
-    await AsyncStorage.setItem(PLAN_KEY, JSON.stringify(newPlan));
+    await safeSetItem(PLAN_KEY, JSON.stringify(newPlan));
     setModal(false);
   };
 
@@ -91,7 +92,7 @@ export default function JetLagScreen() {
     if (!plan) return;
     const updated = { ...plan, days: plan.days.map(d => d.day === day ? { ...d, completed: true } : d) };
     setPlan(updated);
-    await AsyncStorage.setItem(PLAN_KEY, JSON.stringify(updated));
+    await safeSetItem(PLAN_KEY, JSON.stringify(updated));
   };
 
   const shift = plan ? Math.abs(calcShift(plan.departure_zone, plan.arrival_zone)) : 0;

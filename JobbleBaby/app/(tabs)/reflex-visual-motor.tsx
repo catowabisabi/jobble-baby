@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -54,18 +55,18 @@ export default function ReflexVisualMotor() {
 
   async function loadAll() {
     const [r, v, s] = await Promise.all([
-      AsyncStorage.getItem(REFLEX_KEY),
-      AsyncStorage.getItem(VISUAL_KEY),
-      AsyncStorage.getItem(SKINFOLD_KEY),
+      safeGetItem(REFLEX_KEY),
+      safeGetItem(VISUAL_KEY),
+      safeGetItem(SKINFOLD_KEY),
     ]);
     if (r) setReflexes(JSON.parse(r));
     if (v) setVisual(JSON.parse(v));
     if (s) setSkinfolds(JSON.parse(s));
   }
 
-  async function saveReflexes(data: ReflexEntry[]) { setReflexes(data); await AsyncStorage.setItem(REFLEX_KEY, JSON.stringify(data)); }
-  async function saveVisual(data: VisualEntry[]) { setVisual(data); await AsyncStorage.setItem(VISUAL_KEY, JSON.stringify(data)); }
-  async function saveSkinfolds(data: SkinfoldEntry[]) { setSkinfolds(data); await AsyncStorage.setItem(SKINFOLD_KEY, JSON.stringify(data)); }
+  async function saveReflexes(data: ReflexEntry[]) { setReflexes(data); await safeSetItem(REFLEX_KEY, JSON.stringify(data)); }
+  async function saveVisual(data: VisualEntry[]) { setVisual(data); await safeSetItem(VISUAL_KEY, JSON.stringify(data)); }
+  async function saveSkinfolds(data: SkinfoldEntry[]) { setSkinfolds(data); await safeSetItem(SKINFOLD_KEY, JSON.stringify(data)); }
 
   function getReflexColor(reflexId: string, minMo: number, maxMo: number): string {
     const entry = reflexes.find(r => r.reflexId === reflexId);

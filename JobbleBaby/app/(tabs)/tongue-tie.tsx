@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import { STORAGE_KEYS } from '../../store/storage-keys';
@@ -93,10 +94,10 @@ export default function TongueTieScreen() {
 
   // ─── Load data ─────────────────────────────────────────────────────────────
   useEffect(() => {
-    AsyncStorage.getItem(ASSESSMENT_KEY).then(s => s && setAssessments(JSON.parse(s)));
-    AsyncStorage.getItem(FEEDING_KEY).then(s => s && setFeedings(JSON.parse(s)));
-    AsyncStorage.getItem(CHEWING_KEY).then(s => s && setChewing(JSON.parse(s)));
-    AsyncStorage.getItem(BADGE_KEY).then(s => s === 'true' && setBadgeLatcher(true));
+    safeGetItem(ASSESSMENT_KEY).then(s => s && setAssessments(JSON.parse(s)));
+    safeGetItem(FEEDING_KEY).then(s => s && setFeedings(JSON.parse(s)));
+    safeGetItem(CHEWING_KEY).then(s => s && setChewing(JSON.parse(s)));
+    safeGetItem(BADGE_KEY).then(s => s === 'true' && setBadgeLatcher(true));
   }, []);
 
   // ─── Hazelbaker items ──────────────────────────────────────────────────────
@@ -124,9 +125,9 @@ export default function TongueTieScreen() {
     };
     const next = [rec, ...assessments];
     setAssessments(next);
-    await AsyncStorage.setItem(ASSESSMENT_KEY, JSON.stringify(next));
+    await safeSetItem(ASSESSMENT_KEY, JSON.stringify(next));
     // Badge: tongue-tie-aware = completed assessment
-    await AsyncStorage.setItem(STORAGE_KEYS.BADGE_TONGUE_TIE_AWARE, 'true');
+    await safeSetItem(STORAGE_KEYS.BADGE_TONGUE_TIE_AWARE, 'true');
     setAssessModal(false);
     setHazelbaker([1,1,1,1,1,1]); setJawSymmetry({}); setJawNotes('');
     Alert.alert(t('tabs.tongueTie'), t('assessment.saved') || 'Assessment saved');
@@ -144,12 +145,12 @@ export default function TongueTieScreen() {
     };
     const next = [rec, ...feedings];
     setFeedings(next);
-    await AsyncStorage.setItem(FEEDING_KEY, JSON.stringify(next));
+    await safeSetItem(FEEDING_KEY, JSON.stringify(next));
     // Check latcher badge: 7 consecutive days
     const dates = [...new Set(next.map(r=>r.date))].sort().slice(-7);
     if (dates.length >= 7) {
       setBadgeLatcher(true);
-      await AsyncStorage.setItem(BADGE_KEY, 'true');
+      await safeSetItem(BADGE_KEY, 'true');
     }
     setFeedModal(false);
     setDurMin(''); setMilkMl(''); setGagEp(''); setFNotes(''); setLatchQ(3);
@@ -163,7 +164,7 @@ export default function TongueTieScreen() {
     };
     const next = [rec, ...chewing];
     setChewing(next);
-    await AsyncStorage.setItem(CHEWING_KEY, JSON.stringify(next));
+    await safeSetItem(CHEWING_KEY, JSON.stringify(next));
     setChewModal(false);
     setFoodItem(''); setChewGag(''); setRefusal(''); setCNotes('');
   }

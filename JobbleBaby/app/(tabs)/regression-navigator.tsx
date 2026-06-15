@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS, STATUS_COLORS } from '../theme';
@@ -73,11 +74,11 @@ export default function RegressionNavigatorScreen() {
   const loadAllData = async () => {
     try {
       const [regStr, breathStr, lightStr, calmStr, badgeStr] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEY_REGRESSION),
-        AsyncStorage.getItem(STORAGE_KEY_BREATH),
-        AsyncStorage.getItem(STORAGE_KEY_LIGHT),
-        AsyncStorage.getItem(STORAGE_KEY_CALM),
-        AsyncStorage.getItem(STORAGE_KEY_BADGE),
+        safeGetItem(STORAGE_KEY_REGRESSION),
+        safeGetItem(STORAGE_KEY_BREATH),
+        safeGetItem(STORAGE_KEY_LIGHT),
+        safeGetItem(STORAGE_KEY_CALM),
+        safeGetItem(STORAGE_KEY_BADGE),
       ]);
 
       if (regStr) setRegression(JSON.parse(regStr));
@@ -89,7 +90,7 @@ export default function RegressionNavigatorScreen() {
   };
 
   const saveRegression = async (data: RegressionStatus) => {
-    await AsyncStorage.setItem(STORAGE_KEY_REGRESSION, JSON.stringify(data));
+    await safeSetItem(STORAGE_KEY_REGRESSION, JSON.stringify(data));
     setRegression(data);
   };
 
@@ -111,7 +112,7 @@ export default function RegressionNavigatorScreen() {
     };
     const updated = [entry, ...breathLog].slice(0, 30);
     setBreathLog(updated);
-    AsyncStorage.setItem(STORAGE_KEY_BREATH, JSON.stringify(updated));
+    safeSetItem(STORAGE_KEY_BREATH, JSON.stringify(updated));
   };
 
   const logLight = (morningBrightMin: number, outdoorMin: number) => {
@@ -124,7 +125,7 @@ export default function RegressionNavigatorScreen() {
     };
     const updated = [entry, ...lightLog].slice(0, 14);
     setLightLog(updated);
-    AsyncStorage.setItem(STORAGE_KEY_LIGHT, JSON.stringify(updated));
+    safeSetItem(STORAGE_KEY_LIGHT, JSON.stringify(updated));
   };
 
   const logCalm = (technique: CalmSession['technique']) => {
@@ -135,12 +136,12 @@ export default function RegressionNavigatorScreen() {
     };
     const updated = [session, ...calmSessions].slice(0, 50);
     setCalmSessions(updated);
-    AsyncStorage.setItem(STORAGE_KEY_CALM, JSON.stringify(updated));
+    safeSetItem(STORAGE_KEY_CALM, JSON.stringify(updated));
 
     const newCount = updated.filter(s => s.technique === technique).length;
     if (newCount >= 7 && !hasBadge) {
       setHasBadge(true);
-      AsyncStorage.setItem(STORAGE_KEY_BADGE, 'true');
+      safeSetItem(STORAGE_KEY_BADGE, 'true');
     }
   };
 
@@ -149,7 +150,7 @@ export default function RegressionNavigatorScreen() {
     const updated: RegressionStatus = { ...regression, actualEndWeek: regression.currentWeek };
     saveRegression(updated);
     setHasBadge(true);
-    AsyncStorage.setItem(STORAGE_KEY_BADGE, 'true');
+    safeSetItem(STORAGE_KEY_BADGE, 'true');
     Alert.alert(t('regression.completeTitle') || 'Regression Complete', t('regression.completeMessage') || 'Great job navigating the regression!');
   };
 
@@ -163,11 +164,11 @@ export default function RegressionNavigatorScreen() {
           text: t('common.confirm') || 'Confirm',
           onPress: async () => {
             await Promise.all([
-              AsyncStorage.removeItem(STORAGE_KEY_REGRESSION),
-              AsyncStorage.removeItem(STORAGE_KEY_BREATH),
-              AsyncStorage.removeItem(STORAGE_KEY_LIGHT),
-              AsyncStorage.removeItem(STORAGE_KEY_CALM),
-              AsyncStorage.removeItem(STORAGE_KEY_BADGE),
+              safeRemoveItem(STORAGE_KEY_REGRESSION),
+              safeRemoveItem(STORAGE_KEY_BREATH),
+              safeRemoveItem(STORAGE_KEY_LIGHT),
+              safeRemoveItem(STORAGE_KEY_CALM),
+              safeRemoveItem(STORAGE_KEY_BADGE),
             ]);
             setRegression(null);
             setBreathLog([]);

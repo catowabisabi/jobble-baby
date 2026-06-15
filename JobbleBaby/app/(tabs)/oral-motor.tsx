@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, Modal, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import { STORAGE_KEYS } from '../../store/storage-keys';
@@ -34,16 +35,16 @@ export default function OralMotorScreen() {
   const [notes, setNotes]       = useState('');
 
   useEffect(() => {
-    AsyncStorage.getItem(ENTRIES_KEY).then(d => d && setEntries(JSON.parse(d)));
+    safeGetItem(ENTRIES_KEY).then(d => d && setEntries(JSON.parse(d)));
   }, []);
 
   const save = async () => {
     const entry: Entry = { id: uid(), date: new Date().toISOString(), level: selLevel, acceptance: accept, notes };
     const next = [entry, ...entries];
     setEntries(next);
-    await AsyncStorage.setItem(ENTRIES_KEY, JSON.stringify(next));
+    await safeSetItem(ENTRIES_KEY, JSON.stringify(next));
     const uniqueLevels = new Set(next.map(e => e.level));
-    if (uniqueLevels.size >= 4) await AsyncStorage.setItem(STORAGE_KEYS.BADGE_NIPPLE_NAVIGATOR, 'true');
+    if (uniqueLevels.size >= 4) await safeSetItem(STORAGE_KEYS.BADGE_NIPPLE_NAVIGATOR, 'true');
     setModal(false); setSelLevel(1); setAccept('accepted'); setNotes('');
   };
 

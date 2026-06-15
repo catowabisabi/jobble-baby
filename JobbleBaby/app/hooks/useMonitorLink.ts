@@ -1,5 +1,6 @@
 import { Linking, Alert } from 'react-native';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 
 const PREFERRED_APP_KEY = '@jobble/preferred_monitor_app';
 const LAST_EVENT_KEY = '@jobble/last_monitor_event';
@@ -38,7 +39,7 @@ const MONITOR_APP_NAMES: Record<MonitorApp, string> = {
 export function useMonitorLink() {
   const getPreferredApp = async (): Promise<MonitorApp | null> => {
     try {
-      const val = await AsyncStorage.getItem(PREFERRED_APP_KEY);
+      const val = await safeGetItem(PREFERRED_APP_KEY);
       if (val === 'baby-monitor-3g' || val === 'cloudbaby' || val === 'nanit' || val === 'other') {
         return val;
       }
@@ -49,7 +50,7 @@ export function useMonitorLink() {
   };
 
   const setPreferredApp = async (app: MonitorApp): Promise<void> => {
-    await AsyncStorage.setItem(PREFERRED_APP_KEY, app);
+    await safeSetItem(PREFERRED_APP_KEY, app);
   };
 
   const openMonitorApp = async (): Promise<boolean> => {
@@ -75,7 +76,7 @@ export function useMonitorLink() {
 
   const getLastEvent = async (): Promise<LastMonitorEvent | null> => {
     try {
-      const raw = await AsyncStorage.getItem(LAST_EVENT_KEY);
+      const raw = await safeGetItem(LAST_EVENT_KEY);
       if (raw) return JSON.parse(raw);
       return null;
     } catch {
@@ -86,18 +87,18 @@ export function useMonitorLink() {
   const saveLastEvent = async (event: Omit<LastMonitorEvent, 'app'>): Promise<void> => {
     const app = await getPreferredApp();
     const fullEvent: LastMonitorEvent = { ...event, app: app || 'other' };
-    await AsyncStorage.setItem(LAST_EVENT_KEY, JSON.stringify(fullEvent));
+    await safeSetItem(LAST_EVENT_KEY, JSON.stringify(fullEvent));
     // Also append to history
-    const historyRaw = await AsyncStorage.getItem(MONITOR_EVENTS_KEY);
+    const historyRaw = await safeGetItem(MONITOR_EVENTS_KEY);
     const history: MonitorEvent[] = historyRaw ? JSON.parse(historyRaw) : [];
     const newEvent: MonitorEvent = { id: Date.now().toString(), ...event, app: app || 'other' };
     const updated = [newEvent, ...history].slice(0, 100); // keep last 100
-    await AsyncStorage.setItem(MONITOR_EVENTS_KEY, JSON.stringify(updated));
+    await safeSetItem(MONITOR_EVENTS_KEY, JSON.stringify(updated));
   };
 
   const getMonitorEvents = async (): Promise<MonitorEvent[]> => {
     try {
-      const raw = await AsyncStorage.getItem(MONITOR_EVENTS_KEY);
+      const raw = await safeGetItem(MONITOR_EVENTS_KEY);
       return raw ? JSON.parse(raw) : [];
     } catch {
       return [];

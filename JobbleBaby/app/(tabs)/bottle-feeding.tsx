@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TextInput, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -89,9 +90,9 @@ export default function BottleFeedingScreen() {
   const loadData = useCallback(async () => {
     try {
       const [nip, sess, pace] = await Promise.all([
-        AsyncStorage.getItem(NIPPLE_KEY),
-        AsyncStorage.getItem(SESSION_KEY),
-        AsyncStorage.getItem(PACE_KEY),
+        safeGetItem(NIPPLE_KEY),
+        safeGetItem(SESSION_KEY),
+        safeGetItem(PACE_KEY),
       ]);
       if (nip) { setNippleData(JSON.parse(nip)); setNippleNotes(JSON.parse(nip).notes || ''); }
       if (sess) setSessions(JSON.parse(sess));
@@ -106,7 +107,7 @@ export default function BottleFeedingScreen() {
   const saveNippleLevel = async (level: number) => {
     const data: NippleData = { level, started_at: new Date().toISOString(), notes: nippleNotes };
     setNippleData(data);
-    await AsyncStorage.setItem(NIPPLE_KEY, JSON.stringify(data));
+    await safeSetItem(NIPPLE_KEY, JSON.stringify(data));
     setShowNippleModal(false);
   };
 
@@ -114,7 +115,7 @@ export default function BottleFeedingScreen() {
     if (!nippleData) return;
     const data: NippleData = { ...nippleData, notes: nippleNotes };
     setNippleData(data);
-    await AsyncStorage.setItem(NIPPLE_KEY, JSON.stringify(data));
+    await safeSetItem(NIPPLE_KEY, JSON.stringify(data));
   };
 
   // ── Session Log ─────────────────────────────────────────────────────────────
@@ -133,7 +134,7 @@ export default function BottleFeedingScreen() {
     };
     const updated = [entry, ...sessions];
     setSessions(updated);
-    await AsyncStorage.setItem(SESSION_KEY, JSON.stringify(updated));
+    await safeSetItem(SESSION_KEY, JSON.stringify(updated));
     setShowSessionModal(false);
     setSessionForm({ duration_min: '', volume_ml: '', nipple_level: '1', pace_score: '3', notes: '' });
   };
@@ -149,7 +150,7 @@ export default function BottleFeedingScreen() {
     };
     const updated = [entry, ...paceSessions];
     setPaceSessions(updated);
-    await AsyncStorage.setItem(PACE_KEY, JSON.stringify(updated));
+    await safeSetItem(PACE_KEY, JSON.stringify(updated));
     setShowPaceModal(false);
     setPaceForm({ duration_min: '', notes: '' });
   };

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Switch, Alert, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -180,9 +181,9 @@ export default function SleepTrainingScreen() {
     const loadData = async () => {
       try {
         const [profileRaw, sessionRaw, nightsRaw] = await Promise.all([
-          AsyncStorage.getItem(PROFILE_KEY),
-          AsyncStorage.getItem(SESSION_KEY),
-          AsyncStorage.getItem(NIGHTS_KEY),
+          safeGetItem(PROFILE_KEY),
+          safeGetItem(SESSION_KEY),
+          safeGetItem(NIGHTS_KEY),
         ]);
         if (profileRaw) setBabyProfile(JSON.parse(profileRaw));
         if (sessionRaw) {
@@ -206,7 +207,7 @@ export default function SleepTrainingScreen() {
 
   // Save session whenever it changes
   useEffect(() => {
-    AsyncStorage.setItem(SESSION_KEY, JSON.stringify(session)).catch(() => {});
+    safeSetItem(SESSION_KEY, JSON.stringify(session)).catch(() => {});
   }, [session]);
 
   // Timer tick for Ferber/CIO
@@ -313,7 +314,7 @@ export default function SleepTrainingScreen() {
 
     const updatedLogs = [nightLog, ...nightLogs].slice(0, 30);
     setNightLogs(updatedLogs);
-    await AsyncStorage.setItem(NIGHTS_KEY, JSON.stringify(updatedLogs));
+    await safeSetItem(NIGHTS_KEY, JSON.stringify(updatedLogs));
 
     // Award badges
     if (success) {

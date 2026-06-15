@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
@@ -72,10 +73,10 @@ export default function ProcedureRecoveryScreen() {
   async function loadAll() {
     try {
       const [proc, feed, med, wound] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEY_PROCEDURE),
-        AsyncStorage.getItem(STORAGE_KEY_FEEDING),
-        AsyncStorage.getItem(STORAGE_KEY_MEDICATION),
-        AsyncStorage.getItem(STORAGE_KEY_WOUND),
+        safeGetItem(STORAGE_KEY_PROCEDURE),
+        safeGetItem(STORAGE_KEY_FEEDING),
+        safeGetItem(STORAGE_KEY_MEDICATION),
+        safeGetItem(STORAGE_KEY_WOUND),
       ]);
       if (proc) setProcedure(JSON.parse(proc));
       if (feed) setFeedingLog(JSON.parse(feed));
@@ -87,7 +88,7 @@ export default function ProcedureRecoveryScreen() {
   async function saveProcedure() {
     const entry: ProcedureEntry = { id: Date.now().toString(), date: procedureDate, procedureType, clinic, surgeon };
     setProcedure(entry);
-    await AsyncStorage.setItem(STORAGE_KEY_PROCEDURE, JSON.stringify(entry));
+    await safeSetItem(STORAGE_KEY_PROCEDURE, JSON.stringify(entry));
     Alert.alert(t('procedureRecovery.saved') || 'Saved', t('procedureRecovery.procedureSaved') || 'Procedure logged');
   }
 
@@ -98,7 +99,7 @@ export default function ProcedureRecoveryScreen() {
     };
     const updated = [entry, ...feedingLog].slice(0, 100);
     setFeedingLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_FEEDING, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_FEEDING, JSON.stringify(updated));
     setFeedingNotes('');
     if ((Date.now() - new Date(entry.date).getTime()) / (1000 * 60 * 60) > 12) {
       Alert.alert(t('procedureRecovery.alert') || 'Alert', t('procedureRecovery.noFeeding12h') || 'No feeding for 12+ hours');
@@ -111,7 +112,7 @@ export default function ProcedureRecoveryScreen() {
     const entry: MedicationEntry = { id: Date.now().toString(), date: new Date().toISOString(), drug, doseMg: d, weightKg: w };
     const updated = [entry, ...medicationLog].slice(0, 100);
     setMedicationLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_MEDICATION, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_MEDICATION, JSON.stringify(updated));
     setDoseMg('');
   }
 

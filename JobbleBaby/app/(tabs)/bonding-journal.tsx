@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Text, ScrollView, SafeAreaView, TouchableOpacity, TextInput, Alert, Image } from 'react-native';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -122,21 +123,21 @@ export default function BondingJournalScreen() {
 
   const loadProfile = async () => {
     try {
-      const stored = await AsyncStorage.getItem(PROFILE_KEY);
+      const stored = await safeGetItem(PROFILE_KEY);
       if (stored) setBabyProfile(JSON.parse(stored));
     } catch {}
   };
 
   const loadEntries = async () => {
     try {
-      const stored = await AsyncStorage.getItem(ENTRIES_KEY);
+      const stored = await safeGetItem(ENTRIES_KEY);
       if (stored) setEntries(JSON.parse(stored));
     } catch {}
   };
 
   const loadSkinToSkin = async () => {
     try {
-      const stored = await AsyncStorage.getItem(SKIN_TO_SKIN_KEY);
+      const stored = await safeGetItem(SKIN_TO_SKIN_KEY);
       if (stored) {
         const data: SkinToSkinData = JSON.parse(stored);
         setSkinToSkin(data);
@@ -146,7 +147,7 @@ export default function BondingJournalScreen() {
 
   const loadMood = async () => {
     try {
-      const stored = await AsyncStorage.getItem(MOOD_KEY);
+      const stored = await safeGetItem(MOOD_KEY);
       if (stored) {
         const data: MoodEntry[] = JSON.parse(stored);
         setMoodEntries(data);
@@ -159,26 +160,26 @@ export default function BondingJournalScreen() {
 
   const loadMilestones = async () => {
     try {
-      const stored = await AsyncStorage.getItem(MILESTONES_KEY);
+      const stored = await safeGetItem(MILESTONES_KEY);
       if (stored) setMilestones(JSON.parse(stored));
     } catch {}
   };
 
   const saveSkinToSkin = async (data: SkinToSkinData) => {
     try {
-      await AsyncStorage.setItem(SKIN_TO_SKIN_KEY, JSON.stringify(data));
+      await safeSetItem(SKIN_TO_SKIN_KEY, JSON.stringify(data));
     } catch {}
   };
 
   const saveMood = async (data: MoodEntry[]) => {
     try {
-      await AsyncStorage.setItem(MOOD_KEY, JSON.stringify(data));
+      await safeSetItem(MOOD_KEY, JSON.stringify(data));
     } catch {}
   };
 
   const saveMilestones = async (data: Record<string, boolean>) => {
     try {
-      await AsyncStorage.setItem(MILESTONES_KEY, JSON.stringify(data));
+      await safeSetItem(MILESTONES_KEY, JSON.stringify(data));
     } catch {}
   };
 
@@ -223,7 +224,7 @@ export default function BondingJournalScreen() {
     const updated = [newEntry, ...entries];
     setEntries(updated);
     try {
-      await AsyncStorage.setItem(ENTRIES_KEY, JSON.stringify(updated));
+      await safeSetItem(ENTRIES_KEY, JSON.stringify(updated));
     } catch {}
     setShowAddEntry(false);
     setSelectedType('');

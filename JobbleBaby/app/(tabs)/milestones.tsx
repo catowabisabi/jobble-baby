@@ -4,7 +4,8 @@ import {
   Image, Dimensions, Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
@@ -128,7 +129,7 @@ export default function MilestonesScreen() {
 
   const loadBrainBuilder = async () => {
     try {
-      const stored = await AsyncStorage.getItem('@jobble_baby_profile');
+      const stored = await safeGetItem('@jobble_baby_profile');
       if (stored) {
         const profile: BabyProfile = JSON.parse(stored);
         if (profile.birthDate) {
@@ -136,7 +137,7 @@ export default function MilestonesScreen() {
           setBabyMonths(months);
         }
       }
-      const raw = await AsyncStorage.getItem(BRAIN_BUILDER_KEY);
+      const raw = await safeGetItem(BRAIN_BUILDER_KEY);
       if (raw) {
         const data = JSON.parse(raw);
         const today = getDateStr();
@@ -150,7 +151,7 @@ export default function MilestonesScreen() {
 
   const checkMilestoneReminder = async () => {
     try {
-      const profileRaw = await AsyncStorage.getItem('@jobble_baby_profile');
+      const profileRaw = await safeGetItem('@jobble_baby_profile');
       if (!profileRaw) return;
       const profile: BabyProfile = JSON.parse(profileRaw);
       if (!profile.birthDate) return;
@@ -160,14 +161,14 @@ export default function MilestonesScreen() {
       const months = totalDays / 30.44;
       // Show first smile reminder at 4-6 weeks (28-42 days)
       if (totalDays >= 28 && totalDays <= 56) {
-        const milestonesRaw = await AsyncStorage.getItem(STORAGE_KEY);
+        const milestonesRaw = await safeGetItem(STORAGE_KEY);
         const existing: MilestonePhoto[] = milestonesRaw ? JSON.parse(milestonesRaw) : [];
         const hasSmile = existing.some(p => p.type === 'first_smile');
         if (!hasSmile) setShowReminder(true);
       }
       // Show first food reminder at 5-7 months (150-210 days)
       if (months >= 5 && months <= 7) {
-        const milestonesRaw = await AsyncStorage.getItem(STORAGE_KEY);
+        const milestonesRaw = await safeGetItem(STORAGE_KEY);
         const existing: MilestonePhoto[] = milestonesRaw ? JSON.parse(milestonesRaw) : [];
         const hasFood = existing.some(p => p.type === 'first_food');
         if (!hasFood && totalDays > 150) setShowReminder(true);
@@ -177,14 +178,14 @@ export default function MilestonesScreen() {
 
   const loadPhotos = async () => {
     try {
-      const raw = await AsyncStorage.getItem(STORAGE_KEY);
+      const raw = await safeGetItem(STORAGE_KEY);
       if (raw) setPhotos(JSON.parse(raw));
     } catch { /* ignore */ }
   };
 
   const loadProfile = async () => {
     try {
-      const stored = await AsyncStorage.getItem('@jobble_baby_profile');
+      const stored = await safeGetItem('@jobble_baby_profile');
       if (stored) setBabyProfile(JSON.parse(stored));
     } catch { /* ignore */ }
   };
@@ -204,7 +205,7 @@ export default function MilestonesScreen() {
     }
 
     try {
-      await AsyncStorage.setItem(BRAIN_BUILDER_KEY, JSON.stringify({
+      await safeSetItem(BRAIN_BUILDER_KEY, JSON.stringify({
         weekStart: today.substring(0, 7),
         doneDays: Array.from(newDone),
         badgeEarned: earned,
@@ -238,7 +239,7 @@ export default function MilestonesScreen() {
       let height: number | undefined;
       let weight: number | undefined;
       try {
-        const growthRaw = await AsyncStorage.getItem(STORAGE_KEYS.GROWTH_ENTRIES);
+        const growthRaw = await safeGetItem(STORAGE_KEYS.GROWTH_ENTRIES);
         if (growthRaw) {
           const entries = JSON.parse(growthRaw);
           if (entries.length > 0) {
@@ -260,7 +261,7 @@ export default function MilestonesScreen() {
 
       const updated = [newPhoto, ...photos];
       setPhotos(updated);
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
 
       // Trigger badge check
       await onNewGrowthEntry();

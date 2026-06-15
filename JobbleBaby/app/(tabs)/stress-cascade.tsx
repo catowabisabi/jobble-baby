@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Modal, Animated, Alert, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -63,10 +64,10 @@ export default function StressCascade() {
   const loadData = async () => {
     try {
       const [logRaw, nightsRaw, countRaw, checkinRaw] = await Promise.all([
-        AsyncStorage.getItem(STRESS_LOG_KEY),
-        AsyncStorage.getItem(SLEEP_TRAINING_NIGHTS_KEY),
-        AsyncStorage.getItem(INTERVENTIONS_COUNT_KEY),
-        AsyncStorage.getItem(STRESS_CHECKIN_KEY),
+        safeGetItem(STRESS_LOG_KEY),
+        safeGetItem(SLEEP_TRAINING_NIGHTS_KEY),
+        safeGetItem(INTERVENTIONS_COUNT_KEY),
+        safeGetItem(STRESS_CHECKIN_KEY),
       ]);
       if (logRaw) setStressLog(JSON.parse(logRaw));
       if (nightsRaw) setSleepNights(JSON.parse(nightsRaw));
@@ -78,21 +79,21 @@ export default function StressCascade() {
   const saveStressLog = async (log: StressEntry[]) => {
     setStressLog(log);
     try {
-      await AsyncStorage.setItem(STRESS_LOG_KEY, JSON.stringify(log));
+      await safeSetItem(STRESS_LOG_KEY, JSON.stringify(log));
     } catch {}
   };
 
   const saveInterventionsCount = async (count: number) => {
     setInterventionsCount(count);
     try {
-      await AsyncStorage.setItem(INTERVENTIONS_COUNT_KEY, String(count));
+      await safeSetItem(INTERVENTIONS_COUNT_KEY, String(count));
     } catch {}
   };
 
   const saveStressCheckinDate = async (date: string) => {
     setStressCheckinDate(date);
     try {
-      await AsyncStorage.setItem(STRESS_CHECKIN_KEY, date);
+      await safeSetItem(STRESS_CHECKIN_KEY, date);
     } catch {}
   };
 
@@ -178,7 +179,7 @@ export default function StressCascade() {
 
   const handleCallFriend = async () => {
     try {
-      const contactsRaw = await AsyncStorage.getItem(EMERGENCY_CONTACTS_KEY);
+      const contactsRaw = await safeGetItem(EMERGENCY_CONTACTS_KEY);
       let phone = PLACEHOLDER_PHONE;
       if (contactsRaw) {
         const contacts = JSON.parse(contactsRaw);
@@ -240,7 +241,7 @@ export default function StressCascade() {
 
   const handleShiftHandoffDuringStress = async () => {
     try {
-      const shiftRaw = await AsyncStorage.getItem(SHIFT_HANDOFF_KEY);
+      const shiftRaw = await safeGetItem(SHIFT_HANDOFF_KEY);
       if (shiftRaw) {
         const shift = JSON.parse(shiftRaw);
         if (shift.lastSwitchTimestamp) {

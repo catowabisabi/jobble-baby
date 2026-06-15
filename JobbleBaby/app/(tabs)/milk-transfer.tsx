@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -100,8 +101,8 @@ export default function MilkTransferScreen() {
     const load = async () => {
       try {
         const [histRaw, statsRaw] = await Promise.all([
-          AsyncStorage.getItem(HISTORY_KEY),
-          AsyncStorage.getItem(STATS_KEY),
+          safeGetItem(HISTORY_KEY),
+          safeGetItem(STATS_KEY),
         ]);
         if (histRaw) setHistory(JSON.parse(histRaw));
         if (statsRaw) setSideStats(JSON.parse(statsRaw));
@@ -158,7 +159,7 @@ export default function MilkTransferScreen() {
 
     const updated = [entry, ...history].slice(0, 50);
     setHistory(updated);
-    await AsyncStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
+    await safeSetItem(HISTORY_KEY, JSON.stringify(updated));
 
     const updatedStats = { ...sideStats };
     const sideKey = selectedSide;
@@ -167,7 +168,7 @@ export default function MilkTransferScreen() {
       sessionCount: updatedStats[sideKey].sessionCount + 1,
     };
     setSideStats(updatedStats);
-    await AsyncStorage.setItem(STATS_KEY, JSON.stringify(updatedStats));
+    await safeSetItem(STATS_KEY, JSON.stringify(updatedStats));
 
     const totalSessions = Object.values(updatedStats).reduce((sum, s) => sum + s.sessionCount, 0);
     if (totalSessions >= 10) {

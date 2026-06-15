@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
@@ -136,12 +137,12 @@ export default function SleepArchitectureScreen() {
   const loadAllData = async () => {
     try {
       const [arch, circ, ww, wn, env, debt] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEY_ARCHITECTURE),
-        AsyncStorage.getItem(STORAGE_KEY_CIRCADIAN),
-        AsyncStorage.getItem(STORAGE_KEY_WAKE_WINDOWS),
-        AsyncStorage.getItem(STORAGE_KEY_WHITE_NOISE),
-        AsyncStorage.getItem(STORAGE_KEY_ENVIRONMENT),
-        AsyncStorage.getItem(STORAGE_KEY_SLEEP_DEBT),
+        safeGetItem(STORAGE_KEY_ARCHITECTURE),
+        safeGetItem(STORAGE_KEY_CIRCADIAN),
+        safeGetItem(STORAGE_KEY_WAKE_WINDOWS),
+        safeGetItem(STORAGE_KEY_WHITE_NOISE),
+        safeGetItem(STORAGE_KEY_ENVIRONMENT),
+        safeGetItem(STORAGE_KEY_SLEEP_DEBT),
       ]);
       if (arch) setArchitectureLog(JSON.parse(arch));
       if (circ) setCircadianLog(JSON.parse(circ));
@@ -166,7 +167,7 @@ export default function SleepArchitectureScreen() {
     const updated = architectureLog.filter(e => e.date !== today);
     updated.push(entry);
     setArchitectureLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_ARCHITECTURE, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_ARCHITECTURE, JSON.stringify(updated));
 
     const recommended = getRecommendedSleep(babyAge);
     const debtDelta = recommended - entry.totalMinutes;
@@ -177,7 +178,7 @@ export default function SleepArchitectureScreen() {
     debtEntry.debtMin = cumulative;
     updatedDebt.push(debtEntry);
     setSleepDebtLog(updatedDebt);
-    await AsyncStorage.setItem(STORAGE_KEY_SLEEP_DEBT, JSON.stringify(updatedDebt));
+    await safeSetItem(STORAGE_KEY_SLEEP_DEBT, JSON.stringify(updatedDebt));
 
     setTotalMin(''); setNightWakings(''); setTimeToSleep(''); setWasoMin('');
   };
@@ -194,7 +195,7 @@ export default function SleepArchitectureScreen() {
     const updated = circadianLog.filter(e => e.date !== today);
     updated.push(entry);
     setCircadianLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_CIRCADIAN, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_CIRCADIAN, JSON.stringify(updated));
     setMorningLight(''); setOutdoorMin(''); setDimTime(''); setDuskTime('');
   };
 
@@ -207,7 +208,7 @@ export default function SleepArchitectureScreen() {
     const updated = wakeWindows.filter(e => e.date !== today);
     updated.push(entry);
     setWakeWindows(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_WAKE_WINDOWS, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_WAKE_WINDOWS, JSON.stringify(updated));
     setSuggestedWW(''); setActualWW('');
   };
 
@@ -221,7 +222,7 @@ export default function SleepArchitectureScreen() {
     const updated = whiteNoiseLog.filter(e => e.date !== today);
     updated.push(entry);
     setWhiteNoiseLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_WHITE_NOISE, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_WHITE_NOISE, JSON.stringify(updated));
     setSettlingMin('');
   };
 
@@ -236,7 +237,7 @@ export default function SleepArchitectureScreen() {
     const updated = environmentLog.filter(e => e.date !== today);
     updated.push(entry);
     setEnvironmentLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_ENVIRONMENT, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_ENVIRONMENT, JSON.stringify(updated));
   };
 
   const latestEntry = architectureLog.find(e => e.date === today);

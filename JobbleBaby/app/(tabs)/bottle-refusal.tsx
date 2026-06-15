@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -128,8 +129,8 @@ export default function BottleRefusalScreen() {
   const loadData = async () => {
     try {
       const [raw, profileRaw] = await Promise.all([
-        AsyncStorage.getItem(BOTTLE_REFUSAL_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(BOTTLE_REFUSAL_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (raw) setEntries(JSON.parse(raw));
       if (profileRaw) {
@@ -179,7 +180,7 @@ export default function BottleRefusalScreen() {
     setShowLogForm(false);
 
     try {
-      await AsyncStorage.setItem(BOTTLE_REFUSAL_KEY, JSON.stringify(updated));
+      await safeSetItem(BOTTLE_REFUSAL_KEY, JSON.stringify(updated));
       if (updated.length >= 5 && !newBadge) {
         await awardBadge('bottle_refusal_tracked');
         setNewBadge(true);
@@ -192,7 +193,7 @@ export default function BottleRefusalScreen() {
     const updated = entries.filter((e) => e.id !== id);
     setEntries(updated);
     try {
-      await AsyncStorage.setItem(BOTTLE_REFUSAL_KEY, JSON.stringify(updated));
+      await safeSetItem(BOTTLE_REFUSAL_KEY, JSON.stringify(updated));
     } catch {}
   };
 

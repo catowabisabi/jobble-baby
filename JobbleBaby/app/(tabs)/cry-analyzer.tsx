@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TextInput, FlatList, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -104,8 +105,8 @@ export default function CryAnalyzer() {
   const loadData = async () => {
     try {
       const [entriesRaw, profileRaw] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(STORAGE_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (entriesRaw) setEntries(JSON.parse(entriesRaw));
       if (profileRaw) setBabyProfile(JSON.parse(profileRaw));
@@ -115,7 +116,7 @@ export default function CryAnalyzer() {
   const saveEntries = async (newEntries: CryEntry[]) => {
     setEntries(newEntries);
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newEntries));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(newEntries));
     } catch {}
   };
 

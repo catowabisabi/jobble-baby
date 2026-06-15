@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -60,9 +61,9 @@ export default function ShiftHandoff() {
     const loadData = async () => {
       try {
         const [shiftRaw, logRaw, notesRaw] = await Promise.all([
-          AsyncStorage.getItem(SHIFT_STATE_KEY),
-          AsyncStorage.getItem(SHIFT_LOG_KEY),
-          AsyncStorage.getItem(HANDOVER_NOTES_KEY),
+          safeGetItem(SHIFT_STATE_KEY),
+          safeGetItem(SHIFT_LOG_KEY),
+          safeGetItem(HANDOVER_NOTES_KEY),
         ]);
         if (shiftRaw) setShiftState(JSON.parse(shiftRaw));
         if (logRaw) setCareLog(JSON.parse(logRaw));
@@ -85,7 +86,7 @@ export default function ShiftHandoff() {
         });
         if (JSON.stringify(updatedNotes) !== JSON.stringify(handoverNotes)) {
           setHandoverNotes(updatedNotes);
-          await AsyncStorage.setItem(HANDOVER_NOTES_KEY, JSON.stringify(updatedNotes));
+          await safeSetItem(HANDOVER_NOTES_KEY, JSON.stringify(updatedNotes));
         }
       } catch {
       }
@@ -98,7 +99,7 @@ export default function ShiftHandoff() {
   const saveShiftState = async (state: ShiftState) => {
     setShiftState(state);
     try {
-      await AsyncStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(state));
+      await safeSetItem(SHIFT_STATE_KEY, JSON.stringify(state));
     } catch {
     }
   };
@@ -106,7 +107,7 @@ export default function ShiftHandoff() {
   const saveCareLog = async (log: CareLogEntry[]) => {
     setCareLog(log);
     try {
-      await AsyncStorage.setItem(SHIFT_LOG_KEY, JSON.stringify(log));
+      await safeSetItem(SHIFT_LOG_KEY, JSON.stringify(log));
     } catch {
     }
   };
@@ -114,7 +115,7 @@ export default function ShiftHandoff() {
   const saveHandoverNotes = async (notes: HandoverNote[]) => {
     setHandoverNotes(notes);
     try {
-      await AsyncStorage.setItem(HANDOVER_NOTES_KEY, JSON.stringify(notes));
+      await safeSetItem(HANDOVER_NOTES_KEY, JSON.stringify(notes));
     } catch {
     }
   };

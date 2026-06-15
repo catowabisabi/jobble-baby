@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { Link } from 'expo-router';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
@@ -138,7 +139,7 @@ export default function HomeSafetyScreen() {
 
   async function loadData() {
     try {
-      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      const stored = await safeGetItem(STORAGE_KEY);
       if (stored) {
         const data: StoredData = JSON.parse(stored);
         setAnswers(data.answers || {});
@@ -155,7 +156,7 @@ export default function HomeSafetyScreen() {
         lastAuditDate: lastAuditDate || new Date().toISOString(),
         roomsCompleted,
       };
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(data));
     } catch (e) { /* ignore */ }
   }
 

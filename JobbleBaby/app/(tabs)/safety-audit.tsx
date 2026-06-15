@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
@@ -92,7 +93,7 @@ export default function SafetyAuditScreen() {
 
   async function loadEntries() {
     try {
-      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      const stored = await safeGetItem(STORAGE_KEY);
       if (stored) setEntries(JSON.parse(stored));
     } catch (e) { /* ignore */ }
   }
@@ -107,7 +108,7 @@ export default function SafetyAuditScreen() {
     };
     const newEntries = [entry, ...entries].slice(0, 50);
     setEntries(newEntries);
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newEntries));
+    await safeSetItem(STORAGE_KEY, JSON.stringify(newEntries));
     if (currentZone < ZONES.length - 1) {
       setCurrentZone(currentZone + 1);
     } else {

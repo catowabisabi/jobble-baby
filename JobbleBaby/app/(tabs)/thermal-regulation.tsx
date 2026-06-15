@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -131,28 +132,28 @@ export default function ThermalRegulationScreen() {
 
   const loadThermalLog = async () => {
     try {
-      const data = await AsyncStorage.getItem(THERMAL_LOG_KEY);
+      const data = await safeGetItem(THERMAL_LOG_KEY);
       if (data) setEntries(JSON.parse(data));
     } catch (e) { /* ignore */ }
   };
 
   const loadAlertThreshold = async () => {
     try {
-      const data = await AsyncStorage.getItem(THERMAL_ALERT_THRESHOLD_KEY);
+      const data = await safeGetItem(THERMAL_ALERT_THRESHOLD_KEY);
       if (data) setThreshold(JSON.parse(data));
     } catch (e) { /* ignore */ }
   };
 
   const loadFeverEpisodes = async () => {
     try {
-      const data = await AsyncStorage.getItem(FEVER_EPISODE_KEY);
+      const data = await safeGetItem(FEVER_EPISODE_KEY);
       if (data) setFeverEpisodes(JSON.parse(data));
     } catch (e) { /* ignore */ }
   };
 
   const loadCarAlertSetting = async () => {
     try {
-      const data = await AsyncStorage.getItem(CAR_TEMP_ALERT_KEY);
+      const data = await safeGetItem(CAR_TEMP_ALERT_KEY);
       if (data !== null) setCarAlertEnabled(JSON.parse(data));
     } catch (e) { /* ignore */ }
   };
@@ -179,7 +180,7 @@ export default function ThermalRegulationScreen() {
     };
     const updated = [entry, ...entries].slice(0, 100);
     setEntries(updated);
-    await AsyncStorage.setItem(THERMAL_LOG_KEY, JSON.stringify(updated));
+    await safeSetItem(THERMAL_LOG_KEY, JSON.stringify(updated));
     try { await onNewGrowthEntry(); } catch (e) { /* ignore badge errors */ }
     setBodyTemp('');
     setAmbientTemp('');
@@ -202,7 +203,7 @@ export default function ThermalRegulationScreen() {
     };
     const updated = [episode, ...feverEpisodes].slice(0, 50);
     setFeverEpisodes(updated);
-    await AsyncStorage.setItem(FEVER_EPISODE_KEY, JSON.stringify(updated));
+    await safeSetItem(FEVER_EPISODE_KEY, JSON.stringify(updated));
     if (isFever(ft, feverTempType)) {
       Alert.alert(t('thermal.feverDetected'), t('thermal.feverAdvice'), [{ text: 'OK', style: 'default' }]);
     }
@@ -603,7 +604,7 @@ export default function ThermalRegulationScreen() {
                 onPress={async () => {
                   const newVal = !carAlertEnabled;
                   setCarAlertEnabled(newVal);
-                  await AsyncStorage.setItem(CAR_TEMP_ALERT_KEY, JSON.stringify(newVal));
+                  await safeSetItem(CAR_TEMP_ALERT_KEY, JSON.stringify(newVal));
                 }}
                 accessibilityLabel={carAlertEnabled ? 'Disable car seat alert' : 'Enable car seat alert'}
                 accessibilityHint={carAlertEnabled ? 'Turns off the car seat temperature alert' : 'Turns on the car seat temperature alert'}

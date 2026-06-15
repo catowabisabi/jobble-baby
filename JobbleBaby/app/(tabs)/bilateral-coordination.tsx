@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Share, Alert, TextInput } from 'react-native';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
@@ -67,8 +68,8 @@ export default function BilateralCoordinationScreen() {
   const loadData = async () => {
     try {
       const [b, s] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEY_BILATERAL),
-        AsyncStorage.getItem(STORAGE_KEY_SCORES),
+        safeGetItem(STORAGE_KEY_BILATERAL),
+        safeGetItem(STORAGE_KEY_SCORES),
       ]);
       if (b) {
         const parsed: BilateralEntry[] = JSON.parse(b);
@@ -120,7 +121,7 @@ export default function BilateralCoordinationScreen() {
     const updated = bilateralLog.filter(e => !(e.date === today && e.movementType === selectedMovement));
     updated.push(entry);
     setBilateralLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEY_BILATERAL, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY_BILATERAL, JSON.stringify(updated));
 
     // Update coordination scores
     const avgSym = calculateAvgSymmetry();
@@ -132,7 +133,7 @@ export default function BilateralCoordinationScreen() {
     const updatedScores = scores.filter(s => s.date !== today);
     updatedScores.push(coordScore);
     setScores(updatedScores);
-    await AsyncStorage.setItem(STORAGE_KEY_SCORES, JSON.stringify(updatedScores));
+    await safeSetItem(STORAGE_KEY_SCORES, JSON.stringify(updatedScores));
 
     setSymmetryScore(null);
     setNotes('');
@@ -141,10 +142,10 @@ export default function BilateralCoordinationScreen() {
   const exportData = async () => {
     try {
       const [growthRaw, milestoneRaw, trackingRaw, sleepRaw] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEYS.GROWTH_LOG),
-        AsyncStorage.getItem(STORAGE_KEYS.MILESTONE_ENTRIES),
-        AsyncStorage.getItem(STORAGE_KEYS.TRACKING_ENTRIES),
-        AsyncStorage.getItem(STORAGE_KEYS.SLEEP_ENTRIES),
+        safeGetItem(STORAGE_KEYS.GROWTH_LOG),
+        safeGetItem(STORAGE_KEYS.MILESTONE_ENTRIES),
+        safeGetItem(STORAGE_KEYS.TRACKING_ENTRIES),
+        safeGetItem(STORAGE_KEYS.SLEEP_ENTRIES),
       ]);
       const exportObj = {
         exportedAt: new Date().toISOString(),

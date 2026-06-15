@@ -1,5 +1,6 @@
 // Badge award service — checks conditions and awards badges
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import * as Notifications from 'expo-notifications';
 import { BADGES, Badge } from '../data/badges';
 
@@ -18,7 +19,7 @@ export interface BadgeState {
 // Load all badge states
 export const loadBadgeState = async (): Promise<BadgeState> => {
   try {
-    const raw = await AsyncStorage.getItem(BADGES_KEY);
+    const raw = await safeGetItem(BADGES_KEY);
     return raw ? JSON.parse(raw) : {};
   } catch {
     return {};
@@ -28,7 +29,7 @@ export const loadBadgeState = async (): Promise<BadgeState> => {
 // Save badge state
 const saveBadgeState = async (state: BadgeState): Promise<void> => {
   try {
-    await AsyncStorage.setItem(BADGES_KEY, JSON.stringify(state));
+    await safeSetItem(BADGES_KEY, JSON.stringify(state));
   } catch {}
 };
 
@@ -63,8 +64,8 @@ export const checkStreakBadges = async (): Promise<string[]> => {
   const state = await getState();
 
   // Get last log date
-  const lastLogDate = (await AsyncStorage.getItem(LAST_LOG_DATE_KEY)) || today;
-  const streakCount = parseInt((await AsyncStorage.getItem(STREAK_KEY)) || '0', 10);
+  const lastLogDate = (await safeGetItem(LAST_LOG_DATE_KEY)) || today;
+  const streakCount = parseInt((await safeGetItem(STREAK_KEY)) || '0', 10);
 
   // Simple streak: if last log was yesterday, increment; if today, keep; if gap, reset
   const yesterday = new Date();
@@ -81,8 +82,8 @@ export const checkStreakBadges = async (): Promise<string[]> => {
     newStreak = 1; // streak broken or first log
   }
 
-  await AsyncStorage.setItem(STREAK_KEY, String(newStreak));
-  await AsyncStorage.setItem(LAST_LOG_DATE_KEY, today);
+  await safeSetItem(STREAK_KEY, String(newStreak));
+  await safeSetItem(LAST_LOG_DATE_KEY, today);
 
   // Check streak badges
   if (newStreak >= 7 && !state['streak_7']?.earned) {
@@ -130,9 +131,9 @@ export const checkMilestoneBadges = async (totalCount: number): Promise<string[]
 
 // Increment log count and check milestone badges
 export const incrementLogCount = async (): Promise<string[]> => {
-  const countStr = await AsyncStorage.getItem(LOG_COUNT_KEY);
+  const countStr = await safeGetItem(LOG_COUNT_KEY);
   const count = (parseInt(countStr || '0', 10)) + 1;
-  await AsyncStorage.setItem(LOG_COUNT_KEY, String(count));
+  await safeSetItem(LOG_COUNT_KEY, String(count));
   return checkMilestoneBadges(count);
 };
 

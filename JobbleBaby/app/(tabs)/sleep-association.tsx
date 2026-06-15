@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
@@ -88,7 +89,7 @@ export default function SleepAssociationScreen() {
 
   const loadEntries = async () => {
     try {
-      const raw = await AsyncStorage.getItem(STORAGE_KEY);
+      const raw = await safeGetItem(STORAGE_KEY);
       if (raw) setEntries(JSON.parse(raw));
     } catch { }
   };
@@ -130,7 +131,7 @@ export default function SleepAssociationScreen() {
     const today = getDateStr();
     const updated = [entry, ...entries.filter(e => e.date !== today)].slice(0, 100);
     setEntries(updated);
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
 
     if (updated.length >= 7) {
       await awardBadge('sleep_architect');

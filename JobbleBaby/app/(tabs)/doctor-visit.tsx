@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Share, Clipboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -77,11 +78,11 @@ export default function DoctorVisitScreen() {
     const loadData = async () => {
       try {
         const [trackingRaw, growthRaw, scheduleRaw, milestoneRaw, profileRaw] = await Promise.all([
-          AsyncStorage.getItem(TRACKING_KEY),
-          AsyncStorage.getItem(GROWTH_KEY),
-          AsyncStorage.getItem(SCHEDULE_KEY),
-          AsyncStorage.getItem(MILESTONE_KEY),
-          AsyncStorage.getItem(PROFILE_KEY),
+          safeGetItem(TRACKING_KEY),
+          safeGetItem(GROWTH_KEY),
+          safeGetItem(SCHEDULE_KEY),
+          safeGetItem(MILESTONE_KEY),
+          safeGetItem(PROFILE_KEY),
         ]);
 
         if (trackingRaw) setTrackingEntries(JSON.parse(trackingRaw));

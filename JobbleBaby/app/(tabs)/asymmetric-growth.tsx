@@ -9,7 +9,8 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -69,21 +70,21 @@ export default function AsymmetricGrowthScreen() {
 
   async function loadEntries() {
     try {
-      const raw = await AsyncStorage.getItem(STORAGE_KEY);
+      const raw = await safeGetItem(STORAGE_KEY);
       if (raw) setEntries(JSON.parse(raw));
     } catch {}
   }
 
   async function loadThreshold() {
     try {
-      const raw = await AsyncStorage.getItem(STORAGE_KEYS.ASYMMETRY_ALERT_THRESHOLD);
+      const raw = await safeGetItem(STORAGE_KEYS.ASYMMETRY_ALERT_THRESHOLD);
       if (raw) setAlertThreshold(JSON.parse(raw));
     } catch {}
   }
 
   async function saveEntries(data: AsymmetryEntry[]) {
     setEntries(data);
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    await safeSetItem(STORAGE_KEY, JSON.stringify(data));
   }
 
   async function handleAdd() {
@@ -291,7 +292,7 @@ export default function AsymmetricGrowthScreen() {
                 style={[styles.thresholdBtn, alertThreshold === v && styles.thresholdBtnActive]}
                 onPress={async () => {
                   setAlertThreshold(v);
-                  await AsyncStorage.setItem(STORAGE_KEYS.ASYMMETRY_ALERT_THRESHOLD, JSON.stringify(v));
+                  await safeSetItem(STORAGE_KEYS.ASYMMETRY_ALERT_THRESHOLD, JSON.stringify(v));
                 }}
                 accessibilityLabel={`${v}%`}
               >

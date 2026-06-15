@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { STORAGE_KEYS } from '../../store/storage-keys';
 const COLORS = {
@@ -129,10 +130,10 @@ export default function Interoceptive() {
   const loadAll = async () => {
     try {
       const [d, b, s, g] = await Promise.all([
-        AsyncStorage.getItem(DIARY_KEY),
-        AsyncStorage.getItem(BODY_SCAN_KEY),
-        AsyncStorage.getItem(SIGNAL_MATCH_KEY),
-        AsyncStorage.getItem(GAMES_KEY),
+        safeGetItem(DIARY_KEY),
+        safeGetItem(BODY_SCAN_KEY),
+        safeGetItem(SIGNAL_MATCH_KEY),
+        safeGetItem(GAMES_KEY),
       ]);
       if (d) setDiaryEntries(JSON.parse(d));
       if (b) setBodyScanSessions(JSON.parse(b));
@@ -144,25 +145,25 @@ export default function Interoceptive() {
   const saveDiary = async (entry: DiaryEntry) => {
     const updated = [entry, ...diaryEntries];
     setDiaryEntries(updated);
-    await AsyncStorage.setItem(DIARY_KEY, JSON.stringify(updated));
+    await safeSetItem(DIARY_KEY, JSON.stringify(updated));
   };
 
   const saveBodyScan = async (session: BodyScanSession) => {
     const updated = [session, ...bodyScanSessions];
     setBodyScanSessions(updated);
-    await AsyncStorage.setItem(BODY_SCAN_KEY, JSON.stringify(updated));
+    await safeSetItem(BODY_SCAN_KEY, JSON.stringify(updated));
   };
 
   const saveSignalMatch = async (match: SignalMatch) => {
     const updated = [match, ...signalMatches];
     setSignalMatches(updated);
-    await AsyncStorage.setItem(SIGNAL_MATCH_KEY, JSON.stringify(updated));
+    await safeSetItem(SIGNAL_MATCH_KEY, JSON.stringify(updated));
   };
 
   const saveGame = async (entry: GameEntry) => {
     const updated = [entry, ...gameEntries];
     setGameEntries(updated);
-    await AsyncStorage.setItem(GAMES_KEY, JSON.stringify(updated));
+    await safeSetItem(GAMES_KEY, JSON.stringify(updated));
   };
 
   const computePrecisionScore = (): number => {

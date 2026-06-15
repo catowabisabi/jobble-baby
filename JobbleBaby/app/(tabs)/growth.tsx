@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useRouter } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { onNewGrowthEntry } from '../utils/badgeService';
@@ -662,7 +663,7 @@ export default function GrowthScreen() {
   useEffect(() => {
     const loadEntries = async () => {
       try {
-        const stored = await AsyncStorage.getItem(STORAGE_KEY);
+        const stored = await safeGetItem(STORAGE_KEY);
         if (stored) {
           setEntries(JSON.parse(stored));
         } else {
@@ -674,7 +675,7 @@ export default function GrowthScreen() {
     };
     const loadGender = async () => {
       try {
-        const saved = await AsyncStorage.getItem(STORAGE_KEYS.GENDER_PREFERENCE);
+        const saved = await safeGetItem(STORAGE_KEYS.GENDER_PREFERENCE);
         if (saved === 'boys' || saved === 'girls') {
           setGender(saved);
         }
@@ -686,7 +687,7 @@ export default function GrowthScreen() {
 
   // Persist gender preference when it changes
   useEffect(() => {
-    AsyncStorage.setItem(STORAGE_KEYS.GENDER_PREFERENCE, gender).catch(() => {});
+    safeSetItem(STORAGE_KEYS.GENDER_PREFERENCE, gender).catch(() => {});
   }, [gender]);
 
   const saveEntry = async () => {
@@ -699,7 +700,7 @@ export default function GrowthScreen() {
     setHeight('');
     setWeight('');
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
       const awarded = await onNewGrowthEntry();
       if (awarded.length > 0) {
         setNewBadges(awarded);

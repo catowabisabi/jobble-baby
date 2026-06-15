@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { useLanguage } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 
 const STORAGE_KEYS = {
   cryingLog: '@jobble/crying_log',
@@ -109,10 +110,10 @@ export default function ColicReliefScreen() {
   const loadData = async () => {
     try {
       const [crying, comfort, wn, badgeData] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEYS.cryingLog),
-        AsyncStorage.getItem(STORAGE_KEYS.colicComfortLog),
-        AsyncStorage.getItem(STORAGE_KEYS.whiteNoisePref),
-        AsyncStorage.getItem(STORAGE_KEYS.colicBadge),
+        safeGetItem(STORAGE_KEYS.cryingLog),
+        safeGetItem(STORAGE_KEYS.colicComfortLog),
+        safeGetItem(STORAGE_KEYS.whiteNoisePref),
+        safeGetItem(STORAGE_KEYS.colicBadge),
       ]);
       if (crying) setCryingLog(JSON.parse(crying));
       if (comfort) setComfortLog(JSON.parse(comfort));
@@ -122,13 +123,13 @@ export default function ColicReliefScreen() {
   };
 
   const saveCryingLog = async (log: CryingEntry[]) => {
-    await AsyncStorage.setItem(STORAGE_KEYS.cryingLog, JSON.stringify(log));
+    await safeSetItem(STORAGE_KEYS.cryingLog, JSON.stringify(log));
     setCryingLog(log);
     checkBadge(log);
   };
 
   const saveComfortLog = async (log: ComfortEntry[]) => {
-    await AsyncStorage.setItem(STORAGE_KEYS.colicComfortLog, JSON.stringify(log));
+    await safeSetItem(STORAGE_KEYS.colicComfortLog, JSON.stringify(log));
     setComfortLog(log);
   };
 
@@ -146,7 +147,7 @@ export default function ColicReliefScreen() {
     }
     if (consecutive >= 7) {
       setBadge(true);
-      await AsyncStorage.setItem(STORAGE_KEYS.colicBadge, 'true');
+      await safeSetItem(STORAGE_KEYS.colicBadge, 'true');
     }
   };
 
@@ -233,7 +234,7 @@ export default function ColicReliefScreen() {
     setPlayingSound(sound);
     setSoundTimer(minutes);
     setWhiteNoise({ sound, timer: minutes });
-    AsyncStorage.setItem(STORAGE_KEYS.whiteNoisePref, JSON.stringify({ sound, timer: minutes }));
+    safeSetItem(STORAGE_KEYS.whiteNoisePref, JSON.stringify({ sound, timer: minutes }));
   };
 
   const stopSound = () => {

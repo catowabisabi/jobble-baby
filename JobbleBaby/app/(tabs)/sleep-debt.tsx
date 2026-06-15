@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Modal, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -129,9 +130,9 @@ export default function SleepDebt() {
   const loadData = useCallback(async () => {
     try {
       const [sleepRaw, shiftRaw, scheduleRaw] = await Promise.all([
-        AsyncStorage.getItem(PARENT_SLEEP_KEY),
-        AsyncStorage.getItem(SHIFT_STATE_KEY),
-        AsyncStorage.getItem(SCHEDULE_KEY),
+        safeGetItem(PARENT_SLEEP_KEY),
+        safeGetItem(SHIFT_STATE_KEY),
+        safeGetItem(SCHEDULE_KEY),
       ]);
       if (sleepRaw) setParentSleep(JSON.parse(sleepRaw));
       if (shiftRaw) setShiftState(JSON.parse(shiftRaw));
@@ -148,7 +149,7 @@ export default function SleepDebt() {
   const saveParentSleep = async (entries: ParentSleepEntry[]) => {
     setParentSleep(entries);
     try {
-      await AsyncStorage.setItem(PARENT_SLEEP_KEY, JSON.stringify(entries));
+      await safeSetItem(PARENT_SLEEP_KEY, JSON.stringify(entries));
     } catch { /* silently fail */ }
   };
 
@@ -237,7 +238,7 @@ export default function SleepDebt() {
             };
             setShiftState(newState);
             try {
-              await AsyncStorage.setItem(SHIFT_STATE_KEY, JSON.stringify(newState));
+              await safeSetItem(SHIFT_STATE_KEY, JSON.stringify(newState));
             } catch { /* fail */ }
           },
         },

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, Share, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { getDocumentAsync } from 'expo-document-picker';
 import * as Linking from 'expo-linking';
 import * as ImagePicker from 'expo-image-picker';
@@ -130,7 +131,7 @@ export default function ProfileScreen() {
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const stored = await AsyncStorage.getItem('@jobble_baby_profile');
+        const stored = await safeGetItem('@jobble_baby_profile');
         if (stored) {
           const profile = JSON.parse(stored);
           setBabyProfile(profile);
@@ -275,7 +276,7 @@ export default function ProfileScreen() {
     try {
       const exportData: Record<string, unknown> = {};
       for (const key of Object.keys(STORAGE_KEYS)) {
-        const raw = await AsyncStorage.getItem(key);
+        const raw = await safeGetItem(key);
         exportData[key] = raw ? JSON.parse(raw) : null;
       }
       exportData['_exportedAt'] = new Date().toISOString();
@@ -325,7 +326,7 @@ export default function ProfileScreen() {
       for (const key of Object.keys(parsed)) {
         if (key.startsWith('_')) continue;
         if (parsed[key] != null) {
-          await AsyncStorage.setItem(key, JSON.stringify(parsed[key]));
+          await safeSetItem(key, JSON.stringify(parsed[key]));
           count++;
         }
       }
@@ -339,7 +340,7 @@ export default function ProfileScreen() {
 
   const handleShareWithDaycare = async () => {
     try {
-      const profileStr = await AsyncStorage.getItem('@jobble_baby_profile');
+      const profileStr = await safeGetItem('@jobble_baby_profile');
       if (!profileStr) return;
       const profile = JSON.parse(profileStr);
       const token = encodeDaycareToken(profile);
@@ -388,7 +389,7 @@ export default function ProfileScreen() {
             if (result.canceled || !result.assets?.[0]) return;
             const uri = result.assets[0].uri;
             const updatedProfile: BabyProfile = { ...(babyProfile || { name: '', birthDate: '', gender: 'prefer_not_to_say' }), photoUri: uri };
-            await AsyncStorage.setItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
+            await safeSetItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
             setBabyProfile(updatedProfile);
             setPhotoUri(uri);
           },
@@ -405,7 +406,7 @@ export default function ProfileScreen() {
             if (result.canceled || !result.assets?.[0]) return;
             const uri = result.assets[0].uri;
             const updatedProfile: BabyProfile = { ...(babyProfile || { name: '', birthDate: '', gender: 'prefer_not_to_say' }), photoUri: uri };
-            await AsyncStorage.setItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
+            await safeSetItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
             setBabyProfile(updatedProfile);
             setPhotoUri(uri);
           },
@@ -417,7 +418,7 @@ export default function ProfileScreen() {
             if (!babyProfile) return;
             const { photoUri: _, ...rest } = babyProfile;
             const updatedProfile: BabyProfile = rest as BabyProfile;
-            await AsyncStorage.setItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
+            await safeSetItem('@jobble_baby_profile', JSON.stringify(updatedProfile));
             setBabyProfile(updatedProfile);
             setPhotoUri(null);
           },
@@ -525,7 +526,7 @@ export default function ProfileScreen() {
                   text: t('profile.reset'),
                   style: 'destructive',
                   onPress: async () => {
-                    await AsyncStorage.removeItem('@jobble_baby_profile');
+                    await safeRemoveItem('@jobble_baby_profile');
                   },
                 },
               ]);

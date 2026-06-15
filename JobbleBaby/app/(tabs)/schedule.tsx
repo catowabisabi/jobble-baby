@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Share, Alert, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import QRCode from 'react-native-qrcode-svg';
 import { getWeeklySummary, WeeklyTrend } from '../utils/weeklySummary';
 import { awardWeeklyViewer } from '../utils/badgeService';
@@ -118,11 +119,11 @@ export default function ScheduleScreen() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const stored = await AsyncStorage.getItem(STORAGE_KEY);
+        const stored = await safeGetItem(STORAGE_KEY);
         if (stored) {
           setScheduleData(JSON.parse(stored));
         }
-        const profileStored = await AsyncStorage.getItem('@jobble_baby_profile');
+        const profileStored = await safeGetItem('@jobble_baby_profile');
         if (profileStored) {
           setBabyProfile(JSON.parse(profileStored));
         }
@@ -233,7 +234,7 @@ export default function ScheduleScreen() {
     }
     setScheduleData(updated);
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
       // Schedule sleep notification for 1 hour ahead
       await cancelAllNotifications();
       await scheduleSleepNotification('Nap Reminder 🌙', 'Time for baby\'s nap!', 1, 14, 0);

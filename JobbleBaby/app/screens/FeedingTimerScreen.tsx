@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { Link } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
@@ -97,7 +98,7 @@ export default function FeedingTimerScreen() {
     const loadProfile = async () => {
       try {
         const profileRaw = await safeGetItem(PROFILE_KEY);
-        if (profileRaw !== null) {
+        if (profileRaw) {
           const profile = JSON.parse(profileRaw);
           if (profile.birthDate) {
             setBirthDate(profile.birthDate);
@@ -112,7 +113,7 @@ export default function FeedingTimerScreen() {
     const loadTodayFeeds = async () => {
       try {
         const raw = await safeGetItem(TRACKING_KEY);
-        if (raw !== null) {
+        if (raw) {
           const allEntries: TrackingEntry[] = JSON.parse(raw);
           setTodayFeeds(getTodayEntries(allEntries));
         }
@@ -156,7 +157,7 @@ export default function FeedingTimerScreen() {
 
     try {
       const raw = await safeGetItem(TRACKING_KEY);
-      const allEntries: TrackingEntry[] = raw !== null ? JSON.parse(raw) : [];
+      const allEntries: TrackingEntry[] = raw ? JSON.parse(raw) : [];
       const updated = [newEntry, ...allEntries];
       await safeSetItem(TRACKING_KEY, JSON.stringify(updated));
       setTodayFeeds(getTodayEntries(updated));

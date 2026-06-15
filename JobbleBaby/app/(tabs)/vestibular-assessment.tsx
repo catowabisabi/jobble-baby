@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -229,7 +230,7 @@ export default function VestibularAssessmentScreen() {
 
   const loadBirthDate = async () => {
     try {
-      const bd = await AsyncStorage.getItem(BIRTHDATE_KEY);
+      const bd = await safeGetItem(BIRTHDATE_KEY);
       if (bd) {
         setBirthDate(bd);
         setBabyAgeMonths(getMonthsFromBirth(bd));
@@ -239,7 +240,7 @@ export default function VestibularAssessmentScreen() {
 
   const loadEntries = async () => {
     try {
-      const raw = await AsyncStorage.getItem(VESTIBULAR_KEY);
+      const raw = await safeGetItem(VESTIBULAR_KEY);
       if (raw) setEntries(JSON.parse(raw));
     } catch {}
   };
@@ -247,7 +248,7 @@ export default function VestibularAssessmentScreen() {
   const saveEntries = async (updated: Record<string, VestibularEntry[]>) => {
     setEntries(updated);
     try {
-      await AsyncStorage.setItem(VESTIBULAR_KEY, JSON.stringify(updated));
+      await safeSetItem(VESTIBULAR_KEY, JSON.stringify(updated));
     } catch {}
   };
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
@@ -66,27 +67,27 @@ export default function GravityFeedingScreen() {
 
   async function loadLog() {
     try {
-      const raw = await AsyncStorage.getItem(STORAGE_KEYS.GRAVITY_FEEDING_LOG);
+      const raw = await safeGetItem(STORAGE_KEYS.GRAVITY_FEEDING_LOG);
       if (raw) setLog(JSON.parse(raw));
     } catch (_e) { }
   }
 
   async function loadLeapTimeline() {
     try {
-      const raw = await AsyncStorage.getItem(STORAGE_KEYS.GRAVITY_LEAP_TIMELINE);
+      const raw = await safeGetItem(STORAGE_KEYS.GRAVITY_LEAP_TIMELINE);
       if (raw) {
         setLeapTimeline(JSON.parse(raw));
       } else {
         const initial = LEAP_CALENDAR.map(l => ({ ...l, passed: false }));
         setLeapTimeline(initial);
-        await AsyncStorage.setItem(STORAGE_KEYS.GRAVITY_LEAP_TIMELINE, JSON.stringify(initial));
+        await safeSetItem(STORAGE_KEYS.GRAVITY_LEAP_TIMELINE, JSON.stringify(initial));
       }
     } catch (_e) { }
   }
 
   async function loadTactileTaps() {
     try {
-      const raw = await AsyncStorage.getItem(STORAGE_KEYS.GRAVITY_TACTILE_COMMS);
+      const raw = await safeGetItem(STORAGE_KEYS.GRAVITY_TACTILE_COMMS);
       if (raw) setTactileTaps(JSON.parse(raw));
     } catch (_e) { }
   }
@@ -102,7 +103,7 @@ export default function GravityFeedingScreen() {
     };
     const updated = [entry, ...log].slice(0, 100);
     setLog(updated);
-    await AsyncStorage.setItem(STORAGE_KEYS.GRAVITY_FEEDING_LOG, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEYS.GRAVITY_FEEDING_LOG, JSON.stringify(updated));
     setShowLogForm(false);
     setNotes('');
   }
@@ -110,13 +111,13 @@ export default function GravityFeedingScreen() {
   async function handleTactileTap(symbolId: string) {
     const updated = { ...tactileTaps, [symbolId]: (tactileTaps[symbolId] || 0) + 1 };
     setTactileTaps(updated);
-    await AsyncStorage.setItem(STORAGE_KEYS.GRAVITY_TACTILE_COMMS, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEYS.GRAVITY_TACTILE_COMMS, JSON.stringify(updated));
   }
 
   function markLeapPassed(leapId: number) {
     const updated = leapTimeline.map(l => l.leapId === leapId ? { ...l, passed: true, startDate: new Date().toISOString() } : l);
     setLeapTimeline(updated);
-    AsyncStorage.setItem(STORAGE_KEYS.GRAVITY_LEAP_TIMELINE, JSON.stringify(updated));
+    safeSetItem(STORAGE_KEYS.GRAVITY_LEAP_TIMELINE, JSON.stringify(updated));
   }
 
   const comfortableCount = log.filter(e => e.outcome === 'comfortable').length;

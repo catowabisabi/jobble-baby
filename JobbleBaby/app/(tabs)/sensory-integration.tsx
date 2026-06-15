@@ -4,7 +4,8 @@ import {
   Dimensions, Modal, TextInput, Alert, Linking,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -459,7 +460,7 @@ export default function SensoryIntegrationScreen() {
 
   const loadBirthDate = async () => {
     try {
-      const bd = await AsyncStorage.getItem(BIRTHDATE_KEY);
+      const bd = await safeGetItem(BIRTHDATE_KEY);
       if (bd) {
         setBirthDate(bd);
         setBabyAgeMonths(getMonthsFromBirth(bd));
@@ -469,7 +470,7 @@ export default function SensoryIntegrationScreen() {
 
   const loadEntries = async () => {
     try {
-      const raw = await AsyncStorage.getItem(SENSORY_ENTRIES_KEY);
+      const raw = await safeGetItem(SENSORY_ENTRIES_KEY);
       if (raw) setEntries(JSON.parse(raw));
     } catch {}
   };
@@ -477,7 +478,7 @@ export default function SensoryIntegrationScreen() {
   const saveEntries = async (updated: Record<string, SensoryEntry[]>) => {
     setEntries(updated);
     try {
-      await AsyncStorage.setItem(SENSORY_ENTRIES_KEY, JSON.stringify(updated));
+      await safeSetItem(SENSORY_ENTRIES_KEY, JSON.stringify(updated));
     } catch {}
   };
 

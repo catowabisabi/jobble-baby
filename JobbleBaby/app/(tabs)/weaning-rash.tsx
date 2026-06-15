@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, Modal, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import { STORAGE_KEYS } from '../../store/storage-keys';
@@ -46,8 +47,8 @@ export default function WeaningRashScreen() {
   const [notes, setNotes]          = useState('');
 
   useEffect(() => {
-    AsyncStorage.getItem(ENTRIES_KEY).then(d => d && setEntries(JSON.parse(d)));
-    AsyncStorage.getItem(FOODS_KEY).then(d => d && setFoods(JSON.parse(d)));
+    safeGetItem(ENTRIES_KEY).then(d => d && setEntries(JSON.parse(d)));
+    safeGetItem(FOODS_KEY).then(d => d && setFoods(JSON.parse(d)));
   }, []);
 
   const save = async () => {
@@ -57,9 +58,9 @@ export default function WeaningRashScreen() {
     setEntries(next);
     const newFoods = foods.includes(food) ? foods : [food, ...foods];
     setFoods(newFoods);
-    await AsyncStorage.setItem(ENTRIES_KEY, JSON.stringify(next));
-    await AsyncStorage.setItem(FOODS_KEY, JSON.stringify(newFoods));
-    if (newFoods.length >= 3) await AsyncStorage.setItem(STORAGE_KEYS.BADGE_FOOD_EXPLORER, 'true');
+    await safeSetItem(ENTRIES_KEY, JSON.stringify(next));
+    await safeSetItem(FOODS_KEY, JSON.stringify(newFoods));
+    if (newFoods.length >= 3) await safeSetItem(STORAGE_KEYS.BADGE_FOOD_EXPLORER, 'true');
     setModal(false); setFood(''); setWin(1); setRash('none'); setLocs([]); setGis([]); setStool('normal'); setNotes('');
   };
 

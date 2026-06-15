@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -96,11 +97,11 @@ export default function HabitResetScreen() {
   const loadData = useCallback(async () => {
     try {
       const [surveyRaw, dailyRaw, microRaw, streakRaw, profileRaw] = await Promise.all([
-        AsyncStorage.getItem(STORAGE_KEYS.HABIT_RESET_SURVEY),
-        AsyncStorage.getItem(STORAGE_KEYS.HABIT_RESET_DAILY),
-        AsyncStorage.getItem(STORAGE_KEYS.HABIT_RESET_MICRO),
-        AsyncStorage.getItem(STORAGE_KEYS.HABIT_RESET_STREAKS),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(STORAGE_KEYS.HABIT_RESET_SURVEY),
+        safeGetItem(STORAGE_KEYS.HABIT_RESET_DAILY),
+        safeGetItem(STORAGE_KEYS.HABIT_RESET_MICRO),
+        safeGetItem(STORAGE_KEYS.HABIT_RESET_STREAKS),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (surveyRaw) setSurvey(JSON.parse(surveyRaw));
       if (dailyRaw) setDailyEntries(JSON.parse(dailyRaw));
@@ -129,13 +130,13 @@ export default function HabitResetScreen() {
   }, [survey]);
 
   const saveSurvey = async (data: SurveyData) => {
-    await AsyncStorage.setItem(STORAGE_KEYS.HABIT_RESET_SURVEY, JSON.stringify(data));
+    await safeSetItem(STORAGE_KEYS.HABIT_RESET_SURVEY, JSON.stringify(data));
     setSurvey(data);
     setSurveyModal(false);
   };
 
   const saveDaily = async (entries: DailyEntry[]) => {
-    await AsyncStorage.setItem(STORAGE_KEYS.HABIT_RESET_DAILY, JSON.stringify(entries));
+    await safeSetItem(STORAGE_KEYS.HABIT_RESET_DAILY, JSON.stringify(entries));
     setDailyEntries(entries);
   };
 
@@ -173,7 +174,7 @@ export default function HabitResetScreen() {
     }
     const newStreaks = { ...streaks, [habitId]: streak };
     setStreaks(newStreaks);
-    await AsyncStorage.setItem(STORAGE_KEYS.HABIT_RESET_STREAKS, JSON.stringify(newStreaks));
+    await safeSetItem(STORAGE_KEYS.HABIT_RESET_STREAKS, JSON.stringify(newStreaks));
   };
 
   const addMicroHabit = async () => {
@@ -182,7 +183,7 @@ export default function HabitResetScreen() {
     const habit: MicroHabit = { id, domain: newHabitDomain, label: newHabitLabel.trim() };
     const updated = [...microHabits, habit];
     setMicroHabits(updated);
-    await AsyncStorage.setItem(STORAGE_KEYS.HABIT_RESET_MICRO, JSON.stringify(updated));
+    await safeSetItem(STORAGE_KEYS.HABIT_RESET_MICRO, JSON.stringify(updated));
     setNewHabitLabel('');
     setAddHabitModal(false);
   };

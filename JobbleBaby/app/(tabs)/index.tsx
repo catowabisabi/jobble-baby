@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Pressable, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useRouter } from 'expo-router';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -89,7 +90,7 @@ export default function HomeScreen() {
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const stored = await AsyncStorage.getItem('@jobble_baby_profile');
+        const stored = await safeGetItem('@jobble_baby_profile');
         if (stored) {
           setBabyProfile(JSON.parse(stored));
         }
@@ -99,7 +100,7 @@ export default function HomeScreen() {
     };
     const loadTracking = async () => {
       try {
-        const raw = await AsyncStorage.getItem(STORAGE_KEYS.TRACKING_ENTRIES);
+        const raw = await safeGetItem(STORAGE_KEYS.TRACKING_ENTRIES);
         if (!raw) return;
         const entries: TrackingEntry[] = JSON.parse(raw);
         const today = new Date().toISOString().split('T')[0];
@@ -137,8 +138,8 @@ export default function HomeScreen() {
     const loadStressData = async () => {
       try {
         const [logRaw, nightsRaw] = await Promise.all([
-          AsyncStorage.getItem(STORAGE_KEYS.STRESS_LOG),
-          AsyncStorage.getItem(STORAGE_KEYS.SLEEP_TRAINING_NIGHTS),
+          safeGetItem(STORAGE_KEYS.STRESS_LOG),
+          safeGetItem(STORAGE_KEYS.SLEEP_TRAINING_NIGHTS),
         ]);
         const log = logRaw ? JSON.parse(logRaw) : [];
         const nights = nightsRaw ? JSON.parse(nightsRaw) : [];

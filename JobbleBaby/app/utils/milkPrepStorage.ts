@@ -1,4 +1,5 @@
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 
 export interface MilkBag {
   id: string;
@@ -27,7 +28,7 @@ export const saveStash = async (stash: MilkBag[]): Promise<void> => {
 export const loadStash = async (): Promise<MilkBag[]> => {
   try {
     const raw = await safeGetItem(STASH_KEY);
-    return raw !== null ? JSON.parse(raw) : [];
+    return raw ? JSON.parse(raw) : [];
   } catch (error) {
     console.error('Failed to load milk stash:', error);
     return [];
@@ -45,7 +46,7 @@ export const saveTimer = async (timer: MilkTimer): Promise<void> => {
 export const loadTimer = async (): Promise<MilkTimer | null> => {
   try {
     const raw = await safeGetItem(TIMER_KEY);
-    return raw !== null ? JSON.parse(raw) : null;
+    return raw ? JSON.parse(raw) : null;
   } catch (error) {
     console.error('Failed to load milk timer:', error);
     return null;

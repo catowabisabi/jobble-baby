@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -159,8 +160,8 @@ export default function TummyTimeScreen() {
   const loadData = async () => {
     try {
       const [raw, profileRaw] = await Promise.all([
-        AsyncStorage.getItem(TUMMY_TIME_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(TUMMY_TIME_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (raw) setEntries(JSON.parse(raw));
       if (profileRaw) {
@@ -210,7 +211,7 @@ export default function TummyTimeScreen() {
     setTimerSeconds(0);
 
     try {
-      await AsyncStorage.setItem(TUMMY_TIME_KEY, JSON.stringify(updated));
+      await safeSetItem(TUMMY_TIME_KEY, JSON.stringify(updated));
       if (todayTotal + timerSeconds >= dailyGoalSeconds) {
         await awardBadge('tummy_time_goal');
         setNewBadges((prev) => [...prev, 'tummy_time_goal']);
@@ -240,7 +241,7 @@ export default function TummyTimeScreen() {
             const updated = [entry, ...entries];
             setEntries(updated);
             try {
-              await AsyncStorage.setItem(TUMMY_TIME_KEY, JSON.stringify(updated));
+              await safeSetItem(TUMMY_TIME_KEY, JSON.stringify(updated));
             } catch {}
           },
         },

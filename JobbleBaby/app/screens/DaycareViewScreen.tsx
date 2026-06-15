@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useGlobalSearchParams, router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -81,7 +82,7 @@ export default function DaycareViewScreen() {
       }
 
       try {
-        const raw = await AsyncStorage.getItem(TRACKING_KEY);
+        const raw = await safeGetItem(TRACKING_KEY);
         const allEntries: TrackingEntry[] = raw ? JSON.parse(raw) : [];
         const todayEntries = getTodayEntries(allEntries);
         setLinkState({ status: 'valid', payload: decoded, entries: todayEntries });

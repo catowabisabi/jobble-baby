@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { onNewLogEntry } from '../utils/badgeService';
 import { Badge } from '../data/badges';
 import { useTheme } from '../context/ThemeContext';
@@ -61,7 +62,7 @@ export default function TrackingScreen() {
   useEffect(() => {
     const loadEntries = async () => {
       try {
-        const stored = await AsyncStorage.getItem(STORAGE_KEY);
+        const stored = await safeGetItem(STORAGE_KEY);
         if (stored) {
           setEntries(JSON.parse(stored));
         }
@@ -85,7 +86,7 @@ export default function TrackingScreen() {
     const updated = [newEntry, ...entries].slice(0, 10);
     setEntries(updated);
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
       // Check for badge awards
       const awarded = await onNewLogEntry(type);
       if (awarded.length > 0) {

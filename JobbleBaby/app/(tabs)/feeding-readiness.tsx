@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TextInput, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -126,10 +127,10 @@ export default function FeedingReadinessScreen() {
   const loadData = useCallback(async () => {
     try {
       const [fr, fj, ts, al] = await Promise.all([
-        AsyncStorage.getItem(FEEDING_KEY),
-        AsyncStorage.getItem(FLAVOR_KEY),
-        AsyncStorage.getItem(TEXTURE_KEY),
-        AsyncStorage.getItem(ALLERGEN_KEY),
+        safeGetItem(FEEDING_KEY),
+        safeGetItem(FLAVOR_KEY),
+        safeGetItem(TEXTURE_KEY),
+        safeGetItem(ALLERGEN_KEY),
       ]);
       if (fr) setReadinessData(JSON.parse(fr));
       if (fj) setFlavorEntries(JSON.parse(fj));
@@ -149,7 +150,7 @@ export default function FeedingReadinessScreen() {
     if (allDone) {
       const data: FeedingReadiness = { checklist_done: true, date: new Date().toISOString() };
       setReadinessData(data);
-      await AsyncStorage.setItem(FEEDING_KEY, JSON.stringify(data));
+      await safeSetItem(FEEDING_KEY, JSON.stringify(data));
     }
   };
 
@@ -167,12 +168,12 @@ export default function FeedingReadinessScreen() {
     };
     const updated = [entry, ...flavorEntries];
     setFlavorEntries(updated);
-    await AsyncStorage.setItem(FLAVOR_KEY, JSON.stringify(updated));
+    await safeSetItem(FLAVOR_KEY, JSON.stringify(updated));
 
     // Check Flavor Explorer badge (20+ distinct foods)
     const distinctFoods = new Set(updated.map(e => e.food.toLowerCase())).size;
     if (distinctFoods >= 20) {
-      await AsyncStorage.setItem(STORAGE_KEYS.BADGE_FLAVOR_EXPLORER, 'true');
+      await safeSetItem(STORAGE_KEYS.BADGE_FLAVOR_EXPLORER, 'true');
       setShowBadge(true);
       setTimeout(() => setShowBadge(false), 4000);
     }
@@ -190,7 +191,7 @@ export default function FeedingReadinessScreen() {
       transition_dates: [...textureStage.transition_dates, new Date().toISOString()],
     };
     setTextureStage(updated);
-    await AsyncStorage.setItem(TEXTURE_KEY, JSON.stringify(updated));
+    await safeSetItem(TEXTURE_KEY, JSON.stringify(updated));
   };
 
   // ── Allergen Log ───────────────────────────────────────────────────────────
@@ -211,7 +212,7 @@ export default function FeedingReadinessScreen() {
       reaction_severity: allergenSeverity,
     }]);
     setAllergenLog(updated);
-    await AsyncStorage.setItem(ALLERGEN_KEY, JSON.stringify(updated));
+    await safeSetItem(ALLERGEN_KEY, JSON.stringify(updated));
     setShowAllergenModal(false);
   };
 

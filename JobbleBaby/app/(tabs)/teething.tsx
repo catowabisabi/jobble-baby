@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Switch, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -121,9 +122,9 @@ export default function TeethingScreen() {
     const load = async () => {
       try {
         const [profileRaw, symRaw, teethRaw] = await Promise.all([
-          AsyncStorage.getItem(PROFILE_KEY),
-          AsyncStorage.getItem(SYMPTOMS_KEY),
-          AsyncStorage.getItem(TEETH_KEY),
+          safeGetItem(PROFILE_KEY),
+          safeGetItem(SYMPTOMS_KEY),
+          safeGetItem(TEETH_KEY),
         ]);
         if (profileRaw) setBabyProfile(JSON.parse(profileRaw));
         if (symRaw) setSymptoms(JSON.parse(symRaw));
@@ -165,7 +166,7 @@ export default function TeethingScreen() {
     };
     const updated = [entry, ...symptoms].slice(0, 100);
     setSymptoms(updated);
-    await AsyncStorage.setItem(SYMPTOMS_KEY, JSON.stringify(updated));
+    await safeSetItem(SYMPTOMS_KEY, JSON.stringify(updated));
     await awardBadge('first_teething_log');
     setSelectedSymptom(null);
     setNote('');
@@ -177,12 +178,12 @@ export default function TeethingScreen() {
     if (existing?.eruptingAt) {
       const updated = teeth.filter((t) => t.toothId !== toothId);
       setTeeth(updated);
-      await AsyncStorage.setItem(TEETH_KEY, JSON.stringify(updated));
+      await safeSetItem(TEETH_KEY, JSON.stringify(updated));
     } else {
       const eruption: ToothEruption = { toothId, eruptingAt: getDateStr(), order: getEruptedCount() + 1 };
       const updated = [...teeth.filter((t) => t.toothId !== toothId), eruption];
       setTeeth(updated);
-      await AsyncStorage.setItem(TEETH_KEY, JSON.stringify(updated));
+      await safeSetItem(TEETH_KEY, JSON.stringify(updated));
       if (updated.length >= 20) await awardBadge('full_teeth');
     }
   };
@@ -191,7 +192,7 @@ export default function TeethingScreen() {
     const today = getDateStr();
     const updated = symptoms.filter((s) => !s.timestamp.startsWith(today));
     setSymptoms(updated);
-    await AsyncStorage.setItem(SYMPTOMS_KEY, JSON.stringify(updated));
+    await safeSetItem(SYMPTOMS_KEY, JSON.stringify(updated));
   };
 
   const styles = StyleSheet.create({

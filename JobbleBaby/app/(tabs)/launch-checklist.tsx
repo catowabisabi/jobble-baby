@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS, STATUS_COLORS } from '../theme';
@@ -77,7 +78,7 @@ export default function LaunchChecklistScreen() {
 
   const loadState = async () => {
     try {
-      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      const stored = await safeGetItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored) as CheckedState;
         setChecked(parsed);
@@ -90,7 +91,7 @@ export default function LaunchChecklistScreen() {
 
   const saveState = async (newChecked: CheckedState) => {
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newChecked));
+      await safeSetItem(STORAGE_KEY, JSON.stringify(newChecked));
     } catch (e) { /* silently fail */ }
   };
 

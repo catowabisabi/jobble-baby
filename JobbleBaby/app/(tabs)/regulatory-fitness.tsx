@@ -11,6 +11,7 @@ import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
 import { useLanguage } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { STORAGE_KEYS } from '../../store/storage-keys';
 
 interface RegulatoryEntry {
@@ -57,7 +58,7 @@ const getScoreLabel = (score: number): string => {
 
 const loadRegulatoryData = async (): Promise<RegulatoryEntry[]> => {
   try {
-    const data = await AsyncStorage.getItem(STORAGE_KEYS.REGULATORY_FITNESS);
+    const data = await safeGetItem(STORAGE_KEYS.REGULATORY_FITNESS);
     if (data) {
       const parsed: RegulatoryEntry[] = JSON.parse(data);
       const cutoff = new Date();
@@ -72,7 +73,7 @@ const loadRegulatoryData = async (): Promise<RegulatoryEntry[]> => {
 
 const saveRegulatoryData = async (entries: RegulatoryEntry[]): Promise<void> => {
   try {
-    await AsyncStorage.setItem(STORAGE_KEYS.REGULATORY_FITNESS, JSON.stringify(entries));
+    await safeSetItem(STORAGE_KEYS.REGULATORY_FITNESS, JSON.stringify(entries));
   } catch (error) {
     // Silent fail
   }
@@ -218,7 +219,7 @@ const TrendChart: React.FC<{ entries: RegulatoryEntry[]; t: (key: string) => str
 const ParentCalmScore: React.FC<{ t: (key: string) => string }> = ({ t }) => {
   const [score, setScore] = useState(70);
   useEffect(() => {
-    AsyncStorage.getItem(STORAGE_KEYS.STRESS_CASCADE).then(data => {
+    safeGetItem(STORAGE_KEYS.STRESS_CASCADE).then(data => {
       if (data) {
         const parsed = JSON.parse(data);
         if (parsed.length > 0) setScore(parsed[parsed.length - 1].calm_score || 70);

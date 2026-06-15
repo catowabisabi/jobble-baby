@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -87,8 +88,8 @@ export default function IoTSecurityScreen() {
 
   async function loadData() {
     try {
-      const secData = await AsyncStorage.getItem(SECURITY_KEY);
-      const alertData = await AsyncStorage.getItem(ALERTS_KEY);
+      const secData = await safeGetItem(SECURITY_KEY);
+      const alertData = await safeGetItem(ALERTS_KEY);
       if (secData) {
         const entries: SecurityEntry[] = JSON.parse(secData);
         const entry = entries.find(e => e.brand === selectedBrand);
@@ -101,13 +102,13 @@ export default function IoTSecurityScreen() {
 
   async function saveChecklist() {
     try {
-      const secData = await AsyncStorage.getItem(SECURITY_KEY);
+      const secData = await safeGetItem(SECURITY_KEY);
       const entries: SecurityEntry[] = secData ? JSON.parse(secData) : [];
       const idx = entries.findIndex(e => e.brand === selectedBrand);
       const newEntry: SecurityEntry = { brand: selectedBrand, checklist, lastUpdated: new Date().toISOString() };
       if (idx >= 0) entries[idx] = newEntry;
       else entries.push(newEntry);
-      await AsyncStorage.setItem(SECURITY_KEY, JSON.stringify(entries));
+      await safeSetItem(SECURITY_KEY, JSON.stringify(entries));
     } catch (e) { /* silently fail */ }
   }
 
@@ -131,7 +132,7 @@ export default function IoTSecurityScreen() {
     setAlerts(updated);
     setAlertText('');
     try {
-      await AsyncStorage.setItem(ALERTS_KEY, JSON.stringify(updated));
+      await safeSetItem(ALERTS_KEY, JSON.stringify(updated));
     } catch (e) { /* silently fail */ }
   }
 

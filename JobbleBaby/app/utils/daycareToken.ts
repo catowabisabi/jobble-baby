@@ -1,5 +1,6 @@
 // Daycare Token Utility — encode/decode baby profile tokens for sharing with daycare
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 
 export const DAYCARE_TOKEN_KEY = '@jobble/daycare_token';
 
@@ -89,7 +90,7 @@ export async function storeDaycareToken(token: string): Promise<void> {
     createdAt: Date.now(),
     expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
   };
-  await AsyncStorage.setItem(DAYCARE_TOKEN_KEY, JSON.stringify(stored));
+  await safeSetItem(DAYCARE_TOKEN_KEY, JSON.stringify(stored));
 }
 
 /**
@@ -98,11 +99,11 @@ export async function storeDaycareToken(token: string): Promise<void> {
  */
 export async function getDaycareToken(): Promise<StoredDaycareToken | null> {
   try {
-    const raw = await AsyncStorage.getItem(DAYCARE_TOKEN_KEY);
+    const raw = await safeGetItem(DAYCARE_TOKEN_KEY);
     if (!raw) return null;
     const stored: StoredDaycareToken = JSON.parse(raw);
     if (isTokenExpired(stored.expiresAt)) {
-      await AsyncStorage.removeItem(DAYCARE_TOKEN_KEY);
+      await safeRemoveItem(DAYCARE_TOKEN_KEY);
       return null;
     }
     return stored;

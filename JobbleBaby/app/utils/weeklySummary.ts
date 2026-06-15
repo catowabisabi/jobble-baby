@@ -1,4 +1,5 @@
-import { safeGetItem, safeSetItem, safeRemoveItem } from '@/app/utils/SafeStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 
 export interface TrackingEntry {
   id: string;
@@ -80,11 +81,11 @@ export const getWeeklySummary = async (): Promise<WeeklyTrend> => {
   const prevRange = getPreviousWeekRange(currentWeekStart);
 
   // Load tracking entries
-  const trackingRaw = await AsyncStorage.getItem('@jobble/tracking_entries');
+  const trackingRaw = await safeGetItem('@jobble/tracking_entries');
   const trackingEntries: TrackingEntry[] = trackingRaw ? JSON.parse(trackingRaw) : [];
 
   // Load growth entries
-  const growthRaw = await AsyncStorage.getItem('@jobble/growth_entries');
+  const growthRaw = await safeGetItem('@jobble/growth_entries');
   const growthEntries: GrowthEntry[] = growthRaw ? JSON.parse(growthRaw) : [];
 
   // Helper to calculate totals for a given date range

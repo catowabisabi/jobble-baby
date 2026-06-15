@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, FlatList, Modal, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import { STORAGE_KEYS } from '../../store/storage-keys';
@@ -40,8 +41,8 @@ export default function ReflexIntegrationScreen() {
   const [notes, setNotes]       = useState('');
 
   useEffect(() => {
-    AsyncStorage.getItem(RECORDS_KEY).then(d => d && setRecords(JSON.parse(d)));
-    AsyncStorage.getItem(PROFILE_KEY).then(d => {
+    safeGetItem(RECORDS_KEY).then(d => d && setRecords(JSON.parse(d)));
+    safeGetItem(PROFILE_KEY).then(d => {
       if (d) { const p = JSON.parse(d); if (p.birthDate) setBabyAge(Math.floor((Date.now() - new Date(p.birthDate).getTime()) / 2592000000)); }
     });
   }, []);
@@ -50,7 +51,7 @@ export default function ReflexIntegrationScreen() {
     const record: ReflexRecord = { id: uid(), date: new Date().toISOString(), reflex_id: selected, status, notes };
     const next = [record, ...records];
     setRecords(next);
-    await AsyncStorage.setItem(RECORDS_KEY, JSON.stringify(next));
+    await safeSetItem(RECORDS_KEY, JSON.stringify(next));
     setModal(false); setStatus('present'); setNotes('');
   };
 

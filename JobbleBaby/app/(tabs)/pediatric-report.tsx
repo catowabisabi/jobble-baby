@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -154,11 +155,11 @@ export default function PediatricReportScreen() {
     const load = async () => {
       try {
         const [profRaw, growthRaw, milestoneRaw, trackingRaw, allergenRaw] = await Promise.all([
-          AsyncStorage.getItem(PROFILE_KEY),
-          AsyncStorage.getItem(GROWTH_KEY),
-          AsyncStorage.getItem(MILESTONE_KEY),
-          AsyncStorage.getItem(TRACKING_KEY),
-          AsyncStorage.getItem(ALLERGEN_KEY),
+          safeGetItem(PROFILE_KEY),
+          safeGetItem(GROWTH_KEY),
+          safeGetItem(MILESTONE_KEY),
+          safeGetItem(TRACKING_KEY),
+          safeGetItem(ALLERGEN_KEY),
         ]);
         if (profRaw) setProfile(JSON.parse(profRaw));
         if (growthRaw) setGrowthEntries(JSON.parse(growthRaw));

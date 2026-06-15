@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useTheme } from '../context/ThemeContext';
@@ -135,8 +136,8 @@ export default function CupFeedingScreen() {
   const loadData = async () => {
     try {
       const [raw, profileRaw] = await Promise.all([
-        AsyncStorage.getItem(CUP_FEEDING_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(CUP_FEEDING_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (raw) setEntries(JSON.parse(raw));
       if (profileRaw) {
@@ -198,7 +199,7 @@ export default function CupFeedingScreen() {
     setShowLogForm(false);
 
     try {
-      await AsyncStorage.setItem(CUP_FEEDING_KEY, JSON.stringify(updated));
+      await safeSetItem(CUP_FEEDING_KEY, JSON.stringify(updated));
       if (updated.length >= 5 && !newBadge) {
         await awardBadge('cup_feeding_tracked');
         setNewBadge(true);

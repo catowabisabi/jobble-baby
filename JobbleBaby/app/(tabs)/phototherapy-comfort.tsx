@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Alert, Share } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
@@ -74,8 +75,8 @@ export default function PhototherapyComfortScreen() {
   const loadData = async () => {
     try {
       const [sessionData, profileData] = await Promise.all([
-        AsyncStorage.getItem(PHOTO_COMFORT_KEY),
-        AsyncStorage.getItem(PROFILE_KEY),
+        safeGetItem(PHOTO_COMFORT_KEY),
+        safeGetItem(PROFILE_KEY),
       ]);
       if (sessionData) setSessions(JSON.parse(sessionData));
       if (profileData) setProfile(JSON.parse(profileData));
@@ -111,7 +112,7 @@ export default function PhototherapyComfortScreen() {
     };
     const updated = [entry, ...sessions];
     setSessions(updated);
-    await AsyncStorage.setItem(PHOTO_COMFORT_KEY, JSON.stringify(updated));
+    await safeSetItem(PHOTO_COMFORT_KEY, JSON.stringify(updated));
     resetForm();
     setShowModal(false);
   };

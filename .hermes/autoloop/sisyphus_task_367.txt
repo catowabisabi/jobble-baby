@@ -1,0 +1,99 @@
+# Todo #348: GitHub Actions CI/CD Pipeline for Jobble Baby
+
+## Keywords
+continuous_integration, eas_build_automation, github_actions_pipeline
+
+## Task for Sisyphus
+
+Create a GitHub Actions CI/CD pipeline for the Jobble Baby Expo project.
+
+STEP 1 — Read these files first:
+- JobbleBaby/package.json (check scripts section and dependencies)
+- JobbleBaby/app.json (check expo section, eas config)
+- JobbleBaby/.github/workflows/ (if exists, see existing patterns)
+- docs/ folder for any existing CI/CD docs
+
+STEP 2 — Create `.github/workflows/ci.yml`
+This workflow runs on every PR and merge to master:
+
+```yaml
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx eslint .
+```
+
+STEP 3 — Create `.github/workflows/eas-build.yml`
+This workflow triggers EAS builds on merge to master (when credentials are configured):
+
+```yaml
+name: EAS Build
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-ios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx eas build --platform ios --local --non-interactive
+        env:
+          EAS_BUILD_CONTEXT: ${{ toJson(github) }}
+    if: false  # Disable until EAS credentials configured
+
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx eas build --platform android --local --non-interactive
+    if: false  # Disable until EAS credentials configured
+```
+
+STEP 4 — Create `docs/CI_CD_SETUP.md`
+Human-readable guide explaining:
+- GitHub Actions is already configured (ci.yml)
+- EAS build workflow (eas-build.yml) is disabled until user adds credentials
+- User needs to: add EAS_CREDENTIALS secret to GitHub repo, enable the if: false lines
+- Telegram notification setup for build status (optional)
+
+STEP 5 — Create `docs/SENTRY_SETUP.md`
+Instructions for adding Sentry crash reporting:
+- Install @sentry/react-native
+- User needs to create Sentry project, get DSN
+- Add SENTRY_DSN to GitHub Secrets
+- docs/SENTRY_SETUP.md with step-by-step
+
+STEP 6 — Verify
+- ci.yml syntax is valid (check yaml structure)
+- All new files have correct paths
+
+Do NOT run npm install or modify package.json. Just create the workflow files and docs.
+
+DONE
+ULW

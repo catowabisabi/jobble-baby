@@ -5290,4 +5290,59 @@
   "diaperCream.score": "/5",
   "diaperCream.entries": "entries",
   "diaperCream.thisWeek": "this week"
+},
+"gestureMilestone": {
+  "title": "Gesture Bridge",
+  "greeting": "Development",
+  "gestureTimeline": "Gesture Timeline",
+  "addGesture": "+ Log Gesture",
+  "addWord": "+ Log Word",
+  "wordBurst": "Word Burst",
+  "bridgeViz": "Development Bridge",
+  "earlyWarning": "Early Warning",
+  "summaryStats": "Summary Stats",
+  "gestureTypes": {
+    "proto_declarative": "Proto-declarative (showing)",
+    "proto_imperative": "Proto-imperative (requesting)",
+    "social": "Social / Showing"
+  },
+  "initiator": {
+    "baby": "Baby",
+    "caregiver": "Caregiver"
+  },
+  "jointAttention": {
+    "yes": "Joint attention observed",
+    "no": "No joint attention"
+  },
+  "context": "Context",
+  "objectPointed": "Object pointed at",
+  "notes": "Notes (optional)",
+  "save": "Save",
+  "cancel": "Cancel",
+  "noGestures": "No gesture entries yet",
+  "noWords": "No word entries yet",
+  "weeklyGestures": "Weekly Gestures",
+  "jointAttentionRatio": "Joint Attention Ratio",
+  "wordsThisMonth": "Words This Month",
+  "alert9mo": {
+    "title": "9-Month Alert",
+    "body": "No pointing gestures logged yet. Most babies show pointing by 9 months. Consider professional review."
+  },
+  "alert12mo": {
+    "title": "12-Month Alert",
+    "body": "No joint attention observed yet. Joint attention typically emerges by 12 months. Consider professional review."
+  },
+  "word": {
+    "word": "Word",
+    "date": "Date",
+    "context": "Context",
+    "gestureRichness": "Gesture Richness Score"
+  },
+  "bridgeChart": {
+    "gestureLine": "Gesture Count",
+    "wordMarkers": "Word Emergence"
+  },
+  "gestureRichnessScore": "Gesture Richness Score",
+  "logGesture": "Log Gesture",
+  "logWord": "Log Word"
 }

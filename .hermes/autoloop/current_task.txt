@@ -1,9 +1,10 @@
-# Cycle 364 — DISPATCHED
+# Cycle 364 — RUNNING
 # Date: 2026-06-15 08:XX
-# Status: Dispatched #346 to Sisyphus (diaper-cream.tsx)
-# Commit: pending this cycle
-# Todo: #346 completed (Diaper Cream Barrier Tracker)
-# Idea: #78 → implemented, #79/#80 promoted from concepts
-# TODO: 0 pending · 2 new (#79 Gesture-Milestone, #80 Autonomic Readiness)
-# Sisyphus: idle — cycle 363 bg process killed (diaper-cream.tsx created independently)
+# Status: Running #347 (Gesture-Milestone Bridge Tracker)
+# Commit: 7975651 (diaper cream done)
+# Todo: #346 completed, #347 dispatched to Sisyphus
+# Idea: #78 implemented, #79/#80 new
+# TODO: 0 pending · 1 new (#347) + 1 new idea (#80 Autonomic Readiness)
+# Sisyphus: running — gesture-milestone.tsx creation (background pid 737839)
+# Telegram: pending
 ==

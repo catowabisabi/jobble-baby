@@ -1,0 +1,127 @@
+# Todo #349: Implement Autonomic Readiness Index Tab
+
+## Keywords
+autonomic_stability_score, vagal_tone_proxy, stress_response_tracking, brainstem_maturation_index, phase_transition_readiness
+
+## Task for Sisyphus
+
+Create `JobbleBaby/app/(tabs)/autonomic-readiness.tsx` — a new tab that tracks the baby's autonomic nervous system maturation through behavioral proxies.
+
+## UX OVERVIEW
+Parents cannot measure vagal tone or cortisol directly. This tab uses OBSERVABLE BEHAVIORS as proxies:
+- Stress response quality (crying recovery speed, startle response)
+- Feeding stability (swallow-breathe coordination, feeding efficiency)
+- Sleep autonomic markers (HRV-like patterns via wake-after-sleep-onset)
+- Self-soothing capacity emergence
+
+## STEP 1 — Create `autonomic-readiness.tsx`
+
+Design: SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme), single-column layout.
+
+**SECTION A — Autonomic Readiness Score (Hero)**
+- Composite 0-100 score displayed prominently
+- Algorithm: weighted average of 4 sub-scores (see Section D)
+- Color-coded: red <40, yellow 40-70, green >70
+- Shows label: "Autonomic Readiness for [solid foods / sleep training / teething]"
+- Based on baby's current age and observed behaviors
+
+**SECTION B — Stress Response Tracker**
+- Log stress events: startle, overstimulation, teething pain, vaccination
+- Each entry: date, trigger type picker, intensity 1-5, recovery time (seconds), recovery quality picker (spontaneous/soothed/prolonged)
+- Recovery Speed Score: average recovery time normalized to age-expected
+- Startle Response Log: frequency per day, amplitude rating 1-5
+- Weekly trend chart (simple line of recovery speed over time)
+
+**SECTION C — Feeding Autonomic Stability**
+- Log each feed with autonomic notes:
+  - Swallow-breathe coordination rating 1-5 (5=perfectly coordinated)
+  - Desaturation events (YN toggle + count if yes)
+  - Feeding efficiency (good/slow/poor)
+  - Post-feed autonomic state: calm/active/fussy/unsettled
+- Running Swallow-Breathe Coordination Score
+- Alerts: if coordination score drops below 3 for 3+ consecutive feeds
+
+**SECTION D — Sleep Autonomic Quality**
+- Track overnight:
+  - Wake-after-sleep-onset (WASO) minutes
+  - Number of autonomic arousals (spontaneous wakeups with autonomic signs)
+  - Heart rate proxy: woke upset vs woke calm
+- Autonomic Sleep Quality Score: based on WASO + arousal quality
+- Link to existing sleep tracking data if possible
+
+**SECTION E — Self-Soothing Emergence Timeline**
+- Track emergence of self-soothing behaviors:
+  - Hand-to-mouth/gentle thumb sucking (0-3mo)
+  - Transitional objects (6-12mo)
+  - Self-initiated sleep onset (12mo+)
+- Each: behavior name, age first observed, frequency now
+- Self-Soothing Index: 0-25 based on number + quality of behaviors
+
+**SECTION F — Composite Readiness Algorithm**
+```
+Overall Score = (Stress_Recovery_Score × 0.25) 
+              + (Feeding_Autonomic_Score × 0.30) 
+              + (Sleep_Quality_Score × 0.25) 
+              + (Self_Soothing_Index × 0.20)
+
+Readiness for Solid Foods = if Overall > 50 AND Feeding_Autonomic_Score > 3.5
+Readiness for Sleep Training = if Overall > 60 AND Sleep_Quality_Score > 3.0 AND age > 4mo
+Readiness for Teething Stress = if Overall > 40
+```
+
+**SECTION G — Readiness Summary**
+- 3 cards: Solid Foods Readiness, Sleep Training Readiness, Teething Stress Readiness
+- Each: YES/NO/NOT_YET with explanation
+- Recommendations per readiness area
+
+## STEP 2 — Add i18n keys to `i18n/en.json` and `i18n/zh.json`
+Keys needed:
+- `autonomicReadiness.title`, `autonomicReadiness.subtitle`
+- `autonomicReadiness.overallScore`, `autonomicReadiness.readinessFor`
+- `autonomicReadiness.stress`, `autonomicReadiness.stressRecoveryTime`, `autonomicReadiness.startleResponse`, `autonomicReadiness.intensity`, `autonomicReadiness.recoveryQuality`, `autonomicReadiness.spontaneous`, `autonomicReadiness.soothed`, `autonomicReadiness.prolonged`
+- `autonomicReadiness.feeding`, `autonomicReadiness.swallowBreathe`, `autonomicReadiness.desaturationEvents`, `autonomicReadiness.feedingEfficiency`, `autonomicReadiness.postFeedState`, `autonomicReadiness.calm`, `autonomicReadiness.active`, `autonomicReadiness.fussy`, `autonomicReadiness.unsettled`
+- `autonomicReadiness.sleep`, `autonomicReadiness.waso`, `autonomicReadiness.arousals`, `autonomicReadiness.wokeUpset`, `autonomicReadiness.wokeCalm`
+- `autonomicReadiness.selfSoothing`, `autonomicReadiness.handToMouth`, `autonomicReadiness.transitionalObject`, `autonomicReadiness.selfInitiatedSleep`
+- `autonomicReadiness.solidFoodsReady`, `autonomicReadiness.sleepTrainingReady`, `autonomicReadiness.teethingReady`, `autonomicReadiness.notYet`
+- `autonomicReadiness.alertCoordinationDrop`
+
+## STEP 3 — Update `_layout.tsx`
+Add TabNavigator entry:
+```
+<Tabs.Screen
+  name="autonomic-readiness"
+  options={{
+    title: t('autonomicReadiness.title') || 'Autonomic Readiness',
+    tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+  }}
+/>
+```
+Use an existing MaterialCommunityIcons name from the list: heart-pulse, brain, nervous, apple-health, baby-face-outline.
+
+## STEP 4 — Update `store/storage-keys.ts`
+Add keys:
+```
+AUTONOMIC_STRESS_LOG: '@jobble/autonomic_stress_log'
+AUTONOMIC_FEEDING_LOG: '@jobble/autonomic_feeding_log'
+AUTONOMIC_SLEEP_LOG: '@jobble/autonomic_sleep_log'
+AUTONOMIC_SELF_SOOTHING: '@jobble/autonomic_self_soothing'
+AUTONOMIC_READINESS_SCORE: '@jobble/autonomic_readiness_score'
+```
+
+## STEP 5 — Verify
+- TSC: `npx tsc --noEmit` — must pass 0 errors
+- File created: `app/(tabs)/autonomic-readiness.tsx`
+- i18n keys added to en.json + zh.json
+- Tab registered in _layout.tsx
+- Storage keys added to storage-keys.ts
+
+## PATTERNS TO FOLLOW
+- Use SafeStorage (safeGetItem/safeSetItem) — NOT raw AsyncStorage
+- Use useLanguage() hook for i18n
+- Use useTheme() hook for colors
+- All TouchableOpacity must have accessibilityLabel
+- Follow existing tab patterns (e.g., reflex-visual-motor.tsx, thermal-metabolic.tsx)
+- Save data with timestamps as ISO strings
+
+DONE
+ULW

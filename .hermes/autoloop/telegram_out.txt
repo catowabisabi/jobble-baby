@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 12:03
-✅ Done: #347 Gesture-Milestone Bridge Tracker (gesture-milestone.tsx, 583 lines, 5 sections)
-🔧 Dispatched: #348 GitHub Actions CI/CD Pipeline → Sisyphus (opencode PID 855507)
-📋 TODO: 1 pending (#348) · 0 new
-📦 Commit: 3416b80 → pushed
-📝 Desc: Cycle 366完成，gesture-milestone.tsx已創建並push。Storage keys + _layout.tsx tab registration完成。#348 CI/CD pipeline已dispatch。
+🍼 Jobble Baby · 16:04
+✅ Done: #348 CI/CD Pipeline (files already committed)
+🔧 Dispatched: #349 Autonomic Readiness Index → Sisyphus
+📋 TODO: 1 pending (#349) · 0 new
+📦 Commit: 95922f5 → pushed
+📝 Desc: Cycle 368完成，#348 CI/CD已確認完成（workflow文件已存在）。新dispatch #349自主神經準備指數tab，包含壓力反應、吞嚥協調、睡眠自主神經質量、自我安撫追蹤。Composite 0-100評分系統，Ready for固體/睡眠訓練/出牙壓力指示。

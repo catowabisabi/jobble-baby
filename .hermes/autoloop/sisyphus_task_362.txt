@@ -1,0 +1,45 @@
+Task: Create Diaper Cream Barrier Efficacy Tracker tab (diaper-cream.tsx) for JobbleBaby
+
+== Context ==
+Jobble Baby is a comprehensive baby care tracking app with 80+ tabs covering feeding, sleep, development, and health. The app uses React Navigation bottom tabs with i18n (en.json + zh.json).
+
+== Background ==
+New feature: Diaper Cream Barrier Efficacy Tracker — tracks diaper cream application frequency, barrier integrity, and rash prevention outcomes.
+
+== Your Task ==
+Create a NEW tab at: app/(tabs)/diaper-cream.tsx
+
+The tab should include:
+1. **Application Log** — date/time picker, cream type (dropdown: Zinc Oxide, Petroleum-based, Natural/Organic, Other), amount applied (slider or preset: Thin/Medium/Thick), body location (multi-select: diaper area, skin folds, rash spots)
+2. **Barrier Integrity Rating** — 1-5 star rating or slider: 1=compromised/oozing, 5=intact protective barrier
+3. **Rash Tracking** — toggle: rash present/absent, if present: type (yeast/contact/irritant), severity (mild/moderate/severe), photo attachment note
+4. **Weekly Summary** — simple count: applications this week, average barrier score, rash incidents
+5. **History List** — chronological list of past entries with quick stats
+
+Technical requirements:
+- Use SafeStorage (safeGetItem, safeSetItem) for persistence — NOT raw AsyncStorage
+- All user-facing strings via i18n (use t('...') from LanguageContext)
+- Use existing UI patterns: TouchableOpacity, View, Text, ScrollView from React Native
+- Style consistently with existing tabs (colors, spacing)
+- Export default as a React component
+- Register the tab in app/(tabs)/_layout.tsx navigation
+- Add i18n keys to en.json and zh.json
+
+== Existing Code Patterns ==
+Check these files for patterns:
+- app/(tabs)/tracking.tsx — basic log list pattern
+- app/(tabs)/growth.tsx — slider/form pattern
+- app/(tabs)/milestones.tsx — rating/severity pattern
+- app/utils/SafeStorage.ts — safeGetItem/safeSetItem usage
+
+== Approach ==
+1. Read existing similar tabs for patterns
+2. Create the new tab file
+3. Register in _layout.tsx (add to tabs array)
+4. Add i18n keys to en.json + zh.json
+5. Run npx tsc --noEmit to verify 0 errors
+
+== Keywords (use 1-2 in your thinking) ==
+dermatological_barrier_integrity, perianal_erythema_tracking, zinc_oxide_application_protocol
+
+ULW

@@ -1,8 +1,9 @@
-# Cycle 361 — COMPLETE
-# Date: 2026-06-15 05:06
-# Status: All complete — 80 dead AsyncStorage imports removed
-# Commits: 45a91f3 (DB) + 276f479 (code cleanup)
-# Todo: #356 completed, #357 completed (both done)
-# Painpoint #24 resolved
-# TODO: 0 pending · 0 new
+# Cycle 362 — DISPATCHED
+# Date: 2026-06-15 06:xx
+# Status: Dispatched #358 to Sisyphus
+# Commit: 65707bd
+# Todo: #358 new (Diaper Cream Barrier Tracker)
+# Idea: #78 deferred → todo #358
+# TODO: 0 pending · 1 new (#358)
+# Sisyphus: running — diaper-cream.tsx creation
 ==

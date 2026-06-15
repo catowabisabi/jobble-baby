@@ -1,7 +1,7 @@
-🍼 Jobble Baby · 05:06
-✅ Done: #356 AsyncStorage→SafeStorage migration complete (82→0 direct calls)
-✅ Resolved: #24 AsyncStorage lacks try-catch (SafeStorage wrapper covers it)
-🔧 Dispatched: #357 Remove 80 dead AsyncStorage imports
-📋 TODO: 0 pending · 1 new
-📦 Commit: 45a91f3 → pushed
-📝 Desc: Migration完成，但80個file死import未清。Sisyphus正在後台清理。SafeStorage.ts係唯一直接call AsyncStorage的地方，已經有try-catch。
+🍼 Jobble Baby · 05:10
+✅ Done: #356 AsyncStorage→SafeStorage (82→0 direct calls)
+✅ Done: #357 Remove 80 dead AsyncStorage imports
+✅ Resolved: #24 AsyncStorage lacks try-catch
+📋 TODO: 0 pending · 0 new
+📦 Commit: 276f479 → pushed
+📝 Desc: 所有dead import清除晒。SafeStorage.ts係唯一直接call AsyncStorage地方。TSC clean。Queue清空。

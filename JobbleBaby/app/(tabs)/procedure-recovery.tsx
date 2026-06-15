@@ -143,7 +143,7 @@ export default function ProcedureRecoveryScreen() {
         </View>
         <View style={styles.sectionTabs}>
           {sections.map(s => (
-            <TouchableOpacity key={s.key} style={[styles.sectionTab, activeSection === s.key && { backgroundColor: C.accent }]} onPress={() => setActiveSection(s.key)}>
+            <TouchableOpacity key={s.key} style={[styles.sectionTab, activeSection === s.key && { backgroundColor: C.accent }]} onPress={() => setActiveSection(s.key)} accessibilityLabel={s.label} accessibilityRole="button">
               <Text style={[styles.sectionTabText, { color: activeSection === s.key ? '#fff' : C.text }]}>{s.label}</Text>
             </TouchableOpacity>
           ))}
@@ -155,7 +155,7 @@ export default function ProcedureRecoveryScreen() {
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.procedureType') || 'Procedure Type'}</Text>
             <View style={styles.optionRow}>
               {PROCEDURE_TYPES.map(pt => (
-                <TouchableOpacity key={pt.value} style={[styles.optionChip, procedureType === pt.value && { backgroundColor: C.accent }]} onPress={() => setProcedureType(pt.value)}>
+                <TouchableOpacity key={pt.value} style={[styles.optionChip, procedureType === pt.value && { backgroundColor: C.accent }]} onPress={() => setProcedureType(pt.value)} accessibilityLabel={t(pt.labelKey)} accessibilityRole="button">
                   <Text style={[styles.optionChipText, { color: procedureType === pt.value ? '#fff' : C.text }]}>{t(pt.labelKey)}</Text>
                 </TouchableOpacity>
               ))}
@@ -166,7 +166,7 @@ export default function ProcedureRecoveryScreen() {
             <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={clinic} onChangeText={setClinic} placeholder={t('procedureRecovery.clinicPlaceholder') || 'Clinic name'} />
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.surgeon') || 'Surgeon'}</Text>
             <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={surgeon} onChangeText={setSurgeon} placeholder={t('procedureRecovery.surgeonPlaceholder') || 'Surgeon name'} />
-            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveProcedure}>
+            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveProcedure} accessibilityLabel={t('common.save') || 'Save procedure'} accessibilityRole="button">
               <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
             </TouchableOpacity>
           </View>
@@ -177,24 +177,24 @@ export default function ProcedureRecoveryScreen() {
             <Text style={[styles.cardTitle, { color: C.text }]}>{t('procedureRecovery.feedingRecovery') || 'Feeding Recovery'}</Text>
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.latchQuality') || 'Latch Quality (1-5)'}</Text>
             <View style={styles.ratingRow}>
-              {[1,2,3,4,5].map(n => <TouchableOpacity key={n} onPress={() => setLatchQuality(n)}><Text style={[styles.ratingStar, { color: n <= latchQuality ? '#F59E0B' : '#D1D5DB' }]}>*</Text></TouchableOpacity>)}
+              {[1,2,3,4,5].map(n => <TouchableOpacity key={n} onPress={() => setLatchQuality(n)} accessibilityLabel={`${t('procedureRecovery.latchQuality') || 'Latch quality'} ${n}`} accessibilityRole="button"><Text style={[styles.ratingStar, { color: n <= latchQuality ? '#F59E0B' : '#D1D5DB' }]}>*</Text></TouchableOpacity>)}
             </View>
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.duration') || 'Duration (min)'}</Text>
             <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={feedingDuration} onChangeText={setFeedingDuration} keyboardType="numeric" placeholder="0" />
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.bottleAcceptance') || 'Bottle Acceptance'}</Text>
             <View style={styles.optionRow}>
               {BOTTLE_OPTIONS.map(ba => (
-                <TouchableOpacity key={ba.value} style={[styles.optionChip, bottleAcceptance === ba.value && { backgroundColor: C.accent }]} onPress={() => setBottleAcceptance(ba.value)}>
+                <TouchableOpacity key={ba.value} style={[styles.optionChip, bottleAcceptance === ba.value && { backgroundColor: C.accent }]} onPress={() => setBottleAcceptance(ba.value)} accessibilityLabel={t(ba.labelKey)} accessibilityRole="button">
                   <Text style={[styles.optionChipText, { color: bottleAcceptance === ba.value ? '#fff' : C.text }]}>{t(ba.labelKey)}</Text>
                 </TouchableOpacity>
               ))}
             </View>
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painResponse') || 'Pain Response (1-5)'}</Text>
             <View style={styles.ratingRow}>
-              {[1,2,3,4,5].map(n => <TouchableOpacity key={n} onPress={() => setPainResponse(n)}><Text style={[styles.ratingStar, { color: n <= painResponse ? '#EF4444' : '#D1D5DB' }]}>*</Text></TouchableOpacity>)}
+              {[1,2,3,4,5].map(n => <TouchableOpacity key={n} onPress={() => setPainResponse(n)} accessibilityLabel={`${t('procedureRecovery.painResponse') || 'Pain response'} ${n}`} accessibilityRole="button"><Text style={[styles.ratingStar, { color: n <= painResponse ? '#EF4444' : '#D1D5DB' }]}>*</Text></TouchableOpacity>)}
             </View>
             <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={feedingNotes} onChangeText={setFeedingNotes} placeholder={t('procedureRecovery.notesPlaceholder') || 'Notes'} multiline />
-            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveFeeding}>
+            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveFeeding} accessibilityLabel={t('procedureRecovery.saveFeeding') || 'Save feeding log'} accessibilityRole="button">
               <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
             </TouchableOpacity>
             {feedingLog.length > 0 && (
@@ -218,14 +218,14 @@ export default function ProcedureRecoveryScreen() {
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.drug') || 'Drug'}</Text>
             <View style={styles.optionRow}>
               {['acetaminophen','ibuprofen'].map(d => (
-                <TouchableOpacity key={d} style={[styles.optionChip, drug === d && { backgroundColor: C.accent }]} onPress={() => setDrug(d)}>
+                <TouchableOpacity key={d} style={[styles.optionChip, drug === d && { backgroundColor: C.accent }]} onPress={() => setDrug(d)} accessibilityLabel={t('procedureRecovery.' + d) || d} accessibilityRole="button">
                   <Text style={[styles.optionChipText, { color: drug === d ? '#fff' : C.text }]}>{t('procedureRecovery.' + d) || d}</Text>
                 </TouchableOpacity>
               ))}
             </View>
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.dose') || 'Dose (mg)'}</Text>
             <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={doseMg} onChangeText={setDoseMg} keyboardType="numeric" placeholder="0" />
-            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveMedication}>
+            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveMedication} accessibilityLabel={t('procedureRecovery.saveMedication') || 'Save medication log'} accessibilityRole="button">
               <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
             </TouchableOpacity>
           </View>
@@ -237,7 +237,7 @@ export default function ProcedureRecoveryScreen() {
             <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.healingStatus') || 'Healing Status'}</Text>
             <View style={styles.optionRow}>
               {HEALING_STATUSES.map(hs => (
-                <TouchableOpacity key={hs.value} style={[styles.optionChip, { backgroundColor: '#F3F4F6' }]}>
+                <TouchableOpacity key={hs.value} style={[styles.optionChip, { backgroundColor: '#F3F4F6' }]} accessibilityLabel={t(hs.labelKey)} accessibilityRole="button">
                   <Text style={[styles.optionChipText, { color: C.text }]}>{t(hs.labelKey)}</Text>
                 </TouchableOpacity>
               ))}
@@ -263,7 +263,7 @@ export default function ProcedureRecoveryScreen() {
                 <Text style={[styles.timelineText, { color: C.text }]}>{t('procedureRecovery.week2') || 'Back to baseline expected'}</Text>
               </View>
             </View>
-            <TouchableOpacity style={[styles.alertButton, { backgroundColor: '#EF4444' }]} onPress={checkDoctorAlerts}>
+            <TouchableOpacity style={[styles.alertButton, { backgroundColor: '#EF4444' }]} onPress={checkDoctorAlerts} accessibilityLabel={t('procedureRecovery.checkAlerts') || 'Check doctor alerts'} accessibilityRole="button">
               <Text style={styles.alertButtonText}>{t('procedureRecovery.checkAlerts') || 'Check Doctor Alerts'}</Text>
             </TouchableOpacity>
           </View>

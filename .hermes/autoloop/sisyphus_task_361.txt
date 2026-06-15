@@ -1,0 +1,33 @@
+Task: Remove 80 dead AsyncStorage imports from JobbleBaby/app
+
+== Background ==
+The AsyncStorage→SafeStorage migration is complete. All storage calls now go through the SafeStorage wrapper (safeGetItem, safeSetItem, safeRemoveItem) which has proper error handling.
+
+However, 80 files in app/(tabs)/ and app/utils/ still have:
+  import AsyncStorage from '@react-native-async-storage/async-storage';
+These imports are now DEAD (unused) — SafeStorage.ts is the only file that actually calls AsyncStorage.
+
+== Your Task ==
+For EACH of the 80 files (excluding app/utils/SafeStorage.ts):
+
+1. Check if the file actually USES AsyncStorage.getItem, AsyncStorage.setItem, or AsyncStorage.removeItem directly (not through SafeStorage wrapper).
+2. If the file only imports AsyncStorage but never calls AsyncStorage methods directly → remove the import line.
+3. If the file DOES call AsyncStorage directly somewhere → leave it alone and note it.
+
+== Files to process ==
+Grep for: from '@react-native-async-storage/async-storage' in app/ directory (exclude app/utils/SafeStorage.ts)
+
+== Approach ==
+- Don't use sed for this — use Python regex or a simple script to safely remove just the AsyncStorage import line.
+- After modifying each file, verify it still looks syntactically correct.
+- Run npx tsc --noEmit after to check for errors.
+
+== Expected outcome ==
+- All 80 dead imports removed
+- TSC: 0 errors
+- No file should have both SafeStorage and raw AsyncStorage imports
+
+== Keywords (use 1-2 in your thinking) ==
+roomsharing_protocol, sensory_integration_trajectory, oxytocin_release_evening
+
+ULW

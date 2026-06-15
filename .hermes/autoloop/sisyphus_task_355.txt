@@ -1,0 +1,53 @@
+## Task: Create Development Radar tab
+
+Keywords: integrated_development_score, motor_milestone_predictor, sleep_training_method_matrix, responsive_feeding_dynamics, language_burst_onset
+
+STEP 1 — Read these files first:
+- JobbleBaby/app/(tabs)/_layout.tsx (for tab registration pattern)
+- JobbleBaby/app/(tabs)/village-network.tsx (for card-based layout style reference)
+- JobbleBaby/app/i18n/en.json and zh.json (for i18n key structure)
+
+STEP 2 — Create `JobbleBaby/app/(tabs)/development-radar.tsx`
+Design: SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
+
+HEADER:
+- Small label: t('developmentRadar.label') e.g. "Development Snapshot"
+- Title: t('developmentRadar.title') e.g. "Growth Radar"
+- Subtitle: t('developmentRadar.subtitle') e.g. "Track your baby's progress across key areas"
+
+SECTION A — Radar Chart (simulated with Views)
+- Draw a 4-axis radar/spider chart using React Native Views (no external chart lib needed)
+- 4 axes: Motor, Language/Social, Feeding, Sleep
+- Each axis has a value 0-100 driven by mock data
+- Show axis labels using t() keys
+- Style: semi-transparent colored fill, axis lines in C.accent
+
+SECTION B — Axis Detail Cards
+- 4 cards below the radar, one per axis
+- Each card: axis name, current score (0-100), trend indicator (↑↓→), brief description
+- Use t() keys: developmentRadar.axis.{motor,language,feeding,sleep}.title + desc
+
+SECTION C — Recent Milestones Feed
+- List 3 mock recent milestones with emoji, title, date
+- Each: emoji + t() key for milestone name + relative date string
+- Style: card per milestone, most recent first
+
+DATA: Use mock data arrays at top of file. No AsyncStorage needed for MVP.
+
+STEP 3 — Add i18n keys
+Add to en.json and zh.json:
+- developmentRadar.label, title, subtitle
+- developmentRadar.axis.{motor,language,feeding,sleep}.title, desc, score
+- developmentRadar.milestone.* (for recent milestones)
+- developmentRadar.trend.{up,down,stable}
+
+STEP 4 — Register in _layout.tsx
+Add Tabs.Screen entry for development-radar after village-network tab.
+Icon: use the same icon as village-network or a simple chart icon.
+
+STEP 5 — Verify
+- TSC: npx tsc --noEmit → 0 errors
+- Do NOT run npm install or modify package.json
+
+Report what you created and what (if anything) was fixed.
+ULW

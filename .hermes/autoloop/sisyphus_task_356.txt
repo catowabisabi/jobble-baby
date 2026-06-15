@@ -1,0 +1,53 @@
+# Idea #77: Development Radar — Holistic Growth Visualization
+# Keywords: thermal_conduction_skin_contact, state_co_regulation, latch_asymmetry_heatmap
+
+## Task for Sisyphus
+
+Create a new tab `development-radar.tsx` showing a radar chart of baby development across 4 axes.
+
+STEP 1 — Read these files first:
+- JobbleBaby/app/(tabs)/_layout.tsx (for tab registration pattern)
+- JobbleBaby/app/(tabs)/village-network.tsx (for card-based layout style reference)
+- JobbleBaby/i18n/en.json and zh.json (for i18n key structure)
+
+STEP 2 — Create JobbleBaby/app/(tabs)/development-radar.tsx
+Design:
+- SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
+- Header: label + title + subtitle (all i18n)
+
+SECTION A — Radar Chart
+- Simulate a 4-axis radar/spider chart using React Native Views
+- 4 axes: Motor, Language/Social, Feeding, Sleep
+- Each axis has a value 0-100 driven by mock data
+- Semi-transparent colored fill, axis lines in C.accent
+- Axis labels using t() keys
+
+SECTION B — Axis Detail Cards
+- 4 cards below the radar, one per axis
+- Each card: axis name, current score (0-100), trend indicator, brief description
+- Use t() keys: developmentRadar.axis.{motor,language,feeding,sleep}.title + desc
+
+SECTION C — Recent Milestones Feed
+- List 3 mock recent milestones with emoji, title, date
+- Style: card per milestone, most recent first
+
+DATA: Use mock data arrays at top of file. No AsyncStorage needed for MVP.
+
+STEP 3 — Add i18n keys
+Add to en.json and zh.json:
+- developmentRadar.label, title, subtitle
+- developmentRadar.axis.{motor,language,feeding,sleep}.title, desc, score
+- developmentRadar.milestone.* (for recent milestones)
+- developmentRadar.trend.{up,down,stable}
+
+STEP 4 — Register in _layout.tsx
+Add Tabs.Screen entry for development-radar after village-network tab.
+Icon: chart-radar or chart icon from MaterialCommunityIcons.
+
+STEP 5 — Verify
+- TSC: npx tsc --noEmit (0 errors)
+- Do NOT run npm install or modify package.json
+
+Report what you created.
+
+ULW

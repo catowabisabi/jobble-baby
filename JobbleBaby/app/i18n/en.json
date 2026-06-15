@@ -73,7 +73,8 @@
     "interoceptive": "Interoceptive",
     "regulatoryFitness": "Regulatory Fitness",
     "windowOfTolerance": "Window of Tolerance",
-    "villageNetwork": "Village"
+    "villageNetwork": "Village",
+    "developmentRadar": "Radar"
   },
   "gravityFeeding": {
     "title": "Gravity-Assisted Feeding",
@@ -5207,5 +5208,45 @@
     },
     "connect": "Connect",
     "greeting": "Village Network"
+  },
+  "developmentRadar": {
+    "label": "Development Snapshot",
+    "title": "Growth Radar",
+    "subtitle": "Track your baby's progress across key areas",
+    "radarTitle": "Radar Chart",
+    "axisDetailTitle": "Axis Details",
+    "milestonesTitle": "Recent Milestones",
+    "axis": {
+      "motor": {
+        "title": "Motor",
+        "desc": "Gross and fine motor skills development",
+        "score": "Motor Score"
+      },
+      "language": {
+        "title": "Language & Social",
+        "desc": "Communication and social milestones",
+        "score": "Language Score"
+      },
+      "feeding": {
+        "title": "Feeding",
+        "desc": "Feeding skills and nutrition progress",
+        "score": "Feeding Score"
+      },
+      "sleep": {
+        "title": "Sleep",
+        "desc": "Sleep patterns and quality",
+        "score": "Sleep Score"
+      }
+    },
+    "milestone": {
+      "firstWord": "First Word",
+      "crawling": "Started Crawling",
+      "solidFood": "First Solid Food"
+    },
+    "trend": {
+      "up": "Trending up",
+      "down": "Trending down",
+      "stable": "Stable"
+    }
   }
 }

@@ -3,6 +3,7 @@ import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import GearCheckScreen from './gear-check';
 import VillageNetworkScreen from './village-network';
+import DevelopmentRadarScreen from './development-radar';
 
 export default function TabsLayout() {
   const { t } = useLanguage();
@@ -66,6 +67,13 @@ export default function TabsLayout() {
         options={{
           title: t('tabs.villageNetwork') || 'Village',
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account-group" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="development-radar"
+        options={{
+          title: t('tabs.developmentRadar') || 'Radar',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="chart-bell-curve" size={size} color={color} />,
         }}
       />
       <Tabs.Screen

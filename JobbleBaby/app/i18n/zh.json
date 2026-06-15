@@ -73,7 +73,8 @@
     "interoceptive": "內感受追蹤",
     "regulatoryFitness": "調節健身",
     "windowOfTolerance": "容忍窗口",
-    "villageNetwork": "社群"
+    "villageNetwork": "社群",
+    "developmentRadar": "發育雷達"
   },
   "gravityFeeding": {
     "title": "重力輔助餵養",
@@ -5207,5 +5208,45 @@
     },
     "connect": "連繫",
     "greeting": "育兒社群"
+  },
+  "developmentRadar": {
+    "label": "發育概覽",
+    "title": "成長雷達",
+    "subtitle": "追蹤寶寶各範疇的發展進度",
+    "radarTitle": "雷達圖",
+    "axisDetailTitle": "範疇詳情",
+    "milestonesTitle": "最近里程碑",
+    "axis": {
+      "motor": {
+        "title": "大肌肉",
+        "desc": "粗大及精細肌肉發展",
+        "score": "運動分數"
+      },
+      "language": {
+        "title": "語言與社交",
+        "desc": "溝通及社交里程碑",
+        "score": "語言分數"
+      },
+      "feeding": {
+        "title": "餵養",
+        "desc": "餵養技能及營養進度",
+        "score": "餵養分數"
+      },
+      "sleep": {
+        "title": "睡眠",
+        "desc": "睡眠模式及質量",
+        "score": "睡眠分數"
+      }
+    },
+    "milestone": {
+      "firstWord": "第一個詞",
+      "crawling": "開始爬行",
+      "solidFood": "首次固體食物"
+    },
+    "trend": {
+      "up": "上升中",
+      "down": "下降中",
+      "stable": "穩定"
+    }
   }
 }

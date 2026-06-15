@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 18:12
-✅ Done: #351 fix i18n audit — add 4 missing tab labels + remove console.error (committed 439e6f2)
-🔧 Dispatched: —
-📋 TODO: 0 pending · 0 new (deferred: #108 privacy policy URL — user action required)
-📦 Commit: 439e6f2 → pushed
-📝 Desc: Audit 全 REQUIRED checks PASSED。i18n 修復：加入 tabs.galantLatch, tabs.interoceptive, tabs.regulatoryFitness, tabs.windowOfTolerance 到 en.json + zh.json。移除 procedure-recovery.tsx console.error。#108 Deffered — 需要用戶親自部署隱私政策 URL。
+🍼 Jobble Baby · 19:04
+✅ Done: #343 GitHub Actions CI/CD workflow review
+🔧 Dispatched: #106 Village Network tab (idea deferred)
+📋 TODO: 0 pending · 0 new
+📦 Commit: 046d5dc → pushed
+📝 Desc: Workflow files 正常 ✓ · 50 關鍵詞加入 pool · 派 Sisyphus 做 Village Network tab（#106 deferred）· 等待用戶：隱私政策 URL + EAS credentials

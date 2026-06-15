@@ -1,3 +1,15 @@
+#!/bin/bash
+# Cycle 353 dispatch — Village Network tab (idea #106 deferred)
+set -e
+
+SESSION="jobble-baby"
+REPO="/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby"
+JB="$REPO/JobbleBaby"
+AUTOLOOP="$REPO/.hermes/autoloop"
+TASK_FILE="$AUTOLOOP/sisyphus_task_353.txt"
+
+# Write task to numbered file
+cat > "$TASK_FILE" << 'TASK_END'
 # Idea #106: Village Network — Peer Parenting Support Matcher
 # Keywords: mealtime_negotiation_tactics, sleep-onset_association_fragmentation, state_fluidity
 
@@ -60,3 +72,24 @@ STEP 5 — Verify
 Do NOT run npm install or modify package.json. Just create the tab file, add i18n keys, register the tab.
 
 ULW
+TASK_END
+
+# Send interrupt to any running process in tmux
+tmux send-keys -t "$SESSION" C-c 2>/dev/null || true
+sleep 1
+
+# Copy task to /tmp for execution
+cp "$TASK_FILE" /tmp/sisyphus_task.txt
+
+# Send to tmux session - write task content
+tmux send-keys -t "$SESSION" "cat > /tmp/sisyphus_task_353.sh << 'EOF'" Enter
+sleep 1
+tmux send-keys -t "$SESSION" "$(cat "$TASK_FILE" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/^/"/' | sed 's/$/"/')" Enter
+tmux send-keys -t "$SESSION" "EOF" Enter
+sleep 2
+
+# Send the opencode command
+tmux send-keys -t "$SESSION" "cd $JB && opencode run --task /tmp/sisyphus_task.txt 2>&1 | tee $AUTOLOOP/sisyphus_response_353.txt" Enter
+sleep 2
+
+echo "Dispatched cycle 353 to $SESSION"

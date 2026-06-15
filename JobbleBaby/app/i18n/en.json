@@ -72,7 +72,8 @@
     "galantLatch": "Galant + Latch",
     "interoceptive": "Interoceptive",
     "regulatoryFitness": "Regulatory Fitness",
-    "windowOfTolerance": "Window of Tolerance"
+    "windowOfTolerance": "Window of Tolerance",
+    "villageNetwork": "Village"
   },
   "gravityFeeding": {
     "title": "Gravity-Assisted Feeding",
@@ -5161,5 +5162,49 @@
   "procedureRecovery.healingStatuses.other": "Other",
   "procedureRecovery.bottleOptions.accept": "Accepts fully",
   "procedureRecovery.bottleOptions.partial": "Partial acceptance",
-  "procedureRecovery.bottleOptions.refuse": "Refuses bottle"
+  "procedureRecovery.bottleOptions.refuse": "Refuses bottle",
+  "villageNetwork": {
+    "title": "Village Network",
+    "subtitle": "Connect with other parents in your area",
+    "supportCircle": {
+      "title": "Support Circle",
+      "feedingPeers": {
+        "title": "Feeding Peers",
+        "desc": "Share mealtime strategies, allergen introduction tips, and bottle refusal solutions."
+      },
+      "sleepPartners": {
+        "title": "Sleep Partners",
+        "desc": "Survive sleep regressions together — share check-in timing, Ferber progress, and wake windows."
+      },
+      "growthBuddies": {
+        "title": "Growth Buddies",
+        "desc": "Track developmental milestones side-by-side — first steps, words, and sensory milestones."
+      }
+    },
+    "community": {
+      "title": "Community Matching",
+      "connectButton": "Connect"
+    },
+    "profile": {
+      "name": "Name",
+      "babyAge": "Baby Age",
+      "location": "Location",
+      "interests": "Interests"
+    },
+    "resourceHub": {
+      "title": "Resource Hub",
+      "localGroups": "Find Local Parent Groups",
+      "hotlines": "Parenting Hotlines",
+      "laLeche": "La Leche League",
+      "postpartum": "Postpartum Support"
+    },
+    "emergency": {
+      "title": "Emergency Contacts",
+      "bannerTitle": "Crisis Helplines",
+      "hk": "Hong Kong Emergency",
+      "tw": "Taiwan Emergency",
+      "sg": "Singapore Emergency"
+    },
+    "connect": "Connect"
+  }
 }

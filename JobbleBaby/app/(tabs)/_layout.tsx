@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
 import GearCheckScreen from './gear-check';
+import VillageNetworkScreen from './village-network';
 
 export default function TabsLayout() {
   const { t } = useLanguage();
@@ -59,6 +60,13 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="profile"
         options={{ title: t('tabs.profile'), tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" size={size} color={color} /> }}
+      />
+      <Tabs.Screen
+        name="village-network"
+        options={{
+          title: t('tabs.villageNetwork') || 'Village',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account-group" size={size} color={color} />,
+        }}
       />
       <Tabs.Screen
         name="sleep-training"

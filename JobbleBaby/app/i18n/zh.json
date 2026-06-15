@@ -72,7 +72,8 @@
     "galantLatch": "Galant+銜乳導航",
     "interoceptive": "內感受追蹤",
     "regulatoryFitness": "調節健身",
-    "windowOfTolerance": "容忍窗口"
+    "windowOfTolerance": "容忍窗口",
+    "villageNetwork": "社群"
   },
   "gravityFeeding": {
     "title": "重力輔助餵養",
@@ -5161,5 +5162,49 @@
   "procedureRecovery.healingStatuses.other": "其他",
   "procedureRecovery.bottleOptions.accept": "完全接受",
   "procedureRecovery.bottleOptions.partial": "郡郡接受",
-  "procedureRecovery.bottleOptions.refuse": "拒绝"
+  "procedureRecovery.bottleOptions.refuse": "拒绝",
+  "villageNetwork": {
+    "title": "育兒社群",
+    "subtitle": "與區域內其他家長連繫",
+    "supportCircle": {
+      "title": "支援圈",
+      "feedingPeers": {
+        "title": "餵養同伴",
+        "desc": "分享用餐策略、過敏原引入技巧及奶瓶抗拒解決方案。"
+      },
+      "sleepPartners": {
+        "title": "睡眠夥伴",
+        "desc": "一起渡過睡眠倒退期 — 分享檢查時間、Ferber 進度及覺醒窗口。"
+      },
+      "growthBuddies": {
+        "title": "成長伙伴",
+        "desc": "並肩追蹤發育里程碑 — 第一步、說話、感官發展。"
+      }
+    },
+    "community": {
+      "title": "社群配對",
+      "connectButton": "連繫"
+    },
+    "profile": {
+      "name": "名字",
+      "babyAge": "嬰兒年齡",
+      "location": "地區",
+      "interests": "興趣"
+    },
+    "resourceHub": {
+      "title": "資源中心",
+      "localGroups": "尋找本地家長群組",
+      "hotlines": "育兒熱線",
+      "laLeche": "國際母乳餵養協會",
+      "postpartum": "產後支援"
+    },
+    "emergency": {
+      "title": "緊急聯絡",
+      "bannerTitle": "危機支援熱線",
+      "hk": "香港緊急",
+      "tw": "台灣緊急",
+      "sg": "新加坡緊急"
+    },
+    "connect": "連繫"
+  }
 }

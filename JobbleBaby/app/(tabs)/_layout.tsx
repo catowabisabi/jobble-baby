@@ -462,7 +462,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="scale-balance" size={size} color={color} />
         }}
       />
-      <Tabs.Screen
+<Tabs.Screen
         name="cup-feeding"
         options={{
           title: t('tabs.cupFeedingTransition') || 'Cup Feeding',
@@ -470,10 +470,10 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="home-safety"
+        name="diaper-cream"
         options={{
-          title: t('tabs.homeSafety') || 'Home Safety',
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="shield-home" size={size} color={color} />
+          title: t('tabs.diaperCream'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="shield-check" size={size} color={color} />
         }}
       />
       <Tabs.Screen

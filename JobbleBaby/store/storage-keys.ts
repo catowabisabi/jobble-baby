@@ -28,6 +28,7 @@ export const STORAGE_KEYS = {
   COORDINATION_SCORES: "@jobble/coordination_scores",
   CRY_ENTRIES: "@jobble/cry_entries",
   CUP_FEEDING_ENTRIES: "@jobble/cup_feeding_entries",
+  DIAPER_CREAM_ENTRIES: "@jobble/diaper_cream_entries",
   DUSK_ALARM_TIME: "@jobble/dusk_alarm_time",
   EMERGENCY_CONTACTS: "@jobble/emergency_contacts",
   FEEDING_EFFICIENCY: "@jobble/feeding_efficiency",

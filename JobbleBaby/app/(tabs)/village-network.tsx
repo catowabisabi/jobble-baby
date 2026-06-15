@@ -189,7 +189,7 @@ export default function VillageNetworkScreen() {
                 <Text style={styles.supportTitle}>{t(support.titleKey)}</Text>
                 <Text style={styles.supportDesc}>{t(support.descKey)}</Text>
               </View>
-              <TouchableOpacity style={styles.connectBtn}>
+              <TouchableOpacity style={styles.connectBtn} accessibilityLabel={t('villageNetwork.connect') || 'Connect'}>
                 <Text style={styles.connectBtnText}>{t('villageNetwork.connect')}</Text>
               </TouchableOpacity>
             </View>

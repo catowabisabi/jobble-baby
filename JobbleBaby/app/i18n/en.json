@@ -1881,7 +1881,9 @@
       "accept": "Accepts fully",
       "partial": "Partial acceptance",
       "refuse": "Refuses"
-    }
+    },
+    "saveFeeding": "Save Feeding Log",
+    "saveMedication": "Save Medication Log"
   },
   "iotSecurity": {
     "networkScore": "Network Security Score",

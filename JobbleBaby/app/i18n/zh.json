@@ -1881,7 +1881,9 @@
       "accept": "接受",
       "partial": "部分接受",
       "refuse": "拒絕"
-    }
+    },
+    "saveFeeding": "儲存餵奶記錄",
+    "saveMedication": "儲存藥物記錄"
   },
   "iotSecurity": {
     "networkScore": "網絡安全評分",

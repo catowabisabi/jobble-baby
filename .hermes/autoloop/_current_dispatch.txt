@@ -1,5 +1,6 @@
 # Cycle 374 — HERMES REVIEW CYCLE
-# Date: 2026-06-16 11:02 HKT
-# Hermes action: Fixed sleep-architecture.tsx hardcoded strings → i18n (SOUND_TYPES, LIGHT_LEVELS, NOISE_LEVELS)
-# Committed: 47ae47d → pushed
-# No Sisyphus dispatch — app technically complete, remaining work is user-side (EAS creds, App Store Connect, Play Console)
+# Date: 2026-06-16 12:02 HKT
+# Hermes action: Review found painpoint #25 (interoceptive.tsx hardcoded labels) + todo #362
+# Dispatched: task 374 — Fix interoceptive.tsx hardcoded labels → i18n
+# Committed: 86abd2f → pushed
+# Sisyphus: running task 374 (PID 1620653, opencode run --agent Sisyphus)

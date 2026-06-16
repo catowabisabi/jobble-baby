@@ -1,0 +1,83 @@
+# Task: Fix interoceptive.tsx hardcoded label strings → i18n
+
+## Context
+Painpoint #25: interoceptive.tsx has 26+ hardcoded English label strings in 4 arrays that are rendered as user-facing text in the UI. These need i18n treatment before App Store submission.
+
+## Files to Modify
+- `JobbleBaby/app/(tabs)/interoceptive.tsx`
+- `JobbleBaby/app/i18n/en.json`
+- `JobbleBaby/app/i18n/zh.json`
+
+## Your Task
+
+### Step 1 — Audit all hardcoded label arrays
+In `app/(tabs)/interoceptive.tsx`, find ALL arrays with `label: string` that have hardcoded English values. The known ones are:
+
+**NEED_OPTIONS** (lines 66-74):
+```
+{ value: 'feed', label: 'Feed' }
+{ value: 'diaper', label: 'Diaper' }
+{ value: 'sleep', label: 'Sleep' }
+{ value: 'comfort', label: 'Comfort' }
+{ value: 'play', label: 'Play' }
+{ value: 'stimulation_reduction', label: 'Less stimulation' }
+{ value: 'nothing', label: 'Nothing identified' }
+```
+
+**BODY_REGIONS** (lines 76-83):
+```
+{ value: 'head', label: 'Head' }
+{ value: 'throat', label: 'Throat' }
+{ value: 'chest', label: 'Chest' }
+{ value: 'abdomen', label: 'Abdomen' }
+{ value: 'pelvis', label: 'Pelvis' }
+{ value: 'limbs', label: 'Limbs' }
+```
+
+**EMOTIONAL_VALENCES** (lines 85-90):
+```
+{ value: 'calm', label: 'Calm' }
+{ value: 'anxious', label: 'Anxious' }
+{ value: 'frustrated', label: 'Frustrated' }
+{ value: 'neutral', label: 'Neutral' }
+```
+
+**GAME_TYPES** (lines 92-96):
+```
+{ value: 'hot_cold_belly', label: 'Hot/Cold Belly', age_months: 6 }
+{ value: 'belly_breathing_buddy', label: 'Belly Breathing Buddy', age_months: 9 }
+{ value: 'body_part_point', label: 'Body Part Point', age_months: 12 }
+```
+
+Scan the full file to find any additional hardcoded label arrays.
+
+### Step 2 — Add i18n keys
+For each hardcoded label, add a key to `en.json` and `zh.json` under `interoceptive` section.
+
+Pattern: `interoceptive.label.{arrayName}.{value}`
+e.g., `interoceptive.label.needOptions.feed`, `interoceptive.label.bodyRegions.head`, etc.
+
+If a `zh.json` translation key is missing, use the English value as placeholder (copy English text).
+
+### Step 3 — Update interoceptive.tsx
+For each array, change from:
+```
+{ value: 'feed', label: 'Feed' }
+```
+To:
+```
+{ value: 'feed', label: t('interoceptive.label.needOptions.feed') }
+```
+
+Also update `accessibilityLabel={o.label}` to use the i18n key too:
+```
+accessibilityLabel={t('interoceptive.label.needOptions.feed')}
+```
+
+The `t()` function is available via `const { t } = useLanguage()` at the top of the component.
+
+### Step 4 — Verify
+- `npx tsc --noEmit` → 0 errors
+- `node scripts/pre-submission-audit.js` → PASS
+
+DONE ULW

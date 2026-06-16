@@ -1,5 +1,6 @@
 # Cycle 374 — HERMES REVIEW CYCLE
-# Date: 2026-06-16 11:02 HKT
-# Status: All todos clear · Pre-submission audit PASS · sleep-architecture i18n fix committed
-# Commit: 47ae47d → pushed
-# Note: App technically complete. Remaining blockers are USER-side (EAS creds, App Store Connect, Play Console, privacy policy URL)
+# Date: 2026-06-16 12:02 HKT
+# Status: 1 pending todo (#362 interoceptive i18n)
+# Commit: 86abd2f → pushed
+# Dispatched: #374 to Sisyphus (fix interoceptive hardcoded labels)
+# Note: App passes pre-submission audit. Remaining blockers are user-side (EAS creds, App Store Connect, Play Console, privacy policy URL)

@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 11:02
-✅ Done: #374 — sleep-architecture SOUND_TYPES/LIGHT_LEVELS/NOISE_LEVELS → i18n (17 new keys added)
-🔧 Dispatched: None (app technically complete, Sisyphus idle)
-📋 TODO: 0 pending · 0 new
-📦 Commit: 47ae47d → pushed
-📝 Desc: App 已完全就緒。僅餘用戶操作：EAS credentials → App Store Connect → Play Console → privacy policy URL。代碼層面所有工作完成。
+🍼 Jobble Baby · 12:02
+✅ Done: #373 review cycle — app PASS pre-submission audit (TSC 0 errors), 79 tabs registered, 583 a11y labels
+🔧 Dispatched: #374 — Fix interoceptive.tsx hardcoded labels → i18n (painpoint #25)
+📋 TODO: 1 pending · 0 new
+📦 Commit: 86abd2f → pushed
+📝 Desc: 發現 interoceptive.tsx 有 26 個 hardcoded label（Need Options, Body Regions, Emotional Valences, Game Types），已在 DB 創建 painpoint #25 + todo #362。App 技術上完成，等待 Sisyphus 完成 i18n 修復。

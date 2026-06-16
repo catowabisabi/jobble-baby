@@ -1,0 +1,80 @@
+#!/bin/bash
+# Cycle 381 dispatch — Fix 6 hardcoded strings in gesture-milestone.tsx
+
+cat > /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_task_381.txt << 'TASK'
+Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+
+## Task
+
+Fix 6 hardcoded user-visible strings in `app/(tabs)/gesture-milestone.tsx` — convert to i18n using the `t()` helper already used in the file.
+
+### Hardcoded Strings to Fix
+
+1. **Line 400** — Alert body text:
+   ```
+   <Text style={styles.alertBody}>Some milestones are overdue. Consider professional review.</Text>
+   ```
+   → Replace with: `t('gestureMilestone.overdueAlert')`
+
+2. **Line 411** — Bridge step label:
+   ```
+   <Text style={styles.bridgeLabel}>Pointing</Text>
+   ```
+   → Replace with: `t('gestureMilestone.bridge.pointing')`
+
+3. **Line 416** — Bridge step label:
+   ```
+   <Text style={styles.bridgeLabel}>Joint Attn</Text>
+   ```
+   → Replace with: `t('gestureMilestone.bridge.jointAttn')`
+
+4. **Line 421** — Bridge step label:
+   ```
+   <Text style={styles.bridgeLabel}>Words</Text>
+   ```
+   → Replace with: `t('gestureMilestone.bridge.words')`
+
+5. **Line 559** — Toggle button text:
+   ```
+   <Text style={styles.toggleBtnText}>Spontaneous</Text>
+   ```
+   → Replace with: `t('gestureMilestone.wordContext.spontaneous')`
+
+6. **Line 566** — Toggle button text:
+   ```
+   <Text style={styles.toggleBtnText}>Elicited</Text>
+   ```
+   → Replace with: `t('gestureMilestone.wordContext.elicited')`
+
+### i18n Keys to Add
+
+Add to BOTH `app/i18n/en.json` and `app/i18n/zh.json`:
+```json
+"gestureMilestone": {
+  "overdueAlert": "Some milestones are overdue. Consider professional review.",
+  "bridge": {
+    "pointing": "Pointing",
+    "jointAttn": "Joint Attn",
+    "words": "Words"
+  },
+  "wordContext": {
+    "spontaneous": "Spontaneous",
+    "elicited": "Elicited"
+  }
+}
+```
+
+Match the existing `t()` usage style in the file (e.g., `t('gestureMilestone.earlyWarning')`, `t('gestureMilestone.bridgeViz')`).
+
+### Verification
+
+After changes, run from `JobbleBaby/`:
+```
+npx tsc --noEmit
+```
+Must show 0 errors.
+
+**DONE ULW**
+TASK
+
+echo "Dispatch written: sisyphus_task_381.txt"

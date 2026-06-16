@@ -1,0 +1,41 @@
+Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+
+## Task
+
+Fix hardcoded user-visible label arrays in 5 tab files — convert to i18n using the `ti()` helper pattern already used in the codebase. TSC must pass 0 errors after changes.
+
+### Files
+
+1. **bilateral-coordination.tsx** — Replace these 10 hardcoded `label:` strings with `ti()` calls:
+   - 'Grasping', 'Kicking', 'Reaching', 'Crawling', 'Waving', 'Clapping'
+   - 'Left', 'Right', 'Both/Neither'
+   
+2. **circadian.tsx** — Replace these 4 hardcoded phase labels with `ti()` calls:
+   - 'Sleep', 'Feeding', 'Wake' (in phaseInfo defaults and return objects)
+   
+3. **colic-relief.tsx** — Replace these 5 hardcoded `label:` strings with `ti()` calls:
+   - 'Bicycle Legs', 'Belly Massage', 'Warm Compress', 'Gripe Water', 'Probiotic Drops'
+   
+4. **caregiver-fatigue.tsx** — Replace these 8 hardcoded `label:` strings with `ti()` calls:
+   - 'Feeding', 'Sleep', 'Diaper', 'Medicine', 'Appointments', 'Playtime', 'Bathing', 'Travel'
+   
+5. **asymmetric-growth.tsx** — Replace these 4 severity labels with `ti()` calls:
+   - 'Normal', 'Mild', 'Moderate', 'Significant' (in the percentile threshold return objects)
+
+### i18n Keys
+
+For each hardcoded string, add a `ti()` key to:
+- `app/i18n/en.json` 
+- `app/i18n/zh.json`
+
+Use the `ti()` pattern — check how existing `ti()` calls are structured in the codebase for consistency. The key naming should follow the existing convention (e.g., `bilateral.activity.grasping`, `circadian.phase.sleep`, `colicRelief.technique.bicycle`, `caregiverFatigue.activity.feeding`, `asymmetricGrowth.severity.normal`).
+
+### Verification
+
+After making changes, run:
+```
+npx tsc --noEmit
+```
+Must show 0 errors.
+
+**DONE ULW**

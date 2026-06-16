@@ -1,6 +1,7 @@
-# Cycle 379 — HERMES REVIEW CYCLE
-# Date: 2026-06-16 17:13 HKT
-# Status: Codebase submission-ready; Sisyphus session confirmed alive
-# Commit: 8451e9f → pushed
-# Dispatched: — (no pending code tasks; session alive confirmed)
-# Note: 15 internal domain ID hardcoded string arrays noted (non-user-facing). pre-submission audit PASS (9/9). All todos completed. User-action items remain (EAS/ASC/Play Console/privacy URL).
+# Cycle 381 — HERMES REVIEW CYCLE
+# Date: 2026-06-16 HKT
+# Status: Dispatched #378 to Sisyphus (gesture-milestone.tsx 6 hardcoded strings → i18n)
+# Audit: 6 FAIL HardcodedStrings in gesture-milestone.tsx (P1)
+#        5 tab files (todo #377) have undetected hardcoded label arrays (P2, pending)
+# Painpoints: #27 NEW (gesture-milestone.tsx 6 hardcoded strings, P1)
+# TSC: Not yet verified (in progress by Sisyphus)

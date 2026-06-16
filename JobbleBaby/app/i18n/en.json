@@ -2219,7 +2219,13 @@
     "diaper": "Diaper",
     "feeding": "Fed",
     "fillTimes": "Please fill start and end times",
-    "invalidTimes": "End time must be after start time"
+    "invalidTimes": "End time must be after start time",
+    "lightTypes": {
+      "LED": "LED",
+      "Halogen": "Halogen",
+      "Fiber Optic": "Fiber Optic",
+      "BiliBlanket": "BiliBlanket"
+    }
   },
   "eightMonthStorm": {
     "title": "8-Month Storm",
@@ -4810,7 +4816,14 @@
     "wakeWindow": "Wakewindow"
   },
   "regulatoryFitness": {
-    "dataRequired": "Need at least 2 days of data for trend"
+    "dataRequired": "Need at least 2 days of data for trend",
+    "label": {
+      "fitnessCategories": {
+        "autonomic": "Autonomic",
+        "sensory": "Sensory",
+        "motor": "Motor"
+      }
+    }
   },
   "windowOfTolerance": {
     "tab": "Window of Tolerance",
@@ -5069,6 +5082,9 @@
   "reflex.present": "Present",
   "reflex.partially": "Partially",
   "reflex.integrated": "Integrated",
+  "reflexVisualMotor.label.reflexStatus.present": "Present",
+  "reflexVisualMotor.label.reflexStatus.partially": "Partially",
+  "reflexVisualMotor.label.reflexStatus.integrated": "Integrated",
   "reflex.moro": "Moro Reflex",
   "reflex.tonicLabyrinthine": "Tonic Labyrinthine",
   "reflex.atnr": "ATNR",
@@ -5447,7 +5463,16 @@
   "sleepArchitecture.noiseLevels.quiet": "Quiet",
   "sleepArchitecture.noiseLevels.moderate": "Moderate",
   "sleepArchitecture.noiseLevels.noisy": "Noisy",
-  "interoceptive.label.needOptions.feed": "Feed",
+  "diaperCream.label.location.diaper_area": "Diaper Area",
+    "diaperCream.label.location.skin_folds": "Skin Folds",
+    "diaperCream.label.location.rash_spots": "Rash Spots",
+    "diaperCream.label.rashType.yeast": "Yeast",
+    "diaperCream.label.rashType.contact": "Contact",
+    "diaperCream.label.rashType.irritant": "Irritant",
+    "diaperCream.label.severity.mild": "Mild",
+    "diaperCream.label.severity.moderate": "Moderate",
+    "diaperCream.label.severity.severe": "Severe",
+    "interoceptive.label.needOptions.feed": "Feed",
   "interoceptive.label.needOptions.diaper": "Diaper",
   "interoceptive.label.needOptions.sleep": "Sleep",
   "interoceptive.label.needOptions.comfort": "Comfort",

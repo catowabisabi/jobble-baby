@@ -14,6 +14,24 @@ const LOCATIONS = ['diaper_area', 'skin_folds', 'rash_spots'] as const;
 const RASH_TYPES = ['yeast', 'contact', 'irritant'] as const;
 const RASH_SEVERITIES = ['mild', 'moderate', 'severe'] as const;
 
+const LOCATIONS_I18N: Record<Location, string> = {
+  diaper_area: 'diaperCream.label.location.diaper_area',
+  skin_folds: 'diaperCream.label.location.skin_folds',
+  rash_spots: 'diaperCream.label.location.rash_spots',
+};
+
+const RASH_TYPES_I18N: Record<RashType, string> = {
+  yeast: 'diaperCream.label.rashType.yeast',
+  contact: 'diaperCream.label.rashType.contact',
+  irritant: 'diaperCream.label.rashType.irritant',
+};
+
+const RASH_SEVERITIES_I18N: Record<RashSeverity, string> = {
+  mild: 'diaperCream.label.severity.mild',
+  moderate: 'diaperCream.label.severity.moderate',
+  severe: 'diaperCream.label.severity.severe',
+};
+
 type CreamType = typeof CREAM_TYPES[number];
 type Amount = typeof AMOUNTS[number];
 type Location = typeof LOCATIONS[number];
@@ -40,6 +58,25 @@ function uid() {
 
 export default function DiaperCreamScreen() {
   const { t } = useLanguage();
+  const ti = (key: string): string => {
+    const translated = t(key);
+    return translated === key ? key : translated;
+  };
+  const LOCATIONS: { value: Location; label: string }[] = [
+    { value: 'diaper_area', label: ti(LOCATIONS_I18N.diaper_area) },
+    { value: 'skin_folds', label: ti(LOCATIONS_I18N.skin_folds) },
+    { value: 'rash_spots', label: ti(LOCATIONS_I18N.rash_spots) },
+  ];
+  const RASH_TYPES: { value: RashType; label: string }[] = [
+    { value: 'yeast', label: ti(RASH_TYPES_I18N.yeast) },
+    { value: 'contact', label: ti(RASH_TYPES_I18N.contact) },
+    { value: 'irritant', label: ti(RASH_TYPES_I18N.irritant) },
+  ];
+  const RASH_SEVERITIES: { value: RashSeverity; label: string }[] = [
+    { value: 'mild', label: ti(RASH_SEVERITIES_I18N.mild) },
+    { value: 'moderate', label: ti(RASH_SEVERITIES_I18N.moderate) },
+    { value: 'severe', label: ti(RASH_SEVERITIES_I18N.severe) },
+  ];
   const [entries, setEntries] = useState<Entry[]>([]);
   const [modal, setModal] = useState(false);
   const [creamType, setCreamType] = useState<CreamType>('zinc_oxide');
@@ -256,14 +293,14 @@ export default function DiaperCreamScreen() {
               {/* Body Locations */}
               <Text style={styles.fieldLabel}>{t('diaperCream.bodyLocations')}</Text>
               <View style={styles.chipRow}>
-                {LOCATIONS.map(loc => (
+                {LOCATIONS.map(({ value, label }) => (
                   <TouchableOpacity
-                    key={loc}
-                    style={[styles.chip, locations.includes(loc) && styles.chipActive]}
-                    onPress={() => toggleLocation(loc)}
+                    key={value}
+                    style={[styles.chip, locations.includes(value) && styles.chipActive]}
+                    onPress={() => toggleLocation(value)}
                   >
-                    <Text style={[styles.chipText, locations.includes(loc) && styles.chipTextActive]}>
-                      {locationLabel(loc)}
+                    <Text style={[styles.chipText, locations.includes(value) && styles.chipTextActive]}>
+                      {label}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -318,14 +355,14 @@ export default function DiaperCreamScreen() {
                 <>
                   <Text style={styles.fieldLabel}>{t('diaperCream.rashType')}</Text>
                   <View style={styles.chipRow}>
-                    {RASH_TYPES.map(rt => (
+                    {RASH_TYPES.map(({ value, label }) => (
                       <TouchableOpacity
-                        key={rt}
-                        style={[styles.chip, rashType === rt && styles.chipActive]}
-                        onPress={() => setRashType(rt)}
+                        key={value}
+                        style={[styles.chip, rashType === value && styles.chipActive]}
+                        onPress={() => setRashType(value)}
                       >
-                        <Text style={[styles.chipText, rashType === rt && styles.chipTextActive]}>
-                          {rashTypeLabel(rt)}
+                        <Text style={[styles.chipText, rashType === value && styles.chipTextActive]}>
+                          {label}
                         </Text>
                       </TouchableOpacity>
                     ))}
@@ -333,14 +370,14 @@ export default function DiaperCreamScreen() {
 
                   <Text style={styles.fieldLabel}>{t('diaperCream.rashSeverity')}</Text>
                   <View style={styles.chipRow}>
-                    {RASH_SEVERITIES.map(rs => (
+                    {RASH_SEVERITIES.map(({ value, label }) => (
                       <TouchableOpacity
-                        key={rs}
-                        style={[styles.chip, rashSeverity === rs && styles.chipActive]}
-                        onPress={() => setRashSeverity(rs)}
+                        key={value}
+                        style={[styles.chip, rashSeverity === value && styles.chipActive]}
+                        onPress={() => setRashSeverity(value)}
                       >
-                        <Text style={[styles.chipText, rashSeverity === rs && styles.chipTextActive]}>
-                          {rashSeverityLabel(rs)}
+                        <Text style={[styles.chipText, rashSeverity === value && styles.chipTextActive]}>
+                          {label}
                         </Text>
                       </TouchableOpacity>
                     ))}

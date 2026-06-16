@@ -1,0 +1,969 @@
+[93m[1m! [0m agent "Sisyphus" not found. Falling back to default agent
+[0m
+> Sisyphus - Ultraworker · MiniMax-M2.7
+[0m
+ULTRAWORK MODE ENABLED!
+
+I'll leverage parallel context gathering first, then execute the i18n fixes across all 4 tab files.
+
+**Context gathering in parallel:**
+[0m• [0mFind i18n patterns in codebase[90m Explore Agent[0m
+[0m✓ [0mFind i18n patterns in codebase[90m Explore Agent[0m
+[0m✗ [0mRead src/app/(main)/assessment/_components/chart-tabs/diaper-cream.tsx failed
+[91m[1mError: [0mFile not found: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/src/app/(main)/assessment/_components/chart-tabs/diaper-cream.tsx
+[0m✗ [0mRead src/app/(main)/assessment/_components/chart-tabs/phototherapy-comfort.tsx failed
+[91m[1mError: [0mFile not found: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/src/app/(main)/assessment/_components/chart-tabs/phototherapy-comfort.tsx
+[0m✗ [0mRead src/app/(main)/assessment/_components/chart-tabs/reflex-visual-motor.tsx failed
+[91m[1mError: [0mFile not found: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/src/app/(main)/assessment/_components/chart-tabs/reflex-visual-motor.tsx
+[0m✗ [0mRead src/app/(main)/assessment/_components/chart-tabs/regulatory-fitness.tsx failed
+[91m[1mError: [0mFile not found: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/src/app/(main)/assessment/_components/chart-tabs/regulatory-fitness.tsx
+Files not found at expected path. Let me find the actual locations:
+[0m✱ [0mGlob "**/*diaper-cream*"
+[0m✱ [0mGlob "**/*phototherapy*"
+[0m✱ [0mGlob "**/*reflex-visual-motor*"
+[0m✱ [0mGlob "**/*regulatory-fitness*"
+[0m✱ [0mGlob "**/*interoceptive*"
+Found them in `app/(tabs)/`. Let me read all the files:
+[0m→ [0mRead app/(tabs)/diaper-cream.tsx
+[0m→ [0mRead app/(tabs)/phototherapy-comfort.tsx
+[0m→ [0mRead app/(tabs)/reflex-visual-motor.tsx
+[0m→ [0mRead app/(tabs)/regulatory-fitness.tsx
+[0m→ [0mRead app/(tabs)/interoceptive.tsx
+Now I have a clear picture. Let me check the i18n files to understand the existing structure:
+[0m→ [0mRead app/i18n/en.json
+[0m→ [0mRead app/i18n/zh.json
+Now I have a clear picture. Looking at interoceptive.tsx as the reference, the pattern is:
+1. Define I18N key maps as constants outside the component
+2. Inside the component, create a `ti()` helper and arrays that use `ti()` to resolve labels at render time
+
+Let me now check the specific lines mentioned in each file and understand what needs to be changed. I'll search for existing i18n keys for these arrays:
+[0m✱ [0mGrep "diaperCream\.label|phototherapy\.label|reflex\.label|regulatoryFitness\.label"[90m in app/i18n[0m
+[0m✱ [0mGrep "reflex\.(present|partially|integrated)"[90m in app/i18n[0m
+[0m⚙ [0mbackground_output explore - Find i18n patterns in codebase
+Now I have a clear picture. Let me check the exact context around the hardcoded arrays in each file to understand what UI they render:
+[0m✱ [0mGrep "LOCATIONS|RASH_TYPES|RASH_SEVERITIES"
+[0m✱ [0mGrep "LAMP_TYPES"
+[0m✱ [0mGrep "REFLEX_STATUS_OPTIONS"
+Now I have a clear picture. The issue is that these arrays are being rendered directly in JSX with raw strings instead of translated labels. I need to:
+
+1. Add i18n keys to en.json/zh.json
+2. Refactor each file to use the `ti()` pattern from interoceptive.tsx
+
+Let me create the todo list and start the implementation:
+[0m
+[0m# [0mTodos
+[ ] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[ ] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[ ] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[ ] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[ ] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[ ] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[ ] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[ ] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[ ] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Let me first find where `diaperCream` namespace exists in the JSON files and check the structure:
+[0m✱ [0mGrep ""diaperCream":"
+[0m✱ [0mGrep ""photoComfort":"
+[0m→ [0mRead app/i18n/en.json[90m [offset=5373, limit=100][0m
+[0m→ [0mRead app/i18n/en.json[90m [offset=2183, limit=100][0m
+Now I understand the pattern. The task wants me to refactor to use the `ti()` pattern from interoceptive.tsx. Let me now check the zh.json for the same sections:
+[0m✱ [0mGrep ""diaperCream":"
+[0m→ [0mRead app/i18n/zh.json[90m [offset=5373, limit=60][0m
+Now I have a complete understanding. The task wants me to add new keys under the `diaperCream.label.*` namespace pattern and refactor to use the ti() pattern from interoceptive.tsx.
+
+Let me start implementing. I'll begin by updating the i18n JSON files and then refactor the TypeScript files.
+[0m
+[0m# [0mTodos
+[•] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[ ] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[ ] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[ ] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[ ] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[ ] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[ ] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[ ] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[ ] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Let me add the i18n keys to en.json first. I'll add them before the interoceptive.label.* keys:
+[0m← [0mEdit app/i18n/en.json
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
+@@ -5446,9 +5446,18 @@
+ "sleepArchitecture.noiseLevels.veryQuiet": "Very quiet",
+ "sleepArchitecture.noiseLevels.quiet": "Quiet",
+ "sleepArchitecture.noiseLevels.moderate": "Moderate",
+ "sleepArchitecture.noiseLevels.noisy": "Noisy",
+-"interoceptive.label.needOptions.feed": "Feed",
++"diaperCream.label.location.diaper_area": "Diaper Area",
++  "diaperCream.label.location.skin_folds": "Skin Folds",
++  "diaperCream.label.location.rash_spots": "Rash Spots",
++  "diaperCream.label.rashType.yeast": "Yeast",
++  "diaperCream.label.rashType.contact": "Contact",
++  "diaperCream.label.rashType.irritant": "Irritant",
++  "diaperCream.label.severity.mild": "Mild",
++  "diaperCream.label.severity.moderate": "Moderate",
++  "diaperCream.label.severity.severe": "Severe",
++  "interoceptive.label.needOptions.feed": "Feed",
+ "interoceptive.label.needOptions.diaper": "Diaper",
+ "interoceptive.label.needOptions.sleep": "Sleep",
+ "interoceptive.label.needOptions.comfort": "Comfort",
+ "interoceptive.label.needOptions.play": "Play",
+
+[0m
+Now let me add the same keys to zh.json:
+[0m✱ [0mGrep "interoceptive\.label\.needOptions\.feed"
+[0m
+[0m← [0mEdit app/i18n/zh.json
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
+@@ -5446,9 +5446,18 @@
+ "sleepArchitecture.noiseLevels.veryQuiet": "[TODO]",
+ "sleepArchitecture.noiseLevels.quiet": "[TODO]",
+ "sleepArchitecture.noiseLevels.moderate": "[TODO]",
+ "sleepArchitecture.noiseLevels.noisy": "[TODO]",
+-"interoceptive.label.needOptions.feed": "餵奶",
++"diaperCream.label.location.diaper_area": "尿布區",
++  "diaperCream.label.location.skin_folds": "皮膚褶皺",
++  "diaperCream.label.location.rash_spots": "疹子位置",
++  "diaperCream.label.rashType.yeast": "酵母菌",
++  "diaperCream.label.rashType.contact": "接觸性",
++  "diaperCream.label.rashType.irritant": "刺激型",
++  "diaperCream.label.severity.mild": "輕微",
++  "diaperCream.label.severity.moderate": "中等",
++  "diaperCream.label.severity.severe": "嚴重",
++  "interoceptive.label.needOptions.feed": "餵奶",
+ "interoceptive.label.needOptions.diaper": "換尿片",
+ "interoceptive.label.needOptions.sleep": "睡眠",
+ "interoceptive.label.needOptions.comfort": "安撫",
+ "interoceptive.label.needOptions.play": "玩耍",
+
+[0m
+[0m# [0mTodos
+[✓] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[ ] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[•] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[ ] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[ ] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[ ] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[ ] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[ ] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[ ] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Now let me add the photoComfort.label.lightTypes.* keys. Let me find the right location in en.json:
+[0m✱ [0mGrep ""photoComfort":"
+[0m→ [0mRead app/i18n/en.json[90m [offset=2183, limit=45][0m
+[0m
+[0m← [0mEdit app/i18n/en.json
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
+@@ -2218,9 +2218,15 @@
+   "skinTemp": "Skin temp",
+   "diaper": "Diaper",
+   "feeding": "Fed",
+   "fillTimes": "Please fill start and end times",
+-  "invalidTimes": "End time must be after start time"
++  "invalidTimes": "End time must be after start time",
++  "lightTypes": {
++    "LED": "LED",
++    "Halogen": "Halogen",
++    "Fiber Optic": "Fiber Optic",
++    "BiliBlanket": "BiliBlanket"
++  }
+ },
+ "eightMonthStorm": {
+   "title": "8-Month Storm",
+   "convergenceTimeline": "Convergence Timeline",
+
+[0m
+Now let me add the same to zh.json:
+[0m✱ [0mGrep ""photoComfort":"
+[0m→ [0mRead app/i18n/zh.json[90m [offset=2183, limit=45][0m
+[0m
+[0m← [0mEdit app/i18n/zh.json
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
+@@ -2218,9 +2218,15 @@
+   "skinTemp": "體溫",
+   "diaper": "尿布",
+   "feeding": "餵奶",
+   "fillTimes": "請填寫開始和結束時間",
+-  "invalidTimes": "結束時間必須在開始時間之後"
++  "invalidTimes": "結束時間必須在開始時間之後",
++  "lightTypes": {
++    "LED": "LED",
++    "Halogen": "鹵素燈",
++    "Fiber Optic": "光纖燈",
++    "BiliBlanket": "BiliBlanket"
++  }
+ },
+ "eightMonthStorm": {
+   "title": "8個月風暴",
+   "convergenceTimeline": "發育時間線",
+
+[0m
+[0m# [0mTodos
+[✓] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[ ] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[✓] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[ ] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[•] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[ ] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[ ] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[ ] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[ ] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Let me search for the reflexVisualMotor namespace in en.json:
+[0m✱ [0mGrep "reflexVisualMotor|reflex\.(present|partially|integrated)"
+[0m→ [0mRead app/i18n/en.json[90m [offset=5065, limit=30][0m
+I need to add the reflexVisualMotor.label.reflexStatus.* keys. Let me add them after the reflex.integrated key:
+[0m
+[0m← [0mEdit app/i18n/en.json
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
+@@ -5074,8 +5074,11 @@
+ "reflex.integrationTimeline": "Reflex Integration Timeline",
+ "reflex.present": "Present",
+ "reflex.partially": "Partially",
+ "reflex.integrated": "Integrated",
++"reflexVisualMotor.label.reflexStatus.present": "Present",
++"reflexVisualMotor.label.reflexStatus.partially": "Partially",
++"reflexVisualMotor.label.reflexStatus.integrated": "Integrated",
+ "reflex.moro": "Moro Reflex",
+ "reflex.tonicLabyrinthine": "Tonic Labyrinthine",
+ "reflex.atnr": "ATNR",
+ "reflex.galant": "Galant Reflex",
+
+[0m
+Now let me add the same to zh.json:
+[0m✱ [0mGrep "reflex\.integrated"
+[0m
+[0m← [0mEdit app/i18n/zh.json
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
+@@ -5074,8 +5074,11 @@
+ "reflex.integrationTimeline": "反射整合時間線",
+ "reflex.present": "存在",
+ "reflex.partially": "部分",
+ "reflex.integrated": "已整合",
++"reflexVisualMotor.label.reflexStatus.present": "存在",
++"reflexVisualMotor.label.reflexStatus.partially": "部分",
++"reflexVisualMotor.label.reflexStatus.integrated": "已整合",
+ "reflex.moro": "莫羅反射",
+ "reflex.tonicLabyrinthine": "緊張性迷路反射",
+ "reflex.atnr": "ATNR（非對稱性緊張性頸反射）",
+ "reflex.galant": "加蘭反射",
+
+[0m
+Now let me add the regulatoryFitness.label.fitnessCategories.* keys:
+[0m✱ [0mGrep "regulatoryFitness|regulatory_fitness"
+[0m→ [0mRead app/i18n/en.json[90m [offset=4818, limit=50][0m
+Let me add the regulatoryFitness.label.fitnessCategories.* keys. I'll add them inside the existing regulatoryFitness object:
+[0m
+[0m← [0mEdit app/i18n/en.json
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/en.json
+@@ -4815,9 +4815,16 @@
+   "tummyTime": "Tummytime",
+   "wakeWindow": "Wakewindow"
+ },
+ "regulatoryFitness": {
+-  "dataRequired": "Need at least 2 days of data for trend"
++  "dataRequired": "Need at least 2 days of data for trend",
++  "label": {
++    "fitnessCategories": {
++      "autonomic": "Autonomic",
++      "sensory": "Sensory",
++      "motor": "Motor"
++    }
++  }
+ },
+ "windowOfTolerance": {
+   "tab": "Window of Tolerance",
+   "title": "Window of Tolerance",
+
+[0m
+Now let me add the same to zh.json:
+[0m✱ [0mGrep ""regulatoryFitness":"
+[0m→ [0mRead app/i18n/zh.json[90m [offset=4818, limit=10][0m
+[0m
+[0m← [0mEdit app/i18n/zh.json
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/i18n/zh.json
+@@ -4815,9 +4815,16 @@
+   "tummyTime": "[Tummytime]",
+   "wakeWindow": "[Wakewindow]"
+ },
+ "regulatoryFitness": {
+-  "dataRequired": "需要至少2天數據才能顯示趨勢"
++  "dataRequired": "需要至少2天數據才能顯示趨勢",
++  "label": {
++    "fitnessCategories": {
++      "autonomic": "自主神經",
++      "sensory": "感覺",
++      "motor": "運動"
++    }
++  }
+ },
+ "windowOfTolerance": {
+   "tab": "Window of Tolerance",
+   "title": "Window of Tolerance",
+
+[0m
+[0m# [0mTodos
+[✓] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[•] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[✓] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[ ] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[✓] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[ ] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[✓] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[ ] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[ ] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Now let me fix the TypeScript files. Starting with diaper-cream.tsx:
+[0m→ [0mRead app/(tabs)/diaper-cream.tsx[90m [offset=1, limit=50][0m
+I need to add I18N key maps after line 15 and then add ti()-based arrays inside the component. Let me make the edits:
+[0m
+[0m← [0mEdit app/(tabs)/diaper-cream.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+@@ -13,8 +13,27 @@
+ const LOCATIONS = ['diaper_area', 'skin_folds', 'rash_spots'] as const;
+ const RASH_TYPES = ['yeast', 'contact', 'irritant'] as const;
+ const RASH_SEVERITIES = ['mild', 'moderate', 'severe'] as const;
+ 
++// I18N key maps for ti() pattern
++const LOCATIONS_I18N: Record<Location, string> = {
++  diaper_area: 'diaperCream.label.location.diaper_area',
++  skin_folds: 'diaperCream.label.location.skin_folds',
++  rash_spots: 'diaperCream.label.location.rash_spots',
++};
++
++const RASH_TYPES_I18N: Record<RashType, string> = {
++  yeast: 'diaperCream.label.rashType.yeast',
++  contact: 'diaperCream.label.rashType.contact',
++  irritant: 'diaperCream.label.rashType.irritant',
++};
++
++const RASH_SEVERITIES_I18N: Record<RashSeverity, string> = {
++  mild: 'diaperCream.label.severity.mild',
++  moderate: 'diaperCream.label.severity.moderate',
++  severe: 'diaperCream.label.severity.severe',
++};
++
+ type CreamType = typeof CREAM_TYPES[number];
+ type Amount = typeof AMOUNTS[number];
+ type Location = typeof LOCATIONS[number];
+ type RashType = typeof RASH_TYPES[number];
+
+[0m
+That comment is a simple section label that follows existing codebase patterns (like `// Primitive Reflexes` in reflex-visual-motor.tsx). However, to be safe, let me remove it since the code is self-explanatory:
+[0m← [0mEdit app/(tabs)/diaper-cream.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+@@ -13,9 +13,8 @@
+ const LOCATIONS = ['diaper_area', 'skin_folds', 'rash_spots'] as const;
+ const RASH_TYPES = ['yeast', 'contact', 'irritant'] as const;
+ const RASH_SEVERITIES = ['mild', 'moderate', 'severe'] as const;
+ 
+-// I18N key maps for ti() pattern
+ const LOCATIONS_I18N: Record<Location, string> = {
+   diaper_area: 'diaperCream.label.location.diaper_area',
+   skin_folds: 'diaperCream.label.location.skin_folds',
+   rash_spots: 'diaperCream.label.location.rash_spots',
+
+[0m
+Now let me add the ti() function and ti()-based arrays inside the component. Let me read the component function:
+[0m→ [0mRead app/(tabs)/diaper-cream.tsx[90m [offset=40, limit=30][0m
+[0m
+[0m← [0mEdit app/(tabs)/diaper-cream.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+@@ -57,8 +57,27 @@
+ }
+ 
+ export default function DiaperCreamScreen() {
+   const { t } = useLanguage();
++  const ti = (key: string): string => {
++    const translated = t(key);
++    return translated === key ? key : translated;
++  };
++  const LOCATIONS: { value: Location; label: string }[] = [
++    { value: 'diaper_area', label: ti(LOCATIONS_I18N.diaper_area) },
++    { value: 'skin_folds', label: ti(LOCATIONS_I18N.skin_folds) },
++    { value: 'rash_spots', label: ti(LOCATIONS_I18N.rash_spots) },
++  ];
++  const RASH_TYPES: { value: RashType; label: string }[] = [
++    { value: 'yeast', label: ti(RASH_TYPES_I18N.yeast) },
++    { value: 'contact', label: ti(RASH_TYPES_I18N.contact) },
++    { value: 'irritant', label: ti(RASH_TYPES_I18N.irritant) },
++  ];
++  const RASH_SEVERITIES: { value: RashSeverity; label: string }[] = [
++    { value: 'mild', label: ti(RASH_SEVERITIES_I18N.mild) },
++    { value: 'moderate', label: ti(RASH_SEVERITIES_I18N.moderate) },
++    { value: 'severe', label: ti(RASH_SEVERITIES_I18N.severe) },
++  ];
+   const [entries, setEntries] = useState<Entry[]>([]);
+   const [modal, setModal] = useState(false);
+   const [creamType, setCreamType] = useState<CreamType>('zinc_oxide');
+   const [amount, setAmount] = useState<Amount>('medium');
+
+[0m
+Now I need to update the JSX to use the new {value, label} structure. Let me find the JSX:
+[0m✱ [0mGrep "LOCATIONS\.map|RASH_TYPES\.map|RASH_SEVERITIES\.map"
+[0m→ [0mRead app/(tabs)/diaper-cream.tsx[90m [offset=294, limit=20][0m
+[0m
+[0m← [0mEdit app/(tabs)/diaper-cream.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+@@ -292,16 +292,16 @@
+ 
+ {/* Body Locations */}
+ <Text style={styles.fieldLabel}>{t('diaperCream.bodyLocations')}</Text>
+ <View style={styles.chipRow}>
+-  {LOCATIONS.map(loc => (
++  {LOCATIONS.map(({ value, label }) => (
+     <TouchableOpacity
+-      key={loc}
+-      style={[styles.chip, locations.includes(loc) && styles.chipActive]}
+-      onPress={() => toggleLocation(loc)}
++      key={value}
++      style={[styles.chip, locations.includes(value) && styles.chipActive]}
++      onPress={() => toggleLocation(value)}
+     >
+-      <Text style={[styles.chipText, locations.includes(loc) && styles.chipTextActive]}>
+-        {locationLabel(loc)}
++      <Text style={[styles.chipText, locations.includes(value) && styles.chipTextActive]}>
++        {label}
+       </Text>
+     </TouchableOpacity>
+   ))}
+ </View>
+
+[0m
+[0m→ [0mRead app/(tabs)/diaper-cream.tsx[90m [offset=356, limit=20][0m
+[0m
+[0m← [0mEdit app/(tabs)/diaper-cream.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+@@ -354,16 +354,16 @@
+ {rashPresent && (
+   <>
+     <Text style={styles.fieldLabel}>{t('diaperCream.rashType')}</Text>
+     <View style={styles.chipRow}>
+-      {RASH_TYPES.map(rt => (
++      {RASH_TYPES.map(({ value, label }) => (
+         <TouchableOpacity
+-          key={rt}
+-          style={[styles.chip, rashType === rt && styles.chipActive]}
+-          onPress={() => setRashType(rt)}
++          key={value}
++          style={[styles.chip, rashType === value && styles.chipActive]}
++          onPress={() => setRashType(value)}
+         >
+-          <Text style={[styles.chipText, rashType === rt && styles.chipTextActive]}>
+-            {rashTypeLabel(rt)}
++          <Text style={[styles.chipText, rashType === value && styles.chipTextActive]}>
++            {label}
+           </Text>
+         </TouchableOpacity>
+       ))}
+     </View>
+
+[0m
+[0m→ [0mRead app/(tabs)/diaper-cream.tsx[90m [offset=371, limit=20][0m
+[0m
+[0m← [0mEdit app/(tabs)/diaper-cream.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx
+@@ -369,16 +369,16 @@
+ </View>
+ 
+ <Text style={styles.fieldLabel}>{t('diaperCream.rashSeverity')}</Text>
+ <View style={styles.chipRow}>
+-  {RASH_SEVERITIES.map(rs => (
++  {RASH_SEVERITIES.map(({ value, label }) => (
+     <TouchableOpacity
+-      key={rs}
+-      style={[styles.chip, rashSeverity === rs && styles.chipActive]}
+-      onPress={() => setRashSeverity(rs)}
++      key={value}
++      style={[styles.chip, rashSeverity === value && styles.chipActive]}
++      onPress={() => setRashSeverity(value)}
+     >
+-      <Text style={[styles.chipText, rashSeverity === rs && styles.chipTextActive]}>
+-        {rashSeverityLabel(rs)}
++      <Text style={[styles.chipText, rashSeverity === value && styles.chipTextActive]}>
++        {label}
+       </Text>
+     </TouchableOpacity>
+   ))}
+ </View>
+
+[0m
+Now let me check if the old label functions (locationLabel, rashTypeLabel, rashSeverityLabel) are still needed elsewhere in the file:
+[0m✱ [0mGrep "locationLabel|rashTypeLabel|rashSeverityLabel"
+Let me verify the diaper-cream.tsx changes are correct:
+[0m⚙ [0mlsp_diagnostics {"filePath":"/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/diaper-cream.tsx"}
+[0m
+[0m# [0mTodos
+[✓] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[✓] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[✓] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[•] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[✓] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[ ] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[✓] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[ ] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[ ] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Now let me fix phototherapy-comfort.tsx. Let me read the relevant parts:
+[0m→ [0mRead app/(tabs)/phototherapy-comfort.tsx[90m [offset=1, limit=50][0m
+[0m→ [0mRead app/(tabs)/phototherapy-comfort.tsx[90m [offset=51, limit=30][0m
+I need to add the I18N key map and ti()-based arrays. Let me add the I18N key map first:
+[0m
+[0m← [0mEdit app/(tabs)/phototherapy-comfort.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+@@ -32,10 +32,18 @@
+   name: string;
+   birthDate: string;
+ }
+ 
+-const LAMP_TYPES = ['LED', 'Halogen', 'Fiber Optic', 'BiliBlanket'];
++const LAMP_TYPES = ['LED', 'Halogen', 'Fiber Optic', 'BiliBlanket'] as const;
++type LampType = typeof LAMP_TYPES[number];
+ 
++const LAMP_TYPES_I18N: Record<LampType, string> = {
++  LED: 'photoComfort.lightTypes.LED',
++  Halogen: 'photoComfort.lightTypes.Halogen',
++  'Fiber Optic': 'photoComfort.lightTypes.Fiber Optic',
++  BiliBlanket: 'photoComfort.lightTypes.BiliBlanket',
++};
++
+ function getAgeDays(birthDate: string): number {
+   if (!birthDate) return 0;
+   const birth = new Date(birthDate);
+   const today = new Date();
+
+[0m
+Now let me add the ti() function and ti()-based LAMP_TYPES array inside the component:
+[0m← [0mEdit app/(tabs)/phototherapy-comfort.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+@@ -73,8 +73,18 @@
+ const [parentStress, setParentStress] = useState(3);
+ const [notes, setNotes] = useState('');
+ const { effectiveTheme } = useTheme();
+ const { t } = useLanguage();
++const ti = (key: string): string => {
++  const translated = t(key);
++  return translated === key ? key : translated;
++};
++const LAMP_TYPES: { value: LampType; label: string }[] = [
++  { value: 'LED', label: ti(LAMP_TYPES_I18N.LED) },
++  { value: 'Halogen', label: ti(LAMP_TYPES_I18N.Halogen) },
++  { value: 'Fiber Optic', label: ti(LAMP_TYPES_I18N['Fiber Optic']) },
++  { value: 'BiliBlanket', label: ti(LAMP_TYPES_I18N.BiliBlanket) },
++];
+ const C = COLORS[effectiveTheme];
+ const inputBg = effectiveTheme === 'dark' ? '#1a2a3a' : '#f5f7fa';
+ 
+ useEffect(() => { loadData(); }, []);
+
+[0m
+Now let me find and update the JSX that uses LAMP_TYPES:
+[0m✱ [0mGrep "LAMP_TYPES\.map"
+[0m→ [0mRead app/(tabs)/phototherapy-comfort.tsx[90m [offset=331, limit=15][0m
+[0m
+[0m← [0mEdit app/(tabs)/phototherapy-comfort.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+@@ -329,16 +329,16 @@
+ </View>
+ 
+ <Text style={[styles.modalLabel, { color: C.muted }]}>{t('photoComfort.lampType') || 'Lamp Type'}</Text>
+ <View style={styles.lampRow}>
+-  {LAMP_TYPES.map(lamp => (
++  {LAMP_TYPES.map(({ value, label }) => (
+     <TouchableOpacity
+-      key={lamp}
+-      style={[styles.lampBtn, lampType === lamp && { backgroundColor: C.accent }]}
+-      onPress={() => setLampType(lamp)}
+-      accessibilityLabel={"Select lamp type " + lamp}
++      key={value}
++      style={[styles.lampBtn, lampType === value && { backgroundColor: C.accent }]}
++      onPress={() => setLampType(value)}
++      accessibilityLabel={"Select lamp type " + label}
+     >
+-      <Text style={[styles.lampBtnText, lampType === lamp && { color: '#fff' }]}>{lamp}</Text>
++      <Text style={[styles.lampBtnText, lampType === value && { color: '#fff' }]}>{label}</Text>
+     </TouchableOpacity>
+   ))}
+ </View>
+ 
+
+[0m
+[0m⚙ [0mlsp_diagnostics {"filePath":"/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx"}
+[0m
+[0m# [0mTodos
+[✓] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[✓] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[✓] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[✓] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[✓] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[•] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[✓] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[ ] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[ ] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Now let me fix reflex-visual-motor.tsx:
+[0m→ [0mRead app/(tabs)/reflex-visual-motor.tsx[90m [offset=1, limit=50][0m
+Let me add the I18N key map and then the ti()-based arrays:
+[0m
+[0m← [0mEdit app/(tabs)/reflex-visual-motor.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
+@@ -21,10 +21,17 @@
+   { id: 'landau',            nameKey: 'reflex.landau',            minMo: 2,  maxMo: 6  },
+   { id: 'parachute',         nameKey: 'reflex.parachute',         minMo: 6,  maxMo: 12 },
+ ];
+ 
+-const REFLEX_STATUS_OPTIONS = ['present', 'partially', 'integrated'];
++const REFLEX_STATUS_OPTIONS = ['present', 'partially', 'integrated'] as const;
++type ReflexStatus = typeof REFLEX_STATUS_OPTIONS[number];
+ 
++const REFLEX_STATUS_OPTIONS_I18N: Record<ReflexStatus, string> = {
++  present: 'reflexVisualMotor.label.reflexStatus.present',
++  partially: 'reflexVisualMotor.label.reflexStatus.partially',
++  integrated: 'reflexVisualMotor.label.reflexStatus.integrated',
++};
++
+ // Visual-Motor Milestones
+ const VISUAL_MILESTONES = [
+   { id: 'horizontalSweep', nameKey: 'visual.horizontalSweep', minMo: 0, maxMo: 2 },
+   { id: 'verticalSweep',   nameKey: 'visual.verticalSweep',   minMo: 1, maxMo: 3 },
+
+[0m
+Now let me add ti() and the ti()-based array inside the component:
+[0m← [0mEdit app/(tabs)/reflex-visual-motor.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
+@@ -46,8 +46,17 @@
+ export default function ReflexVisualMotor() {
+   const { effectiveTheme } = useTheme();
+   const { background: bg, card, text, accent } = COLORS[effectiveTheme];
+   const { t } = useLanguage();
++  const ti = (key: string): string => {
++    const translated = t(key);
++    return translated === key ? key : translated;
++  };
++  const REFLEX_STATUS: { value: ReflexStatus; label: string }[] = [
++    { value: 'present', label: ti(REFLEX_STATUS_OPTIONS_I18N.present) },
++    { value: 'partially', label: ti(REFLEX_STATUS_OPTIONS_I18N.partially) },
++    { value: 'integrated', label: ti(REFLEX_STATUS_OPTIONS_I18N.integrated) },
++  ];
+   const [reflexes, setReflexes] = useState<ReflexEntry[]>([]);
+   const [visual, setVisual] = useState<VisualEntry[]>([]);
+   const [skinfolds, setSkinfolds] = useState<SkinfoldEntry[]>([]);
+   const [modalReflex, setModalReflex] = useState(false);
+
+[0m
+Now let me find and update the JSX that uses REFLEX_STATUS_OPTIONS:
+[0m✱ [0mGrep "REFLEX_STATUS_OPTIONS"
+[0m→ [0mRead app/(tabs)/reflex-visual-motor.tsx[90m [offset=220, limit=15][0m
+[0m
+[0m← [0mEdit app/(tabs)/reflex-visual-motor.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx
+@@ -218,11 +218,11 @@
+ <Text style={[styles.modalTitle, { color: text }]}>{t('reflex.reflexStatus')}</Text>
+ {selectedReflex && (
+   <>
+     <View style={styles.pickerRow}>
+-      {REFLEX_STATUS_OPTIONS.map(opt => (
+-        <TouchableOpacity key={opt} style={[styles.pickerBtn, selectedReflex.status === opt && { backgroundColor: accent }]} onPress={() => setSelectedReflex({ ...selectedReflex, status: opt })} accessibilityLabel={`Reflex status: ${t('reflex.' + opt)}`}>
+-          <Text style={{ color: selectedReflex.status === opt ? '#fff' : text, fontSize: 13 }}>{t('reflex.' + opt)}</Text>
++      {REFLEX_STATUS.map(({ value, label }) => (
++        <TouchableOpacity key={value} style={[styles.pickerBtn, selectedReflex.status === value && { backgroundColor: accent }]} onPress={() => setSelectedReflex({ ...selectedReflex, status: value })} accessibilityLabel={`Reflex status: ${label}`}>
++          <Text style={{ color: selectedReflex.status === value ? '#fff' : text, fontSize: 13 }}>{label}</Text>
+         </TouchableOpacity>
+       ))}
+     </View>
+     <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Date (YYYY-MM-DD)" placeholderTextColor="#9CA3AF" value={selectedReflex.date} onChangeText={v => setSelectedReflex({ ...selectedReflex, date: v })} />
+
+[0m
+[0m⚙ [0mlsp_diagnostics {"filePath":"/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/reflex-visual-motor.tsx"}
+[0m
+[0m# [0mTodos
+[✓] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[✓] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[✓] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[✓] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[✓] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[✓] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[✓] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[•] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[ ] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Now let me fix regulatory-fitness.tsx. Let me find the hardcoded array:
+[0m✱ [0mGrep "autonomic.*sensory.*motor"
+[0m→ [0mRead app/(tabs)/regulatory-fitness.tsx[90m [offset=255, limit=15][0m
+Let me check the DOMAIN_COLORS and how it's used to understand if there's actually user-facing content that needs fixing:
+[0m✱ [0mGrep "DOMAIN_COLORS"
+Let me verify the regulatory-fitness.tsx file:
+[0m⚙ [0mlsp_diagnostics {"filePath":"/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/regulatory-fitness.tsx"}
+[0m
+[0m# [0mTodos
+[✓] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[✓] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[✓] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[✓] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[✓] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[✓] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[✓] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[✓] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[•] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+Now let me run the verification commands:
+[0m$ [0mcd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit 2>&1 | head -50
+app/(tabs)/phototherapy-comfort.tsx(67,44): error TS2448: Block-scoped variable 'LAMP_TYPES' used before its declaration.
+app/(tabs)/phototherapy-comfort.tsx(67,44): error TS2454: Variable 'LAMP_TYPES' is used before being assigned.
+app/(tabs)/phototherapy-comfort.tsx(120,7): error TS2322: Type '{ value: "LED" | "Halogen" | "Fiber Optic" | "BiliBlanket"; label: string; }' is not assignable to type 'string'.
+app/(tabs)/phototherapy-comfort.tsx(336,43): error TS2367: This comparison appears to be unintentional because the types '{ value: "LED" | "Halogen" | "Fiber Optic" | "BiliBlanket"; label: string; }' and 'string' have no overlap.
+app/(tabs)/phototherapy-comfort.tsx(337,46): error TS2345: Argument of type 'string' is not assignable to parameter of type 'SetStateAction<{ value: "LED" | "Halogen" | "Fiber Optic" | "BiliBlanket"; label: string; }>'.
+  Type 'string' is not assignable to type 'SetStateAction<{ value: "LED" | "Halogen" | "Fiber Optic" | "BiliBlanket"; label: string; }>'.
+app/(tabs)/phototherapy-comfort.tsx(340,53): error TS2367: This comparison appears to be unintentional because the types '{ value: "LED" | "Halogen" | "Fiber Optic" | "BiliBlanket"; label: string; }' and 'string' have no overlap.
+[0m
+I see the issue - there's a naming conflict in phototherapy-comfort.tsx. The outer `LAMP_TYPES` constant is being used by the state initialization, but I'm shadowing it with the inner `LAMP_TYPES` array. Let me fix this:
+[0m← [0mEdit app/(tabs)/phototherapy-comfort.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+@@ -32,10 +32,10 @@
+   name: string;
+   birthDate: string;
+ }
+ 
+-const LAMP_TYPES = ['LED', 'Halogen', 'Fiber Optic', 'BiliBlanket'] as const;
+-type LampType = typeof LAMP_TYPES[number];
++const LAMP_TYPE_VALUES = ['LED', 'Halogen', 'Fiber Optic', 'BiliBlanket'] as const;
++type LampType = typeof LAMP_TYPE_VALUES[number];
+ 
+ const LAMP_TYPES_I18N: Record<LampType, string> = {
+   LED: 'photoComfort.lightTypes.LED',
+   Halogen: 'photoComfort.lightTypes.Halogen',
+
+[0m
+[0m← [0mEdit app/(tabs)/phototherapy-comfort.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+@@ -63,9 +63,9 @@
+ const [showModal, setShowModal] = useState(false);
+ const [sessionDate, setSessionDate] = useState(new Date().toISOString().split('T')[0]);
+ const [startTime, setStartTime] = useState('');
+ const [endTime, setEndTime] = useState('');
+-const [lampType, setLampType] = useState(LAMP_TYPES[0]);
++const [lampType, setLampType] = useState(LAMP_TYPE_VALUES[0]);
+ const [eyeMaskOn, setEyeMaskOn] = useState(false);
+ const [skinTempChecked, setSkinTempChecked] = useState(false);
+ const [diaperChanged, setDiaperChanged] = useState(false);
+ const [feedingDuring, setFeedingDuring] = useState(false);
+
+[0m
+[0m✱ [0mGrep "LAMP_TYPES"
+[0m→ [0mRead app/(tabs)/phototherapy-comfort.tsx[90m [offset=135, limit=10][0m
+[0m
+[0m← [0mEdit app/(tabs)/phototherapy-comfort.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+@@ -134,9 +134,9 @@
+   setShowModal(false);
+ };
+ 
+ const resetForm = () => {
+-  setStartTime(''); setEndTime(''); setLampType(LAMP_TYPES[0]);
++  setStartTime(''); setEndTime(''); setLampType(LAMP_TYPE_VALUES[0]);
+   setEyeMaskOn(false); setSkinTempChecked(false); setDiaperChanged(false);
+   setFeedingDuring(false); setSkinTempFelt('unknown'); setParentStress(3); setNotes('');
+ };
+ 
+
+[0m
+[0m$ [0mcd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit 2>&1 | head -50
+app/(tabs)/phototherapy-comfort.tsx(337,46): error TS2345: Argument of type '"LED" | "Halogen" | "Fiber Optic" | "BiliBlanket"' is not assignable to parameter of type 'SetStateAction<"LED">'.
+  Type '"Halogen"' is not assignable to type 'SetStateAction<"LED">'.
+[0m
+[0m→ [0mRead app/(tabs)/phototherapy-comfort.tsx[90m [offset=59, limit=15][0m
+[0m
+[0m← [0mEdit app/(tabs)/phototherapy-comfort.tsx
+Index: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+===================================================================
+--- /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
++++ /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby/app/(tabs)/phototherapy-comfort.tsx
+@@ -63,9 +63,9 @@
+ const [showModal, setShowModal] = useState(false);
+ const [sessionDate, setSessionDate] = useState(new Date().toISOString().split('T')[0]);
+ const [startTime, setStartTime] = useState('');
+ const [endTime, setEndTime] = useState('');
+-const [lampType, setLampType] = useState(LAMP_TYPE_VALUES[0]);
++const [lampType, setLampType] = useState<LampType>(LAMP_TYPE_VALUES[0]);
+ const [eyeMaskOn, setEyeMaskOn] = useState(false);
+ const [skinTempChecked, setSkinTempChecked] = useState(false);
+ const [diaperChanged, setDiaperChanged] = useState(false);
+ const [feedingDuring, setFeedingDuring] = useState(false);
+
+[0m
+[0m$ [0mcd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit 2>&1 | head -50
+(no output)
+[0m
+No TypeScript errors. Now let me run the pre-submission-audit script:
+[0m$ [0mcd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && node scripts/pre-submission-audit.js 2>&1
+============================================================
+  Jobble Baby Pre-Submission Audit
+============================================================
+
+[34m=== [1/9] TypeScript Compilation ===[0m
+  [32mPASS[0m (0 errors)
+
+[34m=== [2/9] Console.log Detection ===[0m
+  [32mPASS[0m (0 found)
+
+[34m=== [3/9] i18n Key Validation ===[0m
+  [32mPASS[0m (0 missing)
+
+[34m=== [4/9] Accessibility Labels ===[0m
+  [32mPASS[0m (0 missing)
+
+[34m=== [5/9] Screenshot Dimensions ===[0m
+  [32mPASS[0m (all correct dimensions)
+
+[34m=== [6/9] Tabs.Screen Alignment ===[0m
+  [32mPASS[0m (79 tab files, 79 Tabs.Screen entries)
+
+[34m=== [7/9] AsyncStorage Key Consistency ===[0m
+  [32mPASS[0m (0 @jobble/ keys, all follow naming convention)
+
+[34m=== [8/9] app.json Required Fields ===[0m
+  [32mPASS[0m (all required fields present)
+    name: Jobble Baby
+    version: 1.0.0
+    slug: jobble-baby
+    ios.bundleIdentifier: com.jobblebaby.app
+    android.package: com.jobblebaby.app
+
+[34m=== [9/9] Hardcoded Non-i18n Strings Detection ===[0m
+  [33mWARNING[0m (15 potential hardcoded strings)
+    app/(tabs)/diaper-cream.tsx:11 [string_array] 'zinc_oxide', 'petroleum', 'natural'...
+    app/(tabs)/diaper-cream.tsx:13 [string_array] 'diaper_area', 'skin_folds', 'rash_spots'
+    app/(tabs)/diaper-cream.tsx:14 [string_array] 'yeast', 'contact', 'irritant'
+    app/(tabs)/diaper-cream.tsx:15 [string_array] 'mild', 'moderate', 'severe'
+    app/(tabs)/interoceptive.tsx:236 [string_array] 'head', 'throat', 'chest'...
+    app/(tabs)/phototherapy-comfort.tsx:36 [string_array] 'LED', 'Halogen', 'Fiber Optic'...
+    app/(tabs)/reflex-visual-motor.tsx:25 [string_array] 'present', 'partially', 'integrated'
+    app/(tabs)/regulatory-fitness.tsx:258 [string_array] 'autonomic', 'sensory', 'motor'...
+    app/(tabs)/sleep-architecture.tsx:56 [string_array] 'White Noise', 'Pink Noise', 'Brown Noise'...
+    app/(tabs)/sleep-architecture.tsx:57 [string_array] 'Fully dark', 'Dim', 'Night light'...
+    ... and 5 more
+
+============================================================
+  SUMMARY
+============================================================
+[32mPASS[0m: All REQUIRED checks passed
+
+Ready for submission!
+[0m
+[0m# [0mTodos
+[✓] Add i18n keys for diaper-cream.tsx (locations, rash types, severities) to en.json + zh.json
+[✓] Fix diaper-cream.tsx: add ti() pattern for LOCATIONS, RASH_TYPES, RASH_SEVERITIES
+[✓] Add i18n keys for phototherapy-comfort.tsx (LAMP_TYPES) to en.json + zh.json
+[✓] Fix phototherapy-comfort.tsx: add ti() pattern for LAMP_TYPES
+[✓] Add i18n keys for reflex-visual-motor.tsx (REFLEX_STATUS_OPTIONS) to en.json + zh.json
+[✓] Fix reflex-visual-motor.tsx: add ti() pattern for REFLEX_STATUS_OPTIONS
+[✓] Add i18n keys for regulatory-fitness.tsx (FITNESS_CATEGORIES) to en.json + zh.json
+[✓] Fix regulatory-fitness.tsx: add ti() pattern for fitness categories
+[✓] Run tsc --noEmit and pre-submission-audit.js to verify
+[0m
+**DONE ULW**
+
+## Summary of Changes
+
+### Verification Results
+- **TSC**: 0 errors ✅
+- **Pre-submission Audit**: PASS ✅ (WARNING about remaining string arrays is expected - these are raw value arrays still needed for type definitions and internal logic)
+
+### Files Modified
+
+#### 1. `app/(tabs)/diaper-cream.tsx`
+- Added I18N key maps (`LOCATIONS_I18N`, `RASH_TYPES_I18N`, `RASH_SEVERITIES_I18N`) with namespace `diaperCream.label.*`
+- Added `ti()` helper and ti()-based arrays inside the component
+- Updated JSX to use `{ value, label }` destructuring from ti()-based arrays
+
+#### 2. `app/(tabs)/phototherapy-comfort.tsx`
+- Renamed outer constant to `LAMP_TYPE_VALUES` (used for state initialization)
+- Added `LAMP_TYPES_I18N` key map with namespace `photoComfort.lightTypes.*`
+- Added `ti()` helper and `LAMP_TYPES` array with `{ value, label }` structure inside component
+- Updated JSX to use ti()-based array
+
+#### 3. `app/(tabs)/reflex-visual-motor.tsx`
+- Added `REFLEX_STATUS_OPTIONS_I18N` key map with namespace `reflexVisualMotor.label.reflexStatus.*`
+- Added `ti()` helper and `REFLEX_STATUS` array inside component
+- Updated JSX to use ti()-based array
+
+#### 4. `app/i18n/en.json` and `app/i18n/zh.json`
+Added keys:
+- `diaperCream.label.location.{diaper_area,skin_folds,rash_spots}`
+- `diaperCream.label.rashType.{yeast,contact,irritant}`
+- `diaperCream.label.severity.{mild,moderate,severe}`
+- `photoComfort.lightTypes.{LED,Halogen,Fiber Optic,BiliBlanket}`
+- `reflexVisualMotor.label.reflexStatus.{present,partially,integrated}`
+- `regulatoryFitness.label.fitnessCategories.{autonomic,sensory,motor}`
+
+### Note on regulatory-fitness.tsx
+The domain labels ('autonomic', 'sensory', etc.) in regulatory-fitness.tsx are **already properly internationalized** via `t('regulatory_fitness.domain.${domain}')` in the DomainBar component. The hardcoded array at line 258 (`['autonomic', 'sensory', 'motor', 'social']`) is used for internal iteration logic and is not directly rendered to users. I added the `regulatoryFitness.label.fitnessCategories.*` keys for completeness.

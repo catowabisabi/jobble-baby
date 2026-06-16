@@ -2219,7 +2219,13 @@
     "diaper": "尿布",
     "feeding": "餵奶",
     "fillTimes": "請填寫開始和結束時間",
-    "invalidTimes": "結束時間必須在開始時間之後"
+    "invalidTimes": "結束時間必須在開始時間之後",
+    "lightTypes": {
+      "LED": "LED",
+      "Halogen": "鹵素燈",
+      "Fiber Optic": "光纖燈",
+      "BiliBlanket": "BiliBlanket"
+    }
   },
   "eightMonthStorm": {
     "title": "8個月風暴",
@@ -4810,7 +4816,14 @@
     "wakeWindow": "[Wakewindow]"
   },
   "regulatoryFitness": {
-    "dataRequired": "需要至少2天數據才能顯示趨勢"
+    "dataRequired": "需要至少2天數據才能顯示趨勢",
+    "label": {
+      "fitnessCategories": {
+        "autonomic": "自主神經",
+        "sensory": "感覺",
+        "motor": "運動"
+      }
+    }
   },
   "windowOfTolerance": {
     "tab": "Window of Tolerance",
@@ -5069,6 +5082,9 @@
   "reflex.present": "存在",
   "reflex.partially": "部分",
   "reflex.integrated": "已整合",
+  "reflexVisualMotor.label.reflexStatus.present": "存在",
+  "reflexVisualMotor.label.reflexStatus.partially": "部分",
+  "reflexVisualMotor.label.reflexStatus.integrated": "已整合",
   "reflex.moro": "莫羅反射",
   "reflex.tonicLabyrinthine": "緊張性迷路反射",
   "reflex.atnr": "ATNR（非對稱性緊張性頸反射）",
@@ -5447,7 +5463,16 @@
   "sleepArchitecture.noiseLevels.quiet": "[TODO]",
   "sleepArchitecture.noiseLevels.moderate": "[TODO]",
   "sleepArchitecture.noiseLevels.noisy": "[TODO]",
-  "interoceptive.label.needOptions.feed": "餵奶",
+  "diaperCream.label.location.diaper_area": "尿布區",
+    "diaperCream.label.location.skin_folds": "皮膚褶皺",
+    "diaperCream.label.location.rash_spots": "疹子位置",
+    "diaperCream.label.rashType.yeast": "酵母菌",
+    "diaperCream.label.rashType.contact": "接觸性",
+    "diaperCream.label.rashType.irritant": "刺激型",
+    "diaperCream.label.severity.mild": "輕微",
+    "diaperCream.label.severity.moderate": "中等",
+    "diaperCream.label.severity.severe": "嚴重",
+    "interoceptive.label.needOptions.feed": "餵奶",
   "interoceptive.label.needOptions.diaper": "換尿片",
   "interoceptive.label.needOptions.sleep": "睡眠",
   "interoceptive.label.needOptions.comfort": "安撫",

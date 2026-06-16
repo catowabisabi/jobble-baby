@@ -22,7 +22,14 @@ const PRIMITIVE_REFLEXES = [
   { id: 'parachute',         nameKey: 'reflex.parachute',         minMo: 6,  maxMo: 12 },
 ];
 
-const REFLEX_STATUS_OPTIONS = ['present', 'partially', 'integrated'];
+const REFLEX_STATUS_OPTIONS = ['present', 'partially', 'integrated'] as const;
+type ReflexStatus = typeof REFLEX_STATUS_OPTIONS[number];
+
+const REFLEX_STATUS_OPTIONS_I18N: Record<ReflexStatus, string> = {
+  present: 'reflexVisualMotor.label.reflexStatus.present',
+  partially: 'reflexVisualMotor.label.reflexStatus.partially',
+  integrated: 'reflexVisualMotor.label.reflexStatus.integrated',
+};
 
 // Visual-Motor Milestones
 const VISUAL_MILESTONES = [
@@ -40,6 +47,15 @@ export default function ReflexVisualMotor() {
   const { effectiveTheme } = useTheme();
   const { background: bg, card, text, accent } = COLORS[effectiveTheme];
   const { t } = useLanguage();
+  const ti = (key: string): string => {
+    const translated = t(key);
+    return translated === key ? key : translated;
+  };
+  const REFLEX_STATUS: { value: ReflexStatus; label: string }[] = [
+    { value: 'present', label: ti(REFLEX_STATUS_OPTIONS_I18N.present) },
+    { value: 'partially', label: ti(REFLEX_STATUS_OPTIONS_I18N.partially) },
+    { value: 'integrated', label: ti(REFLEX_STATUS_OPTIONS_I18N.integrated) },
+  ];
   const [reflexes, setReflexes] = useState<ReflexEntry[]>([]);
   const [visual, setVisual] = useState<VisualEntry[]>([]);
   const [skinfolds, setSkinfolds] = useState<SkinfoldEntry[]>([]);
@@ -203,9 +219,9 @@ export default function ReflexVisualMotor() {
             {selectedReflex && (
               <>
                 <View style={styles.pickerRow}>
-                  {REFLEX_STATUS_OPTIONS.map(opt => (
-                    <TouchableOpacity key={opt} style={[styles.pickerBtn, selectedReflex.status === opt && { backgroundColor: accent }]} onPress={() => setSelectedReflex({ ...selectedReflex, status: opt })} accessibilityLabel={`Reflex status: ${t('reflex.' + opt)}`}>
-                      <Text style={{ color: selectedReflex.status === opt ? '#fff' : text, fontSize: 13 }}>{t('reflex.' + opt)}</Text>
+                  {REFLEX_STATUS.map(({ value, label }) => (
+                    <TouchableOpacity key={value} style={[styles.pickerBtn, selectedReflex.status === value && { backgroundColor: accent }]} onPress={() => setSelectedReflex({ ...selectedReflex, status: value })} accessibilityLabel={`Reflex status: ${label}`}>
+                      <Text style={{ color: selectedReflex.status === value ? '#fff' : text, fontSize: 13 }}>{label}</Text>
                     </TouchableOpacity>
                   ))}
                 </View>

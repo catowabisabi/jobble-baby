@@ -1,0 +1,49 @@
+# Task: Fix remaining hardcoded string arrays → i18n (5 tab files)
+
+## Context
+Pre-submission audit flags 15 files with hardcoded string arrays. Painpoint #10 identifies 11 files needing i18n. interoceptive.tsx is already done. This task fixes the remaining 4 tab files that have user-facing string arrays.
+
+## Files to Fix
+
+### 1. diaper-cream.tsx (lines 13-15)
+Arrays that ARE user-facing (need i18n):
+- Line 13: `['diaper_area', 'skin_folds', 'rash_spots']` — application site
+- Line 14: `['yeast', 'contact', 'irritant']` — rash type  
+- Line 15: `['mild', 'moderate', 'severe']` — severity
+
+Line 11 `['zinc_oxide', 'petroleum', 'natural', 'other']` is internal ID — keep as-is.
+
+Add i18n keys to en.json + zh.json under `diaperCream.label.*` namespace.
+Use the ti() helper pattern — see interoceptive.tsx for reference.
+
+### 2. phototherapy-comfort.tsx (line 36)
+Array: `['LED', 'Halogen', 'Fiber Optic']` — light type labels (user-facing)
+Add keys under `phototherapy.label.lightTypes.*`
+Use same ti() pattern.
+
+### 3. reflex-visual-motor.tsx (line 25)
+Array: `['present', 'partially', 'integrated']` — reflex status labels (user-facing)
+Add keys under `reflexVisualMotor.label.reflexStatus.*`
+Use same ti() pattern.
+
+### 4. regulatory-fitness.tsx (line 258)
+Array: `['autonomic', 'sensory', 'motor']` — fitness category labels (user-facing)
+Add keys under `regulatoryFitness.label.fitnessCategories.*`
+Use same ti() pattern.
+
+## Your Task
+
+### Step 1 — For each file:
+1. Read the file and identify the hardcoded string arrays
+2. Add i18n keys to `app/i18n/en.json` and `app/i18n/zh.json`
+3. Update the arrays to use ti() i18n helper — move arrays inside the component function so t() is available
+4. If the file already has a ti() helper, use it; if not, add it after `const { t } = useLanguage()`
+
+### Step 2 — Verify
+- `npx tsc --noEmit` → 0 errors
+- `node scripts/pre-submission-audit.js` → PASS
+
+### Step 3 — Report
+Report what you changed in each file.
+
+DONE ULW

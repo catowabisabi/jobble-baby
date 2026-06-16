@@ -1,6 +1,6 @@
-# Cycle 374 — HERMES REVIEW CYCLE
-# Date: 2026-06-16 12:02 HKT
-# Status: 1 pending todo (#362 interoceptive i18n)
-# Commit: 86abd2f → pushed
-# Dispatched: #374 to Sisyphus (fix interoceptive hardcoded labels)
-# Note: App passes pre-submission audit. Remaining blockers are user-side (EAS creds, App Store Connect, Play Console, privacy policy URL)
+# Cycle 375 — HERMES REVIEW CYCLE
+# Date: 2026-06-16 13:14 HKT
+# Status: 1 pending todo (#376 remaining hardcoded strings in 4 tab files)
+# Commit: b40041b → pushed
+# Dispatched: #376 to Sisyphus (fix remaining hardcoded string arrays → i18n)
+# Note: interoceptive.tsx hardcoded labels FIXED by Hermes (todo #375 completed). Sisyphus dispatched for remaining 4 files.

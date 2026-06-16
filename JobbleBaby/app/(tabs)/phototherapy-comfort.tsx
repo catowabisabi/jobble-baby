@@ -33,7 +33,15 @@ interface BabyProfile {
   birthDate: string;
 }
 
-const LAMP_TYPES = ['LED', 'Halogen', 'Fiber Optic', 'BiliBlanket'];
+const LAMP_TYPE_VALUES = ['LED', 'Halogen', 'Fiber Optic', 'BiliBlanket'] as const;
+type LampType = typeof LAMP_TYPE_VALUES[number];
+
+const LAMP_TYPES_I18N: Record<LampType, string> = {
+  LED: 'photoComfort.lightTypes.LED',
+  Halogen: 'photoComfort.lightTypes.Halogen',
+  'Fiber Optic': 'photoComfort.lightTypes.Fiber Optic',
+  BiliBlanket: 'photoComfort.lightTypes.BiliBlanket',
+};
 
 function getAgeDays(birthDate: string): number {
   if (!birthDate) return 0;
@@ -56,7 +64,7 @@ export default function PhototherapyComfortScreen() {
   const [sessionDate, setSessionDate] = useState(new Date().toISOString().split('T')[0]);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [lampType, setLampType] = useState(LAMP_TYPES[0]);
+  const [lampType, setLampType] = useState<LampType>(LAMP_TYPE_VALUES[0]);
   const [eyeMaskOn, setEyeMaskOn] = useState(false);
   const [skinTempChecked, setSkinTempChecked] = useState(false);
   const [diaperChanged, setDiaperChanged] = useState(false);
@@ -66,6 +74,16 @@ export default function PhototherapyComfortScreen() {
   const [notes, setNotes] = useState('');
   const { effectiveTheme } = useTheme();
   const { t } = useLanguage();
+  const ti = (key: string): string => {
+    const translated = t(key);
+    return translated === key ? key : translated;
+  };
+  const LAMP_TYPES: { value: LampType; label: string }[] = [
+    { value: 'LED', label: ti(LAMP_TYPES_I18N.LED) },
+    { value: 'Halogen', label: ti(LAMP_TYPES_I18N.Halogen) },
+    { value: 'Fiber Optic', label: ti(LAMP_TYPES_I18N['Fiber Optic']) },
+    { value: 'BiliBlanket', label: ti(LAMP_TYPES_I18N.BiliBlanket) },
+  ];
   const C = COLORS[effectiveTheme];
   const inputBg = effectiveTheme === 'dark' ? '#1a2a3a' : '#f5f7fa';
 
@@ -117,7 +135,7 @@ export default function PhototherapyComfortScreen() {
   };
 
   const resetForm = () => {
-    setStartTime(''); setEndTime(''); setLampType(LAMP_TYPES[0]);
+    setStartTime(''); setEndTime(''); setLampType(LAMP_TYPE_VALUES[0]);
     setEyeMaskOn(false); setSkinTempChecked(false); setDiaperChanged(false);
     setFeedingDuring(false); setSkinTempFelt('unknown'); setParentStress(3); setNotes('');
   };
@@ -312,14 +330,14 @@ export default function PhototherapyComfortScreen() {
 
             <Text style={[styles.modalLabel, { color: C.muted }]}>{t('photoComfort.lampType') || 'Lamp Type'}</Text>
             <View style={styles.lampRow}>
-              {LAMP_TYPES.map(lamp => (
+              {LAMP_TYPES.map(({ value, label }) => (
                 <TouchableOpacity
-                  key={lamp}
-                  style={[styles.lampBtn, lampType === lamp && { backgroundColor: C.accent }]}
-                  onPress={() => setLampType(lamp)}
-                  accessibilityLabel={"Select lamp type " + lamp}
+                  key={value}
+                  style={[styles.lampBtn, lampType === value && { backgroundColor: C.accent }]}
+                  onPress={() => setLampType(value)}
+                  accessibilityLabel={"Select lamp type " + label}
                 >
-                  <Text style={[styles.lampBtnText, lampType === lamp && { color: '#fff' }]}>{lamp}</Text>
+                  <Text style={[styles.lampBtnText, lampType === value && { color: '#fff' }]}>{label}</Text>
                 </TouchableOpacity>
               ))}
             </View>

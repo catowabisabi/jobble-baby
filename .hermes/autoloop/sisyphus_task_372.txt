@@ -1,0 +1,126 @@
+# Todo #361: Fix i18n JSON parse error + add autonomicReadiness keys
+
+## Context
+en.json and zh.json have a pre-existing JSON parse error at line 5293 (trailing comma before gestureMilestone). TSC is blocked.
+Sisyphus created autonomic-readiness.tsx but did NOT add i18n keys — they are all missing.
+
+## Task 1 — Fix JSON parse error in en.json + zh.json
+The issue: line 5293 has `},` (closing `diaperCream` object) followed by `"gestureMilestone": {` on the same line. The `},` is a trailing comma before the next top-level key. Fix: change `},` to `}` at line 5293.
+
+In both:
+- app/i18n/en.json line 5293: change `},` → `}`
+- app/i18n/zh.json line 5293: same fix
+
+Verify: python3 -c "import json; json.load(open('app/i18n/en.json'))" → no error
+
+## Task 2 — Add ALL autonomicReadiness i18n keys
+Add these keys to both en.json and zh.json as a new top-level "autonomicReadiness" object (before the closing `}` at line 5348):
+
+### en.json — add before the final `}`:
+```json
+  "autonomicReadiness": {
+    "title": "Autonomic Readiness",
+    "subtitle": "Track your baby's autonomic nervous system maturation",
+    "overallScore": "Overall Readiness Score",
+    "readinessFor": "Readiness for",
+    "stress": "Stress Response",
+    "stressRecoveryTime": "Recovery Time (seconds)",
+    "startleResponse": "Startle Response",
+    "overstimulation": "Overstimulation",
+    "teething": "Teething",
+    "vaccination": "Vaccination",
+    "intensity": "Intensity",
+    "recoveryQuality": "Recovery Quality",
+    "spontaneous": "Spontaneous",
+    "soothed": "Soothed",
+    "prolonged": "Prolonged",
+    "feeding": "Feeding Autonomic Stability",
+    "swallowBreathe": "Swallow-Breathe Coordination",
+    "desaturationEvents": "Desaturation Events",
+    "yes": "Yes",
+    "no": "No",
+    "count": "Count",
+    "feedingEfficiency": "Feeding Efficiency",
+    "good": "Good",
+    "slow": "Slow",
+    "poor": "Poor",
+    "postFeedState": "Post-Feed State",
+    "calm": "Calm",
+    "active": "Active",
+    "fussy": "Fussy",
+    "unsettled": "Unsettled",
+    "sleep": "Sleep Autonomic Quality",
+    "waso": "WASO (minutes)",
+    "arousals": "Autonomic Arousals",
+    "wokeUpset": "Woke Upset",
+    "wokeCalm": "Woke Calm",
+    "selfSoothing": "Self-Soothing Emergence",
+    "handToMouth": "Hand-to-Mouth (0-3mo)",
+    "transitionalObject": "Transitional Object (6-12mo)",
+    "selfInitiatedSleep": "Self-Initiated Sleep (12mo+)",
+    "solidFoodsReady": "Solid Foods",
+    "sleepTrainingReady": "Sleep Training",
+    "teethingReady": "Teething",
+    "notYet": "Not Yet",
+    "alertCoordinationDrop": "Alert: Coordination score dropped below 3 for 3+ consecutive feeds"
+  }
+```
+
+### zh.json — same structure, Chinese translations:
+```json
+  "autonomicReadiness": {
+    "title": "自主神經準備度",
+    "subtitle": "追蹤寶寶自主神經系統發育",
+    "overallScore": "整體準備度評分",
+    "readinessFor": "準備度：",
+    "stress": "壓力反應",
+    "stressRecoveryTime": "恢復時間（秒）",
+    "startleResponse": "驚嚇反應",
+    "overstimulation": "過度刺激",
+    "teething": "出牙",
+    "vaccination": "疫苗注射",
+    "intensity": "強度",
+    "recoveryQuality": "恢復質量",
+    "spontaneous": "自然恢復",
+    "soothed": "安撫後恢復",
+    "prolonged": "恢復延長",
+    "feeding": "餵食自主神經穩定性",
+    "swallowBreathe": "吞嚥-呼吸協調",
+    "desaturationEvents": "血氧下降事件",
+    "yes": "是",
+    "no": "否",
+    "count": "次數",
+    "feedingEfficiency": "餵食效率",
+    "good": "良好",
+    "slow": "緩慢",
+    "poor": "差",
+    "postFeedState": "餵後狀態",
+    "calm": "平静",
+    "active": "活跃",
+    "fussy": "烦躁",
+    "unsettled": "不安",
+    "sleep": "睡眠自主神經質量",
+    "waso": "入睡後清醒時間（分鐘）",
+    "arousals": "自主神經覺醒次數",
+    "wokeUpset": "哭着醒來",
+    "wokeCalm": "平静醒來",
+    "selfSoothing": "自我安撫發展",
+    "handToMouth": "吃手（0-3個月）",
+    "transitionalObject": "過渡物件（6-12個月）",
+    "selfInitiatedSleep": "自行入睡（12個月+）",
+    "solidFoodsReady": "固體食物",
+    "sleepTrainingReady": "睡眠訓練",
+    "teethingReady": "出牙",
+    "notYet": "尚未",
+    "alertCoordinationDrop": "提示：連續3次以上餵食協調評分低於3分"
+  }
+```
+
+## Verify
+- python3 -c "import json; json.load(open('app/i18n/en.json'))" → no error
+- python3 -c "import json; json.load(open('app/i18n/zh.json'))" → no error
+- grep "autonomicReadiness.title" app/i18n/en.json → shows translation
+- grep "自主神經準備度" app/i18n/zh.json → shows translation
+- npx tsc --noEmit → 0 errors (i18n errors resolved)
+
+DONE ULW

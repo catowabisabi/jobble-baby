@@ -1,0 +1,44 @@
+# Task: Tab Navigator Cleanup + Hardcoded String i18n
+
+## Context
+The app passes pre-submission audit (TSC 0 errors) but has two remaining issues:
+1. Multiple reflex tabs exist as files but may not all be needed (orphaned tabs)
+2. 15 files have hardcoded non-i18n strings — some are user-facing and should be translated
+
+## Your Task
+
+### Step 1 — Audit tab bar registrations
+Run this command and report which tab .tsx files exist but are NOT registered in _layout.tsx:
+```
+cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+ls app/\(tabs\)/*.tsx | while read f; do
+  NAME=$(basename "$f" .tsx)
+  if grep -q "name=\"$NAME\"" app/\(tabs\)/_layout.tsx; then
+    echo "REGISTERED: $NAME"
+  else
+    echo "ORPHAN: $NAME"
+  fi
+done
+```
+
+Report the ORPHAN list. Do NOT delete anything — just report.
+
+### Step 2 — Fix hardcoded strings in diaper-cream.tsx
+The pre-submission audit flagged these arrays in app/(tabs)/diaper-cream.tsx:
+- Line 11: `['zinc_oxide', 'petroleum', 'natural', 'other']` — these are internal IDs, OK to keep as-is
+- Line 13: `['diaper_area', 'skin_folds', 'rash_spots']` — these appear in the UI as labels
+- Line 14: `['yeast', 'contact', 'irritant']` — these appear in the UI as labels  
+- Line 15: `['mild', 'moderate', 'severe']` — these appear in the UI as labels
+
+For lines 13, 14, 15 only: these ARE user-facing and SHOULD use i18n.
+Read the existing i18n keys in app/i18n/en.json and zh.json for the `diaperCream` section.
+If keys exist (e.g. `diaperCream.applicationSiteYeast`), use them.
+If they don't exist, add them to both en.json and zh.json, then update the code to use `t()`.
+
+### Step 3 — Verify
+- npx tsc --noEmit → 0 errors
+- node scripts/pre-submission-audit.js → PASS
+
+Report findings for each step. Do NOT modify any files except diaper-cream.tsx and i18n files if needed.
+
+DONE ULW

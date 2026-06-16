@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 08:03
-📋 TODO: 0 pending · 0 new · 1 in_progress
-🔧 Working: #360 Autonomic Readiness Index → Sisyphus (in tmux)
-✅ Completed recent: #359 Gesture-Milestone Bridge, #358 Diaper Cream Barrier
-📦 Commit: 0862672 → pushed
-📝 Desc: Sisyphus 正在實現 #360 自主神經準備指數tab（壓力恢復/餵養協調/睡眠質量/自我安撫）。#359手勢里程碑bridge tracker已完成。
+🍼 Jobble Baby · 09:07
+✅ Done: #i18n fix — add medium/spontaneous/elicited keys + gestureMilestone subkeys
+🔧 Dispatched: #374 — Sisyphus reviewing codebase for UX/hardcoded strings/ideas
+📋 TODO: 0 pending · 0 new
+📦 Commit: 0f4ccc8 → pushed
+📝 Desc: Audit PASS ✅ 149 todos complete. App ready for App Store submission. Sisyphus doing final review cycle.

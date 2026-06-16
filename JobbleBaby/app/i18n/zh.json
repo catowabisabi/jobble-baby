@@ -5429,5 +5429,22 @@
   },
   "medium": "中等",
   "spontaneous": "自發性",
-  "elicited": "誘發性"
+  "elicited": "誘發性",
+  "sleepArchitecture.soundTypes.whiteNoise": "[TODO]",
+  "sleepArchitecture.soundTypes.pinkNoise": "[TODO]",
+  "sleepArchitecture.soundTypes.brownNoise": "[TODO]",
+  "sleepArchitecture.soundTypes.rain": "[TODO]",
+  "sleepArchitecture.soundTypes.ocean": "[TODO]",
+  "sleepArchitecture.soundTypes.heartbeat": "[TODO]",
+  "sleepArchitecture.soundTypes.fan": "[TODO]",
+  "sleepArchitecture.soundTypes.lullaby": "[TODO]",
+  "sleepArchitecture.lightLevels.fullyDark": "[TODO]",
+  "sleepArchitecture.lightLevels.dim": "[TODO]",
+  "sleepArchitecture.lightLevels.nightLight": "[TODO]",
+  "sleepArchitecture.lightLevels.lowGlow": "[TODO]",
+  "sleepArchitecture.noiseLevels.silent": "[TODO]",
+  "sleepArchitecture.noiseLevels.veryQuiet": "[TODO]",
+  "sleepArchitecture.noiseLevels.quiet": "[TODO]",
+  "sleepArchitecture.noiseLevels.moderate": "[TODO]",
+  "sleepArchitecture.noiseLevels.noisy": "[TODO]"
 }

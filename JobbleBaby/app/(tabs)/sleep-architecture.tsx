@@ -104,6 +104,36 @@ export default function SleepArchitectureScreen() {
   const C = COLORS[effectiveTheme] || COLORS.light;
   const inputBg = effectiveTheme === 'dark' ? '#1a2a3a' : '#ffffff';
 
+  // i18n key maps for hardcoded display strings (defined here where t is in scope)
+  const SOUND_TYPE_I18N: Record<string, string> = {
+    'White Noise': 'sleepArchitecture.soundTypes.whiteNoise',
+    'Pink Noise': 'sleepArchitecture.soundTypes.pinkNoise',
+    'Brown Noise': 'sleepArchitecture.soundTypes.brownNoise',
+    'Rain': 'sleepArchitecture.soundTypes.rain',
+    'Ocean': 'sleepArchitecture.soundTypes.ocean',
+    'Heartbeat': 'sleepArchitecture.soundTypes.heartbeat',
+    'Fan': 'sleepArchitecture.soundTypes.fan',
+    'Lullaby': 'sleepArchitecture.soundTypes.lullaby',
+  };
+  const LIGHT_LEVEL_I18N: Record<string, string> = {
+    'Fully dark': 'sleepArchitecture.lightLevels.fullyDark',
+    'Dim': 'sleepArchitecture.lightLevels.dim',
+    'Night light': 'sleepArchitecture.lightLevels.nightLight',
+    'Low glow': 'sleepArchitecture.lightLevels.lowGlow',
+  };
+  const NOISE_LEVEL_I18N: Record<string, string> = {
+    'Silent': 'sleepArchitecture.noiseLevels.silent',
+    'Very quiet': 'sleepArchitecture.noiseLevels.veryQuiet',
+    'Quiet': 'sleepArchitecture.noiseLevels.quiet',
+    'Moderate': 'sleepArchitecture.noiseLevels.moderate',
+    'Noisy': 'sleepArchitecture.noiseLevels.noisy',
+  };
+  // Safe i18n lookup: returns translation, falls back to raw string
+  const ti = (key: string): string => {
+    const translated = t(key);
+    return translated === key ? key : translated;
+  };
+
   const [architectureLog, setArchitectureLog] = useState<ArchitectureEntry[]>([]);
   const [circadianLog, setCircadianLog] = useState<CircadianEntry[]>([]);
   const [wakeWindows, setWakeWindows] = useState<WakeWindowEntry[]>([]);
@@ -433,7 +463,7 @@ export default function SleepArchitectureScreen() {
           <Text style={s.infoText}>{t('sleepArchitecture.whiteNoiseHint') || 'Log different sounds to find what settles baby fastest'}</Text>
           <View style={s.chipRow}>
             {SOUND_TYPES.map(sound => (
-              <Chip key={sound} label={sound} active={selectedSound === sound}
+              <Chip key={sound} label={ti(SOUND_TYPE_I18N[sound])} active={selectedSound === sound}
                 onPress={() => setSelectedSound(selectedSound === sound ? '' : sound)} />
             ))}
           </View>
@@ -458,7 +488,7 @@ export default function SleepArchitectureScreen() {
           <Text style={s.sectionTitle} accessibilityLabel="Sleep Environment">{t('sleepArchitecture.environment') || 'Sleep Environment'}</Text>
           {latestEnv && (
             <View style={s.infoCard}>
-              <Text style={s.infoText}>🌡 {t('sleepArchitecture.temp') || 'Temperature'}: {latestEnv.tempC}°C{'\n'}💧 {t('sleepArchitecture.humidity') || 'Humidity'}: {latestEnv.humidityPct}%{'\n'}🔊 {t('sleepArchitecture.noise') || 'Noise'}: {NOISE_LEVELS[latestEnv.noiseLevel]}{'\n'}💡 {t('sleepArchitecture.light') || 'Light'}: {LIGHT_LEVELS[latestEnv.lightLevel]}</Text>
+              <Text style={s.infoText}>🌡 {t('sleepArchitecture.temp') || 'Temperature'}: {latestEnv.tempC}°C{'\n'}💧 {t('sleepArchitecture.humidity') || 'Humidity'}: {latestEnv.humidityPct}%{'\n'}🔊 {t('sleepArchitecture.noise') || 'Noise'}: {ti(NOISE_LEVEL_I18N[NOISE_LEVELS[latestEnv.noiseLevel] ?? ''])}{'\n'}💡 {t('sleepArchitecture.light') || 'Light'}: {ti(LIGHT_LEVEL_I18N[LIGHT_LEVELS[latestEnv.lightLevel] ?? ''])}</Text>
             </View>
           )}
           <View style={s.inputRow}>
@@ -472,14 +502,14 @@ export default function SleepArchitectureScreen() {
           <Text style={[s.infoText, { marginTop: 8 }]}>{t('sleepArchitecture.noiseLevel') || 'Noise Level'}</Text>
           <View style={s.chipRow}>
             {NOISE_LEVELS.map((lvl, i) => (
-              <Chip key={lvl} label={lvl} active={noiseLvl === i}
+              <Chip key={lvl} label={ti(NOISE_LEVEL_I18N[lvl])} active={noiseLvl === i}
                 onPress={() => setNoiseLvl(i)} />
             ))}
           </View>
           <Text style={[s.infoText, { marginTop: 8 }]}>{t('sleepArchitecture.lightLevel') || 'Light Level'}</Text>
           <View style={s.chipRow}>
             {LIGHT_LEVELS.map((lvl, i) => (
-              <Chip key={lvl} label={lvl} active={lightLvl === i}
+              <Chip key={lvl} label={ti(LIGHT_LEVEL_I18N[lvl])} active={lightLvl === i}
                 onPress={() => setLightLvl(i)} />
             ))}
           </View>

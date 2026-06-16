@@ -5429,5 +5429,22 @@
   },
   "medium": "Medium",
   "spontaneous": "Spontaneous",
-  "elicited": "Elicited"
+  "elicited": "Elicited",
+  "sleepArchitecture.soundTypes.whiteNoise": "White Noise",
+  "sleepArchitecture.soundTypes.pinkNoise": "Pink Noise",
+  "sleepArchitecture.soundTypes.brownNoise": "Brown Noise",
+  "sleepArchitecture.soundTypes.rain": "Rain",
+  "sleepArchitecture.soundTypes.ocean": "Ocean",
+  "sleepArchitecture.soundTypes.heartbeat": "Heartbeat",
+  "sleepArchitecture.soundTypes.fan": "Fan",
+  "sleepArchitecture.soundTypes.lullaby": "Lullaby",
+  "sleepArchitecture.lightLevels.fullyDark": "Fully dark",
+  "sleepArchitecture.lightLevels.dim": "Dim",
+  "sleepArchitecture.lightLevels.nightLight": "Night light",
+  "sleepArchitecture.lightLevels.lowGlow": "Low glow",
+  "sleepArchitecture.noiseLevels.silent": "Silent",
+  "sleepArchitecture.noiseLevels.veryQuiet": "Very quiet",
+  "sleepArchitecture.noiseLevels.quiet": "Quiet",
+  "sleepArchitecture.noiseLevels.moderate": "Moderate",
+  "sleepArchitecture.noiseLevels.noisy": "Noisy"
 }

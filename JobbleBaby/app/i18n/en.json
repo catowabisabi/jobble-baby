@@ -5306,7 +5306,9 @@
     },
     "gestureRichnessScore": "Gesture Richness Score",
     "logGesture": "Log Gesture",
-    "logWord": "Log Word"
+    "logWord": "Log Word",
+    "spontaneous": "Spontaneous",
+    "elicited": "Elicited"
   },
   "autonomicReadiness": {
     "title": "Autonomic Readiness",
@@ -5424,5 +5426,8 @@
     "rating4": "Good",
     "rating5": "Excellent",
     "yes": "Yes"
-  }
+  },
+  "medium": "Medium",
+  "spontaneous": "Spontaneous",
+  "elicited": "Elicited"
 }

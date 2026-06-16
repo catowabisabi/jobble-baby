@@ -5306,7 +5306,9 @@
     },
     "gestureRichnessScore": "手势丰富度评分",
     "logGesture": "记录手势",
-    "logWord": "记录词语"
+    "logWord": "记录词语",
+    "spontaneous": "自發性",
+    "elicited": "誘發性"
   },
   "autonomicReadiness": {
     "title": "自主神經準備度",
@@ -5424,5 +5426,8 @@
     "rating4": "良好",
     "rating5": "優秀",
     "yes": "是"
-  }
+  },
+  "medium": "中等",
+  "spontaneous": "自發性",
+  "elicited": "誘發性"
 }

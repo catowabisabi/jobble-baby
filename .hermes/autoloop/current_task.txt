@@ -1,4 +1,15 @@
-#377: FIX regulatory-fitness.tsx CASCADE_ALERTS hardcoded English messages → i18n
+#378: Codebase review — no pending code tasks
 Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
-Painpoint: #26
-Status: Dispatched to Sisyphus
+Status: Submission-ready (user-action items remaining for EAS/ASC setup)
+
+## Cycle 378 Summary
+- ✅ Verified todo #376 (hardcoded string arrays in 5 tab files) — already fixed in prior commits
+- ✅ TSC --noEmit: 0 errors
+- ✅ Sisyphus session alive
+- ✅ 0 pending todos, 76 completed
+
+## Pending User-Action Items
+- EAS credentials configuration
+- App Store Connect app creation
+- Play Console app creation
+- Privacy policy URL deployment (currently placeholder)

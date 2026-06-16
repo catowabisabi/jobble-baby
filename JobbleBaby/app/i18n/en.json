@@ -5289,60 +5289,106 @@
   "diaperCream.cancel": "Cancel",
   "diaperCream.score": "/5",
   "diaperCream.entries": "entries",
-  "diaperCream.thisWeek": "this week"
-},
-"gestureMilestone": {
-  "title": "Gesture Bridge",
-  "greeting": "Development",
-  "gestureTimeline": "Gesture Timeline",
-  "addGesture": "+ Log Gesture",
-  "addWord": "+ Log Word",
-  "wordBurst": "Word Burst",
-  "bridgeViz": "Development Bridge",
-  "earlyWarning": "Early Warning",
-  "summaryStats": "Summary Stats",
-  "gestureTypes": {
-    "proto_declarative": "Proto-declarative (showing)",
-    "proto_imperative": "Proto-imperative (requesting)",
-    "social": "Social / Showing"
-  },
-  "initiator": {
-    "baby": "Baby",
-    "caregiver": "Caregiver"
-  },
-  "jointAttention": {
-    "yes": "Joint attention observed",
-    "no": "No joint attention"
-  },
-  "context": "Context",
-  "objectPointed": "Object pointed at",
-  "notes": "Notes (optional)",
-  "save": "Save",
-  "cancel": "Cancel",
-  "noGestures": "No gesture entries yet",
-  "noWords": "No word entries yet",
-  "weeklyGestures": "Weekly Gestures",
-  "jointAttentionRatio": "Joint Attention Ratio",
-  "wordsThisMonth": "Words This Month",
-  "alert9mo": {
-    "title": "9-Month Alert",
-    "body": "No pointing gestures logged yet. Most babies show pointing by 9 months. Consider professional review."
-  },
-  "alert12mo": {
-    "title": "12-Month Alert",
-    "body": "No joint attention observed yet. Joint attention typically emerges by 12 months. Consider professional review."
-  },
-  "word": {
-    "word": "Word",
-    "date": "Date",
+  "diaperCream.thisWeek": "this week",
+  "gestureMilestone": {
+    "title": "Gesture Bridge",
+    "greeting": "Development",
+    "gestureTimeline": "Gesture Timeline",
+    "addGesture": "+ Log Gesture",
+    "addWord": "+ Log Word",
+    "wordBurst": "Word Burst",
+    "bridgeViz": "Development Bridge",
+    "earlyWarning": "Early Warning",
+    "summaryStats": "Summary Stats",
+    "gestureTypes": {
+      "proto_declarative": "Proto-declarative (showing)",
+      "proto_imperative": "Proto-imperative (requesting)",
+      "social": "Social / Showing"
+    },
+    "initiator": {
+      "baby": "Baby",
+      "caregiver": "Caregiver"
+    },
+    "jointAttention": {
+      "yes": "Joint attention observed",
+      "no": "No joint attention"
+    },
     "context": "Context",
-    "gestureRichness": "Gesture Richness Score"
+    "objectPointed": "Object pointed at",
+    "notes": "Notes (optional)",
+    "save": "Save",
+    "cancel": "Cancel",
+    "noGestures": "No gesture entries yet",
+    "noWords": "No word entries yet",
+    "weeklyGestures": "Weekly Gestures",
+    "jointAttentionRatio": "Joint Attention Ratio",
+    "wordsThisMonth": "Words This Month",
+    "alert9mo": {
+      "title": "9-Month Alert",
+      "body": "No pointing gestures logged yet. Most babies show pointing by 9 months. Consider professional review."
+    },
+    "alert12mo": {
+      "title": "12-Month Alert",
+      "body": "No joint attention observed yet. Joint attention typically emerges by 12 months. Consider professional review."
+    },
+    "word": {
+      "word": "Word",
+      "date": "Date",
+      "context": "Context",
+      "gestureRichness": "Gesture Richness Score"
+    },
+    "bridgeChart": {
+      "gestureLine": "Gesture Count",
+      "wordMarkers": "Word Emergence"
+    },
+    "gestureRichnessScore": "Gesture Richness Score",
+    "logGesture": "Log Gesture",
+    "logWord": "Log Word"
   },
-  "bridgeChart": {
-    "gestureLine": "Gesture Count",
-    "wordMarkers": "Word Emergence"
-  },
-  "gestureRichnessScore": "Gesture Richness Score",
-  "logGesture": "Log Gesture",
-  "logWord": "Log Word"
+  "autonomicReadiness": {
+    "title": "Autonomic Readiness",
+    "subtitle": "Track your baby's autonomic nervous system maturation",
+    "overallScore": "Overall Readiness Score",
+    "readinessFor": "Readiness for",
+    "stress": "Stress Response",
+    "stressRecoveryTime": "Recovery Time (seconds)",
+    "startleResponse": "Startle Response",
+    "overstimulation": "Overstimulation",
+    "teething": "Teething",
+    "vaccination": "Vaccination",
+    "intensity": "Intensity",
+    "recoveryQuality": "Recovery Quality",
+    "spontaneous": "Spontaneous",
+    "soothed": "Soothed",
+    "prolonged": "Prolonged",
+    "feeding": "Feeding Autonomic Stability",
+    "swallowBreathe": "Swallow-Breathe Coordination",
+    "desaturationEvents": "Desaturation Events",
+    "yes": "Yes",
+    "no": "No",
+    "count": "Count",
+    "feedingEfficiency": "Feeding Efficiency",
+    "good": "Good",
+    "slow": "Slow",
+    "poor": "Poor",
+    "postFeedState": "Post-Feed State",
+    "calm": "Calm",
+    "active": "Active",
+    "fussy": "Fussy",
+    "unsettled": "Unsettled",
+    "sleep": "Sleep Autonomic Quality",
+    "waso": "WASO (minutes)",
+    "arousals": "Autonomic Arousals",
+    "wokeUpset": "Woke Upset",
+    "wokeCalm": "Woke Calm",
+    "selfSoothing": "Self-Soothing Emergence",
+    "handToMouth": "Hand-to-Mouth (0-3mo)",
+    "transitionalObject": "Transitional Object (6-12mo)",
+    "selfInitiatedSleep": "Self-Initiated Sleep (12mo+)",
+    "solidFoodsReady": "Solid Foods",
+    "sleepTrainingReady": "Sleep Training",
+    "teethingReady": "Teething",
+    "notYet": "Not Yet",
+    "alertCoordinationDrop": "Alert: Coordination score dropped below 3 for 3+ consecutive feeds"
+  }
 }

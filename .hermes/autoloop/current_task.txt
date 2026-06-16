@@ -1,4 +1,5 @@
-# Cycle 373 — HERMES REVIEW CYCLE
-# Date: 2026-06-16 09:07 HKT
-# Status: All todos clear · Pre-submission audit PASS · Tab cleanup + hardcoded string fix dispatched
-# Commit: 0f4ccc8 → pushed
+# Cycle 374 — HERMES REVIEW CYCLE
+# Date: 2026-06-16 11:02 HKT
+# Status: All todos clear · Pre-submission audit PASS · sleep-architecture i18n fix committed
+# Commit: 47ae47d → pushed
+# Note: App technically complete. Remaining blockers are USER-side (EAS creds, App Store Connect, Play Console, privacy policy URL)

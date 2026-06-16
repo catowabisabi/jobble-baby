@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 09:07
-✅ Done: #i18n fix — add medium/spontaneous/elicited keys + gestureMilestone subkeys
-🔧 Dispatched: #374 — Sisyphus reviewing codebase for UX/hardcoded strings/ideas
+🍼 Jobble Baby · 11:02
+✅ Done: #374 — sleep-architecture SOUND_TYPES/LIGHT_LEVELS/NOISE_LEVELS → i18n (17 new keys added)
+🔧 Dispatched: None (app technically complete, Sisyphus idle)
 📋 TODO: 0 pending · 0 new
-📦 Commit: 0f4ccc8 → pushed
-📝 Desc: Audit PASS ✅ 149 todos complete. App ready for App Store submission. Sisyphus doing final review cycle.
+📦 Commit: 47ae47d → pushed
+📝 Desc: App 已完全就緒。僅餘用戶操作：EAS credentials → App Store Connect → Play Console → privacy policy URL。代碼層面所有工作完成。

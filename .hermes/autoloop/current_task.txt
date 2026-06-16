@@ -1,6 +1,4 @@
-# Cycle 375 — HERMES REVIEW CYCLE
-# Date: 2026-06-16 13:14 HKT
-# Status: 1 pending todo (#376 remaining hardcoded strings in 4 tab files)
-# Commit: b40041b → pushed
-# Dispatched: #376 to Sisyphus (fix remaining hardcoded string arrays → i18n)
-# Note: interoceptive.tsx hardcoded labels FIXED by Hermes (todo #375 completed). Sisyphus dispatched for remaining 4 files.
+#377: FIX regulatory-fitness.tsx CASCADE_ALERTS hardcoded English messages → i18n
+Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+Painpoint: #26
+Status: Dispatched to Sisyphus

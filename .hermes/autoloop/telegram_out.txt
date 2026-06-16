@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 13:15
-✅ Done: #375 Fix interoceptive.tsx hardcoded labels → i18n
-🔧 Dispatched: #376 Fix remaining hardcoded strings (diaper-cream, phototherapy, reflex, regulatory-fitness) → i18n
-📋 TODO: 1 pending · 0 new
-📦 Commit: b40041b → pushed
-📝 Desc: interoceptive.tsx 4 arrays (NEED_OPTIONS, BODY_REGIONS, EMOTIONAL_VALENCES, GAME_TYPES) fully i18n'd — 20 new keys en+zh. Sisyphus dispatched for remaining 4 tab files.
+🍼 Jobble Baby · 14:08
+✅ Done: #376 Fix 4 tab files hardcoded label arrays → i18n (diaper-cream, phototherapy-comfort, reflex-visual-motor, regulatory-fitness)
+🔧 Dispatched: #377 Fix regulatory-fitness.tsx CASCADE_ALERTS hardcoded English messages → i18n
+📋 TODO: 0 pending · 1 new
+📦 Commit: 35419ef → pushed
+📝 Desc: Sisyphus completed all 4 i18n files. TSC 0 errors, pre-submission audit PASS. New task: CASCADE_ALERTS hardcoded English strings in regulatory-fitness.tsx.

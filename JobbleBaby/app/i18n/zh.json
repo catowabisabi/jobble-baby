@@ -4817,6 +4817,12 @@
   },
   "regulatoryFitness": {
     "dataRequired": "需要至少2天數據才能顯示趨勢",
+    "cascadeAlert": {
+      "sensory": "感覺評分低 → 可能影響2-3天內的睡眠",
+      "autonomic": "自主神經評分低 → 可能增加哭鬧",
+      "motor": "運動評分低 → 可能影響感覺整合",
+      "social": "社交參與度低 → 可能表示壓力"
+    },
     "label": {
       "fitnessCategories": {
         "autonomic": "自主神經",

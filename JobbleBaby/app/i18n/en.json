@@ -4817,6 +4817,12 @@
   },
   "regulatoryFitness": {
     "dataRequired": "Need at least 2 days of data for trend",
+    "cascadeAlert": {
+      "sensory": "Low sensory score → may affect sleep in 2-3 days",
+      "autonomic": "Low autonomic score → may increase crying",
+      "motor": "Low motor score → may affect sensory integration",
+      "social": "Low social engagement → may indicate stress"
+    },
     "label": {
       "fitnessCategories": {
         "autonomic": "Autonomic",

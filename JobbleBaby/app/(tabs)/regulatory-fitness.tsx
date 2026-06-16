@@ -23,11 +23,11 @@ interface RegulatoryEntry {
   notes?: string;
 }
 
-const CASCADE_ALERTS: Record<string, { affected: string; message: string }> = {
-  sensory: { affected: 'sleep', message: 'Low sensory score → may affect sleep in 2-3 days' },
-  autonomic: { affected: 'emotional', message: 'Low autonomic score → may increase crying' },
-  motor: { affected: 'sensory', message: 'Low motor score → may affect sensory integration' },
-  social: { affected: 'autonomic', message: 'Low social engagement → may indicate stress' },
+const CASCADE_ALERTS: Record<string, { affected: string; messageKey: string }> = {
+  sensory: { affected: 'sleep', messageKey: 'regulatoryFitness.cascadeAlert.sensory' },
+  autonomic: { affected: 'emotional', messageKey: 'regulatoryFitness.cascadeAlert.autonomic' },
+  motor: { affected: 'sensory', messageKey: 'regulatoryFitness.cascadeAlert.motor' },
+  social: { affected: 'autonomic', messageKey: 'regulatoryFitness.cascadeAlert.social' },
 };
 
 const DOMAIN_COLORS = {
@@ -96,15 +96,16 @@ const DomainBar: React.FC<{
 );
 
 const CascadeAlertBanner: React.FC<{
-  alerts: { message: string }[];
-}> = ({ alerts }) => {
+  alerts: { messageKey: string }[];
+  t: (key: string) => string;
+}> = ({ alerts, t }) => {
   if (alerts.length === 0) return null;
   return (
     <View style={styles.alertBanner}>
       <Text style={styles.alertIcon}>⚠️</Text>
       <View style={styles.alertContent}>
         {alerts.map((alert, i) => (
-          <Text key={i} style={styles.alertText}>{alert.message}</Text>
+          <Text key={i} style={styles.alertText}>{t(alert.messageKey)}</Text>
         ))}
       </View>
     </View>
@@ -243,7 +244,7 @@ export default function RegulatoryFitnessScreen() {
   const C = COLORS[effectiveTheme];
   const { t } = useLanguage();
   const [entries, setEntries] = useState<RegulatoryEntry[]>([]);
-  const [alerts, setAlerts] = useState<{ message: string }[]>([]);
+  const [alerts, setAlerts] = useState<{ messageKey: string }[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [todayLogged, setTodayLogged] = useState(false);
 
@@ -254,12 +255,12 @@ export default function RegulatoryFitnessScreen() {
     setEntries(data);
     if (data.length > 0) {
       const latest = data[data.length - 1];
-      const newAlerts: { message: string }[] = [];
+      const newAlerts: { messageKey: string }[] = [];
       const domains = ['autonomic', 'sensory', 'motor', 'social'] as const;
       domains.forEach(domain => {
         const s = latest[`${domain}_score` as keyof RegulatoryEntry] as number;
         if (s < 50 && CASCADE_ALERTS[domain]) {
-          newAlerts.push({ message: CASCADE_ALERTS[domain].message });
+          newAlerts.push({ messageKey: CASCADE_ALERTS[domain].messageKey });
         }
       });
       setAlerts(newAlerts);
@@ -292,7 +293,7 @@ export default function RegulatoryFitnessScreen() {
         </View>
       </View>
 
-      <CascadeAlertBanner alerts={alerts} />
+      <CascadeAlertBanner alerts={alerts} t={t} />
 
       <View style={styles.domainsContainer}>
         <Text style={[styles.sectionTitle, { color: C.text }]}>{t('regulatory_fitness.domains')}</Text>

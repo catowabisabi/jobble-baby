@@ -181,7 +181,7 @@ export default function DiaperCreamScreen() {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.addBtn} onPress={() => setModal(true)}>
+        <TouchableOpacity style={styles.addBtn} onPress={() => setModal(true)} accessibilityLabel={t('diaperCream.addEntry')}>
           <MaterialCommunityIcons name="plus" size={20} color="#fff" />
           <Text style={styles.addBtnText}>{t('diaperCream.addEntry')}</Text>
         </TouchableOpacity>
@@ -371,10 +371,10 @@ export default function DiaperCreamScreen() {
 
               {/* Modal Buttons */}
               <View style={styles.modalBtns}>
-                <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)}>
+                <TouchableOpacity style={styles.cancelBtn} onPress={() => setModal(false)} accessibilityLabel={t('common.cancel')}>
                   <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.saveBtn} onPress={save}>
+                <TouchableOpacity style={styles.saveBtn} onPress={save} accessibilityLabel={t('diaperCream.save')}>
                   <Text style={styles.saveBtnText}>{t('diaperCream.save')}</Text>
                 </TouchableOpacity>
               </View>

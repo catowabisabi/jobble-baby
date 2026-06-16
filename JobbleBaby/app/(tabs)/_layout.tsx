@@ -183,6 +183,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="home-safety"
+        options={{
+          title: t('tabs.homeSafety'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home-alert" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="reflex-tracker"
         options={{
           title: t('tabs.reflexTracker'),

@@ -456,6 +456,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="autonomic-readiness"
+        options={{
+          title: t('tabs.autonomicReadiness'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="stranger-danger"
         options={{
           title: t('tabs.strangerDanger'),

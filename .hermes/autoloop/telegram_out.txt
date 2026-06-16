@@ -1,7 +1,6 @@
-🍼 Jobble Baby · 16:00
-✅ Done: #376 Fix 5 tab hardcoded string arrays → i18n (verified applied)
-🔧 Dispatched: — (codebase submission-ready; no pending code tasks)
-
+🍼 [PROJECT] · 17:01
+✅ Done: #378 Codebase review — submission-ready confirmed
+🔧 Dispatched: #378 session alive check (echo alive → pending response)
 📋 TODO: 0 pending · 0 new
-📦 Commit: b231ae6 → clean (no new changes this cycle)
-📝 Desc: 代碼已完成，TSC 0 errors。全部 76 todos resolved。等待用戶配置 EAS credentials + 建立 App Store Connect app + Play Console app + 隱私政策 URL。
+📦 Commit: 6b94528 → clean (no new changes this cycle)
+📝 Desc: 代碼已完成，TSC 0 errors。pre-submission audit PASS (9/9)。發現15個內部domain ID hardcoded字串陣列（diaper-cream, sleep-architecture, regulatory-fitness等），全部係internal identifier非user-facing文字，唔影響App Store審批。等待用戶配置 EAS credentials + 建立 App Store Connect app + Play Console app + 隱私政策 URL。

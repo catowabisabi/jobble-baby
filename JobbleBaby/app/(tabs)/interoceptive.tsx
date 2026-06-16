@@ -63,40 +63,75 @@ interface GameEntry {
 
 type TabView = 'dashboard' | 'body_scan' | 'diary' | 'precision' | 'signal' | 'games';
 
-const NEED_OPTIONS: { value: NeedType; label: string }[] = [
-  { value: 'feed', label: 'Feed' },
-  { value: 'diaper', label: 'Diaper' },
-  { value: 'sleep', label: 'Sleep' },
-  { value: 'comfort', label: 'Comfort' },
-  { value: 'play', label: 'Play' },
-  { value: 'stimulation_reduction', label: 'Less stimulation' },
-  { value: 'nothing', label: 'Nothing identified' },
-];
+// I18N key maps — values are translation keys, resolved at render time
+const NEED_OPTIONS_I18N: Record<NeedType, string> = {
+  feed: 'interoceptive.label.needOptions.feed',
+  diaper: 'interoceptive.label.needOptions.diaper',
+  sleep: 'interoceptive.label.needOptions.sleep',
+  comfort: 'interoceptive.label.needOptions.comfort',
+  play: 'interoceptive.label.needOptions.play',
+  stimulation_reduction: 'interoceptive.label.needOptions.stimulation_reduction',
+  nothing: 'interoceptive.label.needOptions.nothing',
+};
 
-const BODY_REGIONS: { value: BodyRegion; label: string }[] = [
-  { value: 'head', label: 'Head' },
-  { value: 'throat', label: 'Throat' },
-  { value: 'chest', label: 'Chest' },
-  { value: 'abdomen', label: 'Abdomen' },
-  { value: 'pelvis', label: 'Pelvis' },
-  { value: 'limbs', label: 'Limbs' },
-];
+const BODY_REGIONS_I18N: Record<BodyRegion, string> = {
+  head: 'interoceptive.label.bodyRegions.head',
+  throat: 'interoceptive.label.bodyRegions.throat',
+  chest: 'interoceptive.label.bodyRegions.chest',
+  abdomen: 'interoceptive.label.bodyRegions.abdomen',
+  pelvis: 'interoceptive.label.bodyRegions.pelvis',
+  limbs: 'interoceptive.label.bodyRegions.limbs',
+};
 
-const EMOTIONAL_VALENCES: { value: EmotionalValence; label: string }[] = [
-  { value: 'calm', label: 'Calm' },
-  { value: 'anxious', label: 'Anxious' },
-  { value: 'frustrated', label: 'Frustrated' },
-  { value: 'neutral', label: 'Neutral' },
-];
+const EMOTIONAL_VALENCES_I18N: Record<EmotionalValence, string> = {
+  calm: 'interoceptive.label.emotionalValences.calm',
+  anxious: 'interoceptive.label.emotionalValences.anxious',
+  frustrated: 'interoceptive.label.emotionalValences.frustrated',
+  neutral: 'interoceptive.label.emotionalValences.neutral',
+};
 
-const GAME_TYPES: { value: GameType; label: string; age_months: number }[] = [
-  { value: 'hot_cold_belly', label: 'Hot/Cold Belly', age_months: 6 },
-  { value: 'belly_breathing_buddy', label: 'Belly Breathing Buddy', age_months: 9 },
-  { value: 'body_part_point', label: 'Body Part Point', age_months: 12 },
-];
+const GAME_TYPES_I18N: Record<GameType, string> = {
+  hot_cold_belly: 'interoceptive.label.gameTypes.hot_cold_belly',
+  belly_breathing_buddy: 'interoceptive.label.gameTypes.belly_breathing_buddy',
+  body_part_point: 'interoceptive.label.gameTypes.body_part_point',
+};
 
 export default function Interoceptive() {
   const { t } = useLanguage();
+  // Safe i18n lookup: returns translation, falls back to raw string
+  const ti = (key: string): string => {
+    const translated = t(key);
+    return translated === key ? key : translated;
+  };
+  // Arrays resolved at render time so t() is available
+  const NEED_OPTIONS: { value: NeedType; label: string }[] = [
+    { value: 'feed', label: ti(NEED_OPTIONS_I18N.feed) },
+    { value: 'diaper', label: ti(NEED_OPTIONS_I18N.diaper) },
+    { value: 'sleep', label: ti(NEED_OPTIONS_I18N.sleep) },
+    { value: 'comfort', label: ti(NEED_OPTIONS_I18N.comfort) },
+    { value: 'play', label: ti(NEED_OPTIONS_I18N.play) },
+    { value: 'stimulation_reduction', label: ti(NEED_OPTIONS_I18N.stimulation_reduction) },
+    { value: 'nothing', label: ti(NEED_OPTIONS_I18N.nothing) },
+  ];
+  const BODY_REGIONS: { value: BodyRegion; label: string }[] = [
+    { value: 'head', label: ti(BODY_REGIONS_I18N.head) },
+    { value: 'throat', label: ti(BODY_REGIONS_I18N.throat) },
+    { value: 'chest', label: ti(BODY_REGIONS_I18N.chest) },
+    { value: 'abdomen', label: ti(BODY_REGIONS_I18N.abdomen) },
+    { value: 'pelvis', label: ti(BODY_REGIONS_I18N.pelvis) },
+    { value: 'limbs', label: ti(BODY_REGIONS_I18N.limbs) },
+  ];
+  const EMOTIONAL_VALENCES: { value: EmotionalValence; label: string }[] = [
+    { value: 'calm', label: ti(EMOTIONAL_VALENCES_I18N.calm) },
+    { value: 'anxious', label: ti(EMOTIONAL_VALENCES_I18N.anxious) },
+    { value: 'frustrated', label: ti(EMOTIONAL_VALENCES_I18N.frustrated) },
+    { value: 'neutral', label: ti(EMOTIONAL_VALENCES_I18N.neutral) },
+  ];
+  const GAME_TYPES: { value: GameType; label: string; age_months: number }[] = [
+    { value: 'hot_cold_belly', label: ti(GAME_TYPES_I18N.hot_cold_belly), age_months: 6 },
+    { value: 'belly_breathing_buddy', label: ti(GAME_TYPES_I18N.belly_breathing_buddy), age_months: 9 },
+    { value: 'body_part_point', label: ti(GAME_TYPES_I18N.body_part_point), age_months: 12 },
+  ];
   const [activeTab, setActiveTab] = useState<TabView>('dashboard');
   const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
   const [bodyScanSessions, setBodyScanSessions] = useState<BodyScanSession[]>([]);

@@ -78,6 +78,30 @@
     "autonomicReadiness": "自主神經準備",
     "diaperCream": "尿布膏"
   },
+  "gestureMilestone": {
+    "title": "手勢里程碑",
+    "greeting": "溝通橋樑",
+    "earlyWarning": "預警",
+    "overdueAlert": "部分里程碑已逾期。建議諮詢專業人士。",
+    "bridgeViz": "溝通橋樑",
+    "bridge": {
+      "pointing": "指向",
+      "jointAttn": "共同注意",
+      "words": "詞語"
+    },
+    "wordContext": {
+      "spontaneous": "自發性",
+      "elicited": "誘發性"
+    },
+    "logGesture": "記錄手勢",
+    "logWord": "記錄詞語",
+    "word": {
+      "word": "詞語"
+    },
+    "context": "語境",
+    "cancel": "取消",
+    "save": "儲存"
+  },
   "gravityFeeding": {
     "title": "重力輔助餵養",
     "subtitle": "優化餵養姿勢、追蹤反流關聯、視覺化發育躍升",

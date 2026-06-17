@@ -78,6 +78,30 @@
     "autonomicReadiness": "Autonomic Readiness",
     "diaperCream": "Diaper Cream"
   },
+  "gestureMilestone": {
+    "title": "Gesture Milestone",
+    "greeting": "Communication Bridge",
+    "earlyWarning": "Early Warning",
+    "overdueAlert": "Some milestones are overdue. Consider professional review.",
+    "bridgeViz": "Communication Bridge",
+    "bridge": {
+      "pointing": "Pointing",
+      "jointAttn": "Joint Attn",
+      "words": "Words"
+    },
+    "wordContext": {
+      "spontaneous": "Spontaneous",
+      "elicited": "Elicited"
+    },
+    "logGesture": "Log Gesture",
+    "logWord": "Log Word",
+    "word": {
+      "word": "Word"
+    },
+    "context": "Context",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
   "gravityFeeding": {
     "title": "Gravity-Assisted Feeding",
     "subtitle": "Optimize feeding position, track reflux correlation, visualize developmental leaps",

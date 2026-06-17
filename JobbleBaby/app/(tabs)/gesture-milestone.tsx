@@ -397,7 +397,7 @@ export default function GestureMilestoneScreen() {
             <MaterialCommunityIcons style={styles.alertIcon} name="alert" size={24} color="#EF4444" />
             <View style={styles.alertText}>
               <Text style={styles.alertTitle}>{t('gestureMilestone.earlyWarning')}</Text>
-              <Text style={styles.alertBody}>Some milestones are overdue. Consider professional review.</Text>
+              <Text style={styles.alertBody}>{t('gestureMilestone.overdueAlert')}</Text>
             </View>
           </View>
         )}
@@ -408,17 +408,17 @@ export default function GestureMilestoneScreen() {
             <View style={styles.bridgeTrack}>
               <View style={styles.bridgeStep}>
                 <View style={[styles.bridgeDot, bridgeProgress.protoDeclarative && styles.bridgeDotActive]} />
-                <Text style={styles.bridgeLabel}>Pointing</Text>
+                <Text style={styles.bridgeLabel}>{t('gestureMilestone.bridge.pointing')}</Text>
               </View>
               <View style={[styles.bridgeLine, bridgeProgress.jointAttention && styles.bridgeLineActive]} />
               <View style={styles.bridgeStep}>
                 <View style={[styles.bridgeDot, bridgeProgress.jointAttention && styles.bridgeDotActive]} />
-                <Text style={styles.bridgeLabel}>Joint Attn</Text>
+                <Text style={styles.bridgeLabel}>{t('gestureMilestone.bridge.jointAttn')}</Text>
               </View>
               <View style={[styles.bridgeLine, bridgeProgress.firstWords && styles.bridgeLineActive]} />
               <View style={styles.bridgeStep}>
                 <View style={[styles.bridgeDot, bridgeProgress.firstWords && styles.bridgeDotActive]} />
-                <Text style={styles.bridgeLabel}>Words</Text>
+                <Text style={styles.bridgeLabel}>{t('gestureMilestone.bridge.words')}</Text>
               </View>
             </View>
           </View>
@@ -554,16 +554,16 @@ export default function GestureMilestoneScreen() {
               <TouchableOpacity
                 style={[styles.toggleBtn, wordContext === 'spontaneous' && styles.toggleBtnActive]}
                 onPress={() => setWordContext('spontaneous')}
-                accessibilityLabel="Spontaneous context"
+                accessibilityLabel={t('gestureMilestone.wordContext.spontaneous')}
               >
-                <Text style={styles.toggleBtnText}>Spontaneous</Text>
+                <Text style={styles.toggleBtnText}>{t('gestureMilestone.wordContext.spontaneous')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.toggleBtn, wordContext === 'elicited' && styles.toggleBtnActive]}
                 onPress={() => setWordContext('elicited')}
-                accessibilityLabel="Elicited context"
+                accessibilityLabel={t('gestureMilestone.wordContext.elicited')}
               >
-                <Text style={styles.toggleBtnText}>Elicited</Text>
+                <Text style={styles.toggleBtnText}>{t('gestureMilestone.wordContext.elicited')}</Text>
               </TouchableOpacity>
             </View>
 

@@ -33,16 +33,27 @@ const HEMISPHERE_MILESTONES = [
   { activity: 'self-feeding', minAge: 7, maxAge: 12, icon: 'food-fork-drink' },
 ];
 
-const HAND_FOOT_OPTIONS = [
-  { value: 'left', label: 'Left' },
-  { value: 'right', label: 'Right' },
-  { value: 'both', label: 'Both/Neither' },
-];
+const HAND_FOOT_OPTIONS_I18N: Record<string, string> = {
+  left: 'bilateral-coordination.label.handFoot.left',
+  right: 'bilateral-coordination.label.handFoot.right',
+  both: 'bilateral-coordination.label.handFoot.bothNeither',
+};
 
 export default function BilateralCoordinationScreen() {
   const { t } = useLanguage();
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme] || COLORS.light;
+
+  const ti = (key: string): string => {
+    const translated = t(key);
+    return translated === key ? key : translated;
+  };
+
+  const HAND_FOOT_OPTIONS = [
+    { value: 'left', label: ti(HAND_FOOT_OPTIONS_I18N.left) },
+    { value: 'right', label: ti(HAND_FOOT_OPTIONS_I18N.right) },
+    { value: 'both', label: ti(HAND_FOOT_OPTIONS_I18N.both) },
+  ];
 
   const MOVEMENT_TYPES = [
     { key: 'grasping', label: t('bilateral-coordination.activityOptions.grasping'), icon: 'hand-back-left' },

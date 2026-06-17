@@ -4931,6 +4931,10 @@
     "timerRunning": "Timerrunning",
     "tummyTime": "Tummytime",
     "wakeWindow": "Wakewindow",
+    "label": {
+      "dayParent": "Day Parent",
+      "nightParent": "Night Parent"
+    },
     "phase": {
       "sleep": "Sleep",
       "feeding": "Feeding",
@@ -5576,6 +5580,13 @@
       "crawling": "Crawling",
       "waving": "Waving",
       "clapping": "Clapping"
+    },
+    "label": {
+      "handFoot": {
+        "left": "Left",
+        "right": "Right",
+        "bothNeither": "Both/Neither"
+      }
     }
   }
 }

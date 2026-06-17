@@ -77,8 +77,8 @@ function getShiftColor(shift: CaregiverShift): string {
   return shift === 'day' ? '#F59E0B' : '#3B82F6';
 }
 
-function getShiftLabel(shift: CaregiverShift): string {
-  return shift === 'day' ? 'Day Parent' : 'Night Parent';
+function getShiftLabel(shift: CaregiverShift, t: (key: string) => string): string {
+  return shift === 'day' ? t('circadian.label.dayParent') : t('circadian.label.nightParent');
 }
 
 export default function CircadianScreen() {
@@ -252,7 +252,7 @@ export default function CircadianScreen() {
             <View style={[styles.shiftBadge, { backgroundColor: shiftColor + '22' }]}>
               <View style={[styles.shiftDot, { backgroundColor: shiftColor }]} />
               <Text style={[styles.shiftText, { color: shiftColor }]}>
-                {getShiftLabel(caregiverShift)}
+                {getShiftLabel(caregiverShift, t)}
               </Text>
             </View>
           </View>

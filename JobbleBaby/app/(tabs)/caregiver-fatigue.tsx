@@ -33,7 +33,7 @@ interface DailyCheckIn {
 
 interface MentalLoadTask {
   id: string;
-  label: string;
+  labelKey: string;
   estimatedHours: number;
 }
 
@@ -49,15 +49,26 @@ interface ResilienceScore {
   consecutiveLowDays: number;
 }
 
+const MENTAL_LOAD_TASKS_I18N: Record<string, string> = {
+  feeding: 'caregiverFatigue.activityEstimates.feeding',
+  sleep: 'caregiverFatigue.activityEstimates.sleep',
+  diaper: 'caregiverFatigue.activityEstimates.diaper',
+  medicine: 'caregiverFatigue.activityEstimates.medicine',
+  appointments: 'caregiverFatigue.activityEstimates.appointments',
+  playtime: 'caregiverFatigue.activityEstimates.playtime',
+  bathing: 'caregiverFatigue.activityEstimates.bathing',
+  travel: 'caregiverFatigue.activityEstimates.travel',
+};
+
 const DEFAULT_MENTAL_LOAD_TASKS: MentalLoadTask[] = [
-  { id: '1', label: 'Feeding', estimatedHours: 3 },
-  { id: '2', label: 'Sleep', estimatedHours: 2 },
-  { id: '3', label: 'Diaper', estimatedHours: 1 },
-  { id: '4', label: 'Medicine', estimatedHours: 0.5 },
-  { id: '5', label: 'Appointments', estimatedHours: 1 },
-  { id: '6', label: 'Playtime', estimatedHours: 2 },
-  { id: '7', label: 'Bathing', estimatedHours: 0.5 },
-  { id: '8', label: 'Travel', estimatedHours: 1 },
+  { id: '1', labelKey: MENTAL_LOAD_TASKS_I18N.feeding, estimatedHours: 3 },
+  { id: '2', labelKey: MENTAL_LOAD_TASKS_I18N.sleep, estimatedHours: 2 },
+  { id: '3', labelKey: MENTAL_LOAD_TASKS_I18N.diaper, estimatedHours: 1 },
+  { id: '4', labelKey: MENTAL_LOAD_TASKS_I18N.medicine, estimatedHours: 0.5 },
+  { id: '5', labelKey: MENTAL_LOAD_TASKS_I18N.appointments, estimatedHours: 1 },
+  { id: '6', labelKey: MENTAL_LOAD_TASKS_I18N.playtime, estimatedHours: 2 },
+  { id: '7', labelKey: MENTAL_LOAD_TASKS_I18N.bathing, estimatedHours: 0.5 },
+  { id: '8', labelKey: MENTAL_LOAD_TASKS_I18N.travel, estimatedHours: 1 },
 ];
 
 const getDateStr = () => new Date().toISOString().split('T')[0];
@@ -96,14 +107,14 @@ export default function CaregiverFatigueScreen() {
   const [survey, setSurvey] = useState<CaregiverSurvey | null>(null);
   const [dailyLogs, setDailyLogs] = useState<DailyCheckIn[]>([]);
   const [mentalLoadTasks, setMentalLoadTasks] = useState<MentalLoadTask[]>([
-    { id: '1', label: t('caregiverFatigue.activityEstimates.feeding'), estimatedHours: 3 },
-    { id: '2', label: t('caregiverFatigue.activityEstimates.sleep'), estimatedHours: 2 },
-    { id: '3', label: t('caregiverFatigue.activityEstimates.diaper'), estimatedHours: 1 },
-    { id: '4', label: t('caregiverFatigue.activityEstimates.medicine'), estimatedHours: 0.5 },
-    { id: '5', label: t('caregiverFatigue.activityEstimates.appointments'), estimatedHours: 1 },
-    { id: '6', label: t('caregiverFatigue.activityEstimates.playtime'), estimatedHours: 2 },
-    { id: '7', label: t('caregiverFatigue.activityEstimates.bathing'), estimatedHours: 0.5 },
-    { id: '8', label: t('caregiverFatigue.activityEstimates.travel'), estimatedHours: 1 },
+    { id: '1', labelKey: MENTAL_LOAD_TASKS_I18N.feeding, estimatedHours: 3 },
+    { id: '2', labelKey: MENTAL_LOAD_TASKS_I18N.sleep, estimatedHours: 2 },
+    { id: '3', labelKey: MENTAL_LOAD_TASKS_I18N.diaper, estimatedHours: 1 },
+    { id: '4', labelKey: MENTAL_LOAD_TASKS_I18N.medicine, estimatedHours: 0.5 },
+    { id: '5', labelKey: MENTAL_LOAD_TASKS_I18N.appointments, estimatedHours: 1 },
+    { id: '6', labelKey: MENTAL_LOAD_TASKS_I18N.playtime, estimatedHours: 2 },
+    { id: '7', labelKey: MENTAL_LOAD_TASKS_I18N.bathing, estimatedHours: 0.5 },
+    { id: '8', labelKey: MENTAL_LOAD_TASKS_I18N.travel, estimatedHours: 1 },
   ]);
   const [respiteGoal, setRespiteGoal] = useState<RespiteGoal>({ weeklyHoursGoal: 2, totalWeeks: 0 });
   const [resilienceScore, setResilienceScore] = useState<ResilienceScore>({
@@ -336,7 +347,7 @@ export default function CaregiverFatigueScreen() {
             <Text style={styles.totalLoadText}>{totalMentalLoad.toFixed(1)} {t('caregiverFatigue.hoursPerDay')}</Text>
             {mentalLoadTasks.map(task => (
               <View key={task.id} style={styles.taskRow}>
-                <Text style={styles.taskLabel}>{task.label}</Text>
+                <Text style={styles.taskLabel}>{t(task.labelKey)}</Text>
                 <View style={styles.taskControls}>
                   <TouchableOpacity style={styles.taskBtn} onPress={() => updateMentalLoad(task.id, Math.max(0, task.estimatedHours - 0.5))}>
                                   accessibilityLabel="TouchableOpacity in caregiver-fatigue"

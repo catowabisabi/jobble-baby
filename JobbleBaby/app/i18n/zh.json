@@ -4931,6 +4931,10 @@
     "timerRunning": "[Timerrunning]",
     "tummyTime": "[Tummytime]",
     "wakeWindow": "[Wakewindow]",
+    "label": {
+      "dayParent": "日班家長",
+      "nightParent": "夜班家長"
+    },
     "phase": {
       "sleep": "睡眠",
       "feeding": "餵奶",
@@ -5576,6 +5580,13 @@
       "crawling": "爬行",
       "waving": "揮手",
       "clapping": "拍手"
+    },
+    "label": {
+      "handFoot": {
+        "left": "左",
+        "right": "右",
+        "bothNeither": "兩者/都不"
+      }
     }
   }
 }

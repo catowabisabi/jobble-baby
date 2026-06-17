@@ -2262,7 +2262,33 @@
     "total": "Total",
     "remaining": "Remaining",
     "subtitle": "Subtitle",
-    "title": "Title"
+    "title": "Title",
+    "cluster": {
+      "motorOrion": "Motor Orion",
+      "socialCassiopeia": "Social Cassiopeia",
+      "sensoryUrsa": "Sensory Ursa"
+    },
+    "milestone": {
+      "headControl": "Head Control",
+      "rolling": "Rolling Both Ways",
+      "sitting": "Sitting Unsupported",
+      "crawling": "Crawling",
+      "pullingUp": "Pulling to Stand",
+      "cruising": "Cruising",
+      "walking": "First Steps",
+      "socialSmile": "Social Smile",
+      "eyeContact": "Eye Contact",
+      "jointAttention": "Joint Attention",
+      "strangerWariness": "Stranger Wariness",
+      "separationAnxiety": "Separation Anxiety",
+      "pointing": "Pointing",
+      "gestures": "Gestures (bye-bye)",
+      "words": "First Words",
+      "vestibularTolerance": "Vestibular Tolerance",
+      "balance": "Balance",
+      "pincerGrasp": "Pincer Grasp",
+      "selfFeeding": "Self Feeding"
+    }
   },
   "photoComfort": {
     "title": "Phototherapy Comfort Companion",

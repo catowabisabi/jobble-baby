@@ -1,11 +1,9 @@
-# Cycle 386 — HERMES REVIEW CYCLE
-# Date: 2026-06-17 01:01 HKT
-# Status: Dispatched #386 to Sisyphus (5 tab files hardcoded label arrays → i18n)
-# Painpoint: #27 FIXED (gestureMilestone i18n keys added to en.json + zh.json)
-# Painpoint: #26 PENDING (5 tab files still need i18n — same as #386)
-# TSC: 0 errors
-# Commit: 25dc6b2 → pushed
-# Note: gestureMilestone.tsx t() calls had no matching keys in i18n files.
-#       Added overdueAlert, bridge.pointing/jointAttn/words, wordContext.spontaneous/elicited.
-#       Dispatched #386 to fix remaining 5 tab files (bilateral-coordination, circadian,
-#       colic-relief, caregiver-fatigue, asymmetric-growth).
+# Cycle 388 — HERMES REVIEW CYCLE
+# Date: 2026-06-17 03:05 HKT
+# Status: Dispatched #387 to Sisyphus (constellation.tsx 19 hardcoded labels → i18n)
+# Issue: jobble-baby tmux session was in broken state (dispatch 387 heredoc failed, cd concat error)
+# Fix: Sent C-c to cancel broken heredoc, manually dispatched task via opencode run
+# Sisyphus: ACTIVE - building todo list, starting constellation.tsx i18n
+# TSC: N/A (task in progress)
+# Commit: b9666c2 → pushed
+# Note: constellation.tsx MILESTONE_CLUSTERS still hardcoded; Sisyphus working on it now.

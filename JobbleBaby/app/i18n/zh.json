@@ -2262,7 +2262,33 @@
     "total": "總計",
     "remaining": "剩餘",
     "subtitle": "[Subtitle]",
-    "title": "[Title]"
+    "title": "[Title]",
+    "cluster": {
+      "motorOrion": "運動獵戶",
+      "socialCassiopeia": "社交仙后",
+      "sensoryUrsa": "感官大熊"
+    },
+    "milestone": {
+      "headControl": "抬頭控制",
+      "rolling": "翻身",
+      "sitting": "獨坐",
+      "crawling": "爬行",
+      "pullingUp": "扶站",
+      "cruising": "扶走",
+      "walking": "第一步",
+      "socialSmile": "社會性微笑",
+      "eyeContact": "眼神接觸",
+      "jointAttention": "共同注意",
+      "strangerWariness": "陌生人焦慮",
+      "separationAnxiety": "分離焦慮",
+      "pointing": "指物",
+      "gestures": "再見手勢",
+      "words": "第一個詞",
+      "vestibularTolerance": "前庭耐受",
+      "balance": "平衡",
+      "pincerGrasp": "拇指食指抓握",
+      "selfFeeding": "自己進食"
+    }
   },
   "photoComfort": {
     "title": "光照治療舒緩伴伴",

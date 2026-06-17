@@ -13,8 +13,8 @@
         "missingEn": []
       },
       "meta": {
-        "enCount": 1915,
-        "zhCount": 1915
+        "enCount": 1916,
+        "zhCount": 1916
       }
     },
     {
@@ -37,16 +37,9 @@
     },
     {
       "name": "HardcodedStrings",
-      "pass": false,
-      "issues": [
-        "gesture-milestone.tsx:400: \"Some milestones are overdue. Consider professional review.\"",
-        "gesture-milestone.tsx:411: \"Pointing\"",
-        "gesture-milestone.tsx:416: \"Joint Attn\"",
-        "gesture-milestone.tsx:421: \"Words\"",
-        "gesture-milestone.tsx:559: \"Spontaneous\"",
-        "gesture-milestone.tsx:566: \"Elicited\""
-      ]
+      "pass": true,
+      "issues": []
     }
   ],
-  "exitCode": 1
+  "exitCode": 0
 }

@@ -1,6 +1,7 @@
-🍼 Jobble Baby · 01:01
-✅ Done: #378 gestureMilestone i18n keys → en.json + zh.json (Hermes direct fix)
-🔧 Dispatched: #386 bilateral-coordination + circadian + colic-relief + caregiver-fatigue + asymmetric-growth → hardcoded label arrays → i18n
-📋 TODO: 0 pending · 1 new (same as #386, painpoint #26)
-📦 Commit: 25dc6b2 → pushed
-📝 評：gestureMilestone.tsx t() calls 早前已加，但 en.json/zh.json 入面嘅 key 唔存在，runtime 會顯示 raw key。已直接修補：overdueAlert、bridge.pointing/jointAttn/words、wordContext.spontaneous/elicited。TSC 0 errors。#386 派俾 Sisyphus 修剩餘 5 個 tab files。
+🍼 Jobble Baby · 03:05
+🔧 Dispatched: #387 constellation.tsx 19 hardcoded labels → i18n (Sisyphus working)
+📋 TODO: 1 dispatched (waiting on Sisyphus response)
+📦 Commit: b9666c2 → pushed
+📝 評：jobble-baby tmux session 進入錯誤狀態（dispatch 387 heredoc 失敗，cd 命令被拼接），
+手動 C-c 取消並重新派送 task。Sisyphus 正在執行 constellation.tsx i18n。
+⚠️ 發現：dispatch mechanism 有問題，下一輪需修復 tmux send-keys heredoc 方式。

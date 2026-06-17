@@ -4,51 +4,50 @@ import { useLanguage } from '../context/LanguageContext';
 
 const { width } = Dimensions.get('window');
 
-// Milestone constellation data
-const MILESTONE_CLUSTERS = [
-  {
-    name: 'Motor Orion',
-    color: '#3B82F6',
-    milestones: [
-      { id: 'head_control', label: 'Head Control', age: '0-2mo', connections: ['rolling', 'sitting'] },
-      { id: 'rolling', label: 'Rolling Both Ways', age: '4-6mo', connections: ['crawling', 'pulling_up'] },
-      { id: 'sitting', label: 'Sitting Unsupported', age: '6-7mo', connections: ['crawling', 'standing'] },
-      { id: 'crawling', label: 'Crawling', age: '7-9mo', connections: ['pulling_up', 'cruising'] },
-      { id: 'pulling_up', label: 'Pulling to Stand', age: '8-10mo', connections: ['cruising', 'walking'] },
-      { id: 'cruising', label: 'Cruising', age: '9-11mo', connections: ['walking'] },
-      { id: 'walking', label: 'First Steps', age: '11-14mo', connections: [] },
-    ],
-  },
-  {
-    name: 'Social Cassiopeia',
-    color: '#EC4899',
-    milestones: [
-      { id: 'social_smile', label: 'Social Smile', age: '0-2mo', connections: ['joint_attention'] },
-      { id: 'eye_contact', label: 'Eye Contact', age: '0-2mo', connections: ['joint_attention', 'stranger_wariness'] },
-      { id: 'joint_attention', label: 'Joint Attention', age: '6-9mo', connections: ['pointing', 'gestures'] },
-      { id: 'stranger_wariness', label: 'Stranger Wariness', age: '7-10mo', connections: ['separation_anxiety'] },
-      { id: 'separation_anxiety', label: 'Separation Anxiety', age: '8-14mo', connections: ['object_permanence'] },
-      { id: 'pointing', label: 'Pointing', age: '9-12mo', connections: ['words'] },
-      { id: 'gestures', label: 'Gestures (bye-bye)', age: '9-12mo', connections: ['words'] },
-      { id: 'words', label: 'First Words', age: '10-14mo', connections: [] },
-    ],
-  },
-  {
-    name: 'Sensory Ursa',
-    color: '#10B981',
-    milestones: [
-      { id: 'vestibular_tolerance', label: 'Vestibular Tolerance', age: '0-3mo', connections: ['rolling', 'balance'] },
-      { id: 'balance', label: 'Balance', age: '4-6mo', connections: ['sitting', 'crawling'] },
-      { id: 'pincer_grasp', label: 'Pincer Grasp', age: '8-10mo', connections: ['self_feeding'] },
-      { id: 'self_feeding', label: 'Self Feeding', age: '9-12mo', connections: [] },
-    ],
-  },
-];
-
 const STAR_SIZE = 44;
 
 export default function ConstellationScreen() {
   const { t } = useLanguage();
+
+  const MILESTONE_CLUSTERS = [
+    {
+      name: t('constellation.cluster.motorOrion'),
+      color: '#3B82F6',
+      milestones: [
+        { id: 'head_control', label: t('constellation.milestone.headControl'), age: '0-2mo', connections: ['rolling', 'sitting'] },
+        { id: 'rolling', label: t('constellation.milestone.rolling'), age: '4-6mo', connections: ['crawling', 'pulling_up'] },
+        { id: 'sitting', label: t('constellation.milestone.sitting'), age: '6-7mo', connections: ['crawling', 'standing'] },
+        { id: 'crawling', label: t('constellation.milestone.crawling'), age: '7-9mo', connections: ['pulling_up', 'cruising'] },
+        { id: 'pulling_up', label: t('constellation.milestone.pullingUp'), age: '8-10mo', connections: ['cruising', 'walking'] },
+        { id: 'cruising', label: t('constellation.milestone.cruising'), age: '9-11mo', connections: ['walking'] },
+        { id: 'walking', label: t('constellation.milestone.walking'), age: '11-14mo', connections: [] },
+      ],
+    },
+    {
+      name: t('constellation.cluster.socialCassiopeia'),
+      color: '#EC4899',
+      milestones: [
+        { id: 'social_smile', label: t('constellation.milestone.socialSmile'), age: '0-2mo', connections: ['joint_attention'] },
+        { id: 'eye_contact', label: t('constellation.milestone.eyeContact'), age: '0-2mo', connections: ['joint_attention', 'stranger_wariness'] },
+        { id: 'joint_attention', label: t('constellation.milestone.jointAttention'), age: '6-9mo', connections: ['pointing', 'gestures'] },
+        { id: 'stranger_wariness', label: t('constellation.milestone.strangerWariness'), age: '7-10mo', connections: ['separation_anxiety'] },
+        { id: 'separation_anxiety', label: t('constellation.milestone.separationAnxiety'), age: '8-14mo', connections: ['object_permanence'] },
+        { id: 'pointing', label: t('constellation.milestone.pointing'), age: '9-12mo', connections: ['words'] },
+        { id: 'gestures', label: t('constellation.milestone.gestures'), age: '9-12mo', connections: ['words'] },
+        { id: 'words', label: t('constellation.milestone.words'), age: '10-14mo', connections: [] },
+      ],
+    },
+    {
+      name: t('constellation.cluster.sensoryUrsa'),
+      color: '#10B981',
+      milestones: [
+        { id: 'vestibular_tolerance', label: t('constellation.milestone.vestibularTolerance'), age: '0-3mo', connections: ['rolling', 'balance'] },
+        { id: 'balance', label: t('constellation.milestone.balance'), age: '4-6mo', connections: ['sitting', 'crawling'] },
+        { id: 'pincer_grasp', label: t('constellation.milestone.pincerGrasp'), age: '8-10mo', connections: ['self_feeding'] },
+        { id: 'self_feeding', label: t('constellation.milestone.selfFeeding'), age: '9-12mo', connections: [] },
+      ],
+    },
+  ];
   const [selectedCluster, setSelectedCluster] = useState(0);
   const [selectedStar, setSelectedStar] = useState<string | null>(null);
   const [loggedMilestones, setLoggedMilestones] = useState<Set<string>>(new Set());

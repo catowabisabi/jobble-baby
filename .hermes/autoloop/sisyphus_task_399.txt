@@ -1,0 +1,29 @@
+# Sisyphus Task — Cycle 399
+# Priority: P2
+# Project: Jobble Baby
+
+Implement Landau Reflex Integration Tracker tab.
+
+File: app/(tabs)/landau-reflex.tsx
+
+Features:
+1. Landau Timeline — log prone extension events: duration_sec, quality_score (1-5), head_lift_cm, notes
+2. Integration Progress — expected integration 3-4mo; alert if still strong >5mo
+3. Trunk Strength Correlation — read tummy-time data from @jobble/tummy_time_entries if exists
+4. Rolling Bridge — map prone extension to rolling milestones (prone→supine, supine→prone)
+
+Data model:
+- @jobble/landau_events: { date, duration_sec, quality_score, head_lift_cm, notes }
+- @jobble/landau_correlations: { date, tummy_time_duration, rolling_milestone, landau_quality }
+
+Requirements:
+- Use SafeStorage (safeGetItem/safeSetItem) — NOT raw AsyncStorage
+- Register in app/(tabs)/_layout.tsx as Tabs.Screen name="landau-reflex"
+- Add i18n keys under "landau" namespace in app/i18n/en.json and app/i18n/zh.json
+- TSC: cd JobbleBaby && npx tsc --noEmit must pass 0 errors
+- Reference: reflex-tracker.tsx for patterns, concept #45 in DB
+
+After implementation:
+- TSC 0 errors
+- Tab visible in tab navigator
+- No hardcoded user-facing strings (all through i18n)

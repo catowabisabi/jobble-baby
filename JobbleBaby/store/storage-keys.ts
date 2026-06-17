@@ -1,6 +1,8 @@
 export const STORAGE_KEYS = {
   ALLERGEN_ENTRIES: "@jobble/allergen_entries",
   ALLERGEN_LOG: "@jobble/allergen_log",
+  LANDAU_EVENTS: "@jobble/landau_events",
+  LANDAU_CORRELATIONS: "@jobble/landau_correlations",
   APPSTORE_CHECKLIST: "@jobble/appstore_checklist",
   ASYMMETRIC_ENTRIES: "@jobble/asymmetric_entries",
   AUTONOMIC_READINESS: "@jobble/autonomic_readiness",

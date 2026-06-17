@@ -197,6 +197,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="landau-reflex"
+        options={{
+          title: t('tabs.landauReflex'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="hip-click"
         options={{
           title: t('tabs.hipClick'),

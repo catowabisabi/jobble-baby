@@ -1,7 +1,12 @@
-# Cycle 382 — HERMES REVIEW CYCLE
-# Date: 2026-06-16 HKT
-# Status: Dispatched #364 to Sisyphus (gesture-milestone.tsx 6 hardcoded strings → i18n)
-# Painpoint: #27 NEW (gesture-milestone.tsx 6 hardcoded strings, high priority)
-# Audit: 6 FAIL HardcodedStrings in gesture-milestone.tsx (P1)
-# TSC: 0 errors (clean)
-# Unresolved painpoint: CocoaPods/macOS (acknowledged, user action required)
+# Cycle 384 — HERMES REVIEW CYCLE
+# Date: 2026-06-16 23:00 HKT
+# Status: IDLE — no pending todos. Codebase clean.
+# TSC: 0 errors
+# Hardcoded strings: REM fixed (sleep-architecture.tsx:386 → t('sleepArchitecture.rem'))
+# Commit: 2e1a022 → pushed (sleep-architecture i18n fix)
+# Commit: d0d84f6 → pushed (gesture-milestone.tsx hardcoded fix)
+# Painpoints: All resolved (#27 fixed this cycle)
+# Brainstorm: Ideas #81 (Co-regulation Resonance), #82 (Suckle-to-Chew Bridge) added to DB
+# Deferred: #106 (Village Network - needs backend), #108 (privacy policy - needs URL deployment)
+# Remaining: User actions only — EAS credentials, App Store/Play Console setup, privacy policy URL
+# No Sisyphus dispatch this cycle — nothing pending.

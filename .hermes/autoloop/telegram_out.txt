@@ -1,6 +1,7 @@
-🍼 [PROJECT] · 17:01
-✅ Done: #378 Codebase review — submission-ready confirmed
-🔧 Dispatched: #378 session alive check (echo alive → pending response)
+🍼 Jobble Baby · 23:00
+✅ Done: #364 gesture-milestone 6 hardcoded → i18n (bridge.words fixed)
+✅ Done: REM hardcoded → i18n (sleep-architecture.tsx direct fix)
 📋 TODO: 0 pending · 0 new
-📦 Commit: 6b94528 → clean (no new changes this cycle)
-📝 Desc: 代碼已完成，TSC 0 errors。pre-submission audit PASS (9/9)。發現15個內部domain ID hardcoded字串陣列（diaper-cream, sleep-architecture, regulatory-fitness等），全部係internal identifier非user-facing文字，唔影響App Store審批。等待用戶配置 EAS credentials + 建立 App Store Connect app + Play Console app + 隱私政策 URL。
+📦 Commit: 2e1a022 → pushed
+📝 評：代碼庫 clean，TSC 0 errors。本週完成所有 pending hardcoded strings。提交準備完成，剩余項目（EAS credentials、隱私政策 URL 部署）需用戶操作。
+⚠️ Telegram bot 401 Unauthorized — token 可能已失效

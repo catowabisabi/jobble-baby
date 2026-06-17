@@ -1,6 +1,5 @@
-🍼 Jobble Baby · 03:12
-✅ Done: #387 constellation.tsx 19 hardcoded labels → i18n (Sisyphus, TSC 0, audit PASS)
-📋 全部代碼工作完成 · i18n 1916 keys · TSC 0 errors
-⚠️ 仍需 user action：EAS credentials、App Store Connect app、Play Console app、privacy policy URL
-📦 Commit: 240f1c9 → pushed
-📝 評：constellation.tsx MILESTONE_CLUSTERS 已移入 component 內，所有 cluster/milestone label 改用 t() call。i18n 中英 keys 齊備。代碼層面已完全就緒，準備提交。
+🍼 Jobble Baby · 08:00
+✅ Done: #379 colic-relief.tsx COMFORT_ACTIONS cleanup (Hermes direct fix)
+📋 TODO: 0 pending · 0 new · App 完全就緒
+📦 Commit: 0443c2f → pushed
+📝 評：所有代碼任務已完成。i18n 全面覆蓋，TSC 0 errors，Sentry/Crash Reporting 已整合。尚有 6 項 user-action 事項需處理（EAS credentials、App Store Connect、Play Console、隱私政策 URL 等），這些需要你親自操作，請準備好蘋果/Google 開發者帳號。

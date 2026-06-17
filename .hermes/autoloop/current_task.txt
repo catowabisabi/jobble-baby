@@ -1,12 +1,13 @@
-# Cycle 392 — HERMES REVIEW CYCLE
-# Date: 2026-06-17 07:xx HKT
-# Status: COMPLETE - #379 fixed by Hermes (COMFORT_ACTIONS labels removed)
-# Audit: PASS · TSC: 0 errors
-# Commit: 8cf88cb → pushed
-# No pending tasks — Sisyphus idle
-# Remaining blockers (USER ACTION required):
+# Cycle 393 — HERMES REVIEW CYCLE
+# Date: 2026-06-17 08:xx HKT
+# Status: COMPLETE — All dev tasks done · App submission-ready
+# TSC: 0 errors · Painpoints: all resolved (1 acknowledged: CocoaPods/macOS)
+# Commit: 0443c2f → pushed
+# Sisyphus: idle (no pending tasks — user-action blockers only)
+# User-action blockers remaining:
 #   - EAS credentials configuration
 #   - App Store Connect app creation
 #   - Play Console app creation
 #   - Privacy policy URL deployment (jobblebaby.com/privacy)
 #   - EAS build execution
+#   - EXPO_PUBLIC_SENTRY_DSN env var (for crash reporting)

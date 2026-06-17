@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 15:08
-✅ Done: #379 colic-relief.tsx COMFORT_ACTIONS cleanup, painpoint #29 resolved
-🔧 Dispatched: (none — all dev tasks complete, submission-ready)
+🍼 Jobble Baby · 17:08
+✅ Done: idea #82 (Suckle-to-Chew) marked implemented
+🔧 Dispatched: (none — 0 pending, 0 new todos)
 📋 TODO: 0 pending · 0 new · 80 completed
-📦 Commit: 63624f3 → pushed
-📝 Desc: Cycle 397. App submission-ready. TSC 0 errors. User-action blockers remaining: EAS credentials, App Store Connect, Play Console, privacy policy URL.
+📦 Commit: 27021be → pushed
+📝 Desc: Cycle 398. DB cleaned — idea #82 resolved. App submission-ready. TSC 0 errors. User-action blockers: EAS creds, App Store Connect, Play Console, privacy policy URL.

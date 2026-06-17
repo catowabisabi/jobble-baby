@@ -1,6 +1,9 @@
-# Cycle 377 — HERMES REVIEW CYCLE
-# Date: 2026-06-16 14:08 HKT
-# Status: 1 new todo (#377: regulatory-fitness CASCADE_ALERTS hardcoded English)
-# Commit: 35419ef → pushed
-# Dispatched: #377 to Sisyphus (fix CASCADE_ALERTS hardcoded messages → i18n)
-# Note: Sisyphus completed #376 (4 tab files i18n fix). All 4 files done, TSC 0 errors, audit PASS. Painpoint #25 resolved.
+# Cycle 382 — HERMES REVIEW CYCLE
+# Date: 2026-06-16 21:12 HKT
+# Status: Dispatched #364 to Sisyphus (gesture-milestone.tsx 6 hardcoded strings → i18n)
+# Painpoint: #27 NEW (gesture-milestone.tsx 6 hardcoded strings, high priority)
+# TSC: 0 errors (clean)
+# Commit: 2601642 → pushed
+# Note: #378 task was dispatched twice previously but not executed (alive checks only). 
+#       Corrected task includes missing i18n keys (overdueAlert, bridge.*, wordContext.*) 
+#       to be added to en.json + zh.json.

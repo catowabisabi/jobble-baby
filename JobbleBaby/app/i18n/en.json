@@ -133,7 +133,17 @@
     "logGesture": "Log Gesture",
     "logWord": "Log Word",
     "spontaneous": "Spontaneous",
-    "elicited": "Elicited"
+    "elicited": "Elicited",
+    "overdueAlert": "Some milestones are overdue. Consider professional review.",
+    "bridge": {
+      "pointing": "Pointing",
+      "jointAttn": "Joint Attn",
+      "words": "Words"
+    },
+    "wordContext": {
+      "spontaneous": "Spontaneous",
+      "elicited": "Elicited"
+    }
   },
   "gravityFeeding": {
     "title": "Gravity-Assisted Feeding",

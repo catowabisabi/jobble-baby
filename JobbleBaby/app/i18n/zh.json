@@ -133,7 +133,17 @@
     "logGesture": "记录手势",
     "logWord": "记录词语",
     "spontaneous": "自發性",
-    "elicited": "誘發性"
+    "elicited": "誘發性",
+    "overdueAlert": "部分里程碑已逾期，建议咨询专业人士。",
+    "bridge": {
+      "pointing": "指向",
+      "jointAttn": "共同注意",
+      "words": "词语"
+    },
+    "wordContext": {
+      "spontaneous": "自发性",
+      "elicited": "诱发性"
+    }
   },
   "gravityFeeding": {
     "title": "重力輔助餵養",

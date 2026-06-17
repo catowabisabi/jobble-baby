@@ -1,0 +1,74 @@
+Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+
+## Task
+Implement the Suckle-to-Chew Developmental Bridge tab (idea #82).
+
+## Files to create
+
+### 1. JobbleBaby/app/(tabs)/suckle-chew.tsx
+Create a complete React Native tab screen with:
+
+- Import from expo-router, React, StyleSheet, SafeAreaView, ScrollView, View, Text, TouchableOpacity
+- Import useLanguage from ../context/LanguageContext
+- Import safeGetItem, safeSetItem from ../utils/SafeStorage
+
+- Data model:
+  - @jobble/suckle_stages: array of {date, stage, tonguePattern, notes}
+  - @jobble/chewing_emergence: array of {date, foodItem, acceptanceScore, gagEvents, refusalEvents, notes}
+  - @jobble/food_texture_ladder: array of {date, textureLevel, foodItem, accepted, notes}
+
+- Stages: suckle, transition, munch, chew
+
+- Texture levels 1-7:
+  1. Smooth purees (4-6mo)
+  2. Thin mashed (5-6mo)
+  3. Thick mashed (6-7mo)
+  4. Soft lumps (6-8mo)
+  5. Soft finger foods (7-9mo)
+  6. Chopped table foods (9-12mo)
+  7. Family meals (12mo+)
+
+- UI sections:
+  1. Current Stage badge + log entry form (stage selector + tongue pattern + notes)
+  2. Food Acceptance Score (food item input, score 1-5, gag/refusal counters, save)
+  3. Texture Ladder (visual 1-7 ladder with current level highlighted, add texture entry)
+  4. Alerts (referral alert if 3+ consecutive acceptance<2, gag alert if gagEvents>2)
+  5. History log (last 5 entries)
+
+### 2. Register in _layout.tsx
+Add import: import SuckleChewScreen from './suckle-chew';
+Add Tabs.Screen entry for name="suckle-chew" with title from t('suckleChew.title')
+
+### 3. i18n keys
+Add to both app/i18n/en.json and app/i18n/zh.json under suckleChew key:
+- title: "Suckle-Chew Bridge"
+- subtitle: "Track oral motor development from suckle to chew"
+- currentStage: "Current Stage"
+- stage.suckle: "Suckle (0-6mo)"
+- stage.transition: "Transition (4-7mo)"
+- stage.munch: "Munch (5-8mo)"
+- stage.chew: "Chew (7mo+)"
+- logEntry: "Log Entry"
+- tonguePattern: "Tongue Pattern"
+- tonguePattern.desc: "Describe tongue movement"
+- notes: "Notes"
+- notesPlaceholder: "Optional observations..."
+- save: "Save"
+- acceptanceScore: "Acceptance Score"
+- foodItem: "Food Item"
+- gagEvents: "Gag Events"
+- refusalEvents: "Refusal Events"
+- textureLadder: "Food Texture Ladder"
+- referralAlert: "Referral Suggested"
+- referralAlertBody: "Acceptance below 2 for 3+ attempts. Consult feeding therapist."
+- gagAlert: "Frequent Gag Events"
+- gagAlertBody: "More than 2 gag events per session. Seek professional guidance."
+- averageAcceptance: "Average Score"
+- todaysLog: "Todays Log"
+- history: "History"
+- level1..level7: texture level names
+
+## Verification
+npx tsc --noEmit in JobbleBaby/ - must show 0 errors.
+
+**DONE ULW**

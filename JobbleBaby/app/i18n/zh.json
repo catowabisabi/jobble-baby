@@ -5588,5 +5588,82 @@
         "bothNeither": "兩者/都不"
       }
     }
+  },
+  "suckleToChewBridge": {
+    "title": "吸嚼過渡橋",
+    "greeting": "發育",
+    "stages": {
+      "suckle": "吸吮",
+      "transition": "過渡",
+      "munch": "咀嚼",
+      "chew": "咀嚼成熟"
+    },
+    "sectionA": {
+      "title": "目前階段",
+      "logStage": "記錄階段",
+      "tonguePattern": "舌頭模式",
+      "tonguePatterns": {
+        "suckle": "吸吮模式",
+        "transition": "過渡模式",
+        "munch": "咀嚼模式",
+        "chew": "成熟咀嚼模式"
+      },
+      "notes": "備註",
+      "notesPlaceholder": "可選觀察...",
+      "noLogs": "暫無階段記錄"
+    },
+    "sectionB": {
+      "title": "食物接受度",
+      "foodItem": "食物項目",
+      "foodItemPlaceholder": "寶寶吃了什麼？",
+      "acceptanceScore": "接受度評分",
+      "gagEvents": "作嘔事件",
+      "refusalEvents": "拒絕事件",
+      "weeklyTrend": "每週趨勢",
+      "averageScore": "平均評分",
+      "noLogs": "暫無接受度記錄",
+      "scores": {
+        "1": "拒絕",
+        "2": "不佳",
+        "3": "中等",
+        "4": "良好",
+        "5": "極佳"
+      }
+    },
+    "sectionC": {
+      "title": "質地階梯",
+      "currentLevel": "目前級別",
+      "logTexture": "記錄質地嘗試",
+      "accepted": "接受",
+      "rejected": "拒絕",
+      "textureLevels": {
+        "level1": "光滑泥糊（4-6個月）",
+        "level2": "稀薄泥蓉（5-6個月）",
+        "level3": "稠密泥蓉（6-7個月）",
+        "level4": "軟塊（6-8個月）",
+        "level5": "軟手指食物（7-9個月）",
+        "level6": "切碎餐桌食物（9-12個月）",
+        "level7": "家庭餐（12個月+）"
+      },
+      "noLogs": "暫無質地記錄"
+    },
+    "sectionD": {
+      "title": "警報",
+      "referralAlert": "接受度評分連續3次以上低於2分。建議尋求專業轉介。",
+      "therapistAlert": "每次進食作嘔超過2次。建議諮詢餵養治療師。",
+      "noAlerts": "目前無警報"
+    },
+    "tabs": {
+      "stageTracker": "階段",
+      "foodAcceptance": "接受度",
+      "textureLadder": "質地",
+      "alerts": "警報"
+    },
+    "common": {
+      "save": "保存",
+      "cancel": "取消",
+      "delete": "刪除",
+      "log": "記錄"
+    }
   }
 }

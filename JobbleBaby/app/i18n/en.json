@@ -5588,5 +5588,82 @@
         "bothNeither": "Both/Neither"
       }
     }
+  },
+  "suckleToChewBridge": {
+    "title": "Suckle-to-Chew Bridge",
+    "greeting": "Development",
+    "stages": {
+      "suckle": "Suckle",
+      "transition": "Transition",
+      "munch": "Munch",
+      "chew": "Chew"
+    },
+    "sectionA": {
+      "title": "Current Stage",
+      "logStage": "Log Stage",
+      "tonguePattern": "Tongue Pattern",
+      "tonguePatterns": {
+        "suckle": "Suckle pattern",
+        "transition": "Transition pattern",
+        "munch": "Munch pattern",
+        "chew": "Chew pattern"
+      },
+      "notes": "Notes",
+      "notesPlaceholder": "Optional observations...",
+      "noLogs": "No stage logs yet"
+    },
+    "sectionB": {
+      "title": "Food Acceptance",
+      "foodItem": "Food Item",
+      "foodItemPlaceholder": "What did baby eat?",
+      "acceptanceScore": "Acceptance Score",
+      "gagEvents": "Gag Events",
+      "refusalEvents": "Refusal Events",
+      "weeklyTrend": "Weekly Trend",
+      "averageScore": "Average Score",
+      "noLogs": "No acceptance logs yet",
+      "scores": {
+        "1": "Refused",
+        "2": "Poor",
+        "3": "Moderate",
+        "4": "Good",
+        "5": "Excellent"
+      }
+    },
+    "sectionC": {
+      "title": "Texture Ladder",
+      "currentLevel": "Current Level",
+      "logTexture": "Log Texture Attempt",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "textureLevels": {
+        "level1": "Smooth purees (4-6mo)",
+        "level2": "Thin mashed (5-6mo)",
+        "level3": "Thick mashed (6-7mo)",
+        "level4": "Soft lumps (6-8mo)",
+        "level5": "Soft finger foods (7-9mo)",
+        "level6": "Chopped table foods (9-12mo)",
+        "level7": "Family meals (12mo+)"
+      },
+      "noLogs": "No texture logs yet"
+    },
+    "sectionD": {
+      "title": "Alerts",
+      "referralAlert": "Acceptance score below 2 for 3+ consecutive attempts. Consider professional referral.",
+      "therapistAlert": "Gag events exceed 2 per session. Consult a feeding therapist.",
+      "noAlerts": "No alerts at this time"
+    },
+    "tabs": {
+      "stageTracker": "Stage",
+      "foodAcceptance": "Acceptance",
+      "textureLadder": "Texture",
+      "alerts": "Alerts"
+    },
+    "common": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "log": "Log"
+    }
   }
 }

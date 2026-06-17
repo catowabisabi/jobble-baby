@@ -539,6 +539,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="brain" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="suckle-to-chew-bridge"
+        options={{
+          title: t('suckleToChewBridge.title') || 'Suckle-Chew Bridge',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-apple" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

@@ -165,4 +165,7 @@ export const STORAGE_KEYS = {
   WEANING_RASH_ENTRIES: "@jobble/weaning_rash_entries",
   WHITE_NOISE_LOGS: "@jobble/white_noise_logs",
   WOUND_PHOTO: "@jobble/wound_photo",
+  SUCKLE_TO_CHEW_STAGE_LOGS: "@jobble/suckle_to_chew_stage_logs",
+  SUCKLE_TO_CHEW_FOOD_ACCEPTANCE_LOGS: "@jobble/suckle_to_chew_food_acceptance_logs",
+  SUCKLE_TO_CHEW_TEXTURE_LADDER_LOGS: "@jobble/suckle_to_chew_texture_ladder_logs",
 } as const;

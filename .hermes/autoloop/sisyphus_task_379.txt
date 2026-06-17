@@ -1,9 +1,42 @@
-CONFIRM: Cycle 379 session alive check.
+# Task #379 — Clean up colic-relief.tsx COMFORT_ACTIONS unused hardcoded labels
 
-Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+## Context
+The COMFORT_ACTIONS array in colic-relief.tsx has hardcoded English labels at lines 26-30:
+```
+{ id: 'bicycle', label: 'Bicycle Legs', icon: '🫠' },
+{ id: 'massage', label: 'Belly Massage', icon: '🤚' },
+{ id: 'warm', label: 'Warm Compress', icon: '🌡️' },
+{ id: 'gripe', label: 'Gripe Water', icon: '💧' },
+{ id: 'probiotic', label: 'Probiotic Drops', icon: '💊' },
+```
+These `label:` properties are NEVER used in the render — the UI uses `t(`colicRelief.${action.id}`)` directly (line 369). These are dead/useless strings.
 
-## Task
+## Your Task
 
-Run: `echo "Sisyphus alive $(date)"` and confirm session is responsive.
+STEP 1 — Open and inspect:
+```
+JobbleBaby/app/(tabs)/colic-relief.tsx
+```
+Focus on lines 25-31 (COMFORT_ACTIONS array).
 
-**DONE ULW**
+STEP 2 — Fix:
+Remove the `label:` property from each object in the COMFORT_ACTIONS array since it is unused. The array should become:
+```
+const COMFORT_ACTIONS = [
+  { id: 'bicycle', icon: '🫠' },
+  { id: 'massage', icon: '🤚' },
+  { id: 'warm', icon: '🌡️' },
+  { id: 'gripe', icon: '💧' },
+  { id: 'probiotic', icon: '💊' },
+];
+```
+
+STEP 3 — Verify TSC:
+```
+cd JobbleBaby && npx tsc --noEmit
+```
+Must be 0 errors.
+
+STEP 4 — Report what you changed.
+
+ULW

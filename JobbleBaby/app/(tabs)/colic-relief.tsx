@@ -23,11 +23,11 @@ const WHITE_NOISE_SOUNDS = ((): string[] => {
   return Object.keys(i18n).filter(k => k.startsWith('sound_')).map(k => k.replace('sound_', ''));
 })();
 const COMFORT_ACTIONS = [
-  { id: 'bicycle', label: 'Bicycle Legs', icon: '🫠' },
-  { id: 'massage', label: 'Belly Massage', icon: '🤚' },
-  { id: 'warm', label: 'Warm Compress', icon: '🌡️' },
-  { id: 'gripe', label: 'Gripe Water', icon: '💧' },
-  { id: 'probiotic', label: 'Probiotic Drops', icon: '💊' },
+  { id: 'bicycle', icon: '🫠' },
+  { id: 'massage', icon: '🤚' },
+  { id: 'warm', icon: '🌡️' },
+  { id: 'gripe', icon: '💧' },
+  { id: 'probiotic', icon: '💊' },
 ];
 
 interface CryingEntry {

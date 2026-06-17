@@ -1,7 +1,6 @@
-🍼 Jobble Baby · 03:05
-🔧 Dispatched: #387 constellation.tsx 19 hardcoded labels → i18n (Sisyphus working)
-📋 TODO: 1 dispatched (waiting on Sisyphus response)
-📦 Commit: b9666c2 → pushed
-📝 評：jobble-baby tmux session 進入錯誤狀態（dispatch 387 heredoc 失敗，cd 命令被拼接），
-手動 C-c 取消並重新派送 task。Sisyphus 正在執行 constellation.tsx i18n。
-⚠️ 發現：dispatch mechanism 有問題，下一輪需修復 tmux send-keys heredoc 方式。
+🍼 Jobble Baby · 03:12
+✅ Done: #387 constellation.tsx 19 hardcoded labels → i18n (Sisyphus, TSC 0, audit PASS)
+📋 全部代碼工作完成 · i18n 1916 keys · TSC 0 errors
+⚠️ 仍需 user action：EAS credentials、App Store Connect app、Play Console app、privacy policy URL
+📦 Commit: 240f1c9 → pushed
+📝 評：constellation.tsx MILESTONE_CLUSTERS 已移入 component 內，所有 cluster/milestone label 改用 t() call。i18n 中英 keys 齊備。代碼層面已完全就緒，準備提交。

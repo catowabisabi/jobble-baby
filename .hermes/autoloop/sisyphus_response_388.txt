@@ -1,0 +1,24 @@
+   - Moved `MILESTONE_CLUSTERS` from module-level (lines 8-46) to inside the com
+ponent (after `const { t } = useLanguage()` on line 10)
+   - Replaced 3 cluster `name:` values with `t('constellation.cluster.<key>')`:
+     - `'Motor Orion'` → `t('constellation.cluster.motorOrion')`
+     - `'Social Cassiopeia'` → `t('constellation.cluster.socialCassiopeia')`
+     - `'Sensory Ursa'` → `t('constellation.cluster.sensoryUrsa')`
+   - Replaced 19 milestone `label:` values with `t('constellation.milestone.<key
+>')`
+   - Age strings (e.g., `'0-2mo'`) left unchanged as specified
+
+2. **`app/i18n/en.json`**: Added `constellation.cluster` and `constellation.mile
+stone` sections with English translations
+
+3. **`app/i18n/zh.json`**: Added same structure with Traditional Chinese transla
+tions (e.g., "Head Control" → "抬頭控制", "Rolling Both Ways" → "翻身")
+
+### Verification:
+```
+npx tsc --noEmit
+```
+✅ 0 errors
+
+enomars@CatoServer:/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-b
+aby/JobbleBaby$

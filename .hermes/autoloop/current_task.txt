@@ -1,9 +1,15 @@
-# Cycle 388 — HERMES REVIEW CYCLE
-# Date: 2026-06-17 03:05 HKT
-# Status: Dispatched #387 to Sisyphus (constellation.tsx 19 hardcoded labels → i18n)
-# Issue: jobble-baby tmux session was in broken state (dispatch 387 heredoc failed, cd concat error)
-# Fix: Sent C-c to cancel broken heredoc, manually dispatched task via opencode run
-# Sisyphus: ACTIVE - building todo list, starting constellation.tsx i18n
-# TSC: N/A (task in progress)
-# Commit: b9666c2 → pushed
-# Note: constellation.tsx MILESTONE_CLUSTERS still hardcoded; Sisyphus working on it now.
+# Cycle 389 — HERMES REVIEW CYCLE
+# Date: 2026-06-17 03:12 HKT
+# Status: COMPLETE - Task #387 (constellation.tsx) DONE by Sisyphus
+# constellation.tsx: MILESTONE_CLUSTERS moved inside component, 19 t() calls added
+# i18n: 19 cluster + milestone keys added to en.json + zh.json
+# TSC: 0 errors
+# Audit: PASS (9/9), i18n coverage 1916/1916
+# Commit: 240f1c9 → pushed
+# Remaining blockers (user action required):
+#   - EAS credentials configuration
+#   - App Store Connect app creation
+#   - Play Console app creation
+#   - Privacy policy URL deployment (jobblebaby.com/privacy)
+#   - EAS build execution
+# Note: 15 "string_array" warnings in audit are internal data arrays, NOT user-visible strings.

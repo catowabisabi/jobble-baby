@@ -383,7 +383,7 @@ export default function SleepArchitectureScreen() {
               <Text style={[s.phasePct, { marginLeft: 8 }]}>{phases.light}%</Text>
             </View>
             <View style={s.phaseRow}>
-              <Text style={s.phaseLabel}>REM</Text>
+              <Text style={s.phaseLabel}>{t('sleepArchitecture.rem')}</Text>
               <View style={{ flex: 1 }} />
               <Text style={[s.phasePct, { marginLeft: 8 }]}>{phases.rem}%</Text>
             </View>

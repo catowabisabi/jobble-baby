@@ -79,28 +79,61 @@
     "diaperCream": "Diaper Cream"
   },
   "gestureMilestone": {
-    "title": "Gesture Milestone",
-    "greeting": "Communication Bridge",
+    "title": "Gesture Bridge",
+    "greeting": "Development",
+    "gestureTimeline": "Gesture Timeline",
+    "addGesture": "+ Log Gesture",
+    "addWord": "+ Log Word",
+    "wordBurst": "Word Burst",
+    "bridgeViz": "Development Bridge",
     "earlyWarning": "Early Warning",
-    "overdueAlert": "Some milestones are overdue. Consider professional review.",
-    "bridgeViz": "Communication Bridge",
-    "bridge": {
-      "pointing": "Pointing",
-      "jointAttn": "Joint Attn",
-      "words": "Words"
+    "summaryStats": "Summary Stats",
+    "gestureTypes": {
+      "proto_declarative": "Proto-declarative (showing)",
+      "proto_imperative": "Proto-imperative (requesting)",
+      "social": "Social / Showing"
     },
-    "wordContext": {
-      "spontaneous": "Spontaneous",
-      "elicited": "Elicited"
+    "initiator": {
+      "baby": "Baby",
+      "caregiver": "Caregiver"
     },
-    "logGesture": "Log Gesture",
-    "logWord": "Log Word",
-    "word": {
-      "word": "Word"
+    "jointAttention": {
+      "yes": "Joint attention observed",
+      "no": "No joint attention"
     },
     "context": "Context",
+    "objectPointed": "Object pointed at",
+    "notes": "Notes (optional)",
+    "save": "Save",
     "cancel": "Cancel",
-    "save": "Save"
+    "noGestures": "No gesture entries yet",
+    "noWords": "No word entries yet",
+    "weeklyGestures": "Weekly Gestures",
+    "jointAttentionRatio": "Joint Attention Ratio",
+    "wordsThisMonth": "Words This Month",
+    "alert9mo": {
+      "title": "9-Month Alert",
+      "body": "No pointing gestures logged yet. Most babies show pointing by 9 months. Consider professional review."
+    },
+    "alert12mo": {
+      "title": "12-Month Alert",
+      "body": "No joint attention observed yet. Joint attention typically emerges by 12 months. Consider professional review."
+    },
+    "word": {
+      "word": "Word",
+      "date": "Date",
+      "context": "Context",
+      "gestureRichness": "Gesture Richness Score"
+    },
+    "bridgeChart": {
+      "gestureLine": "Gesture Count",
+      "wordMarkers": "Word Emergence"
+    },
+    "gestureRichnessScore": "Gesture Richness Score",
+    "logGesture": "Log Gesture",
+    "logWord": "Log Word",
+    "spontaneous": "Spontaneous",
+    "elicited": "Elicited"
   },
   "gravityFeeding": {
     "title": "Gravity-Assisted Feeding",
@@ -2676,7 +2709,8 @@
       "Silent",
       "Very quiet",
       "Quiet"
-    ]
+    ],
+    "rem": "REM"
   },
   "launchChecklist.items.playDevAccount": "Google Play Developer account confirmed",
   "launchChecklist.desc.playDevAccount": "Confirm Google Play Developer account is active",
@@ -5299,63 +5333,6 @@
       "stable": "Stable"
     }
   },
-  "gestureMilestone": {
-    "title": "Gesture Bridge",
-    "greeting": "Development",
-    "gestureTimeline": "Gesture Timeline",
-    "addGesture": "+ Log Gesture",
-    "addWord": "+ Log Word",
-    "wordBurst": "Word Burst",
-    "bridgeViz": "Development Bridge",
-    "earlyWarning": "Early Warning",
-    "summaryStats": "Summary Stats",
-    "gestureTypes": {
-      "proto_declarative": "Proto-declarative (showing)",
-      "proto_imperative": "Proto-imperative (requesting)",
-      "social": "Social / Showing"
-    },
-    "initiator": {
-      "baby": "Baby",
-      "caregiver": "Caregiver"
-    },
-    "jointAttention": {
-      "yes": "Joint attention observed",
-      "no": "No joint attention"
-    },
-    "context": "Context",
-    "objectPointed": "Object pointed at",
-    "notes": "Notes (optional)",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noGestures": "No gesture entries yet",
-    "noWords": "No word entries yet",
-    "weeklyGestures": "Weekly Gestures",
-    "jointAttentionRatio": "Joint Attention Ratio",
-    "wordsThisMonth": "Words This Month",
-    "alert9mo": {
-      "title": "9-Month Alert",
-      "body": "No pointing gestures logged yet. Most babies show pointing by 9 months. Consider professional review."
-    },
-    "alert12mo": {
-      "title": "12-Month Alert",
-      "body": "No joint attention observed yet. Joint attention typically emerges by 12 months. Consider professional review."
-    },
-    "word": {
-      "word": "Word",
-      "date": "Date",
-      "context": "Context",
-      "gestureRichness": "Gesture Richness Score"
-    },
-    "bridgeChart": {
-      "gestureLine": "Gesture Count",
-      "wordMarkers": "Word Emergence"
-    },
-    "gestureRichnessScore": "Gesture Richness Score",
-    "logGesture": "Log Gesture",
-    "logWord": "Log Word",
-    "spontaneous": "Spontaneous",
-    "elicited": "Elicited"
-  },
   "autonomicReadiness": {
     "title": "Autonomic Readiness",
     "subtitle": "Track your baby's autonomic nervous system maturation",
@@ -5494,15 +5471,15 @@
   "sleepArchitecture.noiseLevels.moderate": "Moderate",
   "sleepArchitecture.noiseLevels.noisy": "Noisy",
   "diaperCream.label.location.diaper_area": "Diaper Area",
-    "diaperCream.label.location.skin_folds": "Skin Folds",
-    "diaperCream.label.location.rash_spots": "Rash Spots",
-    "diaperCream.label.rashType.yeast": "Yeast",
-    "diaperCream.label.rashType.contact": "Contact",
-    "diaperCream.label.rashType.irritant": "Irritant",
-    "diaperCream.label.severity.mild": "Mild",
-    "diaperCream.label.severity.moderate": "Moderate",
-    "diaperCream.label.severity.severe": "Severe",
-    "interoceptive.label.needOptions.feed": "Feed",
+  "diaperCream.label.location.skin_folds": "Skin Folds",
+  "diaperCream.label.location.rash_spots": "Rash Spots",
+  "diaperCream.label.rashType.yeast": "Yeast",
+  "diaperCream.label.rashType.contact": "Contact",
+  "diaperCream.label.rashType.irritant": "Irritant",
+  "diaperCream.label.severity.mild": "Mild",
+  "diaperCream.label.severity.moderate": "Moderate",
+  "diaperCream.label.severity.severe": "Severe",
+  "interoceptive.label.needOptions.feed": "Feed",
   "interoceptive.label.needOptions.diaper": "Diaper",
   "interoceptive.label.needOptions.sleep": "Sleep",
   "interoceptive.label.needOptions.comfort": "Comfort",

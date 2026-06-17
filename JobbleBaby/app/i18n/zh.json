@@ -79,28 +79,61 @@
     "diaperCream": "尿布膏"
   },
   "gestureMilestone": {
-    "title": "手勢里程碑",
-    "greeting": "溝通橋樑",
-    "earlyWarning": "預警",
-    "overdueAlert": "部分里程碑已逾期。建議諮詢專業人士。",
-    "bridgeViz": "溝通橋樑",
-    "bridge": {
-      "pointing": "指向",
-      "jointAttn": "共同注意",
-      "words": "詞語"
+    "title": "手势桥梁",
+    "greeting": "发育",
+    "gestureTimeline": "手势时间线",
+    "addGesture": "+ 记录手势",
+    "addWord": "+ 记录词语",
+    "wordBurst": "词汇爆发",
+    "bridgeViz": "发育桥梁",
+    "earlyWarning": "预警",
+    "summaryStats": "统计摘要",
+    "gestureTypes": {
+      "proto_declarative": "陈述性手势（展示）",
+      "proto_imperative": "指令性手势（请求）",
+      "social": "社交性手势"
     },
-    "wordContext": {
-      "spontaneous": "自發性",
-      "elicited": "誘發性"
+    "initiator": {
+      "baby": "宝宝",
+      "caregiver": "照料者"
     },
-    "logGesture": "記錄手勢",
-    "logWord": "記錄詞語",
-    "word": {
-      "word": "詞語"
+    "jointAttention": {
+      "yes": "观察到共同注意",
+      "no": "未观察到共同注意"
     },
-    "context": "語境",
+    "context": "情境",
+    "objectPointed": "指向的物体",
+    "notes": "备注（可选）",
+    "save": "保存",
     "cancel": "取消",
-    "save": "儲存"
+    "noGestures": "暂无手势记录",
+    "noWords": "暂无词语记录",
+    "weeklyGestures": "每周手势数",
+    "jointAttentionRatio": "共同注意比例",
+    "wordsThisMonth": "本月新词",
+    "alert9mo": {
+      "title": "9月龄预警",
+      "body": "尚未记录任何指向性手势。大多数宝宝在9月龄前已出现指向手势。建议咨询专业人士。"
+    },
+    "alert12mo": {
+      "title": "12月龄预警",
+      "body": "尚未观察到共同注意。共同注意通常在12月龄前出现。建议咨询专业人士。"
+    },
+    "word": {
+      "word": "词语",
+      "date": "日期",
+      "context": "情境",
+      "gestureRichness": "手势丰富度评分"
+    },
+    "bridgeChart": {
+      "gestureLine": "手势计数",
+      "wordMarkers": "词语出现"
+    },
+    "gestureRichnessScore": "手势丰富度评分",
+    "logGesture": "记录手势",
+    "logWord": "记录词语",
+    "spontaneous": "自發性",
+    "elicited": "誘發性"
   },
   "gravityFeeding": {
     "title": "重力輔助餵養",
@@ -2676,7 +2709,8 @@
       "寂靜",
       "非常安靜",
       "安靜"
-    ]
+    ],
+    "rem": "快速眼動"
   },
   "launchChecklist.items.playDevAccount": "Google Play 開發者帳戶已確認",
   "launchChecklist.desc.playDevAccount": "確認 Google Play 開發者帳戶已啟用",
@@ -5299,63 +5333,6 @@
       "stable": "穩定"
     }
   },
-  "gestureMilestone": {
-    "title": "手势桥梁",
-    "greeting": "发育",
-    "gestureTimeline": "手势时间线",
-    "addGesture": "+ 记录手势",
-    "addWord": "+ 记录词语",
-    "wordBurst": "词汇爆发",
-    "bridgeViz": "发育桥梁",
-    "earlyWarning": "预警",
-    "summaryStats": "统计摘要",
-    "gestureTypes": {
-      "proto_declarative": "陈述性手势（展示）",
-      "proto_imperative": "指令性手势（请求）",
-      "social": "社交性手势"
-    },
-    "initiator": {
-      "baby": "宝宝",
-      "caregiver": "照料者"
-    },
-    "jointAttention": {
-      "yes": "观察到共同注意",
-      "no": "未观察到共同注意"
-    },
-    "context": "情境",
-    "objectPointed": "指向的物体",
-    "notes": "备注（可选）",
-    "save": "保存",
-    "cancel": "取消",
-    "noGestures": "暂无手势记录",
-    "noWords": "暂无词语记录",
-    "weeklyGestures": "每周手势数",
-    "jointAttentionRatio": "共同注意比例",
-    "wordsThisMonth": "本月新词",
-    "alert9mo": {
-      "title": "9月龄预警",
-      "body": "尚未记录任何指向性手势。大多数宝宝在9月龄前已出现指向手势。建议咨询专业人士。"
-    },
-    "alert12mo": {
-      "title": "12月龄预警",
-      "body": "尚未观察到共同注意。共同注意通常在12月龄前出现。建议咨询专业人士。"
-    },
-    "word": {
-      "word": "词语",
-      "date": "日期",
-      "context": "情境",
-      "gestureRichness": "手势丰富度评分"
-    },
-    "bridgeChart": {
-      "gestureLine": "手势计数",
-      "wordMarkers": "词语出现"
-    },
-    "gestureRichnessScore": "手势丰富度评分",
-    "logGesture": "记录手势",
-    "logWord": "记录词语",
-    "spontaneous": "自發性",
-    "elicited": "誘發性"
-  },
   "autonomicReadiness": {
     "title": "自主神經準備度",
     "subtitle": "追蹤寶寶自主神經系統發育",
@@ -5494,15 +5471,15 @@
   "sleepArchitecture.noiseLevels.moderate": "[TODO]",
   "sleepArchitecture.noiseLevels.noisy": "[TODO]",
   "diaperCream.label.location.diaper_area": "尿布區",
-    "diaperCream.label.location.skin_folds": "皮膚褶皺",
-    "diaperCream.label.location.rash_spots": "疹子位置",
-    "diaperCream.label.rashType.yeast": "酵母菌",
-    "diaperCream.label.rashType.contact": "接觸性",
-    "diaperCream.label.rashType.irritant": "刺激型",
-    "diaperCream.label.severity.mild": "輕微",
-    "diaperCream.label.severity.moderate": "中等",
-    "diaperCream.label.severity.severe": "嚴重",
-    "interoceptive.label.needOptions.feed": "餵奶",
+  "diaperCream.label.location.skin_folds": "皮膚褶皺",
+  "diaperCream.label.location.rash_spots": "疹子位置",
+  "diaperCream.label.rashType.yeast": "酵母菌",
+  "diaperCream.label.rashType.contact": "接觸性",
+  "diaperCream.label.rashType.irritant": "刺激型",
+  "diaperCream.label.severity.mild": "輕微",
+  "diaperCream.label.severity.moderate": "中等",
+  "diaperCream.label.severity.severe": "嚴重",
+  "interoceptive.label.needOptions.feed": "餵奶",
   "interoceptive.label.needOptions.diaper": "換尿片",
   "interoceptive.label.needOptions.sleep": "睡眠",
   "interoceptive.label.needOptions.comfort": "安撫",

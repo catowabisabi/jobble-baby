@@ -1,37 +1,55 @@
-FIX: regulatory-fitness.tsx CASCADE_ALERTS hardcoded English messages (painpoint #26)
+# TASK #377 — Fix hardcoded label arrays → i18n (5 tab files)
 
 Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
 
 ## Task
 
-The `CASCADE_ALERTS` array in `app/(tabs)/regulatory-fitness.tsx` (lines 27-30) has hardcoded English user-facing messages:
+Fix hardcoded English label arrays in 5 tab files. Replace with i18n `t()` calls. Add keys to en.json + zh.json.
 
-```
-const CASCADE_ALERTS = [
-  { domain: 'sensory', threshold: 30, message: 'Low sensory score → may affect sleep in 2-3 days' },
-  { domain: 'autonomic', threshold: 30, message: 'Low autonomic score → may increase crying' },
-  { domain: 'motor', threshold: 30, message: 'Low motor score → may affect exploration' },
-  { domain: 'social', threshold: 30, message: 'Low social score → may affect bonding' },
-];
-```
+## Files to Fix
 
-The `message` field is rendered directly in the UI (in `CascadeAlertBanner`). These need i18n.
+### 1. `app/(tabs)/bilateral-coordination.tsx`
+Hardcoded: `['Grasping', 'Kicking', 'Reaching', 'Crawling', 'Waving', 'Clapping', 'Left', 'Right', 'Both/Neither']` (10 items)
+- Find the array
+- Add `ti('bilateral-coordination.label.<key>')` keys to en.json + zh.json
+- Replace with `t('bilateral-coordination.label.<key>')` calls
+- TSC 0 errors
 
-## Steps
+### 2. `app/(tabs)/circadian.tsx`
+Hardcoded: phase labels `['Sleep', 'Feeding', 'Wake']` + fallback/default state labels
+- Find the array
+- Add i18n keys to en.json + zh.json
+- Replace with `t('...')` calls
+- TSC 0 errors
 
-1. Read `app/(tabs)/regulatory-fitness.tsx` — find the CASCADE_ALERTS array and understand how `message` is used in JSX
-2. Read `app/i18n/en.json` — find `regulatoryFitness` section (grep "regulatoryFitness")
-3. Read `app/i18n/zh.json` — find same section
-4. Add i18n keys under `regulatoryFitness.cascadeAlert.*` for each domain message in both en.json and zh.json
-5. Refactor CASCADE_ALERTS to use `messageKey` instead of `message` (e.g., `messageKey: 'regulatoryFitness.cascadeAlert.sensory'`)
-6. Update the JSX that renders `alert.message` to use `t(alert.messageKey)` instead
-7. Run `cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && npx tsc --noEmit` — must pass with 0 errors
-8. Run `cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && node scripts/pre-submission-audit.js` — must PASS
+### 3. `app/(tabs)/colic-relief.tsx`
+Hardcoded: `['Bicycle Legs', 'Belly Massage', 'Warm Compress', 'Gripe Water', 'Probiotic Drops']` (5 items)
+- Find the array
+- Add i18n keys to en.json + zh.json
+- Replace with `t('...')` calls
+- TSC 0 errors
 
-## Rules
-- Only touch files related to this fix
-- Do NOT change the threshold values or domain names
-- The `message` field in CASCADE_ALERTS objects should be replaced with `messageKey`
-- Use the `t()` hook from `useLanguage()` just like the rest of the file
+### 4. `app/(tabs)/caregiver-fatigue.tsx`
+Hardcoded: `['Feeding', 'Sleep', 'Diaper', 'Medicine', 'Appointments', 'Playtime', 'Bathing', 'Travel']` (8 items)
+- Find the array
+- Add i18n keys to en.json + zh.json
+- Replace with `t('...')` calls
+- TSC 0 errors
 
-**DONE ULW**
+### 5. `app/(tabs)/asymmetric-growth.tsx`
+Hardcoded: `['Normal', 'Mild', 'Moderate', 'Significant']` (4 items)
+- Find the array
+- Add i18n keys to en.json + zh.json
+- Replace with `t('...')` calls
+- TSC 0 errors
+
+## Verification
+1. `npx tsc --noEmit` → 0 errors
+2. All user-facing labels now use i18n `t()` calls
+3. No hardcoded English strings remain in these 5 files
+
+## Pattern
+Look at existing `ti()` or `t()` picker/array patterns in the codebase. Use same naming convention.
+
+Keywords: colic_diurnal_variation_index, island_rule, witch hazel_safe_dilution
+ULW

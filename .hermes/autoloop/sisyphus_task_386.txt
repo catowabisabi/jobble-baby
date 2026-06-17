@@ -1,0 +1,101 @@
+Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+
+## Task
+
+Fix hardcoded user-visible string arrays in 5 tab files → convert to i18n using `t()` helper.
+
+### File 1: bilateral-coordination.tsx
+Lines 37-46 — 10 hardcoded activity labels in ACTIVITY_OPTIONS array:
+```
+{ key: 'grasping', label: 'Grasping' },
+{ key: 'kicking', label: 'Kicking' },
+{ key: 'reaching', label: 'Reaching' },
+{ key: 'crawling', label: 'Crawling' },
+{ key: 'waving', label: 'Waving' },
+{ key: 'clapping', label: 'Clapping' },
+{ key: 'left', label: 'Left' },
+{ key: 'right', label: 'Right' },
+{ key: 'both', label: 'Both' },
+{ key: 'neither', label: 'Neither' },
+```
+Add key `bilateral-coordination.activityOptions` with 10 sub-keys to en.json + zh.json.
+Convert each `label:` to use `t('bilateral-coordination.activityOptions.grasping')` etc.
+Use the existing `t()` pattern already used in this file (e.g., `t('bilateral-coordination.title')`).
+
+### File 2: circadian.tsx
+Lines 68, 71, 73, 92 — 4 phase labels in `getOptimalWakeWindow()` and `useState`:
+```
+{ label: 'Sleep', color: '#3B82F6', minutesRemaining: 0, nextPhase: 'Feeding' }
+{ label: 'Feeding', color: '#F59E0B', minutesRemaining: 0, nextPhase: 'Wake' }
+{ label: 'Wake', color: '#EF4444', minutesRemaining: 0, nextPhase: 'Sleep' }
+```
+Add keys `circadian.phase.sleep`, `circadian.phase.feeding`, `circadian.phase.wake` to en.json + zh.json.
+Also add keys for `nextPhase` values: `circadian.nextPhase.feeding`, `circadian.nextPhase.wake`, `circadian.nextPhase.sleep`.
+
+### File 3: colic-relief.tsx
+Lines 26-30 — 5 technique labels in TECHNIQUE_OPTIONS:
+```
+{ id: 'bicycle', label: 'Bicycle Legs', icon: '🫠' },
+{ id: 'massage', label: 'Belly Massage', icon: '🤚' },
+{ id: 'warm', label: 'Warm Compress', icon: '🌡️' },
+{ id: 'gripe', label: 'Gripe Water', icon: '💧' },
+{ id: 'probiotic', label: 'Probiotic Drops', icon: '🦠' },
+```
+Add key `colicRelief.techniqueOptions` with 5 sub-keys to en.json + zh.json.
+Convert each `label:` to use `t('colicRelief.techniqueOptions.bicycle')` etc.
+Icon emojis can remain hardcoded (not i18n'd).
+
+### File 4: caregiver-fatigue.tsx
+Lines 53-60 — 8 activity labels in ACTIVITY_ESTIMATES array:
+```
+{ id: '1', label: 'Feeding', estimatedHours: 3 },
+{ id: '2', label: 'Sleep', estimatedHours: 2 },
+{ id: '3', label: 'Diaper', estimatedHours: 1 },
+{ id: '4', label: 'Medicine', estimatedHours: 0.5 },
+{ id: '5', label: 'Appointments', estimatedHours: 1 },
+{ id: '6', label: 'Playtime', estimatedHours: 2 },
+{ id: '7', label: 'Bathing', estimatedHours: 0.5 },
+{ id: '8', label: 'Travel', estimatedHours: 1 },
+```
+Add key `caregiverFatigue.activityEstimates` with 8 sub-keys to en.json + zh.json.
+Convert each `label:` to use `t('caregiverFatigue.activityEstimates.feeding')` etc.
+
+### File 5: asymmetric-growth.tsx
+Lines 42-45 — 4 severity labels in `getSeverity()`:
+```
+if (pct < 5) return { label: 'Normal', color: '#16A34A', bgColor: '#DCFCE7' };
+if (pct < 10) return { label: 'Mild', color: '#CA8A04', bgColor: '#FEF9C3' };
+if (pct < 15) return { label: 'Moderate', color: '#EA580C', bgColor: '#FFEDD5' };
+return { label: 'Significant', color: '#DC2626', bgColor: '#FEE2E2' };
+```
+Add keys `asymmetric.severity.normal`, `mild`, `moderate`, `significant` to en.json + zh.json.
+Colors (`#16A34A` etc.) are NOT i18n'd — keep as-is.
+
+### i18n Pattern
+Follow existing i18n structure in en.json/zh.json. For compound keys use dot notation:
+```json
+"bilateral-coordination": {
+  "activityOptions": {
+    "grasping": "Grasping",
+    "kicking": "Kicking",
+    ...
+  }
+}
+```
+
+For zh.json, use Traditional Chinese:
+```json
+"bilateral-coordination": {
+  "activityOptions": {
+    "grasping": "抓握",
+    "kicking": "踢腿",
+    ...
+  }
+}
+```
+
+### Verification
+After each file change, run: `npx tsc --noEmit`
+Must show 0 errors. Fix any TypeScript errors before proceeding to next file.
+
+**DONE ULW**

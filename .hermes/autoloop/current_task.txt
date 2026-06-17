@@ -1,9 +1,11 @@
-# Cycle 385 — HERMES REVIEW CYCLE
-# Date: 2026-06-17 00:06 HKT
-# Status: IDLE — no pending todos. Codebase clean.
+# Cycle 386 — HERMES REVIEW CYCLE
+# Date: 2026-06-17 01:01 HKT
+# Status: Dispatched #386 to Sisyphus (5 tab files hardcoded label arrays → i18n)
+# Painpoint: #27 FIXED (gestureMilestone i18n keys added to en.json + zh.json)
+# Painpoint: #26 PENDING (5 tab files still need i18n — same as #386)
 # TSC: 0 errors
-# Commits: 331b191 → pushed (cycle 383 verification)
-# Painpoints: All resolved
-# Ideas: #81 (Co-regulation Resonance, draft), #82 (Suckle-to-Chew Bridge, draft)
-# Remaining: User actions only — EAS credentials, App Store/Play Console setup, privacy policy URL
-# No Sisyphus dispatch this cycle — nothing pending.
+# Commit: 25dc6b2 → pushed
+# Note: gestureMilestone.tsx t() calls had no matching keys in i18n files.
+#       Added overdueAlert, bridge.pointing/jointAttn/words, wordContext.spontaneous/elicited.
+#       Dispatched #386 to fix remaining 5 tab files (bilateral-coordination, circadian,
+#       colic-relief, caregiver-fatigue, asymmetric-growth).

@@ -2073,7 +2073,17 @@
     "exhaustionAlertTitle": "需要支援",
     "exhaustionAlertBody": "你的心理韌性分數已連續5天低於40分。考慮尋求外界支援。",
     "badgeName": "心理韌性大師",
-    "badgeDesc": "連續7天保持心理韌性分數高於80%"
+    "badgeDesc": "連續7天保持心理韌性分數高於80%",
+    "activityEstimates": {
+      "feeding": "餵奶",
+      "sleep": "睡眠",
+      "diaper": "換尿片",
+      "medicine": "餵藥",
+      "appointments": "預約",
+      "playtime": "遊戲時間",
+      "bathing": "洗澡",
+      "travel": "出行"
+    }
   },
   "colicRelief": {
     "cryingPatternTracker": "哭聲模式追蹤",
@@ -2133,7 +2143,14 @@
     "tabWhiteNoise": "白噪音",
     "error": "錯誤",
     "enterDuration": "請輸入時長",
-    "logged": "已記錄"
+    "logged": "已記錄",
+    "techniqueOptions": {
+      "bicycle": "腳踏單車",
+      "massage": "腹部按摩",
+      "warm": "溫熱敷",
+      "gripe": "口服驅風劑",
+      "probiotic": "益生菌滴劑"
+    }
   },
   "feedingReadiness": {
     "title": "加固準備",
@@ -2942,6 +2959,12 @@
       "leg": "腿部",
       "foot": "腳",
       "hand": "手"
+    },
+    "severity": {
+      "normal": "正常",
+      "mild": "輕微",
+      "moderate": "中等",
+      "significant": "顯著"
     }
   },
   "jaundiceThreshold": {
@@ -4881,7 +4904,17 @@
     "startTummyTime": "[Starttummytime]",
     "timerRunning": "[Timerrunning]",
     "tummyTime": "[Tummytime]",
-    "wakeWindow": "[Wakewindow]"
+    "wakeWindow": "[Wakewindow]",
+    "phase": {
+      "sleep": "睡眠",
+      "feeding": "餵奶",
+      "wake": "清醒"
+    },
+    "nextPhase": {
+      "sleep": "餵奶",
+      "feeding": "清醒",
+      "wake": "睡眠"
+    }
   },
   "regulatoryFitness": {
     "dataRequired": "需要至少2天數據才能顯示趨勢",
@@ -5508,5 +5541,15 @@
   "interoceptive.label.emotionalValences.neutral": "中性",
   "interoceptive.label.gameTypes.hot_cold_belly": "冷熱肚皮",
   "interoceptive.label.gameTypes.belly_breathing_buddy": "肚皮呼吸伙伴",
-  "interoceptive.label.gameTypes.body_part_point": "身體部位指向"
+  "interoceptive.label.gameTypes.body_part_point": "身體部位指向",
+  "bilateral-coordination": {
+    "activityOptions": {
+      "grasping": "抓握",
+      "kicking": "踢腿",
+      "reaching": "伸手",
+      "crawling": "爬行",
+      "waving": "揮手",
+      "clapping": "拍手"
+    }
+  }
 }

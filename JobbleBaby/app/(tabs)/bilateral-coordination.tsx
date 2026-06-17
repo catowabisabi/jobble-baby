@@ -33,15 +33,6 @@ const HEMISPHERE_MILESTONES = [
   { activity: 'self-feeding', minAge: 7, maxAge: 12, icon: 'food-fork-drink' },
 ];
 
-const MOVEMENT_TYPES = [
-  { key: 'grasping', label: 'Grasping', icon: 'hand-back-left' },
-  { key: 'kicking', label: 'Kicking', icon: 'foot-print' },
-  { key: 'reaching', label: 'Reaching', icon: 'arm-flex' },
-  { key: 'crawling', label: 'Crawling', icon: 'walk' },
-  { key: 'waving', label: 'Waving', icon: 'hand-wave' },
-  { key: 'clapping', label: 'Clapping', icon: 'hand-clap' },
-];
-
 const HAND_FOOT_OPTIONS = [
   { value: 'left', label: 'Left' },
   { value: 'right', label: 'Right' },
@@ -52,6 +43,15 @@ export default function BilateralCoordinationScreen() {
   const { t } = useLanguage();
   const { effectiveTheme } = useTheme();
   const C = COLORS[effectiveTheme] || COLORS.light;
+
+  const MOVEMENT_TYPES = [
+    { key: 'grasping', label: t('bilateral-coordination.activityOptions.grasping'), icon: 'hand-back-left' },
+    { key: 'kicking', label: t('bilateral-coordination.activityOptions.kicking'), icon: 'foot-print' },
+    { key: 'reaching', label: t('bilateral-coordination.activityOptions.reaching'), icon: 'arm-flex' },
+    { key: 'crawling', label: t('bilateral-coordination.activityOptions.crawling'), icon: 'walk' },
+    { key: 'waving', label: t('bilateral-coordination.activityOptions.waving'), icon: 'hand-wave' },
+    { key: 'clapping', label: t('bilateral-coordination.activityOptions.clapping'), icon: 'hand-clap' },
+  ];
 
   const [bilateralLog, setBilateralLog] = useState<BilateralEntry[]>([]);
   const [scores, setScores] = useState<CoordinationScore[]>([]);

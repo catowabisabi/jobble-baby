@@ -95,7 +95,16 @@ export default function CaregiverFatigueScreen() {
   const { t } = useLanguage();
   const [survey, setSurvey] = useState<CaregiverSurvey | null>(null);
   const [dailyLogs, setDailyLogs] = useState<DailyCheckIn[]>([]);
-  const [mentalLoadTasks, setMentalLoadTasks] = useState<MentalLoadTask[]>(DEFAULT_MENTAL_LOAD_TASKS);
+  const [mentalLoadTasks, setMentalLoadTasks] = useState<MentalLoadTask[]>([
+    { id: '1', label: t('caregiverFatigue.activityEstimates.feeding'), estimatedHours: 3 },
+    { id: '2', label: t('caregiverFatigue.activityEstimates.sleep'), estimatedHours: 2 },
+    { id: '3', label: t('caregiverFatigue.activityEstimates.diaper'), estimatedHours: 1 },
+    { id: '4', label: t('caregiverFatigue.activityEstimates.medicine'), estimatedHours: 0.5 },
+    { id: '5', label: t('caregiverFatigue.activityEstimates.appointments'), estimatedHours: 1 },
+    { id: '6', label: t('caregiverFatigue.activityEstimates.playtime'), estimatedHours: 2 },
+    { id: '7', label: t('caregiverFatigue.activityEstimates.bathing'), estimatedHours: 0.5 },
+    { id: '8', label: t('caregiverFatigue.activityEstimates.travel'), estimatedHours: 1 },
+  ]);
   const [respiteGoal, setRespiteGoal] = useState<RespiteGoal>({ weeklyHoursGoal: 2, totalWeeks: 0 });
   const [resilienceScore, setResilienceScore] = useState<ResilienceScore>({
     currentScore: 50,

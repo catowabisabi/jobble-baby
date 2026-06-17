@@ -2073,7 +2073,17 @@
     "exhaustionAlertTitle": "Support Needed",
     "exhaustionAlertBody": "Your resilience score has been below 40 for 5+ days. Consider reaching out for support.",
     "badgeName": "Resilience Champion",
-    "badgeDesc": "Maintained resilience score > 80% for 7 consecutive days"
+    "badgeDesc": "Maintained resilience score > 80% for 7 consecutive days",
+    "activityEstimates": {
+      "feeding": "Feeding",
+      "sleep": "Sleep",
+      "diaper": "Diaper",
+      "medicine": "Medicine",
+      "appointments": "Appointments",
+      "playtime": "Playtime",
+      "bathing": "Bathing",
+      "travel": "Travel"
+    }
   },
   "colicRelief": {
     "cryingPatternTracker": "Crying Pattern Tracker",
@@ -2133,7 +2143,14 @@
     "tabWhiteNoise": "White Noise",
     "error": "Error",
     "enterDuration": "Please enter a duration",
-    "logged": "Logged"
+    "logged": "Logged",
+    "techniqueOptions": {
+      "bicycle": "Bicycle Legs",
+      "massage": "Belly Massage",
+      "warm": "Warm Compress",
+      "gripe": "Gripe Water",
+      "probiotic": "Probiotic Drops"
+    }
   },
   "feedingReadiness": {
     "title": "Feeding Readiness",
@@ -2942,6 +2959,12 @@
       "leg": "Leg",
       "foot": "Foot",
       "hand": "Hand"
+    },
+    "severity": {
+      "normal": "Normal",
+      "mild": "Mild",
+      "moderate": "Moderate",
+      "significant": "Significant"
     }
   },
   "jaundiceThreshold": {
@@ -4881,7 +4904,17 @@
     "startTummyTime": "Starttummytime",
     "timerRunning": "Timerrunning",
     "tummyTime": "Tummytime",
-    "wakeWindow": "Wakewindow"
+    "wakeWindow": "Wakewindow",
+    "phase": {
+      "sleep": "Sleep",
+      "feeding": "Feeding",
+      "wake": "Wake"
+    },
+    "nextPhase": {
+      "sleep": "Feeding",
+      "feeding": "Wake",
+      "wake": "Sleep"
+    }
   },
   "regulatoryFitness": {
     "dataRequired": "Need at least 2 days of data for trend",
@@ -5508,5 +5541,15 @@
   "interoceptive.label.emotionalValences.neutral": "Neutral",
   "interoceptive.label.gameTypes.hot_cold_belly": "Hot/Cold Belly",
   "interoceptive.label.gameTypes.belly_breathing_buddy": "Belly Breathing Buddy",
-  "interoceptive.label.gameTypes.body_part_point": "Body Part Point"
+  "interoceptive.label.gameTypes.body_part_point": "Body Part Point",
+  "bilateral-coordination": {
+    "activityOptions": {
+      "grasping": "Grasping",
+      "kicking": "Kicking",
+      "reaching": "Reaching",
+      "crawling": "Crawling",
+      "waving": "Waving",
+      "clapping": "Clapping"
+    }
+  }
 }

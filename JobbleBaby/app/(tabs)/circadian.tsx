@@ -62,15 +62,15 @@ function getOptimalWakeWindow(days: number): number {
   return 150; // 30+ weeks: ~2.5hr
 }
 
-function getCurrentPhase(hour: number): PhaseInfo {
+function getCurrentPhase(hour: number, t: (key: string) => string): PhaseInfo {
   // Simple phase model: sleep (10pm-6am), feeding (6am-10am, 2pm-4pm), wake (rest)
   if (hour >= 22 || hour < 6) {
-    return { label: 'Sleep', color: '#3B82F6', minutesRemaining: 0, nextPhase: 'Feeding' };
+    return { label: t('circadian.phase.sleep'), color: '#3B82F6', minutesRemaining: 0, nextPhase: t('circadian.nextPhase.sleep') };
   }
   if ((hour >= 6 && hour < 10) || (hour >= 14 && hour < 16)) {
-    return { label: 'Feeding', color: '#F59E0B', minutesRemaining: 0, nextPhase: 'Wake' };
+    return { label: t('circadian.phase.feeding'), color: '#F59E0B', minutesRemaining: 0, nextPhase: t('circadian.nextPhase.feeding') };
   }
-  return { label: 'Wake', color: '#EF4444', minutesRemaining: 0, nextPhase: 'Sleep' };
+  return { label: t('circadian.phase.wake'), color: '#EF4444', minutesRemaining: 0, nextPhase: t('circadian.nextPhase.wake') };
 }
 
 function getShiftColor(shift: CaregiverShift): string {
@@ -89,7 +89,7 @@ export default function CircadianScreen() {
   const [babyProfile, setBabyProfile] = useState<BabyProfile | null>(null);
   const [tummyTimeEntries, setTummyTimeEntries] = useState<TummyTimeEntry[]>([]);
   const [scheduleEntries, setScheduleEntries] = useState<ScheduleEntry[]>([]);
-  const [phaseInfo, setPhaseInfo] = useState<PhaseInfo>({ label: 'Wake', color: '#EF4444', minutesRemaining: 0, nextPhase: 'Sleep' });
+  const [phaseInfo, setPhaseInfo] = useState<PhaseInfo>({ label: t('circadian.phase.wake'), color: '#EF4444', minutesRemaining: 0, nextPhase: t('circadian.nextPhase.wake') });
   const [isTummyTimerRunning, setIsTummyTimerRunning] = useState(false);
   const [tummyStartTime, setTummyStartTime] = useState<Date | null>(null);
 
@@ -127,7 +127,7 @@ export default function CircadianScreen() {
     const updatePhase = () => {
       const now = new Date();
       const hour = now.getHours();
-      const phase = getCurrentPhase(hour);
+      const phase = getCurrentPhase(hour, t);
       setPhaseInfo(phase);
     };
     updatePhase();

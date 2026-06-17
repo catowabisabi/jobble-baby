@@ -38,11 +38,11 @@ function calcAsymmetry(left: number, right: number): number {
   return Math.abs(left - right) / ((left + right) / 2) * 100;
 }
 
-function asymmetryLabel(pct: number): { label: string; color: string; bgColor: string } {
-  if (pct < 5) return { label: 'Normal', color: '#16A34A', bgColor: '#DCFCE7' };
-  if (pct < 10) return { label: 'Mild', color: '#CA8A04', bgColor: '#FEF9C3' };
-  if (pct < 15) return { label: 'Moderate', color: '#EA580C', bgColor: '#FFEDD5' };
-  return { label: 'Significant', color: '#DC2626', bgColor: '#FEE2E2' };
+function asymmetryLabel(pct: number, t: (key: string) => string): { label: string; color: string; bgColor: string } {
+  if (pct < 5) return { label: t('asymmetric.severity.normal'), color: '#16A34A', bgColor: '#DCFCE7' };
+  if (pct < 10) return { label: t('asymmetric.severity.mild'), color: '#CA8A04', bgColor: '#FEF9C3' };
+  if (pct < 15) return { label: t('asymmetric.severity.moderate'), color: '#EA580C', bgColor: '#FFEDD5' };
+  return { label: t('asymmetric.severity.significant'), color: '#DC2626', bgColor: '#FEE2E2' };
 }
 
 function getBodyPartLabel(t: (key: string) => string, part: BodyPart): string {
@@ -137,7 +137,7 @@ export default function AsymmetricGrowthScreen() {
             {BODY_PARTS.map(part => {
               const latest = latestForPart(part);
               const pct = latest ? calcAsymmetry(latest.leftValue, latest.rightValue) : null;
-              const level = pct !== null ? asymmetryLabel(pct) : null;
+              const level = pct !== null ? asymmetryLabel(pct, t) : null;
               return (
                 <TouchableOpacity
                   key={part}
@@ -259,7 +259,7 @@ export default function AsymmetricGrowthScreen() {
               .slice(0, 20)
               .map(entry => {
                 const pct = calcAsymmetry(entry.leftValue, entry.rightValue);
-                const level = asymmetryLabel(pct);
+                const level = asymmetryLabel(pct, t);
                 return (
                   <View key={entry.id} style={styles.historyRow}>
                     <View>

@@ -1,6 +1,7 @@
-🍼 Jobble Baby · 13:01
-✅ Done: #384 a11y 4 component files (AllergenDetailModal, ReactionLogModal, EmergencySOSScreen, MonitorWidget)
-🔧 Dispatched: #385 a11y 3 screen files (DaycareViewScreen, FeedingTimerScreen, OnboardingScreen)
+🍼 Jobble Baby · 14:14
+✅ Done: #385 Fix a11y gaps (DaycareView, FeedingTimer, Onboarding)
+✅ Done: #414 i18n structural fix (1774+1787 orphaned keys removed)
+🔧 Dispatched: —
 📋 TODO: 0 pending · 0 new
-📦 Commit: b4ac4fd → pushed
-📝 Desc: 完成 4 個 component 嘅 accessibilityLabel gaps。i18n keys 已加入 en.json + zh.json。派新 task #385 修復 3 個 screen files (DaycareViewScreen, FeedingTimerScreen, OnboardingScreen)。
+📦 Commit: a88e3ca → pushed
+📝 Desc: 所有 audit checks PASS。i18n corruption 已修復（orphan dotted keys removed）。Queue 清空，項目已準備好可以 submit。但需要用戶提供 EAS credentials、App Store/Play Console 創建、privacy policy URL 先可以行 build。

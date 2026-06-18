@@ -1,0 +1,40 @@
+# Sisyphus Task — Cycle 401
+# Priority: P1 (user-intention gap, high value)
+# Project: Jobble Baby
+
+Implement Emergency SOS / Panic Mode Tab.
+
+File: app/(tabs)/emergency-sos.tsx
+
+Features:
+1. Panic Mode Activation — full-screen red panic button, one-tap activation
+2. 4-7-8 Breathing Exercise — visual breathing guide: inhale 4s, hold 7s, exhale 8s, repeat 4 cycles, animated circle
+3. Safe Space Checklist — interactive checklist: baby secured, sharp objects removed, floor clear, door locked, emergency contacts visible (5 items)
+4. Emergency Contacts Quick-Dial — 3 preset contacts (doctor, hospital, spouse) with one-tap tel: links
+5. Calm-Down Timer — 5-minute guided session timer with visual countdown and gentle color transitions
+6. Post-Crisis Summary — logs SOS event with timestamp, duration, triggers selected from checklist
+
+Data model:
+- @jobble/sos_events: { id, date, triggered, duration_sec, checklist_completed, triggers, breathing_cycles, timestamp }
+  - triggered: boolean
+  - checklist_completed: boolean
+  - triggers: JSON array of checklist item names
+  - breathing_cycles: number completed
+
+Requirements:
+- Use SafeStorage (safeGetItem/safeSetItem) — NOT raw AsyncStorage
+- Register in app/(tabs)/_layout.tsx as Tabs.Screen name="emergency-sos"
+- Add i18n keys under "emergencySos" namespace in app/i18n/en.json and app/i18n/zh.json
+- TSC: cd JobbleBaby && npx tsc --noEmit must pass 0 errors
+- Reference: stress-cascade.tsx for existing panic/anxiety UI patterns
+- No hardcoded user-facing strings (all through i18n)
+- accessibilityLabel on all TouchableOpacity elements
+- Dark-theme-first design matching stress-cascade aesthetic
+
+After implementation:
+- TSC 0 errors
+- Tab registered and accessible
+- No raw AsyncStorage
+
+**DONE ULW**
+Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby

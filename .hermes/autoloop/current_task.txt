@@ -1,34 +1,31 @@
-# Cycle 404 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-18 15:12 HKT
-# Status: Sisyphus RUNNING on Task 401 (Emergency SOS) — dispatch pane, exploration phase complete, waiting for Plan Agent
+# Cycle 405 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-18 16:01 HKT
+# Status: Sisyphus RUNNING on Task 401 (Emergency SOS) — re-dispatched after hang detection, opencode now active
 # TSC: 0 errors (JobbleBaby/)
-# Commit: 2a6299d → pushed (no new code changes this cycle)
-# Sisyphus: completed all 6 background exploration tasks (stress-cascade, i18n, SafeStorage, tab layout, breathing animations, app structure), proceeding to Plan Agent next
-# emergency-sos.tsx: NOT YET created (pending Plan Agent output)
+# Commit: af6b845 → to be pushed
+# Sisyphus: opencode re-dispatched to pane 2, running Emergency SOS task
 
-=== CYCLE 404 ACTIONS ===
+=== CYCLE 405 ACTIONS ===
 
-✅ STEP 1 (Survival + Source): Session jobble-baby alive (2 windows: tail-, dispatch)
-  - Sisyphus dispatch pane: all 6 background Explore agents complete, waiting to proceed to Plan Agent
-  - emergency-sos.tsx: NOT YET created
+✅ STEP 1 (Survival + Source): Session jobble-baby alive (window 2 = dispatch)
+  - Sisyphus pane (jobble-baby:2): was stuck waiting, C-c'd and re-dispatched
+  - opencode now running task 401 (Emergency SOS)
   - TSC: 0 errors
 
 ✅ STEP 2 (Verify): Task 401 (Emergency SOS) still in_progress
-  - Sisyphus still in exploration/planning phase — not yet implemented
+  - emergency-sos.tsx: NOT YET created (Sisyphus re-started)
   - No code changes to verify
 
 ✅ STEP 3 (Review): Emergency SOS task 401 active by Sisyphus
-  - All background exploration tasks completed
-  - Proceeding to Plan Agent for implementation
   - No new pending todos needed
 
 ⏭️ STEP 4 (Brainstorm): Skipped — Sisyphus busy on Emergency SOS
 
-⏭️ STEP 5 (Commit): No new code changes — only autoloop internal files
-  - Will commit internal files
-  - Last commit: 2a6299d
+✅ STEP 5 (Commit): autoloop internal files
+  - git add -A && git commit -m "autoloop cycle 405: re-dispatch Emergency SOS, Sisyphus reactivated"
+  - Will push after commit
 
-⏭️ STEP 6 (Dispatch): Skipped — Sisyphus busy on task 401 (exploration done, planning next)
+✅ STEP 6 (Dispatch): Sisyphus re-dispatched to pane 2 (opencode running task 401)
 
 ✅ STEP 7 (Telegram): Report written
 

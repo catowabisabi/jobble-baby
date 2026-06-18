@@ -170,4 +170,5 @@ export const STORAGE_KEYS = {
   SUCKLE_TO_CHEW_STAGE_LOGS: "@jobble/suckle_to_chew_stage_logs",
   SUCKLE_TO_CHEW_FOOD_ACCEPTANCE_LOGS: "@jobble/suckle_to_chew_food_acceptance_logs",
   SUCKLE_TO_CHEW_TEXTURE_LADDER_LOGS: "@jobble/suckle_to_chew_texture_ladder_logs",
+  PINCER_EVENTS: "@jobble/pincer_events",
 } as const;

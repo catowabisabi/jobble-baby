@@ -77,7 +77,8 @@
     "developmentRadar": "發育雷達",
     "autonomicReadiness": "自主神經準備",
     "diaperCream": "尿布膏",
-    "landauReflex": "蘭道反射"
+    "landauReflex": "蘭道反射",
+    "pincerGrasp": "拇指食指抓握"
   },
   "gestureMilestone": {
     "title": "手势桥梁",
@@ -5736,5 +5737,47 @@
       "delete": "刪除",
       "log": "記錄"
     }
+  },
+  "pincerGrasp": {
+    "title": "拇指食指抓握",
+    "greeting": "精細運動發育",
+    "subtitle": "追蹤嬰兒拇指食指抓握能力的發展進程",
+    "precisionScore": "精度分數",
+    "foodType": "食物類型",
+    "graspMethod": "抓握方式",
+    "radical": "激進",
+    "precise": "精準",
+    "durationSec": "時長（秒）",
+    "notes": "備註",
+    "logEvent": "記錄事件",
+    "eventHistory": "事件歷史",
+    "noEvents": "尚無記錄",
+    "feedingReadinessIndex": "進食準備指數",
+    "pincerPrecision": "拇指食指精度",
+    "fingerStrength": "手指力量",
+    "oralMotor": "口腔運動",
+    "sittingBalance": "坐立平衡",
+    "overallScore": "綜合評分",
+    "readinessRadar": "準備度雷達圖",
+    "foodProgression": "食物進階時間線",
+    "meltableSolids": "可溶固體 (6-7個月)",
+    "softCubed": "軟小塊 (7-8個月)",
+    "fingerFoods": "手指食物 (8-9個月)",
+    "pincerRequired": "需抓握 (9-12個月)",
+    "currentStage": "當前階段",
+    "spoonReadiness": "勺子準備度",
+    "spoonOnly": "僅用勺子 (12個月)",
+    "spoonFork": "勺子+叉子 (13個月)",
+    "proficientSpoon": "熟練使用 (15個月)",
+    "transitionHint": "過渡提示",
+    "selfFeedingHandoff": "自主進食交接",
+    "masteryCurve": "掌握曲線",
+    "predictedOnset": "預計起始",
+    "basedOnSlope": "基於曲線斜率",
+    "pincerMasteryMonths": "抓握掌握月齡",
+    "selfFeedingReady": "可自主進食",
+    "save": "保存",
+    "cancel": "取消",
+    "addNote": "添加備註"
   }
 }

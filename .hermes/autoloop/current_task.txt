@@ -1,16 +1,28 @@
-# Cycle 401 — HERMES REVIEW + DISPATCH CYCLE
-# Date: 2026-06-17 21:07 HKT
-# Status: Sisyphus BUSY — Task 400 (pincer-grasp.tsx) still running
+# Cycle 401 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-17 22:08 HKT
+# Status: Sisyphus BUSY on Task 400 (pincer-grasp.tsx) — dispatch 401 next cycle
 # TSC: 0 errors (JobbleBaby/)
-# Commit: 6348b25 → pushed
-# Sisyphus: active, opencode PID 2127038 running task 400
-# DB: todo #380 (Emergency SOS, P1) prepared as task 401
+# Commit: 54e1e2a → pushed
+# Sisyphus: busy on opencode (task 400), pane @2
+# DB: todo #380 (Emergency SOS, P1, pending) — dispatch when 400 done
+# Task 401: pre-written at sisyphus_task_401.txt
 #
-# ✅ STEP 2 (Verify): Landau Reflex #379 confirmed done (DONE ULW, TSC 0)
-# ✅ STEP 3 (Review): No pending todos; identified Emergency SOS gap
-#   - Created todo #380: Emergency SOS Panic Mode (P1)
-#   - sisyphus_task_401.txt prepared — dispatch next cycle
+# ✅ STEP 1 (Survival + Source): Session jobble-baby alive, Sisyphus working on task 400
+#   - pincer-grasp.tsx NOT YET created (opencode still running)
+#
+# ✅ STEP 2 (Verify): Landau Reflex complete (response 399 confirmed DONE ULW, TSC 0)
+#
+# ✅ STEP 3 (Review): No pending/new todos → reviewed codebase
+#   - Emergency SOS tab MISSING from app (tab not in (tabs)/, not in _layout.tsx)
+#   - User intention 明確需求，81 tabs registered 但無 SOS tab
+#   - Todo #380 created: Emergency SOS Panic Mode (P1)
+#
+# ✅ STEP 4 (Brainstorm): 5 sources → kw added: searle_taxonomy, baby_wear_ergonomics_score, train_platform_gaps
+#
+# ✅ STEP 5 (Commit): 54e1e2a pushed
+#
 # ⏸️ STEP 6 (Dispatch): Skipped — Sisyphus busy with task 400
+#   - Task 401 (Emergency SOS) pre-written, dispatch next cycle
 #
 # Remaining blockers (user action needed):
 # - EAS credentials, App Store Connect, Play Console, Privacy policy, EAS build

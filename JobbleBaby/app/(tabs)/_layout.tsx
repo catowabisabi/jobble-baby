@@ -204,6 +204,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="pincer-grasp"
+        options={{
+          title: t('tabs.pincerGrasp'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="hand-pointing-up" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="hip-click"
         options={{
           title: t('tabs.hipClick'),

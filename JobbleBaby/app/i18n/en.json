@@ -17,6 +17,7 @@
     "monitorCorrelation": "Monitor",
     "shiftHandoff": "Shift",
     "stressCascade": "Stress Support",
+    "emergencySos": "SOS",
     "doctorVisit": "Doctor Visit",
     "sleepDebt": "Sleep Debt",
     "tummyTime": "Tummy Time",
@@ -839,6 +840,60 @@
     "interventions": "Interventions",
     "optionalInputs": "Optional inputs",
     "comeBackIn5Minutes": "Come back in 5 minutes"
+  },
+  "emergencySos": {
+    "title": "Emergency SOS",
+    "subtitle": "Panic mode and crisis support",
+    "panicButton": "🆘 PANIC",
+    "panicButtonSubtext": "Tap to activate panic mode",
+    "panicModeActive": "Panic Mode Active",
+    "panicModeSubtitle": "You are not alone. Take a breath.",
+    "deactivatePanic": "Deactivate panic mode - I'm okay now",
+    "imOkay": "I'm Okay",
+    "imOkaySubtext": "Tap when you feel calm",
+    "breathing478": "4-7-8 Breathing",
+    "breathing": {
+      "description": "Inhale 4s · Hold 7s · Exhale 8s · Repeat 4 cycles",
+      "inhale": "Breathe in...",
+      "hold": "Hold...",
+      "exhale": "Breathe out...",
+      "done": "Done!",
+      "cycle": "Cycle {{current}}/{{total}}",
+      "cycles": "{{count}} cycles"
+    },
+    "startBreathing": "Start breathing exercise",
+    "safeSpaceChecklist": "Safe Space Checklist",
+    "checklist": {
+      "description": "Before calming down, ensure:",
+      "babySecured": "Baby is secured in crib",
+      "sharpRemoved": "Sharp objects removed",
+      "floorClear": "Floor is clear",
+      "doorLocked": "Door is locked",
+      "contactsVisible": "Emergency contacts visible"
+    },
+    "contactsQuickDial": "Quick Dial",
+    "contacts": {
+      "doctor": "Doctor",
+      "doctorDesc": "Call pediatrician",
+      "hospital": "Hospital",
+      "hospitalDesc": "Call emergency services",
+      "spouse": "Spouse/Partner",
+      "spouseDesc": "Call your partner",
+      "callFailed": "Unable to make call"
+    },
+    "calmDownTimer": "Calm Down Timer",
+    "timer": {
+      "title": "5-Minute Timer",
+      "minutes": "{{count}} minutes remaining"
+    },
+    "summary": {
+      "title": "Post-Crisis Summary",
+      "duration": "Duration",
+      "checklist": "Checklist Completed",
+      "triggers": "Triggers Identified",
+      "breathingCycles": "Breathing Cycles"
+    },
+    "closeSummary": "Close summary"
   },
   "doctorVisit": {
     "title": "Doctor Visit Summary",

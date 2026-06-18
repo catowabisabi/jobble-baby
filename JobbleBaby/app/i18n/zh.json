@@ -17,6 +17,7 @@
     "monitorCorrelation": "監控關聯",
     "shiftHandoff": "交接",
     "stressCascade": "壓力支援",
+    "emergencySos": "緊急求助",
     "doctorVisit": "就診準備",
     "sleepDebt": "睡眠債務",
     "tummyTime": "趴臥時間",
@@ -839,6 +840,60 @@
     "interventions": "干預措施",
     "optionalInputs": "Optional inputs",
     "comeBackIn5Minutes": "Come back in 5 minutes"
+  },
+  "emergencySos": {
+    "title": "緊急求助",
+    "subtitle": "緊急模式及危機支援",
+    "panicButton": "🆘 緊急",
+    "panicButtonSubtext": "點擊啟動緊急模式",
+    "panicModeActive": "緊急模式已啟動",
+    "panicModeSubtitle": "你不是一個人，深呼吸。",
+    "deactivatePanic": "關閉緊急模式——我沒事了",
+    "imOkay": "我沒事了",
+    "imOkaySubtext": "冷靜下來時點擊",
+    "breathing478": "4-7-8 呼吸法",
+    "breathing": {
+      "description": "吸氣4秒 · 屏息7秒 · 呼氣8秒 · 重複4個週期",
+      "inhale": "吸氣...",
+      "hold": "屏息...",
+      "exhale": "呼氣...",
+      "done": "完成！",
+      "cycle": "第 {{current}}/{{total}} 個週期",
+      "cycles": "{{count}} 個週期"
+    },
+    "startBreathing": "開始呼吸練習",
+    "safeSpaceChecklist": "安全空間清單",
+    "checklist": {
+      "description": "冷靜下來前，確認：",
+      "babySecured": "寶寶已安全放在嬰兒床",
+      "sharpRemoved": "尖銳物品已移走",
+      "floorClear": "地板已清理",
+      "doorLocked": "門已鎖上",
+      "contactsVisible": "緊急聯絡人可見"
+    },
+    "contactsQuickDial": "快速撥號",
+    "contacts": {
+      "doctor": "醫生",
+      "doctorDesc": "致電兒科醫生",
+      "hospital": "醫院",
+      "hospitalDesc": "致電緊急服務",
+      "spouse": "配偶/伴侶",
+      "spouseDesc": "致電您的伴侶",
+      "callFailed": "無法撥打電話"
+    },
+    "calmDownTimer": "冷靜計時器",
+    "timer": {
+      "title": "5分鐘計時器",
+      "minutes": "剩餘 {{count}} 分鐘"
+    },
+    "summary": {
+      "title": "危機後摘要",
+      "duration": "持續時間",
+      "checklist": "清單已完成",
+      "triggers": "已識別觸發因素",
+      "breathingCycles": "呼吸週期"
+    },
+    "closeSummary": "關閉摘要"
   },
   "doctorVisit": {
     "title": "就診摘要",

@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import GearCheckScreen from './gear-check';
 import VillageNetworkScreen from './village-network';
 import DevelopmentRadarScreen from './development-radar';
+import EmergencySOSScreen from './emergency-sos';
 
 export default function TabsLayout() {
   const { t } = useLanguage();
@@ -124,6 +125,13 @@ export default function TabsLayout() {
         options={{
           title: t('tabs.stressCascade'),
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="emergency-sos"
+        options={{
+          title: t('tabs.emergencySos'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="alert-circle" size={size} color={color} />
         }}
       />
       <Tabs.Screen

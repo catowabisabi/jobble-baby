@@ -137,6 +137,7 @@ export const STORAGE_KEYS = {
   SLEEP_ENTRIES: "@jobble/sleep_entries",
   SLEEP_ENVIRONMENT: "@jobble/sleep_environment",
   SLEEP_TRAINING_ENTRIES: "@jobble/sleep_training_entries",
+  SOS_EVENTS: "@jobble/sos_events",
   SLEEP_TRAINING_NIGHTS: "@jobble/sleep_training_nights",
   SLEEP_TRAINING_SESSION: "@jobble/sleep_training_session",
   SOLID_FOOD_ALLERGENS: "@jobble/solid_food_allergens",

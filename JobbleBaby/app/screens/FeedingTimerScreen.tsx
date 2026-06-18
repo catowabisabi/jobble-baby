@@ -295,6 +295,7 @@ export default function FeedingTimerScreen() {
           <TouchableOpacity
             style={[styles.toggleButton, foodType === 'liquid' && styles.toggleButtonActive]}
             onPress={() => setFoodType('liquid')}
+            accessibilityLabel={t('feedingTimer.liquid')}
           >
             <Text style={[styles.toggleText, foodType === 'liquid' && styles.toggleTextActive]}>
               {t('feedingTimer.liquid')}
@@ -303,6 +304,7 @@ export default function FeedingTimerScreen() {
           <TouchableOpacity
             style={[styles.toggleButton, foodType === 'solid' && styles.toggleButtonActive]}
             onPress={() => setFoodType('solid')}
+            accessibilityLabel={t('feedingTimer.solid')}
           >
             <Text style={[styles.toggleText, foodType === 'solid' && styles.toggleTextActive]}>
               {t('feedingTimer.solid')}
@@ -317,6 +319,7 @@ export default function FeedingTimerScreen() {
               key={preset}
               style={styles.presetButton}
               onPress={() => handleQuickAdd(preset)}
+              accessibilityLabel={t('feedingTimer.quickAddPreset', { amount: preset })}
             >
               <Text style={styles.presetText}>{preset}</Text>
               <Text style={styles.presetLabel}>
@@ -333,6 +336,7 @@ export default function FeedingTimerScreen() {
             <TouchableOpacity
               style={[styles.timerBtn, isRunning && styles.timerBtnPrimary]}
               onPress={handleStartPause}
+              accessibilityLabel={isRunning ? t('feedingTimer.pauseTimer') : t('feedingTimer.startTimer')}
             >
               <MaterialCommunityIcons
                 name={isRunning ? 'pause' : 'play'}
@@ -340,7 +344,7 @@ export default function FeedingTimerScreen() {
                 color={isRunning ? '#fff' : C.text}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.timerBtn} onPress={handleReset}>
+            <TouchableOpacity style={styles.timerBtn} onPress={handleReset} accessibilityLabel={t('feedingTimer.reset')}>
               <MaterialCommunityIcons name="refresh" size={28} color={C.text} />
             </TouchableOpacity>
           </View>

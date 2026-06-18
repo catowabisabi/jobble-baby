@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
 
 const STORAGE_KEY = '@jobble_baby_profile';
@@ -24,6 +25,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
   const [gender, setGender] = useState<'boy' | 'girl' | 'prefer_not_to_say' | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const { effectiveTheme } = useTheme();
+  const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
   const styles = StyleSheet.create({
@@ -86,7 +88,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
 
           <Text style={styles.label}>Birth Date</Text>
           <View style={styles.dateRow}>
-            <TouchableOpacity style={styles.dateButton} onPress={() => setShowDatePicker(true)}>
+            <TouchableOpacity style={styles.dateButton} onPress={() => setShowDatePicker(true)} accessibilityLabel={t('onboarding.selectDate')}>
               <Text style={styles.dateText}>
                 {birthDate ? birthDate.toLocaleDateString() : 'Select date'}
               </Text>
@@ -112,6 +114,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
                 key={g}
                 style={[styles.genderBtn, gender === g && styles.genderBtnActive]}
                 onPress={() => setGender(g)}
+                accessibilityLabel={g === 'boy' ? t('onboarding.boy') : g === 'girl' ? t('onboarding.girl') : t('onboarding.preferNotToSay')}
               >
                 <Text style={styles.genderText}>
                   {g === 'boy' ? 'Boy' : g === 'girl' ? 'Girl' : 'Prefer not to say'}
@@ -126,6 +129,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
             style={[styles.saveBtn, (!name || !birthDate || !gender) && styles.saveBtnDisabled]}
             onPress={handleSave}
             disabled={!name || !birthDate || !gender}
+            accessibilityLabel={t('onboarding.getStarted')}
           >
             <Text style={styles.saveBtnText}>Continue</Text>
           </TouchableOpacity>

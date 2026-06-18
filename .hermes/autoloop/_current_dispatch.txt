@@ -1,26 +1,34 @@
-# Cycle 411 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-18 10:00 HKT
-# Status: Task 383 dispatched to Sisyphus pane 2.0
+# Cycle 413 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-18 13:00 HKT
+# Status: Task 384 COMPLETE (4 component files a11y). Dispatching task 385 (3 screen files a11y)
 # TSC: 0 errors (JobbleBaby/)
-# Commit: 4c6e2c9 → pushed
+# Commit: b4ac4fd → pushed
 
-=== CYCLE 411 ACTIONS ===
+=== CYCLE 413 ACTIONS ===
 
-✅ STEP 1 (Survival + Source): Session jobble-baby alive (2 windows), opencode serve running (PID 1202570)
-✅ STEP 2 (Verify): Tasks 381 + 382 COMPLETE
-  - Task 381 (en.json tabs.* i18n): 30 tabs.* keys confirmed in en.json
-  - Task 382 (4 file a11y gaps): all 4 files verified — 11/11, 20/20, 9/9, 13/13 accessibilityLabel
-✅ STEP 3 (Review): Codebase scan found 5 MORE tab files + 7 component/screen files with a11y gaps
-  - Tab files: constellation(3), jaundice-threshold(6), phototherapy-comfort(5), thermal-metabolic(4), village-network(1) = 19 missing
-  - Component/screen: AllergenDetailModal(4), ReactionLogModal(8), EmergencySOSScreen(3), MonitorWidget(1), DaycareView(2), FeedingTimer(5), Onboarding(3) = 26 missing
-  - Task #383 [P2]: Fix 5 tab files a11y gaps (IN PROGRESS, dispatched)
-  - Task #384 [P3]: Fix 7 component/screens a11y gaps (pending)
-✅ STEP 5 (Commit): Autoloop files + todos #383 #384
-  - git commit: 4c6e2c9 (2 files, 5 insertions, 6 deletions)
+✅ STEP 1 (Survival + Source): Session jobble-baby alive (2 windows)
+✅ STEP 2 (Verify): Task 384 COMPLETE — Sisyphus fixed a11y in 4 component files (AllergenDetailModal, ReactionLogModal, EmergencySOSScreen, MonitorWidget)
+✅ STEP 3 (Review): 3 screen files have ZERO accessibilityLabel despite TouchableOpacity usage
+✅ STEP 4 (Brainstorm): Added 50 free-association keywords to pool (total 1000)
+✅ STEP 5 (Commit): Autoloop files + task 384 changes committed
+  - git commit: b4ac4fd (9 files, 138 insertions, 15 deletions)
   - git push: SUCCESS
-✅ STEP 6 (Dispatch): Task 383 dispatched via tmux → jobble-baby:2.0
-  - opencode run with /tmp/sisyphus_task_411.txt
-  - 5 files: constellation, jaundice-threshold, phototherapy-comfort, thermal-metabolic, village-network
+✅ STEP 6 (Dispatch): Task 385 dispatched via tmux → jobble-baby:2.0
+  - 3 files: DaycareViewScreen, FeedingTimerScreen, OnboardingScreen
+
+=== TASK #385 — Fix accessibilityLabel gaps in 3 screen files ===
+
+Files to audit/fix:
+1. app/screens/DaycareViewScreen.tsx — 5 TouchableOpacity, 0 accessibilityLabel
+2. app/screens/FeedingTimerScreen.tsx — 11 TouchableOpacity, 0 accessibilityLabel
+3. app/screens/OnboardingScreen.tsx — 7 TouchableOpacity, 0 accessibilityLabel
+
+Rules:
+- Add accessibilityLabel to EVERY TouchableOpacity that doesn't have one
+- Use existing i18n keys where possible (check en.json/zh.json first)
+- If no existing key, add new key to en.json + zh.json — format: `screenName.actionOrLabel`
+- After editing: run `npx tsc --noEmit` — must pass 0 errors
+- Save response to: .hermes/autoloop/sisyphus_response_413.txt
 
 === PENDING USER-ACTION BLOCKERS ===
 
@@ -33,5 +41,4 @@ High Priority (user-action required):
 
 === CODE QUALITY ===
 
-P2 (Medium): TODO #383 — Fix a11y gaps in 5 tab files (IN PROGRESS, dispatched to Sisyphus)
-P3 (Low): TODO #384 — Fix a11y gaps in 7 component/screen files (pending)
+P3 (Low): TODO #385 — Fix a11y gaps in 3 screen files (IN PROGRESS, dispatched to Sisyphus)

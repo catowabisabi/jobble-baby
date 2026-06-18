@@ -131,7 +131,7 @@ export default function DaycareViewScreen() {
       <View style={[styles.safe, styles.container, styles.errorContainer]}>
         <MaterialCommunityIcons name="link-variant-off" size={56} color={C.muted} style={styles.errorIcon} />
         <Text style={styles.errorTitle}>{t('daycare.invalidLink')}</Text>
-        <TouchableOpacity style={styles.goBackBtn} onPress={() => router.back()}>
+        <TouchableOpacity style={styles.goBackBtn} onPress={() => router.back()} accessibilityLabel={t('common.back')}>
           <Text style={styles.goBackBtnText}>{t('common.back')}</Text>
         </TouchableOpacity>
       </View>
@@ -143,7 +143,7 @@ export default function DaycareViewScreen() {
       <View style={[styles.safe, styles.container, styles.errorContainer]}>
         <MaterialCommunityIcons name="clock-alert-outline" size={56} color={C.muted} style={styles.errorIcon} />
         <Text style={styles.errorTitle}>{t('daycare.linkExpired')}</Text>
-        <TouchableOpacity style={styles.goBackBtn} onPress={() => router.back()}>
+        <TouchableOpacity style={styles.goBackBtn} onPress={() => router.back()} accessibilityLabel={t('common.back')}>
           <Text style={styles.goBackBtnText}>{t('common.back')}</Text>
         </TouchableOpacity>
       </View>

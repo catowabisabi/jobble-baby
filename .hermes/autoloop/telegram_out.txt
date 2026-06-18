@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 12:01
-✅ Done: #383 5 tab files a11y (constellation, jaundice-threshold, phototherapy-comfort, thermal-metabolic, village-network)
-🔧 Dispatched: #384 4 component files a11y (AllergenDetailModal, ReactionLogModal, EmergencySOSScreen, MonitorWidget) → Sisyphus
+🍼 Jobble Baby · 13:01
+✅ Done: #384 a11y 4 component files (AllergenDetailModal, ReactionLogModal, EmergencySOSScreen, MonitorWidget)
+🔧 Dispatched: #385 a11y 3 screen files (DaycareViewScreen, FeedingTimerScreen, OnboardingScreen)
 📋 TODO: 0 pending · 0 new
-📦 Commit: b7be192 → pushed
-📝 Desc: Cycle 412 — #383 COMPLETE，Sisyphus 已修補5個tab文件共53個缺口。#384 已派出修補4個component文件（AllergenDetailModal/ReactionLogModal/EmergencySOSScreen/MonitorWidget）。
+📦 Commit: b4ac4fd → pushed
+📝 Desc: 完成 4 個 component 嘅 accessibilityLabel gaps。i18n keys 已加入 en.json + zh.json。派新 task #385 修復 3 個 screen files (DaycareViewScreen, FeedingTimerScreen, OnboardingScreen)。

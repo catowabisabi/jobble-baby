@@ -1,0 +1,97 @@
+# Task 385 - Accessibility Labels Fix Work Log
+
+## Date: 2026-06-18
+
+## Summary
+Fixed WCAG 2.1 AA accessibility gaps in 3 React Native screen files. Added `accessibilityLabel` to all TouchableOpacity components that were missing them.
+
+## Files Modified
+
+### 1. app/screens/DaycareViewScreen.tsx
+- **Change**: Added `accessibilityLabel={t('common.back')}` to 2 TouchableOpacity components
+- **Lines**: 134, 146
+- **Existing i18n key used**: `common.back`
+
+### 2. app/screens/FeedingTimerScreen.tsx
+- **Changes**: Added `accessibilityLabel` to 7 TouchableOpacity components
+  - Line 298: `accessibilityLabel={t('feedingTimer.liquid')}` (liquid toggle)
+  - Line 307: `accessibilityLabel={t('feedingTimer.solid')}` (solid toggle)
+  - Line 322: `accessibilityLabel={t('feedingTimer.quickAddPreset', { amount: preset })}` (3 preset buttons via map)
+  - Line 339: `accessibilityLabel={isRunning ? t('feedingTimer.pauseTimer') : t('feedingTimer.startTimer')}` (play/pause)
+  - Line 347: `accessibilityLabel={t('feedingTimer.reset')}` (reset)
+- **New i18n keys created**: `feedingTimer.quickAddPreset`, `feedingTimer.startTimer`, `feedingTimer.pauseTimer`, `feedingTimer.reset`
+
+### 3. app/screens/OnboardingScreen.tsx
+- **Changes**: Added `accessibilityLabel` to 5 TouchableOpacity components
+  - Line 91: `accessibilityLabel={t('onboarding.selectDate')}` (date picker)
+  - Line 117: `accessibilityLabel={g === 'boy' ? t('onboarding.boy') : g === 'girl' ? t('onboarding.girl') : t('onboarding.preferNotToSay')}` (3 gender buttons via map)
+  - Line 132: `accessibilityLabel={t('onboarding.getStarted')}` (save button)
+- **Bug fixed**: Added missing `useLanguage` import and `{ t }` destructuring
+- **New i18n key created**: `onboarding.selectDate`
+
+### 4. app/i18n/en.json
+Added new keys to `feedingTimer` section:
+```json
+"quickAddPreset": "Quick add {{amount}}",
+"startTimer": "Start timer",
+"pauseTimer": "Pause timer",
+"reset": "Reset timer"
+```
+
+Added new key to `onboarding` section:
+```json
+"selectDate": "Select birth date"
+```
+
+### 5. app/i18n/zh.json
+Added corresponding Chinese translations to `feedingTimer` section:
+```json
+"quickAddPreset": "快速新增 {{amount}}",
+"startTimer": "開始計時",
+"pauseTimer": "暫停計時",
+"reset": "重置計時器"
+```
+
+Added new key to `onboarding` section:
+```json
+"selectDate": "選擇出生日期"
+```
+
+## Verification
+
+### TypeScript Check
+```bash
+npx tsc --noEmit
+```
+**Result**: 0 errors
+
+### accessibilityLabel Count
+| Screen | TouchableOpacity Count | accessibilityLabel Count |
+|--------|------------------------|-------------------------|
+| DaycareViewScreen.tsx | 2 | 2 |
+| FeedingTimerScreen.tsx | 7 | 7 |
+| OnboardingScreen.tsx | 5 | 5 |
+| **Total** | **14** | **14** |
+
+## i18n Keys Summary
+| Key | en.json | zh.json | Used In |
+|-----|---------|---------|---------|
+| common.back | ✅ existing | ✅ existing | DaycareViewScreen |
+| feedingTimer.liquid | ✅ existing | ✅ existing | FeedingTimerScreen |
+| feedingTimer.solid | ✅ existing | ✅ existing | FeedingTimerScreen |
+| feedingTimer.quickAddPreset | ✅ NEW | ✅ NEW | FeedingTimerScreen |
+| feedingTimer.startTimer | ✅ NEW | ✅ NEW | FeedingTimerScreen |
+| feedingTimer.pauseTimer | ✅ NEW | ✅ NEW | FeedingTimerScreen |
+| feedingTimer.reset | ✅ NEW | ✅ NEW | FeedingTimerScreen |
+| onboarding.selectDate | ✅ NEW | ✅ NEW | OnboardingScreen |
+| onboarding.boy | ✅ existing | ✅ existing | OnboardingScreen |
+| onboarding.girl | ✅ existing | ✅ existing | OnboardingScreen |
+| onboarding.preferNotToSay | ✅ existing | ✅ existing | OnboardingScreen |
+| onboarding.getStarted | ✅ existing | ✅ existing | OnboardingScreen |
+
+## Technical Notes
+- The preset buttons in FeedingTimerScreen use a `.map()` creating 3 buttons, all sharing the same `accessibilityLabel` with dynamic `amount` parameter
+- The gender buttons in OnboardingScreen use a `.map()` creating 3 buttons, each with appropriate gender-specific label
+- OnboardingScreen required adding the missing `useLanguage` import (was only importing `useTheme`)
+
+## Status: COMPLETE ✅

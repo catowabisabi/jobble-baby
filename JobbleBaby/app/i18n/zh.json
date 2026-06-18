@@ -588,16 +588,26 @@
     "no": "否"
   },
   "allergenModal": {
+    "close": "關閉",
+    "selectDate": "選擇日期",
     "dateIntroduced": "引入日期：",
     "fpiesWarning": "FPIES反應在餵食後2-4小時發生——嘔吐和嗜睡。",
-    "logReaction": "記錄反應"
+    "logReaction": "記錄反應",
+    "status": {
+      "notIntroduced": "未引入",
+      "introduced": "已引入",
+      "reactionObserved": "有反應",
+      "tolerated": "已耐受"
+    }
   },
   "reactionModal": {
+    "close": "關閉",
     "logReaction": "記錄反應 {{name}}",
     "reactionType": "反應類型",
     "symptoms": "症狀",
     "severity": "嚴重程度",
     "date": "日期",
+    "selectDate": "選擇反應日期",
     "notes": "備註",
     "notesPlaceholder": "添加任何額外備註...",
     "photo": "照片",
@@ -609,7 +619,11 @@
     "light": "輕度",
     "moderate": "中度",
     "severe": "嚴重",
-    "critical": "危重"
+    "critical": "危重",
+    "reactionTypeIgE": "IgE 反應類型",
+    "reactionTypeFpies": "FPIES 反應類型",
+    "reactionTypeNonIgE": "非 IgE 反應類型",
+    "symptom": "症狀 {{name}}"
   },
   "badgeGallery": {
     "title": "徽章收藏",
@@ -633,12 +647,14 @@
   },
   "emergency": {
     "sos": "緊急求助",
+    "close": "關閉緊急求助",
     "swipeHint": "← 向右滑或三擊頂部關閉",
     "tab": {
       "contacts": "聯絡",
       "guides": "指南",
       "baby": "寶寶"
     },
+    "callButton": "致電 {{name}}",
     "emergencyContacts": "緊急聯絡人",
     "crisisGuides": "危機分流指南",
     "babyInfo": "寶寶資料卡",
@@ -821,7 +837,8 @@
     "noEvents": "尚無監控事件 —點擊開啟監控應用",
     "logCry": "記錄哭聲事件",
     "greeting": "監控",
-    "correlationTitle": "關聯分析"
+    "correlationTitle": "關聯分析",
+    "openMonitor": "開啟監控應用"
   },
   "settings": {
     "monitorApp": "監控應用",

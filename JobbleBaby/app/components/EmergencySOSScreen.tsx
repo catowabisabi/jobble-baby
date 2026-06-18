@@ -390,6 +390,7 @@ export default function EmergencySOSScreen() {
             style={styles.callBtn}
             activeOpacity={0.7}
             onPress={() => handleCall(contact.phone, contact.labelKey)}
+            accessibilityLabel={t('emergency.callButton', { name: t(contact.labelKey) })}
           >
             <Text style={styles.callBtnText}>📞 {contact.phone}</Text>
           </TouchableOpacity>
@@ -484,6 +485,7 @@ export default function EmergencySOSScreen() {
               style={styles.closeBtn}
               activeOpacity={0.7}
               onPress={handleTripleClose}
+              accessibilityLabel={t('emergency.close')}
             >
               <Text style={styles.closeBtnText}>✕</Text>
             </TouchableOpacity>
@@ -497,6 +499,7 @@ export default function EmergencySOSScreen() {
               style={[styles.tab, activeTab === tab && styles.tabActive]}
               activeOpacity={0.7}
               onPress={() => setActiveTab(tab)}
+              accessibilityLabel={t(`emergency.tab.${tab}`)}
             >
               <Text style={[styles.tabText, activeTab === tab && styles.tabTextActive]}>
                 {tab === 'contacts' && '📞 '}{tab === 'guides' && '📋 '}{tab === 'baby' && '👶 '}

@@ -1,7 +1,6 @@
-🍼 Jobble Baby · 10:00
-✅ Done: #381 en.json tabs.* i18n (30 keys)
-✅ Done: #382 4 tab files a11y gaps (53 elements labelled)
-🔧 Dispatched: #383 5 tab files a11y gaps → Sisyphus
-📋 TODO: 1 pending · 1 new
-📦 Commit: 4c6e2c9 → pushed
-📝 Desc: Cycle 411 — 發現仲有5個tab文件 + 7個component/screen缺accessibilityLabel，已加todo排期，#383已派出修補19個缺口。
+🍼 Jobble Baby · 12:01
+✅ Done: #383 5 tab files a11y (constellation, jaundice-threshold, phototherapy-comfort, thermal-metabolic, village-network)
+🔧 Dispatched: #384 4 component files a11y (AllergenDetailModal, ReactionLogModal, EmergencySOSScreen, MonitorWidget) → Sisyphus
+📋 TODO: 0 pending · 0 new
+📦 Commit: b7be192 → pushed
+📝 Desc: Cycle 412 — #383 COMPLETE，Sisyphus 已修補5個tab文件共53個缺口。#384 已派出修補4個component文件（AllergenDetailModal/ReactionLogModal/EmergencySOSScreen/MonitorWidget）。

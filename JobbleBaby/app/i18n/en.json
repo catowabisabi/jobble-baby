@@ -598,16 +598,26 @@
     "no": "No"
   },
   "allergenModal": {
+    "close": "Close",
+    "selectDate": "Select Date",
     "dateIntroduced": "Date Introduced:",
     "fpiesWarning": "FPIES reactions occur 2-4 hours after feeding — profuse vomiting and lethargy.",
-    "logReaction": "Log Reaction"
+    "logReaction": "Log Reaction",
+    "status": {
+      "notIntroduced": "Not Introduced",
+      "introduced": "Introduced",
+      "reactionObserved": "Reaction Observed",
+      "tolerated": "Tolerated"
+    }
   },
   "reactionModal": {
+    "close": "Close",
     "logReaction": "Log Reaction {{name}}",
     "reactionType": "Reaction Type",
     "symptoms": "Symptoms",
     "severity": "Severity",
     "date": "Date",
+    "selectDate": "Select Reaction Date",
     "notes": "Notes",
     "notesPlaceholder": "Add any additional notes...",
     "photo": "Photo",
@@ -619,7 +629,11 @@
     "light": "Light",
     "moderate": "Moderate",
     "severe": "Severe",
-    "critical": "Critical"
+    "critical": "Critical",
+    "reactionTypeIgE": "IgE reaction type",
+    "reactionTypeFpies": "FPIES reaction type",
+    "reactionTypeNonIgE": "Non-IgE reaction type",
+    "symptom": "Symptom {{name}}"
   },
   "badgeGallery": {
     "title": "Badge Collection",
@@ -643,12 +657,14 @@
   },
   "emergency": {
     "sos": "EMERGENCY SOS",
+    "close": "Close Emergency SOS",
     "swipeHint": "← Swipe right or triple-tap header to close",
     "tab": {
       "contacts": "Contacts",
       "guides": "Guides",
       "baby": "Baby"
     },
+    "callButton": "Call {{name}}",
     "emergencyContacts": "Emergency Contacts",
     "crisisGuides": "Crisis Triage Guides",
     "babyInfo": "Baby Info Card",
@@ -831,7 +847,8 @@
     "noEvents": "No monitor events yet — tap to open monitor app",
     "logCry": "Log cry event",
     "greeting": "Monitor",
-    "correlationTitle": "Correlation"
+    "correlationTitle": "Correlation",
+    "openMonitor": "Open monitor app"
   },
   "settings": {
     "monitorApp": "Monitor App",

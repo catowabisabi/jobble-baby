@@ -117,7 +117,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
             <Text style={[styles.headerText, { color: C.text }]}>
               {t('reactionModal.logReaction', { name: `${allergen.emoji} ${allergen.name}` })}
             </Text>
-            <TouchableOpacity onPress={handleClose} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <TouchableOpacity onPress={handleClose} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} accessibilityLabel={t('reactionModal.close')}>
               <Text style={[styles.closeButton, { color: C.muted }]}>✕</Text>
             </TouchableOpacity>
           </View>
@@ -136,6 +136,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
                     },
                   ]}
                   onPress={() => setReactionType(type)}
+                  accessibilityLabel={t(`reactionModal.reactionType${type}`)}
                 >
                   <Text
                     style={[
@@ -170,6 +171,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
                     },
                   ]}
                   onPress={() => toggleSymptom(symptom)}
+                  accessibilityLabel={t('reactionModal.symptom', { name: symptom })}
                 >
                   <Text
                     style={[
@@ -196,6 +198,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
                     },
                   ]}
                   onPress={() => setSeverity(level)}
+                  accessibilityLabel={`${level} ${getSeverityLabel(level)}`}
                 >
                   <Text
                     style={[
@@ -221,6 +224,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
             <TouchableOpacity
               style={[styles.dateButton, { borderColor: C.border }]}
               onPress={() => setShowDatePicker(true)}
+              accessibilityLabel={t('reactionModal.selectDate')}
             >
               <Text style={[styles.dateButtonText, { color: C.text }]}>
                 {reactionDate.toLocaleDateString()}
@@ -250,6 +254,7 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
             <TouchableOpacity
               style={[styles.photoButton, { borderColor: C.border }]}
               onPress={handlePhotoPick}
+              accessibilityLabel={photoUri ? t('reactionModal.changePhoto') : t('reactionModal.addPhoto')}
             >
               <Text style={[styles.photoButtonText, { color: C.accent }]}>
                 {photoUri ? t('reactionModal.changePhoto') : t('reactionModal.addPhoto')}
@@ -265,12 +270,14 @@ export function ReactionLogModal({ visible, allergen, existingReactions, onClose
               <TouchableOpacity
                 style={[styles.cancelButton, { borderColor: C.border }]}
                 onPress={handleClose}
+                accessibilityLabel={t('common.cancel')}
               >
                 <Text style={[styles.cancelButtonText, { color: C.text }]}>{t('common.cancel')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.saveButton, { backgroundColor: C.accent }]}
                 onPress={handleSave}
+                accessibilityLabel={t('reactionModal.saveReaction')}
               >
                 <Text style={styles.saveButtonText}>{t('reactionModal.saveReaction')}</Text>
               </TouchableOpacity>

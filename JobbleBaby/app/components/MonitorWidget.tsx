@@ -47,6 +47,7 @@ export default function MonitorWidget() {
       style={[styles.card, { backgroundColor: C.card, borderColor: C.border }]}
       activeOpacity={0.7}
       onPress={handlePress}
+      accessibilityLabel={lastEvent ? t('monitor.lastEvent') : t('monitor.noEvents')}
     >
       <View style={styles.iconContainer}>
         {lastEvent ? (

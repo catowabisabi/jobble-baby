@@ -77,7 +77,7 @@ export function AllergenDetailModal({ visible, allergen, entry, onClose, onSave,
             <Text style={[styles.headerText, { color: C.text }]}>
               {allergen.emoji} {allergen.name}
             </Text>
-            <TouchableOpacity onPress={onClose} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <TouchableOpacity onPress={onClose} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} accessibilityLabel={t('allergenModal.close')}>
               <Text style={[styles.closeButton, { color: C.muted }]}>✕</Text>
             </TouchableOpacity>
           </View>
@@ -94,6 +94,7 @@ export function AllergenDetailModal({ visible, allergen, entry, onClose, onSave,
                   },
                 ]}
                 onPress={() => handleStatusChange(s)}
+                accessibilityLabel={t(`allergenModal.status.${s}`)}
               >
                 <Text
                   style={[
@@ -113,6 +114,7 @@ export function AllergenDetailModal({ visible, allergen, entry, onClose, onSave,
               <TouchableOpacity
                 style={[styles.dateButton, { borderColor: C.border }]}
                 onPress={() => setShowDatePicker(true)}
+                accessibilityLabel={t('allergenModal.selectDate')}
               >
                 <Text style={[styles.dateButtonText, { color: C.text }]}>
                   {dateIntroduced.toLocaleDateString()}
@@ -141,6 +143,7 @@ export function AllergenDetailModal({ visible, allergen, entry, onClose, onSave,
             <TouchableOpacity
               style={[styles.logReactionButton, { backgroundColor: '#e74c3c' }]}
               onPress={onLogReaction}
+              accessibilityLabel={t('allergenModal.logReaction')}
             >
               <Text style={styles.logReactionButtonText}>{t('allergenModal.logReaction')}</Text>
             </TouchableOpacity>

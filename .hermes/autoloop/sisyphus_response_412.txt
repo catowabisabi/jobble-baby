@@ -1,0 +1,76 @@
+# Task 384 - WCAG 2.1 AA Accessibility Fix Work Log
+
+## Summary
+Fixed accessibilityLabel gaps in 4 React Native component files to meet WCAG 2.1 AA requirements.
+
+## Files Modified
+
+### 1. AllergenDetailModal.tsx
+**TouchableOpacity components fixed: 9**
+- Line 80: Close button → `allergenModal.close`
+- Lines 87-106: 4 status buttons (notIntroduced, introduced, reactionObserved, tolerated) → `allergenModal.status.${s}`
+- Lines 113-120: Date picker button → `allergenModal.selectDate`
+- Lines 141-146: Log reaction button → `allergenModal.logReaction`
+
+### 2. ReactionLogModal.tsx
+**TouchableOpacity components fixed: 17**
+- Line 120: Close button → `reactionModal.close`
+- Lines 129-148: 3 reaction type chips (IgE, FPIES, non-IgE) → `reactionModal.reactionTypeIgE`, `reactionModal.reactionTypeFpies`, `reactionModal.reactionTypeNonIgE`
+- Lines 163-183: Symptom chips → `reactionModal.symptom` with {{name}} interpolation
+- Lines 189-216: 5 severity buttons → Dynamic label `${level} ${getSeverityLabel(level)}`
+- Lines 221-228: Date button → `reactionModal.selectDate`
+- Lines 250-257: Photo button → `reactionModal.changePhoto` / `reactionModal.addPhoto`
+- Lines 265-276: Cancel/Save buttons → `common.cancel`, `reactionModal.saveReaction`
+
+### 3. EmergencySOSScreen.tsx
+**TouchableOpacity components fixed: 7**
+- Line 389-395: Call buttons → `emergency.callButton` with {{name}} interpolation
+- Line 483-489: Close button → `emergency.close`
+- Lines 495-506: 3 tab buttons → `emergency.tab.contacts`, `emergency.tab.guides`, `emergency.tab.baby`
+
+### 4. MonitorWidget.tsx
+**TouchableOpacity components fixed: 1** (only 1 TouchableOpacity exists)
+- Lines 46-79: Main card → `monitor.lastEvent` or `monitor.noEvents` based on state
+
+## i18n Keys Added
+
+### en.json
+```
+allergenModal.close, allergenModal.selectDate, allergenModal.status.notIntroduced, 
+allergenModal.status.introduced, allergenModal.status.reactionObserved, 
+allergenModal.status.tolerated
+
+reactionModal.close, reactionModal.selectDate, reactionModal.reactionTypeIgE, 
+reactionModal.reactionTypeFpies, reactionModal.reactionTypeNonIgE, 
+reactionModal.symptom
+
+emergency.close, emergency.callButton
+
+monitor.openMonitor
+```
+
+### zh.json
+```
+allergenModal.close, allergenModal.selectDate, allergenModal.status.notIntroduced, 
+allergenModal.status.introduced, allergenModal.status.reactionObserved, 
+allergenModal.status.tolerated
+
+reactionModal.close, reactionModal.selectDate, reactionModal.reactionTypeIgE, 
+reactionModal.reactionTypeFpies, reactionModal.reactionTypeNonIgE, 
+reactionModal.symptom
+
+emergency.close, emergency.callButton
+
+monitor.openMonitor
+```
+
+## Verification
+- `npx tsc --noEmit` → 0 errors ✓
+- All TouchableOpacity components now have accessibilityLabel ✓
+- All i18n keys exist in both en.json and zh.json ✓
+
+## Notes
+- Used existing i18n keys where appropriate (e.g., common.cancel, reactionModal.saveReaction)
+- Added new keys following the componentName.actionOrLabel naming convention
+- For dynamic content (symptoms, severity levels), used interpolation patterns
+- Severity buttons use dynamic labels since they combine level number with localized severity text

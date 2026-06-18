@@ -570,7 +570,8 @@
     "preferNotToSay": "不願透露",
     "getStarted": "開始使用",
     "namePlaceholder": "輸入寶寶名字",
-    "datePlaceholder": "選擇日期"
+    "datePlaceholder": "選擇日期",
+    "selectDate": "選擇出生日期"
   },
   "common": {
     "save": "儲存",
@@ -732,7 +733,10 @@
     },
     "timer": "計時器",
     "todayFeeds": "今日餵食",
-    "noFeedsToday": "今日尚無餵食記錄"
+    "noFeedsToday": "今日尚無餵食記錄",
+    "pauseTimer": "暫停計時",
+    "startTimer": "開始計時",
+    "reset": "重置計時器"
   },
   "sleepTraining": {
     "title": "睡眠訓練",

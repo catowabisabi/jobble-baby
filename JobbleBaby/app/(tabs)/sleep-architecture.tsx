@@ -477,7 +477,7 @@ export default function SleepArchitectureScreen() {
           {whiteNoiseLog.filter(e => e.date === today).length > 0 && (
             <View style={s.infoCard}>
               <Text style={s.infoText}>
-                {t('sleepArchitecture.todaySound') || "Today's best sound"}: {whiteNoiseLog[whiteNoiseLog.length - 1].soundType} ({whiteNoiseLog[whiteNoiseLog.length - 1].settlingMin} min)
+                {t('sleepArchitecture.todaySound') || "Today's best sound"}: {ti(SOUND_TYPE_I18N[whiteNoiseLog[whiteNoiseLog.length - 1].soundType])} ({whiteNoiseLog[whiteNoiseLog.length - 1].settlingMin} min)
               </Text>
             </View>
           )}

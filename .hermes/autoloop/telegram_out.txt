@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 15:06
-✅ Done: #383 Fix remaining hardcoded string arrays (16 tab files → i18n compliance)
-🔧 Dispatched: —
-📋 TODO: 0 pending · 0 new
-📦 Commit: 284d8c7 → pushed
-📝 Desc: Cycle 408 完成。TSC 0 errors，所有 audit checks PASS，painpoints 清零，queue 空晒。工程準備已完成，等用戶提供 EAS credentials / App Store Connect / Play Console / privacy policy URL 先可以行 build。
+🍼 Jobble Baby · 18:00
+✅ Done: #385 zh.json keys manually patched (Sisyphus incomplete)
+🔧 Dispatched: #386 Fix sleep-architecture.tsx saved entry i18n
+📋 TODO: 1 pending · 0 new
+📦 Commit: 28c44ba → pushed
+📝 Desc: Cycle 415 完成。Pre-submission audit PASS (全部 required checks)，發現 sleep-architecture.tsx:480 有 bug（saved entry 用 raw string 顯示冇 i18n）。已派 task #386 俾 Sisyphus。工程準備完成，等用戶提供 EAS credentials / App Store / Play Console / privacy policy URL 先可以行 build。

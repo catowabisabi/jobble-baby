@@ -1,36 +1,39 @@
-# Cycle 414 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-18 14:00 HKT
-# Status: Queue empty. All checks PASS. No pending tasks.
+# Cycle 415 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-18 18:00 HKT
+# Status: Dispatched task 386 to Sisyphus
 
-=== CYCLE 414 ACTIONS ===
+=== CYCLE 415 ACTIONS ===
 
 ✅ STEP 1 (Survival + Source): Session jobble-baby alive (2 windows)
-✅ STEP 2 (Verify): Task 385 COMPLETE — Sisyphus fixed a11y in DaycareViewScreen, FeedingTimerScreen, OnboardingScreen
-✅ STEP 3 (Review): Queue empty (0 pending, 0 new). Products tab well-implemented (not mock JSON).
-✅ STEP 4 (Brainstorm): No new keywords added — queue clean
-✅ STEP 5 (Commit): a88e3ca → pushed
-   - fix: i18n structural corruption + accessibility labels
-   - Removed 1774 orphaned dotted keys from en.json
-   - Removed 1787 orphaned dotted keys from zh.json
-   - 120 proper nested sections preserved
-   - pre-submission-audit.js: all 6 checks PASS
+✅ STEP 2 (Verify): Task 385 COMPLETE — zh.json keys manually patched by Hermes
+✅ STEP 3 (Review): Pre-submission audit PASS (0 required issues). Found 1 real bug:
+   - sleep-architecture.tsx:480 - saved whiteNoiseLog entry soundType displayed raw (no i18n)
+   - SOUND_TYPE_I18N exists but saved data not looked up when displaying
+✅ STEP 4 (Brainstorm): Skipped - keyword pool at max (1000)
+✅ STEP 5 (Commit): DB updated with painpoint #31 + todo #386 (pending)
+   - Painpoint: sleep-architecture.tsx line 480 raw display bug
+   - Todo: Fix i18n lookup for saved entry soundType display
+✅ STEP 6 (Dispatch): Task 386 → Sisyphus (fix sleep-architecture i18n bug)
 
 === CURRENT STATE ===
 
-- Pre-submission audit: ALL CHECKS PASS ✅
-- TODO: 0 pending · 0 new · 160 completed
-- Queue: Empty — no tasks to dispatch
+- Pre-submission audit: ALL REQUIRED CHECKS PASS ✅
+- TSC: 0 errors ✅
+- Git: Clean, at commit 630c3a5
+- TODO: 1 pending (#386), 0 new, 160 completed
+- Queue: 1 pending
 
-=== NEXT STEPS ===
+=== DISPATCHED TASK ===
 
-User-action required before EAS build:
+#386 — Fix sleep-architecture.tsx saved entry i18n display bug
+- File: app/(tabs)/sleep-architecture.tsx:480
+- Fix: wrap whiteNoiseLog soundType with ti(SOUND_TYPE_I18N[...])
+- Response file: sisyphus_response_415.txt
+
+=== USER-ACTION BLOCKERS (unchanged) ===
+
 - EAS credentials (Apple Team ID + App-Specific Password)
 - App Store Connect app creation
-- Play Console app creation
+- Play Console app creation  
 - Privacy policy URL (jobblebaby.com/privacy)
 - EAS build execution
-
-=== CODE QUALITY ===
-
-P1 (Critical): User-action blockers above
-P2 (High): Queue empty — project in good shape for submission

@@ -1,5 +1,7 @@
-🍼 Jobble Baby · 09:20
-✅ Done: #382 Accessibility labels (4 files)
-📋 TODO: 0 pending · 0 new
-📦 Commit: 26b8110 → pushed
-📝 Desc: 完成4個tab文件嘅 accessibilityLabel 修補（App Store合規）— diaper-cream 11/11、sensory-integration 9/9、suckle-to-chew 20/20、reflex-visual-motor 13/13。TSC 0 errors。
+🍼 Jobble Baby · 10:00
+✅ Done: #381 en.json tabs.* i18n (30 keys)
+✅ Done: #382 4 tab files a11y gaps (53 elements labelled)
+🔧 Dispatched: #383 5 tab files a11y gaps → Sisyphus
+📋 TODO: 1 pending · 1 new
+📦 Commit: 4c6e2c9 → pushed
+📝 Desc: Cycle 411 — 發現仲有5個tab文件 + 7個component/screen缺accessibilityLabel，已加todo排期，#383已派出修補19個缺口。

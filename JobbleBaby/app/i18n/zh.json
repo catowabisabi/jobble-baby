@@ -5736,7 +5736,8 @@
       "cancel": "取消",
       "delete": "刪除",
       "log": "記錄"
-    }
+    },
+    "subtitle": "吸吮到咀嚼過渡橋樑"
   },
   "pincerGrasp": {
     "title": "拇指食指抓握",
@@ -5778,6 +5779,14 @@
     "selfFeedingReady": "可自主進食",
     "save": "保存",
     "cancel": "取消",
-    "addNote": "添加備註"
+    "addNote": "添加備註",
+    "precisionExcellent": "精準（優秀）",
+    "precisionGood": "精準（良好）",
+    "precisionModerate": "精準（中等）",
+    "precisionFair": "精準（一般）",
+    "precisionPoor": "精準（較差）",
+    "graspMethodPrecise": "精準抓握",
+    "graspMethodRadical": "放射狀抓握",
+    "notesPlaceholder": "記錄備註（例如：嘗試了米餅，手指協調進步）"
   }
 }

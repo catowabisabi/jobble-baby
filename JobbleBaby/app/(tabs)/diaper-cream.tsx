@@ -266,6 +266,7 @@ export default function DiaperCreamScreen() {
                     key={ct}
                     style={[styles.chip, creamType === ct && styles.chipActive]}
                     onPress={() => setCreamType(ct)}
+                    accessibilityLabel={creamTypeLabel(ct)}
                   >
                     <Text style={[styles.chipText, creamType === ct && styles.chipTextActive]}>
                       {creamTypeLabel(ct)}
@@ -282,6 +283,7 @@ export default function DiaperCreamScreen() {
                     key={a}
                     style={[styles.chip, amount === a && styles.chipActive]}
                     onPress={() => setAmount(a)}
+                    accessibilityLabel={amountLabel(a)}
                   >
                     <Text style={[styles.chipText, amount === a && styles.chipTextActive]}>
                       {amountLabel(a)}
@@ -298,6 +300,7 @@ export default function DiaperCreamScreen() {
                     key={value}
                     style={[styles.chip, locations.includes(value) && styles.chipActive]}
                     onPress={() => toggleLocation(value)}
+                    accessibilityLabel={label}
                   >
                     <Text style={[styles.chipText, locations.includes(value) && styles.chipTextActive]}>
                       {label}
@@ -314,6 +317,7 @@ export default function DiaperCreamScreen() {
                     key={r}
                     style={[styles.ratingBtn, barrierRating === r && styles.ratingBtnActive]}
                     onPress={() => setBarrierRating(r)}
+                    accessibilityLabel={`${t('diaperCream.barrierRating')} ${r}`}
                   >
                     <Text style={[styles.ratingText, barrierRating === r && styles.ratingTextActive]}>
                       {r}
@@ -335,6 +339,7 @@ export default function DiaperCreamScreen() {
                 <TouchableOpacity
                   style={[styles.toggleBtn, !rashPresent && styles.toggleBtnActive]}
                   onPress={() => setRashPresent(false)}
+                  accessibilityLabel={t('diaperCream.no')}
                 >
                   <Text style={[styles.toggleBtnText, !rashPresent && styles.toggleBtnTextActive]}>
                     {t('diaperCream.no')}
@@ -343,6 +348,7 @@ export default function DiaperCreamScreen() {
                 <TouchableOpacity
                   style={[styles.toggleBtn, rashPresent && styles.toggleBtnActive]}
                   onPress={() => setRashPresent(true)}
+                  accessibilityLabel={t('diaperCream.yes')}
                 >
                   <Text style={[styles.toggleBtnText, rashPresent && styles.toggleBtnTextActive]}>
                     {t('diaperCream.yes')}
@@ -360,6 +366,7 @@ export default function DiaperCreamScreen() {
                         key={value}
                         style={[styles.chip, rashType === value && styles.chipActive]}
                         onPress={() => setRashType(value)}
+                        accessibilityLabel={label}
                       >
                         <Text style={[styles.chipText, rashType === value && styles.chipTextActive]}>
                           {label}
@@ -375,6 +382,7 @@ export default function DiaperCreamScreen() {
                         key={value}
                         style={[styles.chip, rashSeverity === value && styles.chipActive]}
                         onPress={() => setRashSeverity(value)}
+                        accessibilityLabel={label}
                       >
                         <Text style={[styles.chipText, rashSeverity === value && styles.chipTextActive]}>
                           {label}

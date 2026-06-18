@@ -498,10 +498,10 @@ export default function SuckleToChewBridgeScreen() {
                 />
 
                 <View style={styles.formButtonRow}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowStageForm(false)}>
+                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowStageForm(false)} accessibilityLabel={t('suckleToChewBridge.common.cancel')}>
                     <Text style={styles.cancelBtnText}>{t('suckleToChewBridge.common.cancel')}</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.saveBtn} onPress={handleSaveStage}>
+                  <TouchableOpacity style={styles.saveBtn} onPress={handleSaveStage} accessibilityLabel={t('suckleToChewBridge.common.save')}>
                     <Text style={styles.saveBtnText}>{t('suckleToChewBridge.common.save')}</Text>
                   </TouchableOpacity>
                 </View>
@@ -594,11 +594,11 @@ export default function SuckleToChewBridgeScreen() {
                 <Text style={styles.sectionTitle}>{t('suckleToChewBridge.sectionB.gagEvents')}</Text>
                 <View style={styles.counterRow}>
                   <Text style={styles.counterLabel}>{t('suckleToChewBridge.sectionB.gagEvents')}</Text>
-                  <TouchableOpacity style={styles.counterBtn} onPress={() => setGagEvents(Math.max(0, gagEvents - 1))}>
+                  <TouchableOpacity style={styles.counterBtn} onPress={() => setGagEvents(Math.max(0, gagEvents - 1))} accessibilityLabel={t('suckleToChewBridge.sectionB.gagMinus')}>
                     <MaterialCommunityIcons name="minus" size={16} color={C.text} />
                   </TouchableOpacity>
                   <Text style={styles.counterValue}>{gagEvents}</Text>
-                  <TouchableOpacity style={styles.counterBtn} onPress={() => setGagEvents(gagEvents + 1)}>
+                  <TouchableOpacity style={styles.counterBtn} onPress={() => setGagEvents(gagEvents + 1)} accessibilityLabel={t('suckleToChewBridge.sectionB.gagPlus')}>
                     <MaterialCommunityIcons name="plus" size={16} color={C.text} />
                   </TouchableOpacity>
                 </View>
@@ -606,20 +606,20 @@ export default function SuckleToChewBridgeScreen() {
                 <Text style={styles.sectionTitle}>{t('suckleToChewBridge.sectionB.refusalEvents')}</Text>
                 <View style={styles.counterRow}>
                   <Text style={styles.counterLabel}>{t('suckleToChewBridge.sectionB.refusalEvents')}</Text>
-                  <TouchableOpacity style={styles.counterBtn} onPress={() => setRefusalEvents(Math.max(0, refusalEvents - 1))}>
+                  <TouchableOpacity style={styles.counterBtn} onPress={() => setRefusalEvents(Math.max(0, refusalEvents - 1))} accessibilityLabel={t('suckleToChewBridge.sectionB.refusalMinus')}>
                     <MaterialCommunityIcons name="minus" size={16} color={C.text} />
                   </TouchableOpacity>
                   <Text style={styles.counterValue}>{refusalEvents}</Text>
-                  <TouchableOpacity style={styles.counterBtn} onPress={() => setRefusalEvents(refusalEvents + 1)}>
+                  <TouchableOpacity style={styles.counterBtn} onPress={() => setRefusalEvents(refusalEvents + 1)} accessibilityLabel={t('suckleToChewBridge.sectionB.refusalPlus')}>
                     <MaterialCommunityIcons name="plus" size={16} color={C.text} />
                   </TouchableOpacity>
                 </View>
 
                 <View style={styles.formButtonRow}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowFoodForm(false)}>
+                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowFoodForm(false)} accessibilityLabel={t('suckleToChewBridge.common.cancel')}>
                     <Text style={styles.cancelBtnText}>{t('suckleToChewBridge.common.cancel')}</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.saveBtn} onPress={handleSaveFoodAcceptance}>
+                  <TouchableOpacity style={styles.saveBtn} onPress={handleSaveFoodAcceptance} accessibilityLabel={t('suckleToChewBridge.common.save')}>
                     <Text style={styles.saveBtnText}>{t('suckleToChewBridge.common.save')}</Text>
                   </TouchableOpacity>
                 </View>
@@ -693,7 +693,7 @@ export default function SuckleToChewBridgeScreen() {
                       key={level.level}
                       style={[styles.chip, selectedTextureLevel === level.level && styles.chipSelected]}
                       onPress={() => setSelectedTextureLevel(level.level)}
-                      accessibilityLabel={`Level ${level.level}`}
+                      accessibilityLabel={`${t('suckleToChewBridge.sectionC.textureLevel')} ${level.level}`}
                     >
                       <Text style={[styles.chipText, selectedTextureLevel === level.level && styles.chipTextSelected]}>
                         {level.level}
@@ -707,6 +707,7 @@ export default function SuckleToChewBridgeScreen() {
                   <TouchableOpacity
                     style={[styles.chip, textureAccepted && styles.chipSelected]}
                     onPress={() => setTextureAccepted(true)}
+                    accessibilityLabel={t('suckleToChewBridge.sectionC.accepted')}
                   >
                     <Text style={[styles.chipText, textureAccepted && styles.chipTextSelected]}>
                       ✓ {t('suckleToChewBridge.sectionC.accepted')}
@@ -715,6 +716,7 @@ export default function SuckleToChewBridgeScreen() {
                   <TouchableOpacity
                     style={[styles.chip, !textureAccepted && styles.chipSelected]}
                     onPress={() => setTextureAccepted(false)}
+                    accessibilityLabel={t('suckleToChewBridge.sectionC.rejected')}
                   >
                     <Text style={[styles.chipText, !textureAccepted && styles.chipTextSelected]}>
                       ✗ {t('suckleToChewBridge.sectionC.rejected')}
@@ -723,10 +725,10 @@ export default function SuckleToChewBridgeScreen() {
                 </View>
 
                 <View style={styles.formButtonRow}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowTextureForm(false)}>
+                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowTextureForm(false)} accessibilityLabel={t('suckleToChewBridge.common.cancel')}>
                     <Text style={styles.cancelBtnText}>{t('suckleToChewBridge.common.cancel')}</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.saveBtn} onPress={handleSaveTextureLadder}>
+                  <TouchableOpacity style={styles.saveBtn} onPress={handleSaveTextureLadder} accessibilityLabel={t('suckleToChewBridge.common.save')}>
                     <Text style={styles.saveBtnText}>{t('suckleToChewBridge.common.save')}</Text>
                   </TouchableOpacity>
                 </View>

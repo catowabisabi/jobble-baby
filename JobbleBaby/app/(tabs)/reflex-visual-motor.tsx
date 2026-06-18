@@ -227,10 +227,10 @@ export default function ReflexVisualMotor() {
                 </View>
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Date (YYYY-MM-DD)" placeholderTextColor="#9CA3AF" value={selectedReflex.date} onChangeText={v => setSelectedReflex({ ...selectedReflex, date: v })} />
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedReflex.notes} onChangeText={v => setSelectedReflex({ ...selectedReflex, notes: v })} />
-                <View style={styles.modalBtns}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalReflex(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveReflexModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
-                </View>
+                  <View style={styles.modalBtns}>
+                    <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalReflex(false)} accessibilityLabel={t('reflex.cancel')}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveReflexModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
+                  </View>
               </>
             )}
           </View>
@@ -254,10 +254,10 @@ export default function ReflexVisualMotor() {
                 </View>
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Date (YYYY-MM-DD)" placeholderTextColor="#9CA3AF" value={selectedVisual.date} onChangeText={v => setSelectedVisual({ ...selectedVisual, date: v })} />
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedVisual.notes} onChangeText={v => setSelectedVisual({ ...selectedVisual, notes: v })} />
-                <View style={styles.modalBtns}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalVisual(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveVisualModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
-                </View>
+                  <View style={styles.modalBtns}>
+                    <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalVisual(false)} accessibilityLabel={t('reflex.cancel')}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveVisualModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
+                  </View>
               </>
             )}
           </View>
@@ -281,10 +281,10 @@ export default function ReflexVisualMotor() {
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="mm" placeholderTextColor="#9CA3AF" keyboardType="numeric" value={selectedSkinfold.mm > 0 ? String(selectedSkinfold.mm) : ''} onChangeText={v => setSelectedSkinfold({ ...selectedSkinfold, mm: parseInt(v) || 0 })} />
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Date (YYYY-MM-DD)" placeholderTextColor="#9CA3AF" value={selectedSkinfold.date} onChangeText={v => setSelectedSkinfold({ ...selectedSkinfold, date: v })} />
                 <TextInput style={[styles.input, { backgroundColor: bg, color: text }]} placeholder="Notes" placeholderTextColor="#9CA3AF" value={selectedSkinfold.notes} onChangeText={v => setSelectedSkinfold({ ...selectedSkinfold, notes: v })} />
-                <View style={styles.modalBtns}>
-                  <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalSkinfold(false)}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
-                  <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveSkinfoldModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
-                </View>
+                  <View style={styles.modalBtns}>
+                    <TouchableOpacity style={styles.cancelBtn} onPress={() => setModalSkinfold(false)} accessibilityLabel={t('reflex.cancel')}><Text style={{ color: text }}>{t('reflex.cancel')}</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveSkinfoldModal} accessibilityLabel={t('reflex.save') || 'Save'}><Text style={{ color: '#fff' }}>{t('reflex.save')}</Text></TouchableOpacity>
+                  </View>
               </>
             )}
           </View>

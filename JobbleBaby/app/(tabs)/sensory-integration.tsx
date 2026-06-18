@@ -587,6 +587,7 @@ export default function SensoryIntegrationScreen() {
         <TouchableOpacity
           style={[styles.viewModeBtn, viewMode === 'domains' && { backgroundColor: '#3B82F6' }]}
           onPress={() => setViewMode('domains')}
+          accessibilityLabel={t('sensoryIntegration.domains')}
         >
           <Text style={[styles.viewModeBtnText, { color: viewMode === 'domains' ? '#fff' : textSecondary }]}>
             {t('sensoryIntegration.domains')}
@@ -595,6 +596,7 @@ export default function SensoryIntegrationScreen() {
         <TouchableOpacity
           style={[styles.viewModeBtn, viewMode === 'crossmodal' && { backgroundColor: '#3B82F6' }]}
           onPress={() => setViewMode('crossmodal')}
+          accessibilityLabel={t('sensoryIntegration.crossModal')}
         >
           <Text style={[styles.viewModeBtnText, { color: viewMode === 'crossmodal' ? '#fff' : textSecondary }]}>
             {t('sensoryIntegration.crossModal')}
@@ -735,6 +737,7 @@ export default function SensoryIntegrationScreen() {
                           onPress={() => {
                             // Navigate handled by tab system
                           }}
+                          accessibilityLabel={t(`tabs.${tab.replace('-', '')}`) || tab}
                         >
                           <Text style={[styles.linkedTabChipText, { color: domain.color }]}>
                             → {t(`tabs.${tab.replace('-', '')}`) || tab}
@@ -875,6 +878,7 @@ export default function SensoryIntegrationScreen() {
                       key={milestone.id}
                       style={[styles.milestoneCard, { backgroundColor: cardBg }]}
                       onPress={() => openMilestoneDetail(selectedDomain, milestone)}
+                      accessibilityLabel={t(milestone.labelKey)}
                     >
                       <View style={styles.milestoneCardHeader}>
                         <View style={[styles.milestoneColorBar, { backgroundColor: milestone.color }]} />

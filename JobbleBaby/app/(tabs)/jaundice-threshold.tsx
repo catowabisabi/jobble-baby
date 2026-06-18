@@ -273,6 +273,7 @@ export default function JaundiceThresholdScreen() {
               <TouchableOpacity
                 style={[styles.methodBtn, method === 'blood' && styles.methodBtnActive]}
                 onPress={() => setMethod('blood')}
+                accessibilityLabel={t('jaundiceThreshold.blood')}
               >
                 <Text style={[styles.methodBtnText, method === 'blood' && styles.methodBtnTextActive]}>
                   {t('jaundiceThreshold.blood')}
@@ -281,6 +282,7 @@ export default function JaundiceThresholdScreen() {
               <TouchableOpacity
                 style={[styles.methodBtn, method === 'transcutaneous' && styles.methodBtnActive]}
                 onPress={() => setMethod('transcutaneous')}
+                accessibilityLabel={t('jaundiceThreshold.transcutaneous')}
               >
                 <Text style={[styles.methodBtnText, method === 'transcutaneous' && styles.methodBtnTextActive]}>
                   {t('jaundiceThreshold.transcutaneous')}
@@ -292,6 +294,7 @@ export default function JaundiceThresholdScreen() {
               <TouchableOpacity
                 style={styles.cancelButton}
                 onPress={() => { setShowForm(false); setBiliInput(''); }}
+                accessibilityLabel={t('jaundiceThreshold.cancel')}
               >
                 <Text style={styles.cancelButtonText}>{t('jaundiceThreshold.cancel')}</Text>
               </TouchableOpacity>

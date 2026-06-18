@@ -265,6 +265,7 @@ export default function ThermalMetabolic() {
     <TouchableOpacity
       style={[styles.tabBtn, activeTab === id && styles.tabBtnActive]}
       onPress={() => setActiveTab(id)}
+      accessibilityLabel={label}
     >
       <Text style={[styles.tabBtnText, activeTab === id && styles.tabBtnTextActive]}>{label}</Text>
     </TouchableOpacity>
@@ -330,6 +331,7 @@ export default function ThermalMetabolic() {
             key={type}
             style={[styles.typeBtn, bfType === type && styles.typeBtnActive]}
             onPress={() => setBfType(type)}
+            accessibilityLabel={t(`thermalMetabolic.${type}`)}
           >
             <Text style={[styles.typeBtnText, bfType === type && styles.typeBtnTextActive]}>
               {t(`thermalMetabolic.${type}`)}

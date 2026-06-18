@@ -220,6 +220,7 @@ export default function VillageNetworkScreen() {
               key={resource.id}
               style={styles.resourceCard}
               onPress={() => resource.url && Linking.openURL(resource.url).catch(() => {})}
+              accessibilityLabel={t(resource.titleKey)}
             >
               <Text style={styles.resourceIcon}>{resource.icon}</Text>
               <Text style={styles.resourceTitle}>{t(resource.titleKey)}</Text>

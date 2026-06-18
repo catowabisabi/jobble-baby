@@ -79,6 +79,7 @@ export default function ConstellationScreen() {
             key={c.name}
             style={[styles.clusterChip, selectedCluster === i && { backgroundColor: c.color }]}
             onPress={() => { setSelectedCluster(i); setSelectedStar(null); }}
+            accessibilityLabel={c.name}
           >
             <Text style={[styles.clusterChipText, selectedCluster === i && { color: '#fff' }]}>
               {c.name}

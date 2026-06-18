@@ -387,7 +387,7 @@ export default function PhototherapyComfortScreen() {
             <TextInput style={[styles.input, { backgroundColor: inputBg, color: C.text, minHeight: 60 }]} value={notes} onChangeText={setNotes} placeholder={t('photoComfort.notesPlaceholder') || 'Any notes...'} placeholderTextColor={C.muted} multiline />
 
             <View style={styles.modalActions}>
-              <TouchableOpacity style={[styles.cancelBtn, { borderColor: C.border }]} onPress={() => { resetForm(); setShowModal(false); }}>
+              <TouchableOpacity style={[styles.cancelBtn, { borderColor: C.border }]} onPress={() => { resetForm(); setShowModal(false); }} accessibilityLabel={t('photoComfort.cancel')}>
                 <Text style={[styles.cancelBtnText, { color: C.text }]}>{t('photoComfort.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.saveBtn, { backgroundColor: C.accent }]} onPress={saveSession} accessibilityLabel="Save phototherapy session">

@@ -1,0 +1,40 @@
+# Task 384 — Fix accessibilityLabel gaps in 4 component files
+
+## Context
+You are fixing WCAG 2.1 AA accessibility gaps in React Native component files. Every TouchableOpacity MUST have an accessibilityLabel for screen reader users.
+
+## Files to audit and fix
+
+### 1. app/components/AllergenDetailModal.tsx
+- 9 TouchableOpacity, 0 accessibilityLabel
+- Read the file first to understand context
+
+### 2. app/components/ReactionLogModal.tsx
+- 17 TouchableOpacity, 0 accessibilityLabel
+- Read the file first to understand context
+
+### 3. app/components/EmergencySOSScreen.tsx
+- 7 TouchableOpacity, 0 accessibilityLabel
+- Read the file first to understand context
+
+### 4. app/components/MonitorWidget.tsx
+- 3 TouchableOpacity, 0 accessibilityLabel
+- Read the file first to understand context
+
+## Rules
+
+1. Check en.json and zh.json FIRST for existing i18n keys before adding new ones
+2. For each TouchableOpacity without accessibilityLabel:
+   - If existing i18n key fits → use `accessibilityLabel={t('key.path')}`
+   - If no existing key → add new key to en.json AND zh.json, format: `componentName.actionOrLabel`
+3. After all edits, run `npx tsc --noEmit` — MUST pass 0 errors
+4. If you add new i18n keys, verify they exist in BOTH en.json AND zh.json
+
+## Verification
+- `npx tsc --noEmit` → 0 errors
+- Every TouchableOpacity has an accessibilityLabel
+
+## Output
+Save your full work log to: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_response_412.txt
+
+ULW

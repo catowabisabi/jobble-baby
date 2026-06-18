@@ -1,17 +1,31 @@
-# Cycle 411 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-18 10:00 HKT
-# Status: Task 383 dispatched (a11y gaps, 5 tab files)
+# Cycle 412 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-18 12:00 HKT
+# Status: Task 383 COMPLETE (5 tab files a11y). Dispatching task 384 (4 component files a11y)
 # TSC: 0 errors (JobbleBaby/)
-# Commit: 4c6e2c9 → pushed
 
-=== CYCLE 411 ACTIONS ===
+=== CYCLE 412 ACTIONS ===
 
-✅ STEP 1 (Survival + Source): Session jobble-baby alive (2 windows), opencode serve running (PID 1202570)
-✅ STEP 2 (Verify): Tasks 381 + 382 COMPLETE
-✅ STEP 3 (Review): Codebase scan found a11y gaps — 5 tab files (19 missing) + 7 component/screen files (26 missing)
-✅ STEP 5 (Commit): Autoloop files + todos #383 #384
-✅ STEP 6 (Dispatch): Task 383 dispatched → Sisyphus pane 2.0
+✅ STEP 1 (Survival + Source): Session jobble-baby alive, TSC 0 errors
+✅ STEP 2 (Verify): Task 383 COMPLETE — Sisyphus fixed a11y in 5 tab files (constellation, jaundice-threshold, phototherapy-comfort, thermal-metabolic, village-network)
+✅ STEP 3 (Review): 4 component files have ZERO accessibilityLabel despite TouchableOpacity usage
+✅ STEP 5 (Commit): Pending — git add -A && git commit after task dispatch
+✅ STEP 6 (Dispatch): Task 384 dispatched → Sisyphus
 ✅ STEP 7 (Telegram): Written to telegram_out.txt
+
+=== TASK #384 — Fix accessibilityLabel gaps in 4 component files ===
+
+Files to audit/fix:
+1. app/components/AllergenDetailModal.tsx — 9 TouchableOpacity, 0 accessibilityLabel
+2. app/components/ReactionLogModal.tsx — 17 TouchableOpacity, 0 accessibilityLabel
+3. app/components/EmergencySOSScreen.tsx — 7 TouchableOpacity, 0 accessibilityLabel
+4. app/components/MonitorWidget.tsx — 3 TouchableOpacity, 0 accessibilityLabel
+
+Rules:
+- Add accessibilityLabel to EVERY TouchableOpacity that doesn't have one
+- Use existing i18n keys where possible (check en.json/zh.json first)
+- If no existing key, add new key to en.json + zh.json — format: `componentName.actionOrLabel`
+- After editing: run `npx tsc --noEmit` — must pass 0 errors
+- Save response to: .hermes/autoloop/sisyphus_response_412.txt
 
 === PENDING USER-ACTION BLOCKERS ===
 
@@ -24,5 +38,4 @@ High Priority (user-action required):
 
 === CODE QUALITY ===
 
-P2 (Medium): TODO #383 — Fix a11y gaps in 5 tab files (IN PROGRESS)
-P3 (Low): TODO #384 — Fix a11y gaps in 7 component/screen files (pending)
+P3 (Low): TODO #384 — Fix a11y gaps in 4 component files (IN PROGRESS)

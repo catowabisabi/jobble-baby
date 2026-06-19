@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 22:07
+🍼 Jobble Baby · 23:01
 ✅ Done: —
 🔧 Dispatched: —
 📋 TODO: 0 pending · 0 new · 161 completed
-📦 Commit: cb2fae0 → pushed
-📝 Queue empty · Sisyphus session dead · 11 open painpoints (hardcoded strings in gesture-milestone/interoceptive/5 tabs). Project ready for submission — 5 user-action blockers unchanged.
+📦 Commit: 1ce0bd1 → pushed
+📝 TSC: 0 errors · 26 painpoints resolved · 1 acknowledged (CocoaPods macOS) · Queue empty · Sisyphus session unavailable (TTY cron) · 5 user-action blockers unchanged (EAS creds, App Store Connect, Play Console, privacy URL, EAS build)

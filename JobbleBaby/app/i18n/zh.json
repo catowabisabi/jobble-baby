@@ -736,7 +736,8 @@
     "noFeedsToday": "今日尚無餵食記錄",
     "pauseTimer": "暫停計時",
     "startTimer": "開始計時",
-    "reset": "重置計時器"
+    "reset": "重置計時器",
+    "quickAddPreset": "快速新增 {{amount}}"
   },
   "sleepTraining": {
     "title": "睡眠訓練",

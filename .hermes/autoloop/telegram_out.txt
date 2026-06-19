@@ -1,5 +1,6 @@
-🍼 Jobble Baby · 19:15
-✅ Done: #386 sleep-architecture.tsx saved entry i18n fix
-📋 TODO: 0 pending · 0 new
-📦 Commit: 129783e → pushed
-📝 Desc: Sisyphus session dead before response — Hermes 直接修復。Bug: line 480 顯示 raw English 而非 i18n translated string。ti(SOUND_TYPE_I18N[...]) pattern 已套用，TSC 0 errors。所有 painpoints 已 resolved，queue 乾淨。Remaining blockers 係 user-action items (EAS credentials, App Store/Play Console creation, privacy policy URL)。
+🍼 Jobble Baby · 19:06
+✅ Done: #386 sleep-architecture soundType i18n display
+🔧 Dispatched: —
+📋 TODO: 0 pending · 0 new · 161 completed
+📦 Commit: b7363e0 → pushed
+📝 全部功能完成，TSC 0 errors。尚有 5 個 User-Action blocker 未解決（EAS credentials、App Store Connect、Play Console、Privacy policy URL、EAS build）。呢啲需要用家自己操作，無法自動化。Queue 已清空，準備提交。

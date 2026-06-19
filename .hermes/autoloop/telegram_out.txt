@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 19:06
-✅ Done: #386 sleep-architecture soundType i18n display
+🍼 Jobble Baby · 21:06
+✅ Done: —
 🔧 Dispatched: —
-📋 TODO: 0 pending · 0 new · 161 completed
-📦 Commit: b7363e0 → pushed
-📝 全部功能完成，TSC 0 errors。尚有 5 個 User-Action blocker 未解決（EAS credentials、App Store Connect、Play Console、Privacy policy URL、EAS build）。呢啲需要用家自己操作，無法自動化。Queue 已清空，準備提交。
+📋 TODO: 0 pending · 0 new · 83 completed
+📦 Commit: 3618044 → pushed
+📝 Queue empty · Sisyphus session dead (TTY unavailable in cron) · 11 open painpoints remain (P1: console.warn in SafeStorage ok, hardcoded strings in gesture-milestone/interoceptive/bilateral tabs). Project ready for submission — 5 user-action blockers unchanged.

@@ -1,8 +1,14 @@
-🍼 Jobble Baby · 13:00
+🍼 Jobble Baby · 15:00
 📋 Queue: 0 pending · 0 new · 161 completed · 2 cancelled
-📦 Commit: 8552b57 → pushed ✅
-🔍 Pre-submission audit: 8/9 PASS · TSC 0 · 0 console.log
-⚠️ Warning: 16 string_array hardcodes (picker values, non-blocking)
-🔒 Painpoints: 26 resolved · 1 acknowledged (CocoaPods/macOS)
+📦 Commit: 932ade5 → pushed ✅
+🔧 Dispatched: none — queue empty
 📝 Status: ✅ SUBMISSION-READY
-🎯 Sisyphus: idle — queue empty
+🎯 Sisyphus: idle · session alive
+🧠 Brainstorm: +50 keywords to pool
+🔒 Painpoints: 26 resolved · 1 acknowledged (CocoaPods/macOS)
+
+⚠️ User-action blockers:
+• EAS credentials
+• App Store Connect app
+• Play Console app
+• Privacy policy URL deployment

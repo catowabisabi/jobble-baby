@@ -597,6 +597,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="head-lightbulb" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="protoconversation"
+        options={{
+          title: t('tabs.protoconversation') || 'Proto-Conversation',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="chat-processing-outline" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

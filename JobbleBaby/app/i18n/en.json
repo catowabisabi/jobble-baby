@@ -172,7 +172,8 @@
     "regulatoryFitness": "Regulatoryfitness",
     "windowOfTolerance": "Windowoftolerance",
     "feedingProgression": "Feeding",
-    "behavioralRehearsal": "Rehearsal"
+    "behavioralRehearsal": "Rehearsal",
+    "protoconversation": "Proto-Conv"
   },
   "gestureMilestone": {
     "title": "Gesture Bridge",
@@ -4370,6 +4371,79 @@
       "progress": "Progress:",
       "newStepPlaceholder": "Add a new step...",
       "addStep": "Add Step"
+    }
+  },
+  "protoconversation": {
+    "title": "Proto-Conversation",
+    "greeting": "Prelinguistic Development",
+    "description": "Track prelinguistic communication milestones",
+    "protoCounter": {
+      "title": "Proto-Conversation Turn Counter",
+      "today": "Today",
+      "streak": "7-Day Streak",
+      "add1": "Add 1 exchange",
+      "add5": "Add 5 exchanges",
+      "add10": "Add 10 exchanges",
+      "last14Days": "Last 14 Days"
+    },
+    "gazeAlternation": {
+      "title": "Gaze Alternation",
+      "today": "Today",
+      "sawIt": "Saw it!",
+      "typical": "Typical: 5-10 per day at 12mo"
+    },
+    "jointAttention": {
+      "title": "Joint Attention",
+      "avgDuration": "Avg Duration",
+      "sessions": "Sessions",
+      "start": "Start Timer",
+      "stop": "Stop Timer"
+    },
+    "affectiveSharing": {
+      "title": "Affective Sharing",
+      "todayScore": "Today's Score",
+      "check": "Check In",
+      "checklist": "Emotional Matching Checklist",
+      "smiled_when_I_smiled": "Baby smiled when I smiled",
+      "frowned_when_I_frowned": "Baby frowned when I frowned",
+      "excited_when_I_showed_excitement": "Baby showed excitement when I did"
+    },
+    "motherese": {
+      "title": "Motherese Response",
+      "positiveResponses": "Positive Responses",
+      "totalLogged": "Total Logged",
+      "log": "Log Response",
+      "engaged": "Baby engaged with motherese?",
+      "yes": "Yes",
+      "no": "No/Neutral"
+    },
+    "imitative": {
+      "title": "Imitative Repertoire",
+      "learned": "Learned",
+      "total": "Total Actions",
+      "actions": {
+        "clap_hands": "Clap hands",
+        "wave_bye": "Wave bye-bye",
+        "peek_a_boo": "Peek-a-boo",
+        "blow_kiss": "Blow kiss",
+        "shake_head_no": "Shake head no",
+        "nod": "Nod",
+        "pointing": "Pointing",
+        "touch_nose": "Touch nose",
+        "touch_ears": "Touch ears",
+        "touch_eyes": "Touch eyes"
+      }
+    },
+    "benchmarks": {
+      "title": "Developmental Benchmarks",
+      "protoConversation": "Proto-conversation",
+      "jointAttention": "Joint attention",
+      "gazeAlternation": "Gaze alternation",
+      "imitativeWords": "Imitative words"
+    },
+    "common": {
+      "save": "Save",
+      "cancel": "Cancel"
     }
   }
 }

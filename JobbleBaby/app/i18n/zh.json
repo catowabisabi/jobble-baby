@@ -162,7 +162,8 @@
     "tabs.gestureMilestone": "Gesture [TODO]",
     "preSubmissionQa": "預提交 QA",
     "feedingProgression": "餵食",
-    "behavioralRehearsal": "行為排練"
+    "behavioralRehearsal": "行為排練",
+    "protoconversation": "前語言溝通"
   },
   "gestureMilestone": {
     "title": "手势桥梁",
@@ -4380,6 +4381,79 @@
       "progress": "進度：",
       "newStepPlaceholder": "添加新步驟...",
       "addStep": "添加步驟"
+    }
+  },
+  "protoconversation": {
+    "title": "前語言溝通",
+    "greeting": "前語言發育",
+    "description": "追蹤前語言溝通里程碑",
+    "protoCounter": {
+      "title": "前語言對話回合計數器",
+      "today": "今日",
+      "streak": "7天連續",
+      "add1": "+1 回合",
+      "add5": "+5 回合",
+      "add10": "+10 回合",
+      "last14Days": "過去14天"
+    },
+    "gazeAlternation": {
+      "title": "眼神交替",
+      "today": "今日",
+      "sawIt": "看到了！",
+      "typical": "典型：12個月時每天5-10次"
+    },
+    "jointAttention": {
+      "title": "共同注意",
+      "avgDuration": "平均時長",
+      "sessions": "次數",
+      "start": "開始計時",
+      "stop": "停止計時"
+    },
+    "affectiveSharing": {
+      "title": "情感共享",
+      "todayScore": "今日得分",
+      "check": "打卡",
+      "checklist": "情緒匹配清單",
+      "smiled_when_I_smiled": "BB對我笑時會笑",
+      "frowned_when_I_frowned": "BB皺眉時會皺眉",
+      "excited_when_I_showed_excitement": "BB對我表現興奮時會表現興奮"
+    },
+    "motherese": {
+      "title": "對BB語言回應",
+      "positiveResponses": "正向回應",
+      "totalLogged": "總記錄",
+      "log": "記錄回應",
+      "engaged": "BB對BB語言有反應？",
+      "yes": "有",
+      "no": "沒有/中性"
+    },
+    "imitative": {
+      "title": "模仿動作庫",
+      "learned": "已學會",
+      "total": "總動作",
+      "actions": {
+        "clap_hands": "拍手",
+        "wave_bye": "揮手再見",
+        "peek_a_boo": "躲貓貓",
+        "blow_kiss": "飛吻",
+        "shake_head_no": "搖頭",
+        "nod": "點頭",
+        "pointing": "指點",
+        "touch_nose": "摸鼻子",
+        "touch_ears": "摸耳朵",
+        "touch_eyes": "摸眼睛"
+      }
+    },
+    "benchmarks": {
+      "title": "發育指標",
+      "protoConversation": "前語言對話",
+      "jointAttention": "共同注意",
+      "gazeAlternation": "眼神交替",
+      "imitativeWords": "模仿詞彙"
+    },
+    "common": {
+      "save": "儲存",
+      "cancel": "取消"
     }
   }
 }

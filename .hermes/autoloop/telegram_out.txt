@@ -1,13 +1,6 @@
-🍼 Jobble Baby · 21:06
-📋 Queue: 0 pending · 0 new
-🔧 Sisyphus: idle · session alive
-📦 TSC: 0 errors
-📝 Status: ✅ SUBMISSION-READY
-
-⚠️ User-action blockers:
-• EAS credentials (Apple Team ID + App-Specific Password)
-• App Store Connect app creation
-• Play Console app creation
-• Privacy policy URL deployment (jobblebaby.com/privacy)
-
-💡 所有代碼級任務已完成，等待用戶操作 credentials 及帳戶設定。
+🍼 Jobble Baby · 15:03
+✅ Done: #387 Pre-Submission QA Checklist Tab
+🔧 Dispatched: #388 Feeding Progression Navigator
+📋 TODO: 0 pending · 1 new
+📦 Commit: c509d48 → pushed
+📝 Desc: Cycle 436 — 55 brainstorm keywords added (pool: 1055). Concept #62 sparked: Feeding Progression Navigator (5-stage weaning + allergen timeline). TSC 0. ✅

@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 14:04
-✅ Done: #391 Fix vestibularMotor i18n + behavioral-rehearsal accessibility (19 elements)
-🔧 Dispatched: #392 Fix hardcoded i18n arrays in 5 files (painpoint #26)
-📋 TODO: 0 pending · 0 new
-📦 Commit: 03764ba → pushed
-📝 Desc: 完成 #391，TSC 0 過審。i18n arrays 問題 (bilateral-coordination, circadian, colic-relief, caregiver-fatigue, asymmetric-growth) 已 dispatch 畀 Sisyphus。
+🍼 Jobble Baby · 16:20
+✅ Done: #391 Co-regulation Resonance Tracker (idea #84)
+🔧 Dispatched: #392 Fix hardcoded i18n arrays in 5 files
+📋 TODO: 0 pending · 1 in_progress
+📦 Commit: 23362ab → pushed
+📝 Desc: #391 完成（Co-Regulation Resonance tab，包含 5 個 section）。#392 已 dispatch，修復 5 個 tab 檔案嘅 hardcoded string arrays。

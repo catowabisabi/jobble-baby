@@ -171,7 +171,8 @@
     "interoceptive": "Interoceptive",
     "regulatoryFitness": "Regulatoryfitness",
     "windowOfTolerance": "Windowoftolerance",
-    "feedingProgression": "Feeding"
+    "feedingProgression": "Feeding",
+    "behavioralRehearsal": "Rehearsal"
   },
   "gestureMilestone": {
     "title": "Gesture Bridge",
@@ -4275,5 +4276,100 @@
     "sleepQualityRating": "Sleep Quality After Activity (optional)",
     "feedingOutcome": "Feeding Outcome (optional)",
     "sleepQuality": "Sleep"
+  },
+  "behavioralRehearsal": {
+    "title": "Behavioral Rehearsal",
+    "scenarioLibrary": "Scenario Library",
+    "backToLibrary": "Back to Library",
+    "anxietyElements": "Anxiety-Provoking Elements",
+    "prepSteps": "Suggested Preparation Steps",
+    "logRehearsal": "Log Rehearsal Session",
+    "buildExposure": "Build Exposure Hierarchy",
+    "logOutcome": "Log Real-World Outcome",
+    "stats": {
+      "rehearsals": "Rehearsals",
+      "anxietyReduction": "Avg Anxiety Reduction",
+      "exposureProgress": "Exposure Steps"
+    },
+    "tabs": {
+      "sessions": "Sessions",
+      "outcomes": "Outcomes"
+    },
+    "noRehearsals": "No rehearsal sessions yet. Start with guided mental rehearsal!",
+    "noOutcomes": "No real-world outcomes logged yet.",
+    "before": "Before",
+    "after": "After",
+    "scenario": {
+      "pediatrician": {
+        "title": "First Pediatrician Visit",
+        "desc": "Preparing for the first checkup — vaccinations, physical exam, and unfamiliar environment."
+      },
+      "groupOuting": {
+        "title": "First Group Social Outing",
+        "desc": "Baby groups, family gatherings, or public outings with your infant."
+      },
+      "vaccination": {
+        "title": "Vaccination Appointment",
+        "desc": "Managing anxiety around needles, pain, and post-vaccination fever."
+      },
+      "returnToWork": {
+        "title": "Returning to Work",
+        "desc": "Separation anxiety for both parent and baby during daycare drop-off."
+      },
+      "airplane": {
+        "title": "First Airplane Trip",
+        "desc": "Managing ear pressure, confined space, and schedule disruption."
+      },
+      "strangerCare": {
+        "title": "First Stranger Care Episode",
+        "desc": "Leaving your baby with a new caregiver for the first time."
+      },
+      "sleepTraining": {
+        "title": "Sleep Training Night 1",
+        "desc": "Mental preparation for the first night of structured sleep training."
+      },
+      "solidFoods": {
+        "title": "Introduction to Solid Foods",
+        "desc": "First tasting sessions — allergy risks, gag reflex, and food acceptance."
+      }
+    },
+    "rehearsalType": {
+      "visualization": "Visualization",
+      "verbal": "Verbal Run-through",
+      "rolePlay": "Role Play",
+      "physical": "Physical Practice"
+    },
+    "outcome": {
+      "success": "Success",
+      "partial": "Partial",
+      "backedOut": "Backed Out"
+    },
+    "childResponse": {
+      "calm": "Calm",
+      "fussy": "Fussy",
+      "meltdown": "Meltdown",
+      "na": "N/A"
+    },
+    "rehearsalLog": {
+      "title": "Log Rehearsal Session",
+      "type": "Rehearsal Type",
+      "duration": "Duration (minutes)",
+      "anxietyBefore": "Anxiety Before",
+      "anxietyAfter": "Anxiety After",
+      "notes": "Notes"
+    },
+    "outcomeLog": {
+      "title": "Log Real-World Outcome",
+      "result": "Result",
+      "childResponse": "Child Response",
+      "parentFeeling": "Parent Feeling Post-Event",
+      "notes": "What worked / what to change"
+    },
+    "exposureBuilder": {
+      "title": "Exposure Hierarchy Builder",
+      "progress": "Progress:",
+      "newStepPlaceholder": "Add a new step...",
+      "addStep": "Add Step"
+    }
   }
 }

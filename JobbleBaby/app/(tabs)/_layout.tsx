@@ -5,6 +5,7 @@ import GearCheckScreen from './gear-check';
 import VillageNetworkScreen from './village-network';
 import DevelopmentRadarScreen from './development-radar';
 import EmergencySOSScreen from './emergency-sos';
+import BehavioralRehearsalScreen from './behavioral-rehearsal';
 
 export default function TabsLayout() {
   const { t } = useLanguage();
@@ -587,6 +588,13 @@ export default function TabsLayout() {
         options={{
           title: t('tabs.preSubmissionQa') || 'QA',
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="clipboard-check-outline" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="behavioral-rehearsal"
+        options={{
+          title: t('tabs.behavioralRehearsal') || 'Rehearsal',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="head-lightbulb" size={size} color={color} />
         }}
       />
     </Tabs>

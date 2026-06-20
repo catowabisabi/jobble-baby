@@ -1,7 +1,5 @@
-🍼 Jobble Baby · 07:00
-✅ Done: #385 Vestibular-Motor Integration Navigator
-✅ Done: #388 Feeding Progression Navigator
-🔧 Dispatched: #389 Behavioral Rehearsal Protocol
-📋 TODO: 0 pending · 1 in_progress · 165 completed
-📦 Commit: a344c16 → pushed
-📝 Desc: Vestibular-Motor tab committed ✅ | Feeding Progression tab verified ✅ | TSC 0 | 48 keywords added (pool 1199) | Sisyphus dispatched: Behavioral Rehearsal Protocol tab (concept #53) | Concepts 47/52/56/57/60 marked implemented | Submission-ready awaiting user action: EAS creds + App Store Connect + Play Console + privacy URL
+🍼 Jobble Baby · 08:06
+⚠️ OpenCode server error — task #389 retry pending
+📋 TODO: 1 pending · 163 completed
+📦 Commit: a344c16 ✅
+📝 Desc: OpenCode server 連續返回 UnknownError。#389 Behavioral Rehearsal Protocol tab 等待下次 retry。所有 tabs 完成，TSC 0，準備就緒。

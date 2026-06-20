@@ -1,48 +1,43 @@
-# Cycle 439 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-20 07:00 HKT
-# Status: Dispatched. Task 389 in progress.
+# Cycle 440 — HERMES AUTOLOOP CYCLE (RETRY)
+# Date: 2026-06-20 08:00 HKT
+# Status: OpenCode server error. Task #389 pending retry.
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
 ✅ user-intention.md exists
-✅ Sisyphus idle → dispatching task 389
-✅ Queue: 0 pending · 1 in_progress (todo #389)
+✅ Sisyphus idle → task #389 dispatch FAILED (server error)
+✅ Queue: 1 pending (todo #389)
 
 === STEP 2 (Verify) ===
-✅ Task 385 completed — Vestibular-Motor Integration Navigator → committed a344c16
-✅ Task 388 completed — Feeding Progression Navigator → committed 70b31e8
+✅ Task 385 verified completed — committed a344c16
+✅ Task 389 dispatch: OpenCode server UnknownError (ref: err_3f4ab66d)
+✅ Task #389 marked pending — will retry next cycle
 
 === STEP 3 (Review) ===
 ✅ TSC: 0 errors (JobbleBaby/)
-✅ Queue: 1 in_progress task (todo #389: Behavioral Rehearsal Protocol)
-✅ Concepts 47, 56, 57, 60, 52 → marked implemented (tabs exist)
-✅ Concept 53 → Behavioral Rehearsal Protocol (spec_done, no tab yet)
+✅ Queue: 1 pending task (todo #389: Behavioral Rehearsal Protocol)
+✅ Concept #53 (Behavioral Rehearsal Protocol) — spec_done, awaiting tab
 ✅ No open painpoints
 
 === STEP 4 (Brainstorm) ===
-✅ Added 48 new keywords to pool (total: 1199)
-✅ Picked prompt3: strehl_ratio_resolution, aperture_synthesis_long_exposure, who_standard_deviation
-✅ Sparked task #389: Behavioral Rehearsal Protocol tab (concept #53)
+⏭️ Skipped — already done in cycle 439 (48 keywords added)
 
 === STEP 5 (Commit) ===
-✅ a344c16 → pushed
-   - feat: add Vestibular-Motor Integration Navigator tab (todo #385)
-   - mark todo #385, #388 complete; concepts 47/52/56/57/60 implemented
+⏭️ No code changes this cycle
 
 === STEP 6 (Dispatch) ===
-✅ Dispatched: todo #389 — Behavioral Rehearsal Protocol tab
-✅ prompt3 keywords: strehl_ratio_resolution, aperture_synthesis_long_exposure, who_standard_deviation
-✅ Task written to /tmp/task_389.txt → dispatching via opencode
+❌ FAILED — OpenCode server returned UnknownError
+⚠️ Task #389 still pending — will retry next cycle
 
 === STEP 7 (Telegram) ===
 📝 Written to telegram_out.txt
 
 === CURRENT STATE ===
-- TODO: 0 pending · 1 in_progress · 165 completed · 2 cancelled
-- Queue: 1 task dispatched (todo #389: Behavioral Rehearsal Protocol)
+- TODO: 1 pending · 163 completed · 2 cancelled · 2 deferred
+- Queue: 1 task blocked by server error (todo #389)
 - Git: a344c16 pushed ✅
 - TSC: Verified clean (JobbleBaby/ — 0 errors)
-- Sisyphus: Active — task 389 dispatched
+- OpenCode Server: ⚠️ UNSTABLE — returning UnknownError
 - Keyword pool: 1199 keywords
 
 === PENDING USER-ACTION BLOCKERS ===
@@ -54,5 +49,5 @@
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
 All tab features implemented. i18n bilingual. TSC 0. No console.logs.
-Sisyphus working on: Behavioral Rehearsal Protocol tab (concept #53).
-Next: once #389 done → appstore-connect tab + final submission prep.
+Blocked: OpenCode server error — task #389 retry pending.
+Next: retry #389 once server stabilizes → appstore-connect tab + final submission prep.

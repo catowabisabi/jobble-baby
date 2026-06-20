@@ -161,7 +161,8 @@
     "tabs.cryAnalyzer": "Cry Analyzer [TODO]",
     "tabs.gestureMilestone": "Gesture [TODO]",
     "preSubmissionQa": "預提交 QA",
-    "feedingProgression": "餵食"
+    "feedingProgression": "餵食",
+    "behavioralRehearsal": "行為排練"
   },
   "gestureMilestone": {
     "title": "手势桥梁",
@@ -4285,5 +4286,100 @@
     "sleepQualityRating": "活動後睡眠質量（可選）",
     "feedingOutcome": "餵養結果（可選）",
     "sleepQuality": "睡眠"
+  },
+  "behavioralRehearsal": {
+    "title": "行為排練",
+    "scenarioLibrary": "情境庫",
+    "backToLibrary": "返回情境庫",
+    "anxietyElements": "焦慮因素",
+    "prepSteps": "建議準備步驟",
+    "logRehearsal": "記錄排練環節",
+    "buildExposure": "建立暴露階梯",
+    "logOutcome": "記錄實際結果",
+    "stats": {
+      "rehearsals": "排練次數",
+      "anxietyReduction": "平均焦慮降低",
+      "exposureProgress": "暴露進度"
+    },
+    "tabs": {
+      "sessions": "環節記錄",
+      "outcomes": "實際結果"
+    },
+    "noRehearsals": "尚無排練記錄。開始引導式心理排練！",
+    "noOutcomes": "尚無實際結果記錄。",
+    "before": "排練前",
+    "after": "排練後",
+    "scenario": {
+      "pediatrician": {
+        "title": "第一次兒科就診",
+        "desc": "準備第一次檢查——疫苗注射、身體檢查和陌生環境。"
+      },
+      "groupOuting": {
+        "title": "第一次群體外出",
+        "desc": "嬰兒聚會、家庭聚會或公共場所外出。"
+      },
+      "vaccination": {
+        "title": "疫苗注射 appointment",
+        "desc": "管理針頭恐懼、疼痛和注射後發燒。"
+      },
+      "returnToWork": {
+        "title": "重返工作崗位",
+        "desc": "送托時父母和寶寶的分離焦慮。"
+      },
+      "airplane": {
+        "title": "第一次飛機旅行",
+        "desc": "應對耳壓、密閉空間和行程紊亂。"
+      },
+      "strangerCare": {
+        "title": "第一次陌生人照顧",
+        "desc": "第一次將寶寶交給新照顧者。"
+      },
+      "sleepTraining": {
+        "title": "睡眠訓練第一夜",
+        "desc": "為第一晚結構化睡眠訓練做好心理準備。"
+      },
+      "solidFoods": {
+        "title": "引入固體食物",
+        "desc": "初次品嚐——過敏風險、嘔吐反射和食物接受度。"
+      }
+    },
+    "rehearsalType": {
+      "visualization": "視覺化",
+      "verbal": "語言演練",
+      "rolePlay": "角色扮演",
+      "physical": "實際練習"
+    },
+    "outcome": {
+      "success": "成功",
+      "partial": "部分成功",
+      "backedOut": "退出"
+    },
+    "childResponse": {
+      "calm": "平靜",
+      "fussy": "哭鬧",
+      "meltdown": "崩潰",
+      "na": "不適用"
+    },
+    "rehearsalLog": {
+      "title": "記錄排練環節",
+      "type": "排練類型",
+      "duration": "時長（分鐘）",
+      "anxietyBefore": "排練前焦慮",
+      "anxietyAfter": "排練後焦慮",
+      "notes": "備註"
+    },
+    "outcomeLog": {
+      "title": "記錄實際結果",
+      "result": "結果",
+      "childResponse": "孩子反應",
+      "parentFeeling": "事後家長感受",
+      "notes": "有效做法 / 需改進"
+    },
+    "exposureBuilder": {
+      "title": "暴露階梯建立",
+      "progress": "進度：",
+      "newStepPlaceholder": "添加新步驟...",
+      "addStep": "添加步驟"
+    }
   }
 }

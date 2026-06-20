@@ -1,5 +1,7 @@
-🍼 Jobble Baby · 06:00
-🔧 Working: #385 Vestibular-Motor Integration Navigator (Sisyphus active)
-📋 TODO: 0 pending · 1 in_progress · 163 completed
-📦 Commit: 787befe → pushed
-📝 Desc: Cycle 438 — Feeding Progression Navigator ✅ (file 70b31e8). Now dispatching #385 Vestibular-Motor tab. +49 brainstorm keywords (pool 1151). TSC 0. Sisyphus active in jobble-baby:1.0.
+🍼 Jobble Baby · 07:00
+✅ Done: #385 Vestibular-Motor Integration Navigator
+✅ Done: #388 Feeding Progression Navigator
+🔧 Dispatched: #389 Behavioral Rehearsal Protocol
+📋 TODO: 0 pending · 1 in_progress · 165 completed
+📦 Commit: a344c16 → pushed
+📝 Desc: Vestibular-Motor tab committed ✅ | Feeding Progression tab verified ✅ | TSC 0 | 48 keywords added (pool 1199) | Sisyphus dispatched: Behavioral Rehearsal Protocol tab (concept #53) | Concepts 47/52/56/57/60 marked implemented | Submission-ready awaiting user action: EAS creds + App Store Connect + Play Console + privacy URL

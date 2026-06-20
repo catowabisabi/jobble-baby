@@ -1,47 +1,49 @@
-# Cycle 438 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-20 06:00 HKT
-# Status: Dispatched. Task 385 in progress.
+# Cycle 439 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-20 07:00 HKT
+# Status: Dispatched. Task 389 in progress.
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
 ✅ user-intention.md exists
-✅ Sisyphus idle → dispatching task 385
-✅ Queue: 0 pending · 1 in_progress (todo #385)
+✅ Sisyphus idle → dispatching task 389
+✅ Queue: 0 pending · 1 in_progress (todo #389)
 
 === STEP 2 (Verify) ===
-✅ Task 384 completed — Feeding Progression Navigator → verified (file exists at app/(tabs)/feeding-progression.tsx, commit 70b31e8)
-✅ No pending verifications needed
+✅ Task 385 completed — Vestibular-Motor Integration Navigator → committed a344c16
+✅ Task 388 completed — Feeding Progression Navigator → committed 70b31e8
 
 === STEP 3 (Review) ===
 ✅ TSC: 0 errors (JobbleBaby/)
-✅ Queue: 1 in_progress task (todo #385: Vestibular-Motor Integration Navigator)
-✅ Concept #48: Vestibular-Motor Integration Navigator — in draft status, linked to todo #385
+✅ Queue: 1 in_progress task (todo #389: Behavioral Rehearsal Protocol)
+✅ Concepts 47, 56, 57, 60, 52 → marked implemented (tabs exist)
+✅ Concept 53 → Behavioral Rehearsal Protocol (spec_done, no tab yet)
+✅ No open painpoints
 
 === STEP 4 (Brainstorm) ===
-✅ Added 49 new keywords to pool (total: 1151)
-✅ Picked prompt3: motor_planning_emergence, sensory_body_scan, primitive_reflex_integration_stages
-✅ Sparked task #385: Vestibular-Motor Integration Navigator tab
+✅ Added 48 new keywords to pool (total: 1199)
+✅ Picked prompt3: strehl_ratio_resolution, aperture_synthesis_long_exposure, who_standard_deviation
+✅ Sparked task #389: Behavioral Rehearsal Protocol tab (concept #53)
 
 === STEP 5 (Commit) ===
-✅ 787befe → pushed
-   - autoloop cycle 438: dispatch todo #385, +49 brainstorm keywords
+✅ a344c16 → pushed
+   - feat: add Vestibular-Motor Integration Navigator tab (todo #385)
+   - mark todo #385, #388 complete; concepts 47/52/56/57/60 implemented
 
 === STEP 6 (Dispatch) ===
-✅ Dispatched: todo #385 — Vestibular-Motor Integration Navigator tab
-✅ Target: jobble-baby:1.0 (bash pane with OpenCode)
-✅ Method: opencode run --continue
-✅ Sisyphus confirmed active — reading concept file, grepping for VESTIBULAR_SESSIONS
+✅ Dispatched: todo #389 — Behavioral Rehearsal Protocol tab
+✅ prompt3 keywords: strehl_ratio_resolution, aperture_synthesis_long_exposure, who_standard_deviation
+✅ Task written to /tmp/task_389.txt → dispatching via opencode
 
 === STEP 7 (Telegram) ===
 📝 Written to telegram_out.txt
 
 === CURRENT STATE ===
-- TODO: 0 pending · 1 in_progress · 163 completed · 2 cancelled
-- Queue: 1 task dispatched (todo #385: Vestibular-Motor Integration Navigator)
-- Git: 787befe pushed ✅
+- TODO: 0 pending · 1 in_progress · 165 completed · 2 cancelled
+- Queue: 1 task dispatched (todo #389: Behavioral Rehearsal Protocol)
+- Git: a344c16 pushed ✅
 - TSC: Verified clean (JobbleBaby/ — 0 errors)
-- Sisyphus: Active — reading concept #48, exploring codebase
-- Keyword pool: 1151 keywords
+- Sisyphus: Active — task 389 dispatched
+- Keyword pool: 1199 keywords
 
 === PENDING USER-ACTION BLOCKERS ===
 - EAS credentials (Apple Team ID + App-Specific Password)
@@ -52,5 +54,5 @@
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
 All tab features implemented. i18n bilingual. TSC 0. No console.logs.
-Sisyphus working on: Vestibular-Motor Integration Navigator tab (concept #48).
-Next: once #385 done → appstore-connect tab + final submission prep.
+Sisyphus working on: Behavioral Rehearsal Protocol tab (concept #53).
+Next: once #389 done → appstore-connect tab + final submission prep.

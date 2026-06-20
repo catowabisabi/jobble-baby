@@ -277,7 +277,7 @@ function RehearsalFormModal({ scenarioId, visible, onClose, onSave, accent }: {
             <Text style={styles.fieldLabel}>{t('behavioralRehearsal.rehearsalLog.anxietyBefore')}</Text>
             <View style={styles.anxietyRow}>
               {[1,2,3,4,5].map(v => (
-                <TouchableOpacity key={v} onPress={() => setAnxietyBefore(v)}>
+                <TouchableOpacity key={v} onPress={() => setAnxietyBefore(v)} accessibilityLabel={`Anxiety before level ${v}`}>
                   <MaterialCommunityIcons name={anxietyBefore >= v ? 'circle' : 'circle-outline'}
                     size={28} color={emotionColor(anxietyBefore)} />
                 </TouchableOpacity>
@@ -286,7 +286,7 @@ function RehearsalFormModal({ scenarioId, visible, onClose, onSave, accent }: {
             <Text style={styles.fieldLabel}>{t('behavioralRehearsal.rehearsalLog.anxietyAfter')}</Text>
             <View style={styles.anxietyRow}>
               {[1,2,3,4,5].map(v => (
-                <TouchableOpacity key={v} onPress={() => setAnxietyAfter(v)}>
+                <TouchableOpacity key={v} onPress={() => setAnxietyAfter(v)} accessibilityLabel={`Anxiety after level ${v}`}>
                   <MaterialCommunityIcons name={anxietyAfter >= v ? 'circle' : 'circle-outline'}
                     size={28} color={emotionColor(anxietyAfter)} />
                 </TouchableOpacity>
@@ -297,10 +297,10 @@ function RehearsalFormModal({ scenarioId, visible, onClose, onSave, accent }: {
               value={notes} onChangeText={setNotes} multiline placeholder="..." placeholderTextColor="#999" />
           </ScrollView>
           <View style={styles.modalButtons}>
-            <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
+            <TouchableOpacity style={styles.cancelBtn} onPress={onClose} accessibilityLabel="Cancel rehearsal">
               <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={handleSave}>
+            <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={handleSave} accessibilityLabel="Save rehearsal">
               <Text style={styles.saveBtnText}>{t('common.save')}</Text>
             </TouchableOpacity>
           </View>
@@ -347,7 +347,7 @@ function OutcomeFormModal({ scenarioId, visible, onClose, onSave, accent }: {
               {outcomes.map(o => (
                 <TouchableOpacity key={o}
                   style={[styles.chip, outcome === o && { backgroundColor: accent }]}
-                  onPress={() => setOutcome(o)}>
+                  onPress={() => setOutcome(o)} accessibilityLabel={`Outcome: ${t(OUTCOME_KEYS[o])}`}>
                   <Text style={[styles.chipText, outcome === o && styles.chipTextActive]}>
                     {t(OUTCOME_KEYS[o])}
                   </Text>
@@ -359,7 +359,7 @@ function OutcomeFormModal({ scenarioId, visible, onClose, onSave, accent }: {
               {childResponses.map(cr => (
                 <TouchableOpacity key={cr}
                   style={[styles.chip, childResponse === cr && { backgroundColor: accent }]}
-                  onPress={() => setChildResponse(cr)}>
+                  onPress={() => setChildResponse(cr)} accessibilityLabel={`Child response: ${t(CHILD_RESPONSE_KEYS[cr])}`}>
                   <Text style={[styles.chipText, childResponse === cr && styles.chipTextActive]}>
                     {t(CHILD_RESPONSE_KEYS[cr])}
                   </Text>
@@ -369,7 +369,7 @@ function OutcomeFormModal({ scenarioId, visible, onClose, onSave, accent }: {
             <Text style={styles.fieldLabel}>{t('behavioralRehearsal.outcomeLog.parentFeeling')}</Text>
             <View style={styles.anxietyRow}>
               {[1,2,3,4,5].map(v => (
-                <TouchableOpacity key={v} onPress={() => setParentFeeling(v)}>
+                <TouchableOpacity key={v} onPress={() => setParentFeeling(v)} accessibilityLabel={`Parent feeling level ${v}`}>
                   <MaterialCommunityIcons name={parentFeeling >= v ? 'circle' : 'circle-outline'}
                     size={28} color={emotionColor(parentFeeling)} />
                 </TouchableOpacity>
@@ -380,10 +380,10 @@ function OutcomeFormModal({ scenarioId, visible, onClose, onSave, accent }: {
               value={notes} onChangeText={setNotes} multiline placeholder="..." placeholderTextColor="#999" />
           </ScrollView>
           <View style={styles.modalButtons}>
-            <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
+            <TouchableOpacity style={styles.cancelBtn} onPress={onClose} accessibilityLabel="Cancel outcome">
               <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={handleSave}>
+            <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={handleSave} accessibilityLabel="Save outcome">
               <Text style={styles.saveBtnText}>{t('common.save')}</Text>
             </TouchableOpacity>
           </View>
@@ -447,7 +447,7 @@ function ExposureBuilderModal({ scenarioId, visible, onClose, onSave, accent }: 
           <Text style={styles.fieldLabel}>{t('behavioralRehearsal.exposureBuilder.progress')} {steps.filter(s => s.completed).length}/{steps.length}</Text>
           <ScrollView style={{ maxHeight: '50%', marginBottom: 12 }}>
             {steps.map((step, i) => (
-              <TouchableOpacity key={i} style={styles.stepRow} onPress={() => toggleStep(i)}>
+              <TouchableOpacity key={i} style={styles.stepRow} onPress={() => toggleStep(i)} accessibilityLabel={`Exposure step ${i + 1}: ${step.description}`}>
                 <MaterialCommunityIcons
                   name={step.completed ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'}
                   size={22} color={step.completed ? '#4CAF50' : '#999'} />
@@ -460,15 +460,15 @@ function ExposureBuilderModal({ scenarioId, visible, onClose, onSave, accent }: 
           <TextInput style={styles.input} value={targetDate} onChangeText={setTargetDate}
             placeholder="YYYY-MM-DD" placeholderTextColor="#999" />
           <View style={{ flexDirection: 'row', gap: 8, marginBottom: 12 }}>
-            <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={addStep}>
+            <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={addStep} accessibilityLabel="Add exposure step">
               <Text style={styles.saveBtnText}>+ {t('behavioralRehearsal.exposureBuilder.addStep')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.modalButtons}>
-            <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
+            <TouchableOpacity style={styles.cancelBtn} onPress={onClose} accessibilityLabel="Cancel exposure builder">
               <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveLadder}>
+            <TouchableOpacity style={[styles.saveBtn, { backgroundColor: accent }]} onPress={saveLadder} accessibilityLabel="Save exposure ladder">
               <Text style={styles.saveBtnText}>{t('common.save')}</Text>
             </TouchableOpacity>
           </View>
@@ -531,7 +531,7 @@ export default function BehavioralRehearsalScreen() {
           <>
             <Text style={[styles.sectionTitle, { color: C.text }]}>{t('behavioralRehearsal.scenarioLibrary')}</Text>
             {SCENARIOS.map(s => (
-              <TouchableOpacity key={s.id} style={styles.scenarioCard} onPress={() => setSelectedScenario(s.id)} activeOpacity={0.7}>
+              <TouchableOpacity key={s.id} style={styles.scenarioCard} onPress={() => setSelectedScenario(s.id)} activeOpacity={0.7} accessibilityLabel={`Scenario: ${t(s.titleKey)}`}>
                 <View style={[styles.scenarioIcon, { backgroundColor: C.accent + '20' }]}>
                   <MaterialCommunityIcons name="head-lightbulb" size={28} color={C.accent} />
                 </View>
@@ -546,7 +546,7 @@ export default function BehavioralRehearsalScreen() {
         ) : (
           <>
             {/* Back */}
-            <TouchableOpacity style={styles.backBtn} onPress={() => setSelectedScenario(null)}>
+            <TouchableOpacity style={styles.backBtn} onPress={() => setSelectedScenario(null)} accessibilityLabel="Back to scenario library">
               <MaterialCommunityIcons name="arrow-left" size={20} color={C.accent} />
               <Text style={[styles.backBtnText, { color: C.accent }]}>{t('behavioralRehearsal.backToLibrary')}</Text>
             </TouchableOpacity>

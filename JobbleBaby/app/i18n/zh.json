@@ -1,4 +1,5 @@
 {
+  "key": "鍵",
   "tabs": {
     "home": "主頁",
     "allergens": "過敏原",
@@ -118,7 +119,8 @@
     "tabs.milestones": "Milestones [TODO]",
     "tabs.criticalPeriods": "Critical Periods [TODO]",
     "tabs.vestibularAssessment": "Vestibular [TODO]",
-    "tabs.vestibularMotor": "前庭-運動整合",
+    "tabs.vestibularMotor": "前庭運動",
+    "vestibularMotor": "前庭運動",
     "tabs.profile": "Profile [TODO]",
     "tabs.villageNetwork": "Village [TODO]",
     "tabs.developmentRadar": "Radar [TODO]",
@@ -592,7 +594,10 @@
     "resetConfirmTitle": "重置確認",
     "resetConfirmMessage": "確定要重置嗎？",
     "yes": "是",
-    "no": "否"
+    "no": "否",
+    "next": "下一步",
+    "skip": "跳過",
+    "key": "鍵"
   },
   "allergenModal": {
     "close": "關閉",

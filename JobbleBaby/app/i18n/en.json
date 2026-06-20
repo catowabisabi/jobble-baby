@@ -1,4 +1,5 @@
 {
+  "key": "Key",
   "tabs": {
     "title": "Tummy Time",
     "greeting": "Daily Activity",
@@ -47,7 +48,8 @@
     "tabs.milestones": "Milestones",
     "tabs.criticalPeriods": "Critical Periods",
     "tabs.vestibularAssessment": "Vestibular",
-    "tabs.vestibularMotor": "Vestibular-Motor",
+    "tabs.vestibularMotor": "Vestibular Motor",
+    "vestibularMotor": "Vestibular Motor",
     "tabs.profile": "Profile",
     "tabs.villageNetwork": "Village",
     "tabs.developmentRadar": "Radar",
@@ -602,7 +604,10 @@
     "resetConfirmTitle": "Reset Confirmation",
     "resetConfirmMessage": "Are you sure you want to reset?",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "next": "Next",
+    "skip": "Skip",
+    "key": "Key"
   },
   "allergenModal": {
     "close": "Close",

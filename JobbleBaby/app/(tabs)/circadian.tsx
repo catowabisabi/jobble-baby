@@ -63,12 +63,15 @@ function getOptimalWakeWindow(days: number): number {
 }
 
 function getCurrentPhase(hour: number, t: (key: string) => string): PhaseInfo {
-  // Simple phase model: sleep (10pm-6am), feeding (6am-10am, 2pm-4pm), wake (rest)
+  // Simple phase model: sleep (10pm-6am), feeding (6am-10am, 2pm-4pm), active (10am-2pm), wake (4pm-10pm)
   if (hour >= 22 || hour < 6) {
     return { label: t('circadian.phase.sleep'), color: '#3B82F6', minutesRemaining: 0, nextPhase: t('circadian.nextPhase.sleep') };
   }
   if ((hour >= 6 && hour < 10) || (hour >= 14 && hour < 16)) {
     return { label: t('circadian.phase.feeding'), color: '#F59E0B', minutesRemaining: 0, nextPhase: t('circadian.nextPhase.feeding') };
+  }
+  if (hour >= 10 && hour < 14) {
+    return { label: t('circadian.phase.active'), color: '#22C55E', minutesRemaining: 0, nextPhase: t('circadian.nextPhase.active') };
   }
   return { label: t('circadian.phase.wake'), color: '#EF4444', minutesRemaining: 0, nextPhase: t('circadian.nextPhase.wake') };
 }

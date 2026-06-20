@@ -3483,12 +3483,14 @@
     "phase": {
       "sleep": "Sleep",
       "feeding": "Feeding",
-      "wake": "Wake"
+      "wake": "Wake",
+      "active": "Active"
     },
     "nextPhase": {
       "sleep": "Feeding",
       "feeding": "Wake",
-      "wake": "Sleep"
+      "wake": "Sleep",
+      "active": "Sleep"
     }
   },
   "regulatoryFitness": {

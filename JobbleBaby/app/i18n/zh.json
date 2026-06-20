@@ -3444,12 +3444,14 @@
     "phase": {
       "sleep": "睡眠",
       "feeding": "餵奶",
-      "wake": "清醒"
+      "wake": "清醒",
+      "active": "活動"
     },
     "nextPhase": {
       "sleep": "餵奶",
       "feeding": "清醒",
-      "wake": "睡眠"
+      "wake": "睡眠",
+      "active": "睡眠"
     }
   },
   "regulatoryFitness": {

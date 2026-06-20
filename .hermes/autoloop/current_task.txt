@@ -1,50 +1,56 @@
-# Cycle 434 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-19 21:06 HKT
-# Status: Queue empty. TSC 0. Submission-ready.
+# Cycle 437 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-20 04:00 HKT
+# Status: Task 388 in progress (Sisyphus working)
 
 === STEP 1 (Survival + Source) ===
-✅ Session jobble-baby alive (bash prompt in JobbleBaby/).
-✅ user-intention.md exists (not empty).
-✅ Sisyphus idle — no active task.
-✅ Queue empty (0 pending, 0 new · 161 completed · 2 cancelled).
+✅ Session jobble-baby alive (tmux pane jobble-baby:1.0 running OpenCode/Sisyphus)
+✅ user-intention.md exists (not empty)
+✅ Sisyphus ACTIVE — task 388 dispatched and running
+✅ Queue: 0 pending, 1 in_progress (todo #388)
 
 === STEP 2 (Verify) ===
-✅ No new tasks to verify — queue empty since cycle 426.
+✅ Task 387 completed — Pre-Submission QA Checklist Tab → marked complete in DB (response 414)
+✅ No pending verifications needed
 
 === STEP 3 (Review) ===
 ✅ TSC: 0 errors (JobbleBaby/)
-✅ Queue empty — nothing new to dispatch.
+✅ Queue: 1 in_progress task (todo #388: Feeding Progression Navigator)
+✅ Concept #62: Feeding Progression Navigator — in draft status, linked to todo #388
 
 === STEP 4 (Brainstorm) ===
-⏭️ Skipped — queue empty, project submission-ready.
+⏭️ Skipped — Sisyphus already has work (task 388)
 
 === STEP 5 (Commit) ===
-✅ Nothing to commit — working tree clean.
-✅ Last commit: 0a52da0 → already pushed.
+✅ 309c733 → pushed
+   - autoloop cycle 437: mark todo #388 in_progress after dispatch
 
 === STEP 6 (Dispatch) ===
-❌ NO TASK — queue empty. Sisyphus idle.
+✅ Dispatched: todo #388 — Feeding Progression Navigator tab
+✅ Target: jobble-baby:1.0 (bash pane with OpenCode)
+✅ Task file: /tmp/sisyphus_task_388.txt
+✅ Method: opencode run (task content passed as argument)
+✅ Sisyphus confirmed active — exploring codebase (tab patterns, i18n, Allergens tab)
+⚠️ NOTE: cycle 436 dispatch failed — window target wrong (0 instead of 1).
+    cycle 437 dispatch succeeded.
 
 === STEP 7 (Telegram) ===
-📝 Written to telegram_out.txt.
+📝 Written to telegram_out.txt
 
 === CURRENT STATE ===
-
-- TODO: 0 pending · 0 new · 161 completed · 2 cancelled
-- Queue: EMPTY — no tasks to dispatch
-- Git: 0a52da0 pushed ✅
+- TODO: 0 pending · 1 in_progress · 162 completed · 2 cancelled
+- Queue: 1 task in progress (todo #388: Feeding Progression Navigator)
+- Git: 309c733 pushed ✅
 - TSC: Verified clean (JobbleBaby/ — 0 errors)
-- Sisyphus: Session running bash, idle
-- Pre-submission audit: ALL CHECKS PASS ✅
+- Sisyphus: Active — exploring codebase for task 388
+- Keyword pool: ~1055 keywords
 
 === PENDING USER-ACTION BLOCKERS ===
-
 - EAS credentials (Apple Team ID + App-Specific Password)
 - App Store Connect app creation
 - Play Console app creation
 - Privacy policy URL deployment (jobblebaby.com/privacy)
 
 === PROJECT STATUS ===
-
 Jobble Baby: ✅ SUBMISSION-READY
-All code-level tasks complete. i18n bilingual (297 keys each). TSC 0. No console.logs. All painpoints resolved. User-action blockers cannot be automated.
+All code-level tasks complete. i18n bilingual. TSC 0. No console.logs.
+Sisyphus working on: Feeding Progression Navigator tab (concept #62).

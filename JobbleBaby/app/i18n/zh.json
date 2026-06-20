@@ -158,7 +158,8 @@
     "tabs.sensoryIntegration": "Sensory [TODO]",
     "tabs.zoneRegulation": "Zone [TODO]",
     "tabs.cryAnalyzer": "Cry Analyzer [TODO]",
-    "tabs.gestureMilestone": "Gesture [TODO]"
+    "tabs.gestureMilestone": "Gesture [TODO]",
+    "preSubmissionQa": "預提交 QA"
   },
   "gestureMilestone": {
     "title": "手势桥梁",
@@ -4151,5 +4152,25 @@
     "graspMethodPrecise": "精準抓握",
     "graspMethodRadical": "放射狀抓握",
     "notesPlaceholder": "記錄備註（例如：嘗試了米餅，手指協調進步）"
+  },
+  "preSubmissionQa": {
+    "title": "預提交 QA",
+    "subtitle": "提交前自動化驗證",
+    "runChecks": "執行檢查",
+    "runningChecks": "正在執行檢查...",
+    "checksSummary": "{pass} 通過，{fail} 失敗，{skip} 跳過",
+    "noIssues": "無問題發現",
+    "issuesFound": "發現 {count} 個問題",
+    "pass": "通過",
+    "fail": "失敗",
+    "skip": "跳過",
+    "checkFailed": "檢查失敗",
+    "missingInEn": "en.json 中缺失",
+    "missingInZh": "zh.json 中缺失",
+    "missingField": "app.json 中缺失欄位",
+    "missingIosBundleId": "缺少 expo.ios.bundleIdentifier",
+    "missingAndroidPackage": "缺少 expo.android.package",
+    "androidBuildNotFound": "找不到 android/app/build — 請先執行 eas build",
+    "iosBuildNotFound": "找不到 ios/ 目錄 — 請先執行 eas build"
   }
 }

@@ -93,6 +93,7 @@
     "growthMontage": "Montage",
     "regressionNavigator": "Regression",
     "appstoreChecklist": "Appstorechecklist",
+    "preSubmissionQa": "QA",
     "circadian": "Circadian",
     "gearCheck": "Gearcheck",
     "growth": "Growth",
@@ -168,7 +169,8 @@
     "galantLatch": "Galantlatch",
     "interoceptive": "Interoceptive",
     "regulatoryFitness": "Regulatoryfitness",
-    "windowOfTolerance": "Windowoftolerance"
+    "windowOfTolerance": "Windowoftolerance",
+    "preSubmissionQa": "Pre-Sub QA"
   },
   "gestureMilestone": {
     "title": "Gesture Bridge",
@@ -4141,5 +4143,25 @@
     "subtitle": "Track and build tummy time strength",
     "title": "Tummy Time",
     "todayHistory": "Today's history"
+  },
+  "preSubmissionQa": {
+    "title": "Pre-Submission QA",
+    "subtitle": "Automated validation before App Store submission",
+    "runChecks": "Run Checks",
+    "runningChecks": "Running checks...",
+    "checksSummary": "{pass} passed, {fail} failed, {skip} skipped",
+    "noIssues": "No issues found",
+    "issuesFound": "{count} issues found",
+    "pass": "PASS",
+    "fail": "FAIL",
+    "skip": "SKIP",
+    "checkFailed": "Check failed",
+    "missingInEn": "Missing in en.json",
+    "missingInZh": "Missing in zh.json",
+    "missingField": "Missing field in app.json",
+    "missingIosBundleId": "Missing expo.ios.bundleIdentifier",
+    "missingAndroidPackage": "Missing expo.android.package",
+    "androidBuildNotFound": "android/app/build not found — run eas build first",
+    "iosBuildNotFound": "ios/ directory not found — run eas build first"
   }
 }

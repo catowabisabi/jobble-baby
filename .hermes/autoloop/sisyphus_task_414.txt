@@ -1,0 +1,37 @@
+# Task 387 — Build Pre-Submission QA Checklist Tab
+
+## Context
+
+Create a new tab `pre-submission-qa.tsx` in `app/(tabs)/` that runs **automated** checks before App Store / Play Store submission. This is NOT a manual tick-off list — it runs real-time validation and shows a pass/fail matrix with file:line references.
+
+The tab must check:
+1. **i18n validation**: All keys used in `.tsx` files exist in BOTH `en.json` AND `zh.json`
+2. **Hardcoded string detection**: Scan `.tsx` files for strings NOT wrapped in `t('...')` that should be i18n'd
+3. **App Store metadata**: Verify `app.json`/`app.config.js` has required fields (bundleId, version, etc.)
+4. **EAS build artifact confirmation**: Check that `android/app/build` and `ios/` directories exist
+
+## Output file
+
+Save work log to: `/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_response_414.txt`
+
+## Tab requirements
+
+- Tab filename: `pre-submission-qa.tsx`
+- Register in `app/(tabs)/_layout.tsx` (add to `tabs` array with label `preSubmissionQa`)
+- Add i18n keys `tabs.preSubmissionQa` to `en.json` and `zh.json`
+- On mount: run all checks and display a section per check with PASS/FAIL badges
+- Each failed item shows: `file:line — issue description`
+- "Re-run checks" button to re-scan on demand
+- Use existing app theme (`useTheme`, `useLanguage`, `COLORS`)
+
+## Verification
+
+1. `npx tsc --noEmit` → 0 errors
+2. Tab visible and navigable in the tab bar
+3. All checks complete (some may FAIL if issues remain — that's expected output)
+
+## Keywords
+
+pre_submission_qa · ios_metadata · eas_build_verification
+
+ULW

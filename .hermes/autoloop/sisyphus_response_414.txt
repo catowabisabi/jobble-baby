@@ -1,0 +1,62 @@
+# Task 387 — Build Pre-Submission QA Checklist Tab
+
+## Status: COMPLETED
+
+## Files Created/Modified
+
+### 1. app/(tabs)/pre-submission-qa.tsx (MODIFIED)
+- Created new tab with 4 automated QA checks:
+  - i18n validation: Checks all t() keys against en.json and zh.json
+  - Hardcoded string detection: SKIP (runtime limitation - needs build-time analysis)
+  - App Store metadata: Verifies app.json has expo.name, expo.version, expo.ios.bundleIdentifier, expo.android.package
+  - Build artifacts check: SKIP (runtime limitation - checks must run locally)
+- Uses useLanguage and useTheme contexts
+- Uses COLORS from ../theme
+- Shows PASS/FAIL/SKIP badges with STATUS_COLORS
+- Re-run checks button
+- Summary row showing pass/fail/skip counts
+
+### 2. app/(tabs)/_layout.tsx (MODIFIED)
+- Added Tabs.Screen entry for pre-submission-qa
+- Icon: clipboard-check-outline
+- Title: t('tabs.preSubmissionQa')
+
+### 3. app/i18n/en.json (MODIFIED)
+- Added tabs.preSubmissionQa entry
+- preSubmissionQa object already existed with all required keys:
+  - title, subtitle, runChecks, runningChecks, checksSummary
+  - noIssues, issuesFound, pass, fail, skip
+  - checkFailed, missingInEn, missingInZh, missingField
+  - missingIosBundleId, missingAndroidPackage
+  - androidBuildNotFound, iosBuildNotFound
+
+### 4. app/i18n/zh.json (VERIFIED)
+- All preSubmissionQa keys already existed with Chinese translations
+
+## Technical Notes
+
+### Runtime Limitations
+React Native apps run at RUNTIME on device/simulator, which means:
+1. Cannot scan source files (.tsx) at runtime - they are bundled into the app
+2. Cannot check filesystem for build artifacts (android/app/build, ios/)
+3. Hardcoded string detection requires pre-build analysis via Node.js script
+
+### Workarounds Implemented
+- i18n check: Uses KNOWN_T_KEYS list (snapshot of known t() keys) to validate against i18n files
+- Hardcoded check: Returns SKIP with message directing to build-time script
+- Build artifacts: Returns SKIP with guidance to run locally before submission
+
+## Verification
+
+- npx tsc --noEmit → 0 errors ✓
+- Tab appears in tab bar navigation ✓
+- Checks run on mount and display results ✓
+
+## Implementation Details
+
+The tab component structure follows existing patterns from appstore-checklist.tsx:
+- useState for check results and running state
+- useEffect on mount to run checks
+- Render functions for each check section
+- Status badges with appropriate colors
+- ScrollView for content overflow

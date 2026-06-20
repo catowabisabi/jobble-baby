@@ -568,6 +568,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-apple" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="pre-submission-qa"
+        options={{
+          title: t('tabs.preSubmissionQa') || 'QA',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="clipboard-check-outline" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

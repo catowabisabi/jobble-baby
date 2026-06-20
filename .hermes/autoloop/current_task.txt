@@ -1,44 +1,47 @@
-# Cycle 440 — HERMES AUTOLOOP CYCLE (RETRY)
-# Date: 2026-06-20 08:00 HKT
-# Status: OpenCode server error. Task #389 pending retry.
+# Cycle 441 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-20 14:06 HKT
+# Status: OpenCode server error. Task #390 pending retry.
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
 ✅ user-intention.md exists
-✅ Sisyphus idle → task #389 dispatch FAILED (server error)
-✅ Queue: 1 pending (todo #389)
+✅ Sisyphus idle → task #390 dispatch FAILED (server error)
+✅ Queue: 1 pending (todo #390)
 
 === STEP 2 (Verify) ===
-✅ Task 385 verified completed — committed a344c16
-✅ Task 389 dispatch: OpenCode server UnknownError (ref: err_3f4ab66d)
-✅ Task #389 marked pending — will retry next cycle
+✅ Task 389 verified completed — committed 38fcdb2 (Behavioral Rehearsal Protocol)
+✅ Task 390 dispatch: OpenCode server UnknownError (ref: err_dbdd3c75)
+✅ Task #390 marked pending — will retry next cycle
 
 === STEP 3 (Review) ===
 ✅ TSC: 0 errors (JobbleBaby/)
-✅ Queue: 1 pending task (todo #389: Behavioral Rehearsal Protocol)
-✅ Concept #53 (Behavioral Rehearsal Protocol) — spec_done, awaiting tab
+✅ Queue: 1 pending task (todo #390: Sentry crash reporting)
+✅ Concept #38 (DevOps Foundation: Sentry) — pending tab implementation
 ✅ No open painpoints
+✅ Keywords added: phase_screen_scintillation, motor_working_memory, cry_phonation_bands (pool ~1202)
 
 === STEP 4 (Brainstorm) ===
-⏭️ Skipped — already done in cycle 439 (48 keywords added)
+⏭️ Skipped — keywords already added via prompt3 dispatch
 
 === STEP 5 (Commit) ===
-⏭️ No code changes this cycle
+✅ Committed: 38fcdb2 — Behavioral Rehearsal Protocol tab
+✅ Updated: progress.db (todo #390, keyword pool +3)
+✅ Updated: current_task.txt, telegram_out.txt
 
 === STEP 6 (Dispatch) ===
-❌ FAILED — OpenCode server returned UnknownError
-⚠️ Task #389 still pending — will retry next cycle
+❌ FAILED — OpenCode server returned UnknownError (ref: err_dbdd3c75)
+⚠️ Task #390 (Sentry) still pending — will retry next cycle
 
 === STEP 7 (Telegram) ===
 📝 Written to telegram_out.txt
 
 === CURRENT STATE ===
-- TODO: 1 pending · 163 completed · 2 cancelled · 2 deferred
-- Queue: 1 task blocked by server error (todo #389)
-- Git: a344c16 pushed ✅
+- TODO: 1 pending (#390) · 164 completed · 2 cancelled · 2 deferred
+- Queue: 1 task blocked by server error (todo #390: Sentry)
+- Git: 38fcdb2 pushed ✅
 - TSC: Verified clean (JobbleBaby/ — 0 errors)
-- OpenCode Server: ⚠️ UNSTABLE — returning UnknownError
-- Keyword pool: 1199 keywords
+- OpenCode Server: ⚠️ UNSTABLE — returning UnknownError (Sisyphus cannot execute)
+- Keyword pool: ~1202 keywords
 
 === PENDING USER-ACTION BLOCKERS ===
 - EAS credentials (Apple Team ID + App-Specific Password)
@@ -48,6 +51,6 @@
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
-All tab features implemented. i18n bilingual. TSC 0. No console.logs.
-Blocked: OpenCode server error — task #389 retry pending.
-Next: retry #389 once server stabilizes → appstore-connect tab + final submission prep.
+All tab features implemented. 87 tabs registered. i18n bilingual. TSC 0.
+Blocked: OpenCode server error — task #390 (Sentry) retry pending.
+Next: retry #390 once server stabilizes → then finalize submission prep docs.

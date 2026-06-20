@@ -1,23 +1,34 @@
 #!/bin/bash
-# Dispatch cycle 441 — Task 389: Behavioral Rehearsal Protocol Tab
-TARGET="jobble-baby:1.0"
-PROJECT_DIR="/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby"
-DONE_FILE="/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_response_418.txt"
-RESPONSE_FILE="/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_response_441.txt"
-TASK_FILE="/tmp/task_389.txt"
+# Dispatch cycle 441 - Sentry crash reporting
+cat > /tmp/task_390.txt << 'TASK'
+# Sisyphus Task — Cycle 441
+# Priority: P2
+# Project: Jobble Baby
 
-# Check if already completed
-if [ -f "$DONE_FILE" ]; then
-    echo "Task 389 already completed (response file exists)"
-    exit 0
-fi
+Add Sentry crash reporting and monitoring to the app.
 
-echo "[441] Dispatching task 389 to Sisyphus..."
-tmux send-keys -t "$TARGET" C-c
-sleep 2
-tmux send-keys -t "$TARGET" "cd $PROJECT_DIR" Enter
-sleep 1
-tmux send-keys -t "$TARGET" "cat $TASK_FILE | opencode run -m minimax/MiniMax-M2.7 --dir $PROJECT_DIR -- --prompt 2>&1 | tee $RESPONSE_FILE" Enter
-echo "[441] Dispatched. Waiting 90s..."
-sleep 90
-echo "[441] Done waiting."
+Files to create/modify:
+1. JobbleBaby/package.json: add @sentry/react-native as dev dependency (npm install --save-dev @sentry/react-native)
+2. JobbleBaby/sentry.client.config.ts: create Sentry client config with dsn=SENTRY_DSN env var, tracesSampleRate=0.1, environment from Expo config
+3. JobbleBaby/sentry.edge.config.ts: create Sentry edge config for expo-router edge runtime
+4. JobbleBaby/app/_layout.tsx: import { Sentry.ErrorBoundary } from @sentry/react-native, wrap root layout with ErrorBoundary
+5. JobbleBaby/app.json: add sentry plugin section (plugins: ['@sentry/expo'])
+6. JobbleBaby/docs/SENTRY_SETUP.md: complete user-facing guide — how to create Sentry account, create project, get DSN, add SENTRY_DSN to eas.json as secret, tested in local dev with SENTRY_ENABLED=1
+7. JobbleBaby/.github/workflows/ci.yml: add Sentry commit check step (optional — can skip for now)
+
+Requirements:
+- Use @sentry/react-native latest version compatible with Expo SDK 52
+- DSN as environment variable SENTRY_DSN (placeholder: 'https://placeholder@o123456.ingest.sentry.io/1234567')
+- Enable performance monitoring: tracesSampleRate=0.1
+- Set environment: process.env.EXPO_PUBLIC_APP_ENV || 'development'
+- App entry in app/_layout.tsx should have ErrorBoundary wrapper
+- Run: cd JobbleBaby && npm install --save-dev @sentry/react-native
+- TSC must pass: npx tsc --noEmit → 0 errors
+- No hardcoded user-facing strings
+
+After implementation:
+- npm install in JobbleBaby dir
+- TSC 0 errors
+TASK
+
+tmux send-keys -t jobble-baby "cat /tmp/task_390.txt | opencode run -m minimax/MiniMax-M2.7 --dir /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby -- --prompt" Enter

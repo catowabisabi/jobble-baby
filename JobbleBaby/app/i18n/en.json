@@ -67,6 +67,7 @@
     "tabs.gasRelief": "Gas Relief",
     "tabs.cortisolDynamics": "Cortisol",
     "tabs.autonomicReadiness": "Autonomic",
+    "tabs.coregulationResonance": "Co-Regulation",
     "tabs.galantLatch": "Galant",
     "tabs.gravityFeeding": "Gravity",
     "tabs.landauReflex": "Landau",
@@ -3922,6 +3923,63 @@
     "info_title": "About Autonomic Readiness",
     "log_today": "Log Today's Reading",
     "update_today": "Update Today"
+  },
+  "coregulationResonance": {
+    "title": "Co-Regulation",
+    "subtitle": "Track heart rate synchrony and co-regulation sessions",
+    "sectionA": {
+      "sessionLogger": "Session Logger",
+      "duration": "Duration",
+      "parentHR": "Parent Heart Rate",
+      "babyHR": "Baby Heart Rate",
+      "activity": "Activity Type",
+      "quality": "Quality Rating",
+      "notes": "Notes",
+      "saveSession": "Save Session",
+      "minutes": "min"
+    },
+    "sectionB": {
+      "coRegulationIndex": "Co-Regulation Index",
+      "resonanceScore": "Resonance Score",
+      "trendUp": "Trending up",
+      "trendDown": "Trending down",
+      "trendStable": "Stable",
+      "sevenDayAverage": "7-Day Average"
+    },
+    "sectionC": {
+      "stressCorrelation": "Stress Correlation",
+      "cortisolRisk": "Cortisol Spillover Risk",
+      "amberAlert": "Parent stress chronically elevated — consider self-care break",
+      "redAlert": "High cortisol spillover risk — prioritize caregiver rest",
+      "noAlert": "Stress levels within normal range"
+    },
+    "sectionD": {
+      "hrvSyncLog": "HRV Sync Log",
+      "noSessions": "No sessions logged yet",
+      "hrRatio": "HR ratio",
+      "tapToExpand": "Tap to view details"
+    },
+    "sectionE": {
+      "vagalTone": "Vagal Tone Benchmark",
+      "indicators": "Age-appropriate vagal tone indicators",
+      "calmBreathing": "Calm breathing during rest",
+      "quickSoothe": "Quick soothe recovery",
+      "eyeContact": "Eye contact duration > 30s"
+    },
+    "activity": {
+      "holding": "Holding",
+      "feeding": "Feeding",
+      "play": "Play",
+      "soothing": "Soothing",
+      "nappyChange": "Nappy Change"
+    },
+    "quality": {
+      "1": "1 - Poor",
+      "2": "2 - Fair",
+      "3": "3 - Good",
+      "4": "4 - Very Good",
+      "5": "5 - Excellent"
+    }
   },
   "diaperCream": {
     "title": "Diaper Cream",

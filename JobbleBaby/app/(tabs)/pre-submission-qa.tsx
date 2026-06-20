@@ -262,7 +262,7 @@ export default function PreSubmissionQAScreen() {
         {result.status === 'pending' ? (
           <View style={styles.loadingRow}>
             <ActivityIndicator size="small" color={C.accent} />
-            <Text style={[styles.loadingText, { color: C.muted }]}>Running...</Text>
+            <Text style={[styles.loadingText, { color: C.muted }]}>{t('preSubmissionQa.runningChecks')}</Text>
           </View>
         ) : result.issues.length === 0 ? (
           <Text style={[styles.noIssues, { color: STATUS_COLORS.good }]}>

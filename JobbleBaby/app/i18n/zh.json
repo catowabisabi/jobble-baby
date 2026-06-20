@@ -138,6 +138,7 @@
     "tabs.gasRelief": "Gas Relief [TODO]",
     "tabs.cortisolDynamics": "Cortisol [TODO]",
     "tabs.autonomicReadiness": "Autonomic [TODO]",
+    "tabs.coregulationResonance": "共同調節",
     "tabs.galantLatch": "Galant [TODO]",
     "tabs.gravityFeeding": "Gravity [TODO]",
     "tabs.landauReflex": "Landau [TODO]",
@@ -3952,6 +3953,63 @@
     "info_title": "關於自主神經準備",
     "log_today": "記錄今日讀數",
     "update_today": "今日更新"
+  },
+  "coregulationResonance": {
+    "title": "共同調節",
+    "subtitle": "追蹤心率同步與共同調節 session",
+    "sectionA": {
+      "sessionLogger": "Session 記錄",
+      "duration": "時長",
+      "parentHR": "父母心率",
+      "babyHR": "寶寶心率",
+      "activity": "活動類型",
+      "quality": "品質評分",
+      "notes": "備註",
+      "saveSession": "儲存 Session",
+      "minutes": "分鐘"
+    },
+    "sectionB": {
+      "coRegulationIndex": "共同調節指數",
+      "resonanceScore": "共鳴分數",
+      "trendUp": "上升趨勢",
+      "trendDown": "下降趨勢",
+      "trendStable": "穩定",
+      "sevenDayAverage": "7天平均"
+    },
+    "sectionC": {
+      "stressCorrelation": "壓力關聯",
+      "cortisolRisk": "皮質醇溢出風險",
+      "amberAlert": "父母壓力持續偏高 — 建議休息一下",
+      "redAlert": "高皮質醇溢出風險 — 優先照顧好自己",
+      "noAlert": "壓力水平在正常範圍內"
+    },
+    "sectionD": {
+      "hrvSyncLog": "HRV 同步記錄",
+      "noSessions": "尚無 session 記錄",
+      "hrRatio": "心率比",
+      "tapToExpand": "點擊查看詳情"
+    },
+    "sectionE": {
+      "vagalTone": "迷走神經張力基準",
+      "indicators": "年齡適齡的迷走神經張力指標",
+      "calmBreathing": "休息時呼吸平穩",
+      "quickSoothe": "安撫後快速恢復",
+      "eyeContact": "眼神接觸 > 30秒"
+    },
+    "activity": {
+      "holding": "抱著",
+      "feeding": "餵食",
+      "play": "玩耍",
+      "soothing": "安撫",
+      "nappyChange": "換尿布"
+    },
+    "quality": {
+      "1": "1 - 差",
+      "2": "2 - 一般",
+      "3": "3 - 良好",
+      "4": "4 - 非常好",
+      "5": "5 - 極佳"
+    }
   },
   "diaperCream": {
     "title": "尿布膏",

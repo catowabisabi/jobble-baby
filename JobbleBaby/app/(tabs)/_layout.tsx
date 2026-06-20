@@ -500,6 +500,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="coregulation-resonance"
+        options={{
+          title: t('tabs.coregulationResonance'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="stranger-danger"
         options={{
           title: t('tabs.strangerDanger'),

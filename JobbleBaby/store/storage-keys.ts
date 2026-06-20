@@ -190,4 +190,5 @@ export const STORAGE_KEYS = {
   AFFECTIVE_SHARING: "@jobble/affective_sharing",
   MOTHERESE_RESPONSE: "@jobble/motherese_response",
   IMITATIVE_REPERTOIRE: "@jobble/imitative_repertoire",
+  COREGULATION_SESSION_LOG: "@jobble/coregulation_session_log",
 } as const;

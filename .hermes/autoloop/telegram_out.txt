@@ -1,14 +1,13 @@
-🍼 Jobble Baby · 15:00
-📋 Queue: 0 pending · 0 new · 161 completed · 2 cancelled
-📦 Commit: 932ade5 → pushed ✅
-🔧 Dispatched: none — queue empty
+🍼 Jobble Baby · 20:06
+📋 Queue: 0 pending · 0 new
+🔧 Sisyphus: idle · session alive
+📦 TSC: 0 errors
 📝 Status: ✅ SUBMISSION-READY
-🎯 Sisyphus: idle · session alive
-🧠 Brainstorm: +50 keywords to pool
-🔒 Painpoints: 26 resolved · 1 acknowledged (CocoaPods/macOS)
 
 ⚠️ User-action blockers:
 • EAS credentials
 • App Store Connect app
 • Play Console app
 • Privacy policy URL deployment
+
+💡 Ready for submission — awaiting user action on credentials & accounts.

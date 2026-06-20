@@ -1,47 +1,42 @@
-# Cycle 441 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-20 14:06 HKT
-# Status: OpenCode server error. Task #390 pending retry.
+# Cycle 442 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-20 14:50 HKT
+# Status: COMPLETE — both tasks finished
 
 === STEP 1 (Survival + Source) ===
-✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
+✅ Session jobble-baby alive
 ✅ user-intention.md exists
-✅ Sisyphus idle → task #390 dispatch FAILED (server error)
-✅ Queue: 1 pending (todo #390)
+✅ Sisyphus completed #389 + #390
 
 === STEP 2 (Verify) ===
-✅ Task 389 verified completed — committed 38fcdb2 (Behavioral Rehearsal Protocol)
-✅ Task 390 dispatch: OpenCode server UnknownError (ref: err_dbdd3c75)
-✅ Task #390 marked pending — will retry next cycle
+✅ Todo #389: behavioral-rehearsal.tsx verified (712 lines, TSC 0)
+✅ Todo #390: Sentry implemented (7 files, TSC 0)
+✅ TSC: 0 errors (JobbleBaby/)
 
 === STEP 3 (Review) ===
-✅ TSC: 0 errors (JobbleBaby/)
-✅ Queue: 1 pending task (todo #390: Sentry crash reporting)
-✅ Concept #38 (DevOps Foundation: Sentry) — pending tab implementation
+✅ All 87 tabs registered
+✅ i18n bilingual complete
 ✅ No open painpoints
-✅ Keywords added: phase_screen_scintillation, motor_working_memory, cry_phonation_bands (pool ~1202)
+✅ Keywords added: meconium_transition_timeline, hydrogel_stiffness, suction_swallow_breath_coordination
 
 === STEP 4 (Brainstorm) ===
-⏭️ Skipped — keywords already added via prompt3 dispatch
+✅ 3 keywords added from prompt3
 
 === STEP 5 (Commit) ===
-✅ Committed: 38fcdb2 — Behavioral Rehearsal Protocol tab
-✅ Updated: progress.db (todo #390, keyword pool +3)
-✅ Updated: current_task.txt, telegram_out.txt
+✅ Committed: ee9fab0 — Sentry crash reporting
+✅ Pushed: ee9fab0 → master
 
 === STEP 6 (Dispatch) ===
-❌ FAILED — OpenCode server returned UnknownError (ref: err_dbdd3c75)
-⚠️ Task #390 (Sentry) still pending — will retry next cycle
+⏭️ No pending tasks — queue empty
 
 === STEP 7 (Telegram) ===
 📝 Written to telegram_out.txt
 
 === CURRENT STATE ===
-- TODO: 1 pending (#390) · 164 completed · 2 cancelled · 2 deferred
-- Queue: 1 task blocked by server error (todo #390: Sentry)
-- Git: 38fcdb2 pushed ✅
-- TSC: Verified clean (JobbleBaby/ — 0 errors)
-- OpenCode Server: ⚠️ UNSTABLE — returning UnknownError (Sisyphus cannot execute)
-- Keyword pool: ~1202 keywords
+- TODO: 0 pending · 165 completed
+- Git: ee9fab0 pushed ✅
+- TSC: Verified clean (0 errors)
+- Keyword pool: ~1010 keywords
+- OpenCode Server: ✅ FIXED — model name corrected to minimax-coding-plan/MiniMax-M2
 
 === PENDING USER-ACTION BLOCKERS ===
 - EAS credentials (Apple Team ID + App-Specific Password)
@@ -51,6 +46,5 @@
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
-All tab features implemented. 87 tabs registered. i18n bilingual. TSC 0.
-Blocked: OpenCode server error — task #390 (Sentry) retry pending.
-Next: retry #390 once server stabilizes → then finalize submission prep docs.
+All features implemented. 87 tabs registered. i18n bilingual. TSC 0.
+Ready for: EAS build, App Store Connect, Play Console setup.

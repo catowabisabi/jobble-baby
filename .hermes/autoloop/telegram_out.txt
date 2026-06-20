@@ -1,7 +1,6 @@
-🍼 Jobble Baby · 14:07
+🍼 Jobble Baby · 14:50
 ✅ Done: #389 Behavioral Rehearsal Protocol tab (712 lines, TSC 0)
-🔧 Dispatched: #390 Sentry crash reporting (DevOps Foundation)
-⚠️ OpenCode server UnknownError — retry pending
-📋 TODO: 1 pending · 164 completed
-📦 Commit: 38fcdb2 → pushed
-📝 Desc: #389 完成（新 tab）。#390 Sentry 派發但 server 連續 UnknownError，retry 待下次。87 tabs，i18n 完成，TSC 0，準備就緒。
+✅ Done: #390 Sentry crash reporting (7 files, TSC 0)
+📋 TODO: 0 pending · 165 completed
+📦 Commit: ee9fab0 → pushed
+📝 Desc: #389 + #390 一次過完成。Sentry 修復咗 model name（MiniMax-M2）後成功執行。87 tabs，i18n 完成，TSC 0。準備就緒。

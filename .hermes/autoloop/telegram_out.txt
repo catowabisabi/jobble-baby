@@ -1,13 +1,13 @@
-🍼 Jobble Baby · 20:06
+🍼 Jobble Baby · 21:06
 📋 Queue: 0 pending · 0 new
 🔧 Sisyphus: idle · session alive
 📦 TSC: 0 errors
 📝 Status: ✅ SUBMISSION-READY
 
 ⚠️ User-action blockers:
-• EAS credentials
-• App Store Connect app
-• Play Console app
-• Privacy policy URL deployment
+• EAS credentials (Apple Team ID + App-Specific Password)
+• App Store Connect app creation
+• Play Console app creation
+• Privacy policy URL deployment (jobblebaby.com/privacy)
 
-💡 Ready for submission — awaiting user action on credentials & accounts.
+💡 所有代碼級任務已完成，等待用戶操作 credentials 及帳戶設定。

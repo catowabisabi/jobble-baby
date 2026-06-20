@@ -31,4 +31,4 @@ After implementation:
 - TSC 0 errors
 TASK
 
-tmux send-keys -t jobble-baby "cat /tmp/task_390.txt | opencode run -m minimax/MiniMax-M2.7 --dir /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby -- --prompt" Enter
+tmux send-keys -t jobble-baby "cat /tmp/task_390.txt | opencode run -m minimax-coding-plan/MiniMax-M2 --dir /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby -- --prompt" Enter

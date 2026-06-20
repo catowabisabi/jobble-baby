@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Text } from 'react-native';
 import { safeGetItem, safeSetItem, safeRemoveItem } from './utils/SafeStorage';
 import { Tabs } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -11,6 +11,14 @@ import OnboardingScreen from './screens/OnboardingScreen';
 import DaycareViewScreen from './screens/DaycareViewScreen';
 import FeedingTimerScreen from './screens/FeedingTimerScreen';
 import * as Sentry from '@sentry/react-native';
+
+function SentryFallback() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0D0D0F' }}>
+      <Text style={{ color: '#FF4444' }}>Something went wrong</Text>
+    </View>
+  );
+}
 
 // Initialize Sentry
 Sentry.init({
@@ -65,28 +73,34 @@ export default function RootLayout() {
   if (initialRoute === 'daycare' || showOnboarding) {
     if (!hasProfile && initialRoute !== 'daycare') {
       return (
-        <ThemeProvider>
-          <LanguageProvider>
-            <OnboardingScreen onComplete={() => setShowOnboarding(false)} />
-          </LanguageProvider>
-        </ThemeProvider>
+<Sentry.ErrorBoundary fallback={SentryFallback}>
+          <ThemeProvider>
+            <LanguageProvider>
+              <OnboardingScreen onComplete={() => setShowOnboarding(false)} />
+            </LanguageProvider>
+          </ThemeProvider>
+        </Sentry.ErrorBoundary>
       );
     }
     return (
-      <ThemeProvider>
-        <LanguageProvider>
-          <DaycareViewScreen />
-        </LanguageProvider>
-      </ThemeProvider>
+      <Sentry.ErrorBoundary fallback={SentryFallback}>
+        <ThemeProvider>
+          <LanguageProvider>
+            <DaycareViewScreen />
+          </LanguageProvider>
+        </ThemeProvider>
+      </Sentry.ErrorBoundary>
     );
   }
 
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <TabNavigator />
-      </LanguageProvider>
-    </ThemeProvider>
+    <Sentry.ErrorBoundary fallback={SentryFallback}>
+      <ThemeProvider>
+        <LanguageProvider>
+          <TabNavigator />
+        </LanguageProvider>
+      </ThemeProvider>
+    </Sentry.ErrorBoundary>
   );
 }
 

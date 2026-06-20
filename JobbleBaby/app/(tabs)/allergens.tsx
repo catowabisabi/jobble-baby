@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
 import { ALLERGENS, AllergenEntry, Allergen } from '../data/allergens';
 import AllergenCard from '../components/AllergenCard';
@@ -20,6 +22,7 @@ export default function AllergensScreen() {
   const [selectedAllergen, setSelectedAllergen] = useState<Allergen | null>(null);
   const [showReactionModal, setShowReactionModal] = useState(false);
   const [newBadges, setNewBadges] = useState<Badge[]>([]);
+  const router = useRouter();
   const { effectiveTheme } = useTheme();
   const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
@@ -117,6 +120,16 @@ export default function AllergensScreen() {
     badgeBannerText: { fontSize: 13, fontWeight: '600', color: C.accent, flex: 1 },
     grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
     gridItem: { width: '47%' },
+    navLinkCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 14,
+      borderRadius: 12,
+      borderWidth: 1,
+      marginTop: 16,
+      gap: 8,
+    },
+    navLinkText: { fontSize: 15, fontWeight: '600', flex: 1 },
   });
 
   return (
@@ -149,6 +162,17 @@ export default function AllergensScreen() {
             </View>
           ))}
         </View>
+
+        <TouchableOpacity
+          style={[styles.navLinkCard, { backgroundColor: C.card, borderColor: C.border }]}
+          onPress={() => router.push('/feeding-progression')}
+          accessibilityLabel={t('allergens.viewFeedingProgression')}
+          accessibilityRole="button"
+        >
+          <MaterialCommunityIcons name="food-apple" size={22} color={C.accent} />
+          <Text style={[styles.navLinkText, { color: C.accent }]}>{t('allergens.viewFeedingProgression')}</Text>
+          <MaterialCommunityIcons name="chevron-right" size={20} color={C.accent} />
+        </TouchableOpacity>
       </ScrollView>
 
       {showDetail && selectedAllergen && (

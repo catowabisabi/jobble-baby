@@ -387,6 +387,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="feeding-progression"
+        options={{
+          title: t('tabs.feedingProgression'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-apple" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="phototherapy-comfort"
         options={{
           title: t('tabs.phototherapyComfort'),

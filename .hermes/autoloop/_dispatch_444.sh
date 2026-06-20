@@ -1,9 +1,16 @@
+#!/bin/bash
+# Dispatch cycle 444 — Idea #84: Co-regulation Resonance Tracker
+tmux send-keys -t jobble-baby:0.0 C-c
+sleep 2
+tmux send-keys -t jobble-baby:0.0 "cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby" Enter
+sleep 1
+tmux send-keys -t jobble-baby:0.0 "cat > /tmp/task_391.txt << 'TASK_EOF'
 # Idea #84: Co-regulation Resonance Tracker
 # Keywords: co-regulation_resonance, hrv_sync_pattern, autonomic_coupling, cortisol_diary_correlation, vagal_breakpoint
 
 ## Task for Sisyphus
 
-Create a new tab `coregulation-resonance.tsx` implementing a co-regulation resonance tracker.
+Create a new tab \`coregulation-resonance.tsx\` implementing a co-regulation resonance tracker.
 
 STEP 1 — Read these files first:
 - JobbleBaby/app/(tabs)/_layout.tsx (for tab registration pattern)
@@ -11,10 +18,10 @@ STEP 1 — Read these files first:
 - JobbleBaby/app/(tabs)/window-of-tolerance.tsx (for stress/cortisol tracking UX)
 - JobbleBaby/i18n/en.json and zh.json (for i18n key structure)
 
-STEP 2 — Create `JobbleBaby/app/(tabs)/coregulation-resonance.tsx`
+STEP 2 — Create \`JobbleBaby/app/(tabs)/coregulation-resonance.tsx\`
 Design:
 - SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
-- Header: "Co-Regulation" (i18n key: coregulationResonance.title)
+- Header: \"Co-Regulation\" (i18n key: coregulationResonance.title)
 
 SECTION A — Session Logger
 - Quick-log a co-regulation session:
@@ -27,28 +34,28 @@ SECTION A — Session Logger
 - Save to AsyncStorage @jobble/coregulation_session_log
 
 SECTION B — Co-Regulation Index
-- Calculate composite "Co-Regulation Resonance Score" (0-100):
+- Calculate composite \"Co-Regulation Resonance Score\" (0-100):
   - Base: HR proximity (parent HR / baby HR ratio closer to 1 = better)
   - Bonus: longer sessions, consistent logging
   - Display as large number with trend arrow (up/down/stable)
 - 7-day rolling average chart (bar or line)
 
 SECTION C — Stress Correlation Panel
-- Show "Cortisol Spillover Risk" indicator:
+- Show \"Cortisol Spillover Risk\" indicator:
   - If parent logs HR > 100 BPM in 3+ sessions in a week → amber alert
   - If parent logs HR > 110 BPM in 5+ sessions → red alert
-- Alert message (i18n): "Parent stress chronically elevated — consider self-care break"
+- Alert message (i18n): \"Parent stress chronically elevated — consider self-care break\"
 
 SECTION D — HRV Sync Log
 - List of recent sessions with:
   - Date/time, duration, activity, parent HR, baby HR, rating
-  - HR ratio displayed (e.g., "HR ratio: 0.87" meaning baby's HR is 87% of parent's)
+  - HR ratio displayed (e.g., \"HR ratio: 0.87\" meaning baby's HR is 87% of parent's)
 - Tap to expand → full notes
 
 SECTION E — Vagal Tone Benchmark
 - Simple benchmark card showing:
   - Baby's age-appropriate vagal tone indicators (based on concept: vagal_breakpoint)
-  - "Signs of strong vagal tone": calm breathing, quick soothe recovery, eye contact duration > 30s
+  - \"Signs of strong vagal tone\": calm breathing, quick soothe recovery, eye contact duration > 30s
   - Display as a checklist with 3 items
 
 DATA: Use AsyncStorage for all session data. Mock data array for demo if storage is empty.
@@ -73,3 +80,7 @@ STEP 5 — Verify
 Do NOT run npm install or modify package.json.
 
 ULW
+TASK_EOF" Enter
+sleep 1
+tmux send-keys -t jobble-baby:0.0 "cat /tmp/task_391.txt | head -5" Enter
+echo "Dispatch script written"

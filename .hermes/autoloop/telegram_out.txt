@@ -1,6 +1,5 @@
-🍼 Jobble Baby · 14:50
-✅ Done: #389 Behavioral Rehearsal Protocol tab (712 lines, TSC 0)
-✅ Done: #390 Sentry crash reporting (7 files, TSC 0)
-📋 TODO: 0 pending · 165 completed
-📦 Commit: ee9fab0 → pushed
-📝 Desc: #389 + #390 一次過完成。Sentry 修復咗 model name（MiniMax-M2）後成功執行。87 tabs，i18n 完成，TSC 0。準備就緒。
+🍼 Jobble Baby · 15:15
+🔧 Dispatched: #390 Protoconversation Navigator tab (concept #63)
+📋 TODO: 1 in_progress · 164 completed
+📦 Commit: d07a36a → pushed
+📝 Desc: #390 新概念。Proto-conversation Navigator 追蹤嬰兒前語言溝通 — 輪流對話、視線交替、共同注意、模仿詞庫。88 tabs，50 keywords 新增（pool 1057）。準備就緒。

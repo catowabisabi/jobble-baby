@@ -184,4 +184,10 @@ export const STORAGE_KEYS = {
   EXPOSURE_LADDERS: "@jobble/exposure_ladders",
   REAL_OUTCOMES: "@jobble/real_outcomes",
   REHEARSAL_CONFIDENCE: "@jobble/rehearsal_confidence",
+  PROTO_CONVERSATION: "@jobble/proto_conversation",
+  GAZE_ALTERNATION: "@jobble/gaze_alternation",
+  JOINT_ATTENTION: "@jobble/joint_attention",
+  AFFECTIVE_SHARING: "@jobble/affective_sharing",
+  MOTHERESE_RESPONSE: "@jobble/motherese_response",
+  IMITATIVE_REPERTOIRE: "@jobble/imitative_repertoire",
 } as const;

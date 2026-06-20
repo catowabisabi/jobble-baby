@@ -576,6 +576,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="vestibular-motor"
+        options={{
+          title: t('tabs.vestibularMotor') || 'Vestibular-Motor',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="human-handsup" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="pre-submission-qa"
         options={{
           title: t('tabs.preSubmissionQa') || 'QA',

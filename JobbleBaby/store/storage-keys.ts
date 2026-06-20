@@ -168,6 +168,7 @@ export const STORAGE_KEYS = {
   URINE_LOG: "@jobble/urine_log",
   VELOCITY_ALERT_THRESHOLD: "@jobble/velocity_alert_threshold",
   VESTIBULAR_ENTRIES: "@jobble/vestibular_entries",
+  VESTIBULAR_SESSIONS: "@jobble/vestibular_sessions",
   VISIT_CHECKLIST: "@jobble/visit_checklist",
   VISIT_HISTORY: "@jobble/visit_history",
   WAKE_WINDOWS: "@jobble/wake_windows",

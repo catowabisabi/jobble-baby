@@ -1,5 +1,5 @@
-🍼 Jobble Baby · 04:00
-🔧 Working: #388 Feeding Progression Navigator (Sisyphus active)
-📋 TODO: 0 pending · 1 in_progress · 162 completed
-📦 Commit: 309c733 → pushed
-📝 Desc: Cycle 437 — Task 388 dispatched to Sisyphus. Feeding Progression Navigator tab (5-stage weaning + allergen timeline + Allergens link). TSC 0. ⚠️ Cycle 436 dispatch had window target bug (0→1 fix).
+🍼 Jobble Baby · 06:00
+🔧 Working: #385 Vestibular-Motor Integration Navigator (Sisyphus active)
+📋 TODO: 0 pending · 1 in_progress · 163 completed
+📦 Commit: 787befe → pushed
+📝 Desc: Cycle 438 — Feeding Progression Navigator ✅ (file 70b31e8). Now dispatching #385 Vestibular-Motor tab. +49 brainstorm keywords (pool 1151). TSC 0. Sisyphus active in jobble-baby:1.0.

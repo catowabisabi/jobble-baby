@@ -1,0 +1,55 @@
+# Task 385 — Vestibular-Motor Integration Navigator Tab
+## Status: ✅ COMPLETE
+
+## Implementation Summary
+
+### 1. Created `app/(tabs)/vestibular-motor.tsx` (NEW)
+- Full-featured vestibular-motor integration tab with 7 spec sections:
+  - **Vestibular Activity Logger**: Log rocking (vertical/horizontal/side-to-side), bouncing, swinging, active tummy-time with duration and intensity (low/medium/high)
+  - **Motor Milestone Correlation**: Bridge showing vestibular activity frequency vs motor milestones (head control, rolling, sitting, crawling)
+  - **Sleep-Vestibular Correlation**: Bar chart showing sleep quality (1-5) after logged vestibular activities
+  - **Gut Motility Connection**: Icons showing feeding outcomes (normal, spitting up, constipation, gas) with counts
+  - **Growth Velocity Overlay**: Dual-line chart with vestibular intensity and growth velocity over 14 days
+  - **Optimal Vestibular Window Alerts**: Banner shown when baby is 4-8 months old
+  - **Loading Curve Visualization**: 14-day intensity bar chart with baseline reference
+
+- Data models:
+  - `VestibularSession`: id, date, duration_min, activity_type, intensity, post_sleep_quality, post_feeding_outcome, timestamp, babyAgeMonths
+  - `MotorCorrelation`: id, date, motor_milestone, vestibular_activity_min, timestamp
+
+- Storage: `@jobble/vestibular_sessions` via STORAGE_KEYS.VESTIBULAR_SESSIONS
+
+### 2. Updated `store/storage-keys.ts`
+- Added `VESTIBULAR_SESSIONS: "@jobble/vestibular_sessions"`
+
+### 3. Updated `app/(tabs)/_layout.tsx`
+- Added Tabs.Screen for "vestibular-motor" with title from `tabs.vestibularMotor` and MaterialCommunityIcons "human-handsup" icon
+
+### 4. Updated `app/i18n/en.json`
+- Added `tabs.vestibularMotor`: "Vestibular-Motor"
+- Added full `vestibularMotor.*` namespace with 50+ keys covering all UI text
+
+### 5. Updated `app/i18n/zh.json`
+- Added `tabs.vestibularMotor`: "前庭-運動整合"
+- Added full Chinese translations for `vestibularMotor.*` namespace
+
+### Verification
+- `npx tsc --noEmit`: ✅ 0 errors
+- LSP diagnostics on new file: ✅ No issues
+
+## Files Modified
+1. `app/(tabs)/vestibular-motor.tsx` — NEW (660+ lines)
+2. `store/storage-keys.ts` — Added VESTIBULAR_SESSIONS key
+3. `app/(tabs)/_layout.tsx` — Added Tabs.Screen entry
+4. `app/i18n/en.json` — Added tabs.vestibularMotor + vestibularMotor.* keys
+5. `app/i18n/zh.json` — Added tabs.vestibularMotor + vestibularMotor.* Chinese keys
+
+## Implementation Pattern
+Followed existing landau-reflex.tsx and reflex-tracker.tsx patterns:
+- useState for session entries and form state
+- safeGetItem/safeSetItem for AsyncStorage persistence
+- useLanguage + useTheme contexts
+- COLORS from ../theme
+- MaterialCommunityIcons for activity type icons
+- ScrollView for content layout
+- StyleSheet patterns matching existing tabs

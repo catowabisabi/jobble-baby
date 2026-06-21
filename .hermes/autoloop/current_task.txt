@@ -1,46 +1,44 @@
-# Cycle 461 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-21 14:04 HKT
-# Status: Dispatched. Sisyphus working.
+# Cycle 463 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-21 16:13 HKT
+# Status: Completed.
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
 ✅ user-intention.md exists
-✅ Sisyphus active (processing task)
-✅ Queue: 0 pending · 1 new · 90 completed
+✅ Queue: 0 pending · 0 new · 96 completed
 
 === STEP 2 (Verify) ===
+✅ Task 394 (GitHub Actions CI/CD): completed cycle 461
+✅ Task 395 (GitHub Pages Privacy Policy): completed cycle 462
 ✅ TSC: 0 errors (JobbleBaby/)
-✅ Git: clean, last push e665feb
+✅ Git: clean, last push f438aad
 
 === STEP 3 (Review) ===
-✅ Queue empty — dispatching new task from painpoint #7
-📦 New todo #394: GitHub Actions CI/CD pipeline
-   - .github/workflows/expo-ci.yml (lint + tsc on push/PR)
-   - EAS build step commented out (credentials not available)
-   - .env.example with credential variable documentation
-   - TSC 0 errors maintained
+✅ Codebase submission-ready — all 16 tabs + 16 extra tabs complete
+✅ CI/CD (.github/workflows/expo-ci.yml) + GitHub Pages (deploy-pages.yml) deployed
+✅ pre-submission-audit.js: all REQUIRED checks PASS
+✅ No pending todos in queue
 
 === STEP 4 (Brainstorm) ===
-📝 Keywords: polyvagal_informed, mood_funnel, parentese_prosody
+📝 Added 60 new keywords to pool (1060 total)
+📝 Sources: critical_period_stimulation, waking_threshold, cortisol_memory_consolidation, hippocampal_sequencing, oral_motor_readiness
 
 === STEP 5 (Commit) ===
-✅ git push e665feb (progress.db update — todo #394 added)
+✅ git push f438aad — store-submission-guide.md (292 lines)
 
 === STEP 6 (Dispatch) ===
-🔧 Dispatched: #394 GitHub Actions CI/CD Pipeline
-📁 Task file: /tmp/task_461.txt
-🔑 Model: minimax-coding-plan/MiniMax-M2.7
-📝 Response: sisyphus_response_461.txt
+✅ Task 396: App Store/Play Store Submission Guide
+   - Direct opencode execution (OpenCode server confirmed working)
+   - store-submission-guide.md created at project root
 
 === CURRENT STATE ===
-- TODO: 0 pending · 1 new (running) · 90 completed · 5 cancelled
-- Git: e665feb ✅ pushed
+- TODO: 0 pending · 0 new · 96 completed · 2 cancelled · 2 deferred
+- Git: f438aad ✅ pushed
 - TSC: 0 errors (JobbleBaby/)
-- Sisyphus: ACTIVE (GitHub Actions CI/CD task)
-- Project: SUBMISSION-READY (code-level) — all 16 tabs complete
+- Project: SUBMISSION-READY (code-level)
 
 === PENDING USER-ACTION BLOCKERS ===
 - EAS credentials (Apple Team ID + App-Specific Password)
 - App Store Connect app creation (com.jobblebaby.app)
-- Play Console app creation
-- Privacy policy URL deployment (→ jobblebaby.com/privacy)
+- Play Console app creation (com.jobblebaby.app)
+- GitHub Pages enable: Settings → Pages → Source: GitHub Actions

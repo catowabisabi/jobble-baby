@@ -1,30 +1,42 @@
-# Sisyphus Task — Cycle 456
-# Priority: P2
+# Sisyphus Task — Cycle 457
+# Priority: P3
 # Project: Jobble Baby
 
-## TASK: Console.log Sweep — Production Cleanup
+## TASK: i18n Gap Fill — Chinese Translation Completion
 
-**Keywords:** proprietary_drift · sleep_wake_cycle_stabilizer · visual_cortex_stimulation
+**Keywords:** trunk_extension_symmetry · hydrogel_stiffness · rab3a_gtpase_cycle
 
 ### Objective
-Remove all console.log / console.warn / console.debug statements from the app/ directory before production build. Pre-submission audit already flagged interoceptive.tsx:140. Do a full sweep.
+Fill the missing Chinese (zh) translation keys in zh.json to match en.json.
 
 ### Steps
-1. Run: `grep -rn "console\.\(log\|warn\|debug\)" JobbleBaby/app/ --include="*.ts" --include="*.tsx" -n`
-2. For each match:
-   - If it's a debug/development aid → remove entirely
-   - If it might be useful for production errors → replace with comment or Sentry breadcrumb
-3. Run TSC: `cd JobbleBaby && npx tsc --noEmit` — must pass 0 errors
-4. Run pre-submission audit: `node scripts/pre-submission-audit.js`
-5. Report files modified and line counts
+1. cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
+2. Run this to find missing keys:
+   python3 -c "
+import json
+with open('JobbleBaby/app/i18n/en.json') as f: en = json.load(f)
+with open('JobbleBaby/app/i18n/zh.json') as f: zh = json.load(f)
+def get_keys(d, prefix=''):
+    keys = []
+    for k,v in d.items():
+        full = prefix + k
+        if isinstance(v, dict): keys.extend(get_keys(v, full+'.'))
+        else: keys.append(full)
+    return keys
+en_keys = set(get_keys(en))
+zh_keys = set(get_keys(zh))
+for k in sorted(en_keys - zh_keys): print(k)
+"
+3. For each missing key, translate from English to Traditional Chinese and add to zh.json
+4. Run TSC: cd JobbleBaby && npx tsc --noEmit — must pass 0 errors
+5. Run pre-submission audit: node scripts/pre-submission-audit.js
 
-### Files to Check (known problem areas)
-- app/(tabs)/interoceptive.tsx (flagged line 140)
-- Any other tab files with debug statements
-- app/utils/, app/components/, app/contexts/ directories
+### Files
+- JobbleBaby/app/i18n/en.json (read only)
+- JobbleBaby/app/i18n/zh.json (add missing translations)
 
 ### Done when:
-- `grep -rn "console\.\(log\|warn\|debug\)" JobbleBaby/app/` returns 0 results
+- All en.json keys exist in zh.json
 - TSC 0 errors
 - Pre-submission audit PASS
 

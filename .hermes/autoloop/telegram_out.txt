@@ -1,6 +1,7 @@
-🍼 Jobble Baby · 22:04
-✅ Done: #393 Register 5 tabs (false-positive, already registered)
-✅ Done: painpoint #32 resolved (false regression)
+🍼 Jobble Baby · 23:01
+✅ Done: #389 Behavioral Rehearsal Protocol tab
+✅ Done: #385 Vestibular-Motor Integration tab
+✅ Done: #390 Proto-Conversation Navigator tab
 📋 TODO: 0 pending · 0 new · 168 completed
-📦 Commit: 9d2bdf7 → pushed
-📝 Desc: Cycle 447 · TSC 0. Audit PASS. Queue empty. 89 tabs. i18n bilingual. 等待用戶操作：EAS credentials · App Store screenshots · Play Console setup · privacy policy URL。
+📦 Commit: 5a8acd3 → pushed
+📝 Desc: Cycle 448 · Sisyphus 完成了 3 個新 tab。全部 90 tabs 已註冊，TSC 0。Queue empty。等待用戶操作：EAS credentials · App Store screenshots · Play Console setup · privacy policy URL。

@@ -1,12 +1,6 @@
-🍼 Jobble Baby · 21:06
-✅ Done: #392 Fix hardcoded i18n arrays (duplicate of #377, already complete)
-📋 TODO: 0 pending · 0 in_progress · 89 completed
-📦 Commit: 768e092 → pushed
-📝 Desc: Cycle 447 review — TSC 0 errors, 90 tabs registered, i18n bilingual, audit PASS。Queue 完全空，所有 code-level 工作完成。等待用戶操作：EAS credentials · App Store Connect app 建立 · Play Console 建立 · privacy policy URL 部署。
-
-⚠️ 用戶 action blockers：
-• EAS credentials 配置（Apple Team ID + App-Specific Password）
-• App Store screenshots（6.7" iPhone + 6.5" + iPad 12.9"）
-• Google Service Account JSON for Play Console
-• Privacy policy 部署至 jobblebaby.com/privacy
-• App Store Connect + Play Console 建立 app
+🍼 Jobble Baby · 22:04
+✅ Done: #393 Register 5 tabs (false-positive, already registered)
+✅ Done: painpoint #32 resolved (false regression)
+📋 TODO: 0 pending · 0 new · 168 completed
+📦 Commit: 9d2bdf7 → pushed
+📝 Desc: Cycle 447 · TSC 0. Audit PASS. Queue empty. 89 tabs. i18n bilingual. 等待用戶操作：EAS credentials · App Store screenshots · Play Console setup · privacy policy URL。

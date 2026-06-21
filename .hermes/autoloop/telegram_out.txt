@@ -1,6 +1,7 @@
-🍼 Jobble Baby · 19:01
-✅ Done: #392 Circadian Active Phase i18n
-📋 TODO: 0 pending · 0 new · 167 completed
-📦 Commit: 35e180e → pushed
-📝 Desc: Queue empty. TSC 0 errors. 89 tabs. i18n 雙語完成。代碼層面已達到 submission-ready 狀態。
-⚠️ Blockers (user action needed): EAS credentials, App Store screenshots, Play Console setup, privacy policy URL (jobblebaby.com/privacy)
+🍼 Jobble Baby · 21:05
+✅ Done: #392 Fix hardcoded string arrays (circadian + 4 others)
+🔧 Dispatched: #393 Register 5 completed-but-unregistered tabs in _layout
+📋 TODO: 0 pending · 1 new · 167 completed
+📦 Commit: 0767d53 → pushed
+📝 Desc: 發現 regression — protoconversation, feeding-progression, coregulation-resonance, behavioral-rehearsal, development-radar 全部完成但未 register 入 _layout.tsx。用戶完全無法從 UI 進入呢 5 個 tab。已派 task #393 修復。Sisyphus 排隊中 (API retry 中，MiniMax 999 rate limit，會自動重試)。
+⚠️ App Store blockers (user action): EAS credentials · App Store Connect app 建立 · Play Console 建立 · privacy policy URL 部署

@@ -1,7 +1,5 @@
-🍼 Jobble Baby · 23:01
-✅ Done: #389 Behavioral Rehearsal Protocol tab
-✅ Done: #385 Vestibular-Motor Integration tab
-✅ Done: #390 Proto-Conversation Navigator tab
-📋 TODO: 0 pending · 0 new · 168 completed
-📦 Commit: 5a8acd3 → pushed
-📝 Desc: Cycle 448 · Sisyphus 完成了 3 個新 tab。全部 90 tabs 已註冊，TSC 0。Queue empty。等待用戶操作：EAS credentials · App Store screenshots · Play Console setup · privacy policy URL。
+🍼 Jobble Baby · 00:07
+✅ Done: #81 Co-regulation Resonance Tracker (coregulation-resonance.tsx, 45 i18n keys, registered in _layout.tsx)
+📋 TODO: 0 pending · 0 new · 89 completed
+📦 Commit: 7e9245d → pushed
+📝 Desc: Cycle 449 · Coregulation tab 完成，i18n 中英雙語。全部 90 tabs 已註冊，TSC 0。Queue empty。等待用戶操作：EAS credentials · App Store screenshots · Play Console setup · privacy policy URL。

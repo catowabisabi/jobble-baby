@@ -763,10 +763,10 @@ export default function VestibularMotorScreen() {
             </View>
 
             <View style={styles.formBtnRow}>
-              <TouchableOpacity style={styles.cancelBtn} onPress={() => setShowForm(false)}>
+              <TouchableOpacity style={styles.cancelBtn} accessibilityLabel={t('common.cancel')} onPress={() => setShowForm(false)}>
                 <Text style={styles.cancelBtnText}>{t('common.cancel') || 'Cancel'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.saveBtn} onPress={saveEntry}>
+              <TouchableOpacity style={styles.saveBtn} accessibilityLabel={t('common.next')} onPress={saveEntry}>
                 <Text style={styles.saveBtnText}>{t('common.next') || 'Next'}</Text>
               </TouchableOpacity>
             </View>
@@ -817,10 +817,10 @@ export default function VestibularMotorScreen() {
             </View>
 
             <View style={styles.formBtnRow}>
-              <TouchableOpacity style={styles.cancelBtn} onPress={() => { setShowPostForm(false); setPendingSessionId(null); }}>
+              <TouchableOpacity style={styles.cancelBtn} accessibilityLabel={t('common.skip')} onPress={() => { setShowPostForm(false); setPendingSessionId(null); }}>
                 <Text style={styles.cancelBtnText}>{t('common.skip') || 'Skip'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.saveBtn} onPress={savePostData}>
+              <TouchableOpacity style={styles.saveBtn} accessibilityLabel={t('common.save')} onPress={savePostData}>
                 <Text style={styles.saveBtnText}>{t('common.save') || 'Save'}</Text>
               </TouchableOpacity>
             </View>

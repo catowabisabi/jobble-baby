@@ -215,10 +215,10 @@ export default function FeedingProgressionScreen() {
               </TouchableOpacity>
             ))}
 
-            <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} onPress={saveAllergenLog}>
+            <TouchableOpacity style={[styles.modalBtn, { backgroundColor: C.accent }]} accessibilityLabel={t('feedingProgression.save')} onPress={saveAllergenLog}>
               <Text style={styles.modalBtnText}>{t('feedingProgression.save')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.modalBtnSecondary, { borderColor: C.border }]} onPress={() => setModalVisible(false)}>
+            <TouchableOpacity style={[styles.modalBtnSecondary, { borderColor: C.border }]} accessibilityLabel={t('common.cancel')} onPress={() => setModalVisible(false)}>
               <Text style={[styles.modalBtnTextSecondary, { color: C.text }]}>{t('feedingProgression.cancel')}</Text>
             </TouchableOpacity>
           </View>

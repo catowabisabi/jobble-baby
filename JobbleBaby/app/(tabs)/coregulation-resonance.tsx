@@ -208,7 +208,7 @@ const SessionLoggerModal: React.FC<{
           <Text style={styles.inputLabel}>{t('coregulationResonance.sectionA.quality')}</Text>
           <View style={styles.qualityRow}>
             {[1, 2, 3, 4, 5].map((q) => (
-              <TouchableOpacity key={q} onPress={() => setQuality(q)} style={styles.starBtn}>
+              <TouchableOpacity key={q} accessibilityLabel={`Quality rating ${q} star`} onPress={() => setQuality(q)} style={styles.starBtn}>
                 <Text style={[styles.starText, q <= quality && styles.starActive]}>★</Text>
               </TouchableOpacity>
             ))}
@@ -225,10 +225,10 @@ const SessionLoggerModal: React.FC<{
           />
 
           <View style={styles.modalButtons}>
-            <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
+            <TouchableOpacity style={styles.cancelBtn} accessibilityLabel={t('common.cancel')} onPress={onClose}>
               <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.saveBtn} onPress={handleSave}>
+            <TouchableOpacity style={styles.saveBtn} accessibilityLabel={t('common.save')} onPress={handleSave}>
               <Text style={styles.saveBtnText}>{t('coregulationResonance.sectionA.saveSession')}</Text>
             </TouchableOpacity>
           </View>
@@ -280,7 +280,7 @@ const SessionCard: React.FC<{
   const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   return (
-    <TouchableOpacity style={styles.sessionCard} onPress={onToggle}>
+    <TouchableOpacity style={styles.sessionCard} accessibilityLabel="View session details" onPress={onToggle}>
       <View style={styles.sessionHeader}>
         <View>
           <Text style={styles.sessionDate}>{session.date}</Text>

@@ -36,3 +36,14 @@ jobs:
       - name: Expo dependency validation
         run: npx expo install --check
         working-directory: JobbleBaby
+
+      - name: Run Smoke Tests
+        run: npx ts-node --project tsconfig.test.json __tests__/smoke/smoke-tests.ts
+        working-directory: JobbleBaby
+
+      - name: Upload Smoke Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-report
+          path: JobbleBaby/runtime/logs/tests/**/report.md

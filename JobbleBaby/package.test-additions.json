@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^12.4.0",
+    "@types/jest": "^29.5.0",
+    "detox": "^20.0.0",
+    "jest": "^29.7.0",
+    "jest-expo": "^52.0.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:smoke": "npx ts-node --project tsconfig.test.json __tests__/smoke/smoke-tests.ts",
+    "test:unit": "jest --testPathPattern='__tests__/unit'",
+    "test:mocked": "jest --testPathPattern='__tests__/mocked'",
+    "test:a11y": "jest --testPathPattern='__tests__/a11y'",
+    "test:e2e": "detox test --configuration ios.simulator",
+    "test:all": "npm run test:smoke && npm run test:unit && npm run test:a11y",
+    "test:report": "npm run test:all && echo 'Report generated in runtime/logs/tests/'"
+  }
+}

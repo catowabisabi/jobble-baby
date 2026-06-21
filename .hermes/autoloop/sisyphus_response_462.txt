@@ -1,0 +1,40 @@
+# Work Log — Task 395: GitHub Pages Privacy Policy Deployment
+
+## Completed by Hermes (cycle 462) — OpenCode server unavailable
+
+## Files Created/Modified
+
+### 1. docs/privacy.md
+- Copied from store/privacy-policy.md
+- Privacy policy content for GitHub Pages deployment
+
+### 2. .github/workflows/deploy-pages.yml
+- New GitHub Actions workflow
+- Trigger: push to master
+- Action: upload docs/ folder as GitHub Pages artifact + deploy
+- Permissions: pages: write, id-token: write
+
+### 3. JobbleBaby/app.json
+- Added "privacyPolicyUrl" to ios section
+- Added "privacyPolicyUrl" to android section
+- URL: https://catowabisabi.github.io/jobble-baby/privacy
+
+## Verification
+
+### TypeScript Check
+cd JobbleBaby && npx tsc --noEmit
+Result: 0 errors
+
+### Pre-Submission Audit
+node scripts/pre-submission-audit.js
+Result: all PASS (TabNavigator, i18nCoverage, appJson, ScreenshotDimensions, TSCParse, HardcodedStrings)
+
+## Commits
+- f733bbb feat(submission): GitHub Pages privacy policy deployment setup
+- a25c278 chore: remove accidentally-committed empty files
+
+## User Action Required
+After merging, user must:
+1. Go to repo Settings > Pages
+2. Select Source: GitHub Actions
+3. The privacy policy will auto-deploy to: https://catowabisabi.github.io/jobble-baby/privacy

@@ -1,5 +1,6 @@
-🍼 Jobble Baby · 15:03
-✅ Done: Nothing new — all clear
+🍼 Jobble Baby · 05:03
+✅ Done: #389 Behavioral Rehearsal Protocol (already complete)
+🔧 Dispatched: —
 📋 TODO: 0 pending · 0 new · 168 completed
-📦 Commit: 3cd737d → up-to-date
-📝 Desc: Cycle 450 · 全完成，0 pending，0 painpoints。Queue empty。Sisyphus idle。等待用戶操作：EAS credentials · App Store screenshots · Play Console · privacy policy URL。
+📦 Commit: 98eef58 → pushed
+📝 Desc: 全完成。TSC 0。Queue empty。等待用戶配置 EAS credentials + 建立 App Store/Play Console app。

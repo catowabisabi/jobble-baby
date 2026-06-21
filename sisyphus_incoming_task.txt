@@ -1,35 +1,57 @@
-# Sisyphus Task — Cycle 400
+# Sisyphus Task — Cycle 455
 # Priority: P2
 # Project: Jobble Baby
+# Idea: #85 — Neuroplasticity Peak Tracker
 
-Implement Pincer Grasp Self-Feeding Readiness Tracker tab.
+## TASK #393: Implement Neuroplasticity Peak Tracker Tab
 
-File: app/(tabs)/pincer-grasp.tsx
+**Keywords:** critical_window_closing · plasticity_peak · myelination_wave · synaptic_pruning_rate · gaba_switch_timing
 
-Features:
-1. Pincer Milestone Logger — log pincer grasp events: precision_score (1-5), food_type, grasp_method ('radical'|'precise'), duration_sec, notes
-2. Feeding Readiness Index — composite score: pincer_precision × finger_strength × oral_motor × sitting_balance (each 1-5, display as radar/bar)
-3. Food Progression Timeline — guided progression: meltable solids (6-7mo) → soft cubed (7-8mo) → finger foods (8-9mo) → pincer-required (9-12mo)
-4. Spoon Readiness Bridge — transition from pincer-only to spoon + fork use (12-15mo)
-5. Self-Feeding Handoff — predict self-feeding onset based on pincer mastery curve slope
+### Objective
+Create a new tab `neuroplasticity.tsx` tracking infant brain plasticity peaks correlated with myelination waves and synaptic pruning rates.
 
-Data model:
-- @jobble/pincer_events: { id, date, precision_score, food_type, grasp_method, duration_sec, notes, timestamp }
-- @jobble/feeding_readiness: { id, date, pincer_score, finger_strength, oral_motor, sitting_balance, overall_score, timestamp }
+### File Location
+`JobbleBaby/app/(tabs)/neuroplasticity.tsx`
 
-Requirements:
-- Use SafeStorage (safeGetItem/safeSetItem) — NOT raw AsyncStorage
-- Register in app/(tabs)/_layout.tsx as Tabs.Screen name="pincer-grasp"
-- Add i18n keys under "pincerGrasp" namespace in app/i18n/en.json and app/i18n/zh.json
-- TSC: cd JobbleBaby && npx tsc --noEmit must pass 0 errors
-- Reference: reflex-tracker.tsx or landau-reflex.tsx for patterns
-- No hardcoded user-facing strings (all through i18n)
-- accessibilityLabel on all TouchableOpacity elements
+### Features
+1. **Plasticity Timeline** — Visual timeline 0-12 months showing active plasticity peaks for: language (0-12mo peak), vision (0-4mo critical), motor (2-9mo sensitive), sensory integration (0-3y), gut-brain axis (0-12mo). Overlay baby's current age position.
+2. **Myelination Wave Tracker** — Log myelination milestone events (head control, trunk stability, language sounds). Correlate with plasticity windows.
+3. **Synaptic Pruning Correlation** — Show expected pruning rate curve overlaid with developmental milestone achievements. Alert if milestones lag behind pruning progress.
+4. **Window Status Cards** — Cards per domain showing: window name, open/closing/closed status, days remaining (if closing), stimulation activities suggestions.
+5. **2-Week Closing Alert** — Alert banner when any window is within 2 weeks of closing with suggested activities.
+6. **Integration Links** — Link to existing: critical-periods tab, milestone tab, sensory-integration tab.
 
-After implementation:
-- TSC 0 errors
-- Tab visible in tab navigator
-- No raw AsyncStorage
+### Storage (SafeStorage, NOT raw AsyncStorage)
+- `@jobble/plasticity_tracking` — plasticity event entries
+- `@jobble/window_activities` — logged stimulation activities per window
+
+### i18n Keys
+Add to `JobbleBaby/app/i18n/en.json` and `JobbleBaby/app/i18n/zh.json`:
+- `neuroplasticity.*` namespace — all UI strings (Title, timeline labels, window names, alert messages, activity suggestions)
+- `tabs.neuroplasticity` — tab bar label
+
+### Registration
+Add `Tabs.Screen` entry to `JobbleBaby/app/(tabs)/_layout.tsx`:
+```tsx
+<Tabs.Screen name="neuroplasticity" options={{ title: t('tabs.neuroplasticity'), tabBarIcon: ... }} />
+```
+
+### Quality Gates
+1. TSC `cd JobbleBaby && npx expo typescript --noEmit` (or use npx tsc) passes 0 errors
+2. All interactive elements have `accessibilityLabel`
+3. All user-facing strings use i18n via `t()` or `ti()`
+4. Use `SafeStorage` utility (not raw AsyncStorage) — see app/utils/SafeStorage.ts
+5. Run `node scripts/pre-submission-audit.js` — all checks must PASS
+
+### Implementation Order
+1. Create `neuroplasticity.tsx` with full implementation
+2. Add i18n keys to `en.json` + `zh.json`
+3. Register in `_layout.tsx`
+4. Run TSC — fix any errors
+5. Run pre-submission audit script
+6. Report completion
+
+Reference existing tab patterns: `critical-periods.tsx`, `gesture-milestone.tsx`, `sensory-integration.tsx`
 
 **DONE ULW**
 Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby

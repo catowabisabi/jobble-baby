@@ -54,6 +54,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="neuroplasticity"
+        options={{
+          title: t('tabs.neuroplasticity'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="head-sync" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="critical-periods"
         options={{
           title: t('tabs.criticalPeriods'),

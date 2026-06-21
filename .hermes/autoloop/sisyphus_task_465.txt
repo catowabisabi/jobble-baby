@@ -1,0 +1,31 @@
+# Task 465 — Fix Remaining Hardcoded String Arrays for i18n
+
+## Context
+Jobble Baby app. Pre-submission audit found 16 potential hardcoded strings in 5 tab files. These are user-facing string arrays that need i18n keys.
+
+## Files to Fix
+
+### 1. app/(tabs)/diaper-cream.tsx
+Lines 11-15 — hardcoded string arrays. Convert to i18n key references.
+
+### 2. app/(tabs)/phototherapy-comfort.tsx
+Line 36: hardcoded light type array → i18n key reference
+
+### 3. app/(tabs)/reflex-visual-motor.tsx
+Line 25: hardcoded reflex status array → i18n key reference
+
+### 4. app/(tabs)/regulatory-fitness.tsx
+Line 259: hardcoded regulatory domain array → i18n key reference
+
+### 5. app/(tabs)/sleep-architecture.tsx
+Lines 56-57: hardcoded sound/light arrays → i18n key references
+
+## Requirements
+- Replace hardcoded string arrays with i18n key references (e.g., t('diaperCream.zincOxide'))
+- Add missing i18n keys to both en.json and zh.json
+- TSC 0 errors: cd JobbleBaby && npx tsc --noEmit
+- Audit: node scripts/pre-submission-audit.js — hardcoded strings count reduced
+- Git commit after success
+
+## Keywords
+cortisol_growth_hormone_antagonism, nrem_cycling, hpa_axis_maturation

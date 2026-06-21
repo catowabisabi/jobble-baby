@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 08:00
+🍼 Jobble Baby · 09:01
 ✅ Done: #456 Console.log Sweep — production cleanup (5 files, TSC 0, audit PASS)
 🔧 Dispatched: #457 i18n Gap Fill — Chinese translation (15 missing keys)
 📋 TODO: 0 pending · 0 new · 91 completed
-📦 Commit: 843db4c → pushed
+📦 Commit: 6dcd5df → pushed
 📝 Desc: 全16 tab+console.log清理完成，i18n差15個key待補。等待用戶：EAS credentials + App Store Connect + Play Console + 隱私政策URL部署。

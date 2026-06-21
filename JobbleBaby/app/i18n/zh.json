@@ -108,6 +108,14 @@
     "milestoneRollOverDesc": "Tummy time builds the strength needed to roll both directions. [TODO]",
     "milestoneCrawl": "Crawl [TODO]",
     "milestoneCrawlDesc": "Strong push-up and arm coordination leads to crawling. [TODO]",
+    "milestonePrompt": {
+      "head_lift": "在正面姿勢時抬頭片刻",
+      "push_up": "用枕頭輔助練習俯臥撐",
+      "chest_raise": "在挺胸時伸手夠玩具",
+      "arm_crawl": "把玩具放在略遠處，鼓勵手臂轉移",
+      "roll_over": "從趴臥姿勢輕柔引導翻身",
+      "crawl": "用枕頭設置爬行障礙賽"
+    },
     "todayHistory": "Today's Log [TODO]",
     "badgeEarned": "Daily Goal Badge Earned! [TODO]",
     "rewardUnlocked": "Reward unlocked: {name} [TODO]",
@@ -155,6 +163,8 @@
     "tabs.whiteNoise": "White Noise [TODO]",
     "tabs.diaperCream": "Diaper [TODO]",
     "tabs.suckleChew": "Suckle [TODO]",
+    "cupFeeding": "杯餵",
+    "suckleToChew": "吸吮→咀嚼",
     "tabs.hungerCue": "Hunger [TODO]",
     "tabs.wetDryAnalysis": "Wet/Dry [TODO]",
     "tabs.foodJag": "Food Jag [TODO]",
@@ -4280,7 +4290,14 @@
     "precisionPoor": "精準（較差）",
     "graspMethodPrecise": "精準抓握",
     "graspMethodRadical": "放射狀抓握",
-    "notesPlaceholder": "記錄備註（例如：嘗試了米餅，手指協調進步）"
+    "notesPlaceholder": "記錄備註（例如：嘗試了米餅，手指協調進步）",
+    "meltableSolidsMo": "6-7 個月",
+    "softCubedMo": "7-8 個月",
+    "fingerFoodsMo": "8-9 個月",
+    "pincerRequiredMo": "9-12 個月",
+    "spoonOnlyMo": "12 個月",
+    "spoonForkMo": "13 個月",
+    "proficientSpoonMo": "15 個月"
   },
   "preSubmissionQa": {
     "title": "預提交 QA",

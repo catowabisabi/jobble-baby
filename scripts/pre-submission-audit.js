@@ -65,7 +65,7 @@ check('appJson', () => {
 // 4. Screenshot Dimension Check (existence only)
 check('ScreenshotDimensions', () => {
   if (!fs.existsSync(STORE_DIR)) return { name: 'ScreenshotDimensions', pass: true, issues: [] };
-  const files = fs.readdirSync(STORE_DIR).filter(f => /\.(png|jpg|jpeg)$/i.test(f));
+  const files = fs.readdirSync(STORE_DIR, { recursive: true }).filter(f => /\.(png|jpg|jpeg)$/i.test(f));
   return { name: 'ScreenshotDimensions', pass: true, issues: [], meta: { count: files.length } };
 });
 

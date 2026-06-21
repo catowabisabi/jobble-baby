@@ -1,0 +1,38 @@
+name: Expo CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        working-directory: ./JobbleBaby
+        run: npx tsc --noEmit
+
+      - name: Expo lint
+        working-directory: ./JobbleBaby
+        run: npx expo lint --fix || true
+
+      # EAS Build (uncomment when EAS credentials are configured)
+      # - name: Install EAS CLI
+      #   run: npm install -g eas-cli
+      # - name: Build iOS (simulator)
+      #   run: eas build --platform ios --profile preview --non-interactive
+      #   env:
+      #     EAS_APPLE_TEAM_ID: ${{ secrets.EAS_APPLE_TEAM_ID }}
+      #     EAS_APP_ID: ${{ secrets.EAS_APP_ID }}

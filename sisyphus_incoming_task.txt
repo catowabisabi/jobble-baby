@@ -1,57 +1,32 @@
-# Sisyphus Task — Cycle 455
+# Sisyphus Task — Cycle 456
 # Priority: P2
 # Project: Jobble Baby
-# Idea: #85 — Neuroplasticity Peak Tracker
 
-## TASK #393: Implement Neuroplasticity Peak Tracker Tab
+## TASK: Console.log Sweep — Production Cleanup
 
-**Keywords:** critical_window_closing · plasticity_peak · myelination_wave · synaptic_pruning_rate · gaba_switch_timing
+**Keywords:** proprietary_drift · sleep_wake_cycle_stabilizer · visual_cortex_stimulation
 
 ### Objective
-Create a new tab `neuroplasticity.tsx` tracking infant brain plasticity peaks correlated with myelination waves and synaptic pruning rates.
+Remove all console.log / console.warn / console.debug statements from the app/ directory before production build. Pre-submission audit already flagged interoceptive.tsx:140. Do a full sweep.
 
-### File Location
-`JobbleBaby/app/(tabs)/neuroplasticity.tsx`
+### Steps
+1. Run: `grep -rn "console\.\(log\|warn\|debug\)" JobbleBaby/app/ --include="*.ts" --include="*.tsx" -n`
+2. For each match:
+   - If it's a debug/development aid → remove entirely
+   - If it might be useful for production errors → replace with comment or Sentry breadcrumb
+3. Run TSC: `cd JobbleBaby && npx tsc --noEmit` — must pass 0 errors
+4. Run pre-submission audit: `node scripts/pre-submission-audit.js`
+5. Report files modified and line counts
 
-### Features
-1. **Plasticity Timeline** — Visual timeline 0-12 months showing active plasticity peaks for: language (0-12mo peak), vision (0-4mo critical), motor (2-9mo sensitive), sensory integration (0-3y), gut-brain axis (0-12mo). Overlay baby's current age position.
-2. **Myelination Wave Tracker** — Log myelination milestone events (head control, trunk stability, language sounds). Correlate with plasticity windows.
-3. **Synaptic Pruning Correlation** — Show expected pruning rate curve overlaid with developmental milestone achievements. Alert if milestones lag behind pruning progress.
-4. **Window Status Cards** — Cards per domain showing: window name, open/closing/closed status, days remaining (if closing), stimulation activities suggestions.
-5. **2-Week Closing Alert** — Alert banner when any window is within 2 weeks of closing with suggested activities.
-6. **Integration Links** — Link to existing: critical-periods tab, milestone tab, sensory-integration tab.
+### Files to Check (known problem areas)
+- app/(tabs)/interoceptive.tsx (flagged line 140)
+- Any other tab files with debug statements
+- app/utils/, app/components/, app/contexts/ directories
 
-### Storage (SafeStorage, NOT raw AsyncStorage)
-- `@jobble/plasticity_tracking` — plasticity event entries
-- `@jobble/window_activities` — logged stimulation activities per window
-
-### i18n Keys
-Add to `JobbleBaby/app/i18n/en.json` and `JobbleBaby/app/i18n/zh.json`:
-- `neuroplasticity.*` namespace — all UI strings (Title, timeline labels, window names, alert messages, activity suggestions)
-- `tabs.neuroplasticity` — tab bar label
-
-### Registration
-Add `Tabs.Screen` entry to `JobbleBaby/app/(tabs)/_layout.tsx`:
-```tsx
-<Tabs.Screen name="neuroplasticity" options={{ title: t('tabs.neuroplasticity'), tabBarIcon: ... }} />
-```
-
-### Quality Gates
-1. TSC `cd JobbleBaby && npx expo typescript --noEmit` (or use npx tsc) passes 0 errors
-2. All interactive elements have `accessibilityLabel`
-3. All user-facing strings use i18n via `t()` or `ti()`
-4. Use `SafeStorage` utility (not raw AsyncStorage) — see app/utils/SafeStorage.ts
-5. Run `node scripts/pre-submission-audit.js` — all checks must PASS
-
-### Implementation Order
-1. Create `neuroplasticity.tsx` with full implementation
-2. Add i18n keys to `en.json` + `zh.json`
-3. Register in `_layout.tsx`
-4. Run TSC — fix any errors
-5. Run pre-submission audit script
-6. Report completion
-
-Reference existing tab patterns: `critical-periods.tsx`, `gesture-milestone.tsx`, `sensory-integration.tsx`
+### Done when:
+- `grep -rn "console\.\(log\|warn\|debug\)" JobbleBaby/app/` returns 0 results
+- TSC 0 errors
+- Pre-submission audit PASS
 
 **DONE ULW**
 Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby

@@ -25,20 +25,14 @@ export function useNotifications() {
     try {
       const { status } = await Notifications.requestPermissionsAsync();
       return status as PermissionStatus;
-    } catch (error) {
-      console.error('Failed to request notification permissions:', error);
-      return 'denied';
-    }
+    } catch { return 'denied'; }
   };
 
   const getPermissionStatus = async (): Promise<PermissionStatus> => {
     try {
       const { status } = await Notifications.getPermissionsAsync();
       return status as PermissionStatus;
-    } catch (error) {
-      console.error('Failed to get permission status:', error);
-      return 'undetermined';
-    }
+    } catch { return 'undetermined'; }
   };
 
   const scheduleSleepNotification = async (
@@ -59,10 +53,7 @@ export function useNotifications() {
         } as Notifications.NotificationTriggerInput,
       });
       return id;
-    } catch (error) {
-      console.error('Failed to schedule sleep notification:', error);
-      return '';
-    }
+    } catch { return ''; }
   };
 
   const scheduleFeedingReminder = async (
@@ -83,10 +74,7 @@ export function useNotifications() {
         } as Notifications.NotificationTriggerInput,
       });
       return id;
-    } catch (error) {
-      console.error('Failed to schedule feeding reminder:', error);
-      return '';
-    }
+    } catch { return ''; }
   };
 
   const scheduleDailySummary = async (
@@ -105,18 +93,13 @@ export function useNotifications() {
         } as Notifications.NotificationTriggerInput,
       });
       return id;
-    } catch (error) {
-      console.error('Failed to schedule daily summary notification:', error);
-      return '';
-    }
+    } catch { return ''; }
   };
 
   const cancelAllNotifications = async (): Promise<void> => {
     try {
       await Notifications.cancelAllScheduledNotificationsAsync();
-    } catch (error) {
-      console.error('Failed to cancel all notifications:', error);
-    }
+    } catch { }
   };
 
   const setNotificationChannel = async (): Promise<void> => {
@@ -129,9 +112,7 @@ export function useNotifications() {
         vibrationPattern: [0, 250, 250, 250],
         lightColor: '#FF231F7C',
       });
-    } catch (error) {
-      console.error('Failed to set notification channel:', error);
-    }
+    } catch { }
   };
 
   return {

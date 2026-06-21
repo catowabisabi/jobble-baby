@@ -214,7 +214,5 @@ export const notifyBadgeAward = async (badge: Badge): Promise<void> => {
       },
       trigger: null, // Fire immediately
     });
-  } catch (error) {
-    console.error('Failed to send badge award notification:', error);
-  }
+  } catch { }
 };

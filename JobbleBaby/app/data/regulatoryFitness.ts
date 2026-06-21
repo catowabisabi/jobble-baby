@@ -22,9 +22,7 @@ export const loadRegulatoryData = async (): Promise<RegulatoryEntry[]> => {
       cutoff.setDate(cutoff.getDate() - MAX_ENTRIES);
       return parsed.filter((e) => new Date(e.date) >= cutoff);
     }
-  } catch (error) {
-    console.error('Error loading regulatory data:', error);
-  }
+  } catch { }
   return [];
 };
 
@@ -35,7 +33,6 @@ export const saveRegulatoryEntry = async (entry: RegulatoryEntry): Promise<void>
     const updated = [...filtered, entry].slice(-MAX_ENTRIES);
     await safeSetItem(STORAGE_KEY, JSON.stringify(updated));
   } catch (error) {
-    console.error('Error saving regulatory entry:', error);
     throw error;
   }
 };

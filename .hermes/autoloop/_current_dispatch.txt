@@ -1,56 +1,60 @@
-# Cycle 474 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-22 12:04 HKT
-# Status: Dispatched. Task 396 in progress.
+# Cycle 475 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-22 14:09 HKT
+# Status: Dispatched. Task 398 in progress.
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
 ✅ user-intention.md exists
-✅ Sisyphus dispatched → task 396 in progress
-✅ Queue: 0 pending · 1 in_progress (todo #396)
+✅ Sisyphus dispatched → task 398 in progress
+✅ Queue: 0 pending · 1 in_progress (todo #398)
 
 === STEP 2 (Verify) ===
-✅ No pending tasks to verify — all complete from cycle 473
+✅ #396 Stranger Anxiety + Ear Pressure Navigator — completed (git 9ba757b, DB updated)
+✅ #397 Polyvagal Interoceptive Dashboard — completed (git 24f6762, DB updated)
+✅ #396/397 ideas marked implemented
 
 === STEP 3 (Review) ===
 ✅ TSC: 0 errors (JobbleBaby/)
-✅ Audit: PASS (9/9)
+✅ Audit: PASS 9/9 (from repo root — path detection fixed)
 ✅ No open painpoints (37/37 resolved)
-✅ No pending/in_progress todos before dispatch
+✅ pre-submission-audit.js: added auto-detect JobbleBaby dir when run from repo root
+✅ 92 tabs all aligned, i18n complete
 
 === STEP 4 (Brainstorm) ===
-✅ Sources: friction, cabin_pressure_equilibrium, emergence_in_systems, neophobic_response, auditory_localization
-✅ prompt3: neophobic_response, auditory_localization, cabin_pressure_equilibrium
+✅ Sources: attachment_signaling_baby, formula_transition, chocolate_tempering_curves, bifratal_geography, sympathetic_surge
+✅ prompt3: terahertz_skin_imaging, cortisol_shadow, tongue_tie_reassessment
 ✅ 50 free-associative keywords added (pool: 1000)
-✅ Sparked: Stranger Anxiety + Ear Pressure Navigator (idea #87)
-✅ Created todo #396
+✅ Sparked: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment (idea #89)
+✅ Created todo #398
 
 === STEP 5 (Commit) ===
-✅ 151cd51 → pushed
-   - docs: cycle 474 — brainstorm Stranger Anxiety + Ear Pressure Navigator (idea #87, todo #396)
+✅ e69a4c3 → pushed
+   - chore: mark todos 396-397 complete + fix pre-submission-audit.js path detection
 
 === STEP 6 (Dispatch) ===
-✅ Dispatched: todo #396 — Stranger Anxiety + Ear Pressure Navigator
-✅ Task written to /tmp/task_396.txt → opencode dispatched (PID 2912180)
+✅ Dispatched: todo #398 — Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment
+✅ Task written to /tmp/task_398.txt → tmux dispatch
 
 === STEP 7 (Telegram) ===
 📝 Written to telegram_out.txt
 
 === CURRENT STATE ===
-- TODO: 0 pending · 1 in_progress · 171 completed
-- Git: 151cd51 pushed ✅
+- TODO: 0 pending · 1 in_progress · 173 completed
+- Git: e69a4c3 pushed ✅
 - TSC: Verified clean (JobbleBaby/ — 0 errors)
-- Audit: PASS (9/9)
-- Sisyphus: Active — task 396 dispatched
+- Audit: PASS 9/9 (repo root compatible)
+- Sisyphus: Active — task 398 dispatched
 - Keyword pool: 1000 keywords
+- Ideas: #87 Stranger Anxiety, #88 Polyvagal, #89 Cortisol/Skin/Tongue-Tie
 
 === PENDING USER-ACTION BLOCKERS ===
 - EAS credentials (Apple Team ID + App-Specific Password)
 - App Store Connect app creation (com.jobblebaby.app)
 - Play Console app creation (com.jobblebaby.app)
-- Privacy policy URL deployment (GitHub Pages: https://catowabisabi.github.io/jobble-baby/privacy)
+- Privacy policy URL deployment (https://catowabisabi.github.io/jobble-baby/privacy)
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
-All 92 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS.
-Sisyphus working on: Stranger Anxiety + Ear Pressure Navigator upgrade (todo #396).
-Next: once #396 done → final review + app store submission prep.
+All 93 tabs implemented (92 + cortisol-skin-navigator incoming). i18n bilingual (EN/ZH). TSC 0. Audit PASS 9/9.
+Sisyphus working on: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment (todo #398).
+Next: once #398 done → review → final store submission prep.

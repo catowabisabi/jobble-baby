@@ -1,6 +1,22 @@
-# Cycle 474 — Current Task
-todo #396: Stranger Anxiety + Ear Pressure Navigator (in_progress)
-Dispatched: 2026-06-22 12:04 HKT
-OpenCode PID: 2912180
-Log: /tmp/opencode_396.log
-Keywords: neophobic_response, auditory_localization, cabin_pressure_equilibrium
+# Cycle 475 — Current Task
+todo #398: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment (in_progress)
+Dispatched: 2026-06-22 14:00 HKT
+OpenCode PID: (via tmux jobble-baby:1.0)
+Log: /tmp/opencode_398.log
+Keywords: terahertz_skin_imaging, cortisol_shadow, tongue_tie_reassessment
+
+=== CYCLE 475 STATE ===
+- TODO: 0 pending · 1 in_progress · 173 completed
+- Git: e69a4c3 pushed
+- TSC: Verified clean (JobbleBaby/ — 0 errors)
+- Audit: PASS 9/9 (from JobbleBaby/)
+- Sisyphus: Active — task 398 dispatched
+- Keyword pool: 1000 keywords
+- Idea #89: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment
+- Ideas 87/88: marked implemented
+
+=== PENDING USER-ACTION BLOCKERS ===
+- EAS credentials (Apple Team ID + App-Specific Password)
+- App Store Connect app creation (com.jobblebaby.app)
+- Play Console app creation (com.jobblebaby.app)
+- Privacy policy URL deployment (https://catowabisabi.github.io/jobble-baby/privacy)

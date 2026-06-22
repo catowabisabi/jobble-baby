@@ -1,5 +1,7 @@
-🍼 Jobble Baby · 12:04
-🔧 Dispatched: #396 Stranger Anxiety + Ear Pressure Navigator
-📋 TODO: 0 pending · 1 in_progress · 171 completed
-📦 Commit: d353d7b → pushed
-📝 Desc: 新念頭：將 stranger-danger.tsx 升級，加入旅遊耳壓護理 + 綜合壓力指數，追蹤 7-9 個月陌生人焦慮高峰期。全部 92 tabs 正常，TSC 0，Audit PASS 9/9。
+🍼 Jobble Baby · 14:09
+✅ Done: #396 Stranger Anxiety + Ear Pressure Navigator
+✅ Done: #397 Polyvagal Interoceptive Dashboard
+🔧 Dispatched: #398 Cortisol Shadow + Skin Navigator + Tongue-Tie
+📋 TODO: 0 pending · 1 in_progress · 173 completed
+📦 Commit: e69a4c3 → pushed
+📝 Desc: cycle 475 — completed #396/397, audit fix (run from repo root), sparked idea #89, 50 keywords added. TSC 0, Audit PASS 9/9.

@@ -175,7 +175,6 @@
     "tabs.cryAnalyzer": "Cry Analyzer [TODO]",
     "tabs.gestureMilestone": "Gesture [TODO]",
     "tabs.neuroplasticity": "Neuroplasticity [TODO]",
-    "tabs.coregulationResonance": "共同調節",
     "neuroplasticity": "Neuroplasticity [TODO]",
     "preSubmissionQa": "預提交 QA",
     "feedingProgression": "餵食",
@@ -207,7 +206,7 @@
     "activitiesLogged": "活動已記錄",
     "relatedTabs": "相關標籤",
     "criticalPeriods": "關鍵期",
-    "sensoryIntegration": "感官",
+    "sensoryIntegration": "感官整合",
     "plasticityIntensity": "可塑性強度",
     "intensityLevel": "強度",
     "logIntensity": "記錄強度",
@@ -226,7 +225,6 @@
     "motorWhy": "運動皮層發育需要在這個窗口期間進行強化練習。運動的神經通路正在通過重複使用建立和調整。",
     "motorMyelination": "運動皮層和皮質脊髓束從2-9個月髓鞘化。髓鞘化使自願運動控制所需精確、協調的運動成為可能。",
     "motorPruning": "9個月後，運動修剪集中在消除未使用的運動通路。窗口期間的強化練習加強了倖存的連接。",
-    "sensoryIntegration": "感官整合",
     "sensoryIntegrationDesc": "感官整合窗口（0-36個月）涵蓋所有五種感官與運動、語言和認知發展的整合。這是最廣泛的發育窗口。",
     "sensoryIntegrationWhy": "多感官整合是所有更高級大腦功能的基礎。大腦學習結合來自不同感官輸入，創造對世界的一致理解。",
     "sensoryMyelination": "所有皮層區域的感官整合通路在這個窗口期間都在髓鞘化。連接不同感官模式的聯合區域最後發育。",
@@ -2576,6 +2574,12 @@
       "Halogen": "鹵素燈",
       "Fiber Optic": "光纖燈",
       "BiliBlanket": "BiliBlanket"
+    },
+    "lampTypes": {
+      "LED": "LED",
+      "Halogen": "鹵素燈",
+      "FiberOptic": "光纖燈",
+      "BiliBlanket": "BiliBlanket"
     }
   },
   "eightMonthStorm": {
@@ -2795,7 +2799,30 @@
       "非常安靜",
       "安靜"
     ],
-    "rem": "快速眼動"
+    "rem": "快速眼動",
+    "soundTypes": {
+      "whiteNoise": "白噪音",
+      "pinkNoise": "粉紅噪音",
+      "brownNoise": "棕噪音",
+      "rain": "雨聲",
+      "ocean": "海浪",
+      "heartbeat": "心跳",
+      "fan": "風扇",
+      "lullaby": "催眠曲"
+    },
+    "lightLevels": {
+      "fullyDark": "全黑",
+      "dim": "昏暗",
+      "nightLight": "夜燈",
+      "lowGlow": "低光"
+    },
+    "noiseLevels": {
+      "silent": "寂靜",
+      "veryQuiet": "非常安靜",
+      "quiet": "安靜",
+      "moderate": "適中",
+      "noisy": "嘈雜"
+    }
   },
   "criticalPeriods": {
     "title": "關鍵發育期",
@@ -3535,6 +3562,12 @@
         "sensory": "感覺",
         "motor": "運動"
       }
+    },
+    "domains": {
+      "autonomic": "自主神經",
+      "sensory": "感覺",
+      "motor": "運動",
+      "social": "社交"
     }
   },
   "windowOfTolerance": {
@@ -3710,7 +3743,15 @@
     "cancel": "Cancel",
     "submit": "Submit",
     "saveEntry": "Save Entry",
-    "whatResolvedIt": "What resolved it?"
+    "whatResolvedIt": "What resolved it?",
+    "scanPhases": {
+      "head": "頭部",
+      "throat": "喉部",
+      "chest": "胸部",
+      "abdomen": "腹部",
+      "pelvis": "骨盆",
+      "limbs": "四肢"
+    }
   },
   "reflex": {
     "moro": "Moro Reflex",
@@ -4137,7 +4178,18 @@
     "rating3": "一般",
     "rating4": "良好",
     "rating5": "優秀",
-    "yes": "是"
+    "yes": "是",
+    "creamTypes": {
+      "zinc_oxide": "氧化鋅",
+      "petroleum": "石油基",
+      "natural": "天然/有機",
+      "other": "其他"
+    },
+    "amounts": {
+      "thin": "薄",
+      "medium": "中",
+      "thick": "厚"
+    }
   },
   "medium": "中等",
   "spontaneous": "自發性",
@@ -4685,6 +4737,13 @@
       "chartHint": "查看供應趨勢",
       "storageHint": "管理儲存母乳",
       "weaningHint": "斷奶預測"
+    }
+  },
+  "reflexVisualMotor": {
+    "status": {
+      "present": "存在",
+      "partially": "部分整合",
+      "integrated": "已整合"
     }
   }
 }

@@ -5,6 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { COLORS } from '../theme';
 import { STORAGE_KEYS } from '../../store/storage-keys';
+const enI18n = require('../i18n/en.json');
 
 const STORAGE_KEY_ARCHITECTURE = STORAGE_KEYS.SLEEP_ARCHITECTURE;
 const STORAGE_KEY_CIRCADIAN = STORAGE_KEYS.CIRCADIAN_INPUTS;
@@ -53,9 +54,9 @@ interface SleepDebtEntry {
   debtMin: number;
 }
 
-const SOUND_TYPES = ['White Noise', 'Pink Noise', 'Brown Noise', 'Rain', 'Ocean', 'Heartbeat', 'Fan', 'Lullaby'];
-const LIGHT_LEVELS = ['Fully dark', 'Dim', 'Night light', 'Low glow'];
-const NOISE_LEVELS = ['Silent', 'Very quiet', 'Quiet', 'Moderate', 'Noisy'];
+const SOUND_TYPES = ['sleepArchitecture.soundTypes.whiteNoise', 'sleepArchitecture.soundTypes.pinkNoise', 'sleepArchitecture.soundTypes.brownNoise', 'sleepArchitecture.soundTypes.rain', 'sleepArchitecture.soundTypes.ocean', 'sleepArchitecture.soundTypes.heartbeat', 'sleepArchitecture.soundTypes.fan', 'sleepArchitecture.soundTypes.lullaby'];
+const LIGHT_LEVELS = ['sleepArchitecture.lightLevels.fullyDark', 'sleepArchitecture.lightLevels.dim', 'sleepArchitecture.lightLevels.nightLight', 'sleepArchitecture.lightLevels.lowGlow'];
+const NOISE_LEVELS = ['sleepArchitecture.noiseLevels.silent', 'sleepArchitecture.noiseLevels.veryQuiet', 'sleepArchitecture.noiseLevels.quiet', 'sleepArchitecture.noiseLevels.moderate', 'sleepArchitecture.noiseLevels.noisy'];
 
 function getRecommendedSleep(babyAgeMonths: number): number {
   if (babyAgeMonths < 2) return 540;
@@ -105,33 +106,28 @@ export default function SleepArchitectureScreen() {
   const inputBg = effectiveTheme === 'dark' ? '#1a2a3a' : '#ffffff';
 
   // i18n key maps for hardcoded display strings (defined here where t is in scope)
-  const SOUND_TYPE_I18N: Record<string, string> = {
-    'White Noise': 'sleepArchitecture.soundTypes.whiteNoise',
-    'Pink Noise': 'sleepArchitecture.soundTypes.pinkNoise',
-    'Brown Noise': 'sleepArchitecture.soundTypes.brownNoise',
-    'Rain': 'sleepArchitecture.soundTypes.rain',
-    'Ocean': 'sleepArchitecture.soundTypes.ocean',
-    'Heartbeat': 'sleepArchitecture.soundTypes.heartbeat',
-    'Fan': 'sleepArchitecture.soundTypes.fan',
-    'Lullaby': 'sleepArchitecture.soundTypes.lullaby',
-  };
   const LIGHT_LEVEL_I18N: Record<string, string> = {
-    'Fully dark': 'sleepArchitecture.lightLevels.fullyDark',
-    'Dim': 'sleepArchitecture.lightLevels.dim',
-    'Night light': 'sleepArchitecture.lightLevels.nightLight',
-    'Low glow': 'sleepArchitecture.lightLevels.lowGlow',
+    'sleepArchitecture.lightLevels.fullyDark': 'sleepArchitecture.lightLevels.fullyDark',
+    'sleepArchitecture.lightLevels.dim': 'sleepArchitecture.lightLevels.dim',
+    'sleepArchitecture.lightLevels.nightLight': 'sleepArchitecture.lightLevels.nightLight',
+    'sleepArchitecture.lightLevels.lowGlow': 'sleepArchitecture.lightLevels.lowGlow',
   };
   const NOISE_LEVEL_I18N: Record<string, string> = {
-    'Silent': 'sleepArchitecture.noiseLevels.silent',
-    'Very quiet': 'sleepArchitecture.noiseLevels.veryQuiet',
-    'Quiet': 'sleepArchitecture.noiseLevels.quiet',
-    'Moderate': 'sleepArchitecture.noiseLevels.moderate',
-    'Noisy': 'sleepArchitecture.noiseLevels.noisy',
+    'sleepArchitecture.noiseLevels.silent': 'sleepArchitecture.noiseLevels.silent',
+    'sleepArchitecture.noiseLevels.veryQuiet': 'sleepArchitecture.noiseLevels.veryQuiet',
+    'sleepArchitecture.noiseLevels.quiet': 'sleepArchitecture.noiseLevels.quiet',
+    'sleepArchitecture.noiseLevels.moderate': 'sleepArchitecture.noiseLevels.moderate',
+    'sleepArchitecture.noiseLevels.noisy': 'sleepArchitecture.noiseLevels.noisy',
   };
-  // Safe i18n lookup: returns translation, falls back to raw string
+  // Safe i18n lookup: returns translation, falls back to English original
   const ti = (key: string): string => {
     const translated = t(key);
-    return translated === key ? key : translated;
+    if (translated !== key) return translated;
+    // Fall back to English original via enI18n
+    const parts = key.split('.');
+    let val: any = enI18n;
+    for (const p of parts) { val = val?.[p]; }
+    return typeof val === 'string' ? val : key;
   };
 
   const [architectureLog, setArchitectureLog] = useState<ArchitectureEntry[]>([]);
@@ -463,7 +459,7 @@ export default function SleepArchitectureScreen() {
           <Text style={s.infoText}>{t('sleepArchitecture.whiteNoiseHint') || 'Log different sounds to find what settles baby fastest'}</Text>
           <View style={s.chipRow}>
             {SOUND_TYPES.map(sound => (
-              <Chip key={sound} label={ti(SOUND_TYPE_I18N[sound])} active={selectedSound === sound}
+              <Chip key={sound} label={ti(sound)} active={selectedSound === sound}
                 onPress={() => setSelectedSound(selectedSound === sound ? '' : sound)} />
             ))}
           </View>
@@ -477,7 +473,7 @@ export default function SleepArchitectureScreen() {
           {whiteNoiseLog.filter(e => e.date === today).length > 0 && (
             <View style={s.infoCard}>
               <Text style={s.infoText}>
-                {t('sleepArchitecture.todaySound') || "Today's best sound"}: {ti(SOUND_TYPE_I18N[whiteNoiseLog[whiteNoiseLog.length - 1].soundType])} ({whiteNoiseLog[whiteNoiseLog.length - 1].settlingMin} min)
+                {t('sleepArchitecture.todaySound') || "Today's best sound"}: {ti(whiteNoiseLog[whiteNoiseLog.length - 1].soundType)} ({whiteNoiseLog[whiteNoiseLog.length - 1].settlingMin} min)
               </Text>
             </View>
           )}

@@ -206,7 +206,7 @@
     "activitiesLogged": "activities logged",
     "relatedTabs": "Related Tabs",
     "criticalPeriods": "Critical Periods",
-    "sensoryIntegration": "Sensory",
+    "sensoryIntegration": "Sensory Integration",
     "plasticityIntensity": "Plasticity Intensity",
     "intensityLevel": "intensity",
     "logIntensity": "Log Intensity",
@@ -225,7 +225,6 @@
     "motorWhy": "Motor cortex development requires intense practice during this window. Neural pathways for movement are being established and refined through repeated use.",
     "motorMyelination": "Motor cortex and corticospinal tracts are myelinating from 2-9 months. Myelination enables the precise, coordinated movements needed for voluntary motor control.",
     "motorPruning": "After 9 months, motor pruning focuses on eliminating unused motor pathways. Intensive practice during the window strengthens the connections that survive pruning.",
-    "sensoryIntegration": "Sensory Integration",
     "sensoryIntegrationDesc": "The sensory integration window (0-36 months) encompasses all five senses integrating with motor, language, and cognitive development. This is the broadest developmental window.",
     "sensoryIntegrationWhy": "Multisensory integration is foundational for all higher brain functions. The brain learns to combine input from different senses to create a coherent picture of the world.",
     "sensoryMyelination": "Sensory integration pathways across all cortex regions are myelinating throughout this window. Association areas connecting different sensory modalities develop last.",
@@ -2605,6 +2604,12 @@
       "Halogen": "Halogen",
       "Fiber Optic": "Fiber Optic",
       "BiliBlanket": "BiliBlanket"
+    },
+    "lampTypes": {
+      "LED": "LED",
+      "Halogen": "Halogen",
+      "FiberOptic": "Fiber Optic",
+      "BiliBlanket": "BiliBlanket"
     }
   },
   "eightMonthStorm": {
@@ -2824,7 +2829,30 @@
       "Very quiet",
       "Quiet"
     ],
-    "rem": "REM"
+    "rem": "REM",
+    "soundTypes": {
+      "whiteNoise": "White Noise",
+      "pinkNoise": "Pink Noise",
+      "brownNoise": "Brown Noise",
+      "rain": "Rain",
+      "ocean": "Ocean",
+      "heartbeat": "Heartbeat",
+      "fan": "Fan",
+      "lullaby": "Lullaby"
+    },
+    "lightLevels": {
+      "fullyDark": "Fully dark",
+      "dim": "Dim",
+      "nightLight": "Night light",
+      "lowGlow": "Low glow"
+    },
+    "noiseLevels": {
+      "silent": "Silent",
+      "veryQuiet": "Very quiet",
+      "quiet": "Quiet",
+      "moderate": "Moderate",
+      "noisy": "Noisy"
+    }
   },
   "criticalPeriods": {
     "title": "Critical Periods",
@@ -3564,6 +3592,12 @@
         "sensory": "Sensory",
         "motor": "Motor"
       }
+    },
+    "domains": {
+      "autonomic": "Autonomic",
+      "sensory": "Sensory",
+      "motor": "Motor",
+      "social": "Social"
     }
   },
   "windowOfTolerance": {
@@ -3739,7 +3773,15 @@
     "cancel": "Cancel",
     "submit": "Submit",
     "saveEntry": "Save Entry",
-    "whatResolvedIt": "What resolved it?"
+    "whatResolvedIt": "What resolved it?",
+    "scanPhases": {
+      "head": "Head",
+      "throat": "Throat",
+      "chest": "Chest",
+      "abdomen": "Abdomen",
+      "pelvis": "Pelvis",
+      "limbs": "Limbs"
+    }
   },
   "reflex": {
     "moro": "Moro Reflex",
@@ -4096,7 +4138,18 @@
     "rating3": "Fair",
     "rating4": "Good",
     "rating5": "Excellent",
-    "yes": "Yes"
+    "yes": "Yes",
+    "creamTypes": {
+      "zinc_oxide": "Zinc Oxide",
+      "petroleum": "Petroleum-based",
+      "natural": "Natural/Organic",
+      "other": "Other"
+    },
+    "amounts": {
+      "thin": "Thin",
+      "medium": "Medium",
+      "thick": "Thick"
+    }
   },
   "medium": "Medium",
   "spontaneous": "Spontaneous",
@@ -4657,6 +4710,13 @@
       "chartHint": "View supply trends",
       "storageHint": "Manage stored milk",
       "weaningHint": "Weaning predictor"
+    }
+  },
+  "reflexVisualMotor": {
+    "status": {
+      "present": "Present",
+      "partially": "Partially Integrated",
+      "integrated": "Integrated"
     }
   }
 }

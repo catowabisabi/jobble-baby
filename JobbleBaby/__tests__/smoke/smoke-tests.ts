@@ -24,26 +24,32 @@ function checkFileExists(relativePath: string): boolean {
 
 function runTsc(): { success: boolean; output: string } {
   try {
-    // Exclude test files from TypeScript check (they need jest types)
-    const output = execSync('npx tsc --noEmit --skipLibCheck 2>&1 | grep -v "__tests__" | grep -v "tsconfig.test"', {
+    // Run TypeScript check directly — non-zero exit means errors exist
+    // --skipLibCheck avoids third-party type noise
+    const output = execSync('npx tsc --noEmit --skipLibCheck 2>&1 || true', {
       cwd: PROJECT_ROOT,
       encoding: 'utf-8',
       timeout: 120000,
     });
-    return { success: true, output };
+    // Filter to only actual app-file errors (skip test files, jest types, node_modules)
+    const appErrors = output
+      .split('\n')
+      .filter((line: string) =>
+        line.includes('/app/') ||
+        line.includes('/store/') ||
+        line.includes('/utils/') ||
+        line.includes('/hooks/') ||
+        line.includes('/context/') ||
+        line.includes('/components/') ||
+        line.includes('/screens/')
+      );
+    const filteredOutput = appErrors.join('\n').trim();
+    return { success: filteredOutput.length === 0, output: filteredOutput };
   } catch (e: unknown) {
+    // execSync should not throw because we use || true above
     const error = e as { stdout?: string; stderr?: string; message?: string };
     const rawOutput = error.stdout ?? error.stderr ?? error.message ?? 'Unknown error';
-    // Filter out test file errors (they need jest types not yet installed)
-    const filteredOutput = rawOutput
-      .split('\n')
-      .filter((line: string) => !line.includes('__tests__') && !line.includes('describe') && !line.includes('it('))
-      .join('\n')
-      .trim();
-    return {
-      success: false,
-      output: filteredOutput || 'TypeScript errors in test files (jest types not installed)',
-    };
+    return { success: false, output: rawOutput.substring(0, 500) };
   }
 }
 

@@ -53,11 +53,11 @@ JobbleBaby/
 | E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
 | F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
 | G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-|| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ RT-004 | 1 test |
+| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ RT-004 + RT-005 | 13 tests (10 pass, 3 fail confirmed bug) |
 || I | 效能/穩定性測試 | — | — | ❌ 未實現（doc only） | 0% |
 || J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ Placeholder only | 0% |
 
-**Overall: 41/42 runnable tests pass (98%)**
+**Overall: 50/53 runnable tests pass (94%)**
 **Layers Implemented: 4/10 (40%)**
 
 ## ⚙️ Jest 配置

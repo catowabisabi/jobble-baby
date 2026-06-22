@@ -82,22 +82,30 @@ describe('Regression: RT-XXX <Title>', () => {
 
 #### RT-005 — Quick Entry FAB 無 onPress Handler（已知 bug）
 
-**症狀：** `app/(tabs)/index.tsx` 的 Quick Entry FAB 按鈕渲染但不觸發任何導航。
+**狀態：** ✅ 回歸測試已實現（`__tests__/regression/regression_005_quick_entry_fab_onpress.test.ts`）
+**測試結果：** 3/5 FAIL（bug 已確認存在）
 
-**根因：** `TouchableOpacity` 缺少 `onPress` 屬性。
+**Bug：** `app/(tabs)/index.tsx` Quick Entry FAB 按鈕渲染但無 onPress handler。
 
-**測試方式：**
-```typescript
-it('test_quick_entry_fab_has_press_handler', () => {
-  const content = fs.readFileSync(INDEX_PATH, 'utf-8');
-  // 找 Quick Entry FAB TouchableOpacity
-  // 驗證有 onPress={...} 屬性
-  const fabMatch = content.match(/QuickEntry.*?TouchableOpacity[^}]+onPress=/s);
-  expect(fabMatch).not.toBeNull();
-});
+**根因：** `TouchableOpacity` 缺少 `onPress` 屬性，只有 `activeOpacity={0.7}`。
+
+**修復位置：** `app/(tabs)/index.tsx` lines 364-373
+
+**驗證方式：**
+```bash
+npx jest --testPathPattern="__tests__/regression/regression_005"
+# Expected: 3 FAIL until bug is fixed
 ```
 
-**狀態：** 待修復 `app/(tabs)/index.tsx` 後加入。
+**Bug 確認證據：**
+- `test_quick_entry_fab_touchableopacity_has_onpress` — FAIL：0 onPress in FAB TouchableOpacity
+- `test_quick_entry_fab_row_has_router_navigation` — FAIL：router.push not found in FAB section
+- `test_quick_entry_fab_accessibility_declares_action_but_no_handler` — FAIL：accessibilityHint says "Tap to log" but no onPress
+
+**Fix 需包含：**
+1. 添加 `onPress={}` handler 到每個 Quick Entry TouchableOpacity
+2. Handler 應調用 router.push 或直接寫入 storage
+3. 建議：使用 `handleQuickAdd(entry)` 函數或 `router.push('/tracking?type=diaper')` 之類的路徑
 
 ---
 
@@ -139,9 +147,9 @@ it('test_quick_entry_fab_has_press_handler', () => {
 
 ## 覆蓋矩陣
 
-|| Test ID | 覆蓋類型 | 狀態 |
+||| Test ID | 覆蓋類型 | 狀態 |
 |---------|---------|--------|------|
-| RT-004 | i18n hardcoded prevention | ✅ |
-| RT-005 | Quick Entry FAB onPress | ❌ 待實現 |
+|| RT-004 | i18n hardcoded prevention | ✅ 8/8 PASS |
+|| RT-005 | Quick Entry FAB onPress | ⚠️ 2/5 PASS (3 FAIL = bug confirmed) |
 | RT-006 | Theme colors interface | ✅ (unit test) |
 | RT-007 | Storage keys validation | ✅ (unit test) |

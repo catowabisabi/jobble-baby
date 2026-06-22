@@ -632,6 +632,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="chat-processing-outline" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="cortisol-skin-navigator"
+        options={{
+          title: t('cortisolSkin.title') || 'Cortisol+Skin',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

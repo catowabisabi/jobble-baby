@@ -4932,5 +4932,117 @@
       "partially": "Partially Integrated",
       "integrated": "Integrated"
     }
+  },
+  "cortisolSkin": {
+    "title": "Cortisol + Skin Navigator",
+    "subtitle": "Track stress indicators and skin changes",
+    "tabs": {
+      "cortisol": "Cortisol Shadow",
+      "skin": "Skin Navigator",
+      "tongueTie": "Tongue-Tie"
+    },
+    "cortisol": {
+      "title": "Cortisol Shadow Timeline",
+      "subtitle": "Proxy indicators for HPA-axis activation",
+      "fussiness": "Fussiness Level",
+      "fussinessDesc": "Rate baby's overall fussiness (1=none, 5=inconsolable)",
+      "skinRedness": "Skin Redness",
+      "skinRednessDesc": "Rate visible skin flushing/redness (1=normal, 5=intense)",
+      "sleepDisruption": "Sleep Disruption",
+      "sleepDisruptionDesc": "Rate sleep fragmentation (1=solid, 5=highly fragmented)",
+      "feedingStrikes": "Feeding Strikes",
+      "feedingStrikesDesc": "Number of feeding strikes today",
+      "logEntry": "Log Stress Episode",
+      "history": "Stress Episode History",
+      "noData": "No stress episodes logged yet",
+      "episodeCard": "Episode",
+      "correlatedWith": "Correlated with",
+      "score": "Stress Score"
+    },
+    "skin": {
+      "title": "Skin Change Navigator",
+      "subtitle": "Photo + text log of skin observations",
+      "addEntry": "Add Skin Entry",
+      "area": "Affected Area",
+      "areas": {
+        "face": "Face",
+        "chest": "Chest",
+        "abdomen": "Abdomen",
+        "back": "Back",
+        "arms": "Arms",
+        "legs": "Legs",
+        "hands": "Hands",
+        "feet": "Feet",
+        "diaperArea": "Diaper Area",
+        "neck": "Neck",
+        "scalp": "Scalp"
+      },
+      "severity": "Severity",
+      "severityLevels": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe"
+      },
+      "type": "Skin Issue Type",
+      "types": {
+        "rash": "Rash",
+        "flushing": "Flushing",
+        "temperature": "Temperature Change",
+        "dryness": "Dryness",
+        "irritation": "Irritation",
+        "other": "Other"
+      },
+      "photoHint": "Photo (optional)",
+      "notes": "Notes",
+      "notesPlaceholder": "Describe the skin change...",
+      "timeline": "Timeline",
+      "noEntries": "No skin entries logged yet",
+      "alertSameArea": "Alert: Same area flagged 3+ times — consider pediatrician review",
+      "bodyMap": "Body Map",
+      "tapToSelect": "Tap areas to mark affected regions"
+    },
+    "tongueTie": {
+      "title": "Tongue-Tie Functional Reassessment",
+      "subtitle": "5-question functional screen",
+      "startScreening": "Start Screening",
+      "question": "Question {current} of {total}",
+      "questions": {
+        "latchQuality": "How would you rate latch quality?",
+        "feedingDuration": "Does feeding take longer than 30 minutes?",
+        "clickingSounds": "Are there clicking sounds during feeding?",
+        "maternalPain": "Is there maternal nipple pain?",
+        "weightGain": "Is weight gain adequate?"
+      },
+      "options": {
+        "no": "No",
+        "sometimes": "Sometimes",
+        "yes": "Yes"
+      },
+      "scoring": {
+        "title": "Screening Score",
+        "lowConcern": "Low Concern (0-2)",
+        "monitor": "Monitor (3-5)",
+        "refer": "Refer to Specialist (6+)"
+      },
+      "result": "Your Score: {score}/10",
+      "recommendation": "Recommendation",
+      "education": {
+        "title": "About Tongue-Tie Release (Frenotomy)",
+        "signs": "Signs that tongue-tie release may help",
+        "sign1": "Poor latch despite good positioning",
+        "sign2": "Extended feeding times (>30 min)",
+        "sign3": "Clicking or smacking sounds",
+        "sign4": "Maternal pain or damage",
+        "sign5": "Poor weight gain",
+        "sign6": "Recurrent mastitis or low supply"
+      },
+      "links": {
+        "title": "Related Trackers",
+        "feeding": "Feeding Progression",
+        "growth": "Growth Tracker"
+      },
+      "history": "Previous Assessments",
+      "noHistory": "No previous assessments"
+    }
   }
 }

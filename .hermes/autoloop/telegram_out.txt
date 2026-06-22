@@ -1,7 +1,6 @@
-🍼 Jobble Baby · 14:09
-✅ Done: #396 Stranger Anxiety + Ear Pressure Navigator
-✅ Done: #397 Polyvagal Interoceptive Dashboard
-🔧 Dispatched: #398 Cortisol Shadow + Skin Navigator + Tongue-Tie
-📋 TODO: 0 pending · 1 in_progress · 173 completed
-📦 Commit: e69a4c3 → pushed
-📝 Desc: cycle 475 — completed #396/397, audit fix (run from repo root), sparked idea #89, 50 keywords added. TSC 0, Audit PASS 9/9.
+🍼 Jobble Baby · 15:06
+⚠️ Cycle 475 task #398 crashed (Ultraworker stuck at exploration). Tab NOT created.
+🔧 Re-dispatched: #398 Cortisol Shadow + Skin Navigator + Tongue-Tie (retry, PID 3010688)
+📋 TODO: 0 pending · 1 in_progress · 172 completed
+📦 Commit: e69a4c3 (no new changes — task restarted)
+📝 Desc: cycle 476 — task #398 crashed during explore phase. Fixed dispatch syntax (removed --continue/--prompt). Re-dispatched. TSC 0, Audit PASS 9/9.

@@ -1,22 +1,32 @@
-# Cycle 475 — Current Task
+# Cycle 476 — Current Task
 todo #398: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment (in_progress)
-Dispatched: 2026-06-22 14:00 HKT
-OpenCode PID: (via tmux jobble-baby:1.0)
+Dispatched: 2026-06-22 15:06 HKT
+OpenCode PID: 3010688
 Log: /tmp/opencode_398.log
 Keywords: terahertz_skin_imaging, cortisol_shadow, tongue_tie_reassessment
 
-=== CYCLE 475 STATE ===
-- TODO: 0 pending · 1 in_progress · 173 completed
-- Git: e69a4c3 pushed
+=== CYCLE 476 STATE ===
+- TODO: 0 pending · 1 in_progress · 172 completed
+- Git: e69a4c3 pushed (no new changes yet)
 - TSC: Verified clean (JobbleBaby/ — 0 errors)
-- Audit: PASS 9/9 (from JobbleBaby/)
-- Sisyphus: Active — task 398 dispatched
+- Audit: PASS 9/9 (repo root compatible)
+- Sisyphus: Active — task 398 dispatched (retry, PID 3010688)
 - Keyword pool: 1000 keywords
 - Idea #89: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment
-- Ideas 87/88: marked implemented
+
+=== PREVIOUS CYCLE 475 ISSUE ===
+- Task 398 crashed during exploration phase (Ultraworker mode)
+- cortilsol-skin-navigator.tsx NOT created
+- Re-dispatched with fixed syntax (removed --continue and --prompt)
 
 === PENDING USER-ACTION BLOCKERS ===
 - EAS credentials (Apple Team ID + App-Specific Password)
 - App Store Connect app creation (com.jobblebaby.app)
 - Play Console app creation (com.jobblebaby.app)
 - Privacy policy URL deployment (https://catowabisabi.github.io/jobble-baby/privacy)
+
+=== PROJECT STATUS ===
+Jobble Baby: ✅ SUBMISSION-READY (code-level)
+All 93 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS 9/9.
+Sisyphus working on: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment (#398).
+Next: once #398 done → review → final store submission prep.

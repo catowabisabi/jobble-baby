@@ -4959,5 +4959,117 @@
       "partially": "部分整合",
       "integrated": "已整合"
     }
+  },
+  "cortisolSkin": {
+    "title": "皮質醇＋皮膚導航",
+    "subtitle": "追蹤壓力指標和皮膚變化",
+    "tabs": {
+      "cortisol": "皮質醇影子",
+      "skin": "皮膚導航",
+      "tongueTie": "舌繫帶"
+    },
+    "cortisol": {
+      "title": "皮質醇影子時間線",
+      "subtitle": "HPA軸激活的代理指標",
+      "fussiness": "煩躁程度",
+      "fussinessDesc": "評估寶寶整體煩躁程度（1=無，5=無法安撫）",
+      "skinRedness": "皮膚發紅",
+      "skinRednessDesc": "評估可見皮膚潮紅/發紅（1=正常，5=強烈）",
+      "sleepDisruption": "睡眠中斷",
+      "sleepDisruptionDesc": "評估睡眠碎片化程度（1=完整，5=高度碎片化）",
+      "feedingStrikes": "餵食罷工",
+      "feedingStrikesDesc": "今天餵食罷工次數",
+      "logEntry": "記錄壓力事件",
+      "history": "壓力事件歷史",
+      "noData": "尚無記錄的壓力事件",
+      "episodeCard": "事件",
+      "correlatedWith": "關聯於",
+      "score": "壓力分數"
+    },
+    "skin": {
+      "title": "皮膚變化導航",
+      "subtitle": "皮膚觀察的相片＋文字記錄",
+      "addEntry": "新增皮膚記錄",
+      "area": "受影響區域",
+      "areas": {
+        "face": "面部",
+        "chest": "胸部",
+        "abdomen": "腹部",
+        "back": "背部",
+        "arms": "手臂",
+        "legs": "腿部",
+        "hands": "手部",
+        "feet": "腳部",
+        "diaperArea": "尿布區",
+        "neck": "頸部",
+        "scalp": "头皮"
+      },
+      "severity": "嚴重程度",
+      "severityLevels": {
+        "mild": "輕度",
+        "moderate": "中度",
+        "severe": "重度"
+      },
+      "type": "皮膚問題類型",
+      "types": {
+        "rash": "皮疹",
+        "flushing": "潮紅",
+        "temperature": "溫度變化",
+        "dryness": "乾燥",
+        "irritation": "刺激",
+        "other": "其他"
+      },
+      "photoHint": "相片（可選）",
+      "notes": "備註",
+      "notesPlaceholder": "描述皮膚變化...",
+      "timeline": "時間線",
+      "noEntries": "尚無皮膚記錄",
+      "alertSameArea": "警示：同一區域被標記3次或以上——建議諮詢兒科醫生",
+      "bodyMap": "身體圖",
+      "tapToSelect": "點擊區域以標記受影響位置"
+    },
+    "tongueTie": {
+      "title": "舌繫帶功能重新評估",
+      "subtitle": "5題功能篩檢",
+      "startScreening": "開始篩檢",
+      "question": "第 {current} 題，共 {total} 題",
+      "questions": {
+        "latchQuality": "您如何評估銜乳品質？",
+        "feedingDuration": "餵食時間是否超過30分鐘？",
+        "clickingSounds": "餵食時是否有點擊聲或啪嗒聲？",
+        "maternalPain": "母親是否有乳頭疼痛？",
+        "weightGain": "體重增長是否正常？"
+      },
+      "options": {
+        "no": "否",
+        "sometimes": "有時",
+        "yes": "是"
+      },
+      "scoring": {
+        "title": "篩檢分數",
+        "lowConcern": "低關注（0-2）",
+        "monitor": "監測（3-5）",
+        "refer": "轉介專科（6+）"
+      },
+      "result": "您的分數：{score}/10",
+      "recommendation": "建議",
+      "education": {
+        "title": "關於舌繫帶鬆解術（ frenotomy）",
+        "signs": "舌繫帶鬆解可能有幫助的跡象",
+        "sign1": "尽管姿勢正確但銜乳不良",
+        "sign2": "餵食時間過長（>30分鐘）",
+        "sign3": "點擊聲或啪嗒聲",
+        "sign4": "母親乳頭疼痛或損傷",
+        "sign5": "體重增長不良",
+        "sign6": "復發性乳腺炎或奶量不足"
+      },
+      "links": {
+        "title": "相關追蹤器",
+        "feeding": "餵食進展",
+        "growth": "生長追蹤器"
+      },
+      "history": "過往評估",
+      "noHistory": "無過往評估"
+    }
   }
 }

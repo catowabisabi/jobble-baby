@@ -198,4 +198,7 @@ export const STORAGE_KEYS = {
   NEUROPLASTICITY_TRACKING: "@jobble/neuroplasticity_tracking",
   PLASTICITY_ACTIVITIES: "@jobble/plasticity_activities",
   POLYVAGAL_LOG: "@jobble/polyvagal_log",
+  CORTISOL_LOG: "@jobble/cortisol_log",
+  SKIN_CHANGE_LOG: "@jobble/skin_change_log",
+  TONGUE_TIE_ASSESSMENT: "@jobble/tongue_tie_assessment",
 } as const;

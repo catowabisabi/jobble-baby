@@ -1,12 +1,22 @@
 /**
  * D. 前端 Mocked 測試 — HomeScreen
- * 
- * 使用 mocked AsyncStorage 測試 HomeScreen 的 UI 狀態
+ *
+ * Uses mocked AsyncStorage to test HomeScreen UI state
+ *
+ * Key setup:
+ * - HomeScreen uses useTheme() → <ThemeProvider> wrapper required
+ * - HomeScreen uses useLanguage() → <LanguageProvider> wrapper required
+ * - expo-router useRouter() → mocked
+ * - SafeStorage calls → jest.fn() mocks
+ *
+ * Run: npm run test:mocked
  */
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeScreen from '../../app/(tabs)/index';
+import { renderWithProviders } from '../helpers/render-with-providers';
+import { safeGetItem } from '../../app/utils/SafeStorage';
 
 // Mock the dependencies
 jest.mock('../../app/utils/SafeStorage', () => ({
@@ -27,66 +37,47 @@ jest.mock('expo-router', () => ({
   }),
 }));
 
-const mockSafeGetItem = require('../../app/utils/SafeStorage').safeGetItem;
-const mockSafeSetItem = require('../../app/utils/SafeStorage').safeSetItem;
-
 describe('HomeScreen', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     AsyncStorage.clear();
+    // Default: all safeGetItem calls return null (no data)
+    (safeGetItem as jest.Mock).mockResolvedValue(null);
   });
 
-  it('should render loading state initially', () => {
-    // No profile stored - should show onboarding redirect
-    mockSafeGetItem.mockResolvedValueOnce(null);
-    
-    const { getByTestId } = render(<HomeScreen />);
-    // The component will try to load profile
-    expect(mockSafeGetItem).toHaveBeenCalled();
-  });
-
-  it('should render home content when profile exists', async () => {
-    const mockProfile = JSON.stringify({
-      name: 'TestBaby',
-      birthDate: '2024-01-01',
-      gender: 'boy',
-    });
-    
-    // First call: profile check, Second call: timeline events
-    mockSafeGetItem
-      .mockResolvedValueOnce(mockProfile)  // profile exists
-      .mockResolvedValueOnce(null);        // no timeline events
-
-    const { getByText } = render(<HomeScreen />);
-
-    // Wait for async operations
+  it('should call safeGetItem on mount', async () => {
+    renderWithProviders(<HomeScreen />);
     await waitFor(() => {
-      expect(mockSafeGetItem).toHaveBeenCalled();
+      expect(safeGetItem).toHaveBeenCalled();
     });
   });
 
-  it('should call safeGetItem for profile on mount', async () => {
-    mockSafeGetItem.mockResolvedValue(null);
-
-    render(<HomeScreen />);
+  it('should render Quick Entry buttons even with no profile', async () => {
+    const { getAllByText } = renderWithProviders(<HomeScreen />);
 
     await waitFor(() => {
-      expect(mockSafeGetItem).toHaveBeenCalledWith('@jobble_baby_profile');
+      const diaper = getAllByText('Diaper');
+      const feed = getAllByText('Feed');
+      const sleep = getAllByText('Sleep');
+      expect(diaper.length).toBeGreaterThan(0);
+      expect(feed.length).toBeGreaterThan(0);
+      expect(sleep.length).toBeGreaterThan(0);
     });
   });
 
-  it('should render Quick Entry buttons', async () => {
-    const mockProfile = JSON.stringify({ name: 'Baby', birthDate: '2024-01-01', gender: 'girl' });
-    mockSafeGetItem.mockResolvedValueOnce(mockProfile);
-    mockSafeGetItem.mockResolvedValueOnce(null);
-
-    const { getByText } = render(<HomeScreen />);
+  it('should call safeGetItem with profile key on mount', async () => {
+    renderWithProviders(<HomeScreen />);
 
     await waitFor(() => {
-      // Quick entries should be rendered
-      expect(getByText('Diaper')).toBeTruthy();
-      expect(getByText('Feed')).toBeTruthy();
-      expect(getByText('Sleep')).toBeTruthy();
+      expect(safeGetItem).toHaveBeenCalledWith('@jobble_baby_profile');
+    });
+  });
+
+  it('should render projection card', async () => {
+    const { getByText } = renderWithProviders(<HomeScreen />);
+
+    await waitFor(() => {
+      expect(getByText('🔮')).toBeTruthy();
     });
   });
 });

@@ -32,7 +32,7 @@ describe('STORAGE_KEYS', () => {
   it('should have all keys prefixed with @jobble/', () => {
     Object.entries(STORAGE_KEYS).forEach(([key, value]) => {
       expect(value).toMatch(/^@jobble\//);
-      expect(key).toMatch(/^[A-Z_]+$/);
+      expect(key).toMatch(/^[A-Z_][A-Z0-9_]*$/);
     });
   });
 
@@ -47,7 +47,7 @@ describe('STORAGE_KEYS', () => {
       'BOTTLE_SESSION',
       'FEEDING_READINESS',
       'MILK_TRANSFER_HISTORY',
-      'CUPS_FEEDING_ENTRIES',
+      'CUP_FEEDING_ENTRIES',
       'BOTTLE_REFUSAL_ENTRIES',
     ];
 

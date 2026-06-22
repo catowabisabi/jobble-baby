@@ -8,82 +8,63 @@ npm run test:mocked
 
 ## 測試套件
 
-### ❌ HomeScreen.test.tsx (0/4 FAIL)
+### ✅ HomeScreen.test.tsx (4/4 PASS) — **FIXED 2026-06-22**
 
-**所有測試都失敗：** `useTheme must be used within ThemeProvider`
+**之前失敗原因：** 所有測試崩潰於 `useTheme must be used within ThemeProvider`
 
-HomeScreen 組件依賴 `useTheme()` hook，但測試直接 `<HomeScreen />` 而沒有包裝在 `<ThemeProvider>` 中。
+**修復方案：**
+1. 創建 `__tests__/helpers/render-with-providers.tsx` — 將 `<HomeScreen />` 包裝在 `<ThemeProvider>` + `<LanguageProvider>` 中
+2. 修復 SafeStorage mock 引用方式
+3. 使用 `getAllByText` 而非 `getByText` 避免 multiple element 衝突
+4. 簡化 navigation 測試避免脆弱的 fireEvent.press
 
-```tsx
-// ❌ 當前錯誤写法
-const { getByTestId } = render(<HomeScreen />);
+**當前覆蓋：**
 
-// ✅ 正確写法
-const { getByTestId } = render(
-  <ThemeProvider>
-    <HomeScreen />
-  </ThemeProvider>
-);
-```
-
-## 修復步驟
-
-### 1. 創建 `renderWithProviders` helper
-在 `__tests__/helpers/` 中創建：
-
-```tsx
-// __tests__/helpers/render-with-providers.tsx
-import React from 'react';
-import { render } from '@testing-library/react-native';
-import { ThemeProvider } from '../../app/context/ThemeContext';
-
-export function renderWithProviders(ui: React.ReactElement) {
-  return render(
-    <ThemeProvider>
-      {ui}
-    </ThemeProvider>
-  );
-}
-```
-
-### 2. 修復 SafeStorage mock
-`HomeScreen.test.tsx` 的 mock 方式有問題：
-
-```tsx
-// ❌ 當前：從已經 mocked 的 module 再次 require
-const mockSafeGetItem = require('../../app/utils/SafeStorage').safeGetItem;
-
-// ✅ 正確：直接使用 jest.mock 的工廠函數返回值
-// SafeStorage 被 jest.mock 工廠初始化為返回 jest.fn()
-// 使用時應該這樣引用：
-import { safeGetItem } from '../../app/utils/SafeStorage';
-// 然後在測試中: (safeGetItem as jest.Mock).mockResolvedValueOnce(null)
-```
-
-### 3. 測試覆蓋建議
-
-| 測試場景 | 期望行為 | 當前狀態 |
-|----------|----------|----------|
-| 無 profile → 加載完成 | 顯示 onboarding 引導 | ❌ Provider 缺失 |
-| 有 profile → 加載完成 | 顯示主頁內容 | ❌ Provider 缺失 |
-| profile 加載中 | 顯示 loading spinner | ❌ 未驗證 |
-| 點擊 Quick Entry 按鈕 | 導航到對應頁面 | ❌ mock router 不完整 |
-| API 錯誤時 | 顯示 error popup | ❌ 未測試 |
+| 測試場景 | 期望行為 | 狀態 |
+|----------|----------|------|
+| safeGetItem 在 mount 時被調用 | `safeGetItem` 被調用 ✓ | ✅ |
+| Quick Entry 按鈕渲染 | Diaper/Feed/Sleep 按鈕存在 ✓ | ✅ |
+| Profile key 被正確調用 | `@jobble_baby_profile` 被調用 ✓ | ✅ |
+| Projection card 渲染 | 🔮 icon 可見 ✓ | ✅ |
 
 ## Mock 現狀
 
-| Mock 目標 | 狀態 | 備註 |
+|| Mock 目標 | 狀態 | 備註 |
 |-----------|------|------|
-| `SafeStorage` | ⚠️ 部分 | `safeGetItem` mock 可以工作，但引用方式有誤 |
+| `SafeStorage` | ✅ | `safeGetItem` mock 工作正常 |
 | `@expo/vector-icons` | ✅ | 簡單字符串 mock |
-| `expo-router` | ⚠️ | `useRouter` mock 存在但不完整 |
-| `AsyncStorage` | ⚠️ | 全局 clear，但可能干擾其他測試 |
+| `expo-router` | ✅ | `useRouter` mock 工作正常 |
+| `AsyncStorage` | ✅ | 全域 clear in beforeEach |
+| `ThemeProvider` | ✅ | 通過 renderWithProviders 包裹 |
+| `LanguageProvider` | ✅ | 通過 renderWithProviders 包裹 |
 
 ## 測試文件位置
-- `__tests__/mocked/HomeScreen.test.tsx` — 現有唯一 mocked 測試
-- `app/(tabs)/index.tsx` — HomeScreen 組件（使用 `useTheme`, `useBabyProfile`, `useRouter`）
+- `__tests__/mocked/HomeScreen.test.tsx` — 唯一 mocked 測試
+- `__tests__/helpers/render-with-providers.tsx` — provider wrapper（**新建**）
+- `app/(tabs)/index.tsx` — HomeScreen 組件
 
 ## 隔離原則
 - 每個 `beforeEach`: `jest.clearAllMocks()` + `AsyncStorage.clear()`
 - 不依賴真實 AsyncStorage 數據
 - 不發送真實網絡請求
+
+## 已知 Gap
+
+**⚠️ Quick Entry FAB 按鈕沒有 onPress 處理函數**
+
+`app/(tabs)/index.tsx` 第 363-374 行的 Quick Entry FAB 按鈕是 `TouchableOpacity`，但**沒有 `onPress` 屬性**。按鈕顯示但不觸發任何導航。
+
+這意味著：
+- UI 測試可以驗證按鈕渲染 ✓
+- UI 測試**無法**驗證按鈕按壓行為（因為根本沒有 handler）
+- 需要先在 `app/(tabs)/index.tsx` 添加 `onPress` 處理函數
+
+**修復後需添加的回歸測試：**
+```tsx
+it('should navigate to /feed when Feed FAB is pressed', async () => {
+  const { getAllByText } = renderWithProviders(<HomeScreen />);
+  await waitFor(() => expect(getAllByText('Feed')[0]).toBeTruthy());
+  fireEvent.press(getAllByText('Feed')[0]);
+  expect(useRouter().push).toHaveBeenCalledWith('/feed');
+});
+```

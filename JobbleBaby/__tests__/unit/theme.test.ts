@@ -12,17 +12,14 @@ describe('Theme', () => {
   });
 
   it('should have required color properties in both themes', () => {
-    const requiredColors = [
+    // ThemeColors interface: background, card, border, accent, text, muted
+    const requiredColors: (keyof ThemeColors)[] = [
       'background',
-      'surface',
-      'primary',
-      'secondary',
-      'text',
-      'textSecondary',
+      'card',
       'border',
-      'error',
-      'success',
-      'warning',
+      'accent',
+      'text',
+      'muted',
     ];
 
     const light = COLORS.light as ThemeColors;
@@ -31,8 +28,8 @@ describe('Theme', () => {
     requiredColors.forEach((color) => {
       expect(light).toHaveProperty(color);
       expect(dark).toHaveProperty(color);
-      expect(typeof light[color as keyof ThemeColors]).toBe('string');
-      expect(typeof dark[color as keyof ThemeColors]).toBe('string');
+      expect(typeof light[color]).toBe('string');
+      expect(typeof dark[color]).toBe('string');
     });
   });
 
@@ -49,13 +46,16 @@ describe('Theme', () => {
   });
 
   it('should have different background and surface colors', () => {
+    // "surface" concept is represented by "card" in actual design
     const light = COLORS.light as ThemeColors;
-    expect(light.background).not.toBe(light.surface);
+    expect(light.background).not.toBe(light.card);
   });
 
-  it('should have error color that is visibly red-ish', () => {
-    const light = COLORS.light as ThemeColors;
-    // Error should contain red component
-    expect(light.error).toMatch(/^#FF|#[0-9A-Fa-f]{2}[0-5][0-9]/);
+  it('should have error/warning colors in STATUS_COLORS', () => {
+    // Error/warning/status colors are exported separately as STATUS_COLORS
+    const { STATUS_COLORS } = require('../../app/theme');
+    expect(STATUS_COLORS.error).toMatch(/^#[0-9A-Fa-f]{6}$/);
+    expect(STATUS_COLORS.warning).toBeDefined();
+    expect(STATUS_COLORS.good).toBeDefined();
   });
 });

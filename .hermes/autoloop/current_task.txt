@@ -1,55 +1,52 @@
 # Cycle 468 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-22 01:XX HKT
-# Status: COMPLETE. Project submission-ready. No pending tasks.
+# Date: 2026-06-22 00:XX HKT
+# Status: Dispatched. Task 397 in progress.
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
-✅ user-intention.md exists — full context loaded
-✅ Sisyphus idle after completing task 395 (Lactation tab)
+✅ user-intention.md exists
+✅ Sisyphus idle → dispatched task 397
+✅ Queue: 0 pending · 1 in_progress (todo #397)
 ✅ Keyword pool: 1110 keywords
-✅ TSC: 0 errors (JobbleBaby/)
-✅ Audit: PASS (9/9 required checks)
 
 === STEP 2 (Verify) ===
-✅ _layout.tsx lactation tab registration — committed f5cd5bb
-✅ Task 395 (Lactation & Pumping Tracker) — completed, committed
-✅ All 170 todos completed
+✅ Task 395 completed — GitHub Pages Privacy Policy → committed f733bbb + a25c278
+✅ Task 395 (Lactation tab) already marked completed
 
 === STEP 3 (Review) ===
-✅ 0 pending · 0 new · 170 completed
-✅ 82 ideas implemented (1 deferred: idea #83)
-✅ 0 open painpoints
-✅ Tabs: 92 files, 91 Tabs.Screen entries (audit confirmed alignment)
-✅ Lactation tab now properly registered in _layout.tsx
+✅ TSC: 0 errors (JobbleBaby/)
+✅ Audit: PASS (9/9 required checks) — WARNING: 16 hardcoded strings in 5 files
+✅ Queue: 1 in_progress task (todo #397: Accessibility Labels)
+✅ No open painpoints
+✅ Hardcoded strings WARNING: 16 strings in 5 files (task 465 not in DB)
 
 === STEP 4 (Brainstorm) ===
 ⏭️ Skipped — project submission-ready, no pending tasks
 
 === STEP 5 (Commit) ===
-✅ Commit f5cd5bb pushed: fix: register lactation tab in _layout.tsx
+✅ f3f210e → pushed
+   - chore: add Jest/Testing Library devDeps, babel flow preset, test docs
 
 === STEP 6 (Dispatch) ===
-⏭️ No pending tasks — project submission-ready
-⏭️ Sisyphus idle
+✅ Dispatched: todo #397 — Fix Accessibility Labels in 3 Tab Files
+✅ Keywords: fontanelle_softness, parasympathetic_dominance, inattentional_blindness
+✅ Task dispatched via opencode run background job (PID 2517566)
 
 === CURRENT STATE ===
-- TODO: 0 pending · 0 new · 170 completed
-- Git: f5cd5bb ✅ pushed
-- TSC: 0 errors (JobbleBaby/)
-- Audit: PASS (9/9 checks)
-- Sisyphus: Idle — all tasks complete
-- Keyword pool: 1110 keywords
-- Tab count: 92 tab files, 91 registered screens
+- TODO: 0 pending · 1 in_progress (#397) · 93 completed
+- Git: f3f210e pushed ✅
+- TSC: Verified clean (JobbleBaby/ — 0 errors)
+- Audit: PASS (9/9) — WARNING hardcoded strings (16 in 5 files)
+- Sisyphus: Active — task 397 dispatched
 
 === PENDING USER-ACTION BLOCKERS ===
-- EAS credentials (Apple Team ID + App-Specific Password) → user action required
-- App Store Connect app creation (com.jobblebaby.app) → user action required
-- Play Console app creation (com.jobblebaby.app) → user action required
-- Privacy policy URL deploy → jobblebaby.com/privacy → user action required
-- GitHub Pages enable: Settings → Pages → Source: GitHub Actions → user action required
+- EAS credentials (Apple Team ID + App-Specific Password)
+- App Store Connect app creation (com.jobblebaby.app)
+- Play Console app creation (com.jobblebaby.app)
+- GitHub Pages enable: Settings → Pages → Source: GitHub Actions
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
 All 92 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS.
-Lactation tab fully registered. All 91 screens aligned with Tabs.Screen entries.
-Next: User provides EAS credentials → EAS build → submission
+Sisyphus working on: Accessibility Labels fix (#397).
+Next: after #397 → review audit WARNING for hardcoded strings (task 465 prepared but not in DB)

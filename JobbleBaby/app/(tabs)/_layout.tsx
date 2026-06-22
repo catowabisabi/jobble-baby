@@ -122,6 +122,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="lactation"
+        options={{
+          title: t('lactation.title'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="water-pump" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="shift-handoff"
         options={{
           title: t('tabs.shiftHandoff') || 'Shift',

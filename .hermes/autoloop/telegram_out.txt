@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 18:08
-✅ Done: #464 accessibility labels (3 tabs, WCAG 2.1 AA ✅)
-🔧 Dispatched: #465 hardcoded strings i18n (5 tabs)
-📋 TODO: 1 pending · 0 new · 168 completed
-📦 Commit: b3a9a53 → pushed
-📝 Desc: Task 464 committed · Task 465 dispatched · Audit PASS ·  submission-ready
+🍼 Jobble Baby · 22:47
+✅ Done: #395 Lactation & Pumping Tracker (idea #86)
+🔧 Dispatched: —
+📋 TODO: 0 pending · 0 new · 170 completed
+📦 Commit: 16a1fba → pushed
+📝 Desc: Lactation tab 完成 — pumping logger + supply chart + milk storage + weaning predictor + tab correlations。60 i18n keys，TSC 0，audit PASS。項目現已 SUBMISSION-READY，等待用戶提供 EAS credentials 即可提交。

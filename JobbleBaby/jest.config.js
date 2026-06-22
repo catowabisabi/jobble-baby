@@ -4,8 +4,9 @@
  * 測試框架配置
  */
 module.exports = {
-  preset: 'jest-expo',
+  preset: '@react-native/jest-preset',
   setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts'],
+  setupFiles: [],
   transformIgnorePatterns: [
     'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@testing-library)',
   ],

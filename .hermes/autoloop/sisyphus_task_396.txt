@@ -1,0 +1,63 @@
+# Task 396 — Upgrade Stranger Danger tab: Stranger Anxiety + Ear Pressure Navigator
+
+## Context
+Jobble Baby app. The existing stranger-danger.tsx tracks stranger anxiety and separation distress. This task upgrades it with ear pressure/air travel comfort features and a composite distress index.
+
+## Existing File
+app/(tabs)/stranger-danger.tsx — already exists with StrangerInfo and SeparationRecord tracking. Read it first.
+
+## Upgrade Requirements
+
+### 1. New Section: Air Travel Ear Comfort Protocol
+- Pre-flight readiness checklist:
+  - Baby's age (≥7 days for most airlines, some require ≥14 days)
+  - Current congestion level (none/mild/moderate/severe)
+  - Recent ear infection (yes/no/unknown)
+  - Last feeding time
+- Pressure equalization logging:
+  - Flight date, flight number
+  - Descent start time, descent end time
+  - Baby distress level during descent (0-10)
+  - Intervention used: feeding/pacifier/nothing
+- Post-flight summary
+
+### 2. New Section: Teething Pressure Correlation
+- Link existing teething distress with ear pressure symptoms
+- Show correlation: days with teething fussiness vs. ear rubbing frequency
+- Quick-log ear rubbing episodes with timestamp
+
+### 3. Composite Distress Index
+- Combine: stranger anxiety intensity + ear pressure events + teething pain
+- Show as a single "Distress Level" gauge
+- Alert parents when composite score is elevated
+- Message: "Stranger danger phase is developmental NORMAL — this peaks around 8-10 months"
+
+### 4. Upgrade Existing Stranger Anxiety Section
+- Add intensity scale with visual slider (0-10)
+- Add face recognition photos (familiar vs unfamiliar)
+- Add timeline view of stranger anxiety progression
+
+## Technical Requirements
+- File: app/(tabs)/stranger-danger.tsx (append new sections, refactor existing)
+- If Tabs.Screen not registered in _layout.tsx, add it
+- AsyncStorage keys:
+  - @jobble/stranger_anxiety_log (already used)
+  - @jobble/flight_pressure_log (NEW)
+  - @jobble/teething_pressure_correlation (NEW)
+- i18n keys required:
+  - strangerDanger.flight.* (flight section)
+  - strangerDanger.teething.* (teething correlation)
+  - strangerDanger.composite.* (distress index)
+  - strangerDanger.alert.normalPhase
+  Add all to app/i18n/en.json and app/i18n/zh.json
+- accessibilityLabel on all Pressable/TouchableOpacity
+- TSC 0 errors required
+- Pre-submission audit must PASS
+
+## Keywords (for DB reference)
+neophobic_response, auditory_localization, cabin_pressure_equilibrium, stranger_anxiety_timeline, ear_pressure_equalization, developmental_distress_index, flight_readiness, trigeminal_sensitivity
+
+## Verification
+1. npx tsc --noEmit → 0 errors
+2. node scripts/pre-submission-audit.js → all PASS
+3. Git commit with message: "feat: upgrade Stranger Danger tab with ear pressure + distress index (todo #396)"

@@ -1,51 +1,6 @@
-# Cycle 473 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-22 11:00 HKT
-# Status: ✅ Complete — nothing to dispatch
-
-=== STEP 0 (Intent Gate) ===
-✅ user-intention.md exists — skip
-
-=== STEP 1 (Survival + Source) ===
-✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
-✅ user-intention.md exists
-✅ Git working tree clean after push
-✅ TSC: 0 errors (JobbleBaby/)
-✅ Audit: PASS (9/9)
-
-=== STEP 2 (Verify) ===
-✅ No pending/in_progress tasks to verify — all complete from cycle 472
-
-=== STEP 3 (Review) ===
-✅ TSC: 0 errors
-✅ Audit: PASS (9/9)
-✅ No pending/in_progress/new todos — 0 active
-✅ All painpoints resolved (37 total)
-✅ All ideas implemented (86/86)
-
-=== STEP 4 (Brainstorm) ===
-⏭️ Skipped — no pending tasks and codebase stable
-
-=== STEP 5 (Commit) ===
-✅ c88ae89 → pushed
-   - docs: add pre-submission test suites (a11y, performance, regression)
-
-=== STEP 6 (Dispatch) ===
-⏭️ No pending tasks — all complete
-
-=== CURRENT STATE ===
-- TODO: 0 pending · 0 new · 0 in_progress · 170 completed
-- Git: c88ae89 (clean working tree)
-- TSC: Verified clean (JobbleBaby/ — 0 errors)
-- Audit: PASS (9/9)
-- Sisyphus: IDLE
-
-=== PENDING USER-ACTION BLOCKERS ===
-- EAS credentials (Apple Team ID + App-Specific Password)
-- App Store Connect app creation (com.jobblebaby.app)
-- Play Console app creation (com.jobblebaby.app)
-- Privacy policy URL deployment (GitHub Pages: jobblebaby.com/privacy)
-
-=== PROJECT STATUS ===
-Jobble Baby: ✅ SUBMISSION-READY (code-level)
-All 92 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS.
-Next: User action required for EAS credentials + App Store/Play Console setup.
+# Cycle 474 — Current Task
+todo #396: Stranger Anxiety + Ear Pressure Navigator (in_progress)
+Dispatched: 2026-06-22 12:04 HKT
+OpenCode PID: 2912180
+Log: /tmp/opencode_396.log
+Keywords: neophobic_response, auditory_localization, cabin_pressure_equilibrium

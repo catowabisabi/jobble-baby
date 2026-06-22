@@ -1,58 +1,56 @@
-# Cycle 439 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-20 07:00 HKT
-# Status: Dispatched. Task 389 in progress.
+# Cycle 474 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-22 12:04 HKT
+# Status: Dispatched. Task 396 in progress.
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive (tmux pane jobble-baby:1.0)
 ✅ user-intention.md exists
-✅ Sisyphus idle → dispatching task 389
-✅ Queue: 0 pending · 1 in_progress (todo #389)
+✅ Sisyphus dispatched → task 396 in progress
+✅ Queue: 0 pending · 1 in_progress (todo #396)
 
 === STEP 2 (Verify) ===
-✅ Task 385 completed — Vestibular-Motor Integration Navigator → committed a344c16
-✅ Task 388 completed — Feeding Progression Navigator → committed 70b31e8
+✅ No pending tasks to verify — all complete from cycle 473
 
 === STEP 3 (Review) ===
 ✅ TSC: 0 errors (JobbleBaby/)
-✅ Queue: 1 in_progress task (todo #389: Behavioral Rehearsal Protocol)
-✅ Concepts 47, 56, 57, 60, 52 → marked implemented (tabs exist)
-✅ Concept 53 → Behavioral Rehearsal Protocol (spec_done, no tab yet)
-✅ No open painpoints
+✅ Audit: PASS (9/9)
+✅ No open painpoints (37/37 resolved)
+✅ No pending/in_progress todos before dispatch
 
 === STEP 4 (Brainstorm) ===
-✅ Added 48 new keywords to pool (total: 1199)
-✅ Picked prompt3: strehl_ratio_resolution, aperture_synthesis_long_exposure, who_standard_deviation
-✅ Sparked task #389: Behavioral Rehearsal Protocol tab (concept #53)
+✅ Sources: friction, cabin_pressure_equilibrium, emergence_in_systems, neophobic_response, auditory_localization
+✅ prompt3: neophobic_response, auditory_localization, cabin_pressure_equilibrium
+✅ 50 free-associative keywords added (pool: 1000)
+✅ Sparked: Stranger Anxiety + Ear Pressure Navigator (idea #87)
+✅ Created todo #396
 
 === STEP 5 (Commit) ===
-✅ a344c16 → pushed
-   - feat: add Vestibular-Motor Integration Navigator tab (todo #385)
-   - mark todo #385, #388 complete; concepts 47/52/56/57/60 implemented
+✅ 151cd51 → pushed
+   - docs: cycle 474 — brainstorm Stranger Anxiety + Ear Pressure Navigator (idea #87, todo #396)
 
 === STEP 6 (Dispatch) ===
-✅ Dispatched: todo #389 — Behavioral Rehearsal Protocol tab
-✅ prompt3 keywords: strehl_ratio_resolution, aperture_synthesis_long_exposure, who_standard_deviation
-✅ Task written to /tmp/task_389.txt → dispatching via opencode
+✅ Dispatched: todo #396 — Stranger Anxiety + Ear Pressure Navigator
+✅ Task written to /tmp/task_396.txt → opencode dispatched (PID 2912180)
 
 === STEP 7 (Telegram) ===
 📝 Written to telegram_out.txt
 
 === CURRENT STATE ===
-- TODO: 0 pending · 1 in_progress · 165 completed · 2 cancelled
-- Queue: 1 task dispatched (todo #389: Behavioral Rehearsal Protocol)
-- Git: a344c16 pushed ✅
+- TODO: 0 pending · 1 in_progress · 171 completed
+- Git: 151cd51 pushed ✅
 - TSC: Verified clean (JobbleBaby/ — 0 errors)
-- Sisyphus: Active — task 389 dispatched
-- Keyword pool: 1199 keywords
+- Audit: PASS (9/9)
+- Sisyphus: Active — task 396 dispatched
+- Keyword pool: 1000 keywords
 
 === PENDING USER-ACTION BLOCKERS ===
 - EAS credentials (Apple Team ID + App-Specific Password)
-- App Store Connect app creation
-- Play Console app creation
-- Privacy policy URL deployment (jobblebaby.com/privacy)
+- App Store Connect app creation (com.jobblebaby.app)
+- Play Console app creation (com.jobblebaby.app)
+- Privacy policy URL deployment (GitHub Pages: https://catowabisabi.github.io/jobble-baby/privacy)
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
-All tab features implemented. i18n bilingual. TSC 0. No console.logs.
-Sisyphus working on: Behavioral Rehearsal Protocol tab (concept #53).
-Next: once #389 done → appstore-connect tab + final submission prep.
+All 92 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS.
+Sisyphus working on: Stranger Anxiety + Ear Pressure Navigator upgrade (todo #396).
+Next: once #396 done → final review + app store submission prep.

@@ -1,7 +1,6 @@
-🍼 Jobble Baby · 04:20
-✅ Done: #397 Accessibility labels (already fixed, no changes needed)
-✅ Done: #469 Hardcoded strings → committed bef5c98 → pushed
+🍼 Jobble Baby · 07:03
+✅ Done: #audit i18n 130 keys (auto-refresh, pre-submission)
 🔧 Dispatched: none (all complete)
 📋 TODO: 0 pending · 0 new
-📦 Commit: bef5c98 → pushed
-📝 Desc: Task #397 verified already done; #469 fixed phototherapy-comfort.tsx i18n. Audit PASS (9/9). TSC 0. 15-string WARNING remains (internal data keys, non-blocking). App submission-ready — awaiting user action on EAS credentials + store accounts.
+📦 Commit: 99eb475 → pushed
+📝 Desc: TSC 0. Audit PASS 6/6 (TabNav, i18n 130/130, appJson, screenshots 38, TSC, HardcodedStrings). 所有代碼評審完成，App 已具備 submission-ready 狀態，等待用戶處理：EAS credentials、Apple App Store Connect 建立、Google Play Console 建立、GitHub Pages 隱私政策開通。

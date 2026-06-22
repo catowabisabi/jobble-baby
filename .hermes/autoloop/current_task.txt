@@ -1,23 +1,20 @@
 # Cycle 476 — Current Task
-todo #398: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment (in_progress)
-Dispatched: 2026-06-22 15:06 HKT
-OpenCode PID: 3010688
-Log: /tmp/opencode_398.log
-Keywords: terahertz_skin_imaging, cortisol_shadow, tongue_tie_reassessment
+No pending tasks. Sisyphus idle.
 
 === CYCLE 476 STATE ===
-- TODO: 0 pending · 1 in_progress · 172 completed
-- Git: e69a4c3 pushed (no new changes yet)
-- TSC: Verified clean (JobbleBaby/ — 0 errors)
-- Audit: PASS 9/9 (repo root compatible)
-- Sisyphus: Active — task 398 dispatched (retry, PID 3010688)
+- TODO: 0 pending · 0 new · 173 completed
+- Git: bc9c0f9 pushed ✅
+- TSC: 0 errors
+- Audit: PASS 9/9 (93 tabs)
+- Sisyphus: Idle
 - Keyword pool: 1000 keywords
-- Idea #89: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment
+- Ideas: #87 Stranger Anxiety, #88 Polyvagal, #89 Cortisol/Skin/Tongue-Tie (all completed)
 
-=== PREVIOUS CYCLE 475 ISSUE ===
-- Task 398 crashed during exploration phase (Ultraworker mode)
-- cortilsol-skin-navigator.tsx NOT created
-- Re-dispatched with fixed syntax (removed --continue and --prompt)
+=== JUST COMPLETED ===
+- todo #398: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment ✅
+- 3 sub-trackers: cortisol timeline, skin navigator, tongue-tie screen
+- i18n: cortisolSkin.* in en.json + zh.json
+- Storage: @jobble/cortisol_log, @jobble/skin_change_log, @jobble/tongue_tie_assessment
 
 === PENDING USER-ACTION BLOCKERS ===
 - EAS credentials (Apple Team ID + App-Specific Password)
@@ -27,6 +24,6 @@ Keywords: terahertz_skin_imaging, cortisol_shadow, tongue_tie_reassessment
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
-All 93 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS 9/9.
-Sisyphus working on: Cortisol Shadow + Skin Navigator + Tongue-Tie Reassessment (#398).
-Next: once #398 done → review → final store submission prep.
+All 94 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS 9/9.
+Sisyphus idle — waiting for new tasks.
+Next: Review codebase → brainstorm new ideas OR wait for user input on blockers.

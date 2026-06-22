@@ -37,3 +37,4 @@ assets/screenshots/**
 # Testing
 *.log
 npm-debug.log*
+JobbleBaby/runtime/

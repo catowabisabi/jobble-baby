@@ -37,9 +37,9 @@ JobbleBaby/
         ├── API-TESTS.md
         ├── MOCKED-TESTS.md
         ├── E2E-TESTS.md
-        ├── REGRESSION-TESTS.md
-        ├── PERFORMANCE.md
-        └── A11Y-TESTS.md
+├── REGRESSION-TESTS.md     ✅ 新建 2026-06-22（RT-004 文檔 + RT-005 待實現）
+├── PERFORMANCE.md          ✅ 新建 2026-06-22（9 大測試場景 + thresholds）
+└── A11Y-TESTS.md          ✅ 新建 2026-06-22（8 個真正需要實現的 a11y 測試）
 ```
 
 ## 🔢 10 層測試覆蓋矩陣
@@ -53,9 +53,9 @@ JobbleBaby/
 | E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
 | F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
 | G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-| H | 回歸測試 | Jest | — | ❌ 未實現 | 0% |
-| I | 效能/穩定性測試 | — | — | ❌ 未實現 | 0% |
-| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ❌ 未啟用 | 0% |
+|| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ RT-004 | 1 test |
+|| I | 效能/穩定性測試 | — | — | ❌ 未實現（doc only） | 0% |
+|| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ Placeholder only | 0% |
 
 **Overall: 41/42 runnable tests pass (98%)**
 **Layers Implemented: 4/10 (40%)**

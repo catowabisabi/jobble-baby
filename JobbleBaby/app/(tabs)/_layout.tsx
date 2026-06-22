@@ -584,6 +584,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="polyvagal-dashboard"
+        options={{
+          title: t('polyvagal.tabTitle'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="galant-latch-navigator"
         options={{
           title: t('galantLatch.title') || 'Galant + Latch',

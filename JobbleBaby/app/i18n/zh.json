@@ -2324,6 +2324,12 @@
       "travel": "出行"
     }
   },
+  "parentCapacity": {
+    "title": "父母容量",
+    "hoursSlept": "睡眠時數",
+    "currentStress": "當前壓力",
+    "calculatedAt": "計算時間"
+  },
   "colicRelief": {
     "cryingPatternTracker": "哭聲模式追蹤",
     "fiveSGuide": "5 S 安撫指南",
@@ -3666,6 +3672,141 @@
     "promptRest": "Rest when baby rests",
     "decrease": "減少",
     "increase": "增加"
+  },
+  "polyvagal": {
+    "tabTitle": "迷走神經儀表板",
+    "state": {
+      "ventralVagal": "腹側迷走神經 / 社交投入",
+      "sympathetic": "交感神經 / 興奮狀態",
+      "dorsalVagal": "背側迷走神經 / 關機狀態"
+    },
+    "checkin": {
+      "title": "內感檢查",
+      "tension": "緊張在哪裡？",
+      "tensionHead": "頭部",
+      "tensionChest": "胸部",
+      "tensionGut": "腹部",
+      "tensionLimbs": "四肢",
+      "gutFeeling": "直覺感受？",
+      "gutCalm": "平靜",
+      "gutUneasy": "不安",
+      "gutAnxious": "焦慮",
+      "gutDread": "恐懼",
+      "heartRate": "心率感知",
+      "heartNormal": "正常",
+      "heartElevated": "偏高",
+      "heartRacing": "急速",
+      "energyLevel": "能量水平",
+      "energyHigh": "高",
+      "energyMedium": "中",
+      "energyLow": "低",
+      "energyDepleted": "耗盡",
+      "logCheckin": "記錄檢查"
+    },
+    "tool": {
+      "title": "調節工具",
+      "breathingTitle": "4-4-8 呼吸法",
+      "breathingDesc": "吸氣4秒，屏息4秒，呼氣8秒",
+      "breathingStart": "開始呼吸",
+      "breathingStop": "停止",
+      "breathingInhale": "吸氣",
+      "breathingHold": "屏息",
+      "breathingExhale": "呼氣",
+      "groundingTitle": "5-4-3-2-1 接地練習",
+      "groundingDesc": "說出5樣看到的東西、4樣聽到的聲音、3樣感受到的觸覺、2樣聞到的氣味、1樣嚐到的味道",
+      "groundingStart": "開始接地",
+      "groundingStep": "步驟",
+      "coregulationTitle": "共同調節",
+      "coregulationDesc": "與寶寶的臉和能量同步",
+      "coregulationPrompt": "看著寶寶，配合他們的能量，一起呼吸"
+    },
+    "correlation": {
+      "title": "父母-寶寶關聯",
+      "parentState": "父母狀態",
+      "babyFussiness": "寶寶哭鬧",
+      "description": "你的調節能力影響寶寶的調節",
+      "ventralCorrelated": "父母腹側迷走神經 + 寶寶平靜的天數",
+      "dorsalCorrelated": "父母背側迷走神經關機 + 高哭鬧的天數"
+    },
+    "index": {
+      "title": "父母容量指數",
+      "readiness": "共同調節準備度",
+      "levelLow": "低",
+      "levelMedium": "中",
+      "levelHigh": "高",
+      "sleepHours": "昨晚睡眠時數",
+      "stressLevel": "壓力程度",
+      "polyvagalState": "當前迷走神經狀態",
+      "interoceptiveClarity": "內感清晰度"
+    },
+    "alert": {
+      "lowCapacity": "你今天的容量很低——尋求支持吧"
+    },
+    "log": {
+      "title": "迷走神經日誌",
+      "noLogs": "尚無記錄。開始追蹤你的神經系統狀態。",
+      "note": "備註（選填）",
+      "babyState": "當時寶寶狀態"
+    },
+    "logZone": "記錄狀態",
+    "notePlaceholder": "選填備註...",
+    "noteLabel": "備註",
+    "stateLogger": "迷走神經狀態記錄",
+    "subtitle": "追蹤你的神經系統與寶寶的共同調節",
+    "interoceptiveCheckIn": "內感檢查",
+    "tensionLocation": "緊張在哪裡？",
+    "gutFeeling": "直覺感受？",
+    "heartRate": "心率感知",
+    "energy": "能量水平",
+    "logCheckIn": "記錄檢查",
+    "regulationTools": "調節工具",
+    "breathe4x4x8": "4-4-8 呼吸法",
+    "grounding54321": "5-4-3-2-1 接地練習",
+    "coregulation": "共同調節",
+    "coregulationPrompt": "看著寶寶，配合他們的能量，一起呼吸",
+    "correlationView": "父母-寶寶關聯",
+    "correlationInsight": "你的調節能力影響寶寶的調節",
+    "parentCapacity": "父母容量",
+    "sleepHours": "昨晚睡眠時數",
+    "stressLevel": "壓力程度",
+    "coRegulationReadiness": "共同調節準備度",
+    "lowCapacityAlert": "你今天的容量很低——尋求支持吧",
+    "logCapacity": "記錄容量",
+    "inhale": "吸氣",
+    "hold": "屏息",
+    "exhale": "呼氣",
+    "breathingIdle": "準備好了",
+    "groundingInput": "接地輸入",
+    "nextStep": "下一步",
+    "done": "完成",
+    "stop": "停止",
+    "close": "關閉",
+    "increase": "增加",
+    "decrease": "減少",
+    "zone": {
+      "ventralVagal": "腹側迷走神經 / 社交投入",
+      "sympathetic": "交感神經 / 興奮狀態",
+      "dorsalVagal": "背側迷走神經 / 關機狀態",
+      "ventralVagalDesc": "平靜、連結、臨在——社交投入啟動",
+      "sympatheticDesc": "焦慮、憤怒、挫折——戰或逃系統啟動",
+      "dorsalVagalDesc": "解離、斷聯、耗盡——凍結反應啟動",
+      "ventralDesc": "平靜、連結、臨在——社交投入啟動",
+      "sympatheticDesc": "焦慮、憤怒、挫折——戰或逃系統啟動",
+      "dorsalDesc": "解離、斷聯、耗盡——凍結反應啟動"
+    },
+    "babyState": {
+      "calm": "平靜",
+      "fussy": "哭鬧",
+      "crying": "大哭",
+      "sleeping": "睡著"
+    },
+    "grounding": {
+      "5": "5樣看到的東西",
+      "4": "4樣聽到的聲音",
+      "3": "3樣感受到的觸覺",
+      "2": "2樣聞到的氣味",
+      "1": "1樣嚐到的味道"
+    }
   },
   "dyadicSynchrony": {
     "title": "Dyadic Synchrony Playground",

@@ -2354,6 +2354,12 @@
       "travel": "Travel"
     }
   },
+  "parentCapacity": {
+    "title": "Parent Capacity",
+    "hoursSlept": "Hours slept",
+    "currentStress": "Current stress",
+    "calculatedAt": "Calculated at"
+  },
   "colicRelief": {
     "cryingPatternTracker": "Crying Pattern Tracker",
     "fiveSGuide": "5 S's Activation Guide",
@@ -3696,6 +3702,141 @@
     "promptRest": "Rest when baby rests",
     "decrease": "Decrease",
     "increase": "Increase"
+  },
+  "polyvagal": {
+    "tabTitle": "Polyvagal Dashboard",
+    "state": {
+      "ventralVagal": "Ventral Vagal / Social Engagement",
+      "sympathetic": "Sympathetic / Aroused",
+      "dorsalVagal": "Dorsal Vagal / Shutdown"
+    },
+    "checkin": {
+      "title": "Interoceptive Check-In",
+      "tension": "Where is tension?",
+      "tensionHead": "Head",
+      "tensionChest": "Chest",
+      "tensionGut": "Gut",
+      "tensionLimbs": "Limbs",
+      "gutFeeling": "Gut feeling?",
+      "gutCalm": "Calm",
+      "gutUneasy": "Uneasy",
+      "gutAnxious": "Anxious",
+      "gutDread": "Dread",
+      "heartRate": "Heart rate perception",
+      "heartNormal": "Normal",
+      "heartElevated": "Elevated",
+      "heartRacing": "Racing",
+      "energyLevel": "Energy level",
+      "energyHigh": "High",
+      "energyMedium": "Medium",
+      "energyLow": "Low",
+      "energyDepleted": "Depleted",
+      "logCheckin": "Log Check-In"
+    },
+    "tool": {
+      "title": "Regulation Tools",
+      "breathingTitle": "4-4-8 Breathing",
+      "breathingDesc": "Inhale 4s, hold 4s, exhale 8s",
+      "breathingStart": "Start Breathing",
+      "breathingStop": "Stop",
+      "breathingInhale": "Inhale",
+      "breathingHold": "Hold",
+      "breathingExhale": "Exhale",
+      "groundingTitle": "5-4-3-2-1 Grounding",
+      "groundingDesc": "Name 5 things you see, 4 you hear, 3 you feel, 2 you smell, 1 you taste",
+      "groundingStart": "Start Grounding",
+      "groundingStep": "Step",
+      "coregulationTitle": "Co-Regulation",
+      "coregulationDesc": "Sync with your baby's face and energy",
+      "coregulationPrompt": "Look at baby, match their energy, breathe together"
+    },
+    "correlation": {
+      "title": "Parent-Baby Correlation",
+      "parentState": "Parent State",
+      "babyFussiness": "Baby Fussiness",
+      "description": "Your regulation affects baby's regulation",
+      "ventralCorrelated": "Days with ventral vagal parent + calm baby",
+      "dorsalCorrelated": "Days with dorsal vagal shutdown + high crying"
+    },
+    "index": {
+      "title": "Parent Capacity Index",
+      "readiness": "Co-Regulation Readiness",
+      "levelLow": "Low",
+      "levelMedium": "Medium",
+      "levelHigh": "High",
+      "sleepHours": "Sleep last night",
+      "stressLevel": "Stress level",
+      "polyvagalState": "Current polyvagal state",
+      "interoceptiveClarity": "Interoceptive clarity"
+    },
+    "alert": {
+      "lowCapacity": "Your capacity is low today — reach out for support"
+    },
+    "log": {
+      "title": "Polyvagal Log",
+      "noLogs": "No entries yet. Start tracking your nervous system state.",
+      "note": "Note (optional)",
+      "babyState": "Baby state at this time"
+    },
+    "logZone": "Log Zone",
+    "notePlaceholder": "Optional note...",
+    "noteLabel": "Note",
+    "stateLogger": "Polyvagal State Logger",
+    "subtitle": "Track your nervous system and baby's co-regulation",
+    "interoceptiveCheckIn": "Interoceptive Check-In",
+    "tensionLocation": "Where is tension?",
+    "gutFeeling": "Gut feeling?",
+    "heartRate": "Heart rate perception",
+    "energy": "Energy level",
+    "logCheckIn": "Log Check-In",
+    "regulationTools": "Regulation Tools",
+    "breathe4x4x8": "4-4-8 Breathing",
+    "grounding54321": "5-4-3-2-1 Grounding",
+    "coregulation": "Co-Regulation",
+    "coregulationPrompt": "Look at baby, match their energy, breathe together",
+    "correlationView": "Parent-Baby Correlation",
+    "correlationInsight": "Your regulation affects baby's regulation",
+    "parentCapacity": "Parent Capacity",
+    "sleepHours": "Sleep last night",
+    "stressLevel": "Stress level",
+    "coRegulationReadiness": "Co-Regulation Readiness",
+    "lowCapacityAlert": "Your capacity is low today — reach out for support",
+    "logCapacity": "Log Capacity",
+    "inhale": "Inhale",
+    "hold": "Hold",
+    "exhale": "Exhale",
+    "breathingIdle": "Ready",
+    "groundingInput": "Grounding input",
+    "nextStep": "Next",
+    "done": "Done",
+    "stop": "Stop",
+    "close": "Close",
+    "increase": "Increase",
+    "decrease": "Decrease",
+    "zone": {
+      "ventralVagal": "Ventral Vagal / Social Engagement",
+      "sympathetic": "Sympathetic / Aroused",
+      "dorsalVagal": "Dorsal Vagal / Shutdown",
+      "ventralVagalDesc": "Calm, connected, present — social engagement activated",
+      "sympatheticDesc": "Anxious, angry, frustrated — fight/flight system active",
+      "dorsalVagalDesc": "Dissociated, disconnected, exhausted — freeze response",
+      "ventralDesc": "Calm, connected, present — social engagement activated",
+      "sympatheticDesc": "Anxious, angry, frustrated — fight/flight system active",
+      "dorsalDesc": "Dissociated, disconnected, exhausted — freeze response"
+    },
+    "babyState": {
+      "calm": "Calm",
+      "fussy": "Fussy",
+      "crying": "Crying",
+      "sleeping": "Sleeping"
+    },
+    "grounding": {
+      "5": "5 things you SEE",
+      "4": "4 things you HEAR",
+      "3": "3 things you FEEL",
+      "2": "2 things you SMELL",
+      "1": "1 thing you TASTE"
+    }
   },
   "dyadicSynchrony": {
     "title": "Dyadic Synchrony Playground",

@@ -78,6 +78,7 @@ export const STORAGE_KEYS = {
   HYDRATION_DAILY: "@jobble/hydration_daily",
   INTEROCEPTIVE_DIARY: "@jobble/interoceptive_diary",
   INTEROCEPTIVE_GAMES: "@jobble/interoceptive_games",
+  INTEROCEPTIVE_LOG: "@jobble/interoceptive_log",
   IOT_ALERTS: "@jobble/iot_alerts",
   IOT_SECURITY_ENTRIES: "@jobble/iot_security_entries",
   JAUNDICE_ENTRIES: "@jobble/jaundice_entries",
@@ -109,6 +110,7 @@ export const STORAGE_KEYS = {
   PAIN_COMFORT_SCORE: "@jobble/pain_comfort_score",
   PARENT_CALM_SESSION: "@jobble/parent_calm_session",
   PARENT_SLEEP_ENTRIES: "@jobble/parent_sleep_entries",
+  PARENT_CAPACITY_INDEX: "@jobble/parent_capacity_index",
   PARENTAL_HEIGHTS: "@jobble/parental_heights",
   PEDIATRICIAN_ALERT: "@jobble/pediatrician_alert",
   PERIOD_ACTIVITIES: "@jobble/period_activities",
@@ -195,4 +197,5 @@ export const STORAGE_KEYS = {
   COREGULATION_SESSION_LOG: "@jobble/coregulation_session_log",
   NEUROPLASTICITY_TRACKING: "@jobble/neuroplasticity_tracking",
   PLASTICITY_ACTIVITIES: "@jobble/plasticity_activities",
+  POLYVAGAL_LOG: "@jobble/polyvagal_log",
 } as const;

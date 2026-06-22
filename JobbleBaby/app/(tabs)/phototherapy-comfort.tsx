@@ -33,15 +33,14 @@ interface BabyProfile {
   birthDate: string;
 }
 
-const LAMP_TYPE_VALUES = ['LED', 'Halogen', 'Fiber Optic', 'BiliBlanket'] as const;
-type LampType = typeof LAMP_TYPE_VALUES[number];
-
-const LAMP_TYPES_I18N: Record<LampType, string> = {
+const LAMP_TYPES_I18N = {
   LED: 'photoComfort.lightTypes.LED',
   Halogen: 'photoComfort.lightTypes.Halogen',
   'Fiber Optic': 'photoComfort.lightTypes.Fiber Optic',
   BiliBlanket: 'photoComfort.lightTypes.BiliBlanket',
-};
+} as const;
+type LampType = keyof typeof LAMP_TYPES_I18N;
+const LAMP_TYPE_VALUES = Object.keys(LAMP_TYPES_I18N) as readonly LampType[];
 
 function getAgeDays(birthDate: string): number {
   if (!birthDate) return 0;

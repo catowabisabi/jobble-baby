@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 10:01
-✅ Done: cycle 471 verified — TSC 0, audit PASS
+🍼 Jobble Baby · 11:00
+✅ Done: cycle 473 — docs: add pre-submission test suites (a11y, perf, regression)
 🔧 Dispatched: none (all complete)
 📋 TODO: 0 pending · 0 new
-📦 Commit: 85e16f9 (clean — nothing new to push)
-📝 Desc: 代碼評審完成，TSC 0，Audit PASS 9/9。所有代碼級別已完成，App 準備就緒，等待用戶處理：EAS credentials、Apple App Store Connect 建立、Google Play Console 建立、GitHub Pages 隱私政策部署。
+📦 Commit: c88ae89 → pushed
+📝 Desc: 代碼評審完成，92 tabs，TASC 0，Audit PASS 9/9。App 準備就緒，等待用戶處理：EAS credentials、Apple App Store Connect 建立、Google Play Console 建立、GitHub Pages 隱私政策部署。

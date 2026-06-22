@@ -20,7 +20,15 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const ROOT_DIR = process.cwd();
+// Auto-detect: if app/(tabs) not found at cwd, assume running from repo root and prepend JobbleBaby/
+const CWD = process.cwd();
+let ROOT_DIR = CWD;
+if (!fs.existsSync(path.join(CWD, 'app', '(tabs)'))) {
+  const candidate = path.join(CWD, 'JobbleBaby');
+  if (fs.existsSync(path.join(candidate, 'app', '(tabs)'))) {
+    ROOT_DIR = candidate;
+  }
+}
 const APP_DIR = path.join(ROOT_DIR, 'app');
 const I18N_DIR = path.join(APP_DIR, 'i18n');
 const TABS_DIR = path.join(APP_DIR, '(tabs)');

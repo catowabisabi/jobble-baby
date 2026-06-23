@@ -22,13 +22,13 @@ const PRIMITIVE_REFLEXES = [
   { id: 'parachute',         nameKey: 'reflex.parachute',         minMo: 6,  maxMo: 12 },
 ];
 
-const REFLEX_STATUS_OPTIONS = ['present', 'partially', 'integrated'] as const;
+const REFLEX_STATUS_OPTIONS = ['reflexVisualMotor.status.present', 'reflexVisualMotor.status.partially', 'reflexVisualMotor.status.integrated'] as const;
 type ReflexStatus = typeof REFLEX_STATUS_OPTIONS[number];
 
 const REFLEX_STATUS_OPTIONS_I18N: Record<ReflexStatus, string> = {
-  present: 'reflexVisualMotor.label.reflexStatus.present',
-  partially: 'reflexVisualMotor.label.reflexStatus.partially',
-  integrated: 'reflexVisualMotor.label.reflexStatus.integrated',
+  'reflexVisualMotor.status.present': 'reflexVisualMotor.status.present',
+  'reflexVisualMotor.status.partially': 'reflexVisualMotor.status.partially',
+  'reflexVisualMotor.status.integrated': 'reflexVisualMotor.status.integrated',
 };
 
 // Visual-Motor Milestones
@@ -52,9 +52,9 @@ export default function ReflexVisualMotor() {
     return translated === key ? key : translated;
   };
   const REFLEX_STATUS: { value: ReflexStatus; label: string }[] = [
-    { value: 'present', label: ti(REFLEX_STATUS_OPTIONS_I18N.present) },
-    { value: 'partially', label: ti(REFLEX_STATUS_OPTIONS_I18N.partially) },
-    { value: 'integrated', label: ti(REFLEX_STATUS_OPTIONS_I18N.integrated) },
+    { value: 'reflexVisualMotor.status.present', label: t('reflexVisualMotor.status.present') },
+    { value: 'reflexVisualMotor.status.partially', label: t('reflexVisualMotor.status.partially') },
+    { value: 'reflexVisualMotor.status.integrated', label: t('reflexVisualMotor.status.integrated') },
   ];
   const [reflexes, setReflexes] = useState<ReflexEntry[]>([]);
   const [visual, setVisual] = useState<VisualEntry[]>([]);

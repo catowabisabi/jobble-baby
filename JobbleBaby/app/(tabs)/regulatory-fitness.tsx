@@ -24,17 +24,17 @@ interface RegulatoryEntry {
 }
 
 const CASCADE_ALERTS: Record<string, { affected: string; messageKey: string }> = {
-  sensory: { affected: 'sleep', messageKey: 'regulatoryFitness.cascadeAlert.sensory' },
-  autonomic: { affected: 'emotional', messageKey: 'regulatoryFitness.cascadeAlert.autonomic' },
-  motor: { affected: 'sensory', messageKey: 'regulatoryFitness.cascadeAlert.motor' },
-  social: { affected: 'autonomic', messageKey: 'regulatoryFitness.cascadeAlert.social' },
+  'regulatoryFitness.domains.autonomic': { affected: 'sleep', messageKey: 'regulatoryFitness.cascadeAlert.sensory' },
+  'regulatoryFitness.domains.sensory': { affected: 'emotional', messageKey: 'regulatoryFitness.cascadeAlert.autonomic' },
+  'regulatoryFitness.domains.motor': { affected: 'sensory', messageKey: 'regulatoryFitness.cascadeAlert.motor' },
+  'regulatoryFitness.domains.social': { affected: 'autonomic', messageKey: 'regulatoryFitness.cascadeAlert.social' },
 };
 
-const DOMAIN_COLORS = {
-  autonomic: '#4A90D9',
-  sensory: '#7B68EE',
-  motor: '#20B2AA',
-  social: '#FF6B6B',
+const DOMAIN_COLORS: Record<string, string> = {
+  'regulatoryFitness.domains.autonomic': '#4A90D9',
+  'regulatoryFitness.domains.sensory': '#7B68EE',
+  'regulatoryFitness.domains.motor': '#20B2AA',
+  'regulatoryFitness.domains.social': '#FF6B6B',
 };
 
 const SCORE_COLORS = {
@@ -256,9 +256,16 @@ export default function RegulatoryFitnessScreen() {
     if (data.length > 0) {
       const latest = data[data.length - 1];
       const newAlerts: { messageKey: string }[] = [];
-      const domains = ['autonomic', 'sensory', 'motor', 'social'] as const;
+      const domains = ['regulatoryFitness.domains.autonomic', 'regulatoryFitness.domains.sensory', 'regulatoryFitness.domains.motor', 'regulatoryFitness.domains.social'] as const;
+      const domainToScoreKey: Record<string, keyof RegulatoryEntry> = {
+        'regulatoryFitness.domains.autonomic': 'autonomic_score',
+        'regulatoryFitness.domains.sensory': 'sensory_score',
+        'regulatoryFitness.domains.motor': 'motor_score',
+        'regulatoryFitness.domains.social': 'social_score',
+      };
       domains.forEach(domain => {
-        const s = latest[`${domain}_score` as keyof RegulatoryEntry] as number;
+        const scoreKey = domainToScoreKey[domain];
+        const s = latest[scoreKey] as number;
         if (s < 50 && CASCADE_ALERTS[domain]) {
           newAlerts.push({ messageKey: CASCADE_ALERTS[domain].messageKey });
         }
@@ -299,10 +306,10 @@ export default function RegulatoryFitnessScreen() {
         <Text style={[styles.sectionTitle, { color: C.text }]}>{t('regulatory_fitness.domains')}</Text>
         {latestEntry ? (
           <>
-            <DomainBar domain="autonomic" score={latestEntry.autonomic_score} color={DOMAIN_COLORS.autonomic} t={t} />
-            <DomainBar domain="sensory" score={latestEntry.sensory_score} color={DOMAIN_COLORS.sensory} t={t} />
-            <DomainBar domain="motor" score={latestEntry.motor_score} color={DOMAIN_COLORS.motor} t={t} />
-            <DomainBar domain="social" score={latestEntry.social_score} color={DOMAIN_COLORS.social} t={t} />
+            <DomainBar domain="autonomic" score={latestEntry.autonomic_score} color={DOMAIN_COLORS['regulatoryFitness.domains.autonomic']} t={t} />
+            <DomainBar domain="sensory" score={latestEntry.sensory_score} color={DOMAIN_COLORS['regulatoryFitness.domains.sensory']} t={t} />
+            <DomainBar domain="motor" score={latestEntry.motor_score} color={DOMAIN_COLORS['regulatoryFitness.domains.motor']} t={t} />
+            <DomainBar domain="social" score={latestEntry.social_score} color={DOMAIN_COLORS['regulatoryFitness.domains.social']} t={t} />
           </>
         ) : (
           <Text style={styles.noDataText}>{t('regulatory_fitness.no_data')}</Text>

@@ -233,7 +233,7 @@ export default function Interoceptive() {
   const streak = getStreak();
   const scoreColor = precisionScore >= 75 ? COLORS.teal : precisionScore >= 45 ? COLORS.amber : '#EF4444';
 
-  const SCAN_PHASES = ['head', 'throat', 'chest', 'abdomen', 'pelvis', 'limbs'];
+  const SCAN_PHASES = ['interoceptive.scanPhases.head', 'interoceptive.scanPhases.throat', 'interoceptive.scanPhases.chest', 'interoceptive.scanPhases.abdomen', 'interoceptive.scanPhases.pelvis', 'interoceptive.scanPhases.limbs'];
 
   const startBodyScan = () => {
     setShowBodyScan(true);
@@ -580,7 +580,7 @@ export default function Interoceptive() {
             {scanPhase < SCAN_PHASES.length ? (
               <>
                 <Text style={styles.scanPhaseText}>
-                  {t(`interoceptive.scan${SCAN_PHASES[scanPhase].charAt(0).toUpperCase() + SCAN_PHASES[scanPhase].slice(1)}`) || SCAN_PHASES[scanPhase]}
+                  {t(SCAN_PHASES[scanPhase])}
                 </Text>
                 <View style={styles.scanProgress}>
                   <View style={[styles.scanProgressBar, { width: `${((scanPhase + 1) / SCAN_PHASES.length) * 100}%` }]} />

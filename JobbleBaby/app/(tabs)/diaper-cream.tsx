@@ -8,29 +8,11 @@ import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const ENTRIES_KEY = STORAGE_KEYS.DIAPER_CREAM_ENTRIES;
 
-const CREAM_TYPES = ['zinc_oxide', 'petroleum', 'natural', 'other'] as const;
-const AMOUNTS = ['thin', 'medium', 'thick'] as const;
-const LOCATIONS = ['diaper_area', 'skin_folds', 'rash_spots'] as const;
-const RASH_TYPES = ['yeast', 'contact', 'irritant'] as const;
-const RASH_SEVERITIES = ['mild', 'moderate', 'severe'] as const;
-
-const LOCATIONS_I18N: Record<Location, string> = {
-  diaper_area: 'diaperCream.label.location.diaper_area',
-  skin_folds: 'diaperCream.label.location.skin_folds',
-  rash_spots: 'diaperCream.label.location.rash_spots',
-};
-
-const RASH_TYPES_I18N: Record<RashType, string> = {
-  yeast: 'diaperCream.label.rashType.yeast',
-  contact: 'diaperCream.label.rashType.contact',
-  irritant: 'diaperCream.label.rashType.irritant',
-};
-
-const RASH_SEVERITIES_I18N: Record<RashSeverity, string> = {
-  mild: 'diaperCream.label.severity.mild',
-  moderate: 'diaperCream.label.severity.moderate',
-  severe: 'diaperCream.label.severity.severe',
-};
+const CREAM_TYPES = ['diaperCream.creamTypeZincOxide', 'diaperCream.creamTypePetroleum', 'diaperCream.creamTypeNatural', 'diaperCream.creamTypeOther'] as const;
+const AMOUNTS = ['diaperCream.amountThin', 'diaperCream.amountMedium', 'diaperCream.amountThick'] as const;
+const LOCATIONS = ['diaperCream.locationDiaperArea', 'diaperCream.locationSkinFolds', 'diaperCream.locationRashSpots'] as const;
+const RASH_TYPES = ['diaperCream.rashTypeYeast', 'diaperCream.rashTypeContact', 'diaperCream.rashTypeIrritant'] as const;
+const RASH_SEVERITIES = ['diaperCream.severityMild', 'diaperCream.severityModerate', 'diaperCream.severitySevere'] as const;
 
 type CreamType = typeof CREAM_TYPES[number];
 type Amount = typeof AMOUNTS[number];
@@ -58,34 +40,30 @@ function uid() {
 
 export default function DiaperCreamScreen() {
   const { t } = useLanguage();
-  const ti = (key: string): string => {
-    const translated = t(key);
-    return translated === key ? key : translated;
-  };
   const LOCATIONS: { value: Location; label: string }[] = [
-    { value: 'diaper_area', label: ti(LOCATIONS_I18N.diaper_area) },
-    { value: 'skin_folds', label: ti(LOCATIONS_I18N.skin_folds) },
-    { value: 'rash_spots', label: ti(LOCATIONS_I18N.rash_spots) },
+    { value: 'diaperCream.locationDiaperArea', label: t('diaperCream.locationDiaperArea') },
+    { value: 'diaperCream.locationSkinFolds', label: t('diaperCream.locationSkinFolds') },
+    { value: 'diaperCream.locationRashSpots', label: t('diaperCream.locationRashSpots') },
   ];
   const RASH_TYPES: { value: RashType; label: string }[] = [
-    { value: 'yeast', label: ti(RASH_TYPES_I18N.yeast) },
-    { value: 'contact', label: ti(RASH_TYPES_I18N.contact) },
-    { value: 'irritant', label: ti(RASH_TYPES_I18N.irritant) },
+    { value: 'diaperCream.rashTypeYeast', label: t('diaperCream.rashTypeYeast') },
+    { value: 'diaperCream.rashTypeContact', label: t('diaperCream.rashTypeContact') },
+    { value: 'diaperCream.rashTypeIrritant', label: t('diaperCream.rashTypeIrritant') },
   ];
   const RASH_SEVERITIES: { value: RashSeverity; label: string }[] = [
-    { value: 'mild', label: ti(RASH_SEVERITIES_I18N.mild) },
-    { value: 'moderate', label: ti(RASH_SEVERITIES_I18N.moderate) },
-    { value: 'severe', label: ti(RASH_SEVERITIES_I18N.severe) },
+    { value: 'diaperCream.severityMild', label: t('diaperCream.severityMild') },
+    { value: 'diaperCream.severityModerate', label: t('diaperCream.severityModerate') },
+    { value: 'diaperCream.severitySevere', label: t('diaperCream.severitySevere') },
   ];
   const [entries, setEntries] = useState<Entry[]>([]);
   const [modal, setModal] = useState(false);
-  const [creamType, setCreamType] = useState<CreamType>('zinc_oxide');
-  const [amount, setAmount] = useState<Amount>('medium');
+  const [creamType, setCreamType] = useState<CreamType>('diaperCream.creamTypeZincOxide');
+  const [amount, setAmount] = useState<Amount>('diaperCream.amountMedium');
   const [locations, setLocations] = useState<Location[]>([]);
   const [barrierRating, setBarrierRating] = useState(3);
   const [rashPresent, setRashPresent] = useState(false);
-  const [rashType, setRashType] = useState<RashType>('contact');
-  const [rashSeverity, setRashSeverity] = useState<RashSeverity>('mild');
+  const [rashType, setRashType] = useState<RashType>('diaperCream.rashTypeContact');
+  const [rashSeverity, setRashSeverity] = useState<RashSeverity>('diaperCream.severityMild');
   const [photoNote, setPhotoNote] = useState('');
   const [notes, setNotes] = useState('');
 
@@ -111,13 +89,13 @@ export default function DiaperCreamScreen() {
     setEntries(next);
     await safeSetItem(ENTRIES_KEY, JSON.stringify(next));
     setModal(false);
-    setCreamType('zinc_oxide');
-    setAmount('medium');
+    setCreamType('diaperCream.creamTypeZincOxide');
+    setAmount('diaperCream.amountMedium');
     setLocations([]);
     setBarrierRating(3);
     setRashPresent(false);
-    setRashType('contact');
-    setRashSeverity('mild');
+    setRashType('diaperCream.rashTypeContact');
+    setRashSeverity('diaperCream.severityMild');
     setPhotoNote('');
     setNotes('');
   };
@@ -150,46 +128,46 @@ export default function DiaperCreamScreen() {
 
   const creamTypeLabel = (ct: CreamType) => {
     const labels: Record<CreamType, string> = {
-      zinc_oxide: t('diaperCream.creamTypeZincOxide'),
-      petroleum: t('diaperCream.creamTypePetroleum'),
-      natural: t('diaperCream.creamTypeNatural'),
-      other: t('diaperCream.creamTypeOther'),
+      ['diaperCream.creamTypeZincOxide']: t('diaperCream.creamTypeZincOxide'),
+      ['diaperCream.creamTypePetroleum']: t('diaperCream.creamTypePetroleum'),
+      ['diaperCream.creamTypeNatural']: t('diaperCream.creamTypeNatural'),
+      ['diaperCream.creamTypeOther']: t('diaperCream.creamTypeOther'),
     };
     return labels[ct];
   };
 
   const amountLabel = (a: Amount) => {
     const labels: Record<Amount, string> = {
-      thin: t('diaperCream.amountThin'),
-      medium: t('diaperCream.amountMedium'),
-      thick: t('diaperCream.amountThick'),
+      ['diaperCream.amountThin']: t('diaperCream.amountThin'),
+      ['diaperCream.amountMedium']: t('diaperCream.amountMedium'),
+      ['diaperCream.amountThick']: t('diaperCream.amountThick'),
     };
     return labels[a];
   };
 
   const locationLabel = (loc: Location) => {
     const labels: Record<Location, string> = {
-      diaper_area: t('diaperCream.locationDiaperArea'),
-      skin_folds: t('diaperCream.locationSkinFolds'),
-      rash_spots: t('diaperCream.locationRashSpots'),
+      ['diaperCream.locationDiaperArea']: t('diaperCream.locationDiaperArea'),
+      ['diaperCream.locationSkinFolds']: t('diaperCream.locationSkinFolds'),
+      ['diaperCream.locationRashSpots']: t('diaperCream.locationRashSpots'),
     };
     return labels[loc];
   };
 
   const rashTypeLabel = (rt: RashType) => {
     const labels: Record<RashType, string> = {
-      yeast: t('diaperCream.rashTypeYeast'),
-      contact: t('diaperCream.rashTypeContact'),
-      irritant: t('diaperCream.rashTypeIrritant'),
+      ['diaperCream.rashTypeYeast']: t('diaperCream.rashTypeYeast'),
+      ['diaperCream.rashTypeContact']: t('diaperCream.rashTypeContact'),
+      ['diaperCream.rashTypeIrritant']: t('diaperCream.rashTypeIrritant'),
     };
     return labels[rt];
   };
 
   const rashSeverityLabel = (rs: RashSeverity) => {
     const labels: Record<RashSeverity, string> = {
-      mild: t('diaperCream.severityMild'),
-      moderate: t('diaperCream.severityModerate'),
-      severe: t('diaperCream.severitySevere'),
+      ['diaperCream.severityMild']: t('diaperCream.severityMild'),
+      ['diaperCream.severityModerate']: t('diaperCream.severityModerate'),
+      ['diaperCream.severitySevere']: t('diaperCream.severitySevere'),
     };
     return labels[rs];
   };

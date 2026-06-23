@@ -172,14 +172,16 @@
     "tummyTime": "Tummytime",
     "weaningRash": "Weaningrash",
     "galantLatch": "Galantlatch",
-    "interoceptive": "Interoceptive",
+    "indoorAir": "Indoor Air Quality",
+    "interopective": "Interoceptive",
     "regulatoryFitness": "Regulatoryfitness",
     "windowOfTolerance": "Windowoftolerance",
     "feedingProgression": "Feeding",
     "behavioralRehearsal": "Rehearsal",
     "protoconversation": "Proto-Conv",
     "coregulationResonance": "Co-Regulation",
-    "neuroplasticity": "Neuroplasticity"
+    "neuroplasticity": "Neuroplasticity",
+    "interoceptive": "Interoceptive"
   },
   "neuroplasticity": {
     "title": "Neuroplasticity",

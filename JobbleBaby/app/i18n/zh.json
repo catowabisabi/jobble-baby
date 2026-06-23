@@ -72,7 +72,8 @@
     "bottleFeeding": "奶瓶餵養",
     "reflexVisualMotor": "Reflex & Visual-Motor",
     "galantLatch": "Galantlatch [TODO]",
-    "interoceptive": "Interoceptive [TODO]",
+    "indoorAir": "室內空氣質量",
+    "interopective": "Interoceptive [TODO]",
     "regulatoryFitness": "Regulatoryfitness [TODO]",
     "windowOfTolerance": "Windowoftolerance [TODO]",
     "villageNetwork": "社群",
@@ -179,7 +180,8 @@
     "preSubmissionQa": "預提交 QA",
     "feedingProgression": "餵食",
     "behavioralRehearsal": "行為排練",
-    "protoconversation": "前語言溝通"
+    "protoconversation": "前語言溝通",
+    "interoceptive": "內感"
   },
   "neuroplasticity": {
     "title": "神經可塑性",

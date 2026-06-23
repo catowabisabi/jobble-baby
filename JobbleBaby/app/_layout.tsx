@@ -265,6 +265,10 @@ function TabNavigator() {
         options={{ title: t('tabs.interoceptive'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="psychology" color={color} />, headerShown: false }}
       />
       <Tabs.Screen
+        name="indoor-air-navigator"
+        options={{ title: t('tabs.indoorAir'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="filter-alt" color={color} />, headerShown: false }}
+      />
+      <Tabs.Screen
         name="iot-security"
         options={{ title: t('tabs.iotSecurity'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="security" color={color} />, headerShown: false }}
       />

@@ -1,5 +1,5 @@
-🍼 Jobble Baby · 09:01
-✅ Done: #400 Indoor Air Quality + Baby Respiratory Navigator (idea #90 implemented)
-📋 TODO: 0 pending · 0 new · 175 completed
-📦 Commit: 78476ec → pushed
-📝 Desc: 新tab室內空氣質量導航頁，95 tabs總數。含Air Log/呼吸追蹤/7天相關性圖/房間AQ評分/Alert系統。i18n中英完成。TSC 0。Audit PASS。
+🍼 Jobble Baby · 10:08
+✅ Done: #1 Hardcoded string arrays → i18n keys (cortisol-skin + stranger-danger)
+📋 TODO: 0 pending · 0 new · 1 completed (DB)
+📦 Commit: 6d21304 → pushed
+📝 Desc: Audit FAIL→PASS。6個hardcoded string已修復（cortisol-skin: Episodes/Feeding Strikes；stranger-danger: Teething Fussiness/Neither/Teething/Neutral）。i18n keys已加。中英雙語。TSC 0。Audit 6/6 PASS。

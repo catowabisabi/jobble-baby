@@ -334,13 +334,13 @@ export default function CortisolSkinNavigatorScreen() {
               <View style={[styles.statsRow, { backgroundColor: C.card, borderColor: C.border }]}>
                 <View style={styles.statItem}>
                   <Text style={[styles.statValue, { color: C.text }]}>{cortisolLog.length}</Text>
-                  <Text style={[styles.statLabel, { color: C.muted }]}>Episodes</Text>
+                  <Text style={[styles.statLabel, { color: C.muted }]}>{tl('cortisolSkin.cortisol.stats.episodes')}</Text>
                 </View>
                 <View style={styles.statItem}>
                   <Text style={[styles.statValue, { color: C.text }]}>
                     {cortisolLog.filter(e => e.feedingStrikes > 0).length}
                   </Text>
-                  <Text style={[styles.statLabel, { color: C.muted }]}>Feeding Strikes</Text>
+                  <Text style={[styles.statLabel, { color: C.muted }]}>{tl('cortisolSkin.cortisol.stats.feedingStrikes')}</Text>
                 </View>
                 <View style={styles.statItem}>
                   <Text style={[styles.statValue, { color: C.text }]}>

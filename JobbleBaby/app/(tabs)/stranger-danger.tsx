@@ -881,7 +881,7 @@ export default function StrangerDangerScreen() {
               accessibilityLabel="Log teething only"
             >
               <Ionicons name="happy" size={24} color={colors.muted} />
-              <Text style={[styles.quickLogText, { color: colors.muted }]}>Teething Fussiness</Text>
+              <Text style={[styles.quickLogText, { color: colors.muted }]}>{t('strangerDanger.teething.quickLog.teethingFussiness')}</Text>
               <Text style={[styles.quickLogSubtext, { color: colors.muted }]}>No ear rubbing</Text>
             </TouchableOpacity>
 
@@ -891,7 +891,7 @@ export default function StrangerDangerScreen() {
               accessibilityLabel="Log neutral"
             >
               <Ionicons name="pause" size={24} color={colors.muted} />
-              <Text style={[styles.quickLogText, { color: colors.muted }]}>Neither</Text>
+              <Text style={[styles.quickLogText, { color: colors.muted }]}>{t('strangerDanger.teething.quickLog.neither')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -967,12 +967,12 @@ export default function StrangerDangerScreen() {
                   )}
                   {entry.teethingFussiness && (
                     <View style={[styles.tag, { backgroundColor: '#f59e0b' }]}>
-                      <Text style={styles.tagText}>Teething</Text>
+                      <Text style={styles.tagText}>{t('strangerDanger.teething.tags.teething')}</Text>
                     </View>
                   )}
                   {!entry.earRubbingEpisode && !entry.teethingFussiness && (
                     <View style={[styles.tag, { backgroundColor: colors.muted }]}>
-                      <Text style={styles.tagText}>Neutral</Text>
+                      <Text style={styles.tagText}>{t('strangerDanger.teething.tags.neutral')}</Text>
                     </View>
                   )}
                 </View>

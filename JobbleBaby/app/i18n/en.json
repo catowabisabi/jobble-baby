@@ -3065,8 +3065,15 @@
       "correlation": "Correlation",
       "highCorrelation": "High correlation - consult doctor if persistent",
       "lowCorrelation": "Low correlation - likely separate issues",
-      "quickLog": "Quick Log Ear Rubbing",
-      "timestamp": "Timestamp"
+      "quickLog": {
+        "teethingFussiness": "Teething Fussiness",
+        "neither": "Neither"
+      },
+      "timestamp": "Timestamp",
+      "tags": {
+        "teething": "Teething",
+        "neutral": "Neutral"
+      }
     },
     "composite": {
       "title": "Composite Distress Index",
@@ -4956,7 +4963,11 @@
       "noData": "No stress episodes logged yet",
       "episodeCard": "Episode",
       "correlatedWith": "Correlated with",
-      "score": "Stress Score"
+      "score": "Stress Score",
+      "stats": {
+        "episodes": "Episodes",
+        "feedingStrikes": "Feeding Strikes"
+      }
     },
     "skin": {
       "title": "Skin Change Navigator",

@@ -3035,8 +3035,15 @@
       "correlation": "關聯性",
       "highCorrelation": "高度關聯 — 如持續請諮詢醫生",
       "lowCorrelation": "低關聯性 — 可能是獨立問題",
-      "quickLog": "快速記錄抓耳朵",
-      "timestamp": "時間戳"
+      "quickLog": {
+        "teethingFussiness": "出牙不適",
+        "neither": "兩者皆非"
+      },
+      "timestamp": "時間戳",
+      "tags": {
+        "teething": "出牙",
+        "neutral": "中性"
+      }
     },
     "composite": {
       "title": "綜合不適指數",
@@ -4983,7 +4990,11 @@
       "noData": "尚無記錄的壓力事件",
       "episodeCard": "事件",
       "correlatedWith": "關聯於",
-      "score": "壓力分數"
+      "score": "壓力分數",
+      "stats": {
+        "episodes": "記錄次數",
+        "feedingStrikes": "餵食抗拒"
+      }
     },
     "skin": {
       "title": "皮膚變化導航",

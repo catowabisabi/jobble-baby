@@ -1,36 +1,34 @@
-# Cycle 483 — HERMES AUTOLOOP CYCLE COMPLETE
+# Cycle 484 — HERMES AUTOLOOP CYCLE COMPLETE
 # Date: 2026-06-23 23:01 HKT
-# Status: ALL DONE — SUBMISSION READY
+# Status: DISPATCHED — i18n cleanup
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive
 ✅ user-intention.md exists
-✅ Sisyphus idle
-✅ DB: 0 pending · 0 new
+✅ Sisyphus idle → dispatched task #401
 
 === STEP 2 (Verify) ===
 ✅ No pending todos to verify
 
 === STEP 3 (Review + Analysis) ===
 ✅ TSC: 0 errors (JobbleBaby/)
-✅ Painpoint #28 (console.log scatter) — RESOLVED (0 matches in codebase)
-✅ 95 tabs implemented (growth from 94)
+✅ Found i18n asymmetry: 25 extra zh-only keys (tummyTime.* + pincerGrasp.*)
+✅ No en.json counterparts — orphan translations
+✅ 95 tabs implemented
 ✅ Codebase clean
-✅ Audit PASS
 
 === STEP 4 (Brainstorm) ===
-⏭️ Skipped — project submission-ready, no pending tasks
+⏭️ Skipped — project submission-ready, task found via code review
 
 === STEP 5 (Commit) ===
-⏭️ Nothing to commit — tree clean (9a8de44 already pushed by Sisyphus cycle 483)
+✅ 805a46b → pushed
+   - chore: cycle 484 — autoloop state update
 
 === STEP 6 (Dispatch) ===
-⏭️ No pending tasks — Sisyphus idle
-⏭️ Project waiting on user action:
-  - EAS credentials (Apple Team ID + App-Specific Password)
-  - App Store Connect app creation (com.jobblebaby.app)
-  - Play Console app creation (com.jobblebaby.app)
-  - Privacy policy URL deployment
+🔧 Dispatched: #401 Fix i18n asymmetry — remove 25 orphan zh-only keys
+   - 25 orphan keys: tummyTime.* + pincerGrasp.*
+   - Keywords: i18n, zh-json, orphan-keys
+   - Sisyphus running in background
 
 === STEP 7 (Telegram) ===
 📝 Written to telegram_out.txt
@@ -38,15 +36,16 @@
 === CURRENT STATE ===
 - TSC: 0 errors
 - Audit: PASS
-- Git: 9a8de44 pushed ✅
-- TODO: 0 pending · 0 new · 175 completed (DB)
-- Sisyphus: Idle
+- Git: 805a46b pushed ✅
+- TODO: 1 pending · 0 new · 175 completed (DB)
+- Sisyphus: Running task #401
 - Tabs: 95 registered
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
 All 95 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS.
 Painpoint #28 (console.log scatter) — CLEARED.
+New issue found: i18n asymmetry (25 orphan zh-only keys) — Sisyphus fixing.
 Waiting for user action on submission blockers:
   - EAS credentials (Apple Team ID + App-Specific Password)
   - App Store Connect app creation (com.jobblebaby.app)

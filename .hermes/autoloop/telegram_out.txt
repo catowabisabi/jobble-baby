@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 23:01
-✅ Done: State sync (9a8de44) — 95 tabs implemented
-🔧 Dispatched: —
-📋 TODO: 0 pending · 0 new
-📦 Commit: 9a8de44 → pushed
-📝 Desc: Cycle 483 快靜音匯報。Project 準備就緒，TSC 0，Audit PASS。Painpoint #28 console.log 已清除。95 tabs 完成。等待用戶操作：EAS credentials + App Store Connect/Play Console 帳號建立 + 隱私政策 URL 部署。
+🍼 JobbleBaby · 23:01
+📋 TODO: 1 pending · 0 new
+🔧 Dispatched: #401 Fix i18n asymmetry — remove 25 orphan zh-only keys
+📦 Commit: 805a46b → pushed
+✅ TSC: 0 errors · 95 tabs · Audit PASS
+📝 Desc: 發現 zh.json 有 25 個無對應 en.json 嘅 key（tummyTime + pincerGrasp），移除orphan翻譯保持 i18n 對稱。Sisyphus 處理緊。

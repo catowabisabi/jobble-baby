@@ -1,5 +1,6 @@
-🍼 Jobble Baby · 10:08
-✅ Done: #1 Hardcoded string arrays → i18n keys (cortisol-skin + stranger-danger)
-📋 TODO: 0 pending · 0 new · 1 completed (DB)
-📦 Commit: 6d21304 → pushed
-📝 Desc: Audit FAIL→PASS。6個hardcoded string已修復（cortisol-skin: Episodes/Feeding Strikes；stranger-danger: Teething Fussiness/Neither/Teething/Neutral）。i18n keys已加。中英雙語。TSC 0。Audit 6/6 PASS。
+🍼 Jobble Baby · 12:00
+✅ Done: #400 Indoor Air Quality + Baby Respiratory Navigator tab
+🔧 Dispatched: —
+📋 TODO: 0 pending · 0 new
+📦 Commit: 32169b8 → pushed
+📝 Desc: Cycle 487 修復 i18n key path（airLog→indoorAir.airLog）+ 加 tabs.interoceptive key。Audit PASS ✅。全部 94 tabs 完成，TSC 0，準備就緒提交。

@@ -3791,7 +3791,6 @@
       "sympatheticDesc": "焦慮、憤怒、挫折——戰或逃系統啟動",
       "dorsalVagalDesc": "解離、斷聯、耗盡——凍結反應啟動",
       "ventralDesc": "平靜、連結、臨在——社交投入啟動",
-      "sympatheticDesc": "焦慮、憤怒、挫折——戰或逃系統啟動",
       "dorsalDesc": "解離、斷聯、耗盡——凍結反應啟動"
     },
     "babyState": {
@@ -5070,6 +5069,73 @@
       },
       "history": "過往評估",
       "noHistory": "無過往評估"
+    }
+  },
+  "indoorAir": {
+    "title": "室內空氣質量",
+    "subtitle": "追蹤室內空氣質量與呼吸事件",
+    "tabs": {
+      "airLog": "空氣日誌",
+      "respiratory": "呼吸",
+      "correlation": "相關性",
+      "roomScore": "房間評分",
+      "alert": "警報"
+    },
+    "airLog": {
+      "add": "記錄空氣質量",
+      "addNew": "記錄室內空氣",
+      "noEntries": "尚無空氣日誌。點擊 + 添加。",
+      "purifier": "空氣清新機",
+      "window": "開窗通風",
+      "candles": "香薰/蠟燭",
+      "cleaning": "清潔產品",
+      "cooking": "煮食活動"
+    },
+    "respiratory": {
+      "add": "記錄呼吸",
+      "addNew": "記錄呼吸事件",
+      "noEntries": "尚無呼吸事件記錄。",
+      "coughCount": "咳嗽次數",
+      "wheeze": "喘息",
+      "wheezeNone": "無",
+      "wheezeMild": "輕微",
+      "wheezeModerate": "中等",
+      "wheezeSevere": "嚴重",
+      "wheezeSeverity": "喘息程度",
+      "congestion": "鼻塞",
+      "congestionNone": "無",
+      "congestionMild": "輕微",
+      "congestionModerate": "中等",
+      "congestionSevere": "嚴重",
+      "congestionVerySevere": "非常嚴重",
+      "congestionMax": "極度",
+      "congestionScore": "鼻塞評分",
+      "reliever": "使用舒緩藥物",
+      "relieverTypePlaceholder": "例如：沙丁胺醇"
+    },
+    "correlation": {
+      "title": "空氣質量與健康相關性（7天）",
+      "voc": "VOC 評分",
+      "respiratory": "呼吸評分"
+    },
+    "roomScore": {
+      "title": "房間空氣質量評分",
+      "nursery": "嬰兒房",
+      "livingRoom": "客廳",
+      "kitchen": "廚房",
+      "hint": "1-5分：通風 + 污染源評估"
+    },
+    "alert": {
+      "title": "警報歷史",
+      "noAlerts": "尚無觸發警報。",
+      "vocSpike": "檢測到 VOC 峰值",
+      "vocCongestionAlert": "檢測到 VOC 峰值 + 鼻塞趨勢",
+      "vocCongestionDetail": "空氣質量事件（香薰/清潔）與嬰兒鼻塞趨勢同時出現。建議改善通風。",
+      "hint": "當 VOC 峰值（香薰/清潔）與嬰兒鼻塞評分 >= 3 同時出現時，會觸發警報。"
+    },
+    "common": {
+      "save": "儲存",
+      "cancel": "取消"
     }
   }
 }

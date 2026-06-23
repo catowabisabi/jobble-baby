@@ -1,47 +1,56 @@
-# Sisyphus Task — Cycle 483
-# Priority: P2
+# Sisyphus Task — Cycle 484
+# Priority: P3
 # Project: Jobble Baby
+# Todo: #400
 
-## TASK: Fix Hardcoded String Arrays → i18n Keys
+## TASK: Implement Indoor Air Quality + Baby Respiratory Navigator Tab
 
-**Keywords:** appetite_suppression_phase · acoustic_environment_scoring · binaural_interference
+**Keywords:** indoor_air_quality · voc_emission_testing · respiratory_event_tracker
 
 ### Objective
-Replace hardcoded string array enum values with i18n key references in the flagged files.
+Create a new tab that tracks indoor air quality alongside baby respiratory events, correlating environmental factors with health/sleep disruption.
 
 ### Steps
-1. Run pre-submission audit to get full list of hardcoded string files:
-   cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && node scripts/pre-submission-audit.js
-   Note: Look for the "Hardcoded Non-i18n Strings Detection" section.
+1. Create new file: `app/(tabs)/indoor-air-navigator.tsx`
+2. Implement the following sections:
+   - **Indoor Air Log** — parent logs daily: air purifier usage (on/off), open window duration (minutes), candles/incense (yes/no), cleaning products used, cooking events
+   - **Respiratory Event Tracker** — coughing episodes (count), wheezing (0-3 severity), nasal congestion score (0-5), reliever medication use (yes/no + type)
+   - **Correlation Dashboard** — simple chart showing: air quality events vs. respiratory episodes vs. sleep disruption score
+   - **Room-by-Room AQ Score** — nursery, living room, kitchen rated 1-5 by ventilation + pollutant sources
+   - **Alert System** — when VOC spike (candle/cleaning) coincides with baby congestion trend → push notification flag
 
-2. For each flagged file, identify the hardcoded string arrays (enum values), add matching i18n keys to en.json and zh.json under an appropriate namespace (e.g. `enums.severity_levels`, `enums.body_areas`), then replace the hardcoded strings with i18n translations.
+3. Add AsyncStorage keys in `store/storage-keys.ts`:
+   - INDOOR_AIR_LOG = '@jobble/indoor_air_log'
+   - RESPIRATORY_EVENTS = '@jobble/respiratory_events'
 
-3. Run TSC after each file: cd JobbleBaby && npx tsc --noEmit — must pass 0 errors
+4. Register tab in `_layout.tsx` under BOTTOM_TABS:
+   ```tsx
+   { name: 'indoor-air-navigator', title: 'Air Quality', icon: 'leaf' }
+   ```
 
-4. After all files fixed, run full pre-submission audit — must still PASS
+5. Add i18n keys in `en.json` and `zh.json`:
+   ```json
+   "indoorAir": {
+     "title": "Indoor Air Quality",
+     "airLog": { "purifier": "Air Purifier", "windowDuration": "Window Duration (min)", ... },
+     "respiratory": { "coughCount": "Coughing Episodes", "wheezeSeverity": "Wheeze Severity", ... },
+     "correlation": { "title": "AQ vs Health Correlation", ... },
+     "roomScore": { "nursery": "Nursery", "livingRoom": "Living Room", ... },
+     "alert": { "vocSpike": "VOC Spike Detected", ... }
+   }
+   ```
 
-### Files to review (typically flagged):
-- app/(tabs)/diaper-cream.tsx (severity levels, rash types, diaper areas)
-- app/(tabs)/interoceptive.tsx (body areas)
-- app/(tabs)/reflex-visual-motor.tsx (reflex states)
-- app/(tabs)/regulatory-fitness.tsx (regulatory types)
-- app/(tabs)/sleep-architecture.tsx (sound types, light levels, noise levels)
-- (and others flagged by audit)
+6. Run TSC after implementation: `cd JobbleBaby && npx tsc --noEmit` — must pass 0 errors
 
-### i18n namespaces to create:
-Add under `enums.*` in both en.json and zh.json:
-- enums.severity: mild, moderate, severe
-- enums.body_areas: head, throat, chest, abdomen, limbs, back, skin_folds
-- enums.rash_types: yeast, contact, irritant, diaper_area
-- enums.sound_types: whiteNoise, pinkNoise, brownNoise
-- enums.light_levels: fullyDark, dim, nightLight
-- enums.noise_levels: silent, veryQuiet, quiet
-- (add more as needed per file)
+7. Run pre-submission audit: `cd JobbleBaby && node scripts/pre-submission-audit.js` — must PASS
 
 ### Done when:
-- Pre-submission audit no longer flags hardcoded strings (or only legitimate cases remain)
+- File created: app/(tabs)/indoor-air-navigator.tsx
+- Tab registered in _layout.tsx
+- i18n keys added to en.json + zh.json
+- AsyncStorage keys added to storage-keys.ts
 - TSC 0 errors
-- Both en.json and zh.json updated with all new enum keys
+- Audit PASS
 
 **DONE ULW**
 Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby

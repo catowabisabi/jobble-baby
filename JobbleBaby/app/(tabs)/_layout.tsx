@@ -639,6 +639,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
         }}
       />
+      <Tabs.Screen
+        name="indoor-air-navigator"
+        options={{
+          title: t('indoorAir.title') || 'Air Quality',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="leaf" size={size} color={color} />
+        }}
+      />
     </Tabs>
   );
 }

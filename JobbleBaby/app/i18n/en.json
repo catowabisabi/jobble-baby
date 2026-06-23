@@ -3821,7 +3821,6 @@
       "sympatheticDesc": "Anxious, angry, frustrated — fight/flight system active",
       "dorsalVagalDesc": "Dissociated, disconnected, exhausted — freeze response",
       "ventralDesc": "Calm, connected, present — social engagement activated",
-      "sympatheticDesc": "Anxious, angry, frustrated — fight/flight system active",
       "dorsalDesc": "Dissociated, disconnected, exhausted — freeze response"
     },
     "babyState": {
@@ -5043,6 +5042,73 @@
       },
       "history": "Previous Assessments",
       "noHistory": "No previous assessments"
+    }
+  },
+  "indoorAir": {
+    "title": "Indoor Air Quality",
+    "subtitle": "Track indoor air quality and respiratory events",
+    "tabs": {
+      "airLog": "Air Log",
+      "respiratory": "Respiratory",
+      "correlation": "Correlation",
+      "roomScore": "Room Scores",
+      "alert": "Alerts"
+    },
+    "airLog": {
+      "add": "Log Air Quality",
+      "addNew": "Log Indoor Air",
+      "noEntries": "No air logs yet. Tap + to add one.",
+      "purifier": "Air Purifier",
+      "window": "Window Open",
+      "candles": "Candles/Incense",
+      "cleaning": "Cleaning Products",
+      "cooking": "Cooking Event"
+    },
+    "respiratory": {
+      "add": "Log Respiratory",
+      "addNew": "Log Respiratory Event",
+      "noEntries": "No respiratory events logged yet.",
+      "coughCount": "Coughing Episodes",
+      "wheeze": "Wheeze",
+      "wheezeNone": "None",
+      "wheezeMild": "Mild",
+      "wheezeModerate": "Moderate",
+      "wheezeSevere": "Severe",
+      "wheezeSeverity": "Wheeze Severity",
+      "congestion": "Congestion",
+      "congestionNone": "None",
+      "congestionMild": "Mild",
+      "congestionModerate": "Moderate",
+      "congestionSevere": "Severe",
+      "congestionVerySevere": "Very Severe",
+      "congestionMax": "Maximum",
+      "congestionScore": "Congestion Score",
+      "reliever": "Reliever Used",
+      "relieverTypePlaceholder": "e.g. Salbutamol"
+    },
+    "correlation": {
+      "title": "AQ vs Health Correlation (7 days)",
+      "voc": "VOC Score",
+      "respiratory": "Respiratory Score"
+    },
+    "roomScore": {
+      "title": "Room-by-Room Air Quality",
+      "nursery": "Nursery",
+      "livingRoom": "Living Room",
+      "kitchen": "Kitchen",
+      "hint": "Score 1-5: ventilation + pollutant sources"
+    },
+    "alert": {
+      "title": "Alert History",
+      "noAlerts": "No alerts triggered yet.",
+      "vocSpike": "VOC Spike Detected",
+      "vocCongestionAlert": "VOC spike + congestion trend detected",
+      "vocCongestionDetail": "Air quality event detected (candle/cleaning) coinciding with baby congestion trend. Consider improving ventilation.",
+      "hint": "Alerts trigger when a VOC spike (candle/cleaning) coincides with baby congestion score >= 3."
+    },
+    "common": {
+      "save": "Save",
+      "cancel": "Cancel"
     }
   }
 }

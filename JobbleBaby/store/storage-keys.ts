@@ -201,4 +201,6 @@ export const STORAGE_KEYS = {
   CORTISOL_LOG: "@jobble/cortisol_log",
   SKIN_CHANGE_LOG: "@jobble/skin_change_log",
   TONGUE_TIE_ASSESSMENT: "@jobble/tongue_tie_assessment",
+  INDOOR_AIR_LOG: "@jobble/indoor_air_log",
+  RESPIRATORY_EVENTS: "@jobble/respiratory_events",
 } as const;

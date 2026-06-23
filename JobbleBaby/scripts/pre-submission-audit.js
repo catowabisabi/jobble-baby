@@ -86,12 +86,26 @@ function collectI18nKeysFromFile(content) {
   // Match t('key') or t("key") but not t(`key`) (template literals)
   const regex = /t\s*\(\s*['"]([^'"]+)['"]\s*\)/g;
   let match;
+  // Detect if this file uses a namespace-wrapper pattern like:
+  // const t = (key: string) => tt(`namespace.${key}`)
+  // If so, the namespace is prepended to all t() calls.
+  const wrapperMatch = content.match(/const\s+t\s*=\s*\(\s*\w+\s*:\s*string\s*\)\s*=>\s*\w+\(\s*`([^`]+)\$\{\w+\}[^`]*`\s*\)/);
+  const namespace = wrapperMatch ? wrapperMatch[1].replace(/\$\{\w+\}/, '').trim() : null;
+
   while ((match = regex.exec(content)) !== null) {
     const key = match[1];
     // Filter out false positives: single chars, escape sequences, common JS/HTML tokens
     const invalidKeys = ['window', 'document', 'navigator', 'localStorage', 'sessionStorage'];
     if (key.length > 1 && !/^[T:\n\\]/.test(key) && !invalidKeys.includes(key)) {
-      keys.add(key);
+      // If file uses a namespace wrapper (e.g. indoorAir.), prepend it to short keys
+      if (namespace && !key.includes('.')) {
+        keys.add(namespace + key);
+      } else if (namespace && key.startsWith(namespace) === false && key.includes('.')) {
+        // Key doesn't start with namespace but has dots — prepend namespace
+        keys.add(namespace + key);
+      } else {
+        keys.add(key);
+      }
     }
   }
   return keys;

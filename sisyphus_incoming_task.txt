@@ -1,44 +1,47 @@
-# Sisyphus Task — Cycle 457
-# Priority: P3
+# Sisyphus Task — Cycle 483
+# Priority: P2
 # Project: Jobble Baby
 
-## TASK: i18n Gap Fill — Chinese Translation Completion
+## TASK: Fix Hardcoded String Arrays → i18n Keys
 
-**Keywords:** trunk_extension_symmetry · hydrogel_stiffness · rab3a_gtpase_cycle
+**Keywords:** appetite_suppression_phase · acoustic_environment_scoring · binaural_interference
 
 ### Objective
-Fill the missing Chinese (zh) translation keys in zh.json to match en.json.
+Replace hardcoded string array enum values with i18n key references in the flagged files.
 
 ### Steps
-1. cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
-2. Run this to find missing keys:
-   python3 -c "
-import json
-with open('JobbleBaby/app/i18n/en.json') as f: en = json.load(f)
-with open('JobbleBaby/app/i18n/zh.json') as f: zh = json.load(f)
-def get_keys(d, prefix=''):
-    keys = []
-    for k,v in d.items():
-        full = prefix + k
-        if isinstance(v, dict): keys.extend(get_keys(v, full+'.'))
-        else: keys.append(full)
-    return keys
-en_keys = set(get_keys(en))
-zh_keys = set(get_keys(zh))
-for k in sorted(en_keys - zh_keys): print(k)
-"
-3. For each missing key, translate from English to Traditional Chinese and add to zh.json
-4. Run TSC: cd JobbleBaby && npx tsc --noEmit — must pass 0 errors
-5. Run pre-submission audit: node scripts/pre-submission-audit.js
+1. Run pre-submission audit to get full list of hardcoded string files:
+   cd /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby && node scripts/pre-submission-audit.js
+   Note: Look for the "Hardcoded Non-i18n Strings Detection" section.
 
-### Files
-- JobbleBaby/app/i18n/en.json (read only)
-- JobbleBaby/app/i18n/zh.json (add missing translations)
+2. For each flagged file, identify the hardcoded string arrays (enum values), add matching i18n keys to en.json and zh.json under an appropriate namespace (e.g. `enums.severity_levels`, `enums.body_areas`), then replace the hardcoded strings with i18n translations.
+
+3. Run TSC after each file: cd JobbleBaby && npx tsc --noEmit — must pass 0 errors
+
+4. After all files fixed, run full pre-submission audit — must still PASS
+
+### Files to review (typically flagged):
+- app/(tabs)/diaper-cream.tsx (severity levels, rash types, diaper areas)
+- app/(tabs)/interoceptive.tsx (body areas)
+- app/(tabs)/reflex-visual-motor.tsx (reflex states)
+- app/(tabs)/regulatory-fitness.tsx (regulatory types)
+- app/(tabs)/sleep-architecture.tsx (sound types, light levels, noise levels)
+- (and others flagged by audit)
+
+### i18n namespaces to create:
+Add under `enums.*` in both en.json and zh.json:
+- enums.severity: mild, moderate, severe
+- enums.body_areas: head, throat, chest, abdomen, limbs, back, skin_folds
+- enums.rash_types: yeast, contact, irritant, diaper_area
+- enums.sound_types: whiteNoise, pinkNoise, brownNoise
+- enums.light_levels: fullyDark, dim, nightLight
+- enums.noise_levels: silent, veryQuiet, quiet
+- (add more as needed per file)
 
 ### Done when:
-- All en.json keys exist in zh.json
+- Pre-submission audit no longer flags hardcoded strings (or only legitimate cases remain)
 - TSC 0 errors
-- Pre-submission audit PASS
+- Both en.json and zh.json updated with all new enum keys
 
 **DONE ULW**
 Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby

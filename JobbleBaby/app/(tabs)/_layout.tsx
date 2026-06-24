@@ -416,6 +416,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="feeding-readiness-navigator"
+        options={{
+          title: t('tabs.feedingReadinessNavigator'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="food-off" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="phototherapy-comfort"
         options={{
           title: t('tabs.phototherapyComfort'),

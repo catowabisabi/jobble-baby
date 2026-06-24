@@ -131,7 +131,6 @@
     "protoconversation": "前語言溝通",
     "interoceptive": "內感",
     "tabs": {
-      "feedingReadinessNavigator": "加固準備",
       "cryAcoustic": "哭聲指紋"
     },
     "bilateralCoordination": "Bilateral [TODO]",
@@ -151,7 +150,8 @@
     "symmetryAnalysis": "Symmetry [TODO]",
     "wetDryAnalysis": "Wet/Dry [TODO]",
     "whiteNoise": "White Noise [TODO]",
-    "zoneRegulation": "Zone [TODO]"
+    "zoneRegulation": "Zone [TODO]",
+    "feedingReadinessNavigator": "加固準備"
   },
   "neuroplasticity": {
     "title": "神經可塑性",

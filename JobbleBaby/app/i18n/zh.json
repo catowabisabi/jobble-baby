@@ -5105,7 +5105,8 @@
       "recording": "錄製中...",
       "pitchLabel": "音高輪廓：~350-500 Hz（典型飢餓哭聲）",
       "simulatedWaveform": "模擬波形",
-      "duration": "時長"
+      "duration": "時長",
+      "title": "Section A — 波形視圖"
     },
     "sectionB": {
       "classifierTitle": "哭聲類型分類",
@@ -5119,11 +5120,14 @@
       "frustratedDesc": "間歇性爆發",
       "bored": "無聊",
       "boredDesc": "低吟，~200-300 Hz",
-      "confidence": "匹配置信度"
+      "confidence": "匹配置信度",
+      "title": "Section B — 哭聲分類"
     },
     "sectionC": {
       "timeSeriesTitle": "哭聲模式時間序列",
-      "eventsPerDay": "每天哭聲次數"
+      "eventsPerDay": "每天哭聲次數",
+      "title": "Section C — 聲學時間序列",
+      "cardTitle": "哭聲模式時間序列"
     },
     "sectionD": {
       "correlationTitle": "什麼觸發哭鬧？",
@@ -5136,7 +5140,9 @@
       "hungryRisk": "飢餓風險",
       "tiredRisk": "疲倦風險",
       "discomfort": "不適",
-      "heatDistress": "熱應激"
+      "heatDistress": "熱應激",
+      "title": "Section D — 相關性引擎",
+      "cardTitle": "什麼觸發哭鬧？"
     },
     "sectionE": {
       "eventJournal": "哭聲事件",
@@ -5166,7 +5172,11 @@
         "soothing": "安撫",
         "held": "抱起",
         "other": "其他"
-      }
+      },
+      "title": "Section E — 哭聲事件日誌",
+      "modalTitle": "添加哭聲事件",
+      "durationMinutes": "時長（分鐘）",
+      "modalSaveEntry": "保存記錄"
     }
   },
   "feedingReadinessMultisensor": {
@@ -5233,7 +5243,8 @@
       "stage5": "階段5",
       "currentStage": "當前階段",
       "completed": "已完成",
-      "tapToLog": "點擊記錄"
+      "tapToLog": "點擊記錄",
+      "currentAge": "當前月齡：{{months}} 個月"
     }
   }
 }

@@ -829,7 +829,8 @@
       "stage5": "Family foods + self-feeding",
       "currentStage": "Current",
       "completed": "Completed",
-      "tapToLog": "Tap to log achievement"
+      "tapToLog": "Tap to log achievement",
+      "currentAge": "Current age: {{months}} months"
     }
   },
   "feedingTimer": {
@@ -5168,7 +5169,8 @@
       "recording": "Recording...",
       "pitchLabel": "Pitch contour: ~350-500 Hz (typical hungry cry)",
       "simulatedWaveform": "Simulated waveform",
-      "duration": "Duration"
+      "duration": "Duration",
+      "title": "Section A — Waveform Visualizer"
     },
     "sectionB": {
       "classifierTitle": "Cry Type Classifier",
@@ -5182,11 +5184,14 @@
       "frustratedDesc": "Intermittent bursts",
       "bored": "Bored",
       "boredDesc": "Low whimpering, ~200-300 Hz",
-      "confidence": "Match confidence"
+      "confidence": "Match confidence",
+      "title": "Section B — Cry Type Classifier"
     },
     "sectionC": {
       "timeSeriesTitle": "Cry Pattern Over Time",
-      "eventsPerDay": "cry events per day"
+      "eventsPerDay": "cry events per day",
+      "title": "Section C — Acoustic Time-Series",
+      "cardTitle": "Cry Pattern Over Time"
     },
     "sectionD": {
       "correlationTitle": "What Triggers Crying?",
@@ -5199,7 +5204,9 @@
       "hungryRisk": "hungry risk",
       "tiredRisk": "tired risk",
       "discomfort": "discomfort",
-      "heatDistress": "heat distress"
+      "heatDistress": "heat distress",
+      "title": "Section D — Correlation Engine",
+      "cardTitle": "What Triggers Crying?"
     },
     "sectionE": {
       "eventJournal": "Cry Events",
@@ -5229,7 +5236,11 @@
         "soothing": "Soothing",
         "held": "Held",
         "other": "Other"
-      }
+      },
+      "title": "Section E — Cry Event Journal",
+      "modalTitle": "Add Cry Event",
+      "durationMinutes": "Duration (minutes)",
+      "modalSaveEntry": "Save Entry"
     }
   }
 }

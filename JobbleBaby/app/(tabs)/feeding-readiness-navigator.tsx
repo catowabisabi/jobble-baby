@@ -313,7 +313,7 @@ export default function FeedingReadinessNavigatorScreen() {
               <Text style={[styles.dotLabel, { color: C.muted }]}>8 mo</Text>
             </View>
           </View>
-          <Text style={[styles.currentAge, { color: C.muted }]}>Current age: 6 months</Text>
+          <Text style={[styles.currentAge, { color: C.muted }]}>{t('feedingReadinessMultisensor.sectionE.currentAge', { months: '6' })}</Text>
         </View>
 
         <Text style={[styles.sectionTitle, { color: C.text }]}>{t('feedingReadinessMultisensor.sectionE.title')}</Text>

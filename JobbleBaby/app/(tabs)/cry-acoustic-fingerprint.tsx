@@ -293,13 +293,13 @@ export default function CryAcousticFingerprint() {
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.header}>
           <Text style={styles.title}>Cry Acoustic Fingerprint</Text>
-          <Text style={styles.subtitle}>Record and analyze your baby's cry patterns</Text>
+          <Text style={styles.subtitle}>{t('cryAcoustic.subtitle')}</Text>
         </View>
 
         {/* ── Section A: Waveform Visualizer ── */}
-        <Text style={styles.sectionTitle}>Section A — Waveform Visualizer</Text>
+        <Text style={styles.sectionTitle}>{t('cryAcoustic.sectionA.title')}</Text>
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Record Cry Sample</Text>
+          <Text style={styles.cardTitle}>{t('cryAcoustic.sectionA.recordTitle')}</Text>
 
           <TouchableOpacity
             style={styles.recordBtn}
@@ -372,7 +372,7 @@ export default function CryAcousticFingerprint() {
         </View>
 
         {/* ── Section B: Cry Type Classifier ── */}
-        <Text style={styles.sectionTitle}>Section B — Cry Type Classifier</Text>
+        <Text style={styles.sectionTitle}>{t('cryAcoustic.sectionB.title')}</Text>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Cry Type Classifier</Text>
           <View style={styles.cryTypeGrid}>
@@ -406,9 +406,9 @@ export default function CryAcousticFingerprint() {
         </View>
 
         {/* ── Section C: Acoustic Time-Series ── */}
-        <Text style={styles.sectionTitle}>Section C — Acoustic Time-Series</Text>
+        <Text style={styles.sectionTitle}>{t('cryAcoustic.sectionC.title')}</Text>
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Cry Pattern Over Time</Text>
+          <Text style={styles.cardTitle}>{t('cryAcoustic.sectionC.cardTitle')}</Text>
           <View style={styles.avgLabel}>
             <Text style={{ fontSize: 9, color: '#F59E0B' }}>Avg: {avgCount} events/day</Text>
           </View>
@@ -435,9 +435,9 @@ export default function CryAcousticFingerprint() {
         </View>
 
         {/* ── Section D: Correlation Engine ── */}
-        <Text style={styles.sectionTitle}>Section D — Correlation Engine</Text>
+        <Text style={styles.sectionTitle}>{t('cryAcoustic.sectionD.title')}</Text>
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>What Triggers Crying?</Text>
+          <Text style={styles.cardTitle}>{t('cryAcoustic.sectionD.correlationTitle')}</Text>
           {correlationCards.map(card => (
             <View key={card.key} style={styles.corrCard}>
               <View style={styles.corrHeader}>
@@ -466,9 +466,9 @@ export default function CryAcousticFingerprint() {
         </View>
 
         {/* ── Section E: Cry Event Journal ── */}
-        <Text style={styles.sectionTitle}>Section E — Cry Event Journal</Text>
+        <Text style={styles.sectionTitle}>{t('cryAcoustic.sectionE.title')}</Text>
         {cryEvents.length === 0 ? (
-          <Text style={styles.emptyText}>No cry events recorded yet</Text>
+          <Text style={styles.emptyText}>{t('cryAcoustic.sectionE.noEvents')}</Text>
         ) : (
           cryEvents.slice(0, 10).map(event => {
             const cryTypeInfo = CRY_TYPES.find(c => c.key === event.cryType);
@@ -491,15 +491,15 @@ export default function CryAcousticFingerprint() {
                 </View>
                 <View style={styles.eventRow}>
                   <View style={styles.eventMeta}>
-                    <Text style={styles.eventMetaLabel}>Duration</Text>
+                    <Text style={styles.eventMetaLabel}>{t('cryAcoustic.sectionE.duration')}</Text>
                     <Text style={styles.eventMetaValue}>{event.duration_minutes} min</Text>
                   </View>
                   <View style={styles.eventMeta}>
-                    <Text style={styles.eventMetaLabel}>Trigger</Text>
+                    <Text style={styles.eventMetaLabel}>{t('cryAcoustic.sectionE.trigger')}</Text>
                     <Text style={styles.eventMetaValue}>{event.trigger}</Text>
                   </View>
                   <View style={styles.eventMeta}>
-                    <Text style={styles.eventMetaLabel}>Response</Text>
+                    <Text style={styles.eventMetaLabel}>{t('cryAcoustic.sectionE.response')}</Text>
                     <Text style={styles.eventMetaValue}>{event.response}</Text>
                   </View>
                 </View>
@@ -525,9 +525,9 @@ export default function CryAcousticFingerprint() {
       <Modal visible={showAddModal} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={styles.modalCard}>
-            <Text style={styles.modalTitle}>Add Cry Event</Text>
+            <Text style={styles.modalTitle}>{t('cryAcoustic.sectionE.modalTitle')}</Text>
 
-            <Text style={styles.modalLabel}>Cry Type</Text>
+            <Text style={styles.modalLabel}>{t('cryAcoustic.sectionE.cryType')}</Text>
             <View style={styles.cryTypePicker}>
               {CRY_TYPES.map(ct => (
                 <TouchableOpacity
@@ -545,7 +545,7 @@ export default function CryAcousticFingerprint() {
               ))}
             </View>
 
-            <Text style={styles.modalLabel}>Duration (minutes)</Text>
+            <Text style={styles.modalLabel}>{t('cryAcoustic.sectionE.durationMinutes')}</Text>
             <TextInput
               style={styles.modalInput}
               value={addForm.duration}
@@ -555,7 +555,7 @@ export default function CryAcousticFingerprint() {
               placeholderTextColor={C.muted}
             />
 
-            <Text style={styles.modalLabel}>Trigger</Text>
+            <Text style={styles.modalLabel}>{t('cryAcoustic.sectionE.trigger')}</Text>
             <TextInput
               style={styles.modalInput}
               value={addForm.trigger}
@@ -564,7 +564,7 @@ export default function CryAcousticFingerprint() {
               placeholderTextColor={C.muted}
             />
 
-            <Text style={styles.modalLabel}>Response</Text>
+            <Text style={styles.modalLabel}>{t('cryAcoustic.sectionE.response')}</Text>
             <TextInput
               style={styles.modalInput}
               value={addForm.response}
@@ -579,7 +579,7 @@ export default function CryAcousticFingerprint() {
               accessibilityLabel="Save cry event"
               accessibilityRole="button"
             >
-              <Text style={styles.saveBtnText}>Save Entry</Text>
+              <Text style={styles.saveBtnText}>{t('cryAcoustic.sectionE.modalSaveEntry')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.cancelBtn}
@@ -587,7 +587,7 @@ export default function CryAcousticFingerprint() {
               accessibilityLabel="Cancel"
               accessibilityRole="button"
             >
-              <Text style={styles.cancelBtnText}>Cancel</Text>
+              <Text style={styles.cancelBtnText}>{t('common.cancel')}</Text>
             </TouchableOpacity>
           </View>
         </View>

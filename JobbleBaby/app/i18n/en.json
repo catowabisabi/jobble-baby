@@ -60,6 +60,7 @@
     "tabs.milkPrep": "Milk Prep",
     "tabs.shiftHandoff": "Shift Handoff",
     "tabs.feedingReadiness": "Feeding",
+    "tabs.feedingReadinessNavigator": "Feeding Readiness",
     "tabs.bottleReflux": "Reflux",
     "tabs.rootingReflex": "Rooting",
     "tabs.tummyTime": "Tummy Time",
@@ -91,6 +92,7 @@
     "tabs.sensoryIntegration": "Sensory",
     "tabs.zoneRegulation": "Zone",
     "tabs.cryAnalyzer": "Cry Analyzer",
+    "tabs.cryAcoustic": "Cry Fingerprint",
     "tabs.gestureMilestone": "Gesture",
     "tabs.neuroplasticity": "Neuroplasticity",
     "thermalRegulation": "Thermal",
@@ -797,6 +799,73 @@
     "babyAge": "{{name}} · {{age}}",
     "linkExpired": "This link has expired. Please request a new link from the parent.",
     "invalidLink": "Invalid link. Please request a new link from the parent."
+  },
+  "feedingReadinessMultisensor": {
+    "title": "Feeding Readiness",
+    "subtitle": "Multisensory developmental readiness signals",
+    "sectionA": {
+      "title": "Multisensory Readiness Checklist",
+      "oralMotor": "Oral Motor",
+      "handMouth": "Hand-Mouth Axis",
+      "sensory": "Sensory",
+      "tongueLateralization": "Tongue Lateralization",
+      "tongueLateralizationDesc": "Baby moves food sideways with tongue",
+      "munchingReflex": "Munching Reflex",
+      "munchingReflexDesc": "Rhythmic munching when gums stimulated",
+      "acceptsSpoon": "Accepts Spoon",
+      "acceptsSpoonDesc": "Opens mouth for spoon approach",
+      "gagReflexNormal": "Normal Gag Reflex",
+      "gagReflexNormalDesc": "Gag reflex present but not hypersensitive",
+      "handToMouthFrequency": "Hand-to-Mouth Frequency",
+      "handToMouthFrequencyLow": "Low",
+      "handToMouthFrequencyMedium": "Medium",
+      "handToMouthFrequencyHigh": "High",
+      "pincerGraspEmerged": "Pincer Grasp Emerged",
+      "pincerGraspEmergedDesc": "Thumb + finger precision grasp",
+      "selfFeedingAttempts": "Self-Feeding Attempts",
+      "selfFeedingAttemptsDesc": "Brings food to mouth independently",
+      "textureToleranceScore": "Texture Tolerance Score",
+      "newTasteAcceptances": "New Taste Acceptances",
+      "newTasteAcceptancesDesc": "Accepts new flavors without refusal",
+      "mouthingFrequency": "Mouthing Frequency",
+      "mouthingFrequencyDesc": "Frequency of object mouthing per day"
+    },
+    "sectionB": {
+      "title": "Does tactile exploration predict food acceptance?",
+      "axisX": "Days of Mouthing",
+      "axisY": "Days to Accept New Food",
+      "mockLabel": "14-day tracking data"
+    },
+    "sectionC": {
+      "title": "Readiness Composite Score",
+      "composite": "Composite Score",
+      "oralMotorScore": "Oral Motor",
+      "handMouthScore": "Hand-Mouth",
+      "sensoryScore": "Sensory",
+      "thresholdMessage": "Not yet ready — keep practicing oral motor play",
+      "red": "Needs attention",
+      "amber": "Making progress",
+      "green": "Ready to advance"
+    },
+    "sectionD": {
+      "title": "Optimal Window Predictor",
+      "windowOpen": "Window open: 4-6 months",
+      "windowClosing": "Window closing: 8-10 months",
+      "windowPassed": "Window has passed",
+      "allergenWindowAlert": "Optimal allergen introduction window (4-6 months) closing in ~N weeks",
+      "basedOn": "Based on age and readiness trends"
+    },
+    "sectionE": {
+      "title": "Texture Ladder Progress",
+      "stage1": "Smooth purée",
+      "stage2": "Chunky purée",
+      "stage3": "Soft meltables",
+      "stage4": "Soft solids",
+      "stage5": "Family foods + self-feeding",
+      "currentStage": "Current",
+      "completed": "Completed",
+      "tapToLog": "Tap to log achievement"
+    }
   },
   "feedingTimer": {
     "title": "Feeding Timer",
@@ -5122,6 +5191,80 @@
     "common": {
       "save": "Save",
       "cancel": "Cancel"
+    }
+  },
+  "cryAcoustic": {
+    "title": "Cry Fingerprint",
+    "subtitle": "Acoustic cry analysis and pattern detection",
+    "sectionA": {
+      "recordTitle": "Record Cry Sample",
+      "startRecording": "Start Recording",
+      "stopRecording": "Stop Recording",
+      "recording": "Recording...",
+      "pitchLabel": "Pitch contour: ~350-500 Hz (typical hungry cry)",
+      "simulatedWaveform": "Simulated waveform",
+      "duration": "Duration"
+    },
+    "sectionB": {
+      "classifierTitle": "Cry Type Classifier",
+      "hungry": "Hungry",
+      "hungryDesc": "Rising pitch contour, ~350-500 Hz",
+      "pain": "Pain",
+      "painDesc": "High-pitched sudden, ~500-700 Hz",
+      "tired": "Tired",
+      "tiredDesc": "Wailing, decreasing intensity",
+      "frustrated": "Frustrated",
+      "frustratedDesc": "Intermittent bursts",
+      "bored": "Bored",
+      "boredDesc": "Low whimpering, ~200-300 Hz",
+      "confidence": "Match confidence"
+    },
+    "sectionC": {
+      "timeSeriesTitle": "Cry Pattern Over Time",
+      "eventsPerDay": "cry events per day"
+    },
+    "sectionD": {
+      "correlationTitle": "What Triggers Crying?",
+      "lastFeed": "Last Feed",
+      "lastSleep": "Last Sleep",
+      "diaper": "Diaper",
+      "temperature": "Temperature",
+      "hoursAgo": "{{hours}}h ago",
+      "minutesAgo": "{{minutes}}min ago",
+      "hungryRisk": "hungry risk",
+      "tiredRisk": "tired risk",
+      "discomfort": "discomfort",
+      "heatDistress": "heat distress"
+    },
+    "sectionE": {
+      "eventJournal": "Cry Events",
+      "addEntry": "Add Entry",
+      "cryType": "Cry Type",
+      "duration": "Duration",
+      "durationSec": "{{seconds}}s",
+      "trigger": "Trigger",
+      "response": "Response",
+      "resolvedWith": "Resolved With",
+      "noEvents": "No cry events recorded yet",
+      "triggerOptions": {
+        "hunger": "Hunger",
+        "sleepy": "Sleepy",
+        "diaper": "Diaper",
+        "temperature": "Temperature",
+        "reflux": "Reflux",
+        "teething": "Teething",
+        "overstimulation": "Overstimulation",
+        "other": "Other"
+      },
+      "responseOptions": {
+        "fed": "Fed",
+        "rocked": "Rocked",
+        "changed": "Diaper changed",
+        "temperatureAdjusted": "Temperature adjusted",
+        "soothing": "Soothing",
+        "held": "Held",
+        "other": "Other"
+      }
     }
   }
 }

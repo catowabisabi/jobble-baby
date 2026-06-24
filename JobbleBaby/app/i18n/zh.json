@@ -37,6 +37,7 @@
     "medicineDose": "藥物劑量",
     "pediatricReport": "報告",
     "cryAnalyzer": "哭聲分析器",
+    "cryAcoustic": "哭聲指紋",
     "gutBrainAxis": "腸腦軸",
     "projection": "發育預測",
     "clinicianPortal": "醫療共享",
@@ -5123,6 +5124,80 @@
     "common": {
       "save": "儲存",
       "cancel": "取消"
+    }
+  },
+  "cryAcoustic": {
+    "title": "哭聲指紋",
+    "subtitle": "哭聲聲學分析與模式偵測",
+    "sectionA": {
+      "recordTitle": "錄製哭聲樣本",
+      "startRecording": "開始錄製",
+      "stopRecording": "停止錄製",
+      "recording": "錄製中...",
+      "pitchLabel": "音高輪廓：~350-500 Hz（典型飢餓哭聲）",
+      "simulatedWaveform": "模擬波形",
+      "duration": "時長"
+    },
+    "sectionB": {
+      "classifierTitle": "哭聲類型分類",
+      "hungry": "飢餓",
+      "hungryDesc": "上升音高輪廓，~350-500 Hz",
+      "pain": "疼痛",
+      "painDesc": "高音突然，~500-700 Hz",
+      "tired": "疲倦",
+      "tiredDesc": "哭泣，指數遞減",
+      "frustrated": "挫折",
+      "frustratedDesc": "間歇性爆發",
+      "bored": "無聊",
+      "boredDesc": "低吟，~200-300 Hz",
+      "confidence": "匹配置信度"
+    },
+    "sectionC": {
+      "timeSeriesTitle": "哭聲模式時間序列",
+      "eventsPerDay": "每天哭聲次數"
+    },
+    "sectionD": {
+      "correlationTitle": "什麼觸發哭鬧？",
+      "lastFeed": "上次餵食",
+      "lastSleep": "上次睡眠",
+      "diaper": "尿片",
+      "temperature": "溫度",
+      "hoursAgo": "{{hours}}小時前",
+      "minutesAgo": "{{minutes}}分鐘前",
+      "hungryRisk": "飢餓風險",
+      "tiredRisk": "疲倦風險",
+      "discomfort": "不適",
+      "heatDistress": "熱應激"
+    },
+    "sectionE": {
+      "eventJournal": "哭聲事件",
+      "addEntry": "新增記錄",
+      "cryType": "哭聲類型",
+      "duration": "時長",
+      "durationSec": "{{seconds}}秒",
+      "trigger": "觸發因素",
+      "response": "回應方式",
+      "resolvedWith": "緩解方式",
+      "noEvents": "尚無哭聲記錄",
+      "triggerOptions": {
+        "hunger": "肚子餓",
+        "sleepy": "想睡",
+        "diaper": "尿片",
+        "temperature": "溫度",
+        "reflux": "胃食道逆流",
+        "teething": "出牙",
+        "overstimulation": "過度刺激",
+        "other": "其他"
+      },
+      "responseOptions": {
+        "fed": "餵食",
+        "rocked": "搖晃",
+        "changed": "換尿片",
+        "temperatureAdjusted": "調整溫度",
+        "soothing": "安撫",
+        "held": "抱起",
+        "other": "其他"
+      }
     }
   }
 }

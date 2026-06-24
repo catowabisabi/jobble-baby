@@ -402,6 +402,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="cry-acoustic-fingerprint"
+        options={{
+          title: t('tabs.cryAcoustic'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="microphone" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="feeding-progression"
         options={{
           title: t('tabs.feedingProgression'),

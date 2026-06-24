@@ -1,81 +1,89 @@
-## Sisyphus Task #402 — Multisensory Feeding Readiness Navigator
+## Sisyphus Task #403 — Cry Acoustic Fingerprint Navigator
 
-**Project**: JobbleBaby  
-**Repo**: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby  
+**Project**: JobbleBaby
+**Repo**: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
 **Working Dir**: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
 
 ### Task
 
-Create a new tab `feeding-readiness-navigator.tsx` implementing a Multisensory Feeding Readiness Navigator.
+Create a new tab `cry-acoustic-fingerprint.tsx` implementing a Cry Acoustic Fingerprint Navigator.
 
-**IMPORTANT**: This is a NEW file, distinct from the existing `feeding-readiness.tsx` tab. The existing tab focuses on allergen introduction, iron, and texture checklists. This new tab focuses on crossmodal developmental readiness signals.
+**IMPORTANT**: This is a NEW file. Do NOT modify any existing cry-related files.
 
 STEP 1 — Read these files first:
 - JobbleBaby/app/(tabs)/_layout.tsx (for tab registration pattern)
-- JobbleBaby/app/(tabs)/feeding-progression.tsx (for feeding UX patterns)
-- JobbleBaby/app/(tabs)/growth.tsx (for milestone-style checklist UX)
+- JobbleBaby/app/(tabs)/growth.tsx (for checklist + journal UX patterns)
+- JobbleBaby/app/(tabs)/behavioral-rehearsal.tsx (for event journal UX)
 - JobbleBaby/app/i18n/en.json and zh.json (for i18n key structure)
 
-STEP 2 — Create `JobbleBaby/app/(tabs)/feeding-readiness-navigator.tsx`
+STEP 2 — Create `JobbleBaby/app/(tabs)/cry-acoustic-fingerprint.tsx`
 
 Design:
 - SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
-- Header: "Feeding Readiness" (i18n key: feedingReadinessMultisensor.title)
+- Header: "Cry Fingerprint" (i18n key: cryAcoustic.title)
 
-SECTION A — Multisensory Readiness Checklist
-- Three-domain checklist with tap-to-log entries:
-  - Oral Motor domain: tongue_lateralization, munching_reflex, accepts_spoon, gag_reflex_normal
-  - Hand-Mouth Axis domain: hand_to_mouth_frequency (low/medium/high), pincer_grasp_emerged, self_feeding_attempts
-  - Sensory domain: texture_tolerance_score (1-5), new_taste_acceptances, mouthing_frequency
-- Each domain gets a sub-score (0-100) and a tap-to-toggle entry
-- Visual: 3 domain cards with colored indicators
+SECTION A — Waveform Visualizer
+- Title: "Record Cry Sample" (cryAcoustic.sectionA.recordTitle)
+- Large "Start Recording" button (cryAcoustic.sectionA.startRecording)
+- Simulate recording: shows a fake waveform visualization using Animated API or SVG paths
+- Display a fake pitch contour graph: a curved SVG path showing frequency over time
+- 5-second simulated recording with animated waveform
+- Label: "Pitch contour: ~350-500 Hz (typical hungry cry)" (cryAcoustic.sectionA.pitchLabel)
 
-SECTION B — Crossmodal Correlation View
-- Simple scatter or bar chart showing:
-  - X-axis: days of mouthing object tracking
-  - Y-axis: food acceptance speed (days to accept new food after introduction)
-  - Use mock data: 14 data points for demo
-- Title: "Does tactile exploration predict food acceptance?"
+SECTION B — Cry Type Classifier
+- Title: "Cry Type Classifier" (cryAcoustic.sectionB.classifierTitle)
+- 5 cry types displayed as tappable cards, each with icon, name, and acoustic description:
+  1. Hungry — icon: bottle, description: "Rising pitch contour, ~350-500 Hz"
+  2. Pain — icon: alert-circle, description: "High-pitched sudden, ~500-700 Hz"
+  3. Tired — icon: moon, description: "Wailing, decreasing intensity"
+  4. Frustrated — icon: emoticon-sad, description: "Intermittent bursts"
+  5. Bored — icon: emoticon-neutral, description: "Low whimpering, ~200-300 Hz"
+- Selected type highlighted with border color
+- Confidence indicator (mock: 78% match)
 
-SECTION C — Readiness Composite Score
-- Large circular gauge or progress ring showing 0-100 composite
-- Sub-scores listed: Oral Motor: X%, Hand-Mouth: X%, Sensory: X%
-- Color coding: red (<40), amber (40-70), green (>70)
-- Below threshold message: "Not yet ready — keep practicing oral motor play"
+SECTION C — Acoustic Time-Series
+- Title: "Cry Pattern Over Time" (cryAcoustic.sectionC.timeSeriesTitle)
+- Simple bar chart (14 days) showing cry events per day
+- Use mock data: 14 data points (0-8 events per day)
+- X-axis: day labels (Mon, Tue...)
+- Y-axis: event count
+- Average line overlay
 
-SECTION D — Optimal Window Predictor
-- Card showing: estimated developmental window for solids (e.g., "Window open: 4-6 months" or "Window closing: 8-10 months")
-- Based on: baby age, readiness score trend, oral motor milestones logged
-- Alert: "Optimal allergen introduction window (4-6 months) closing in ~N weeks"
+SECTION D — Correlation Engine
+- Title: "What Triggers Crying?" (cryAcoustic.sectionD.correlationTitle)
+- 4 correlation cards showing % likelihood:
+  1. Last Feed: "2.5h ago → 72% hungry risk"
+  2. Last Sleep: "45min ago → 85% tired risk"
+  3. Diaper: "1h ago → 20% discomfort"
+  4. Temperature: "24C → 10% heat distress"
+- Each card has a progress bar showing % likelihood
 
-SECTION E — Texture Ladder Progress
-- Visual step-ladder of 5 texture stages:
-  1. Smooth purée
-  2. Chunky purée  
-  3. Soft meltables (puffcorn, teething biscuit)
-  4. Soft solids (soft banana, avocado)
-  5. Family foods + self-feeding
-- Highlight current stage, completed stages show checkmark
-- Tap each stage to log when it was achieved
+SECTION E — Cry Event Journal
+- Title: "Cry Events" (cryAcoustic.sectionE.eventJournal)
+- List of past cry events (mock data: 10 entries)
+- Each entry: timestamp, cry type badge, duration, trigger, response
+- FAB button to add new entry
+- "Add Entry" modal: cry type picker, duration input, trigger dropdown, response dropdown
 
-DATA: Use AsyncStorage for all checklist data and texture ladder.
-- @jobble/ms_readiness_checklist
-- @jobble/texture_ladder_state
-- Mock data array for demo if storage is empty
+DATA: Use AsyncStorage for all data.
+- @jobble/cry_events: [{ date, type, duration_sec, avg_pitch_hz, trigger, response, resolved_with }]
+- @jobble/cry_correlations: [{ date, cry_type, last_feed_hours, last_sleep_hours, last_diaper_hours, room_temp_c }]
+- Mock data: 10 pre-populated events, 14 days of correlation data
 
 STEP 3 — Add i18n keys
 Add to en.json and zh.json:
-- feedingReadinessMultisensor.title, subtitle
-- feedingReadinessMultisensor.sectionA.* (checklist labels for all 3 domains)
-- feedingReadinessMultisensor.sectionB.* (chart title, axis labels)
-- feedingReadinessMultisensor.sectionC.* (score labels, threshold messages)
-- feedingReadinessMultisensor.sectionD.* (window predictor, alerts)
-- feedingReadinessMultisensor.sectionE.* (texture ladder stages)
+- cryAcoustic.title, subtitle
+- cryAcoustic.sectionA.* (recordTitle, startRecording, pitchLabel)
+- cryAcoustic.sectionB.* (classifierTitle, hungry, pain, tired, frustrated, bored)
+- cryAcoustic.sectionC.* (timeSeriesTitle)
+- cryAcoustic.sectionD.* (correlationTitle, lastFeed, lastSleep, diaper, temperature)
+- cryAcoustic.sectionE.* (eventJournal, addEntry)
+- tabs.cryAcoustic
 
 STEP 4 — Register in _layout.tsx
-Add Tabs.Screen entry for feeding-readiness-navigator.
-Icon: silverware-fork-knife (MaterialCommunityIcons)
-Register after feeding-progression.tsx entry.
+Add Tabs.Screen entry for cry-acoustic-fingerprint.
+Icon: microphone (MaterialCommunityIcons)
+Register in appropriate position among tabs.
 
 STEP 5 — Verify
 - TSC: npx tsc --noEmit → 0 errors
@@ -83,6 +91,6 @@ STEP 5 — Verify
 
 Do NOT run npm install or modify package.json.
 
-Keywords: crossmodal_transfer, feeding_readiness_composite, texture_ladder
+Keywords: cry_acoustic_analysis, pitch_contour, spectrogram_patterns, cry_classifier, acoustic_fingerprint
 
 ULW

@@ -1,16 +1,17 @@
 # Cycle 488 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-23 20:00 HKT
-# Status: WATCH — Sisyphus running task #402
+# Date: 2026-06-23 21:12 HKT
+# Status: DISPATCHED — Sisyphus running task #403
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive
 ✅ user-intention.md exists
-✅ Sisyphus running PID 3889473 on task #402
-✅ Idea #92 added to DB (Cry Acoustic Fingerprint Navigator)
-✅ Todo #403 created (new, p2)
+✅ Sisyphus PID 3991959 running task #403 (Cry Acoustic Fingerprint Navigator)
+✅ Idea #92 created in DB (Cry Acoustic Fingerprint Navigator)
+✅ Todo #403: new (p2)
+✅ Todo #402: pending_retry (was killed - stalled 3h)
 
 === STEP 2 (Verify) ===
-⏳ Sisyphus still working on #402 — no output yet (output buffered)
+⏳ Sisyphus just started on #403 — no output yet
 ✅ TSC: 0 errors (JobbleBaby/)
 ✅ Audit: PASS 9/9
 
@@ -24,24 +25,28 @@
 ⏸️ Skipped — Sisyphus busy
 
 === STEP 5 (Commit) ===
-(git add -A && git commit pushed in previous cycle 487 - no changes to commit)
+✅ git add -A && git commit -m "chore: cycle 488 — housekeeping, no code changes" && git push
+✅ Hash: 4a74970 pushed
 
 === STEP 6 (Dispatch) ===
-⏸️ Sisyphus busy with task #402 — #403 queued (new, p2)
+✅ Task #403 dispatched to Sisyphus (Cry Acoustic Fingerprint Navigator, p2)
+⏳ Task #402 queued (Multisensory Feeding Readiness Navigator, p3)
+✅ Idea #92 added to DB
 
 === CURRENT STATE ===
 - TSC: 0 errors
 - Audit: PASS
-- Git: 4ca18c9 ✅ (last commit cycle 487)
-- TODO: 1 pending (#402) · 1 new (#403) · 176 completed (DB)
-- Sisyphus: Running task #402 (PID 3889473) — no output yet, output buffered
-- Ideas: 92 total (idea #92: Cry Acoustic Fingerprint Navigator)
+- Git: 4a74970 ✅ (cycle 488)
+- TODO: 1 pending_retry (#402) · 1 new (#403) · 176 completed (DB)
+- Sisyphus: Running task #403 (PID 3991959)
+- Ideas: 92 total (idea #92: Cry Acoustic Fingerprint Navigator — just added)
 - Painpoints: 0 open
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
 All 95 tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS 9/9.
-Idea #92 (Cry Acoustic Fingerprint Navigator) — created, awaiting Sisyphus.
+Idea #92 (Cry Acoustic Fingerprint Navigator) — dispatching now.
+Task #402 stalled 3h — killed, to be retried after #403 completes.
 Waiting for user action on submission blockers:
   - EAS credentials (Apple Team ID + App-Specific Password)
   - App Store Connect app creation (com.jobblebaby.app)

@@ -79,13 +79,17 @@ setupFiles: ['./__tests__/setup.ts'],
 
 ```bash
 npm test                    # 所有 Jest 測試（排除 smoke/e2e/a11y）
-npm run test:smoke          # 煙霧測試（tsx）
-npm run test:unit           # 單元測試 ✅
-npm run test:mocked         # Mocked 前端測試 ✅
-npm run test:a11y           # 無障礙測試（未啟用）
-npm run test:e2e            # E2E 測試（需先配置 Detox）
+npm run test:smoke          # 煙霧測試（tsx）✅ 7/7 PASS
+npm run test:unit           # 單元測試 ✅ 31/31 PASS
+npm run test:mocked         # Mocked 前端測試 ✅ 21/21 PASS
+npm run test:a11y           # 無障礙測試 ✅ 17/17 PASS
+npm run test:e2e            # E2E 測試（需先配置 Detox）❌ 未配置
+npx jest --testPathPattern='__tests__/regression'  # 回歸測試（RT-004 ✅ RT-005 ❌）
 npm run test:all            # smoke + unit + mocked
+npm run test:report         # smoke + unit + mocked + 輸出報告
 ```
+
+> ⚠️ 注意：`npm run test:regression` 不存在。回歸測試需直接用 `npx jest --testPathPattern='__tests__/regression'` 執行。
 
 ## 📊 本次 QA Cycle 成果 (2026-06-22)
 

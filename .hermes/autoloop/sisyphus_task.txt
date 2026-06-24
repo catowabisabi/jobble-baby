@@ -1,74 +1,43 @@
-# Idea #84: Co-regulation Resonance Tracker
-# Keywords: co-regulation_resonance, hrv_sync_pattern, autonomic_coupling, cortisol_diary_correlation, vagal_breakpoint
+# Task #489 — Complete Cry + Feeding Readiness i18n + Storage Keys
 
-## Task for Sisyphus
+## Context
+Hermes fixed 2 TSC errors in feeding-readiness-navigator.tsx (line 323: icon name, line 428: style type).
+cry-acoustic-fingerprint.tsx was created but uses hardcoded English strings (no i18n).
+Both tabs now compile (TSC: 0 errors).
 
-Create a new tab `coregulation-resonance.tsx` implementing a co-regulation resonance tracker.
+## Your Job — Complete the following:
 
-STEP 1 — Read these files first:
-- JobbleBaby/app/(tabs)/_layout.tsx (for tab registration pattern)
-- JobbleBaby/app/(tabs)/autonomic-readiness.tsx (for similar physiological metric style)
-- JobbleBaby/app/(tabs)/window-of-tolerance.tsx (for stress/cortisol tracking UX)
-- JobbleBaby/i18n/en.json and zh.json (for i18n key structure)
+### STEP 1 — Add CRY storage keys to storage-keys.ts
+Read `JobbleBaby/store/storage-keys.ts` first.
+Add these two entries to the STORAGE_KEYS object (follow the existing format):
+- `CRY_EVENTS: "@jobble/cry_events"`
+- `CRY_CORRELATIONS: "@jobble/cry_correlations"`
 
-STEP 2 — Create `JobbleBaby/app/(tabs)/coregulation-resonance.tsx`
-Design:
-- SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
-- Header: "Co-Regulation" (i18n key: coregulationResonance.title)
+### STEP 2 — Add i18n keys to cry-acoustic-fingerprint.tsx
+Read `JobbleBaby/app/(tabs)/cry-acoustic-fingerprint.tsx` to find ALL hardcoded English strings.
+Read `JobbleBaby/app/i18n/en.json` and `zh.json` to understand the format.
+Add i18n keys under `"cryAcoustic"` in both en.json and zh.json for every hardcoded string in the component.
 
-SECTION A — Session Logger
-- Quick-log a co-regulation session:
-  - Duration picker (5/10/15/20/30 min)
-  - Parent HR input (manual entry: resting HR in BPM)
-  - Baby HR input (manual entry)
-  - Activity type: { holding, feeding, play, soothing, nappy-change }
-  - Quality rating: 1-5 stars
-  - Notes field
-- Save to AsyncStorage @jobble/coregulation_session_log
+Key strings to internationalize include (but are not limited to):
+- Section titles: "Cry Fingerprint", "Cry Events", "Correlation Dashboard", etc.
+- Labels: "Cry Type", "Duration (min)", "Trigger", "Response", "Confidence", etc.
+- Button text: "Add Entry", "Recording...", "Stop", "Save"
+- Empty state: "No cry events recorded yet"
+- Chart labels: day labels, frequency labels
 
-SECTION B — Co-Regulation Index
-- Calculate composite "Co-Regulation Resonance Score" (0-100):
-  - Base: HR proximity (parent HR / baby HR ratio closer to 1 = better)
-  - Bonus: longer sessions, consistent logging
-  - Display as large number with trend arrow (up/down/stable)
-- 7-day rolling average chart (bar or line)
+Keep the tab functional (mock data is OK), just make it bilingual.
 
-SECTION C — Stress Correlation Panel
-- Show "Cortisol Spillover Risk" indicator:
-  - If parent logs HR > 100 BPM in 3+ sessions in a week → amber alert
-  - If parent logs HR > 110 BPM in 5+ sessions → red alert
-- Alert message (i18n): "Parent stress chronically elevated — consider self-care break"
+### STEP 3 — Verify feeding-readiness i18n completeness
+Read `JobbleBaby/app/(tabs)/feeding-readiness-navigator.tsx` and check all `t('...')` calls.
+Compare with `en.json` and `zh.json` feedingReadinessMultisensor keys.
+Add any missing i18n keys.
 
-SECTION D — HRV Sync Log
-- List of recent sessions with:
-  - Date/time, duration, activity, parent HR, baby HR, rating
-  - HR ratio displayed (e.g., "HR ratio: 0.87" meaning baby's HR is 87% of parent's)
-- Tap to expand → full notes
+### STEP 4 — Register CRY storage keys in cry-acoustic-fingerprint.tsx
+Update the component to import STORAGE_KEYS from `../store/storage-keys` (or `../../store/storage-keys` depending on path) and use STORAGE_KEYS.CRY_EVENTS and STORAGE_KEYS.CRY_CORRELATIONS instead of the local string constants.
 
-SECTION E — Vagal Tone Benchmark
-- Simple benchmark card showing:
-  - Baby's age-appropriate vagal tone indicators (based on concept: vagal_breakpoint)
-  - "Signs of strong vagal tone": calm breathing, quick soothe recovery, eye contact duration > 30s
-  - Display as a checklist with 3 items
-
-DATA: Use AsyncStorage for all session data. Mock data array for demo if storage is empty.
-
-STEP 3 — Add i18n keys
-Add to en.json and zh.json:
-- coregulationResonance.title, subtitle
-- coregulationResonance.sectionA.* (session logger labels)
-- coregulationResonance.sectionB.* (index labels, trend)
-- coregulationResonance.sectionC.* (stress alert messages)
-- coregulationResonance.sectionD.* (session log labels)
-- coregulationResonance.sectionE.* (vagal benchmark)
-- coregulationResonance.activity.*, quality.*
-
-STEP 4 — Register in _layout.tsx
-Add Tabs.Screen entry for coregulation-resonance after autonomic-readiness.
-Icon: heart-pulse (MaterialCommunityIcons)
-
-STEP 5 — Verify
-- TSC: npx tsc --noEmit → 0 errors
+### STEP 5 — Verify
+- Run `npx tsc --noEmit` → 0 errors
+- Git add + commit with message: "chore: complete i18n for cry-acoustic-fingerprint and feeding-readiness, add CRY storage keys"
 
 Do NOT run npm install or modify package.json.
 

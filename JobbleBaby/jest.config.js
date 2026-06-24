@@ -32,7 +32,6 @@ module.exports = {
     '/node_modules/',
     '/__tests__/smoke/',
     '/__tests__/e2e/',
-    '/__tests__/a11y/',
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/app/$1',

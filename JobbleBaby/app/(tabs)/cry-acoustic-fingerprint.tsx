@@ -6,10 +6,7 @@ import { safeGetItem, safeSetItem } from '../utils/SafeStorage';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { COLORS } from '../theme';
-
-// ─── Storage Keys ─────────────────────────────────────────────────────────────
-const CRY_EVENTS_KEY = '@jobble/cry_events';
-const CRY_CORRELATIONS_KEY = '@jobble/cry_correlations';
+import { STORAGE_KEYS } from '../../store/storage-keys';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 type CryType = 'hungry' | 'pain' | 'tired' | 'frustrated' | 'bored';
@@ -31,13 +28,6 @@ interface CorrelationData {
 }
 
 // ─── Cry Type Config ─────────────────────────────────────────────────────────
-const CRY_TYPES: { key: CryType; icon: string; label: string; desc: string; color: string }[] = [
-  { key: 'hungry', icon: 'bottle', label: 'Hungry', desc: 'Rising pitch contour, ~350-500 Hz', color: '#F97316' },
-  { key: 'pain', icon: 'alert-circle', label: 'Pain', desc: 'High-pitched sudden, ~500-700 Hz', color: '#EF4444' },
-  { key: 'tired', icon: 'moon', label: 'Tired', desc: 'Wailing, decreasing intensity', color: '#8B5CF6' },
-  { key: 'frustrated', icon: 'emoticon-sad', label: 'Frustrated', desc: 'Intermittent bursts', color: '#F59E0B' },
-  { key: 'bored', icon: 'emoticon-neutral', label: 'Bored', desc: 'Low whimpering, ~200-300 Hz', color: '#6B7280' },
-];
 
 // ─── Mock Data ───────────────────────────────────────────────────────────────
 const MOCK_CRY_EVENTS: CryEvent[] = [
@@ -94,6 +84,15 @@ export default function CryAcousticFingerprint() {
   const { t } = useLanguage();
   const C = COLORS[effectiveTheme];
 
+  // Cry types with i18n labels
+  const CRY_TYPES = [
+    { key: 'hungry' as CryType, icon: 'bottle', label: t('cryAcoustic.sectionB.hungry'), desc: t('cryAcoustic.sectionB.hungryDesc'), color: '#F97316' },
+    { key: 'pain' as CryType, icon: 'alert-circle', label: t('cryAcoustic.sectionB.pain'), desc: t('cryAcoustic.sectionB.painDesc'), color: '#EF4444' },
+    { key: 'tired' as CryType, icon: 'moon', label: t('cryAcoustic.sectionB.tired'), desc: t('cryAcoustic.sectionB.tiredDesc'), color: '#8B5CF6' },
+    { key: 'frustrated' as CryType, icon: 'emoticon-sad', label: t('cryAcoustic.sectionB.frustrated'), desc: t('cryAcoustic.sectionB.frustratedDesc'), color: '#F59E0B' },
+    { key: 'bored' as CryType, icon: 'emoticon-neutral', label: t('cryAcoustic.sectionB.bored'), desc: t('cryAcoustic.sectionB.boredDesc'), color: '#6B7280' },
+  ];
+
   // State
   const [cryEvents, setCryEvents] = useState<CryEvent[]>([]);
   const [correlations, setCorrelations] = useState<CorrelationData>(MOCK_CORRELATIONS);
@@ -117,15 +116,15 @@ export default function CryAcousticFingerprint() {
   const loadData = async () => {
     try {
       const [eventsRaw, corrRaw] = await Promise.all([
-        safeGetItem(CRY_EVENTS_KEY),
-        safeGetItem(CRY_CORRELATIONS_KEY),
+        safeGetItem(STORAGE_KEYS.CRY_EVENTS),
+        safeGetItem(STORAGE_KEYS.CRY_CORRELATIONS),
       ]);
       if (eventsRaw) {
         setCryEvents(JSON.parse(eventsRaw));
       } else {
         // Initialize with mock data
         setCryEvents(MOCK_CRY_EVENTS);
-        await safeSetItem(CRY_EVENTS_KEY, JSON.stringify(MOCK_CRY_EVENTS));
+        await safeSetItem(STORAGE_KEYS.CRY_EVENTS, JSON.stringify(MOCK_CRY_EVENTS));
       }
       if (corrRaw) setCorrelations(JSON.parse(corrRaw));
     } catch {}
@@ -134,7 +133,7 @@ export default function CryAcousticFingerprint() {
   const saveEvents = async (newEvents: CryEvent[]) => {
     setCryEvents(newEvents);
     try {
-      await safeSetItem(CRY_EVENTS_KEY, JSON.stringify(newEvents));
+      await safeSetItem(STORAGE_KEYS.CRY_EVENTS, JSON.stringify(newEvents));
     } catch {}
   };
 

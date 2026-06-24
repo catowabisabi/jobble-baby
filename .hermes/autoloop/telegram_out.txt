@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 11:01
-✅ Done: #402 feeding-readiness-navigator tab (1671b4c)
-🔧 Dispatched: — (submission-ready, no pending code tasks)
+🍼 Jobble Baby · 12:01
+✅ Done: #470 Fix 18 hardcoded strings → i18n keys (cry-acoustic + feeding-readiness)
 📋 TODO: 0 pending · 0 new
-📦 Commit: 4988644 → pushed
-📝 Desc: 代碼級已完成，97 tab 全就緒，TSC 0，i18n EN/ZH。用戶操作 needed：EAS 憑證/App Store Connect/Play Console/隱私政策 URL。
+📦 Commit: d4da9d9 → pushed
+📝 全部 tab 完成．i18n 中英完整．TSC 0 errors．Audit 全 PASS。
+提交準備完成，等你設定 EAS credentials 同 App Store Connect。

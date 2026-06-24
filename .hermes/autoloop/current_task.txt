@@ -1,49 +1,44 @@
-# Cycle 491 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-24 01:15 HKT
-# Status: COMPLETED — Sisyphus finished task #491
+# Cycle 492 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-24 02:01 HKT
+# Status: DISPATCHED — Task #470 sent to Sisyphus
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive
 ✅ user-intention.md exists
-✅ Worker PID 4127190 completed task #491 (was restarted from dead PID 4095325)
+✅ Sisyphus session idle
 
 === STEP 2 (Verify previous round) ===
-✅ Task #491: COMPLETED
-   - Created: feeding-readiness-navigator.tsx (463 lines, 5 sections, TSC 0 errors)
-   - Added FEEDING_READINESS_NAVIGATOR to storage-keys.ts
-   - Registered tab in _layout.tsx
-   - Fixed 3 accessibility issues (star rating, counter buttons)
-   - Pre-submission audit: 9/9 PASS ✅
-   - Git committed: e2d38f8 ✅
-   - Git pushed: 21b38b5..e2d38f8 ✅
+✅ Task #491: COMPLETED (cycle 491)
+   - feeding-readiness-navigator.tsx + cry-acoustic-fingerprint.tsx both created
+   - TSC: 0 errors · Audit: 9/9 PASS
+   - Git: e2d38f8 → pushed
 
 === STEP 3 (Review + Analysis) ===
-✅ Idea #91 (Multisensory Feeding Readiness Navigator) — IMPLEMENTED
-   - feeding-readiness-navigator.tsx: 463 lines, sections A-E
-   - TSC: 0 errors
-   - i18n: feedingReadinessMultisensor.* keys (already existed in en.json + zh.json)
-   - Storage: FEEDING_READINESS_NAVIGATOR key added
-   - Accessibility: 3 interactive elements now have accessibilityLabel
-✅ Idea #92 (Cry Acoustic Fingerprint Navigator) — IMPLEMENTED
-   - cry-acoustic-fingerprint.tsx: 598 lines, registered in _layout.tsx
-   - TSC: 0 errors
-✅ All TODOs: 0 pending · 0 new
+✅ Review: codebase audit passed 9/9 (cycle 491)
+⚠️ Residual painpoints identified:
+   - Painpoint #30: 16 hardcoded strings in 8 tab files
+   - Painpoint #29: 10 elements missing accessibilityLabel in 3 tab files
+   - Painpoint #28: console.log statements → VERIFIED CLEAR
+✅ Todo #470 created to address these
 
 === STEP 4 (Brainstorm) ===
 ⏭️ Skipped — project submission-ready, awaiting user action on credentials
 
 === STEP 5 (Commit) ===
-✅ git push already done (e2d38f8)
+✅ 59b5951 → pushed
+   - chore: cycle 492 — dispatch #470 pre-submission warning fixes
 
 === STEP 6 (Dispatch) ===
-✅ All TODOs complete — no pending tasks to dispatch
+✅ Task #470 dispatched to Sisyphus
+   - Fix Painpoint #30: hardcoded strings → i18n
+   - Fix Painpoint #29: missing accessibilityLabel in 3 tab files
+   - Keywords: topology · extensor_spasticity · gut_microbiome_seed
 
 === CURRENT STATE ===
-- Git: e2d38f8 ✅ (cycle 491)
-- TODO: 0 pending · 0 new · all completed
-- Sisyphus: idle (job done)
-- Ideas: 92 total — all implemented or completed
-- Painpoints: 0 open (all warnings are non-blocking)
+- Git: 59b5951 ✅
+- TODO: 1 pending (#470) · 0 new
+- Sisyphus: dispatched, running
+- Painpoints open: #30, #29 (both P1, dispatch sent)
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
@@ -52,4 +47,4 @@ Awaiting user action on:
   - EAS credentials (Apple Team ID + App-Specific Password)
   - App Store Connect app creation (com.jobblebaby.app)
   - Play Console app creation (com.jobblebaby.app)
-  - Privacy policy URL deployment (privacy.html created, needs deployment at catowabisabi.github.io/jobble-baby/privacy)
+  - Privacy policy URL deployment

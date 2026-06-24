@@ -1,5 +1,6 @@
-🍼 Jobble Baby · 01:15
-✅ Done: #491 Multisensory Feeding Readiness Navigator (idea #91)
-📋 TODO: 0 pending · 0 new
-📦 Commit: e2d38f8 → pushed
-📝 Desc: Multisensory Feeding Readiness Navigator 完成（463行、5 sections、TSC 0 errors、a11y fixed）。97 tabs全部完成，i18n雙語，audit 9/9 PASS。等待用戶提供EAS credentials同埋App Store/Play Console帳號。
+🍼 Jobble Baby · 02:01
+✅ Done: #491 Feeding Readiness Navigator + Cry Acoustic Fingerprint
+🔧 Dispatched: #470 Fix pre-submission warnings (hardcoded strings + accessibility labels)
+📋 TODO: 1 pending · 0 new
+📦 Commit: 59b5951 → pushed
+📝 Desc: 殘餘 painpoint #30/#29 清除 — hardcoded strings + accessibility labels，準備作最後 submit audit

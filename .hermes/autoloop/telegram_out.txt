@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 12:01
-✅ Done: #470 Fix 18 hardcoded strings → i18n keys (cry-acoustic + feeding-readiness)
-📋 TODO: 0 pending · 0 new
-📦 Commit: d4da9d9 → pushed
-📝 全部 tab 完成．i18n 中英完整．TSC 0 errors．Audit 全 PASS。
-提交準備完成，等你設定 EAS credentials 同 App Store Connect。
+🍼 Jobble Baby · 13:00
+✅ Done: #470 18 hardcoded strings → i18n (cry-acoustic + feeding-readiness-navigator)
+✅ Done: test files committed (cry-acoustic + feeding-readiness mocked tests)
+📋 TODO: 0 pending · 0 new · 97 completed
+📦 Commit: 3efb85c → pushed
+📝 Desc: Project 正式係 submission-ready。代碼、i18n、TSC、Audit 全部 PASS。remaining blockers 係 user action：EAS credentials + App Store Connect + Play Console + privacy policy URL。

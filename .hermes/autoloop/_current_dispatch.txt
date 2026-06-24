@@ -1,5 +1,5 @@
-# Cycle 499 — Hermes Autoloop
-# Date: 2026-06-24 12:01 HKT
+# Cycle 500 — Hermes Autoloop
+# Date: 2026-06-24 13:00 HKT
 
 === STATUS ===
 ✅ Pre-submission audit: ALL PASS
@@ -8,14 +8,13 @@
 ✅ Sisyphus: alive (jobble-baby session)
 
 === DONE ===
-- #470: 18 hardcoded strings → i18n keys
-  - cry-acoustic-fingerprint.tsx: 17 strings (sectionA-E titles, cardTitles, modal labels)
-  - feeding-readiness-navigator.tsx: 1 string (currentAge)
-  - Added missing i18n keys to en.json + zh.json
-  - Audit: HardcodedStrings PASS ✅
+- #470: 18 hardcoded strings → i18n keys (cry-acoustic + feeding-readiness-navigator)
+- Test files: CryAcousticFingerprint.test.tsx + FeedingReadinessNavigator.test.tsx
+- Git: 3efb85c pushed
 
 === COMMITS ===
-- d4da9d9: fix: 18 hardcoded strings → i18n (cry-acoustic + feeding-readiness-navigator)
+- 3efb85c: test: add mocked tests for cry-acoustic-fingerprint and feeding-readiness-navigator
+- d4da9d9: fix: 18 hardcoded strings → i18n
 - 3e05fd8: chore: cycle 499 autoloop state sync
 
 === TODO ===

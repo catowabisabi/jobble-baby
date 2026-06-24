@@ -1,96 +1,116 @@
-## Sisyphus Task #403 — Cry Acoustic Fingerprint Navigator
+## Task #491 — Implement Multisensory Feeding Readiness Navigator (idea #91)
 
 **Project**: JobbleBaby
 **Repo**: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
 **Working Dir**: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
 
+### Background
+This tab was previously attempted but the file had TSC errors and was removed. You must implement a clean, TSC-error-free version.
+
+**IMPORTANT**: This is a NEW file. Do NOT modify any existing feeding-related files.
+
 ### Task
-
-Create a new tab `cry-acoustic-fingerprint.tsx` implementing a Cry Acoustic Fingerprint Navigator.
-
-**IMPORTANT**: This is a NEW file. Do NOT modify any existing cry-related files.
 
 STEP 1 — Read these files first:
 - JobbleBaby/app/(tabs)/_layout.tsx (for tab registration pattern)
+- JobbleBaby/app/(tabs)/feeding-progression.tsx (for feeding UX patterns)
 - JobbleBaby/app/(tabs)/growth.tsx (for checklist + journal UX patterns)
-- JobbleBaby/app/(tabs)/behavioral-rehearsal.tsx (for event journal UX)
 - JobbleBaby/app/i18n/en.json and zh.json (for i18n key structure)
 
-STEP 2 — Create `JobbleBaby/app/(tabs)/cry-acoustic-fingerprint.tsx`
+STEP 2 — Create `JobbleBaby/app/(tabs)/feeding-readiness-navigator.tsx`
 
 Design:
 - SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
-- Header: "Cry Fingerprint" (i18n key: cryAcoustic.title)
+- Header: "Feeding Readiness" (i18n key: feedingReadinessMultisensor.title)
+- Subheader: "Solid food introduction readiness tracker" (feedingReadinessMultisensor.subtitle)
 
-SECTION A — Waveform Visualizer
-- Title: "Record Cry Sample" (cryAcoustic.sectionA.recordTitle)
-- Large "Start Recording" button (cryAcoustic.sectionA.startRecording)
-- Simulate recording: shows a fake waveform visualization using Animated API or SVG paths
-- Display a fake pitch contour graph: a curved SVG path showing frequency over time
-- 5-second simulated recording with animated waveform
-- Label: "Pitch contour: ~350-500 Hz (typical hungry cry)" (cryAcoustic.sectionA.pitchLabel)
+SECTION A — Multisensory Readiness Checklist (3-domain tap-to-log)
+- Title: "Readiness Signals" (feedingReadinessMultisensor.sectionA.title)
+- Three sub-sections, each with checkable items:
 
-SECTION B — Cry Type Classifier
-- Title: "Cry Type Classifier" (cryAcoustic.sectionB.classifierTitle)
-- 5 cry types displayed as tappable cards, each with icon, name, and acoustic description:
-  1. Hungry — icon: bottle, description: "Rising pitch contour, ~350-500 Hz"
-  2. Pain — icon: alert-circle, description: "High-pitched sudden, ~500-700 Hz"
-  3. Tired — icon: moon, description: "Wailing, decreasing intensity"
-  4. Frustrated — icon: emoticon-sad, description: "Intermittent bursts"
-  5. Bored — icon: emoticon-neutral, description: "Low whimpering, ~200-300 Hz"
-- Selected type highlighted with border color
-- Confidence indicator (mock: 78% match)
+ORAL MOTOR items (feedingReadinessMultisensor.sectionA.oral.*):
+- Tongue lateralization observed
+- Munching reflex present
+- Accepts spoon feeding
+- Gag reflex appropriately sensitive
+- Drooling increased
 
-SECTION C — Acoustic Time-Series
-- Title: "Cry Pattern Over Time" (cryAcoustic.sectionC.timeSeriesTitle)
-- Simple bar chart (14 days) showing cry events per day
-- Use mock data: 14 data points (0-8 events per day)
-- X-axis: day labels (Mon, Tue...)
-- Y-axis: event count
-- Average line overlay
+HAND-MOUTH items (feedingReadinessMultisensor.sectionA.handMouth.*):
+- Frequent hand-to-mouth exploration
+- Pincer grasp emerging
+- Self-feeding attempts
+- Brings objects to mouth
 
-SECTION D — Correlation Engine
-- Title: "What Triggers Crying?" (cryAcoustic.sectionD.correlationTitle)
-- 4 correlation cards showing % likelihood:
-  1. Last Feed: "2.5h ago → 72% hungry risk"
-  2. Last Sleep: "45min ago → 85% tired risk"
-  3. Diaper: "1h ago → 20% discomfort"
-  4. Temperature: "24C → 10% heat distress"
-- Each card has a progress bar showing % likelihood
+SENSORY items (feedingReadinessMultisensor.sectionA.sensory.*):
+- Texture tolerance score (1-5 tap to rate)
+- New taste acceptances (count)
+- Mouthing frequency (high/medium/low)
 
-SECTION E — Cry Event Journal
-- Title: "Cry Events" (cryAcoustic.sectionE.eventJournal)
-- List of past cry events (mock data: 10 entries)
-- Each entry: timestamp, cry type badge, duration, trigger, response
-- FAB button to add new entry
-- "Add Entry" modal: cry type picker, duration input, trigger dropdown, response dropdown
+Each item: tappable row with icon, label, and checkmark when selected.
+Store checklist state in AsyncStorage.
+
+SECTION B — Crossmodal Correlation View
+- Title: "Crossmodal Signals" (feedingReadinessMultisensor.sectionB.title)
+- Bar chart: days of mouthing vs. days to accept new food (14-day mock data)
+- X-axis: Day 1-14, Y-axis: score 0-10
+- Two bars per day: mouthing days (blue), food acceptance days (green)
+
+SECTION C — Readiness Composite Score
+- Title: "Readiness Score" (feedingReadinessMultisensor.sectionC.title)
+- Large circular gauge showing 0-100 composite score
+- Color: red (0-39), amber (40-69), green (70-100)
+- Sub-scores displayed below: Oral Motor: X%, Hand-Mouth: X%, Sensory: X%
+- Mock: composite 68 (amber), with sub-scores
+
+SECTION D — Optimal Introduction Window
+- Title: "Best Window" (feedingReadinessMultisensor.sectionD.title)
+- Card showing: "Recommended: 6.5–8 months based on readiness trend"
+- Mini timeline showing past → current → projected window
+- "Current age: 6 months" indicator
+
+SECTION E — Texture Ladder Progress
+- Title: "Food Textures" (feedingReadinessMultisensor.sectionE.title)
+- 5-stage vertical ladder with icons and labels:
+  1. Purée (icon: food-apple, color: green)
+  2. Chunky purée (icon: food-variant, color: green)
+  3. Soft meltables (icon: cookie, color: amber)
+  4. Soft solids (icon: bread-slice, color: amber)
+  5. Family foods (icon: silverware-fork-knife, color: red)
+- Current stage highlighted, stages below marked complete, above marked "next"
+- Tap to advance stage (saves to AsyncStorage)
 
 DATA: Use AsyncStorage for all data.
-- @jobble/cry_events: [{ date, type, duration_sec, avg_pitch_hz, trigger, response, resolved_with }]
-- @jobble/cry_correlations: [{ date, cry_type, last_feed_hours, last_sleep_hours, last_diaper_hours, room_temp_c }]
-- Mock data: 10 pre-populated events, 14 days of correlation data
+- @jobble/ms_readiness_checklist: { oral: [], handMouth: [], sensory: { score: 3, newTastes: 2, mouthing: 'medium' } }
+- @jobble/texture_ladder_state: { currentStage: 1, startedAt: '2026-05-01' }
+- Mock data pre-populated for demo
 
 STEP 3 — Add i18n keys
-Add to en.json and zh.json:
-- cryAcoustic.title, subtitle
-- cryAcoustic.sectionA.* (recordTitle, startRecording, pitchLabel)
-- cryAcoustic.sectionB.* (classifierTitle, hungry, pain, tired, frustrated, bored)
-- cryAcoustic.sectionC.* (timeSeriesTitle)
-- cryAcoustic.sectionD.* (correlationTitle, lastFeed, lastSleep, diaper, temperature)
-- cryAcoustic.sectionE.* (eventJournal, addEntry)
-- tabs.cryAcoustic
+Add to en.json and zh.json under feedingReadinessMultisensor.*:
+- title, subtitle
+- sectionA.title, sectionA.oral.*, sectionA.handMouth.*, sectionA.sensory.*
+- sectionB.title
+- sectionC.title
+- sectionD.title, sectionD.recommended, sectionD.currentAge
+- sectionE.title, sectionE.stage1-5
 
 STEP 4 — Register in _layout.tsx
-Add Tabs.Screen entry for cry-acoustic-fingerprint.
-Icon: microphone (MaterialCommunityIcons)
-Register in appropriate position among tabs.
+Add Tabs.Screen entry for feeding-readiness-navigator.
+Icon: silverware-fork-knife (MaterialCommunityIcons)
+Position: after feeding-progression tab.
 
 STEP 5 — Verify
-- TSC: npx tsc --noEmit → 0 errors
+- TSC: npx tsc --noEmit → 0 errors (THIS IS CRITICAL - previous version had TSC errors)
 - Pre-submission audit: node scripts/pre-submission-audit.js → all PASS
+- Git add + commit with message: "feat: implement Multisensory Feeding Readiness Navigator (idea #91)"
+
+CRITICAL TSC RULES:
+- Always use MaterialCommunityIcons icons with exact name attribute (e.g., name="silverware-fork-knife")
+- All ternary expressions: x ? value1 : null (NOT x && value)
+- No orphan imports
+- Run tsc --noEmit IMMEDIATELY after creating the file, fix ALL errors before proceeding
 
 Do NOT run npm install or modify package.json.
 
-Keywords: cry_acoustic_analysis, pitch_contour, spectrogram_patterns, cry_classifier, acoustic_fingerprint
+Keywords: feeding_readiness_composite, texture_ladder, crossmodal_transfer, solid_food_introduction, oral_motor_development
 
 ULW

@@ -1,57 +1,65 @@
-# Cycle 489 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-23 22:10 HKT
-# Status: DISPATCHED — Sisyphus running task #489
+# Cycle 490 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-24 00:10 HKT
+# Status: DISPATCHED — Sisyphus running task #491
 
 === STEP 1 (Survival + Source) ===
 ✅ Session jobble-baby alive
 ✅ user-intention.md exists
-✅ Sisyphus PID 4027043 running task #489 (Complete Cry + Feeding i18n + Storage Keys)
-✅ Todo #402: pending_retry (Multisensory Feeding Readiness Navigator)
-✅ Todo #403: pending_retry (Cry Acoustic Fingerprint Navigator)
+✅ Sisyphus PID 4095327 running task #491 (Multisensory Feeding Readiness Navigator)
+✅ Idea #91: in_progress → (implementing)
+✅ Idea #92: in_progress → implemented (cry-acoustic-fingerprint.tsx exists with full i18n)
 
-=== STEP 2 (Verify) ===
-✅ TSC: 0 errors (after Hermes fixes)
-✅ Hermes fixed 2 TSC errors in feeding-readiness-navigator.tsx:
-   - Line 323: name="tongue" → name="emoticon-outline"
-   - Line 428: x && S.checkBoxFilled → x ? S.checkBoxFilled : null
-✅ Hermes registered cry-acoustic-fingerprint in _layout.tsx
-✅ Git: 0f2958d pushed
+=== STEP 2 (Verify previous round) ===
+✅ Task #490: PARTIAL COMPLETION (Sisyphus got stuck on subagents)
+   - Created: JobbleBaby/docs/privacy.html ✅
+   - Created: JobbleBaby/store/app-store-metadata.md ✅ (Hermes fixed inaccurate content)
+   - Created: JobbleBaby/store/play-store-metadata.md ✅ (Hermes fixed inaccurate content)
+   - Git committed: a2ef1f0 ✅
+❌ Missing from #490: app-store-metadata.md, play-store-metadata.md were created by Hermes
+   Sisyphus died before subagents completed. Hermes completed the files.
 
 === STEP 3 (Review + Analysis) ===
-✅ TSC: 0 errors
-✅ Painpoints: 0 open
-✅ Codebase clean (post-fix)
+✅ Idea #92 (Cry Acoustic Fingerprint Navigator) — IMPLEMENTED
+   - cry-acoustic-fingerprint.tsx: 597 lines, uses useLanguage/i18n
+   - cryAcoustic keys in en.json: complete (title, sections A-E)
+   - Storage keys: CRY_EVENTS, CRY_CORRELATIONS, CRY_ENTRIES in storage-keys.ts
+   - Marked todo #403: completed
+✅ Idea #91 (Multisensory Feeding Readiness Navigator) — PENDING
+   - feeding-readiness-navigator.tsx: REMOVED (had TSC errors)
+   - Re-dispatched as task #491
 
 === STEP 4 (Brainstorm) ===
-⏸️ Skipped — Sisyphus busy
+⏸️ Skipped — project submission-ready, Sisyphus busy
 
 === STEP 5 (Commit) ===
-✅ git add -A && git commit -m "fix: TSC errors in feeding-readiness-navigator, register cry-acoustic-fingerprint tab" && git push
-✅ Hash: 0f2958d pushed
+✅ git add -A && git commit -m "chore: add privacy policy HTML page and structured App Store/Play Store metadata" && git push
+✅ Hash: a2ef1f0 pushed
 
 === STEP 6 (Dispatch) ===
-✅ Task #489 dispatched to Sisyphus (Complete Cry + Feeding i18n + Storage Keys)
-   - Add CRY_EVENTS + CRY_CORRELATIONS to storage-keys.ts
-   - Add complete i18n to cry-acoustic-fingerprint.tsx
-   - Verify feeding-readiness i18n completeness
-   - Register CRY storage keys in cry-acoustic-fingerprint.tsx
-   - TSC + git commit
-✅ PID 4027043 running
+✅ Task #491 dispatched to Sisyphus (Multisensory Feeding Readiness Navigator)
+   - 3-domain checklist: oral motor, hand-mouth, sensory
+   - Crossmodal correlation chart
+   - Readiness composite score gauge
+   - Optimal introduction window predictor
+   - Texture ladder progress tracker
+   - Full i18n (en.json + zh.json)
+   - Register in _layout.tsx
+   - TSC: 0 errors (critical — previous version had errors)
+✅ PID 4095327 running
 
 === CURRENT STATE ===
-- TSC: 0 errors
-- Git: 0f2958d ✅ (cycle 489)
-- TODO: 2 pending_retry (#402, #403) · 176 completed (DB)
-- Sisyphus: Running task #489 (PID 4027043)
-- Ideas: 92 total
+- Git: a2ef1f0 ✅ (cycle 490)
+- TODO: 1 pending_retry (#402) · 177 completed (DB)
+- Sisyphus: Running task #491 (PID 4095327)
+- Ideas: 92 total (91 in_progress, 92 implemented)
 - Painpoints: 0 open
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
 All 95+ tabs implemented. i18n bilingual (EN/ZH). TSC 0. Audit PASS 9/9.
-Task #489: completing i18n for cry-acoustic-fingerprint + feeding-readiness.
+Task #491: implementing Multisensory Feeding Readiness Navigator (idea #91).
 Pending user action on submission blockers:
   - EAS credentials (Apple Team ID + App-Specific Password)
   - App Store Connect app creation (com.jobblebaby.app)
   - Play Console app creation (com.jobblebaby.app)
-  - Privacy policy URL deployment (https://catowabisabi.github.io/jobble-baby/privacy)
+  - Privacy policy URL deployed (privacy.html created, needs deployment at catowabisabi.github.io/jobble-baby/privacy)

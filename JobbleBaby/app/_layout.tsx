@@ -217,6 +217,14 @@ function TabNavigator() {
         options={{ title: t('tabs.doctorVisit'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="local-hospital" color={color} />, headerShown: false }}
       />
       <Tabs.Screen
+        name="feeding-readiness-navigator"
+        options={{
+          title: t('feedingReadinessMultisensor.title'),
+          tabBarIcon: ({ color }) => <MaterialIcons size={28} name="sensors" color={color} />,
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
         name="feeding-readiness"
         options={{ title: t('tabs.feedingReadiness'), tabBarIcon: ({ color }) => <MaterialIcons size={28} name="restaurant" color={color} />, headerShown: false }}
       />

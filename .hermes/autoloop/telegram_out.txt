@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 13:00
+🍼 Jobble Baby · 14:04
 ✅ Done: #470 18 hardcoded strings → i18n (cry-acoustic + feeding-readiness-navigator)
-✅ Done: test files committed (cry-acoustic + feeding-readiness mocked tests)
-📋 TODO: 0 pending · 0 new · 97 completed
-📦 Commit: 3efb85c → pushed
-📝 Desc: Project 正式係 submission-ready。代碼、i18n、TSC、Audit 全部 PASS。remaining blockers 係 user action：EAS credentials + App Store Connect + Play Console + privacy policy URL。
+🔧 Dispatched: —
+📋 TODO: 0 pending · 0 new · 178 completed
+📦 Commit: e58234c → pushed
+📝 Desc: Cycle 501 — project SUBMISSION-READY。全部97 tab完成，i18n雙語，TSC 0，審計ALL PASS。等待用戶操作：EAS credentials / App Store Connect / Play Console / Privacy Policy URL。

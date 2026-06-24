@@ -1,7 +1,7 @@
 # Jobble Baby 測試體系文檔
 
 > 根據 `universal-testing-system-agent-prompt.zh-TW.md` 建立
-> 最後更新: 2026-06-22 (本次 QA cycle)
+> 最後更新: 2026-06-23 (cycle 487 — i18n asymmetry fix + smoke/unit/mocked/regression run)
 
 ## 📁 測試架構
 

@@ -123,6 +123,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="milk-thermal-safety-checker"
+        options={{
+          title: t('tabs.milkThermalSafetyChecker'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="thermometer" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="lactation"
         options={{
           title: t('lactation.title'),

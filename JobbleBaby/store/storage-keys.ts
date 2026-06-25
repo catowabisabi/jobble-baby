@@ -103,6 +103,7 @@ export const STORAGE_KEYS = {
   MILESTONE_PHOTOS: "@jobble/milestone_photos",
   MILK_TRANSFER_HISTORY: "@jobble/milk_transfer_history",
   MILK_TRANSFER_STATS: "@jobble/milk_transfer_stats",
+  MILK_WARMING_SESSION: "@jobble/milk_warming_session",
   MONTAGE_PROJECTS: "@jobble/montage_projects",
   MONTAGE_SETTINGS: "@jobble/montage_settings",
   MOOD_CHECKINS: "@jobble/mood_checkins",

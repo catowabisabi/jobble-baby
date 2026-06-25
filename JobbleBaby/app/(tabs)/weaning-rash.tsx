@@ -9,20 +9,38 @@ import { STORAGE_KEYS } from '../../store/storage-keys';
 const ENTRIES_KEY = STORAGE_KEYS.WEANING_RASH_ENTRIES;
 const FOODS_KEY   = STORAGE_KEYS.WEANING_FOODS_LIST;
 
-const WINDOW_LABELS = ['Days 1-2','Days 3-4','Days 5-7','Week 2','Week 3','Week 4'];
-
 const RASH_COLORS: Record<string, string> = {
   none: '#10B981', mild: '#F59E0B', moderate: '#F97316', severe: '#EF4444',
 };
 
-const RASH_LOCATIONS = ['face','torso','arms','legs','diaper area','other'] as const;
-const GI_SYMPTOMS     = ['vomiting','diarrhea','constipation','bloating','blood in stool','gassy'] as const;
-const STOOL_TYPES     = ['normal','soft','runny','hard','mucousy'] as const;
+const RASH_LOCATIONS_KEYS = {
+  face: 'weaningRash.rashLocationFace',
+  torso: 'weaningRash.rashLocationTorso',
+  arms: 'weaningRash.rashLocationArms',
+  legs: 'weaningRash.rashLocationLegs',
+  'diaper area': 'weaningRash.rashLocationDiaper',
+  other: 'weaningRash.rashLocationOther',
+} as const;
+const GI_SYMPTOMS_KEYS = {
+  vomiting: 'weaningRash.giSymptomVomiting',
+  diarrhea: 'weaningRash.giSymptomDiarrhea',
+  constipation: 'weaningRash.giSymptomConstipation',
+  bloating: 'weaningRash.giSymptomBloating',
+  'blood in stool': 'weaningRash.giSymptomBloodInStool',
+  gassy: 'weaningRash.giSymptomGassy',
+} as const;
+const STOOL_TYPES_KEYS = {
+  normal: 'weaningRash.stoolTypeNormal',
+  soft: 'weaningRash.stoolTypeSoft',
+  runny: 'weaningRash.stoolTypeRunny',
+  hard: 'weaningRash.stoolTypeHard',
+  mucousy: 'weaningRash.stoolTypeMucousy',
+} as const;
 
 type RashType   = 'none' | 'mild' | 'moderate' | 'severe';
-type RashLoc    = typeof RASH_LOCATIONS[number];
-type GiSym      = typeof GI_SYMPTOMS[number];
-type Stool      = typeof STOOL_TYPES[number];
+type RashLoc    = keyof typeof RASH_LOCATIONS_KEYS;
+type GiSym      = keyof typeof GI_SYMPTOMS_KEYS;
+type Stool      = keyof typeof STOOL_TYPES_KEYS;
 
 interface Entry {
   id: string; date: string; food_name: string; window: number;
@@ -69,7 +87,7 @@ export default function WeaningRashScreen() {
   const hasFpies  = (e: Entry) => e.rash_type !== 'none' && entries.filter(x => x.food_name === e.food_name).length === 1;
 
   const progress = (w: number) => entries.filter(e => e.window === w).length;
-  const maxProg  = Math.max(...WINDOW_LABELS.map((_, i) => progress(i+1)), 1);
+  const maxProg  = Math.max(...[1,2,3,4,5,6].map(i => progress(i)), 1);
 
   
 
@@ -82,7 +100,7 @@ export default function WeaningRashScreen() {
 
         {/* 6-Window Timeline */}
         <View style={styles.timeline}>
-          {WINDOW_LABELS.map((label, i) => {
+          {(['weaningRash.window1','weaningRash.window2','weaningRash.window3','weaningRash.window4','weaningRash.window5','weaningRash.window6'] as const).map((label, i) => {
             const w = i + 1;
             const done = entries.filter(e => e.window === w).length;
             const active = w === win;
@@ -90,7 +108,7 @@ export default function WeaningRashScreen() {
               <TouchableOpacity key={w} style={[styles.winChip, active && styles.winChipActive]}
                               accessibilityLabel="TouchableOpacity in weaning-rash"
                 onPress={() => setWin(w)}>
-                <Text style={[styles.winLabel, active && styles.winLabelActive]}>{label}</Text>
+                <Text style={[styles.winLabel, active && styles.winLabelActive]}>{t(label)}</Text>
                 <Text style={styles.winCount}>{done} log{done !== 1 ? 's' : ''}</Text>
               </TouchableOpacity>
             );
@@ -127,9 +145,9 @@ export default function WeaningRashScreen() {
                   <Text style={styles.rashBadgeText}>{t('weaningRash.rash' + item.rash_type.charAt(0).toUpperCase() + item.rash_type.slice(1))}</Text>
                 </View>
               </View>
-              <Text style={styles.winMeta}>{WINDOW_LABELS[item.window - 1]}</Text>
-              {item.rash_location.length > 0 && <Text style={styles.meta}>📍 {item.rash_location.join(', ')}</Text>}
-              {item.gi_symptoms.length > 0  && <Text style={styles.meta}>💊 {item.gi_symptoms.join(', ')}</Text>}
+              <Text style={styles.winMeta}>{t(['weaningRash.window1','weaningRash.window2','weaningRash.window3','weaningRash.window4','weaningRash.window5','weaningRash.window6'][item.window - 1])}</Text>
+              {item.rash_location.length > 0 && <Text style={styles.meta}>📍 {item.rash_location.map(l => t(RASH_LOCATIONS_KEYS[l])).join(', ')}</Text>}
+              {item.gi_symptoms.length > 0  && <Text style={styles.meta}>💊 {item.gi_symptoms.map(g => t(GI_SYMPTOMS_KEYS[g])).join(', ')}</Text>}
               {item.notes && <Text style={styles.notes}>{item.notes}</Text>}
             </View>
           )}
@@ -147,11 +165,11 @@ export default function WeaningRashScreen() {
 
             <Text style={styles.fieldLabel}>{t('weaningRash.window')}</Text>
             <View style={styles.winRow}>
-              {WINDOW_LABELS.map((label, i) => (
-                <TouchableOpacity key={i+1} style={[styles.winOpt, win === i+1 && styles.winOptActive]}
+              {([1,2,3,4,5,6] as const).map(i => (
+                <TouchableOpacity key={i} style={[styles.winOpt, win === i && styles.winOptActive]}
                                 accessibilityLabel="TouchableOpacity in weaning-rash"
-                  onPress={() => setWin(i+1)}>
-                  <Text style={[styles.winOptText, win === i+1 && styles.winOptTextActive]}>{i+1}</Text>
+                  onPress={() => setWin(i)}>
+                  <Text style={[styles.winOptText, win === i && styles.winOptTextActive]}>{i}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -169,33 +187,33 @@ export default function WeaningRashScreen() {
 
             <Text style={styles.fieldLabel}>{t('weaningRash.rashLocation')}</Text>
             <View style={styles.chipRow}>
-              {RASH_LOCATIONS.map(l => (
-                <TouchableOpacity key={l} style={[styles.chip, locs.includes(l) && styles.chipActive]}
+              {(Object.entries(RASH_LOCATIONS_KEYS) as [RashLoc, string][]).map(([value, labelKey]) => (
+                <TouchableOpacity key={value} style={[styles.chip, locs.includes(value) && styles.chipActive]}
                                 accessibilityLabel="TouchableOpacity in weaning-rash"
-                  onPress={() => toggleLoc(l)}>
-                  <Text style={[styles.chipText, locs.includes(l) && styles.chipTextActive]}>{l}</Text>
+                  onPress={() => toggleLoc(value)}>
+                  <Text style={[styles.chipText, locs.includes(value) && styles.chipTextActive]}>{t(labelKey)}</Text>
                 </TouchableOpacity>
               ))}
             </View>
 
             <Text style={styles.fieldLabel}>{t('weaningRash.giSymptoms')}</Text>
             <View style={styles.chipRow}>
-              {GI_SYMPTOMS.map(g => (
-                <TouchableOpacity key={g} style={[styles.chip, gis.includes(g) && styles.chipActive]}
+              {(Object.entries(GI_SYMPTOMS_KEYS) as [GiSym, string][]).map(([value, labelKey]) => (
+                <TouchableOpacity key={value} style={[styles.chip, gis.includes(value) && styles.chipActive]}
                                 accessibilityLabel="TouchableOpacity in weaning-rash"
-                  onPress={() => toggleGi(g)}>
-                  <Text style={[styles.chipText, gis.includes(g) && styles.chipTextActive]}>{g}</Text>
+                  onPress={() => toggleGi(value)}>
+                  <Text style={[styles.chipText, gis.includes(value) && styles.chipTextActive]}>{t(labelKey)}</Text>
                 </TouchableOpacity>
               ))}
             </View>
 
             <Text style={styles.fieldLabel}>{t('weaningRash.stoolType')}</Text>
             <View style={styles.chipRow}>
-              {STOOL_TYPES.map(s => (
-                <TouchableOpacity key={s} style={[styles.chip, stool === s && styles.chipActive]}
+              {(Object.entries(STOOL_TYPES_KEYS) as [Stool, string][]).map(([value, labelKey]) => (
+                <TouchableOpacity key={value} style={[styles.chip, stool === value && styles.chipActive]}
                                 accessibilityLabel="TouchableOpacity in weaning-rash"
-                  onPress={() => setStool(s)}>
-                  <Text style={[styles.chipText, stool === s && styles.chipTextActive]}>{s}</Text>
+                  onPress={() => setStool(value)}>
+                  <Text style={[styles.chipText, stool === value && styles.chipTextActive]}>{t(labelKey)}</Text>
                 </TouchableOpacity>
               ))}
             </View>

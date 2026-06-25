@@ -30,10 +30,15 @@ const TEXTURE_LEVELS = [
   { level: 7, labelKey: 'suckleToChewBridge.sectionC.textureLevels.level7', months: '12mo+' },
 ] as const;
 
-const TONGUE_PATTERNS = ['suckle', 'transition', 'munch', 'chew'] as const;
+const TONGUE_PATTERNS = {
+  suckle: 'suckleToChewBridge.sectionA.tonguePatterns.suckle',
+  transition: 'suckleToChewBridge.sectionA.tonguePatterns.transition',
+  munch: 'suckleToChewBridge.sectionA.tonguePatterns.munch',
+  chew: 'suckleToChewBridge.sectionA.tonguePatterns.chew',
+} as const;
 
 type StageType = typeof STAGES[number]['id'];
-type TonguePattern = typeof TONGUE_PATTERNS[number];
+type TonguePattern = keyof typeof TONGUE_PATTERNS;
 type InnerTab = 'stageTracker' | 'foodAcceptance' | 'textureLadder' | 'alerts';
 
 interface StageLogEntry {
@@ -474,15 +479,15 @@ export default function SuckleToChewBridgeScreen() {
 
                 <Text style={styles.sectionTitle}>{t('suckleToChewBridge.sectionA.tonguePattern')}</Text>
                 <View style={styles.chipRow}>
-                  {TONGUE_PATTERNS.map(pattern => (
+                  {Object.entries(TONGUE_PATTERNS).map(([pattern, labelKey]) => (
                     <TouchableOpacity
                       key={pattern}
                       style={[styles.chip, selectedTonguePattern === pattern && styles.chipSelected]}
-                      onPress={() => setSelectedTonguePattern(pattern)}
-                      accessibilityLabel={t(`suckleToChewBridge.sectionA.tonguePatterns.${pattern}`)}
+                      onPress={() => setSelectedTonguePattern(pattern as TonguePattern)}
+                      accessibilityLabel={t(labelKey)}
                     >
                       <Text style={[styles.chipText, selectedTonguePattern === pattern && styles.chipTextSelected]}>
-                        {t(`suckleToChewBridge.sectionA.tonguePatterns.${pattern}`)}
+                        {t(labelKey)}
                       </Text>
                     </TouchableOpacity>
                   ))}
@@ -519,7 +524,7 @@ export default function SuckleToChewBridgeScreen() {
                     <View style={styles.entryInfo}>
                       <Text style={styles.entryTitle}>{t(STAGES.find(s => s.id === log.stage)?.labelKey ?? '')}</Text>
                       <Text style={styles.entryMeta}>
-                        {t(`suckleToChewBridge.sectionA.tonguePatterns.${log.tonguePattern}`)} · {log.date}
+                        {t(TONGUE_PATTERNS[log.tonguePattern])} · {log.date}
                       </Text>
                     </View>
                   </View>

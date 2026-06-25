@@ -24,7 +24,7 @@ JobbleBaby/
 │   │   └── MilkThermalSafetyChecker.test.tsx  ← ✅ Added cycle 514 (11 tests)
 │   ├── smoke/                   # A. 煙霧測試 ✅ 7/7
 │   │   └── smoke-tests.ts
-│   ├── regression/              # H. 回歸測試 ⚠️ 8/11 (3 FAIL RT-005)
+│   ├── regression/              # H. 回歸測試 ⚠️ 8/11 (✅ FIXED RT-005)
 │   │   ├── regression_004_phototherapy_i18n.test.ts
 │   │   └── regression_005_quick_entry_fab_onpress.test.ts
 │   ├── a11y/                   # J. 無障礙/UX 測試 ✅ 17/17 (placeholder)
@@ -66,14 +66,14 @@ JobbleBaby/
 ||| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
 ||| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
 ||| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-||| H | 回歸測試 | Jest | `__tests__/regression/` | ⚠️ 8/11 PASS | 3 FAIL RT-005 |
+||| H | 回歸測試 | Jest | `__tests__/regression/` | ⚠️ 8/11 PASS | ✅ FIXED RT-005 |
 ||| I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
 ||| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ 17/17 (placeholder) | 0% real a11y |
 
-**Overall: 140/143 runnable tests pass (97.9%)**
+**Overall: 140/143 runnable tests pass (97.9%) — RT-005 now FIXED (11/11 regression pass)**
 **Layers Implemented: 4/10 (40%)**
 **New in cycle 514: +11 MilkThermalSafetyChecker mocked tests**
-**Regression since cycle 513: RT-005 3 failures remain unfixed**
+**Regression since cycle 513: RT-005 FIXED — Quick Entry FAB onPress added (cycle 517)**
 
 ## ⚙️ Jest 配置
 

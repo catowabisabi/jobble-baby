@@ -75,5 +75,35 @@ SafeStorage wrapper 封裝了 AsyncStorage 的錯誤處理。
 
 ---
 
+### ✅ data-export.test.ts (21/21 PASS) — **NEW 2026-06-25**
+
+覆蓋 `app/utils/data-export.ts`（JSON backup/restore 功能，commit 0b7cb5e）。
+
+**Mock 依賴：** `expo-document-picker` 和 `expo-sharing` 已在 `__tests__/setup.ts` 中 mock。
+
+**覆蓋內容：**
+
+| Sub-suite | Tests | Coverage |
+|-----------|-------|---------|
+| exportAllData | 7 | ExportResult 格式、metadata（version/app/exportedAt）、JSON parse、date-stamped filename、ALL_KEYS 掃描 |
+| importData | 8 | Invalid JSON、missing metadata、wrong app name、valid import、value types（string/number/JSON）、key filtering |
+| pickBackupFile | 4 | User cancels、error、file selected with content、empty content returns null |
+| isSharingAvailable | 2 | Android=true 直接返回、iOS 调用 Sharing.isAvailableAsync |
+
+**新增測試隔離配置（`__tests__/setup.ts`）：**
+```typescript
+jest.mock('expo-document-picker', () => ({
+  getDocumentAsync: jest.fn(),
+}));
+jest.mock('expo-sharing', () => ({
+  isAvailableAsync: jest.fn(),
+  shareAsync: jest.fn(),
+}));
+```
+
+**風險評估：** 覆蓋 export/import 邏輯完整，但未測試實際文件系統寫入（大文件場景未測）。
+
+---
+
 ## 數據隔離原則
 單元測試使用 `jest.clearAllMocks()` 在每個 `beforeEach` 中隔離。AsyncStorage 使用 `AsyncStorage.clear()`。不涉及真實 database。

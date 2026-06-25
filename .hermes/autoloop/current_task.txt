@@ -1,48 +1,56 @@
-# Cycle 503 — HERMES AUTOLOOP CYCLE
-# Date: 2026-06-24 20:00 HKT
-# Status: RUNNING — Project SUBMISSION-READY
+# Cycle 505 — HERMES AUTOLOOP CYCLE
+# Date: 2026-06-24 22:00 HKT
+# Status: RUNNING — Task #404 dispatched
+
+=== STEP 0 (Intent Gate) ===
+✅ user-intention.md exists — skip
 
 === STEP 1 (Survival + Source) ===
-✅ Session jobble-baby alive (opencode running)
-✅ user-intention.md exists
-✅ Git: 7d9679e clean + pushed
+✅ Session jobble-baby alive (opencode PID 601976)
+✅ Git: 8c0fbdb clean + pushed
+✅ TSC: 0 errors (verified JobbleBaby)
+✅ Sisyphus: active (task #404)
 
 === STEP 2 (Verify previous round) ===
-✅ No pending tasks from cycle 502
+✅ Task #491 (feeding-readiness-navigator) — completed, TSC 0, commit e2d38f8
+✅ Idea #91 marked implemented
 
 === STEP 3 (Review + Analysis) ===
-✅ Project: SUBMISSION-READY (code-level)
-✅ 0 pending · 0 new · 178 completed
-✅ 92 ideas · 33 painpoints · 1038 DB entries
+✅ Project: SUBMISSION-READY
+✅ DB: 0 pending · 0 new · 178 completed (before #404)
+✅ Painpoints reviewed: 4 actionable gaps identified
+   - #4: JSON export/backup (→ todo #404, dispatched)
+   - #2: WHO growth standards (deferred)
+   - #3: Real product data (deferred)
+   - #24: AsyncStorage error handling (deferred)
 
 === STEP 4 (Brainstorm) ===
-⏭️ Skipped — project submission-ready
+✅ Sources: baby_wear_ergonomics_score, dirac_cone_linear_dispersion, skin_to_skin_seeking, babinski_sign, bayley_scale_equivalents
+✅ 50 keywords added to pool (pool now 1000)
+✅ Prompt3: asymmetric_tonic_neck, soothing_latency, gut_barrier_permeability_opening
 
 === STEP 5 (Commit) ===
-✅ 7d9679e pushed (chore: cycle 503 autoloop state sync)
+✅ 8c0fbdb pushed (chore: cycle 505 — idea #91 marked implemented)
 
 === STEP 6 (Dispatch) ===
-⏭️ No pending code tasks — project is submission-ready
-   Sisyphus is running (opencode --continue) doing web platform work
-   User action blockers (outside code scope):
-   - EAS credentials (Apple Team ID + App-Specific Password)
-   - App Store Connect app (com.jobblebaby.app)
-   - Play Console app (com.jobblebaby.app)
-   - Privacy policy page at real URL
+✅ Task #404 dispatched to Sisyphus (PID 601976)
+   - JSON data export + backup feature (painpoint #4)
+   - Priority: 85
+   - Log: /tmp/opencode_404.log
 
 === CURRENT STATE ===
-- TODO: 0 pending · 0 new · 178 completed
-- Git: 7d9679e ✅ pushed
-- TSC: 0 errors (from cycle 500)
-- Audit: ALL PASS
-- Sisyphus: active (web platform support)
+- TODO: 1 new · 178 completed (after todo #404 creation)
+- Git: 8c0fbdb ✅ pushed
+- TSC: 0 errors
+- Audit: assumed PASS
+- Sisyphus: active (opencode #404)
 - i18n: EN/ZH complete
 
 === PROJECT STATUS ===
 Jobble Baby: ✅ SUBMISSION-READY (code-level)
-Sisyphus: adding react-dom + react-native-web for web platform support
-User action required for submission:
-  - EAS credentials
-  - App Store Connect setup
-  - Play Console setup
+New work: JSON export/backup feature in progress
+User action blockers (outside code scope):
+  - EAS credentials (Apple Team ID + App-Specific Password)
+  - App Store Connect app (com.jobblebaby.app)
+  - Play Console app (com.jobblebaby.app)
   - Privacy policy URL deployment

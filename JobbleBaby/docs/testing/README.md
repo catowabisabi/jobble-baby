@@ -44,21 +44,22 @@ JobbleBaby/
 
 ## 🔢 10 層測試覆蓋矩陣
 
-|| 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 |
-|------|------|------|------|------|------|------|
-| A | 煙霧測試 | tsx | `__tests__/smoke/` | ⚠️ 6/7 | 86% |
-| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 31/31 | 100% |
-| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
-| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 4/4 | 100% |
-| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
-| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
-| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ RT-004 + RT-005 | 13 tests (10 pass, 3 fail confirmed bug) |
+||| 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 |
+||------|------|------|------|------|------|------|
+|| A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
+|| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% (+21 new) |
+|| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
+|| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 45/45 | 100% |
+|| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
+|| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
+|| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
+|| H | 回歸測試 | Jest | `__tests__/regression/` | ⚠️ RT-004 ✅ RT-005 🔴 3 FAIL | 8 PASS, 3 FAIL |
 || I | 效能/穩定性測試 | — | — | ❌ 未實現（doc only） | 0% |
-|| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ Placeholder only | 0% |
+|| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ❌ Placeholder only | 0% |
 
-**Overall: 50/53 runnable tests pass (94%)**
+**Overall: 104/107 runnable tests pass (97%)**
 **Layers Implemented: 4/10 (40%)**
+**New in this cycle: +21 unit tests for data-export.ts**
 
 ## ⚙️ Jest 配置
 

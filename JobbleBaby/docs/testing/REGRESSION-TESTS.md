@@ -147,9 +147,9 @@ npx jest --testPathPattern="__tests__/regression/regression_005"
 
 ## 覆蓋矩陣
 
-||| Test ID | 覆蓋類型 | 狀態 |
-|---------|---------|--------|------|
-|| RT-004 | i18n hardcoded prevention | ✅ 8/8 PASS |
-|| RT-005 | Quick Entry FAB onPress | ⚠️ 2/5 PASS (3 FAIL = bug confirmed) |
-| RT-006 | Theme colors interface | ✅ (unit test) |
-| RT-007 | Storage keys validation | ✅ (unit test) |
+|||| Test ID | 覆蓋類型 | 狀態 |
+||---------|---------|--------|------|
+||| RT-004 | i18n hardcoded prevention | ✅ 6/6 PASS |
+||| RT-005 | Quick Entry FAB onPress | ⚠️ 2/5 PASS (3 FAIL = known bug, unfixed since cycle 500) |
+
+**Note:** RT-006 (Theme colors) and RT-007 (Storage keys) are covered by unit tests in `__tests__/unit/theme.test.ts` and `__tests__/unit/storage-keys.test.ts`, not as standalone regression files.

@@ -367,6 +367,11 @@ export default function HomeScreen() {
                 accessibilityHint={`Tap to log a ${entry.label.toLowerCase()} entry with current timestamp`}
                 style={[styles.fab, { backgroundColor: entry.color, minHeight: 44, minWidth: 44 }]}
                 activeOpacity={0.7}
+                onPress={() => {
+                  if (entry.id === 'diaper') router.push('/diaper-cream');
+                  else if (entry.id === 'feed') router.push('/bottle-feeding');
+                  else if (entry.id === 'sleep') router.push('/sleep-association');
+                }}
               >
                 <Text style={styles.fabIcon}>{entry.icon}</Text>
                 <Text style={styles.fabText}>{t(QUICK_ENTRY_I18N_KEYS[entry.id])}</Text>

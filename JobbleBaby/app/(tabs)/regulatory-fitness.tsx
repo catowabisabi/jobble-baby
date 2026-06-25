@@ -30,6 +30,13 @@ const CASCADE_ALERTS: Record<string, { affected: string; messageKey: string }> =
   'regulatoryFitness.domains.social': { affected: 'autonomic', messageKey: 'regulatoryFitness.cascadeAlert.social' },
 };
 
+const DOMAIN_SCORE_KEYS: Record<string, string> = {
+  'regulatoryFitness.domains.autonomic': 'autonomic_score',
+  'regulatoryFitness.domains.sensory': 'sensory_score',
+  'regulatoryFitness.domains.motor': 'motor_score',
+  'regulatoryFitness.domains.social': 'social_score',
+};
+
 const DOMAIN_COLORS: Record<string, string> = {
   'regulatoryFitness.domains.autonomic': '#4A90D9',
   'regulatoryFitness.domains.sensory': '#7B68EE',
@@ -256,16 +263,9 @@ export default function RegulatoryFitnessScreen() {
     if (data.length > 0) {
       const latest = data[data.length - 1];
       const newAlerts: { messageKey: string }[] = [];
-      const domains = ['regulatoryFitness.domains.autonomic', 'regulatoryFitness.domains.sensory', 'regulatoryFitness.domains.motor', 'regulatoryFitness.domains.social'] as const;
-      const domainToScoreKey: Record<string, keyof RegulatoryEntry> = {
-        'regulatoryFitness.domains.autonomic': 'autonomic_score',
-        'regulatoryFitness.domains.sensory': 'sensory_score',
-        'regulatoryFitness.domains.motor': 'motor_score',
-        'regulatoryFitness.domains.social': 'social_score',
-      };
-      domains.forEach(domain => {
-        const scoreKey = domainToScoreKey[domain];
-        const s = latest[scoreKey] as number;
+      Object.keys(DOMAIN_SCORE_KEYS).forEach(domain => {
+        const scoreKey = DOMAIN_SCORE_KEYS[domain];
+        const s = latest[scoreKey as keyof RegulatoryEntry] as number;
         if (s < 50 && CASCADE_ALERTS[domain]) {
           newAlerts.push({ messageKey: CASCADE_ALERTS[domain].messageKey });
         }

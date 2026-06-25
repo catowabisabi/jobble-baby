@@ -22,14 +22,7 @@ const PRIMITIVE_REFLEXES = [
   { id: 'parachute',         nameKey: 'reflex.parachute',         minMo: 6,  maxMo: 12 },
 ];
 
-const REFLEX_STATUS_OPTIONS = ['reflexVisualMotor.status.present', 'reflexVisualMotor.status.partially', 'reflexVisualMotor.status.integrated'] as const;
-type ReflexStatus = typeof REFLEX_STATUS_OPTIONS[number];
-
-const REFLEX_STATUS_OPTIONS_I18N: Record<ReflexStatus, string> = {
-  'reflexVisualMotor.status.present': 'reflexVisualMotor.status.present',
-  'reflexVisualMotor.status.partially': 'reflexVisualMotor.status.partially',
-  'reflexVisualMotor.status.integrated': 'reflexVisualMotor.status.integrated',
-};
+type ReflexStatus = 'reflexVisualMotor.status.present' | 'reflexVisualMotor.status.partially' | 'reflexVisualMotor.status.integrated';
 
 // Visual-Motor Milestones
 const VISUAL_MILESTONES = [

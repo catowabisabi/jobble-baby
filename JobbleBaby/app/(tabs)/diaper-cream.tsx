@@ -8,17 +8,12 @@ import { STORAGE_KEYS } from '../../store/storage-keys';
 
 const ENTRIES_KEY = STORAGE_KEYS.DIAPER_CREAM_ENTRIES;
 
-const CREAM_TYPES = ['diaperCream.creamTypeZincOxide', 'diaperCream.creamTypePetroleum', 'diaperCream.creamTypeNatural', 'diaperCream.creamTypeOther'] as const;
-const AMOUNTS = ['diaperCream.amountThin', 'diaperCream.amountMedium', 'diaperCream.amountThick'] as const;
-const LOCATIONS = ['diaperCream.locationDiaperArea', 'diaperCream.locationSkinFolds', 'diaperCream.locationRashSpots'] as const;
-const RASH_TYPES = ['diaperCream.rashTypeYeast', 'diaperCream.rashTypeContact', 'diaperCream.rashTypeIrritant'] as const;
-const RASH_SEVERITIES = ['diaperCream.severityMild', 'diaperCream.severityModerate', 'diaperCream.severitySevere'] as const;
-
-type CreamType = typeof CREAM_TYPES[number];
-type Amount = typeof AMOUNTS[number];
-type Location = typeof LOCATIONS[number];
-type RashType = typeof RASH_TYPES[number];
-type RashSeverity = typeof RASH_SEVERITIES[number];
+// String literal types for type safety
+type CreamType = 'diaperCream.creamTypeZincOxide' | 'diaperCream.creamTypePetroleum' | 'diaperCream.creamTypeNatural' | 'diaperCream.creamTypeOther';
+type Amount = 'diaperCream.amountThin' | 'diaperCream.amountMedium' | 'diaperCream.amountThick';
+type Location = 'diaperCream.locationDiaperArea' | 'diaperCream.locationSkinFolds' | 'diaperCream.locationRashSpots';
+type RashType = 'diaperCream.rashTypeYeast' | 'diaperCream.rashTypeContact' | 'diaperCream.rashTypeIrritant';
+type RashSeverity = 'diaperCream.severityMild' | 'diaperCream.severityModerate' | 'diaperCream.severitySevere';
 
 interface Entry {
   id: string;
@@ -40,6 +35,17 @@ function uid() {
 
 export default function DiaperCreamScreen() {
   const { t } = useLanguage();
+  const CREAM_TYPES: { value: CreamType; label: string }[] = [
+    { value: 'diaperCream.creamTypeZincOxide', label: t('diaperCream.creamTypeZincOxide') },
+    { value: 'diaperCream.creamTypePetroleum', label: t('diaperCream.creamTypePetroleum') },
+    { value: 'diaperCream.creamTypeNatural', label: t('diaperCream.creamTypeNatural') },
+    { value: 'diaperCream.creamTypeOther', label: t('diaperCream.creamTypeOther') },
+  ];
+  const AMOUNTS: { value: Amount; label: string }[] = [
+    { value: 'diaperCream.amountThin', label: t('diaperCream.amountThin') },
+    { value: 'diaperCream.amountMedium', label: t('diaperCream.amountMedium') },
+    { value: 'diaperCream.amountThick', label: t('diaperCream.amountThick') },
+  ];
   const LOCATIONS: { value: Location; label: string }[] = [
     { value: 'diaperCream.locationDiaperArea', label: t('diaperCream.locationDiaperArea') },
     { value: 'diaperCream.locationSkinFolds', label: t('diaperCream.locationSkinFolds') },
@@ -239,15 +245,15 @@ export default function DiaperCreamScreen() {
 
               <Text style={styles.fieldLabel}>{t('diaperCream.creamType')}</Text>
               <View style={styles.chipRow}>
-                {CREAM_TYPES.map(ct => (
+                {CREAM_TYPES.map(({ value, label }) => (
                   <TouchableOpacity
-                    key={ct}
-                    style={[styles.chip, creamType === ct && styles.chipActive]}
-                    onPress={() => setCreamType(ct)}
-                    accessibilityLabel={creamTypeLabel(ct)}
+                    key={value}
+                    style={[styles.chip, creamType === value && styles.chipActive]}
+                    onPress={() => setCreamType(value)}
+                    accessibilityLabel={label}
                   >
-                    <Text style={[styles.chipText, creamType === ct && styles.chipTextActive]}>
-                      {creamTypeLabel(ct)}
+                    <Text style={[styles.chipText, creamType === value && styles.chipTextActive]}>
+                      {label}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -256,15 +262,15 @@ export default function DiaperCreamScreen() {
               {/* Amount */}
               <Text style={styles.fieldLabel}>{t('diaperCream.amount')}</Text>
               <View style={styles.chipRow}>
-                {AMOUNTS.map(a => (
+                {AMOUNTS.map(({ value, label }) => (
                   <TouchableOpacity
-                    key={a}
-                    style={[styles.chip, amount === a && styles.chipActive]}
-                    onPress={() => setAmount(a)}
-                    accessibilityLabel={amountLabel(a)}
+                    key={value}
+                    style={[styles.chip, amount === value && styles.chipActive]}
+                    onPress={() => setAmount(value)}
+                    accessibilityLabel={label}
                   >
-                    <Text style={[styles.chipText, amount === a && styles.chipTextActive]}>
-                      {amountLabel(a)}
+                    <Text style={[styles.chipText, amount === value && styles.chipTextActive]}>
+                      {label}
                     </Text>
                   </TouchableOpacity>
                 ))}

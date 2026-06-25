@@ -1,5 +1,6 @@
-🍼 Jobble Baby · 10:02
-✅ Done: #408 Milk Thermal Safety Checker
+🍼 Jobble Baby · 14:02
+✅ Done: #408 Milk Thermal Safety Checker (prev cycle) + RT-005 FAB fix
+🔧 Dispatched: —
 📋 TODO: 0 pending · 0 in_progress · 0 new · 183 done
-📦 Commit: 54472d3 → pushed
-📝 Desc: #408 完成 — Milk Thermal Safety Checker committed。暖奶溫度計時器（37°C 目標、保暖方式選擇、溫度警報、解凍奶24h追蹤）。i18n 27 keys。TSC 0 errors。99 tabs 全 clean。Project SUBMISSION-READY，等待 user 配置 EAS credentials。
+📦 Commit: e0b0e4a → pushed
+📝 Desc: RT-005 修復完成 — Quick Entry FAB（Diaper/Feed/Sleep）新增 onPress handler，回歸測試 11/11 全 PASS。代碼層面 SUBMISSION-READY，等待 user 配置 EAS credentials。

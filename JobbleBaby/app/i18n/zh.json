@@ -608,6 +608,15 @@
     "parentName": "Jamie & Sam",
     "parentEmail": "jamie@jobble.app"
   },
+  "dataExport": {
+    "title": "資料備份",
+    "exportButton": "匯出我的資料",
+    "importButton": "從備份還原",
+    "exportSuccess": "資料匯出成功",
+    "exportFailed": "匯出失敗",
+    "importSuccess": "資料還原成功",
+    "version": "版本"
+  },
   "onboarding": {
     "welcome": "歡迎使用 Jobble Baby",
     "enterBabyName": "寶寶名字",

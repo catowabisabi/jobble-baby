@@ -605,6 +605,15 @@
     "parentName": "Jamie & Sam",
     "parentEmail": "jamie@jobble.app"
   },
+  "dataExport": {
+    "title": "Data Backup",
+    "exportButton": "Export My Data",
+    "importButton": "Restore from Backup",
+    "exportSuccess": "Data exported successfully",
+    "exportFailed": "Export failed",
+    "importSuccess": "Data restored successfully",
+    "version": "Version"
+  },
   "onboarding": {
     "welcome": "Welcome to Jobble Baby",
     "enterBabyName": "Baby's Name",

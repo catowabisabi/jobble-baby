@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, Share, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/SafeStorage';
-import { getDocumentAsync } from 'expo-document-picker';
+import { exportAllData, shareExportedData, importData, pickBackupFile } from '../utils/data-export';
 import * as Linking from 'expo-linking';
 import * as ImagePicker from 'expo-image-picker';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -273,21 +273,10 @@ export default function ProfileScreen() {
   const handleExportData = async () => {
     setIsExportLoading(true);
     try {
-      const exportData: Record<string, unknown> = {};
-      for (const key of Object.keys(STORAGE_KEYS)) {
-        const raw = await safeGetItem(key);
-        exportData[key] = raw ? JSON.parse(raw) : null;
-      }
-      exportData['_exportedAt'] = new Date().toISOString();
-      exportData['_appVersion'] = '1.0.0';
-
-      const jsonStr = JSON.stringify(exportData, null, 2);
-      await Share.share({
-        message: jsonStr,
-        title: 'Jobble Baby Data Export',
-      });
-    } catch (e) {
-      Alert.alert('Export Failed', 'Could not export data. Please try again.');
+      const { content, filename } = await exportAllData();
+      await shareExportedData(content, filename);
+    } catch {
+      Alert.alert(t('dataExport.exportFailed') || 'Export Failed', 'Could not export data. Please try again.');
     } finally {
       setIsExportLoading(false);
     }
@@ -296,41 +285,18 @@ export default function ProfileScreen() {
   const handleImportData = async () => {
     setIsImportLoading(true);
     try {
-      const result = await getDocumentAsync({ type: ['public.json'], copyToCacheDirectory: true, multiple: false });
-      if (result.canceled || !result.assets || result.assets.length === 0) {
+      const file = await pickBackupFile();
+      if (!file) {
         setIsImportLoading(false);
         return;
       }
-      const file = result.assets[0];
-      const content = await fetch(file.uri).then(r => r.text());
-      if (!content.trim()) {
-        Alert.alert(t('profile.importFailed') || 'Import Failed', 'Empty file.');
-        setIsImportLoading(false);
-        return;
+      const result = await importData(file.content);
+      if (result.success) {
+        Alert.alert(t('dataExport.importSuccess') || 'Import Successful', `Imported ${result.imported} entries — restart app to see changes.`);
+      } else {
+        Alert.alert(t('profile.importFailed') || 'Import Failed', result.errors.join('\n'));
       }
-      let parsed: Record<string, unknown>;
-      try {
-        parsed = JSON.parse(content);
-      } catch {
-        Alert.alert(t('profile.importFailed') || 'Import Failed', 'Invalid backup file.');
-        setIsImportLoading(false);
-        return;
-      }
-      if (!parsed._exportedAt || !parsed._appVersion) {
-        Alert.alert(t('profile.importFailed') || 'Import Failed', 'Missing metadata.');
-        setIsImportLoading(false);
-        return;
-      }
-      let count = 0;
-      for (const key of Object.keys(parsed)) {
-        if (key.startsWith('_')) continue;
-        if (parsed[key] != null) {
-          await safeSetItem(key, JSON.stringify(parsed[key]));
-          count++;
-        }
-      }
-      Alert.alert(t('profile.importSuccess') || 'Import Successful', `Imported ${count} entries — restart app to see changes.`);
-    } catch (e) {
+    } catch {
       Alert.alert(t('profile.importFailed') || 'Import Failed', 'Could not import data. Please try again.');
     } finally {
       setIsImportLoading(false);

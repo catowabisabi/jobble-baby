@@ -6,6 +6,7 @@ import VillageNetworkScreen from './village-network';
 import DevelopmentRadarScreen from './development-radar';
 import EmergencySOSScreen from './emergency-sos';
 import BehavioralRehearsalScreen from './behavioral-rehearsal';
+import RSAThoracicNavigatorScreen from './rsa-thoracic-navigator';
 
 export default function TabsLayout() {
   const { t } = useLanguage();
@@ -658,6 +659,13 @@ export default function TabsLayout() {
         options={{
           title: t('indoorAir.title') || 'Air Quality',
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="leaf" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="rsa-thoracic-navigator"
+        options={{
+          title: t('rsaThoracic.title') || 'RSA+Thoracic',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-pulse" size={size} color={color} />
         }}
       />
     </Tabs>

@@ -120,6 +120,7 @@
     "weaningRash": "Weaningrash",
     "galantLatch": "Galant",
     "indoorAir": "Indoor Air Quality",
+    "rsaThoracic": "RSA+Thoracic",
     "interopective": "Interoceptive",
     "regulatoryFitness": "Regulatoryfitness",
     "windowOfTolerance": "Windowoftolerance",
@@ -5267,6 +5268,77 @@
       "modalTitle": "Add Cry Event",
       "durationMinutes": "Duration (minutes)",
       "modalSaveEntry": "Save Entry"
+    }
+  },
+  "rsaThoracic": {
+    "title": "RSA + Thoracic Resonance",
+    "subtitle": "Track respiratory sinus arrhythmia and thoracic observation",
+    "composite": "Composite Score",
+    "status": {
+      "optimal": "Optimal",
+      "monitor": "Monitor",
+      "concerning": "Concerning"
+    },
+    "section1": {
+      "title": "RSA Breathing Log",
+      "subtitle": "Tap to log breathing phase",
+      "breathingIn": "Breathing In",
+      "breathingOut": "Breathing Out",
+      "logEntry": "Log RSA Entry",
+      "notes": "Notes",
+      "notesPlaceholder": "Optional observations...",
+      "totalEntries": "Total Entries",
+      "last7Days": "Last 7 Days",
+      "inCount": "In",
+      "outCount": "Out",
+      "history": "RSA History"
+    },
+    "section2": {
+      "title": "Thoracic Observation",
+      "subtitle": "Xiphoid status, retraction grade, and breathing pattern",
+      "addEntry": "Add Observation",
+      "logEntry": "Log Thoracic Entry",
+      "xiphoid": "Xiphoid Status",
+      "xiphoidOptions": {
+        "retracted": "Retracted",
+        "neutral": "Neutral",
+        "bulging": "Bulging"
+      },
+      "retractionGrade": "Retraction Grade",
+      "grade0": "No retraction",
+      "grade1": "Mild subcostal",
+      "grade2": "Moderate intercostal",
+      "grade3": "Severe",
+      "pattern": "Breathing Pattern",
+      "patternOptions": {
+        "normal": "Normal",
+        "labored": "Labored",
+        "shallow": "Shallow",
+        "wheezing": "Wheezing",
+        "periodic": "Periodic"
+      },
+      "notes": "Notes",
+      "notesPlaceholder": "Optional observations...",
+      "history": "Thoracic History"
+    },
+    "section3": {
+      "title": "RSA 7-Day Chart"
+    },
+    "section5": {
+      "title": "Alerts",
+      "flatRsa": {
+        "title": "Flat RSA Pattern Detected",
+        "body": "All RSA entries show the same phase. This may indicate respiratory dysregulation. Consider professional review."
+      },
+      "severeRetraction": {
+        "title": "Severe Retraction Grade 3",
+        "body": "Grade 3 retraction indicates significant respiratory effort. Seek medical attention."
+      },
+      "breathingAlert": {
+        "title": "Abnormal Breathing Pattern",
+        "body": "Wheezing or periodic breathing detected. Monitor closely and consult your pediatrician."
+      },
+      "noAlerts": "No alerts at this time."
     }
   }
 }

@@ -74,6 +74,7 @@
     "reflexVisualMotor": "Reflex [TODO]",
     "galantLatch": "Galant [TODO]",
     "indoorAir": "室內空氣質量",
+    "rsaThoracic": "RSA+胸廓",
     "interopective": "Interoceptive [TODO]",
     "regulatoryFitness": "Regulatoryfitness [TODO]",
     "windowOfTolerance": "Windowoftolerance [TODO]",
@@ -5271,6 +5272,77 @@
       "completed": "已完成",
       "tapToLog": "點擊記錄",
       "currentAge": "當前月齡：{{months}} 個月"
+    }
+  },
+  "rsaThoracic": {
+    "title": "RSA + 胸廓共振",
+    "subtitle": "追蹤呼吸性竇性心律失常及胸廓觀察",
+    "composite": "綜合評分",
+    "status": {
+      "optimal": "理想",
+      "monitor": "觀察",
+      "concerning": "需關注"
+    },
+    "section1": {
+      "title": "RSA 呼吸記錄",
+      "subtitle": "點擊記錄呼吸相位",
+      "breathingIn": "吸氣",
+      "breathingOut": "呼氣",
+      "logEntry": "記錄 RSA 條目",
+      "notes": "備註",
+      "notesPlaceholder": "可選觀察...",
+      "totalEntries": "總記錄",
+      "last7Days": "最近7天",
+      "inCount": "吸氣",
+      "outCount": "呼氣",
+      "history": "RSA 歷史"
+    },
+    "section2": {
+      "title": "胸廓觀察",
+      "subtitle": "劍突狀態、內陷等級及呼吸模式",
+      "addEntry": "新增觀察",
+      "logEntry": "記錄胸廓條目",
+      "xiphoid": "劍突狀態",
+      "xiphoidOptions": {
+        "retracted": "內陷",
+        "neutral": "中立",
+        "bulging": "突出"
+      },
+      "retractionGrade": "內陷等級",
+      "grade0": "無內陷",
+      "grade1": "輕度肋下",
+      "grade2": "中度肋間",
+      "grade3": "重度",
+      "pattern": "呼吸模式",
+      "patternOptions": {
+        "normal": "正常",
+        "labored": "費力",
+        "shallow": "淺表",
+        "wheezing": "喘息",
+        "periodic": "週期性"
+      },
+      "notes": "備註",
+      "notesPlaceholder": "可選觀察...",
+      "history": "胸廓歷史"
+    },
+    "section3": {
+      "title": "RSA 7日圖表"
+    },
+    "section5": {
+      "title": "警示",
+      "flatRsa": {
+        "title": "檢測到平坦 RSA 模式",
+        "body": "所有 RSA 條目顯示相同相位。這可能表示呼吸調節失衡。建議諮詢專業人員。"
+      },
+      "severeRetraction": {
+        "title": "重度內陷 3 級",
+        "body": "3 級內陷表示呼吸用力明顯。請就醫。"
+      },
+      "breathingAlert": {
+        "title": "異常呼吸模式",
+        "body": "檢測到喘息或週期性呼吸。請密切關注並諮詢兒科醫生。"
+      },
+      "noAlerts": "目前無警示。"
     }
   }
 }

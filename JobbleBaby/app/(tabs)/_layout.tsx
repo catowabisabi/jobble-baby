@@ -347,6 +347,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="velocity-decile-tracker"
+        options={{
+          title: t('tabs.velocityDecileTracker') || 'Velocity Decile',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="chart-bar" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="clinician-portal"
         options={{
           title: t('tabs.clinicianPortal'),

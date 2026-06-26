@@ -107,6 +107,7 @@
     "phototherapyComfort": "Phototherapycomfort",
     "pincerGrasp": "Pincergrasp",
     "projection": "Projection",
+    "velocityDecileTracker": "Velocity Decile",
     "reflexIntegration": "Reflexintegration",
     "reflexTracker": "Reflextracker",
     "reflexVisualMotor": "Reflex",
@@ -384,6 +385,40 @@
       "thu": "Thu",
       "fri": "Fri",
       "sat": "Sat"
+    }
+  },
+  "velocityDecileTracker": {
+    "title": "Velocity Decile Tracker",
+    "subtitle": "Track weight gain velocity against WHO decile bands",
+    "sectionA": {
+      "title": "Weight Velocity",
+      "yAxisLabel": "Velocity (g/day)"
+    },
+    "sectionB": {
+      "title": "Current Velocity Band",
+      "belowTypical": "Below typical — consult pediatrician",
+      "lowerEnd": "Lower end of typical",
+      "typical": "Typical range",
+      "higherEnd": "Higher end of typical",
+      "accelerated": "Accelerated growth"
+    },
+    "sectionC": {
+      "title": "Trend",
+      "increasing": "Increasing",
+      "decreasing": "Decreasing",
+      "stable": "Stable"
+    },
+    "sectionD": {
+      "title": "Growth Alerts",
+      "noAlert": "No faltering detected",
+      "falteringMessage": "Warning — Velocity dropped from 50th to 15th decile in 6 weeks"
+    },
+    "sectionE": {
+      "title": "Log Weight",
+      "dateLabel": "Date",
+      "weightLabel": "Weight (kg)",
+      "saveButton": "Save Entry",
+      "velocityCalculated": "Calculated velocity"
     }
   },
   "pediatricReport": {

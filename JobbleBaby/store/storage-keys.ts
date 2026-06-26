@@ -209,4 +209,5 @@ export const STORAGE_KEYS = {
   INDOOR_AIR_LOG: "@jobble/indoor_air_log",
   RESPIRATORY_EVENTS: "@jobble/respiratory_events",
   FEEDING_READINESS_NAVIGATOR: "@jobble/feeding_readiness_navigator",
+  WEIGHT_VELOCITY_ENTRIES: "@jobble/weight_velocity_entries",
 } as const;

@@ -41,6 +41,7 @@
     "cryAcoustic": "哭聲指紋",
     "gutBrainAxis": "腸腦軸",
     "projection": "發育預測",
+    "velocityDecileTracker": "增速追蹤",
     "clinicianPortal": "醫療共享",
     "jaundice": "Jaundice [TODO]",
     "iotSecurity": "IoT 安全",
@@ -387,6 +388,40 @@
       "thu": "四",
       "fri": "五",
       "sat": "六"
+    }
+  },
+  "velocityDecileTracker": {
+    "title": "生長速度百分位追蹤器",
+    "subtitle": "追蹤體重增速並對照世衛組織十分位帶",
+    "sectionA": {
+      "title": "體重增速",
+      "yAxisLabel": "速度 (克/天)"
+    },
+    "sectionB": {
+      "title": "當前增速區間",
+      "belowTypical": "低於典型 — 請諮詢兒科醫生",
+      "lowerEnd": "典型範圍下限",
+      "typical": "典型範圍",
+      "higherEnd": "典型範圍上限",
+      "accelerated": "加速增長"
+    },
+    "sectionC": {
+      "title": "趨勢",
+      "increasing": "上升",
+      "decreasing": "下降",
+      "stable": "穩定"
+    },
+    "sectionD": {
+      "title": "生長警示",
+      "noAlert": "未檢測到生長停滯",
+      "falteringMessage": "警示 — 增速在6週內從第50百分位下降至第15百分位"
+    },
+    "sectionE": {
+      "title": "記錄體重",
+      "dateLabel": "日期",
+      "weightLabel": "體重 (公斤)",
+      "saveButton": "儲存記錄",
+      "velocityCalculated": "計算速度"
     }
   },
   "pediatricReport": {

@@ -1,116 +1,103 @@
-## Task #491 — Implement Multisensory Feeding Readiness Navigator (idea #91)
+## Task #492 — Implement Weight Velocity Decile Tracker (concept #2)
 
 **Project**: JobbleBaby
 **Repo**: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
 **Working Dir**: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
 
 ### Background
-This tab was previously attempted but the file had TSC errors and was removed. You must implement a clean, TSC-error-free version.
-
-**IMPORTANT**: This is a NEW file. Do NOT modify any existing feeding-related files.
+WHO growth charts track both percentile position AND velocity (rate of gain). Most apps only show percentile snapshots. This tab visualizes weight gain velocity in decile bands — more sensitive for detecting growth faltering or acceleration before it shows in percentiles.
 
 ### Task
 
 STEP 1 — Read these files first:
-- JobbleBaby/app/(tabs)/_layout.tsx (for tab registration pattern)
-- JobbleBaby/app/(tabs)/feeding-progression.tsx (for feeding UX patterns)
-- JobbleBaby/app/(tabs)/growth.tsx (for checklist + journal UX patterns)
-- JobbleBaby/app/i18n/en.json and zh.json (for i18n key structure)
+- JobbleBaby/app/(tabs)/_layout.tsx (tab registration pattern)
+- JobbleBaby/app/(tabs)/projection.tsx (existing growth/velocity data patterns)
+- JobbleBaby/app/(tabs)/growth.tsx (chart + journal UX patterns)
+- JobbleBaby/app/i18n/en.json and zh.json (i18n key structure)
 
-STEP 2 — Create `JobbleBaby/app/(tabs)/feeding-readiness-navigator.tsx`
+STEP 2 — Create `JobbleBaby/app/(tabs)/velocity-decile-tracker.tsx`
 
 Design:
 - SafeAreaView + ScrollView, themed (COLORS, useLanguage, useTheme)
-- Header: "Feeding Readiness" (i18n key: feedingReadinessMultisensor.title)
-- Subheader: "Solid food introduction readiness tracker" (feedingReadinessMultisensor.subtitle)
+- Header: "Velocity Decile Tracker" (i18n key: velocityDecileTracker.title)
+- Subheader: "Track weight gain velocity against WHO decile bands" (velocityDecileTracker.subtitle)
 
-SECTION A — Multisensory Readiness Checklist (3-domain tap-to-log)
-- Title: "Readiness Signals" (feedingReadinessMultisensor.sectionA.title)
-- Three sub-sections, each with checkable items:
+SECTION A — Velocity Decile Chart
+- Title: "Weight Velocity" (velocityDecileTracker.sectionA.title)
+- Bar chart showing velocity (g/day) per measurement over time
+- Horizontal reference lines at decile thresholds: 10th (red dashed), 25th (amber dashed), 50th (green solid), 75th (amber dashed), 90th (red dashed)
+- Bars colored by decile: below 10th=red, 10-25th=amber, 25-75th=green, 75-90th=amber, above 90th=blue
+- X-axis: measurement dates, Y-axis: velocity (g/day)
+- Mock data: 6 data points over 6 months
 
-ORAL MOTOR items (feedingReadinessMultisensor.sectionA.oral.*):
-- Tongue lateralization observed
-- Munching reflex present
-- Accepts spoon feeding
-- Gag reflex appropriately sensitive
-- Drooling increased
+SECTION B — Decile Band Gauge
+- Title: "Current Velocity Band" (velocityDecileTracker.sectionB.title)
+- Large horizontal bar divided into 5 colored segments (red/amber/green/amber/blue)
+- Pointer/indicator showing current velocity decile band
+- Label: "XXth decile — [description]" where descriptions:
+  - <10th: "Below typical — consult pediatrician"
+  - 10-25th: "Lower end of typical"
+  - 25-75th: "Typical range"
+  - 75-90th: "Higher end of typical"
+  - >90th: "Accelerated growth"
 
-HAND-MOUTH items (feedingReadinessMultisensor.sectionA.handMouth.*):
-- Frequent hand-to-mouth exploration
-- Pincer grasp emerging
-- Self-feeding attempts
-- Brings objects to mouth
+SECTION C — Velocity Trend Arrow
+- Title: "Trend" (velocityDecileTracker.sectionC.title)
+- Three measurements shown as connected dots with trend arrow
+- Up arrow (green): velocity increasing >20% 
+- Down arrow (red): velocity decreasing >20%
+- Stable (amber): within ±20%
+- Mock: recent measurements: 28.5, 26.2, 24.8 g/day → declining trend
 
-SENSORY items (feedingReadinessMultisensor.sectionA.sensory.*):
-- Texture tolerance score (1-5 tap to rate)
-- New taste acceptances (count)
-- Mouthing frequency (high/medium/low)
+SECTION D — Faltering Alert Card
+- Title: "Growth Alerts" (velocityDecileTracker.sectionD.title)
+- Card that shows alert if velocity dropped ≥2 decile bands in last 60 days
+- Mock alert: "⚠️ Velocity dropped from 50th to 15th decile in 6 weeks"
+- If no alert: green checkmark "No faltering detected"
 
-Each item: tappable row with icon, label, and checkmark when selected.
-Store checklist state in AsyncStorage.
+SECTION E — Velocity Entry Journal
+- Title: "Log Weight" (velocityDecileTracker.sectionE.title)
+- Simple form: date picker + weight (kg) input
+- Auto-calculates velocity from previous entry: (current - previous_weight_kg) / days × 1000 g/day
+- Save button → stores to AsyncStorage
+- Data key: @jobble/weight_velocity_entries
 
-SECTION B — Crossmodal Correlation View
-- Title: "Crossmodal Signals" (feedingReadinessMultisensor.sectionB.title)
-- Bar chart: days of mouthing vs. days to accept new food (14-day mock data)
-- X-axis: Day 1-14, Y-axis: score 0-10
-- Two bars per day: mouthing days (blue), food acceptance days (green)
-
-SECTION C — Readiness Composite Score
-- Title: "Readiness Score" (feedingReadinessMultisensor.sectionC.title)
-- Large circular gauge showing 0-100 composite score
-- Color: red (0-39), amber (40-69), green (70-100)
-- Sub-scores displayed below: Oral Motor: X%, Hand-Mouth: X%, Sensory: X%
-- Mock: composite 68 (amber), with sub-scores
-
-SECTION D — Optimal Introduction Window
-- Title: "Best Window" (feedingReadinessMultisensor.sectionD.title)
-- Card showing: "Recommended: 6.5–8 months based on readiness trend"
-- Mini timeline showing past → current → projected window
-- "Current age: 6 months" indicator
-
-SECTION E — Texture Ladder Progress
-- Title: "Food Textures" (feedingReadinessMultisensor.sectionE.title)
-- 5-stage vertical ladder with icons and labels:
-  1. Purée (icon: food-apple, color: green)
-  2. Chunky purée (icon: food-variant, color: green)
-  3. Soft meltables (icon: cookie, color: amber)
-  4. Soft solids (icon: bread-slice, color: amber)
-  5. Family foods (icon: silverware-fork-knife, color: red)
-- Current stage highlighted, stages below marked complete, above marked "next"
-- Tap to advance stage (saves to AsyncStorage)
-
-DATA: Use AsyncStorage for all data.
-- @jobble/ms_readiness_checklist: { oral: [], handMouth: [], sensory: { score: 3, newTastes: 2, mouthing: 'medium' } }
-- @jobble/texture_ladder_state: { currentStage: 1, startedAt: '2026-05-01' }
-- Mock data pre-populated for demo
+DATA: Use AsyncStorage.
+- @jobble/weight_velocity_entries: [ { date: '2026-06-01', weightKg: 7.2, velocityGDay: 24.8 }, ... ]
+- Pre-populate with 6 mock entries spanning 6 months
+- Decile thresholds (WHO standards, approximate for 0-6mo):
+  - 10th: 20 g/day
+  - 25th: 25 g/day  
+  - 50th: 30 g/day
+  - 75th: 35 g/day
+  - 90th: 40 g/day
 
 STEP 3 — Add i18n keys
-Add to en.json and zh.json under feedingReadinessMultisensor.*:
+Add to en.json and zh.json under velocityDecileTracker.*:
 - title, subtitle
-- sectionA.title, sectionA.oral.*, sectionA.handMouth.*, sectionA.sensory.*
-- sectionB.title
-- sectionC.title
-- sectionD.title, sectionD.recommended, sectionD.currentAge
-- sectionE.title, sectionE.stage1-5
+- sectionA.title, sectionA.yAxisLabel
+- sectionB.title, sectionB.belowTypical, sectionB.lowerEnd, sectionB.typical, sectionB.higherEnd, sectionB.accelerated
+- sectionC.title, sectionC.increasing, sectionC.decreasing, sectionC.stable
+- sectionD.title, sectionD.noAlert, sectionD.falteringMessage
+- sectionE.title, sectionE.dateLabel, sectionE.weightLabel, sectionE.saveButton, sectionE.velocityCalculated
 
 STEP 4 — Register in _layout.tsx
-Add Tabs.Screen entry for feeding-readiness-navigator.
-Icon: silverware-fork-knife (MaterialCommunityIcons)
-Position: after feeding-progression tab.
+Add Tabs.Screen entry for velocity-decile-tracker.
+Icon: chart-bar (MaterialCommunityIcons)
+Position: after projection tab.
 
 STEP 5 — Verify
-- TSC: npx tsc --noEmit → 0 errors (THIS IS CRITICAL - previous version had TSC errors)
+- TSC: npx tsc --noEmit → 0 errors
 - Pre-submission audit: node scripts/pre-submission-audit.js → all PASS
-- Git add + commit with message: "feat: implement Multisensory Feeding Readiness Navigator (idea #91)"
+- Git NOT needed (Hermes will commit)
 
 CRITICAL TSC RULES:
-- Always use MaterialCommunityIcons icons with exact name attribute (e.g., name="silverware-fork-knife")
+- Always use MaterialCommunityIcons icons with exact name attribute (e.g., name="chart-bar")
 - All ternary expressions: x ? value1 : null (NOT x && value)
 - No orphan imports
 - Run tsc --noEmit IMMEDIATELY after creating the file, fix ALL errors before proceeding
 
 Do NOT run npm install or modify package.json.
 
-Keywords: feeding_readiness_composite, texture_ladder, crossmodal_transfer, solid_food_introduction, oral_motor_development
-
+Keywords: weight_velocity_decile, who_growth_velocity, faltering_weight_detection, velocity_chart_who, growth_acceleration_tracking
 ULW

@@ -1,5 +1,7 @@
-🍼 Jobble Baby · 10:00
+🍼 Jobble Baby · 13:00
+✅ Done: #492 Weight Velocity Decile Tracker (fd974b4)
+✅ Done: malformed file cleanup (5511075 → pushed)
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: 82a8b46 → pushed
-📝 Desc: Cycle 528 — project unchanged since 08:02. SUBMISSION-READY (code-level). TSC: 0 errors. 98 tabs. 4982/4985 i18n keys. Sisyphus: idle.
+📦 Commit: 5511075 → pushed
+📝 Desc: Cycle 529 — project unchanged. SUBMISSION-READY (code-level). TSC: 0 errors. 98 tabs. Sisyphus: no active session.
 ⚠️ User action blockers: (1) EAS credentials, (2) App Store Connect, (3) Play Console, (4) Privacy policy URL.

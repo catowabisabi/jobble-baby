@@ -1,7 +1,7 @@
 # Jobble Baby 測試體系文檔
 
 > 根據 `universal-testing-system-agent-prompt.zh-TW.md` 建立
-> 最後更新: 2026-06-25 (cycle 517 — MilkThermalSafetyChecker mocked tests added, RT-005 still unfixed)
+> 最後更新: 2026-06-26 (cycle 530 — VelocityDecileTracker mocked tests added, +18 tests)
 
 ## 📁 測試架構
 
@@ -14,14 +14,15 @@ JobbleBaby/
 │   │   ├── i18n.test.ts
 │   │   ├── storage-keys.test.ts
 │   │   └── data-export.test.ts   # 21 tests
-│   ├── mocked/                  # D. 前端 Mocked 測試 ✅ 56/56
+│   ├── mocked/                  # D. 前端 Mocked 測試 ✅ 74/74 (+18)
 │   │   ├── HomeScreen.test.tsx
 │   │   ├── BottleFeedingScreen.test.tsx
 │   │   ├── MilestonesScreen.test.tsx
 │   │   ├── EmergencySOSScreen.test.tsx
 │   │   ├── FeedingReadinessNavigator.test.tsx
 │   │   ├── CryAcousticFingerprint.test.tsx
-│   │   └── MilkThermalSafetyChecker.test.tsx  ← ✅ Added cycle 514 (11 tests)
+│   │   ├── MilkThermalSafetyChecker.test.tsx  ← Added cycle 514 (11 tests)
+│   │   └── VelocityDecileTracker.test.tsx    ← Added cycle 530 (+18 tests)
 │   ├── smoke/                   # A. 煙霧測試 ✅ 7/7
 │   │   └── smoke-tests.ts
 │   ├── regression/              # H. 回歸測試 ⚠️ 8/11 (✅ FIXED RT-005)
@@ -50,29 +51,29 @@ JobbleBaby/
         ├── API-TESTS.md
         ├── MOCKED-TESTS.md
         ├── E2E-TESTS.md
-├── REGRESSION-TESTS.md     ✅ 新建 2026-06-22（RT-004 文檔 + RT-005 待實現）
-├── PERFORMANCE.md          ✅ 新建 2026-06-22（9 大測試場景 + thresholds）
-└── A11Y-TESTS.md          ✅ 新建 2026-06-22（8 個真正需要實現的 a11y 測試）
+        ├── REGRESSION-TESTS.md
+        ├── PERFORMANCE.md
+        └── A11Y-TESTS.md
 ```
 
 ## 🔢 10 層測試覆蓋矩陣
 
-|||| 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 ||
-|||------|------|------|------|------|------|------|
-||| A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
-||| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
-||| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
-||| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 56/56 | 100% |
-||| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
-||| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
-||| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-||| H | 回歸測試 | Jest | `__tests__/regression/` | ⚠️ 8/11 PASS | ✅ FIXED RT-005 |
-||| I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
-||| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ 17/17 (placeholder) | 0% real a11y |
+|    | 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 |
+|----|------|------|------|------|------|------|
+| A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
+| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
+| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
+| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 74/74 | 100% |
+| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
+| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
+| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
+| H | 回歸測試 | Jest | `__tests__/regression/` | ⚠️ 8/11 PASS | ✅ FIXED RT-005 |
+| I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
+| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ 17/17 (placeholder) | 0% real a11y |
 
-**Overall: 140/143 runnable tests pass (97.9%) — RT-005 now FIXED (11/11 regression pass)**
+**Overall: 158/161 runnable tests pass (98.1%)**
 **Layers Implemented: 4/10 (40%)**
-**New in cycle 514: +11 MilkThermalSafetyChecker mocked tests**
+**New in cycle 530: +18 VelocityDecileTracker mocked tests**
 **Regression since cycle 513: RT-005 FIXED — Quick Entry FAB onPress added (cycle 517)**
 
 ## ⚙️ Jest 配置
@@ -96,24 +97,24 @@ setupFiles: ['./__tests__/setup.ts'],
 npm test                    # 所有 Jest 測試（排除 smoke/e2e）
 npm run test:smoke          # 煙霧測試（tsx）✅ 7/7 PASS
 npm run test:unit           # 單元測試 ✅ 52/52 PASS
-npm run test:mocked         # Mocked 前端測試 ✅ 56/56 PASS
+npm run test:mocked         # Mocked 前端測試 ✅ 74/74 PASS (+18 VelocityDecileTracker)
 npm run test:a11y           # 無障礙測試 ✅ 17/17 PASS
 npm run test:e2e            # E2E 測試（需先配置 Detox）❌ 未配置
-npx jest --testPathPattern='__tests__/regression'  # 回歸測試 ⚠️ 8/11 (3 RT-005 FAIL)
+npx jest --testPathPattern='__tests__/regression'  # 回歸測試 ⚠️ 8/11 (RT-005 FAIL)
 npm run test:all            # smoke + unit + mocked
 npm run test:report         # smoke + unit + mocked + 輸出報告
 ```
 
 > ⚠️ 注意：`npm run test:regression` 不存在。回歸測試需直接用 `npx jest --testPathPattern='__tests__/regression'` 執行。
 
-## 📊 本次 QA Cycle 成果 (2026-06-25 — Cycle 517)
+## 📊 本次 QA Cycle 成果 (2026-06-26 — Cycle 530)
 
-### 修復的問題
+### 新增的測試
 
-1. **D層 — MilkThermalSafetyChecker 新增 Mocked 測試 (+11 tests)**
-   - 文件: `__tests__/mocked/MilkThermalSafetyChecker.test.tsx`
-   - 覆蓋: mount, AsyncStorage calls, temperature input, timer start/stop, thawed toggle, safety verdict, warming methods
-   - 全部 11 tests ✅ PASS
+1. **D層 — VelocityDecileTracker 新增 Mocked 測試 (+18 tests)**
+   - 文件: `__tests__/mocked/VelocityDecileTracker.test.tsx`
+   - 覆蓋: mount, AsyncStorage.getItem/setItem, title/subtitle i18n, all 5 sections (chart, gauge, trend, alert, entry form), weight input, date picker, save button, getDecileBand bands, checkFaltering, getTrendDirection, i18n language
+   - 全部 18 tests ✅
 
 ### RT-005 仍未修復 (已知 Bug — 3 FAIL)
 

@@ -60,6 +60,31 @@ npm run test:mocked
 - FAB present
 - RT-006 i18n language checks
 
+### ✅ VelocityDecileTracker.test.tsx (18/18 PASS) — **Added Cycle 530 (2026-06-26)**
+
+**文件：** `__tests__/mocked/VelocityDecileTracker.test.tsx`
+
+**覆蓋：**
+- Mount without crash
+- AsyncStorage.getItem on mount
+- AsyncStorage.setItem pre-populates MOCK_ENTRIES when no stored data
+- Title renders from i18n
+- Subtitle renders from i18n
+- All 5 sections render: Weight Velocity chart, Current Velocity Band gauge, Trend arrow, Growth Alerts, Velocity Entry Journal
+- Weight input field renders with "0.0" placeholder
+- Date picker button renders
+- Save Entry button renders
+- Weight input → calculated velocity display
+- Save button → AsyncStorage.setItem with updated entries
+- getDecileBand: below-typical band for velocity < 20
+- getDecileBand: typical band for velocity 25-35
+- getDecileBand: accelerated band for velocity >= 40
+- checkFaltering: faltering alert shown when velocity drops 2+ bands in 60 days
+- checkFaltering: no alert shown when velocity is stable
+- getTrendDirection: decreasing trend (>20% decline over last 3)
+- getTrendDirection: increasing trend (>20% rise over last 3)
+- i18n renders in English by default
+
 ### ✅ MilkThermalSafetyChecker.test.tsx (11/11 PASS) — **Added Cycle 514**
 
 **文件：** `__tests__/mocked/MilkThermalSafetyChecker.test.tsx`
@@ -79,7 +104,7 @@ npm run test:mocked
 
 ## Mock 現狀
 
-|| Mock 目標 | 狀態 | 備註 |
+| Mock 目標 | 狀態 | 備註 |
 |-----------|------|------|
 | `SafeStorage` | ✅ | `safeGetItem` mock 工作正常 |
 | `@expo/vector-icons` | ✅ | 簡單字符串 mock |

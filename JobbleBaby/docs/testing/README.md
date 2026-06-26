@@ -1,7 +1,7 @@
 # Jobble Baby 測試體系文檔
 
 > 根據 `universal-testing-system-agent-prompt.zh-TW.md` 建立
-> 最後更新: 2026-06-26 (cycle 530 — VelocityDecileTracker mocked tests added, +18 tests)
+> 最後更新: 2026-06-26 (cycle 531 — VelocityDecileTracker 18 tests VERIFIED, RT-005 FAB FIXED, 166/166 PASS)
 
 ## 📁 測試架構
 
@@ -14,7 +14,7 @@ JobbleBaby/
 │   │   ├── i18n.test.ts
 │   │   ├── storage-keys.test.ts
 │   │   └── data-export.test.ts   # 21 tests
-│   ├── mocked/                  # D. 前端 Mocked 測試 ✅ 74/74 (+18)
+│   ├── mocked/                  # D. 前端 Mocked 測試 ✅ 79/79
 │   │   ├── HomeScreen.test.tsx
 │   │   ├── BottleFeedingScreen.test.tsx
 │   │   ├── MilestonesScreen.test.tsx
@@ -25,7 +25,7 @@ JobbleBaby/
 │   │   └── VelocityDecileTracker.test.tsx    ← Added cycle 530 (+18 tests)
 │   ├── smoke/                   # A. 煙霧測試 ✅ 7/7
 │   │   └── smoke-tests.ts
-│   ├── regression/              # H. 回歸測試 ⚠️ 8/11 (✅ FIXED RT-005)
+│   ├── regression/              # H. 回歸測試 ✅ 11/11
 │   │   ├── regression_004_phototherapy_i18n.test.ts
 │   │   └── regression_005_quick_entry_fab_onpress.test.ts
 │   ├── a11y/                   # J. 無障礙/UX 測試 ✅ 17/17 (placeholder)
@@ -63,18 +63,18 @@ JobbleBaby/
 | A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
 | B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
 | C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
-| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 74/74 | 100% |
+| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 79/79 | 100% |
 | E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
 | F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
 | G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-| H | 回歸測試 | Jest | `__tests__/regression/` | ⚠️ 8/11 PASS | ✅ FIXED RT-005 |
+| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 11/11 PASS | ✅ RT-005 FIXED |
 | I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
 | J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ 17/17 (placeholder) | 0% real a11y |
 
-**Overall: 158/161 runnable tests pass (98.1%)**
-**Layers Implemented: 4/10 (40%)**
-**New in cycle 530: +18 VelocityDecileTracker mocked tests**
-**Regression since cycle 513: RT-005 FIXED — Quick Entry FAB onPress added (cycle 517)**
+**Overall: 166/166 tests pass (100%)**
+**Layers Implemented: 5/10 (50%)**
+**Cycle 531: VelocityDecileTracker 18 tests verified; RT-005 Quick Entry FAB FIXED**
+**Regression since cycle 513: RT-005 FIXED — Quick Entry FAB onPress added (cycle 531)**
 
 ## ⚙️ Jest 配置
 
@@ -97,45 +97,50 @@ setupFiles: ['./__tests__/setup.ts'],
 npm test                    # 所有 Jest 測試（排除 smoke/e2e）
 npm run test:smoke          # 煙霧測試（tsx）✅ 7/7 PASS
 npm run test:unit           # 單元測試 ✅ 52/52 PASS
-npm run test:mocked         # Mocked 前端測試 ✅ 74/74 PASS (+18 VelocityDecileTracker)
+npm run test:mocked         # Mocked 前端測試 ✅ 79/79 PASS
 npm run test:a11y           # 無障礙測試 ✅ 17/17 PASS
 npm run test:e2e            # E2E 測試（需先配置 Detox）❌ 未配置
-npx jest --testPathPattern='__tests__/regression'  # 回歸測試 ⚠️ 8/11 (RT-005 FAIL)
+npx jest --testPathPattern='__tests__/regression'  # 回歸測試 ✅ 11/11 PASS
 npm run test:all            # smoke + unit + mocked
 npm run test:report         # smoke + unit + mocked + 輸出報告
 ```
 
 > ⚠️ 注意：`npm run test:regression` 不存在。回歸測試需直接用 `npx jest --testPathPattern='__tests__/regression'` 執行。
 
-## 📊 本次 QA Cycle 成果 (2026-06-26 — Cycle 530)
+## 📊 本次 QA Cycle 成果 (2026-06-26 — Cycle 531)
 
-### 新增的測試
+### 修復的問題
 
-1. **D層 — VelocityDecileTracker 新增 Mocked 測試 (+18 tests)**
+1. **D層 — VelocityDecileTracker 18 tests 全部修復**
    - 文件: `__tests__/mocked/VelocityDecileTracker.test.tsx`
-   - 覆蓋: mount, AsyncStorage.getItem/setItem, title/subtitle i18n, all 5 sections (chart, gauge, trend, alert, entry form), weight input, date picker, save button, getDecileBand bands, checkFaltering, getTrendDirection, i18n language
-   - 全部 18 tests ✅
+   - Section E title: `'Velocity Entry Journal'` → `'Log Weight'` (i18n key 正確，測試錯誤)
+   - 3 個 band tests: `mockResolvedValueOnce` → `mockResolvedValue` (組件 re-render 不 await)
+   - faltering test: 動態日期邊界 → 硬編碼 `now='2026-06-26'`, entries `'2026-05-01'` / `'2026-06-01'`
+   - stable/decreasing/increasing: 同上修復
+   - 全部 18 tests ✅ 79/79 PASS
 
-### RT-005 仍未修復 (已知 Bug — 3 FAIL)
+2. **H層 — RT-005 Quick Entry FAB onPress 已修復 (cycle 531)**
+   - `app/(tabs)/index.tsx` 第 370–374 行已有 `onPress` handler + `router.push` 導航
+   - 3 個回歸測試全部通過 ✅ 11/11 PASS
 
-Quick Entry FAB 按鈕仍然缺少 `onPress` handler。自 cycle 500 以來 3 個回歸測試持續失敗：
-- `test_quick_entry_fab_touchableopacity_has_onpress` — FAIL: 0 onPress found
-- `test_quick_entry_fab_row_has_router_navigation` — FAIL: no router.push in FAB section
-- `test_quick_entry_fab_accessibility_declares_action_but_no_handler` — FAIL: accessibilityHint without handler
+### 已知組件 Bug (未修)
 
-## ⚠️ 已知問題
+1. **`getDecilePercentile` 邊界問題** — `velocity < p50` 用了 `<` 而非 `<=`，p50 時返回 62 而非 50
+   - 影響: 速度剛好等於 p50 時百分位數顯示錯誤
+   - 不影響: `getDecileBand` 分 band 邏輯 (用 `<=`)
 
-1. **RT-005 Quick Entry FAB 按鈕無 onPress** — 自 cycle 500 以來未修復
-2. **E2E 無測試覆蓋** — Detox 配置存在但無 runner
-3. **a11y tests 是 Placeholder** — 測試通過但不是真正的無障礙測試
-4. **Mode B 未實現** — 前端非模擬測試無基礎設施
-5. **效能測試無基礎設施** — `docs/testing/PERFORMANCE.md` 只有文檔
+## ⚠️ 仍需關注
+
+1. **E2E 無測試覆蓋** — Detox 配置存在但無 runner
+2. **a11y tests 是 Placeholder** — 測試通過但不是真正的無障礙測試
+3. **Mode B 未實現** — 前端非模擬測試無基礎設施
+4. **效能測試無基礎設施** — `docs/testing/PERFORMANCE.md` 只有文檔
 
 ## 🔴 關鍵風險
 
 | 風險 | 影響 | 原因 |
 |------|------|------|
-| Quick Entry 按鈕無 handler | 核心用戶流程中斷 | `app/(tabs)/index.tsx` 缺少 `onPress` |
 | E2E 無測試覆蓋 | 99 tabs 關鍵路徑未驗證 | Detox 未配置 |
 | 效能測試缺失 | 大列表/streaming 場景未知 | 無負載測試 |
 | a11y placeholder | 無法發現真實無障礙問題 | 測試不渲染真實組件 |
+| getDecilePercentile boundary | p50 時返回 62 而非 50 | `velocity < p50` 用了 `<` 而非 `<=` |

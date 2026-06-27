@@ -1,7 +1,7 @@
 # Jobble Baby 測試體系文檔
 
 > 根據 `universal-testing-system-agent-prompt.zh-TW.md` 建立
-> 最後更新: 2026-06-26 (cycle 531 — VelocityDecileTracker 18 tests VERIFIED, RT-005 FAB FIXED, 166/166 PASS)
+> 最後更新: 2026-06-27 (cycle 534 — 4 new screen tests added + fixed, 183/183 PASS)
 
 ## 📁 測試架構
 
@@ -14,15 +14,19 @@ JobbleBaby/
 │   │   ├── i18n.test.ts
 │   │   ├── storage-keys.test.ts
 │   │   └── data-export.test.ts   # 21 tests
-│   ├── mocked/                  # D. 前端 Mocked 測試 ✅ 79/79
+│   ├── mocked/                  # D. 前端 Mocked 測試 ✅ 96/96
 │   │   ├── HomeScreen.test.tsx
 │   │   ├── BottleFeedingScreen.test.tsx
 │   │   ├── MilestonesScreen.test.tsx
 │   │   ├── EmergencySOSScreen.test.tsx
 │   │   ├── FeedingReadinessNavigator.test.tsx
 │   │   ├── CryAcousticFingerprint.test.tsx
-│   │   ├── MilkThermalSafetyChecker.test.tsx  ← Added cycle 514 (11 tests)
-│   │   └── VelocityDecileTracker.test.tsx    ← Added cycle 530 (+18 tests)
+│   │   ├── MilkThermalSafetyChecker.test.tsx
+│   │   ├── VelocityDecileTracker.test.tsx
+│   │   ├── CircadianScreen.test.tsx     ← Added cycle 534 (+4 tests)
+│   │   ├── GrowthScreen.test.tsx        ← Added cycle 534 (+5 tests)
+│   │   ├── ProfileScreen.test.tsx       ← Added cycle 534 (+4 tests, fixed mock)
+│   │   └── SleepTrainingScreen.test.tsx ← Added cycle 534 (+4 tests)
 │   ├── smoke/                   # A. 煙霧測試 ✅ 7/7
 │   │   └── smoke-tests.ts
 │   ├── regression/              # H. 回歸測試 ✅ 11/11
@@ -58,22 +62,22 @@ JobbleBaby/
 
 ## 🔢 10 層測試覆蓋矩陣
 
-|    | 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 |
-|----|------|------|------|------|------|------|
-| A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
-| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
-| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
-| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 79/79 | 100% |
-| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
-| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
-| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 11/11 PASS | ✅ RT-005 FIXED |
-| I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
-| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ 17/17 (placeholder) | 0% real a11y |
+||    | 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 |
+||----|------|------|------|------|------|------|
+|| A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
+|| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
+|| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
+|| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 96/96 | 100% |
+|| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
+|| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
+|| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
+|| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 13/13 | ✅ RT-005 FIXED |
+|| I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
+|| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ 15/15 (placeholder) | 0% real a11y |
 
-**Overall: 166/166 tests pass (100%)**
+**Overall: 183/183 tests pass (100%)**
 **Layers Implemented: 5/10 (50%)**
-**Cycle 531: VelocityDecileTracker 18 tests verified; RT-005 Quick Entry FAB FIXED**
+**Cycle 534: 4 new screen tests (Circadian, Growth, Profile, SleepTraining) + 2 mock bugs fixed**
 **Regression since cycle 513: RT-005 FIXED — Quick Entry FAB onPress added (cycle 531)**
 
 ## ⚙️ Jest 配置

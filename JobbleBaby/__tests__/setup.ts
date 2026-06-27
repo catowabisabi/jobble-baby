@@ -44,7 +44,20 @@ jest.mock('expo-notifications', () => ({
 // Mock @expo/vector-icons
 jest.mock('@expo/vector-icons', () => ({
   MaterialIcons: 'MaterialIcons',
+  MaterialCommunityIcons: 'MaterialCommunityIcons',
+  Ionicons: 'Ionicons',
 }));
+
+// Mock expo-modules-core for all tests
+jest.mock('expo-modules-core', () => ({
+  EventEmitter: class {},
+  NativeModulesProxy: {},
+  requireNativeModule: jest.fn(),
+  requireOptionalNativeModule: jest.fn(),
+}));
+
+// Mock direct subpath imports used by some screens
+jest.mock('@expo/vector-icons/MaterialCommunityIcons', () => 'MaterialCommunityIcons', { virtual: true });
 
 // Mock expo-document-picker
 jest.mock('expo-document-picker', () => ({

@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 16:00
+🍼 Jobble Baby · 17:00
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: a0f3e27 → pushed
+📦 Commit: e055256 → pushed
 📝 Desc: Jobble Baby 完全 code-complete。99 tabs、TSC 0 errors、Audit 9/9、Jest 192 tests 全 PASS、i18n 141 keys 完美對稱。
 ⚠️ 4個 user-action blockers 需處理：
   1. EAS credentials（Apple Team ID + App-Specific Password）

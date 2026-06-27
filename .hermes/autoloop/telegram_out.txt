@@ -1,10 +1,11 @@
-🍼 Jobble Baby · 00:01
+🍼 Jobble Baby · 01:00
+✅ Done: #471 Cry Acoustic Fingerprint Navigator (cycle 531)
 📋 TODO: 0 pending · 0 new · 98 completed
-📦 Commit: dc63b38 → pushed
-📝 狀態：代碼級 SUBMISSION-READY
+📦 Commit: 59ae4b7 → pushed
+📝 Desc: 代碼級 SUBMISSION-READY。全部 98 tabs 完成，TSC 0 errors，pre-submission audit 9/9 PASS。
 ⚠️ 用戶需親自完成（無法代勞）：
   1. Apple EAS credentials（Team ID + App-Specific Password）
   2. App Store Connect 建立 com.jobblebaby.app
   3. Play Console 建立 com.jobblebaby.app
-  4. 隱私政策 URL 部署（目前 404，需部署至 jobblebaby.com/privacy）
-🤖 Sisyphus：idle，隨時候命
+  4. 隱私政策 URL → https://catowabisabi.github.io/jobble-baby/privacy（目前 404，需 GitHub Pages source 設定正確）
+🤖 Sisyphus：idle，隨伺候命

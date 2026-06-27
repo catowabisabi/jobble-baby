@@ -1,6 +1,10 @@
-🍼 [Jobble Baby] · 23:00
-✅ Completed: #471 Cry Acoustic Fingerprint Navigator
-🔧 Dispatched: —
-📋 TODO: 0 pending · 0 new · 98 total
-📦 Commit: 3801262 → pushed
-📝 Desc: 项目已 SUBMISSION-READY，代码级审核全部通过。剩余工作：用户自行配置 EAS credentials、创建 App Store Connect 和 Play Console 应用。
+🍼 Jobble Baby · 00:01
+📋 TODO: 0 pending · 0 new · 98 completed
+📦 Commit: dc63b38 → pushed
+📝 狀態：代碼級 SUBMISSION-READY
+⚠️ 用戶需親自完成（無法代勞）：
+  1. Apple EAS credentials（Team ID + App-Specific Password）
+  2. App Store Connect 建立 com.jobblebaby.app
+  3. Play Console 建立 com.jobblebaby.app
+  4. 隱私政策 URL 部署（目前 404，需部署至 jobblebaby.com/privacy）
+🤖 Sisyphus：idle，隨時候命

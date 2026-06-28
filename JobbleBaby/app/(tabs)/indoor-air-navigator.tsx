@@ -258,7 +258,7 @@ export default function IndoorAirNavigatorScreen() {
             <Text style={{ color: text }}>{getRoomLabel(room.room, t)}</Text>
             <View style={styles.scoreButtons}>
               {[1, 2, 3, 4, 5].map(score => (
-                <TouchableOpacity key={score} onPress={() => updateRoomScore(room.room, score)} style={[styles.scoreBtn, { backgroundColor: room.score === score ? primary : border }]}>
+                <TouchableOpacity key={score} onPress={() => updateRoomScore(room.room, score)} style={[styles.scoreBtn, { backgroundColor: room.score === score ? primary : border }]} accessibilityLabel={`${getRoomLabel(room.room, t)} score ${score}`}>
                   <Text style={{ color: room.score === score ? '#fff' : subtext, fontSize: 12 }}>{score}</Text>
                 </TouchableOpacity>
               ))}
@@ -298,7 +298,7 @@ export default function IndoorAirNavigatorScreen() {
         {/* Section Tabs */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.sectionTabs}>
           {(['log', 'resp', 'correlation', 'rooms', 'alert'] as const).map(section => (
-            <TouchableOpacity key={section} onPress={() => setActiveSection(section)} style={[styles.sectionTab, activeSection === section && { backgroundColor: primary }]}>
+            <TouchableOpacity key={section} onPress={() => setActiveSection(section)} style={[styles.sectionTab, activeSection === section && { backgroundColor: primary }]} accessibilityLabel={`${section === 'log' ? t('indoorAir.tabs.airLog') : section === 'resp' ? t('indoorAir.tabs.respiratory') : section === 'correlation' ? t('indoorAir.tabs.correlation') : section === 'rooms' ? t('indoorAir.tabs.roomScore') : t('indoorAir.tabs.alert')} tab`}>
               <Text style={{ color: activeSection === section ? '#fff' : subtext, fontSize: 13 }}>
                 {section === 'log' ? t('indoorAir.tabs.airLog') : section === 'resp' ? t('indoorAir.tabs.respiratory') : section === 'correlation' ? t('indoorAir.tabs.correlation') : section === 'rooms' ? t('indoorAir.tabs.roomScore') : t('indoorAir.tabs.alert')}
               </Text>
@@ -318,14 +318,14 @@ export default function IndoorAirNavigatorScreen() {
 
       {/* FAB — Add Air Log */}
       {activeSection === 'log' && (
-        <TouchableOpacity style={[styles.fab, { backgroundColor: primary }]} onPress={() => setShowAirModal(true)}>
+        <TouchableOpacity style={[styles.fab, { backgroundColor: primary }]} onPress={() => setShowAirModal(true)} accessibilityLabel={t('indoorAir.airLog.add')}>
           <Text style={styles.fabText}>+ {t('indoorAir.airLog.add')}</Text>
         </TouchableOpacity>
       )}
 
       {/* FAB — Add Resp Event */}
       {activeSection === 'resp' && (
-        <TouchableOpacity style={[styles.fab, { backgroundColor: '#DC2626' }]} onPress={() => setShowRespModal(true)}>
+        <TouchableOpacity style={[styles.fab, { backgroundColor: '#DC2626' }]} onPress={() => setShowRespModal(true)} accessibilityLabel={t('indoorAir.respiratory.add')}>
           <Text style={styles.fabText}>+ {t('indoorAir.respiratory.add')}</Text>
         </TouchableOpacity>
       )}
@@ -335,14 +335,14 @@ export default function IndoorAirNavigatorScreen() {
         <View style={styles.modalOverlay}>
           <View style={[styles.modal, { backgroundColor: card }]}>
             <Text style={[styles.modalTitle, { color: text }]}>{t('indoorAir.airLog.addNew')}</Text>
-            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.purifier')}</Text><TouchableOpacity onPress={() => setPurifierOn(!purifierOn)} style={[styles.toggle, { backgroundColor: purifierOn ? primary : border }]}><Text style={{ color: '#fff' }}>{purifierOn ? 'ON' : 'OFF'}</Text></TouchableOpacity></View>
+            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.purifier')}</Text><TouchableOpacity onPress={() => setPurifierOn(!purifierOn)} style={[styles.toggle, { backgroundColor: purifierOn ? primary : border }]} accessibilityLabel={`${t('indoorAir.airLog.purifier')} ${purifierOn ? 'ON' : 'OFF'}`}><Text style={{ color: '#fff' }}>{purifierOn ? 'ON' : 'OFF'}</Text></TouchableOpacity></View>
             <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.window')}</Text><TextInput style={[styles.input, { color: text, borderColor: border }]} value={windowMinutes} onChangeText={setWindowMinutes} keyboardType="numeric" placeholder="0" placeholderTextColor={subtext} /></View>
-            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.candles')}</Text><TouchableOpacity onPress={() => setCandlesIncense(!candlesIncense)} style={[styles.toggle, { backgroundColor: candlesIncense ? '#F59E0B' : border }]}><Text style={{ color: '#fff' }}>{candlesIncense ? 'ON' : 'OFF'}</Text></TouchableOpacity></View>
-            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.cleaning')}</Text><TouchableOpacity onPress={() => setCleaningProducts(!cleaningProducts)} style={[styles.toggle, { backgroundColor: cleaningProducts ? '#F59E0B' : border }]}><Text style={{ color: '#fff' }}>{cleaningProducts ? 'ON' : 'OFF'}</Text></TouchableOpacity></View>
-            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.cooking')}</Text><TouchableOpacity onPress={() => setCookingEvent(!cookingEvent)} style={[styles.toggle, { backgroundColor: cookingEvent ? '#F59E0B' : border }]}><Text style={{ color: '#fff' }}>{cookingEvent ? 'ON' : 'OFF'}</Text></TouchableOpacity></View>
+            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.candles')}</Text><TouchableOpacity onPress={() => setCandlesIncense(!candlesIncense)} style={[styles.toggle, { backgroundColor: candlesIncense ? '#F59E0B' : border }]} accessibilityLabel={`${t('indoorAir.airLog.candles')} ${candlesIncense ? 'ON' : 'OFF'}`}><Text style={{ color: '#fff' }}>{candlesIncense ? 'ON' : 'OFF'}</Text></TouchableOpacity></View>
+            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.cleaning')}</Text><TouchableOpacity onPress={() => setCleaningProducts(!cleaningProducts)} style={[styles.toggle, { backgroundColor: cleaningProducts ? '#F59E0B' : border }]} accessibilityLabel={`${t('indoorAir.airLog.cleaning')} ${cleaningProducts ? 'ON' : 'OFF'}`}><Text style={{ color: '#fff' }}>{cleaningProducts ? 'ON' : 'OFF'}</Text></TouchableOpacity></View>
+            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.airLog.cooking')}</Text><TouchableOpacity onPress={() => setCookingEvent(!cookingEvent)} style={[styles.toggle, { backgroundColor: cookingEvent ? '#F59E0B' : border }]} accessibilityLabel={`${t('indoorAir.airLog.cooking')} ${cookingEvent ? 'ON' : 'OFF'}`}><Text style={{ color: '#fff' }}>{cookingEvent ? 'ON' : 'OFF'}</Text></TouchableOpacity></View>
             <View style={styles.modalBtns}>
-              <TouchableOpacity style={[styles.btn, { backgroundColor: border }]} onPress={() => { setShowAirModal(false); resetAirForm(); }}><Text style={{ color: text }}>{t('common.cancel')}</Text></TouchableOpacity>
-              <TouchableOpacity style={[styles.btn, { backgroundColor: primary }]} onPress={handleAddAirLog}><Text style={{ color: '#fff' }}>{t('common.save')}</Text></TouchableOpacity>
+              <TouchableOpacity style={[styles.btn, { backgroundColor: border }]} onPress={() => { setShowAirModal(false); resetAirForm(); }} accessibilityLabel={t('common.cancel')}><Text style={{ color: text }}>{t('common.cancel')}</Text></TouchableOpacity>
+              <TouchableOpacity style={[styles.btn, { backgroundColor: primary }]} onPress={handleAddAirLog} accessibilityLabel={t('common.save')}><Text style={{ color: '#fff' }}>{t('common.save')}</Text></TouchableOpacity>
             </View>
           </View>
         </View>
@@ -356,17 +356,17 @@ export default function IndoorAirNavigatorScreen() {
             <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.respiratory.coughCount')}</Text><TextInput style={[styles.input, { color: text, borderColor: border }]} value={coughCount} onChangeText={setCoughCount} keyboardType="numeric" placeholder="0" placeholderTextColor={subtext} /></View>
             <Text style={{ color: subtext, marginBottom: 4 }}>{t('indoorAir.respiratory.wheezeSeverity')}: {getWheezeLabel(wheezeSeverity, t)}</Text>
             <View style={styles.severityRow}>
-              {[0, 1, 2, 3].map(s => <TouchableOpacity key={s} onPress={() => setWheezeSeverity(s)} style={[styles.sevBtn, { backgroundColor: wheezeSeverity === s ? primary : border }]}><Text style={{ color: wheezeSeverity === s ? '#fff' : subtext }}>{s}</Text></TouchableOpacity>)}
+              {[0, 1, 2, 3].map(s => <TouchableOpacity key={s} onPress={() => setWheezeSeverity(s)} style={[styles.sevBtn, { backgroundColor: wheezeSeverity === s ? primary : border }]} accessibilityLabel={`${t('indoorAir.respiratory.wheezeSeverity')} ${s}`}><Text style={{ color: wheezeSeverity === s ? '#fff' : subtext }}>{s}</Text></TouchableOpacity>)}
             </View>
             <Text style={{ color: subtext, marginBottom: 4 }}>{t('indoorAir.respiratory.congestionScore')}: {getCongestionLabel(congestionScore, t)}</Text>
             <View style={styles.severityRow}>
-              {[0, 1, 2, 3, 4, 5].map(s => <TouchableOpacity key={s} onPress={() => setCongestionScore(s)} style={[styles.sevBtn, { backgroundColor: congestionScore === s ? '#DC2626' : border }]}><Text style={{ color: congestionScore === s ? '#fff' : subtext }}>{s}</Text></TouchableOpacity>)}
+              {[0, 1, 2, 3, 4, 5].map(s => <TouchableOpacity key={s} onPress={() => setCongestionScore(s)} style={[styles.sevBtn, { backgroundColor: congestionScore === s ? '#DC2626' : border }]} accessibilityLabel={`${t('indoorAir.respiratory.congestionScore')} ${s}`}><Text style={{ color: congestionScore === s ? '#fff' : subtext }}>{s}</Text></TouchableOpacity>)}
             </View>
-            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.respiratory.reliever')}</Text><TouchableOpacity onPress={() => setRelieverUsed(!relieverUsed)} style={[styles.toggle, { backgroundColor: relieverUsed ? primary : border }]}><Text style={{ color: '#fff' }}>{relieverUsed ? 'YES' : 'NO'}</Text></TouchableOpacity></View>
+            <View style={styles.formRow}><Text style={{ color: text }}>{t('indoorAir.respiratory.reliever')}</Text><TouchableOpacity onPress={() => setRelieverUsed(!relieverUsed)} style={[styles.toggle, { backgroundColor: relieverUsed ? primary : border }]} accessibilityLabel={`${t('indoorAir.respiratory.reliever')} ${relieverUsed ? 'YES' : 'NO'}`}><Text style={{ color: '#fff' }}>{relieverUsed ? 'YES' : 'NO'}</Text></TouchableOpacity></View>
             {relieverUsed && <TextInput style={[styles.input, { color: text, borderColor: border }]} value={relieverType} onChangeText={setRelieverType} placeholder={t('indoorAir.respiratory.relieverTypePlaceholder')} placeholderTextColor={subtext} />}
             <View style={styles.modalBtns}>
-              <TouchableOpacity style={[styles.btn, { backgroundColor: border }]} onPress={() => { setShowRespModal(false); resetRespForm(); }}><Text style={{ color: text }}>{t('common.cancel')}</Text></TouchableOpacity>
-              <TouchableOpacity style={[styles.btn, { backgroundColor: '#DC2626' }]} onPress={handleAddRespEvent}><Text style={{ color: '#fff' }}>{t('common.save')}</Text></TouchableOpacity>
+              <TouchableOpacity style={[styles.btn, { backgroundColor: border }]} onPress={() => { setShowRespModal(false); resetRespForm(); }} accessibilityLabel={t('common.cancel')}><Text style={{ color: text }}>{t('common.cancel')}</Text></TouchableOpacity>
+              <TouchableOpacity style={[styles.btn, { backgroundColor: '#DC2626' }]} onPress={handleAddRespEvent} accessibilityLabel={t('common.save')}><Text style={{ color: '#fff' }}>{t('common.save')}</Text></TouchableOpacity>
             </View>
           </View>
         </View>

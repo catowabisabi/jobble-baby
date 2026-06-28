@@ -1,6 +1,7 @@
-🍼 Jobble Baby · 14:00
-✅ Done: —
-🔧 Dispatched: — (0 pending · 0 new)
-📋 TODO: 0 pending · 0 new · 183 done
-📦 Commit: 8a218c9 → pushed (progress.db sync)
-📝 Desc: 代碼級完成，所有 183 todo 做完。keyword pool 1000/1000。i18n/TSC/Audit/Jest 全部 green。Sisyphus idle。等待用戶處理 4 個 blockers：① EAS credentials ② App Store Connect 建立 app ③ Play Console 建立 app ④ 隱私政策 URL HTTP 404 修復。
+🍼 Jobble Baby · 03:10 HKT
+
+✅ Done: RT-006 roomScores persist fix — updateRoomScore now calls safeSetItem; ROOM_SCORES_KEY added to storage-keys.ts; room scores load on mount
+
+📋 TODO: 0 pending · 0 new · 183 completed
+📦 Commit: 853795b → pushed
+📝 Desc: RT-006 房間評分重啟後消失問題已修復。本週期發現室內空氣導航房間評分 updateRoomScore() 冇 persist，regression test 3/3 FAIL 即時修復。TSC 0 errors，Audit 6/6 PASS，Tests 195 PASS。

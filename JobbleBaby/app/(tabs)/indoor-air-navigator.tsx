@@ -10,6 +10,7 @@ import { STORAGE_KEYS } from '../../store/storage-keys';
 // ─── Storage Keys ─────────────────────────────────────────────────────────────
 const AIR_LOG_KEY = STORAGE_KEYS.INDOOR_AIR_LOG;
 const RESP_EVENTS_KEY = STORAGE_KEYS.RESPIRATORY_EVENTS;
+const ROOM_SCORES_KEY = STORAGE_KEYS.ROOM_SCORES;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface AirLogEntry {
@@ -103,6 +104,14 @@ export default function IndoorAirNavigatorScreen() {
 
   useEffect(() => { loadData(); }, [loadData]);
 
+  // ── Load room scores on mount ────────────────────────────────────────────────
+  useEffect(() => {
+    (async () => {
+      const roomRaw = await safeGetItem(ROOM_SCORES_KEY);
+      if (roomRaw) setRoomScores(JSON.parse(roomRaw));
+    })();
+  }, []);
+
   // ── Save helpers ─────────────────────────────────────────────────────────────
   async function saveAirLogs(logs: AirLogEntry[]) {
     setAirLogs(logs);
@@ -163,6 +172,7 @@ export default function IndoorAirNavigatorScreen() {
   async function updateRoomScore(room: RoomScore['room'], score: number) {
     const updated = roomScores.map(r => r.room === room ? { ...r, score } : r);
     setRoomScores(updated);
+    await safeSetItem(ROOM_SCORES_KEY, JSON.stringify(updated));
   }
 
   // ── Reset forms ─────────────────────────────────────────────────────────────

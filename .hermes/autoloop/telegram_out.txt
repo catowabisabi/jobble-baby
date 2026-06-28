@@ -1,10 +1,14 @@
-🍼 Jobble Baby · 17:00
+🍼 Jobble Baby · 02:00
+✅ Done: —
+🔧 Dispatched: —
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: e055256 → pushed
-📝 Desc: Jobble Baby 完全 code-complete。99 tabs、TSC 0 errors、Audit 9/9、Jest 192 tests 全 PASS、i18n 141 keys 完美對稱。
+📦 Commit: 13cf87e → pushed (clean)
+📝 Desc: Jobble Baby 完全 code-complete。99 tabs、TSC 0 errors、Jest 192 tests 全 PASS、i18n 141 keys 完美對稱。所有代碼工作已完成。
+
 ⚠️ 4個 user-action blockers 需處理：
   1. EAS credentials（Apple Team ID + App-Specific Password）
   2. App Store Connect 建立 com.jobblebaby.app
   3. Play Console 建立 com.jobblebaby.app
-  4. Privacy policy URL → https://catowabisabi.github.io/jobble-baby/privacy 係 HTTP 404，仲未部署
+  4. Privacy policy HTTP 404 → docs/privacy-policy.html 存在但未部署到 GitHub Pages。修復方法：將 docs/ 資料夾發布為 GitHub Pages，或將 privacy-policy.html 改名為 index.html 並設定 GitHub Pages 來源為 docs/
+
 Sisyphus idle，沒有 pending 任務。

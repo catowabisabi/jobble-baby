@@ -1,5 +1,5 @@
 🍼 Jobble Baby · 17:00
 
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: edbcb51 → pushed
-📝 Desc: 項目代碼級已完成，全部 183 tasks done，89 ideas implemented。僅待用戶操作：EAS credentials、App Store Connect 建立、Play Console 建立、隱私政策部署。
+📦 Commit: 7353d0c → pushed (clean)
+📝 Desc: 項目代碼級已完成，全部 183 tasks done。僅待用戶操作：① EAS credentials（Apple Team ID + App-Specific Password）② App Store Connect 建立 com.jobblebaby.app ③ Play Console 建立 com.jobblebaby.app ④ 隱私政策頁面部署至 https://catowabisabi.github.io/jobble-baby/privacy

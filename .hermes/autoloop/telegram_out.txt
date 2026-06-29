@@ -1,5 +1,5 @@
-🍼 Jobble Baby · 13:01
+🍼 Jobble Baby · 02:02
 
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: 7b92549 → pushed (clean)
-📝 Desc: 項目代碼級完成，閒置等待用戶操作。4 個 blockers：① EAS credentials ② App Store Connect 建立 app ③ Play Console 建立 app ④ 隱私政策 URL 部署
+📦 Commit: 67b4c7a → pushed (clean)
+📝 Desc: 項目代碼級完成，閒置等待用戶操作。4 個 blockers：① EAS credentials（Apple Team ID + App-Specific Password）② App Store Connect 建立 com.jobblebaby.app ③ Play Console 建立 app ④ privacy policy 未部署至真實 URL（privacy-policy.html 存在但 HTTP 404）

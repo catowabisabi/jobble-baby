@@ -1,5 +1,5 @@
-# Cycle 558 — Sisyphus Response Log
-2026-06-29 10:00 HKT
+# Cycle 562 — Sisyphus Response Log
+2026-06-29 16:00 HKT
 
 No active task — Sisyphus idle, no dispatch this cycle.
 Project: SUBMISSION-READY (code-level).
@@ -17,4 +17,4 @@ User action blockers:
   1. EAS credentials (Apple Team ID + App-Specific Password)
   2. App Store Connect: create com.jobblebaby.app
   3. Play Console: create com.jobblebaby.app
-  4. Privacy policy URL HTTP 404 — docs/privacy-policy.html not deployed
+  4. Privacy policy URL HTTP 404 — GitHub Free no Pages

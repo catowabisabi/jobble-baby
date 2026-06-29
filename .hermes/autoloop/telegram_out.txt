@@ -1,8 +1,6 @@
-🍼 Jobble Baby · 03:03
-
-✅ Done: #39 privacy-policy.html → privacy (URL fix) · painpoint deferred (GitHub Free no Pages)
+🍼 Jobble Baby · 16:00
 
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: e42868c → pushed
+📦 Commit: 2fb85a2 → clean
 
-📝 Desc: 項目代碼級完成。隱私政策文件已改名為配合 GitHub Pages URL（隱私），但 GitHub Free 帳戶不支援 Pages（422錯誤）。仍需用戶操作：① 升級 GitHub Pro 或 ② 使用 Cloudflare Pages/Netlify/Vercel 部署 或 ③ jobblebaby.com 托管。其餘 3 個 user blockers 不變（EAS credentials、App Store Connect、Play Console）。
+📝 Desc: 項目代碼級完成，0 pending。99 tabs、TSC 0 errors、i18n 141/141、Audit 9/9、Jest 192 tests ALL PASS。4個 user-action blockers 仍然存在：① EAS credentials ② App Store Connect 創建 app ③ Play Console 創建 app ④ 隱私政策 URL（GitHub Free 不支援 Pages）。代碼层面無嘢做，等用戶操作。

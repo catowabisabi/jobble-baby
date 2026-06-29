@@ -1,5 +1,5 @@
-🍼 Jobble Baby · 00:03
+🍼 Jobble Baby · 04:00
 
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: 4b9cb7e → pushed (clean)
-📝 Desc: 項目代碼級完成，pre-submission audit 9/9 PASS。全部 99 tabs clean，TSC 0 errors。僅待用戶操作：① EAS credentials（Apple Team ID + App-Specific Password）② App Store Connect 建立 app ③ Play Console 建立 app ④ 隱私政策 URL 部署
+📦 Commit: fd71d0c → pushed (clean)
+📝 Desc: 項目代碼級完成。全部 99 tabs TSC 0 errors，i18n 141 keys，pre-submission audit 9/9 PASS。用戶操作待完成：① EAS credentials ② App Store Connect 建立 app ③ Play Console 建立 app ④ 隱私政策 URL 部署

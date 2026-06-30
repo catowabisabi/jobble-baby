@@ -100,11 +100,11 @@ const ENERGY_I18N: Record<Energy, string> = {
 };
 
 const GROUNDING_STEPS = [
-  { count: 5, sense: 'See', key: 'grounding.5' },
-  { count: 4, sense: 'Hear', key: 'grounding.4' },
-  { count: 3, sense: 'Touch', key: 'grounding.3' },
-  { count: 2, sense: 'Smell', key: 'grounding.2' },
-  { count: 1, sense: 'Taste', key: 'grounding.1' },
+  { count: 5, key: 'grounding.5' },
+  { count: 4, key: 'grounding.4' },
+  { count: 3, key: 'grounding.3' },
+  { count: 2, key: 'grounding.2' },
+  { count: 1, key: 'grounding.1' },
 ];
 
 export default function PolyvagalDashboard() {

@@ -1,7 +1,7 @@
-🍼 Jobble Baby · 18:00
-✅ Done: #477 hardcoded string cleanup + polyvagal-dashboard.tsx unused field removal
+🍼 Jobble Baby · 19:00
+✅ Done: #490 hardcoded strings audit — all already i18n'd; polyvagal-dashboard.tsx unused field removed
 🔧 Dispatched: none — 0 pending · 0 new (SUBMISSION-READY)
 📋 TODO: 0 pending · 0 new · 183 completed · 2 deferred
-📦 Commit: 0362cfd → pushed
+📦 Commit: 23c7144 → pushed
 📝 狀態: SUBMISSION-READY (代碼級) · TSC 0 errors · Jest 192 tests · 9/9 audit PASS
 ⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console · privacy URL

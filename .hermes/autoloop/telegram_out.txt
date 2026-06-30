@@ -1,7 +1,7 @@
-🍼 Jobble Baby · 09:00
-✅ Done: painpoint #30 — 8 tab files i18n hardcoded strings fixed (growth, interoceptive, phototherapy, reflex, regulatory, sleep, teething + en/zh json + regression docs)
+🍼 Jobble Baby · 18:00
+✅ Done: #477 hardcoded string cleanup + polyvagal-dashboard.tsx unused field removal
 🔧 Dispatched: none — 0 pending · 0 new (SUBMISSION-READY)
 📋 TODO: 0 pending · 0 new · 183 completed · 2 deferred
-📦 Commit: b4e3d2d → pushed
-📝 Concept #66: Reciprocal Breathing Synchrony Navigator (brainstorm, draft)
-⚠️ Blockers (user action): EAS creds, App Store Connect, Play Console, privacy URL
+📦 Commit: 0362cfd → pushed
+📝 狀態: SUBMISSION-READY (代碼級) · TSC 0 errors · Jest 192 tests · 9/9 audit PASS
+⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console · privacy URL

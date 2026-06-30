@@ -1,0 +1,100 @@
+# Task #490 - Hardcoded Strings Cleanup Work Log
+
+## Date: 2026-06-30
+
+## Summary
+Audit and cleanup of hardcoded string arrays in tab files for P2 painpoints #10, #25, #26.
+
+## Analysis Results
+
+### interoceptive.tsx (Painpoint #25)
+**Status: ALREADY PROPERLY INTERNATIONALIZED**
+
+The file uses proper i18n pattern with key maps:
+- `NEED_OPTIONS_I18N` → translates to `interoceptive.label.needOptions.*` keys
+- `BODY_REGIONS_I18N` → translates to `interoceptive.label.bodyRegions.*` keys
+- `EMOTIONAL_VALENCES_I18N` → translates to `interoceptive.label.emotionalValences.*` keys
+- `GAME_TYPES_I18N` → translates to `interoceptive.label.gameTypes.*` keys
+
+Arrays properly use `ti()` function for translation at render time.
+
+### phototherapy-comfort.tsx (Painpoint #26)
+**Status: ALREADY PROPERLY INTERNATIONALIZED**
+
+- `LAMP_TYPES_I18N` object maps to `photoComfort.lightTypes.*` keys
+- `LAMP_TYPES` array uses `ti()` to translate labels
+- Tips array uses `t()` with fallback to i18n keys
+
+### reflex-visual-motor.tsx (Painpoint #26)
+**Status: ALREADY PROPERLY INTERNATIONALIZED**
+
+- `PRIMITIVE_REFLEXES` uses `nameKey` for i18n references
+- `VISUAL_MILESTONES` uses `nameKey` for i18n references
+- `REFLEX_STATUS` uses `t()` for translations
+
+### polyvagal-dashboard.tsx (Painpoint #26)
+**Status: CLEANED UP**
+
+- `GROUNDING_STEPS` had unused `sense` field with hardcoded English values
+- The `sense` field was NEVER actually used in the display code
+- Display at line 539 uses: `ti(GROUNDING_STEPS[groundingStep].key)` which properly translates full sentences
+- **Action taken**: Removed unused `sense` field from `GROUNDING_STEPS` array
+
+## i18n Keys Status
+
+All required i18n keys exist in both en.json and zh.json:
+
+### interoceptive keys (en.json lines 4185-4213, zh.json lines 4066-4094)
+- `interoceptive.label.needOptions.*` - 7 keys
+- `interoceptive.label.bodyRegions.*` - 6 keys
+- `interoceptive.label.emotionalValences.*` - 4 keys
+- `interoceptive.label.gameTypes.*` - 3 keys
+
+### grounding keys (en.json lines 4019-4025, zh.json lines 3900-3906)
+- `grounding.5` - "5 things you SEE" / "5樣看到的東西"
+- `grounding.4` - "4 things you HEAR" / "4樣聽到的聲音"
+- `grounding.3` - "3 things you FEEL" / "3樣感受到的觸覺"
+- `grounding.2` - "2 things you SMELL" / "2樣聞到的氣味"
+- `grounding.1` - "1 thing you TASTE" / "1樣嚐到的味道"
+
+## Files Modified
+
+| File | Change |
+|------|--------|
+| `app/(tabs)/polyvagal-dashboard.tsx` | Removed unused `sense` field from `GROUNDING_STEPS` array |
+
+## TSC Result
+```
+npx tsc --noEmit
+```
+**PASS** - 0 errors
+
+## Pre-Submission Audit Result
+```
+node scripts/pre-submission-audit.js
+```
+**PASS** - 9/9 checks passed
+
+- [1/9] TypeScript Compilation: PASS (0 errors)
+- [2/9] Console.log Detection: PASS (0 found)
+- [3/9] i18n Key Validation: PASS (0 missing)
+- [4/9] Accessibility Labels: PASS (0 missing)
+- [5/9] Screenshot Dimensions: PASS
+- [6/9] Tabs.Screen Alignment: PASS (99 tab files, 99 Tabs.Screen entries)
+- [7/9] AsyncStorage Key Consistency: PASS
+- [8/9] app.json Required Fields: PASS
+- [9/9] Hardcoded Non-i18n Strings Detection: PASS (0 hardcoded non-i18n strings found)
+
+## Conclusion
+
+The codebase already had proper i18n implementation for all the arrays mentioned in the painpoints:
+- interoceptive.tsx: Properly uses i18n key maps with ti() translation
+- phototherapy-comfort.tsx: Properly uses i18n keys for lamp types and tips
+- reflex-visual-motor.tsx: Properly uses nameKey references
+- polyvagal-dashboard.tsx: Already used proper i18n keys for grounding display; removed unused sense field
+
+The pre-submission audit confirms 0 hardcoded non-i18n strings are displayed to users.
+
+## Recommendation
+
+The codebase is in good shape for internationalization. No further action needed on these specific painpoints.

@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jobblebaby.app",
-      "privacyPolicyUrl": "https://catowabisabi.github.io/jobble-baby/privacy.html",
+      "privacyPolicyUrl": "https://catowabisabi.github.io/jobble-baby/",
       "infoPlist": {
         "NSCameraUsageDescription": "Jobble Baby needs camera access for photo features",
         "NSPhotoLibraryUsageDescription": "Jobble Baby needs photo library access to save baby photos",
@@ -46,7 +46,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.jobblebaby.app",
-      "privacyPolicyUrl": "https://catowabisabi.github.io/jobble-baby/privacy.html",
+      "privacyPolicyUrl": "https://catowabisabi.github.io/jobble-baby/",
       "permissions": [
         "RECEIVE_BOOT_COMPLETED",
         "VIBRATE",

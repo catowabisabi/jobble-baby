@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Jobble Baby</title>
+  <meta name="description" content="Jobble Baby Privacy Policy — how we collect, use, and protect your data.">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #f0a868;
+      --accent-hover: #e8915a;
+      --link: #58a6ff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    header { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #0d1117;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    h1 { font-size: 1.8rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .meta { color: var(--text-muted); font-size: 0.9rem; }
+    .meta span { margin-right: 1.5rem; }
+
+    /* Table of Contents */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .toc-title { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+    .toc ol { list-style: none; counter-reset: toc; }
+    .toc li { counter-increment: toc; margin-bottom: 0.4rem; }
+    .toc li a { color: var(--text); font-size: 0.9rem; }
+    .toc li a:hover { color: var(--accent); text-decoration: none; }
+    .toc li a::before {
+      content: counter(toc) ". ";
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Sections */
+    section { margin-bottom: 2.5rem; }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    p { color: var(--text); margin-bottom: 0.75rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    li { color: var(--text); margin-bottom: 0.35rem; }
+    strong { color: var(--text); font-weight: 600; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.6rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* Highlight box */
+    .callout {
+      background: rgba(240, 168, 104, 0.1);
+      border: 1px solid rgba(240, 168, 104, 0.3);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .callout strong { color: var(--accent); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      margin-top: 3rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.4rem; }
+      .toc { padding: 1rem; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="badge">Legal</div>
+      <h1>Privacy Policy</h1>
+      <div class="meta">
+        <span><strong>App:</strong> Jobble Baby</span>
+        <span><strong>Bundle ID:</strong> com.jobblebaby.app</span>
+      </div>
+      <div class="meta" style="margin-top: 0.5rem;">
+        <span><strong>Effective Date:</strong> June 2026</span>
+      </div>
+    </header>
+
+    <nav class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#data-collection">Data Collection</a></li>
+        <li><a href="#data-usage">How We Use Your Data</a></li>
+        <li><a href="#third-party">Third-Party Services</a></li>
+        <li><a href="#children">Children's Privacy</a></li>
+        <li><a href="#storage">Data Storage &amp; Security</a></li>
+        <li><a href="#rights">Your Rights</a></li>
+        <li><a href="#cookies">Cookies</a></li>
+        <li><a href="#changes">Policy Changes</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <section id="data-collection">
+        <h2>1. Data Collection</h2>
+        <p>Jobble Baby collects the following information to provide and improve our parenting support services:</p>
+        <ul>
+          <li><strong>Baby Profile Data:</strong> Name, date of birth, gender, and optional photo</li>
+          <li><strong>Tracking Data:</strong> Feeding logs, diaper changes, sleep records, and growth measurements</li>
+          <li><strong>Health Information:</strong> Allergen records, doctor visit notes, and milestone achievements</li>
+          <li><strong>Device Information:</strong> Device type, operating system version, and app version</li>
+          <li><strong>Usage Analytics:</strong> Tab navigation and feature usage frequency (anonymous and aggregated only)</li>
+        </ul>
+        <div class="callout">
+          <strong>You are in control.</strong> All data is entered manually by you. We do not collect data from sensors, cameras, or microphones.
+        </div>
+      </section>
+
+      <section id="data-usage">
+        <h2>2. How We Use Your Data</h2>
+        <p>We use collected data <strong>solely</strong> for the following purposes:</p>
+        <ul>
+          <li>Providing and improving app functionality</li>
+          <li>Sending optional reminders (scheduled alerts and milestone notifications)</li>
+          <li>Generating growth charts and milestone reports</li>
+          <li>Local storage on your device (no mandatory cloud sync)</li>
+        </ul>
+        <p>We <strong>do not</strong> sell, rent, or share your personal data with advertisers or analytics companies.</p>
+      </section>
+
+      <section id="third-party">
+        <h2>3. Third-Party Services</h2>
+        <p>Jobble Baby may use the following third-party services:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Purpose</th>
+              <th>Data Shared</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Expo / EAS</td>
+              <td>App build and distribution</td>
+              <td>None (build artifacts only)</td>
+            </tr>
+            <tr>
+              <td>Google Play Services</td>
+              <td>Android push notifications</td>
+              <td>Device token (optional, opt-in)</td>
+            </tr>
+            <tr>
+              <td>Apple Push Notification</td>
+              <td>iOS push notifications</td>
+              <td>Device token (optional, opt-in)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="children">
+        <h2>4. Children's Privacy</h2>
+        <p>Jobble Baby is a parenting tool that processes baby and child health data on behalf of parents and guardians. We comply with:</p>
+        <ul>
+          <li>Apple's App Store Review Guidelines for children's apps</li>
+          <li>Google Play's Families Policy requirements</li>
+        </ul>
+        <div class="callout">
+          <strong>Important:</strong> We do not knowingly collect data from children under 13 years of age. Parents and guardians using the app are solely responsible for the accuracy of any data entered about a child.
+        </div>
+      </section>
+
+      <section id="storage">
+        <h2>5. Data Storage &amp; Security</h2>
+        <ul>
+          <li>Data is stored <strong>locally on your device</strong> using encrypted storage. No mandatory cloud sync is required.</li>
+          <li>You can delete all data at any time by uninstalling the app or clearing app data from your device settings.</li>
+          <li>We implement reasonable security measures consistent with industry standards, but cannot guarantee 100% security.</li>
+          <li>Optional cloud backup (e.g., JSON export) is available in the app's Settings for manual backup by the user.</li>
+        </ul>
+      </section>
+
+      <section id="rights">
+        <h2>6. Your Rights</h2>
+        <p>You have full control over your data. You can request deletion or export your data at any time by:</p>
+        <ul>
+          <li>Using the <strong>Export Data</strong> button in the app's Profile tab to download a full JSON backup</li>
+          <li>Clearing app data from your device's Settings menu</li>
+          <li>Contacting us at <a href="mailto:privacy@jobblebaby.com">privacy@jobblebaby.com</a></li>
+        </ul>
+      </section>
+
+      <section id="cookies">
+        <h2>7. Cookies</h2>
+        <p>Jobble Baby <strong>does not use cookies</strong> or any similar tracking technologies. The app operates entirely offline with local storage on your device.</p>
+      </section>
+
+      <section id="changes">
+        <h2>8. Changes to This Policy</h2>
+        <p>If we update this Privacy Policy, we will update the "Effective Date" above and, if we make material changes, we will notify you by posting a notice within the app. We encourage you to review this policy periodically.</p>
+      </section>
+
+      <section id="contact">
+        <h2>9. Contact Us</h2>
+        <p>For privacy concerns, data deletion requests, or questions about this policy:</p>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:privacy@jobblebaby.com">privacy@jobblebaby.com</a></li>
+          <li><strong>Website:</strong> <a href="https://jobblebaby.com" target="_blank" rel="noopener">https://jobblebaby.com</a></li>
+        </ul>
+        <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">
+          <em>Note: Email and website URLs will be updated before App Store and Google Play submission.</em>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Jobble Baby. All rights reserved.</p>
+      <p style="margin-top: 0.5rem;"><a href="https://jobblebaby.com">jobblebaby.com</a></p>
+    </footer>
+  </div>
+</body>
+</html>

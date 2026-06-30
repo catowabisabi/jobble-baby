@@ -1,0 +1,16 @@
+title: Jobble Baby
+exclude:
+  - JobbleBaby
+  - docs
+  - scripts
+  - store
+  - fastlane
+  - node_modules
+  - "*.json"
+  - "*.lock"
+  - README.md
+  - AGENTS.md
+  - "*.db"
+  - _config.yml
+  - ".github"
+  - runtime

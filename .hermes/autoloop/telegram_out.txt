@@ -1,5 +1,4 @@
-🍼 Jobble Baby · 05:03
-✅ Done: #gitignore — coverage/ (14MB) 加入 .gitignore
+🍼 Jobble Baby · 07:00
 📋 TODO: 0 pending · 0 new
-📦 Commit: 668c92d → pushed
-📝 Desc: 代碼級全部完成。發現並修復 coverage/ 未納入 .gitignore（14MB）。4 項 USER ACTION 阻塞繼續：① EAS credentials ② App Store Connect 建立 app ③ Play Console 建立 app ④ privacy policy URL 部署。請問邊樣可以開始準備？
+📦 Commit: 5551baf → pushed
+📝 Desc: 代碼級全部完成，0 pending。Sisyphus 已重啟。4 項 USER ACTION 阻塞發佈：① EAS credentials ② App Store Connect 建立 app ③ Play Console 建立 app ④ privacy policy URL 部署。請問幾時可以開始準備 EAS credentials？

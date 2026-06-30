@@ -175,6 +175,35 @@ npm run test:mocked 2>&1 | grep "same key"
 
 ---
 
+#### RT-009 — i18n Hardcoded String Fixes (2026-06-30)
+
+**狀態:** ✅ 回歸測試已實現（`__tests__/regression/regression_009_i18n_2026_06_30.test.ts`）
+**測試結果:** 12/12 PASS（commit a09641e）
+
+**Bug：** 8 個 screen 包含 hardcoded 英文字符串而非 i18n t() 調用。
+
+**修復覆蓋：**
+
+| Screen | 問題 | 修復 |
+|--------|------|------|
+| `growth.tsx` | placeholder "0.0" | `t('growth.heightPlaceholder')` / `t('growth.weightPlaceholder')` |
+| `interoceptive.tsx` | Badge text, button labels, tab names | `t('interoceptive.*')` |
+| `phototherapy-comfort.tsx` | skinTemp 'Yes'/'No', '?' | `t('photoComfort.skinTemp.*')`, `t('common.yes/no')` |
+| `reflex-visual-motor.tsx` | Date/Notes placeholders | `t('reflex.*Placeholder')` |
+| `regulatory-fitness.tsx` | status labels 'optimal'/'developing'/'concerning' | `t('regulatory_fitness.status.*')` |
+| `sleep-architecture.tsx` | debt level labels 'Minimal'/'Moderate'/'High'/'Severe' | `t('sleepArchitecture.debtLevel.*')` |
+| `teething.tsx` | 20 顆牙齒名稱、severity、quadrant labels | `t('teething.tooth.*')`, `t('teething.severity.*')` |
+
+**驗證方式：**
+```bash
+npx jest --testPathPattern="__tests__/regression/regression_009"
+# Expected: 12/12 PASS
+```
+
+**風險：** 測試使用源碼靜態分析（fs.readFileSync），未實際渲染組件。如果翻譯 key 存在但翻譯值是英文（無中文翻譯），測試無法捕獲。
+
+---
+
 ## 失敗分類
 
 所有 regression failure 需標記類型：
@@ -191,12 +220,13 @@ npm run test:mocked 2>&1 | grep "same key"
 
 ## 覆蓋矩陣
 
-||||| Test ID | 覆蓋類型 | 狀態 |
-|||---------|---------|--------|------|
-| RT-004 | i18n hardcoded prevention | ✅ 6/6 PASS |
-| RT-005 | Quick Entry FAB onPress | ⚠️ 2/5 PASS (3 FAIL = known bug, unfixed since cycle 500) |
-| RT-006 | Theme Colors + Storage Keys | ✅ Covered by unit tests |
-| RT-007 | act() wrapper in async tests | ⚠️ Identified, needs fix |
-| RT-008 | Duplicate key `18` in HomeScreen | ⚠️ Identified, needs fix |
+|||||| Test ID | 覆蓋類型 | 狀態 |
+||||---------|---------|--------|------|
+|| RT-004 | i18n hardcoded prevention | ✅ 6/6 PASS |
+|| RT-005 | Quick Entry FAB onPress | ⚠️ 2/5 PASS (3 FAIL = known bug, unfixed since cycle 500) |
+|| RT-006 | Theme Colors + Storage Keys | ✅ Covered by unit tests |
+|| RT-007 | act() wrapper in async tests | ⚠️ Identified, needs fix |
+|| RT-008 | Duplicate key `18` in HomeScreen | ⚠️ Identified, needs fix |
+|| RT-009 | i18n hardcoded strings (8 screens) | ✅ 12/12 PASS (cycle 577) |
 
 **Note:** RT-006 (Theme colors) and RT-007 (Storage keys) are covered by unit tests in `__tests__/unit/theme.test.ts` and `__tests__/unit/storage-keys.test.ts`, not as standalone regression files.

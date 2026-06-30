@@ -1,7 +1,7 @@
 # Jobble Baby 測試體系文檔
 
 > 根據 `universal-testing-system-agent-prompt.zh-TW.md` 建立
-> 最後更新: 2026-06-30 (cycle 570 — 202/202 pass, act() warnings identified, duplicate key warning)
+> 最後更新: 2026-06-30 (cycle 577 — 214/214 pass, RT-009 added)
 
 ## 📁 測試架構
 
@@ -33,10 +33,11 @@ JobbleBaby/
 │   │   └── TeethingScreen.test.tsx
 │   ├── smoke/                   # A. 煙霧測試 ✅ 7/7
 │   │   └── smoke-tests.ts
-│   ├── regression/              # H. 回歸測試 ✅ 14/14
+│   ├── regression/              # H. 回歸測試 ✅ 26/26 (RT-004 + RT-005 + RT-006 + RT-009)
 │   │   ├── regression_004_phototherapy_i18n.test.ts  (6 tests)
 │   │   ├── regression_005_quick_entry_fab_onpress.test.ts (5 tests)
-│   │   └── regression_006_room_scores_no_persist.test.ts  (3 tests, cycle 552)
+│   │   ├── regression_006_room_scores_no_persist.test.ts  (3 tests)
+│   │   └── regression_009_i18n_2026_06_30.test.ts  (12 tests, cycle 577)
 │   ├── a11y/                    # J. 無障礙/UX 測試 ⚠️ placeholder
 │   │   └── a11y.test.ts
 │   ├── e2e/                     # F. E2E 測試 ❌ 未配置
@@ -66,23 +67,23 @@ JobbleBaby/
 
 ## 🔢 10 層測試覆蓋矩陣
 
-|     | 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 |
+||     | 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 |
 |-----|------|------|------|------|------|------|
-| A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
-| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
-| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
-| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 112 tests / 16 suites | 16/113 screens (~14%) |
-| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
-| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
-| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 14/14 | RT-004 + RT-005 + RT-006 |
-| I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
-| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ placeholder | 0% real a11y |
+|| A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
+|| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
+|| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
+|| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 112 tests / 16 suites | 16/113 screens (~14%) |
+|| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
+|| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
+|| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
+|| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 26/26 | RT-004 + RT-005 + RT-006 + RT-009 |
+|| I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
+|| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ placeholder | 0% real a11y |
 
-**Overall: 202/202 tests pass (100%)**
+**Overall: 214/214 tests pass (100%)**
 **Layers Implemented: 5/10 (50%)**
-**Last full run: Cycle 570 — 202/202 PASS**
-**New in Cycle 570:** act() async wrapper warnings in VelocityDecileTracker + ProfileScreen; duplicate key `18` React warning identified
+**Last full run: Cycle 577 — 214/214 PASS**
+**Commit tested: a09641e** (feat: Sentry plugin + lint script + CI/CD docs + i18n fixes)
 
 ## ⚙️ Jest 配置
 
@@ -108,7 +109,7 @@ npm run test:unit           # 單元測試 ✅ 52/52 PASS
 npm run test:mocked         # Mocked 前端測試 ✅ 112/112 PASS
 npm run test:a11y           # 無障礙測試 ⚠️ placeholder
 npm run test:e2e            # E2E 測試（需先配置 Detox）❌ 未配置
-npx jest --testPathPattern='__tests__/regression'  # 回歸測試 ✅ 14/14 PASS
+npx jest --testPathPattern='__tests__/regression'  # 回歸測試 ✅ 26/26 PASS
 npm run test:all            # smoke + unit + mocked
 npm run test:report         # smoke + unit + mocked + 輸出報告
 ```
@@ -133,11 +134,12 @@ npm run test:report         # smoke + unit + mocked + 輸出報告
 | Duplicate key `18` in HomeScreen | React list rendering warning | List item key collision — non-blocking |
 | `act()` wrapper missing in async tests | Flaky tests, state update warnings | VelocityDecile + Profile async setState |
 
-## 📊 Cycle 570 成果 (2026-06-30)
+## 📊 Cycle 577 成果 (2026-06-30)
 
-- 202/202 tests pass — Zero failures
-- Cycle 569 (commit 743fc5c) autoloop — concept #65 fix
-- act() async wrapper warnings identified in 2 test files
-- Duplicate key `18` React reconciliation warning identified
-- A11y tests: 17/17 pass but all are placeholders
-- RT-007 (act() wrapper) and RT-008 (duplicate key) added to regression registry
+- **214/214 tests pass — Zero failures**
+- Commit a09641e: Sentry plugin + lint script + CI/CD docs + i18n fixes
+- RT-009 新增：8 個 screen 的 i18n hardcoded string 修復驗證（12 tests）
+- Smoke tests: 7/7 ✅ TypeScript 編譯也 PASS 了（上次 FAIL）
+- 所有 regression suites 保持綠燈
+- A11y tests: 17/17 pass 但仍是 placeholder
+- RT-007 (act() wrapper) 和 RT-008 (duplicate key) 仍待修復

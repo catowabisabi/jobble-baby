@@ -553,7 +553,9 @@
     "title": "Title",
     "toddler": "Toddler",
     "weightKg": "Weightkg",
-    "whoGrowthChart": "Whogrowthchart"
+    "whoGrowthChart": "Whogrowthchart",
+    "heightPlaceholder": "0.0",
+    "weightPlaceholder": "0.0"
   },
   "milestones": {
     "title": "Milestones",
@@ -997,7 +999,36 @@
     "tipFirstToothBody": "Start brushing when first tooth erupts. Use a tiny smear of fluoride toothpaste on a soft infant toothbrush.",
     "darkMode": "Dark Mode",
     "expectedSoon": "Expected Soon",
-    "erupted": "ERUPTED"
+    "erupted": "ERUPTED",
+    "tooth": {
+      "upperCentralIncisor": "Upper Central Incisor",
+      "upperLateralIncisor": "Upper Lateral Incisor",
+      "upperCanine": "Upper Canine",
+      "upperFirstMolar": "Upper First Molar",
+      "upperSecondMolar": "Upper Second Molar",
+      "lowerCentralIncisor": "Lower Central Incisor",
+      "lowerLateralIncisor": "Lower Lateral Incisor",
+      "lowerCanine": "Lower Canine",
+      "lowerFirstMolar": "Lower First Molar",
+      "lowerSecondMolar": "Lower Second Molar"
+    },
+    "quadrant": {
+      "UR": "Upper Right",
+      "UL": "Upper Left",
+      "LL": "Lower Left",
+      "LR": "Lower Right"
+    },
+    "severity": {
+      "mild": "Mild",
+      "moderate": "Moderate",
+      "severe": "Severe"
+    },
+    "allBabyTeeth": "All 20 Baby Teeth",
+    "activeToday": "Active Today",
+    "monthsOld": "months old",
+    "baby": "Baby",
+    "addProfileToTrack": "Add baby profile to track age-based eruption",
+    "underSixMonths": "Under 6 months — consult doctor"
   },
   "monitor": {
     "lastEvent": "Last monitor event",
@@ -2751,7 +2782,14 @@
       "Halogen": "Halogen",
       "FiberOptic": "Fiber Optic",
       "BiliBlanket": "BiliBlanket"
-    }
+    },
+    "unknown": "Unknown",
+    "skinTemp": {
+      "normal": "Normal",
+      "warm": "Warm",
+      "hot": "Hot"
+    },
+    "note": "Note"
   },
   "eightMonthStorm": {
     "title": "8-Month Storm",
@@ -2901,6 +2939,12 @@
     "phasesInfo": "Age-based typical distribution",
     "sleepDebt": "Sleep Debt",
     "debtWarning": "Sleep debt is building up. Consider earlier bedtime to help baby recover.",
+    "debtLevel": {
+      "minimal": "Minimal",
+      "moderate": "Moderate",
+      "high": "High",
+      "severe": "Severe"
+    },
     "circadian": "Circadian Entrainment",
     "morningLight": "Morning light",
     "outdoor": "Outdoor",
@@ -3745,10 +3789,11 @@
       "social": "Social/Emotional"
     },
     "status": {
-      "optimal": "optimal",
-      "developing": "developing",
-      "concerning": "concerning"
+      "optimal": "Optimal",
+      "developing": "Developing",
+      "concerning": "Concerning"
     },
+    "7dayTrend": "7-Day Trend",
     "parent_calm": "Parent Calm Score",
     "suggestions": "Activity Suggestions",
     "suggestion": {
@@ -4136,6 +4181,55 @@
       "abdomen": "Abdomen",
       "pelvis": "Pelvis",
       "limbs": "Limbs"
+    },
+    "label": {
+      "needOptions": {
+        "feed": "Feed",
+        "diaper": "Diaper",
+        "sleep": "Sleep",
+        "comfort": "Comfort",
+        "play": "Play",
+        "stimulation_reduction": "Stimulation Reduction",
+        "nothing": "Nothing"
+      },
+      "bodyRegions": {
+        "head": "Head",
+        "throat": "Throat",
+        "chest": "Chest",
+        "abdomen": "Abdomen",
+        "pelvis": "Pelvis",
+        "limbs": "Limbs"
+      },
+      "emotionalValences": {
+        "calm": "Calm",
+        "anxious": "Anxious",
+        "frustrated": "Frustrated",
+        "neutral": "Neutral"
+      },
+      "gameTypes": {
+        "hot_cold_belly": "Hot/Cold Belly",
+        "belly_breathing_buddy": "Belly Breathing Buddy",
+        "body_part_point": "Body Part Point"
+      }
+    },
+    "noGutFeeling": "No gut feeling logged",
+    "matched": "Matched",
+    "missed": "Missed",
+    "addNewEntry": "+ New Entry",
+    "addNewChallenge": "+ New Challenge",
+    "notYetAvailable": "Not yet available",
+    "howDidBabyReact": "How did baby react?",
+    "additionalObservations": "Additional observations",
+    "logGame": "Log Game",
+    "bodyScanStreak": "Body Scan Streak",
+    "signalMaster": "Signal Master",
+    "tab": {
+      "dashboard": "Dashboard",
+      "bodyScan": "Body Scan",
+      "diary": "Diary",
+      "score": "Score",
+      "signal": "Signal",
+      "games": "Games"
     }
   },
   "reflex": {
@@ -4158,7 +4252,9 @@
     "integrationTimeline": "Integration Timeline",
     "reflexStatus": "Reflex Status",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "datePlaceholder": "Date (YYYY-MM-DD)",
+    "notesPlaceholder": "Notes"
   },
   "visual": {
     "horizontalSweep": "Horizontal Sweep",
@@ -4168,7 +4264,9 @@
     "qualityScore": "Quality Score",
     "expectedAge": "Expected Age",
     "title": "Visual-Motor Assessment",
-    "visualMotorScore": "Visual-Motor Score"
+    "visualMotorScore": "Visual-Motor Score",
+    "datePlaceholder": "Date (YYYY-MM-DD)",
+    "notesPlaceholder": "Notes"
   },
   "skinfold": {
     "triceps": "Triceps",
@@ -4176,7 +4274,10 @@
     "mm": "mm",
     "trend": "Trend",
     "title": "Skinfold Measurement",
-    "measurement": "Measurement"
+    "measurement": "Measurement",
+    "mmPlaceholder": "mm",
+    "datePlaceholder": "Date (YYYY-MM-DD)",
+    "notesPlaceholder": "Notes"
   },
   "score": {
     "integratedScore": "Integrated Score",

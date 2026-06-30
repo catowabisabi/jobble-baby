@@ -556,7 +556,9 @@
     "title": "[Title]",
     "toddler": "[Toddler]",
     "weightKg": "[Weightkg]",
-    "whoGrowthChart": "[Whogrowthchart]"
+    "whoGrowthChart": "[Whogrowthchart]",
+    "heightPlaceholder": "0.0",
+    "weightPlaceholder": "0.0"
   },
   "milestones": {
     "title": "里程碑",
@@ -931,8 +933,37 @@
     "tipFirstToothTitle": "第一顆牙齒護理",
     "tipFirstToothBody": "第一顆牙長出後開始刷牙。用軟嬰兒牙刷沾少量含氟牙膏。",
     "darkMode": "深色模式",
-    "expectedSoon": "Expected Soon",
-    "erupted": "ERUPTED"
+    "expectedSoon": "即將長出",
+    "erupted": "已長出",
+    "tooth": {
+      "upperCentralIncisor": "上顎中切牙",
+      "upperLateralIncisor": "上顎側切牙",
+      "upperCanine": "上顎尖牙",
+      "upperFirstMolar": "上顎第一磨牙",
+      "upperSecondMolar": "上顎第二磨牙",
+      "lowerCentralIncisor": "下顎中切牙",
+      "lowerLateralIncisor": "下顎側切牙",
+      "lowerCanine": "下顎尖牙",
+      "lowerFirstMolar": "下顎第一磨牙",
+      "lowerSecondMolar": "下顎第二磨牙"
+    },
+    "quadrant": {
+      "UR": "右上",
+      "UL": "左上",
+      "LL": "左下",
+      "LR": "右下"
+    },
+    "severity": {
+      "mild": "輕微",
+      "moderate": "中等",
+      "severe": "嚴重"
+    },
+    "allBabyTeeth": "全部20顆乳牙",
+    "activeToday": "今日活躍",
+    "monthsOld": "個月大",
+    "baby": "寶寶",
+    "addProfileToTrack": "添加寶寶資料以追蹤年齡相關萌出",
+    "underSixMonths": "6個月以下——請諮詢醫生"
   },
   "monitor": {
     "lastEvent": "最後監控事件",
@@ -2632,7 +2663,14 @@
       "Halogen": "鹵素燈",
       "FiberOptic": "光纖燈",
       "BiliBlanket": "BiliBlanket"
-    }
+    },
+    "unknown": "未知",
+    "skinTemp": {
+      "normal": "正常",
+      "warm": "溫暖",
+      "hot": "過熱"
+    },
+    "note": "備註"
   },
   "eightMonthStorm": {
     "title": "8個月風暴",
@@ -2782,6 +2820,12 @@
     "phasesInfo": "按年齡的典型分佈",
     "sleepDebt": "睡眠債",
     "debtWarning": "睡眠債正在累積。建議提早就寢時間幫助寶寶恢復。",
+    "debtLevel": {
+      "minimal": "輕微",
+      "moderate": "中等",
+      "high": "高度",
+      "severe": "嚴重"
+    },
     "circadian": "生理時鐘同步",
     "morningLight": "晨光",
     "outdoor": "戶外",
@@ -3630,6 +3674,7 @@
       "developing": "發展中",
       "concerning": "關注"
     },
+    "7dayTrend": "7天趨勢",
     "parent_calm": "家長平静指數",
     "suggestions": "活動建議",
     "suggestion": {
@@ -4017,6 +4062,55 @@
       "abdomen": "腹部",
       "pelvis": "骨盆",
       "limbs": "四肢"
+    },
+    "label": {
+      "needOptions": {
+        "feed": "餵奶",
+        "diaper": "尿片",
+        "sleep": "睡眠",
+        "comfort": "安撫",
+        "play": "玩耍",
+        "stimulation_reduction": "減少刺激",
+        "nothing": "無"
+      },
+      "bodyRegions": {
+        "head": "頭部",
+        "throat": "喉部",
+        "chest": "胸部",
+        "abdomen": "腹部",
+        "pelvis": "骨盆",
+        "limbs": "四肢"
+      },
+      "emotionalValences": {
+        "calm": "平靜",
+        "anxious": "焦慮",
+        "frustrated": "沮喪",
+        "neutral": "中立"
+      },
+      "gameTypes": {
+        "hot_cold_belly": "冷熱肚子",
+        "belly_breathing_buddy": "腹式呼吸伙伴",
+        "body_part_point": "身體部位指認"
+      }
+    },
+    "noGutFeeling": "沒有直覺記錄",
+    "matched": "匹配",
+    "missed": "錯過",
+    "addNewEntry": "+ 新記錄",
+    "addNewChallenge": "+ 新挑戰",
+    "notYetAvailable": "尚未可用",
+    "howDidBabyReact": "寶寶有何反應？",
+    "additionalObservations": "其他觀察",
+    "logGame": "記錄遊戲",
+    "bodyScanStreak": "身體掃描連勝",
+    "signalMaster": "信號大師",
+    "tab": {
+      "dashboard": "儀表板",
+      "bodyScan": "身體掃描",
+      "diary": "日記",
+      "score": "評分",
+      "signal": "信號",
+      "games": "遊戲"
     }
   },
   "reflex": {
@@ -4039,7 +4133,9 @@
     "integrationTimeline": "Integration Timeline",
     "reflexStatus": "Reflex Status",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "datePlaceholder": "日期 (YYYY-MM-DD)",
+    "notesPlaceholder": "備註"
   },
   "landau": {
     "title": "蘭道反射",
@@ -4119,7 +4215,9 @@
     "qualityScore": "Quality Score",
     "expectedAge": "Expected Age",
     "title": "Visual-Motor Assessment",
-    "visualMotorScore": "Visual-Motor Score"
+    "visualMotorScore": "Visual-Motor Score",
+    "datePlaceholder": "日期 (YYYY-MM-DD)",
+    "notesPlaceholder": "備註"
   },
   "skinfold": {
     "triceps": "Triceps",
@@ -4127,7 +4225,10 @@
     "mm": "mm",
     "trend": "Trend",
     "title": "Skinfold Measurement",
-    "measurement": "Measurement"
+    "measurement": "Measurement",
+    "mmPlaceholder": "mm",
+    "datePlaceholder": "日期 (YYYY-MM-DD)",
+    "notesPlaceholder": "備註"
   },
   "score": {
     "integratedScore": "Integrated Score",

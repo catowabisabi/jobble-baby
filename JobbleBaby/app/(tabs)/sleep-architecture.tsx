@@ -113,11 +113,11 @@ function calculateRestfulnessScore(entry: ArchitectureEntry, recommended: number
   return Math.round((durationScore * 0.35 + wakingScore * 0.25 + settleScore * 0.2 + wasoScore * 0.2));
 }
 
-function getDebtLevel(debtMin: number): { label: string; color: string } {
-  if (debtMin < 60) return { label: 'Minimal', color: '#4CAF50' };
-  if (debtMin < 120) return { label: 'Moderate', color: '#FFC107' };
-  if (debtMin < 180) return { label: 'High', color: '#FF9800' };
-  return { label: 'Severe', color: '#F44336' };
+function getDebtLevel(debtMin: number, t: (key: string) => string): { label: string; color: string } {
+  if (debtMin < 60) return { label: t('sleepArchitecture.debtLevel.minimal'), color: '#4CAF50' };
+  if (debtMin < 120) return { label: t('sleepArchitecture.debtLevel.moderate'), color: '#FFC107' };
+  if (debtMin < 180) return { label: t('sleepArchitecture.debtLevel.high'), color: '#FF9800' };
+  return { label: t('sleepArchitecture.debtLevel.severe'), color: '#F44336' };
 }
 
 export default function SleepArchitectureScreen() {
@@ -291,7 +291,7 @@ export default function SleepArchitectureScreen() {
   const restfulnessScore = latestEntry ? calculateRestfulnessScore(latestEntry, recommended) : null;
   const phases = getAgeBasedSleepPhases(babyAge);
   const latestDebt = sleepDebtLog.length > 0 ? sleepDebtLog[sleepDebtLog.length - 1] : { debtMin: 0, date: today };
-  const debtInfo = getDebtLevel(latestDebt.debtMin);
+  const debtInfo = getDebtLevel(latestDebt.debtMin, t);
   const suggestedWakeWindow = getWakeWindowMin(babyAge);
   const latestCircadian = circadianLog.find(e => e.date === today);
   const latestEnv = environmentLog.find(e => e.date === today);

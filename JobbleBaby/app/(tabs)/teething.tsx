@@ -16,31 +16,31 @@ const PROFILE_KEY = '@jobble_baby_profile';
 const TEETHING_BLUE = '#60A5FA';
 const TEETHING_AMBER = '#F59E0B';
 
-const TOOTH_POSITIONS: Record<number, { name: string; emoji: string; typicalMonths: number; quadrant: 'UR' | 'UL' | 'LL' | 'LR' }> = {
+const TOOTH_POSITIONS: Record<number, { toothKey: string; emoji: string; typicalMonths: number; quadrant: 'UR' | 'UL' | 'LL' | 'LR' }> = {
   // Upper Right (UR): teeth 1-5
-  1:  { name: 'Upper Central Incisor',   emoji: '🔼', typicalMonths: 8,  quadrant: 'UR' },
-  2:  { name: 'Upper Lateral Incisor',  emoji: '🔼', typicalMonths: 10, quadrant: 'UR' },
-  3:  { name: 'Upper Canine',           emoji: '🔼', typicalMonths: 18, quadrant: 'UR' },
-  4:  { name: 'Upper First Molar',      emoji: '🔼', typicalMonths: 14, quadrant: 'UR' },
-  5:  { name: 'Upper Second Molar',     emoji: '🔼', typicalMonths: 24, quadrant: 'UR' },
+  1:  { toothKey: 'teething.tooth.upperCentralIncisor',   emoji: '🔼', typicalMonths: 8,  quadrant: 'UR' },
+  2:  { toothKey: 'teething.tooth.upperLateralIncisor',  emoji: '🔼', typicalMonths: 10, quadrant: 'UR' },
+  3:  { toothKey: 'teething.tooth.upperCanine',          emoji: '🔼', typicalMonths: 18, quadrant: 'UR' },
+  4:  { toothKey: 'teething.tooth.upperFirstMolar',      emoji: '🔼', typicalMonths: 14, quadrant: 'UR' },
+  5:  { toothKey: 'teething.tooth.upperSecondMolar',     emoji: '🔼', typicalMonths: 24, quadrant: 'UR' },
   // Upper Left (UL): teeth 6-10
-  6:  { name: 'Upper Central Incisor',   emoji: '🔼', typicalMonths: 8,  quadrant: 'UL' },
-  7:  { name: 'Upper Lateral Incisor',  emoji: '🔼', typicalMonths: 10, quadrant: 'UL' },
-  8:  { name: 'Upper Canine',           emoji: '🔼', typicalMonths: 18, quadrant: 'UL' },
-  9:  { name: 'Upper First Molar',      emoji: '🔼', typicalMonths: 14, quadrant: 'UL' },
-  10: { name: 'Upper Second Molar',     emoji: '🔼', typicalMonths: 24, quadrant: 'UL' },
+  6:  { toothKey: 'teething.tooth.upperCentralIncisor',   emoji: '🔼', typicalMonths: 8,  quadrant: 'UL' },
+  7:  { toothKey: 'teething.tooth.upperLateralIncisor',  emoji: '🔼', typicalMonths: 10, quadrant: 'UL' },
+  8:  { toothKey: 'teething.tooth.upperCanine',           emoji: '🔼', typicalMonths: 18, quadrant: 'UL' },
+  9:  { toothKey: 'teething.tooth.upperFirstMolar',       emoji: '🔼', typicalMonths: 14, quadrant: 'UL' },
+  10: { toothKey: 'teething.tooth.upperSecondMolar',      emoji: '🔼', typicalMonths: 24, quadrant: 'UL' },
   // Lower Left (LL): teeth 11-15
-  11: { name: 'Lower Central Incisor',  emoji: '🔽', typicalMonths: 6,  quadrant: 'LL' },
-  12: { name: 'Lower Lateral Incisor',  emoji: '🔽', typicalMonths: 7,  quadrant: 'LL' },
-  13: { name: 'Lower Canine',           emoji: '🔽', typicalMonths: 18, quadrant: 'LL' },
-  14: { name: 'Lower First Molar',      emoji: '🔽', typicalMonths: 14, quadrant: 'LL' },
-  15: { name: 'Lower Second Molar',     emoji: '🔽', typicalMonths: 24, quadrant: 'LL' },
+  11: { toothKey: 'teething.tooth.lowerCentralIncisor',   emoji: '🔽', typicalMonths: 6,  quadrant: 'LL' },
+  12: { toothKey: 'teething.tooth.lowerLateralIncisor',  emoji: '🔽', typicalMonths: 7,  quadrant: 'LL' },
+  13: { toothKey: 'teething.tooth.lowerCanine',          emoji: '🔽', typicalMonths: 18, quadrant: 'LL' },
+  14: { toothKey: 'teething.tooth.lowerFirstMolar',      emoji: '🔽', typicalMonths: 14, quadrant: 'LL' },
+  15: { toothKey: 'teething.tooth.lowerSecondMolar',      emoji: '🔽', typicalMonths: 24, quadrant: 'LL' },
   // Lower Right (LR): teeth 16-20
-  16: { name: 'Lower Central Incisor',  emoji: '🔽', typicalMonths: 6,  quadrant: 'LR' },
-  17: { name: 'Lower Lateral Incisor',  emoji: '🔽', typicalMonths: 7,  quadrant: 'LR' },
-  18: { name: 'Lower Canine',           emoji: '🔽', typicalMonths: 18, quadrant: 'LR' },
-  19: { name: 'Lower First Molar',      emoji: '🔽', typicalMonths: 14, quadrant: 'LR' },
-  20: { name: 'Lower Second Molar',     emoji: '🔽', typicalMonths: 24, quadrant: 'LR' },
+  16: { toothKey: 'teething.tooth.lowerCentralIncisor',  emoji: '🔽', typicalMonths: 6,  quadrant: 'LR' },
+  17: { toothKey: 'teething.tooth.lowerLateralIncisor',  emoji: '🔽', typicalMonths: 7,  quadrant: 'LR' },
+  18: { toothKey: 'teething.tooth.lowerCanine',          emoji: '🔽', typicalMonths: 18, quadrant: 'LR' },
+  19: { toothKey: 'teething.tooth.lowerFirstMolar',       emoji: '🔽', typicalMonths: 14, quadrant: 'LR' },
+  20: { toothKey: 'teething.tooth.lowerSecondMolar',      emoji: '🔽', typicalMonths: 24, quadrant: 'LR' },
 };
 
 type SymptomId = 'drooling' | 'gum_swollen' | 'irritable' | 'biting' | 'fever' | 'sleep_disrupted' | 'rash' | 'decreased_appetite';
@@ -297,8 +297,8 @@ export default function TeethingScreen() {
             <Text style={styles.summaryTitle}>{eruptedCount} / 20 Teeth</Text>
             <Text style={styles.summarySubtitle}>
               {babyProfile?.birthDate
-                ? `${Math.round(babyAge)} months old · ${babyProfile.name || 'Baby'}`
-                : 'Add baby profile to track age-based eruption'}
+                ? `${Math.round(babyAge)} ${t('teething.monthsOld')} · ${babyProfile.name || t('teething.baby')}`
+                : t('teething.addProfileToTrack')}
             </Text>
           </View>
         </View>
@@ -316,18 +316,18 @@ export default function TeethingScreen() {
           {nextExpected.map((tooth) => (
             <View key={tooth.typicalMonths} style={styles.expectedSoonRow}>
               <Text style={styles.expectedSoonEmoji}>{tooth.emoji}</Text>
-              <Text style={styles.expectedSoonName}>{tooth.name}</Text>
+              <Text style={styles.expectedSoonName}>{t(tooth.toothKey)}</Text>
               <Text style={styles.expectedSoonAge}>~{tooth.typicalMonths} mo</Text>
             </View>
           ))}
         </View>
       )}
 
-      <Text style={styles.sectionTitle}>All 20 Baby Teeth</Text>
+      <Text style={styles.sectionTitle}>{t('teething.allBabyTeeth')}</Text>
     <View style={styles.quadrantGrid}>
       {(['UR', 'UL', 'LL', 'LR'] as const).map((quadrant) => (
         <View key={quadrant} style={styles.quadrantColumn}>
-          <Text style={styles.quadrantLabel}>{quadrant}</Text>
+          <Text style={styles.quadrantLabel}>{t(`teething.quadrant.${quadrant}`)}</Text>
           {Object.entries(TOOTH_POSITIONS)
             .filter(([, tooth]) => tooth.quadrant === quadrant)
             .map(([numStr, tooth]) => {
@@ -365,7 +365,7 @@ export default function TeethingScreen() {
       <View>
         {activeSymptomIds.length > 0 && (
           <View style={styles.activeSymptomsContainer}>
-            <Text style={styles.activeSymptomsTitle}>Active Today ({activeSymptomIds.length})</Text>
+            <Text style={styles.activeSymptomsTitle}>{t('teething.activeToday')} ({activeSymptomIds.length})</Text>
             <View style={styles.activeSymptomsRow}>
               {activeSymptomIds.map((sid) => (
                 <View key={sid} style={styles.activeSymptomChip}>
@@ -419,7 +419,7 @@ export default function TeethingScreen() {
                   onPress={() => setSeverity(sev)}
                 >
                   <Text style={[styles.severityText, severity === sev && styles.severityTextActive]}>
-                    {sev === 1 ? 'Mild 😌' : sev === 2 ? 'Moderate 😣' : 'Severe 😫'}
+                    {sev === 1 ? `${t('teething.severity.mild')} 😌` : sev === 2 ? `${t('teething.severity.moderate')} 😣` : `${t('teething.severity.severe')} 😫`}
                   </Text>
                 </TouchableOpacity>
               ))}
@@ -446,7 +446,7 @@ export default function TeethingScreen() {
                 <View key={entry.id} style={styles.symptomHistoryItem}>
                   <Ionicons name={def.icon as any} size={18} color={TEETHING_BLUE} style={styles.symptomHistoryIcon} />
                   <Text style={styles.symptomHistoryText}>
-                    {t(def.labelKey)} · {entry.severity === 1 ? 'Mild' : entry.severity === 2 ? 'Moderate' : 'Severe'}
+                    {t(def.labelKey)} · {entry.severity === 1 ? t('teething.severity.mild') : entry.severity === 2 ? t('teething.severity.moderate') : t('teething.severity.severe')}
                     {entry.note && ` · "${entry.note}"`}
                   </Text>
                   <Text style={styles.symptomHistoryTime}>
@@ -482,7 +482,7 @@ export default function TeethingScreen() {
         <Text style={styles.reliefNote}>{t('teething.otcDosageNote') || 'Consult your pediatrician before giving any medication.'}</Text>
         {babyAge < 6 && (
           <View style={styles.ageWarningBadge}>
-            <Text style={styles.ageWarningText}>⚠️ Under 6 months — consult doctor</Text>
+            <Text style={styles.ageWarningText}>⚠️ {t('teething.underSixMonths')}</Text>
           </View>
         )}
       </View>

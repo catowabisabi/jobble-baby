@@ -57,9 +57,9 @@ const getScoreColor = (score: number): string => {
 };
 
 const getScoreLabel = (score: number): string => {
-  if (score >= 80) return 'optimal';
-  if (score >= 50) return 'developing';
-  return 'concerning';
+  if (score >= 80) return 'regulatory_fitness.status.optimal';
+  if (score >= 50) return 'regulatory_fitness.status.developing';
+  return 'regulatory_fitness.status.concerning';
 };
 
 const loadRegulatoryData = async (): Promise<RegulatoryEntry[]> => {
@@ -97,7 +97,7 @@ const DomainBar: React.FC<{
       <View style={[styles.barFill, { width: `${score}%`, backgroundColor: color }]} />
     </View>
     <Text style={[styles.domainScore, { color: getScoreColor(score) }]}>
-      {score} — {t(`regulatory_fitness.status.${getScoreLabel(score)}`)}
+      {score} — {t(getScoreLabel(score))}
     </Text>
   </View>
 );
@@ -207,7 +207,7 @@ const TrendChart: React.FC<{ entries: RegulatoryEntry[]; t: (key: string) => str
   const chartHeight = 80;
   return (
     <View style={styles.trendContainer}>
-      <Text style={styles.trendTitle}>7-Day Trend</Text>
+      <Text style={styles.trendTitle}>{t('regulatory_fitness.7dayTrend')}</Text>
       <View style={styles.trendChart}>
         {last7.map((entry, i) => {
           const height = (entry.composite_score / 100) * chartHeight;
@@ -240,7 +240,7 @@ const ParentCalmScore: React.FC<{ t: (key: string) => string }> = ({ t }) => {
         <View style={[styles.parentScoreCircle, { borderColor: getScoreColor(score) }]}>
           <Text style={[styles.parentScoreValue, { color: getScoreColor(score) }]}>{score}</Text>
         </View>
-        <Text style={styles.parentScoreLabel}>{t(`regulatory_fitness.status.${getScoreLabel(score)}`)}</Text>
+        <Text style={styles.parentScoreLabel}>{t(getScoreLabel(score))}</Text>
       </View>
     </View>
   );

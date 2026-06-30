@@ -131,6 +131,50 @@ npx jest --testPathPattern="__tests__/regression/regression_005"
 
 ---
 
+#### RT-007 — `act()` wrapper missing in async state tests (identified cycle 570)
+
+**狀態:** ⚠️ 已識別，需要修復
+**測試結果:** 14/14 regression tests pass — 但 VelocityDecileTracker + ProfileScreen 有 `act()` console warnings
+
+**Bug:** `VelocityDecileTrackerScreen` 和 `ProfileScreen` 在測試中觸發 async state updates，但未被 `act()` wrapper 包裹。
+
+**根因:** `velocity-decile-tracker.tsx:281` — `setEntries()`, `velocity-decile-tracker.tsx:284` — `setLoaded()`, `profile.tsx:254` — `setPreferredMonitorApp()` 在 async 函數中調用 setState，但測試未用 `act()` 包裹。
+
+**修復位置:**
+- `__tests__/mocked/VelocityDecileTracker.test.tsx`
+- `__tests__/mocked/ProfileScreen.test.tsx`
+
+**驗證方式:**
+```bash
+npm run test:mocked 2>&1 | grep "act("
+# Should show 0 console.error about act() wrapper
+```
+
+**Fix 需包含:**
+1. 使用 `act()` 包裹 async state updates，或
+2. Mock async 函數為同步
+
+---
+
+#### RT-008 — Duplicate key `18` in HomeScreen list rendering (identified cycle 570)
+
+**狀態:** ⚠️ 已識別，需要修復
+**分類:** `frontend-crash` (warning only)
+
+**Bug:** React list reconciliation warning: "Encountered two children with the same key, `18`."
+
+**根因:** 某個 `.map()` 使用了非唯一 key（可能使用 index 或 hardcoded value `18`）。
+
+**修復位置:** `app/(tabs)/index.tsx` 或其 child components 的 `.map()`
+
+**驗證方式:**
+```bash
+npm run test:mocked 2>&1 | grep "same key"
+# Should show 0 duplicate key warnings
+```
+
+---
+
 ## 失敗分類
 
 所有 regression failure 需標記類型：
@@ -147,9 +191,12 @@ npx jest --testPathPattern="__tests__/regression/regression_005"
 
 ## 覆蓋矩陣
 
-|||| Test ID | 覆蓋類型 | 狀態 |
-||---------|---------|--------|------|
-||| RT-004 | i18n hardcoded prevention | ✅ 6/6 PASS |
-||| RT-005 | Quick Entry FAB onPress | ⚠️ 2/5 PASS (3 FAIL = known bug, unfixed since cycle 500) |
+||||| Test ID | 覆蓋類型 | 狀態 |
+|||---------|---------|--------|------|
+| RT-004 | i18n hardcoded prevention | ✅ 6/6 PASS |
+| RT-005 | Quick Entry FAB onPress | ⚠️ 2/5 PASS (3 FAIL = known bug, unfixed since cycle 500) |
+| RT-006 | Theme Colors + Storage Keys | ✅ Covered by unit tests |
+| RT-007 | act() wrapper in async tests | ⚠️ Identified, needs fix |
+| RT-008 | Duplicate key `18` in HomeScreen | ⚠️ Identified, needs fix |
 
 **Note:** RT-006 (Theme colors) and RT-007 (Storage keys) are covered by unit tests in `__tests__/unit/theme.test.ts` and `__tests__/unit/storage-keys.test.ts`, not as standalone regression files.

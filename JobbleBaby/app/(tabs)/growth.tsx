@@ -801,7 +801,7 @@ export default function GrowthScreen() {
             <Text style={styles.inputLabel}>{t('growth.heightCm')}</Text>
           <TextInput
             style={styles.input}
-            placeholder="0.0"
+            placeholder={t('growth.heightPlaceholder')}
             placeholderTextColor={C.muted}
             keyboardType="decimal-pad"
             value={height}
@@ -810,7 +810,7 @@ export default function GrowthScreen() {
             <Text style={styles.inputLabel}>{t('growth.weightKg')}</Text>
           <TextInput
             style={styles.input}
-            placeholder="0.0"
+            placeholder={t('growth.weightPlaceholder')}
             placeholderTextColor={C.muted}
             keyboardType="decimal-pad"
             value={weight}

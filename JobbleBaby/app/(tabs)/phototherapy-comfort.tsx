@@ -150,7 +150,7 @@ export default function PhototherapyComfortScreen() {
       '',
       ...sessions.slice(0, 10).map(s =>
         `${s.date} | ${s.lampType} | ${s.startTime}-${s.endTime} | ${formatDuration(s.durationMin)} | ` +
-        `Eye mask: ${s.eyeMaskOn ? 'Yes' : 'No'} | Skin temp: ${s.skinTempFelt} | ` +
+        `Eye mask: ${s.eyeMaskOn ? t('common.yes') : t('common.no')} | Skin temp: ${t(`photoComfort.skinTemp.${s.skinTempFelt}`)} | ` +
         `Stress: ${'★'.repeat(s.parentStress)}${'☆'.repeat(5 - s.parentStress)}`
       ),
     ];
@@ -299,7 +299,7 @@ export default function PhototherapyComfortScreen() {
                   ))}
                 </View>
                 {session.notes ? (
-                  <Text style={[styles.sessionNotes, { color: C.muted }]}>Note: {session.notes}</Text>
+                  <Text style={[styles.sessionNotes, { color: C.muted }]}>{t('photoComfort.note') || 'Note:'}: {session.notes}</Text>
                 ) : null}
               </View>
             ))
@@ -364,7 +364,7 @@ export default function PhototherapyComfortScreen() {
                   accessibilityLabel={"Skin temp " + temp}
                 >
                   <Text style={[styles.tempBtnText, skinTempFelt === temp && { color: '#fff' }]}>
-                    {temp === 'unknown' ? '?' : temp}
+                    {temp === 'unknown' ? t('photoComfort.unknown') : t(`photoComfort.skinTemp.${temp}`)}
                   </Text>
                 </TouchableOpacity>
               ))}

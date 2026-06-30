@@ -1,7 +1,7 @@
 # Jobble Baby 測試體系文檔
 
 > 根據 `universal-testing-system-agent-prompt.zh-TW.md` 建立
-> 最後更新: 2026-06-29 (cycle 553 — smoke 7/7 pass, README synced)
+> 最後更新: 2026-06-30 (cycle 570 — 202/202 pass, act() warnings identified, duplicate key warning)
 
 ## 📁 測試架構
 
@@ -79,9 +79,10 @@ JobbleBaby/
 | I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
 | J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ placeholder | 0% real a11y |
 
-**Overall: 185/185 tests pass (100%)**
+**Overall: 202/202 tests pass (100%)**
 **Layers Implemented: 5/10 (50%)**
-**Last full run: Cycle 552 — 185/185 PASS**
+**Last full run: Cycle 570 — 202/202 PASS**
+**New in Cycle 570:** act() async wrapper warnings in VelocityDecileTracker + ProfileScreen; duplicate key `18` React warning identified
 
 ## ⚙️ Jest 配置
 
@@ -122,18 +123,21 @@ npm run test:report         # smoke + unit + mocked + 輸出報告
 
 ## 🔴 關鍵風險
 
-| 風險 | 影響 | 原因 |
-|------|------|------|
+|| 風險 | 影響 | 原因 |
+||------|------|------|
 | Screen Coverage Gap | 86%+ screens untested | 113 screens, 16 tested |
 | E2E 無測試覆蓋 | 99 tabs 關鍵路徑未驗證 | Detox 未配置 |
 | 效能測試缺失 | 大列表/streaming 場景未知 | 無負載測試 |
 | a11y placeholder | 無法發現真實無障礙問題 | 測試不渲染真實組件 |
 | `getDecilePercentile` boundary | p50 時返回 62 而非 50 | `velocity < p50` 用了 `<` 而非 `<=` |
 | Duplicate key `18` in HomeScreen | React list rendering warning | List item key collision — non-blocking |
+| `act()` wrapper missing in async tests | Flaky tests, state update warnings | VelocityDecile + Profile async setState |
 
-## 📊 Cycle 552 成果 (2026-06-29)
+## 📊 Cycle 570 成果 (2026-06-30)
 
-- 185/185 tests pass — Zero failures
-- RT-006 (Room Scores Persistence) fixed and regression tested (3 tests)
-- Storage key count: 206 → 207 (`ROOM_SCORES_KEY`)
-- `indoor-air-navigator.tsx`: accessibilityLabel added to 15 TouchableOpacity elements
+- 202/202 tests pass — Zero failures
+- Cycle 569 (commit 743fc5c) autoloop — concept #65 fix
+- act() async wrapper warnings identified in 2 test files
+- Duplicate key `18` React reconciliation warning identified
+- A11y tests: 17/17 pass but all are placeholders
+- RT-007 (act() wrapper) and RT-008 (duplicate key) added to regression registry

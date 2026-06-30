@@ -352,12 +352,12 @@ export default function Interoceptive() {
         <Text style={styles.cardDesc}>{t('interoceptive.precisionScoreDesc')}</Text>
         {bodyScanSessions.length >= 3 && (
           <View style={styles.badge}>
-            <Text style={styles.badgeText}>Body Scan Streak: {bodyScanSessions.length} sessions</Text>
+            <Text style={styles.badgeText}>{t('interoceptive.bodyScanStreak', { count: bodyScanSessions.length })}</Text>
           </View>
         )}
         {streak >= 7 && (
           <View style={[styles.badge, { backgroundColor: COLORS.teal }]}>
-            <Text style={styles.badgeText}>Signal Master: {streak}-day streak</Text>
+            <Text style={styles.badgeText}>{t('interoceptive.signalMaster', { streak })}</Text>
           </View>
         )}
       </View>
@@ -378,9 +378,9 @@ export default function Interoceptive() {
       {diaryEntries.slice(0, 5).map(e => (
         <View key={e.id} style={styles.entryRow}>
           <Text style={styles.entryDate}>{new Date(e.date).toLocaleDateString()}</Text>
-          <Text style={styles.entryText}>{e.gut_feeling || 'No gut feeling logged'}</Text>
+          <Text style={styles.entryText}>{e.gut_feeling || t('interoceptive.noGutFeeling')}</Text>
           <Text style={[styles.entryMatch, { color: e.matched ? COLORS.teal : '#EF4444' }]}>
-            {e.matched ? 'Matched' : 'Missed'}
+            {e.matched ? t('interoceptive.matched') : t('interoceptive.missed')}
           </Text>
         </View>
       ))}
@@ -424,7 +424,7 @@ export default function Interoceptive() {
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{t('interoceptive.diaryTitle')}</Text>
       <TouchableOpacity style={styles.addBtn} onPress={() => setShowDiaryEntry(true)} accessibilityLabel="Add diary entry">
-        <Text style={styles.addBtnText}>+ New Entry</Text>
+        <Text style={styles.addBtnText}>{t('interoceptive.addNewEntry')}</Text>
       </TouchableOpacity>
       {diaryEntries.map(e => (
         <View key={e.id} style={styles.diaryCard}>
@@ -480,7 +480,7 @@ export default function Interoceptive() {
         <Text style={styles.streakLabel}>{t('interoceptive.signalStreak')}</Text>
       </View>
       <TouchableOpacity style={styles.addBtn} onPress={() => setShowSignalChallenge(true)} accessibilityLabel="Start challenge">
-        <Text style={styles.addBtnText}>+ New Challenge</Text>
+        <Text style={styles.addBtnText}>{t('interoceptive.addNewChallenge')}</Text>
       </TouchableOpacity>
       {signalMatches.slice(0, 10).map(m => (
         <View key={m.id} style={styles.entryRow}>
@@ -517,7 +517,7 @@ export default function Interoceptive() {
           >
             <Text style={styles.gameCardTitle}>{g.label}</Text>
             <Text style={styles.gameCardAge}>{g.age_months}+ months</Text>
-            {babyAgeMonths < g.age_months && <Text style={styles.gameCardLock}>🔒 Not yet available</Text>}
+            {babyAgeMonths < g.age_months && <Text style={styles.gameCardLock}>🔒 {t('interoceptive.notYetAvailable')}</Text>}
           </TouchableOpacity>
         ))}
       </View>
@@ -528,7 +528,7 @@ export default function Interoceptive() {
           value={gameReaction}
           onChangeText={setGameReaction}
           multiline
-          placeholder="How did baby react?"
+          placeholder={t('interoceptive.howDidBabyReact')}
           accessibilityLabel="Game reaction notes"
         />
       </View>
@@ -539,12 +539,12 @@ export default function Interoceptive() {
           value={gameNotes}
           onChangeText={setGameNotes}
           multiline
-          placeholder="Additional observations"
+          placeholder={t('interoceptive.additionalObservations')}
           accessibilityLabel="Game notes"
         />
       </View>
       <TouchableOpacity style={styles.addBtn} onPress={addGameEntry} accessibilityLabel="Log game entry">
-        <Text style={styles.addBtnText}>Log Game</Text>
+        <Text style={styles.addBtnText}>{t('interoceptive.logGame')}</Text>
       </TouchableOpacity>
       {gameEntries.map(e => (
         <View key={e.id} style={styles.diaryCard}>
@@ -563,12 +563,12 @@ export default function Interoceptive() {
     <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.tabBar}>
-          {renderTabButton('dashboard', 'Dashboard')}
-          {renderTabButton('body_scan', 'Body Scan')}
-          {renderTabButton('diary', 'Diary')}
-          {renderTabButton('precision', 'Score')}
-          {renderTabButton('signal', 'Signal')}
-          {renderTabButton('games', 'Games')}
+          {renderTabButton('dashboard', t('interoceptive.tab.dashboard'))}
+          {renderTabButton('body_scan', t('interoceptive.tab.bodyScan'))}
+          {renderTabButton('diary', t('interoceptive.tab.diary'))}
+          {renderTabButton('precision', t('interoceptive.tab.score'))}
+          {renderTabButton('signal', t('interoceptive.tab.signal'))}
+          {renderTabButton('games', t('interoceptive.tab.games'))}
         </View>
 
         {activeTab === 'dashboard' && renderDashboard()}

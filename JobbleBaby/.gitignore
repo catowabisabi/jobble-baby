@@ -42,3 +42,6 @@ yarn-error.*
 
 # store screenshots (generated, not committed)
 assets/screenshots/**
+
+# test coverage
+coverage/

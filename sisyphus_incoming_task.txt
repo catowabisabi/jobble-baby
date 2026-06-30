@@ -1,1 +1,49 @@
+Task #475 — Add Sentry crash reporting + GitHub Actions CI/CD pipeline
 
+## Context
+Jobble Baby is an Expo (React Native) app in /JobbleBaby/. All 9 pre-submission audit checks PASS. TSC 0 errors. 89 features implemented. You are adding DevOps infrastructure — crash reporting and CI pipeline — before App Store submission.
+
+## Your Task
+Implement BOTH of the following in the JobbleBaby/ project root:
+
+### A. Sentry Crash Reporting
+1. Install: npm install --save-dev @sentry/react-native (in JobbleBaby/)
+2. Create docs/SENTRY_SETUP.md with:
+   - Instructions for user to create Sentry account at sentry.io
+   - Steps to create a new React Native project in Sentry dashboard
+   - How to get the DSN
+   - How to set SENTRY_DSN in app.json or .env (as EXPO_PUBLIC_SENTRY_DSN)
+   - How to test crash reporting (throw test error, verify in Sentry dashboard)
+3. Modify app.json: add "expo": { "plugins": [["@sentry/react-native", {"EXPO_PUBLIC_SENTRY_DSN": "YOUR_DSN_HERE"}]] } or similar placeholder
+4. Add sentry init to app/_layout.tsx or a dedicated sentry.ts file:
+   ```
+   import * as Sentry from '@sentry/react-native';
+   Sentry.init({ dsn: process.env.EXPO_PUBLIC_SENTRY_DSN });
+   ```
+5. Ensure TSC passes after changes
+
+### B. GitHub Actions CI/CD
+1. Create .github/workflows/ci.yml:
+   - trigger: [push, pull_request]
+   - runs-on: ubuntu-latest
+   - steps: actions/checkout@v4, actions/setup-node@v4 (node 18), npm ci, npx tsc --noEmit, npm run lint (if exists)
+2. Create docs/CI_CD_SETUP.md with:
+   - How to enable GitHub Actions (just push .github/ directory)
+   - How to add EAS credentials as GitHub Secrets for automated builds
+   - How to set up Telegram notifications on build failure (bot token + chat ID)
+   - EAS build workflow file (.github/workflows/eas-build.yml) as a template
+3. Add to package.json: a "lint" script if missing (can be echo 'no lint')
+
+## Keywords
+sentry, github_actions, ci_cd
+
+## Quality Gates
+- npx tsc --noEmit → 0 errors
+- All new files must have proper structure
+- docs/*.md must be complete and actionable
+
+## TSC Fix Rule
+If you get TSC errors from @sentry/react-native types, add to tsconfig.json:
+  "skipLibCheck": true
+
+ULW

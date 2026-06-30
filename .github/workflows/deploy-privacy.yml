@@ -30,13 +30,16 @@ jobs:
         with:
           ref: master
 
+      - name: Setup directory
+        run: mkdir -p _site && cp privacy.html _site/index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'privacy.html'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment

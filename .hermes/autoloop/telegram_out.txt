@@ -1,4 +1,7 @@
-🍼 Jobble Baby · 07:00
-📋 TODO: 0 pending · 0 new
-📦 Commit: 5551baf → pushed
-📝 Desc: 代碼級全部完成，0 pending。Sisyphus 已重啟。4 項 USER ACTION 阻塞發佈：① EAS credentials ② App Store Connect 建立 app ③ Play Console 建立 app ④ privacy policy URL 部署。請問幾時可以開始準備 EAS credentials？
+🍼 Jobble Baby · 09:00
+✅ Done: painpoint #30 — 8 tab files i18n hardcoded strings fixed (growth, interoceptive, phototherapy, reflex, regulatory, sleep, teething + en/zh json + regression docs)
+🔧 Dispatched: none — 0 pending · 0 new (SUBMISSION-READY)
+📋 TODO: 0 pending · 0 new · 183 completed · 2 deferred
+📦 Commit: b4e3d2d → pushed
+📝 Concept #66: Reciprocal Breathing Synchrony Navigator (brainstorm, draft)
+⚠️ Blockers (user action): EAS creds, App Store Connect, Play Console, privacy URL

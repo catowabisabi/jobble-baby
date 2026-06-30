@@ -6,6 +6,14 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "@sentry/react-native",
+        {
+          "EXPO_PUBLIC_SENTRY_DSN": "YOUR_DSN_HERE"
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jobblebaby.app",

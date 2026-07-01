@@ -1,7 +1,8 @@
-🍼 Jobble Baby · 16:00
-✅ Done: #490 — hardcoded strings cleanup (polyvagal GROUNDING_STEPS, audit 9/9 PASS)
+🍼 Jobble Baby · 18:05
+✅ Done: dispatch_task.py PTY fix (bash expansion bug resolved)
+✅ Done: commit cycle-587 uncommitted reports
 🔧 Dispatched: none
 📋 TODO: 0 pending · 0 new · 183 completed · 2 deferred
-📦 Commit: 246dbaf → clean (nothing new this cycle)
-📝 Desc: SUBMISSION-READY · Audit 9/9 PASS · TSC 0 errors · Sisyphus idle · 4 user blockers remain
+📦 Commit: 70449ac → pushed
+📝 Desc: SUBMISSION-READY · 9/9 audit PASS · TSC 0 errors · dispatch fixed · Sisyphus idle
 ⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console · privacy URL

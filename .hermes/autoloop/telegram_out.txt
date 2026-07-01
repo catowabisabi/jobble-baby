@@ -1,7 +1,7 @@
-🍼 Jobble Baby · 08:00
-✅ Done: none — no dispatch (cycle 580, sub-ready)
+🍼 Jobble Baby · 09:00
+✅ Done: none — no dispatch (cycle 581, sub-ready)
 🔧 Dispatched: none — 0 pending · 0 new (SUBMISSION-READY)
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: cf94245 → pushed
+📦 Commit: face3be → pushed
 📝 Desc: SUBMISSION-READY · 214 tests · TSC 0 errors · i18n 141/141 · 4 user blockers remain
 ⚠️ Blockers (user action): EAS creds · App Store Connect app creation · Play Console app creation · privacy URL deployment

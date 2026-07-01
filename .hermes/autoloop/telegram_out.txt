@@ -3,6 +3,6 @@
 ✅ Done: commit cycle-587 uncommitted reports
 🔧 Dispatched: none
 📋 TODO: 0 pending · 0 new · 183 completed · 2 deferred
-📦 Commit: 70449ac → pushed
+📦 Commit: 956f9eb → (local divergent)
 📝 Desc: SUBMISSION-READY · 9/9 audit PASS · TSC 0 errors · dispatch fixed · Sisyphus idle
 ⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console · privacy URL

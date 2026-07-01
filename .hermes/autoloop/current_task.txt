@@ -1,15 +1,16 @@
-# Cycle 587 — HERMES AUTOLOOP CYCLE
-# Date: 2026-07-01 17:00 HKT (cron)
+# Cycle 588 — HERMES AUTOLOOP CYCLE
+# Date: 2026-07-01 18:00 HKT (cron)
 
 === STATUS ===
-✅ Session jobble-baby alive (Sisyphus idle, READY)
-✅ Git: 6ea9f6b (clean after commit)
+✅ Session jobble-baby alive (Sisyphus idle, CLEAN bash prompt)
+✅ Git: 2111198 (pushed)
 ✅ Project: SUBMISSION-READY (code-level)
 
 === STEP 2 (Verify previous round) ===
-✅ No task in flight — Sisyphus idle
+✅ No task in flight — Sisyphus was stuck in bash errors (task 490 dispatch failed)
+✅ Task 475 (Sentry+CI/CD) already COMPLETE per opencode_475.log
 ✅ 0 pending · 0 new todos (183 completed · 2 deferred)
-✅ No code changes (minor docs update only)
+✅ Audit 9/9 PASS · TSC 0 errors
 
 === STEP 3 (Review + Analysis) ===
 ✅ Project: SUBMISSION-READY (code-level)
@@ -18,13 +19,15 @@
 ✅ All pre-submission checks: PASS (9/9)
 ✅ TSC: 0 errors (99 tabs)
 ✅ i18n: 141/141 keys
+✅ Painpoint #22 (dispatch bash expansion) FIXED: dispatch_task.py now uses PTY stdin pipe
 
 === STEP 4 (Brainstorm) ===
 ⏭️ Skipped — keyword pool maxed, project sub-ready
 
 === STEP 5 (Commit) ===
-✅ Committed: docs/testing/README.md timestamp (Cycle 585 → 587)
-✅ Pushed: 6ea9f6b
+✅ Committed: dispatch_task.py PTY fix (bash → PTY pipe, no shell expansion)
+✅ Committed: uncommitted cycle-587 reports
+✅ Pushed: 2111198
 
 === STEP 6 (Dispatch) ===
 ⏭️ No pending tasks — 0 pending · 0 new
@@ -34,9 +37,9 @@
 1. EAS credentials: Apple Team ID + App-Specific Password
 2. App Store Connect: create com.jobblebaby.app
 3. Play Console: create com.jobblebaby.app
-4. Privacy policy URL — docs/privacy.html exists but needs live URL deployment (deferred #108)
+4. Privacy policy URL — GitHub Free no Pages (deferred painpoint #39)
 
 === PROJECT STATUS ===
 ✅ SUBMISSION-READY (code-level)
 ⏸ BLOCKED on user actions (4 blockers above)
-📋 2 deferred: #106 Village Network · #108 privacy URL deployment
+📋 2 deferred: #106 Village Network · #39 privacy URL

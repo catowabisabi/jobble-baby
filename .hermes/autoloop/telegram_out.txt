@@ -1,7 +1,7 @@
-🍼 Jobble Baby · 07:00
-✅ Done: docs/testing/README.md — cycle 579, test results updated (214 PASS)
+🍼 Jobble Baby · 08:00
+✅ Done: none — no dispatch (cycle 580, sub-ready)
 🔧 Dispatched: none — 0 pending · 0 new (SUBMISSION-READY)
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: 635e276 → pushed
-📝 Desc: 214 tests pass · TSC 0 errors · i18n 141/141 · SUBMISSION-READY · 4 user blockers remain
+📦 Commit: cf94245 → pushed
+📝 Desc: SUBMISSION-READY · 214 tests · TSC 0 errors · i18n 141/141 · 4 user blockers remain
 ⚠️ Blockers (user action): EAS creds · App Store Connect app creation · Play Console app creation · privacy URL deployment

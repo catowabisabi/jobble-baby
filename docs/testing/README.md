@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-> 最後更新：2026-06-30 (Cycle 559)
+> 最後更新：2026-07-01 (Cycle 579)
 
 ## 📋 項目概覽
 
@@ -37,20 +37,22 @@ runtime/logs/tests/   # 測試報告輸出
 
 ## 📊 測試矩陣
 
-| 層級 | 測試類型 | 工具 | 隔離 DB | 覆蓋範圍 |
-|------|----------|------|---------|---------|
-| A | 煙霧測試 | shell script + tsc | N/A | 基本啟動 |
-| B | 單元測試 | Jest | mock | pure functions |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | UI state |
-| E | Non-Mocked 測試 | Expo + Jest | mock AsyncStorage | 前後端鏈 |
-| F | E2E 流程測試 | Detox | N/A | 完整用戶流程 |
-| H | 回歸測試 | Jest | mock | bug 修復驗證 |
-| I | 效能測試 | Detox | N/A | request count, render |
-| J | 無障礙測試 | jest-a11y + manual | N/A | WCAG 2.1 AA |
+|| 層級 | 測試類型 | 工具 | 隔離 DB | 覆蓋範圍 ||
+||------|----------|------|---------|----------||
+|| A | 煙霧測試 | shell script + tsc | N/A | 7 tests — 7/7 ✅ ||
+|| B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ ||
+|| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 112 tests — 112/112 ✅ ||
+|| H | 回歸測試 | Jest | mock | 26 tests — 26/26 ✅ ||
+|| J | 無障礙測試 | jest-a11y + manual | N/A | 17 tests — 17/17 ✅ ||
+|| F | E2E 流程測試 | Detox | N/A | Template (8 cases) ⚠️ BLOCKED ||
+|| E | Non-Mocked Mode B | Expo + Jest | mock AsyncStorage | 0 tests ❌ GAP ||
+|| I | 效能測試 | Detox | N/A | 0 tests ❌ GAP ||
 
 **不適用於此項目：**
 - C (後端 API 整合測試) — 無後端
 - G (外部 API 測試) — 無外部 API
+
+**最新測試結果：Cycle 579 — 214 PASS, 0 FAIL, 0 BLOCKED (runnable suite)**
 
 ---
 

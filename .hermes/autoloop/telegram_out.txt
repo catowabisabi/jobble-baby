@@ -1,6 +1,11 @@
-🍼 Jobble Baby · 06:04
-✅ Done: #601 Autonomic Resonance Navigator (idea #94)
-🔧 Dispatched: #410 Fix missing i18n keys in autonomic-resonance.tsx
-📋 TODO: 0 pending · 1 new
-📦 Commit: f9425b7 → pushed
-📝 Desc: 上循環 Sisyphus 完成咗自律神經共振導航器（#94），914行新代碼包括耦合強度計、迷走神經制動提示、Allostatic Load 儀表板。本循環發現 i18n 有5個漏Key，已派新任務修復。項目仍係 SUBMISSION-READY，等用戶行動（EAS credentials、App Store Connect、Play Console）。
+🍼 Jobble Baby · 19:00
+✅ Done: #410 Fix missing i18n keys in autonomic-resonance.tsx
+📋 TODO: 0 pending · 0 new · 185 completed
+📦 Commit: 683f828 → pushed
+📝 Desc: Commit Sisyphus 嘅 i18n fix — 補回 5 個 missing keys（logResonance, parentZone, notePlaceholder, noteLabel, loadLevel）入 en.json + zh.json。TSC 0 errors。代碼已完全 SUBMISSION-READY。
+
+⚠️ User Action Required（代碼已完成，呢啲要你做）：
+1. EAS credentials 配置（Apple Team ID + App-Specific Password）
+2. App Store Connect 建立 com.jobblebaby.app
+3. Play Console 建立 com.jobblebaby.app
+4. 隱私政策 URL 部署（GitHub Free 無法 hosting pages — 用 Cloudflare Pages / Netlify / Vercel）

@@ -1,8 +1,7 @@
-🍼 Jobble Baby · 18:05
-✅ Done: dispatch_task.py PTY fix (bash expansion bug resolved)
-✅ Done: commit cycle-587 uncommitted reports
+🍼 Jobble Baby · 21:00
+✅ Done: Cycle 567 — clean, 0 pending · 0 new · 2 deferred
 🔧 Dispatched: none
 📋 TODO: 0 pending · 0 new · 183 completed · 2 deferred
-📦 Commit: 956f9eb → (local divergent)
-📝 Desc: SUBMISSION-READY · 9/9 audit PASS · TSC 0 errors · dispatch fixed · Sisyphus idle
+📦 Commit: 4ef976a → pushed (docs: update testing README)
+📝 Desc: SUBMISSION-READY · TSC 0 errors · Sisyphus idle · 4 user blockers remain
 ⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console · privacy URL

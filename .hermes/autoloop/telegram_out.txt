@@ -1,8 +1,6 @@
-🍼 Jobble Baby · 02:00
-✅ Done: Cycle 592 — sub-ready, 0 pending · 0 new · Sisyphus idle
-🔧 Dispatched: none
-📋 TODO: 0 pending · 0 new · 104 completed
-📦 Commit: 0a5e2dc → pushed (keyword pool update)
-📝 Desc: SUBMISSION-READY · 100 tabs · Sisyphus idle
-⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console
-ℹ️ Privacy URL: https://catowabisabi.github.io/jobble-baby/privacy (verify)
+🍼 Jobble Baby · 04:00
+✅ Done: —
+🔧 Dispatched: —
+📋 TODO: 0 pending · 0 new · 183 completed
+📦 Commit: 6610bee → up to date
+📝 Desc: Project SUBMISSION-READY (code-level). TSC 0 errors · 100 tabs. Sisyphus idle. BLOCKED on user: EAS creds + App Store Connect + Play Console setup.

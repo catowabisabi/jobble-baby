@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-> 最後更新：2026-07-02 (Cycle 596)
+> 最後更新：2026-07-02 (Cycle 599)
 
 ## 📋 項目概覽
 
@@ -41,7 +41,7 @@ runtime/logs/tests/   # 測試報告輸出
 |------|----------|------|---------|----------|
 | A | 煙霧測試 | shell script + tsc | N/A | 7 tests — 7/7 ✅ |
 | B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 129 tests — 129/129 ✅ (+17 PolyvagalDashboard, Cycle 591) |
+| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 129 tests — 129/129 ✅ (+17 PolyvagalDashboardScreen, Cycle 599) |
 | H | 回歸測試 | Jest | mock | 26 tests — 26/26 ✅ |
 | J | 無障礙測試 | jest-a11y + manual | N/A | 17 tests — 17/17 ✅ |
 | F | E2E 流程測試 | Detox | N/A | Template (8 cases) ⚠️ BLOCKED |
@@ -52,7 +52,7 @@ runtime/logs/tests/   # 測試報告輸出
 - C (後端 API 整合測試) — 無後端
 - G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 591 — 224 PASS (Jest) + 7 PASS (Smoke) = 231 PASS, 0 FAIL, 0 BLOCKED (runnable suite)**
+**最新測試結果：Cycle 599 — 224 PASS (Jest) + 7 PASS (Smoke) = 231 PASS, 0 FAIL, 0 BLOCKED (runnable suite)**
 
 ---
 

@@ -620,6 +620,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="autonomic-resonance"
+        options={{
+          title: t('autonomicResonance.title') || 'Autonomic Resonance',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="heart-flash" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="galant-latch-navigator"
         options={{
           title: t('galantLatch.title') || 'Galant + Latch',

@@ -1,0 +1,51 @@
+# Task: Implement Autonomic Resonance Navigator — Idea #94
+
+## File to create
+`JobbleBaby/app/(tabs)/autonomic-resonance.tsx`
+
+## Keywords (prompt3)
+autonomic_resonance, vagal_brake_stimulation, cumulative_allostatic_load
+
+## Full spec
+
+### Problem
+The existing Polyvagal Dashboard (parent) and Autonomic Readiness Index (baby) are two separate tools. Parents miss the real-time coupling between their own nervous system state and their baby's physiological regulation. Coregulation is not just about behavior — it's about neural coupling: when a parent's ventral vagal system is activated (calm, socially engaged), their baby's autonomic stability measurably improves within minutes. No app tracks this bidirectional resonance loop.
+
+### Solution
+A unified navigator that tracks parent-baby autonomic coupling in real-time, identifies resonance patterns, and guides parents to intentionally use their own regulatory capacity to soothe and stabilize their baby.
+
+### Sections to implement
+
+1. **Resonance Logger** — Parent logs their own Polyvagal state (ventral vagal/sympathetic/dorsal) alongside a simultaneous baby state indicator (calm/aroused/distressed). App timestamps each paired entry.
+
+2. **Coupling Strength Meter** — After 7+ paired entries, calculates a "Resonance Score" — how often baby's state improves within 5 minutes of parent entering ventral vagal. Shows as a % coupling strength.
+
+3. **Vagal Brake Prompt** — When baby is distressed, app generates a specific "vagal brake" stimulus:
+   - Slow, exhalation-focused breathing cue
+   - Soft cooing at 250-400Hz prompt
+   - Gentle vestibular stimulation (rocking pattern)
+   - Contingent responsiveness prompt (name baby's state, narrate calm)
+
+4. **Resonance Timeline** — Line chart: parent polyvagal state vs. baby state over past 14 days. Color bands show coupling windows.
+
+5. **Allostatic Load Dashboard** — Tracks cumulative stress load for both parent and baby: sleep debt, illness burden, feeding stress, emotional dysregulation. Color-coded gauge (green=low, red=high).
+
+6. **Resonance Alert** — Flags: parent chronically in dorsal/sympathetic (compassion fatigue risk), baby not responding to parent's ventral vagal state (referral indicator).
+
+### Technical requirements
+- File: `app/(tabs)/autonomic-resonance.tsx`
+- Storage: `@jobble/resonance_pairs`, `@jobble/allostatic_load`
+- i18n keys: `autonomicResonance.*` (add to en.json + zh.json)
+- Links to: `polyvagal-dashboard.tsx` (parent state), `autonomic-readiness.tsx` (baby state)
+- Use existing code style: TSC 0 errors, no hardcoded strings (all via useI18n)
+- All AsyncStorage keys namespaced under `@jobble/`
+- Register tab in `app/(tabs)/_layout.tsx` if not already present
+
+### Approach
+1. First read `polyvagal-dashboard.tsx` and `autonomic-readiness.tsx` to understand the existing code patterns
+2. Create `autonomic-resonance.tsx` following the same style
+3. Add i18n keys to both en.json and zh.json
+4. Register in `_layout.tsx` if needed
+5. Run TSC to verify 0 errors
+
+ULW

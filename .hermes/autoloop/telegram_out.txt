@@ -1,6 +1,7 @@
-🍼 Jobble Baby · 16:04
-✅ Done: #409 Autonomic Resonance Navigator (idea #94)
-🔧 Dispatched: #409 Autonomic Resonance Navigator — Parent-Baby Neural Coupling Tracker
-📋 TODO: 0 pending · 1 new · 183 completed · 2 deferred
-📦 Commit: 3065301 → pushed
-📝 Desc: Cycle 1053 — 新 feature idea #94 來自 brainstorm：追蹤父母同 BB 神經耦合 (autonomic_resonance + coregulation_contagion + vagal_brake_stimulation)。49 個新關鍵詞已入 pool (共 1101)。Sisyphus 已 dispatch，任務執行中。代碼級 SUBMISSION-READY 不變。
+🍼 Jobble Baby · 17:00
+✅ Done: #409 Autonomic Resonance Navigator — Parent-Baby Neural Coupling Tracker
+🔧 Dispatched: (none — no pending tasks)
+📋 TODO: 0 pending · 0 new · 184 completed
+📦 Commit: d2c4501 → pushed
+📝 Desc: 新增 Autonomic Resonance tab（Idea #94）。追蹤父母-嬰兒神經耦合：Resonance Logger、Coupling Strength Meter、Vagal Brake Prompt、Resonance Timeline、Allostatic Load Dashboard、Resonance Alert。i18n 中英雙語，TSC 0 errors，tab 已註冊。項目仍係 SUBMISSION-READY（code-level）。
+⚠️ 用戶行動 blocker：EAS credentials、Apple App Store Connect、Google Play Console、Privacy Policy URL。

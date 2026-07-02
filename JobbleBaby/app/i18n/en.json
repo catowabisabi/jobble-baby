@@ -4065,6 +4065,15 @@
     "low": "Low",
     "medium": "Medium",
     "high": "High",
+    "logResonance": "Log Resonance Pair",
+    "parentZone": "Parent Zone",
+    "notePlaceholder": "Optional note...",
+    "noteLabel": "Note",
+    "loadLevel": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
     "resonanceAlert": "Resonance Alert",
     "compassionFatigue": "Compassion Fatigue Risk",
     "compassionFatigueDesc": "Parent has been in dorsal/sympathetic state frequently. Consider self-care.",

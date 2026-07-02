@@ -1,0 +1,36 @@
+# Task: Fix Missing i18n Keys in Autonomic Resonance Navigator
+
+## Files to edit
+- `JobbleBaby/app/i18n/en.json`
+- `JobbleBaby/app/i18n/zh.json`
+
+## Keywords (prompt3)
+i18n_missing_keys, autonomic_resonance, zh_translation
+
+## Full spec
+
+### Problem
+autonomic-resonance.tsx references 5 i18n keys that don't exist in en.json/zh.json. This means the app would crash or show missing translation markers at runtime for those specific UI elements.
+
+### Missing keys to add
+
+Add these 5 keys to `autonomicResonance` section in BOTH en.json AND zh.json:
+
+1. `"logResonance": "Log Resonance Pair"` (en) / `"記錄共振配對"` (zh)
+2. `"parentZone": "Parent Zone"` (en) / `"父母狀態區"` (zh)
+3. `"notePlaceholder": "Optional note..."` (en) / `"可選備註..."` (zh)
+4. `"noteLabel": "Note"` (en) / `"備註"` (zh)
+5. `"loadLevel": { "low": "Low", "medium": "Medium", "high": "High" }` (en) / `{ "low": "低", "medium": "中", "high": "高" }` (zh)
+
+### Approach
+1. Read the current autonomicResonance section in en.json and zh.json to understand the structure
+2. Add the 5 missing keys to both files using appropriate JSON structure
+3. Run `npx tsc --noEmit` in JobbleBaby/ to verify 0 errors
+4. Commit with descriptive message
+
+### Verification
+- TSC: 0 errors
+- Both en.json and zh.json have the same keys under autonomicResonance
+- JSON is valid (no trailing commas, proper syntax)
+
+ULW

@@ -3946,6 +3946,15 @@
     "low": "低",
     "medium": "中",
     "high": "高",
+    "logResonance": "記錄共振配對",
+    "parentZone": "父母狀態區",
+    "notePlaceholder": "可選備註...",
+    "noteLabel": "備註",
+    "loadLevel": {
+      "low": "低",
+      "medium": "中",
+      "high": "高"
+    },
     "resonanceAlert": "共振警示",
     "compassionFatigue": "同情疲勞風險",
     "compassionFatigueDesc": "父母經常處於背側/交感神經狀態。請考慮自我照顧。",

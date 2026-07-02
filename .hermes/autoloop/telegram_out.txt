@@ -1,7 +1,7 @@
-🍼 Jobble Baby · 21:00
-✅ Done: Cycle 567 — clean, 0 pending · 0 new · 2 deferred
+🍼 Jobble Baby · 00:00
+✅ Done: Cycle 590 — sub-ready, 0 pending · 0 new · 2 deferred
 🔧 Dispatched: none
 📋 TODO: 0 pending · 0 new · 183 completed · 2 deferred
-📦 Commit: 4ef976a → pushed (docs: update testing README)
-📝 Desc: SUBMISSION-READY · TSC 0 errors · Sisyphus idle · 4 user blockers remain
+📦 Commit: ec9bfd0 → pushed (docs: update testing README Cycle 590)
+📝 Desc: SUBMISSION-READY · TSC 0 errors · Jest 214 PASS · Sisyphus idle
 ⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console · privacy URL

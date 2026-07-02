@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 07:00
+🍼 Jobble Baby · 08:00
 ✅ Done: —
 🔧 Dispatched: —
 📋 TODO: 0 pending · 0 new · 183 completed
-📦 Commit: caddcca → pushed
-📝 Desc: Project SUBMISSION-READY (code-level). TSC 0 errors · 100 tabs. Sisyphus idle. BLOCKED on user: EAS creds + App Store Connect + Play Console setup.
+📦 Commit: b9075cf → pushed
+📝 Desc: Project SUBMISSION-READY (code-level). TSC 0 errors · 100 tabs. Sisyphus was stuck (restarted cycle). BLOCKED on user: EAS creds + App Store Connect + Play Console setup.

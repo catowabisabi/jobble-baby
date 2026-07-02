@@ -1,7 +1,8 @@
-🍼 Jobble Baby · 00:00
-✅ Done: Cycle 590 — sub-ready, 0 pending · 0 new · 2 deferred
+🍼 Jobble Baby · 02:00
+✅ Done: Cycle 592 — sub-ready, 0 pending · 0 new · Sisyphus idle
 🔧 Dispatched: none
-📋 TODO: 0 pending · 0 new · 183 completed · 2 deferred
-📦 Commit: ec9bfd0 → pushed (docs: update testing README Cycle 590)
-📝 Desc: SUBMISSION-READY · TSC 0 errors · Jest 214 PASS · Sisyphus idle
-⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console · privacy URL
+📋 TODO: 0 pending · 0 new · 104 completed
+📦 Commit: 0a5e2dc → pushed (keyword pool update)
+📝 Desc: SUBMISSION-READY · 100 tabs · Sisyphus idle
+⚠️ Blockers (user action): EAS creds · App Store Connect · Play Console
+ℹ️ Privacy URL: https://catowabisabi.github.io/jobble-baby/privacy (verify)

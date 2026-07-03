@@ -5653,5 +5653,86 @@
     "alertLipTieBody": "Consider lip tie screening at your next pediatrician or pediatric dentist visit, especially if breastfeeding challenges exist.",
     "saveEntry": "Save Entry",
     "saveNasalEntry": "Save Nasal Breathing Entry"
+  },
+  "socialEmotional": {
+    "jealousyTitle": "Jealousy Tracker",
+    "socialRefTitle": "Social Referencing",
+    "jointTitle": "Joint Attention & Empathy",
+    "frustrationTitle": "Frustration Tolerance",
+    "timelineTitle": "Social-Emotional Timeline",
+    "contextSibling": "Sibling arrives",
+    "contextDiverted": "Parent attention diverted",
+    "contextToy": "Toy taken",
+    "contextOther": "Other",
+    "intensity": "Intensity",
+    "approached": "Approached",
+    "hesitated": "Hesitated",
+    "rejected": "Rejected",
+    "under9moNote": "Joint attention typically emerges around 9 months",
+    "alertSocialRefDelay": "Social referencing milestone may be delayed — discuss with pediatrician",
+    "alertJointDelay": "Joint attention milestone may be delayed — discuss with pediatrician",
+    "logEntry": "Log Entry",
+    "entriesSaved": "Entry saved!",
+    "tabs": {
+      "socialEmotional": "Social-Emotional"
+    },
+    "section1": {
+      "title": "Jealousy Episode",
+      "contextLabel": "Context",
+      "intensityLabel": "Intensity",
+      "notesLabel": "Notes (optional)",
+      "notesPlaceholder": "What happened?",
+      "saveBtn": "Save Jealousy Episode"
+    },
+    "section2": {
+      "title": "Social Referencing",
+      "triggerLabel": "Trigger",
+      "triggerNewFood": "New food",
+      "triggerNewPerson": "New person",
+      "triggerNewObject": "New object",
+      "triggerStranger": "Stranger",
+      "triggerUnfamiliarPlace": "Unfamiliar place",
+      "responseLabel": "Baby's Response",
+      "lookedAtCaregiver": "Did baby look at caregiver's face?",
+      "yes": "Yes",
+      "no": "No",
+      "saveBtn": "Log Social Reference"
+    },
+    "section3": {
+      "title": "Joint Attention & Empathy",
+      "typeLabel": "Type",
+      "jointAttention": "Joint Attention",
+      "empathyExpression": "Empathy Expression",
+      "triadicEngagement": "Triadic Engagement",
+      "jointPoint": "Point to object",
+      "jointEyeGaze": "Eye gaze to same object",
+      "jointShow": "Show object to caregiver",
+      "empathyComfort": "Comforted distressed person",
+      "empathyConcern": "Showed concern facial expression",
+      "empathyHelp": "Attempted to help",
+      "triadicReached": "Reached for object caregiver reached for",
+      "triadicShared": "Shared object with caregiver",
+      "saveBtn": "Log Entry"
+    },
+    "section4": {
+      "title": "Frustration Tolerance",
+      "weeklyLabel": "Weekly Tolerance Level",
+      "level0": "Instant meltdown",
+      "level1": "Needs immediate soothe",
+      "level2": "Cries but calms <2min",
+      "level3": "Calms 2-5min",
+      "level4": "Self-soothes <2min",
+      "level5": "High tolerance",
+      "contextLabel": "Context (optional)",
+      "contextPlaceholder": "What triggered the frustration?",
+      "saveBtn": "Log Frustration Tolerance"
+    },
+    "section5": {
+      "title": "14-Day Timeline",
+      "noData": "No entries yet",
+      "jealousyLabel": "Jealousy",
+      "socialRefLabel": "Social Ref",
+      "jointLabel": "Joint/Empathy"
+    }
   }
 }

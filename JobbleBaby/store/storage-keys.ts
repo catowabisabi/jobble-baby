@@ -216,4 +216,5 @@ export const STORAGE_KEYS = {
   ROOM_SCORES: "@jobble/room_scores",
   FEEDING_READINESS_NAVIGATOR: "@jobble/feeding_readiness_navigator",
   WEIGHT_VELOCITY_ENTRIES: "@jobble/weight_velocity_entries",
+  SOCIAL_EMOTIONAL_LOG: "@jobble/social_emotional_log",
 } as const;

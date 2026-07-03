@@ -5657,5 +5657,86 @@
     "alertLipTieBody": "下次就診時考慮進行唇繫帶篩查，特別是如有母乳餵養困難。",
     "saveEntry": "儲存記錄",
     "saveNasalEntry": "儲存鼻腔呼吸記錄"
+  },
+  "socialEmotional": {
+    "jealousyTitle": "嫉妒追蹤",
+    "socialRefTitle": "社交參照",
+    "jointTitle": "共同注意與同理心",
+    "frustrationTitle": "挫折容忍度",
+    "timelineTitle": "社交情感時間線",
+    "contextSibling": "兄弟姐妹到來",
+    "contextDiverted": "父母注意力轉移",
+    "contextToy": "玩具被拿走",
+    "contextOther": "其他",
+    "intensity": "強度",
+    "approached": "靠近",
+    "hesitated": "猶豫",
+    "rejected": "拒絕",
+    "under9moNote": "共同注意通常在9個月左右出現",
+    "alertSocialRefDelay": "社交參照里程碑可能延遲——建議與兒科醫生討論",
+    "alertJointDelay": "共同注意里程碑可能延遲——建議與兒科醫生討論",
+    "logEntry": "記錄項目",
+    "entriesSaved": "已儲存！",
+    "tabs": {
+      "socialEmotional": "社交情感"
+    },
+    "section1": {
+      "title": "嫉妒事件",
+      "contextLabel": "情境",
+      "intensityLabel": "強度",
+      "notesLabel": "備註（選填）",
+      "notesPlaceholder": "發生了什麼？",
+      "saveBtn": "儲存嫉妒事件"
+    },
+    "section2": {
+      "title": "社交參照",
+      "triggerLabel": "觸發因素",
+      "triggerNewFood": "新食物",
+      "triggerNewPerson": "新人",
+      "triggerNewObject": "新物品",
+      "triggerStranger": "陌生人",
+      "triggerUnfamiliarPlace": "不熟悉的地方",
+      "responseLabel": "寶寶反應",
+      "lookedAtCaregiver": "寶寶有看向照顧者的臉嗎？",
+      "yes": "是",
+      "no": "否",
+      "saveBtn": "記錄社交參照"
+    },
+    "section3": {
+      "title": "共同注意與同理心",
+      "typeLabel": "類型",
+      "jointAttention": "共同注意",
+      "empathyExpression": "同理心表現",
+      "triadicEngagement": "三方互動",
+      "jointPoint": "指向物體",
+      "jointEyeGaze": "眼神注視同一物體",
+      "jointShow": "展示物體給照顧者",
+      "empathyComfort": "安慰傷心的人",
+      "empathyConcern": "表現擔心的表情",
+      "empathyHelp": "嘗試幫忙",
+      "triadicReached": "伸手拿照顧者拿的物品",
+      "triadicShared": "與照顧者分享物品",
+      "saveBtn": "記錄項目"
+    },
+    "section4": {
+      "title": "挫折容忍度",
+      "weeklyLabel": "每週容忍程度",
+      "level0": "立即崩潰",
+      "level1": "需要立即安撫",
+      "level2": "哭泣但在2分鐘內平靜",
+      "level3": "2-5分鐘內平靜",
+      "level4": "2分鐘內自我安撫",
+      "level5": "高度容忍",
+      "contextLabel": "情境（選填）",
+      "contextPlaceholder": "什麼引發了挫折？",
+      "saveBtn": "記錄挫折容忍度"
+    },
+    "section5": {
+      "title": "14天時間線",
+      "noData": "尚無記錄",
+      "jealousyLabel": "嫉妒",
+      "socialRefLabel": "社交參照",
+      "jointLabel": "共同/同理心"
+    }
   }
 }

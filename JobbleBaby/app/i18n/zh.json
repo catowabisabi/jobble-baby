@@ -154,7 +154,8 @@
     "wetDryAnalysis": "Wet/Dry [TODO]",
     "whiteNoise": "White Noise [TODO]",
     "zoneRegulation": "Zone [TODO]",
-    "feedingReadinessNavigator": "加固準備"
+    "feedingReadinessNavigator": "加固準備",
+    "lipSealNavigator": "嘴唇閉合"
   },
   "neuroplasticity": {
     "title": "神經可塑性",
@@ -884,7 +885,11 @@
     "subtitle": "追蹤牙齒及舒緩症狀",
     "selectSymptom": "選擇症狀",
     "logSymptom": "記錄症狀",
-    "severity": "嚴重程度",
+    "severity": {
+      "mild": "輕微",
+      "moderate": "中等",
+      "severe": "嚴重"
+    },
     "noteOptional": "備註（選填）",
     "tapToAddNote": "點擊添加備註...",
     "todayLog": "今日記錄",
@@ -952,11 +957,6 @@
       "UL": "左上",
       "LL": "左下",
       "LR": "右下"
-    },
-    "severity": {
-      "mild": "輕微",
-      "moderate": "中等",
-      "severe": "嚴重"
     },
     "allBabyTeeth": "全部20顆乳牙",
     "activeToday": "今日活躍",
@@ -2647,7 +2647,11 @@
     "cancel": "取消",
     "save": "儲存",
     "eyeMask": "眼罩",
-    "skinTemp": "體溫",
+    "skinTemp": {
+      "normal": "正常",
+      "warm": "溫暖",
+      "hot": "過熱"
+    },
     "diaper": "尿布",
     "feeding": "餵奶",
     "fillTimes": "請填寫開始和結束時間",
@@ -2665,11 +2669,6 @@
       "BiliBlanket": "BiliBlanket"
     },
     "unknown": "未知",
-    "skinTemp": {
-      "normal": "正常",
-      "warm": "溫暖",
-      "hot": "過熱"
-    },
     "note": "備註"
   },
   "eightMonthStorm": {
@@ -4123,7 +4122,7 @@
     "signalOptions": "Feed | Diaper | Sleep | Comfort | Play | Reduce stimulation | Nothing",
     "signalResult": "Result",
     "signalStreak": "Current streak",
-    "signalMaster": "Signal Master badge earned!",
+    "signalMaster": "信號大師",
     "gameTitle": "Interoceptive Games",
     "hotColdBelly": "Hot/Cold Belly",
     "bellyBreathingBuddy": "Belly Breathing Buddy",
@@ -4195,7 +4194,6 @@
     "additionalObservations": "其他觀察",
     "logGame": "記錄遊戲",
     "bodyScanStreak": "身體掃描連勝",
-    "signalMaster": "信號大師",
     "tab": {
       "dashboard": "儀表板",
       "bodyScan": "身體掃描",
@@ -5608,5 +5606,54 @@
       },
       "noAlerts": "目前無警示。"
     }
+  },
+  "lipSeal": {
+    "title": "嘴唇閉合導航",
+    "assessTitle": "嘴唇閉合評估",
+    "addEntry": "記錄項目",
+    "date": "日期",
+    "state": "狀態",
+    "sleep": "睡眠",
+    "awake": "清醒",
+    "quality": "嘴唇閉合品質",
+    "sealed": "閉合（良好）",
+    "partiallyOpen": "部分張開（觀察）",
+    "mouthBreathing": "口呼吸（需轉介）",
+    "history": "歷史記錄",
+    "noEntries": "尚無記錄，點擊 + 新增。",
+    "nasalTitle": "鼻呼吸追蹤",
+    "nasalSleep": "睡眠呼吸",
+    "nasalAwake": "清醒呼吸",
+    "nasalYes": "是",
+    "nasalNo": "否",
+    "nasalUnknown": "未知",
+    "nasalNoEntries": "尚無鼻呼吸記錄。",
+    "feedingTitle": "餵養關聯",
+    "feedingHint": "記錄嘴唇閉合品質以查看與餵養效果的關聯。",
+    "feedingGoodLatch": "良好含乳",
+    "feedingFair": "一般",
+    "feedingPoor": "不佳",
+    "correlation": "關聯分析（30天）",
+    "sealedGoodLatch": "閉合 + 良好含乳",
+    "sealedPoor": "閉合 + 不佳",
+    "positiveCorrelation": "嘴唇閉合良好與餵養效果正相關！",
+    "recentFeedingEntries": "近期餵養記錄",
+    "noFeedingEntries": "尚無帶品質數據的餵養記錄。",
+    "milestoneTitle": "面部發育里程碑",
+    "milestoneHint": "追蹤關鍵面部及口腔肌動發育里程碑。",
+    "mouthRestClosed": "嘴巴休息時閉合",
+    "tongueOnPalate": "舌頭置於上顎",
+    "noOpenMouth": "無持續張口姿勢",
+    "midfaceNormal": "中面部發育正常",
+    "achievedOn": "達成於",
+    "alertsTitle": "警示",
+    "noAlerts": "無警示",
+    "allClear": "嘴唇閉合及面部發育追蹤狀況良好。",
+    "alertMouthBreathing": "6個月後仍口呼吸",
+    "alertMouthBreathingBody": "6個月後持續口呼吸與面部發育改變相關。建議諮詢兒科牙醫或耳鼻喉科專科。",
+    "alertMilestonesDelayed": "面部發育里程碑延遲",
+    "alertMilestonesBody": "9個月以上所有面部發育里程碑仍未達成。請諮詢兒科醫生進行評估。",
+    "alertLipTieScreening": "建議進行唇繫帶篩查",
+    "alertLipTieBody": "下次就診時考慮進行唇繫帶篩查，特別是如有母乳餵養困難。"
   }
 }

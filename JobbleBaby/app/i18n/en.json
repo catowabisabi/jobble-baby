@@ -151,7 +151,8 @@
     "symmetryAnalysis": "Symmetry",
     "wetDryAnalysis": "Wet/Dry",
     "whiteNoise": "White Noise",
-    "zoneRegulation": "Zone"
+    "zoneRegulation": "Zone",
+    "lipSealNavigator": "Lip Seal"
   },
   "neuroplasticity": {
     "title": "Neuroplasticity",
@@ -949,7 +950,11 @@
     "subtitle": "Track teeth & comfort symptomsy",
     "selectSymptom": "Select a symptom",
     "logSymptom": "Log Symptom",
-    "severity": "Severity",
+    "severity": {
+      "mild": "Mild",
+      "moderate": "Moderate",
+      "severe": "Severe"
+    },
     "noteOptional": "Note (optional)",
     "tapToAddNote": "Tap to add note...",
     "todayLog": "Today's Log",
@@ -1017,11 +1022,6 @@
       "UL": "Upper Left",
       "LL": "Lower Left",
       "LR": "Lower Right"
-    },
-    "severity": {
-      "mild": "Mild",
-      "moderate": "Moderate",
-      "severe": "Severe"
     },
     "allBabyTeeth": "All 20 Baby Teeth",
     "activeToday": "Active Today",
@@ -2766,7 +2766,11 @@
     "cancel": "Cancel",
     "save": "Save",
     "eyeMask": "Eye mask",
-    "skinTemp": "Skin temp",
+    "skinTemp": {
+      "normal": "Normal",
+      "warm": "Warm",
+      "hot": "Hot"
+    },
     "diaper": "Diaper",
     "feeding": "Fed",
     "fillTimes": "Please fill start and end times",
@@ -2784,11 +2788,6 @@
       "BiliBlanket": "BiliBlanket"
     },
     "unknown": "Unknown",
-    "skinTemp": {
-      "normal": "Normal",
-      "warm": "Warm",
-      "hot": "Hot"
-    },
     "note": "Note"
   },
   "eightMonthStorm": {
@@ -4242,7 +4241,7 @@
     "signalOptions": "Feed | Diaper | Sleep | Comfort | Play | Reduce stimulation | Nothing",
     "signalResult": "Result",
     "signalStreak": "Current streak",
-    "signalMaster": "Signal Master badge earned!",
+    "signalMaster": "Signal Master",
     "gameTitle": "Interoceptive Games",
     "hotColdBelly": "Hot/Cold Belly",
     "bellyBreathingBuddy": "Belly Breathing Buddy",
@@ -4314,7 +4313,6 @@
     "additionalObservations": "Additional observations",
     "logGame": "Log Game",
     "bodyScanStreak": "Body Scan Streak",
-    "signalMaster": "Signal Master",
     "tab": {
       "dashboard": "Dashboard",
       "bodyScan": "Body Scan",
@@ -5604,5 +5602,54 @@
       },
       "noAlerts": "No alerts at this time."
     }
+  },
+  "lipSeal": {
+    "title": "Lip Seal Navigator",
+    "assessTitle": "Lip Seal Assessment",
+    "addEntry": "Log Entry",
+    "date": "Date",
+    "state": "State",
+    "sleep": "Sleep",
+    "awake": "Awake",
+    "quality": "Lip Seal Quality",
+    "sealed": "Sealed (Good)",
+    "partiallyOpen": "Partially Open (Monitor)",
+    "mouthBreathing": "Mouth Breathing (Refer)",
+    "history": "History",
+    "noEntries": "No entries yet. Tap + to add one.",
+    "nasalTitle": "Nasal Breathing",
+    "nasalSleep": "Sleep Breathing",
+    "nasalAwake": "Awake Breathing",
+    "nasalYes": "Yes",
+    "nasalNo": "No",
+    "nasalUnknown": "Unknown",
+    "nasalNoEntries": "No nasal breathing entries yet.",
+    "feedingTitle": "Feeding Correlation",
+    "feedingHint": "Log lip seal entries with feeding quality to see correlation.",
+    "feedingGoodLatch": "Good Latch",
+    "feedingFair": "Fair",
+    "feedingPoor": "Poor",
+    "correlation": "Correlation (30 days)",
+    "sealedGoodLatch": "Sealed + Good Latch",
+    "sealedPoor": "Sealed + Poor",
+    "positiveCorrelation": "Good lip seal correlates with better feeding!",
+    "recentFeedingEntries": "Recent Feeding Entries",
+    "noFeedingEntries": "No feeding entries with quality data yet.",
+    "milestoneTitle": "Facial Milestones",
+    "milestoneHint": "Track key facial and oral motor development milestones.",
+    "mouthRestClosed": "Mouth Rests Closed",
+    "tongueOnPalate": "Tongue on Palate",
+    "noOpenMouth": "No Persistent Open Mouth",
+    "midfaceNormal": "Midface Normal",
+    "achievedOn": "Achieved",
+    "alertsTitle": "Alerts",
+    "noAlerts": "No Alerts",
+    "allClear": "Lip seal and facial development tracking looks healthy.",
+    "alertMouthBreathing": "Mouth Breathing After 6 Months",
+    "alertMouthBreathingBody": "Persistent mouth breathing after 6 months is associated with altered facial development. Consider consulting a pediatric dentist or ENT specialist.",
+    "alertMilestonesDelayed": "Facial Milestones Delayed",
+    "alertMilestonesBody": "At 9+ months, all facial development milestones remain unachieved. Consult your pediatrician for evaluation.",
+    "alertLipTieScreening": "Lip Tie Screening Recommended",
+    "alertLipTieBody": "Consider lip tie screening at your next pediatrician or pediatric dentist visit, especially if breastfeeding challenges exist."
   }
 }

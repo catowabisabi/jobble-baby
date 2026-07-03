@@ -641,6 +641,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="lip-seal-navigator"
+        options={{
+          title: t('lipSeal.title') || 'Lip Seal',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="face-man" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="vestibular-motor"
         options={{
           title: t('tabs.vestibularMotor') || 'Vestibular-Motor',

@@ -69,21 +69,21 @@ JobbleBaby/
 
 ||     | 層級 | 名稱 | 工具 | 位置 | 狀態 | 覆蓋 |
 |-----|------|------|------|------|------|------|
-|| A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
-|| B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
-|| C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
-|| D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 112 tests / 16 suites | 16/113 screens (~14%) |
-|| E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
-|| F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
-|| G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-|| H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 26/26 | RT-004 + RT-005 + RT-006 + RT-009 |
-|| I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
-|| J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ placeholder | 0% real a11y |
+|  | A | 煙霧測試 | tsx | `__tests__/smoke/` | ✅ 7/7 | 100% |
+|  | B | 後端單元測試 | Jest | `__tests__/unit/` | ✅ 52/52 | 100% |
+|  | C | 後端 API 整合測試 | — | — | ❌ 0% | N/A (無 backend) |
+|  | D | 前端 Mocked 測試 | Jest + RTL | `__tests__/mocked/` | ✅ 175 tests / 19 suites | 19/103 screens (~18%) |
+|  | E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
+|  | F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
+|  | G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
+|  | H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 50/50 | RT-004 + RT-005 + RT-006 + RT-009 |
+|  | I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
+|  | J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ placeholder | 0% real a11y |
 
 **Overall: 301/301 tests pass (100%)**
 **Layers Implemented: 5.5/10 (50%)**
-**Last full run: Cycle 1107 — 301/301 PASS**
-**Commit tested: 8cafd13** (feat: Social-Emotional Sentinel Navigator tab #413)
+**Last full run: Cycle 1108 — 301/301 PASS (2026-07-03)**
+**Commit tested: 245a6e0** (chore: cycle 1107 — TSC 0, audit 9/9 PASS, SUBMISSION-READY)
 
 ## ⚙️ Jest 配置
 
@@ -116,10 +116,10 @@ npm run test:report         # smoke + unit + mocked + 輸出報告
 
 ## ⚠️ 仍需關注
 
-1. **Screen Coverage Gap (~81%)** — 99 screens, only 19 have mocked tests
+1. **Screen Coverage Gap (~82%)** — 103 screens, only 19 have mocked tests
 2. **social-emotional-sentinel 零測試** — 🔴 CRITICAL: 657-line new screen (commit 8cafd13) shipped without any test
-3. **E2E 無測試覆蓋** — Detox 配置存在但無 runner
-4. **a11y tests 是 Placeholder** — 測試通過但不是真正的無障礙測試
+3. **E2E 無測試覆蓋** — Detox 配置存在但無測試文件
+4. **a11y tests 是 Placeholder** — 17 tests pass but do not render real components
 5. **Mode B 未實現** — 前端非模擬測試無基礎設施
 6. **效能測試無基礎設施** — `docs/testing/PERFORMANCE.md` 只有文檔
 
@@ -136,15 +136,15 @@ npm run test:report         # smoke + unit + mocked + 輸出報告
 | Duplicate key `18` in HomeScreen | React list rendering warning | List item key collision — non-blocking |
 | `act()` wrapper missing in async tests | Flaky tests, state update warnings | VelocityDecile + Profile async setState |
 
-## 📊 Cycle 1107 成果 (2026-07-03)
+## 📊 Cycle 1108 成果 (2026-07-03)
 
 - **301/301 tests pass — Zero failures**
-- Commit 8cafd13: Social-Emotional Sentinel Navigator tab (#413) — 657 lines, **ZERO tests**
-- LipSealNavigatorScreen.test.tsx 新增 (63 tests) — 覆蓋 lip-seal-navigator.tsx + a11y fix
-- Smoke tests: 7/7 ✅ PASS
+- Commit 245a6e0: chore(autoloop): cycle 1107 — TSC 0, audit 9/9 PASS, SUBMISSION-READY
+- Smoke tests: 7/7 ✅ PASS (TypeScript 0 errors)
 - Unit tests: 52/52 ✅ PASS
-- Mocked tests: 175/175 ✅ PASS (up from 112 — +63 from LipSeal)
+- Mocked tests: 175/175 ✅ PASS (19 suites, 19 screens covered)
 - Regression: 50/50 ✅ PASS
-- A11y: 17/17 pass 但仍是 placeholder
+- A11y: 17/17 ⚠️ PASS (placeholder)
+- social-emotional-sentinel (657 lines) 仍需測試
 - RT-007 (act() wrapper) 和 RT-008 (duplicate key) 仍待修復
-- social-emotional-sentinel 需要盡快建立測試
+- 新建 `docs/testing/test-database-strategy.md`

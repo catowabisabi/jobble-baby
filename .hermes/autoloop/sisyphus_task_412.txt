@@ -1,40 +1,37 @@
-# Task 384 — Fix accessibilityLabel gaps in 4 component files
+# Task: Implement Lip Seal Competence Navigator Tab
 
 ## Context
-You are fixing WCAG 2.1 AA accessibility gaps in React Native component files. Every TouchableOpacity MUST have an accessibilityLabel for screen reader users.
+- REPO: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby
+- Tab file to create: JobbleBaby/app/(tabs)/lip-seal-navigator.tsx
+- i18n files: JobbleBaby/app/i18n/en.json + zh.json
+- Register in: JobbleBaby/app/(tabs)/_layout.tsx
 
-## Files to audit and fix
+## Keywords (prompt3)
+lip_seal_competence, nasal_breathing_establishment, oral_motor_development
 
-### 1. app/components/AllergenDetailModal.tsx
-- 9 TouchableOpacity, 0 accessibilityLabel
-- Read the file first to understand context
+## Full Spec
+Implement Lip Seal Competence Navigator tab — app/(tabs)/lip-seal-navigator.tsx.
 
-### 2. app/components/ReactionLogModal.tsx
-- 17 TouchableOpacity, 0 accessibilityLabel
-- Read the file first to understand context
+### Features (5 sections)
+1. **Lip Seal Assessment** — Weekly log of lip seal quality during sleep and awake states. 3-level scale: sealed (good), partially open (monitor), mouth breathing (refer). Photo capture option.
+2. **Nasal Breathing Establishment Timeline** — Track when baby consistently breathes through nose during feeds and sleep. Correlates with lip seal competence.
+3. **Feeding Efficiency Overlay** — Does strong lip seal correlate with better bottle latch and fewer air intake events? Link to feeding tab data.
+4. **Facial Development Milestones** — Track midface development, absence of persistent open mouth posture, tongue resting position.
+5. **Alert System** — Flags persistent mouth breathing at 6+ months, lip tie indicators, referral to pediatric dentist/ENT.
 
-### 3. app/components/EmergencySOSScreen.tsx
-- 7 TouchableOpacity, 0 accessibilityLabel
-- Read the file first to understand context
+### Technical Requirements
+- File: app/(tabs)/lip-seal-navigator.tsx
+- AsyncStorage: @jobble/lip_seal_log, @jobble/nasal_breathing_timeline
+- i18n keys: lipSeal.* (assessment, sealed, partiallyOpen, mouthBreathing, sleepState, awakeState, photoCapture, alert6Months, lipTieIndicator, referral), nasalBreathing.* (timeline, established, notEstablished, correlationNote)
+- Register in: (tabs)/_layout.tsx
+- Use existing theme (useTheme, ThemedText, ThemedView, PressableScale)
+- Use store/storage-keys.ts for AsyncStorage key constants
+- Use t() from app/i18n for all user-facing strings
+- TSC 0 errors required
+- Follow existing navigator patterns (indoor-air-navigator.tsx, suckle-to-chew-bridge.tsx as reference)
 
-### 4. app/components/MonitorWidget.tsx
-- 3 TouchableOpacity, 0 accessibilityLabel
-- Read the file first to understand context
-
-## Rules
-
-1. Check en.json and zh.json FIRST for existing i18n keys before adding new ones
-2. For each TouchableOpacity without accessibilityLabel:
-   - If existing i18n key fits → use `accessibilityLabel={t('key.path')}`
-   - If no existing key → add new key to en.json AND zh.json, format: `componentName.actionOrLabel`
-3. After all edits, run `npx tsc --noEmit` — MUST pass 0 errors
-4. If you add new i18n keys, verify they exist in BOTH en.json AND zh.json
-
-## Verification
-- `npx tsc --noEmit` → 0 errors
-- Every TouchableOpacity has an accessibilityLabel
-
-## Output
-Save your full work log to: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop/sisyphus_response_412.txt
-
+### Verification
+- TSC: tsc --noEmit must pass with 0 errors
+- i18n: all lipSeal.* and nasalBreathing.* keys must exist in both en.json and zh.json with identical key counts
+- Pre-submission audit: PASS
 ULW

@@ -3962,7 +3962,17 @@
     "referralIndicatorDesc": "嬰兒對父母的腹側迷走神經狀態沒有反應。請考慮尋求專業支持。",
     "relatedTabs": "相關標籤",
     "polyvagalDashboard": "迷走神經儀表板",
-    "autonomicReadiness": "自律神經準備"
+    "autonomicReadiness": "自律神經準備",
+    "zone": {
+      "ventral": "腹側迷走神經（平靜）",
+      "sympathetic": "交感神經（壓力）",
+      "dorsal": "背側迷走神經（關機）"
+    },
+    "babyStates": {
+      "calm": "平靜",
+      "aroused": "興奮",
+      "distressed": "痛苦"
+    }
   },
   "dyadicSynchrony": {
     "title": "Dyadic Synchrony Playground",

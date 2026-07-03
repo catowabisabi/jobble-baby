@@ -4081,7 +4081,17 @@
     "referralIndicatorDesc": "Baby not responding to parent's ventral vagal state. Consider professional support.",
     "relatedTabs": "Related Tabs",
     "polyvagalDashboard": "Polyvagal Dashboard",
-    "autonomicReadiness": "Autonomic Readiness"
+    "autonomicReadiness": "Autonomic Readiness",
+    "zone": {
+      "ventral": "Ventral Vagal (Calm)",
+      "sympathetic": "Sympathetic (Stressed)",
+      "dorsal": "Dorsal Vagal (Shutdown)"
+    },
+    "babyStates": {
+      "calm": "Calm",
+      "aroused": "Aroused",
+      "distressed": "Distressed"
+    }
   },
   "dyadicSynchrony": {
     "title": "Dyadic Synchrony Playground",

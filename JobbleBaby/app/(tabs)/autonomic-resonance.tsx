@@ -72,9 +72,9 @@ const ZONE_I18N: Record<PolyvagalZone, string> = {
 };
 
 const BABY_STATE_I18N: Record<BabyState, string> = {
-  calm: 'autonomicResonance.babyState.calm',
-  aroused: 'autonomicResonance.babyState.aroused',
-  distressed: 'autonomicResonance.babyState.distressed',
+  calm: 'autonomicResonance.babyStates.calm',
+  aroused: 'autonomicResonance.babyStates.aroused',
+  distressed: 'autonomicResonance.babyStates.distressed',
 };
 
 const generateId = () => Date.now().toString(36) + Math.random().toString(36).substr(2);

@@ -5650,6 +5650,8 @@
     "alertMilestonesDelayed": "Facial Milestones Delayed",
     "alertMilestonesBody": "At 9+ months, all facial development milestones remain unachieved. Consult your pediatrician for evaluation.",
     "alertLipTieScreening": "Lip Tie Screening Recommended",
-    "alertLipTieBody": "Consider lip tie screening at your next pediatrician or pediatric dentist visit, especially if breastfeeding challenges exist."
+    "alertLipTieBody": "Consider lip tie screening at your next pediatrician or pediatric dentist visit, especially if breastfeeding challenges exist.",
+    "saveEntry": "Save Entry",
+    "saveNasalEntry": "Save Nasal Breathing Entry"
   }
 }

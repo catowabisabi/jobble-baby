@@ -317,7 +317,7 @@ export default function LipSealNavigator() {
                 ))}
               </View>
 
-              <TouchableOpacity onPress={addLipSealEntry} style={[styles.addBtn, { backgroundColor: C.accent }]}>
+              <TouchableOpacity onPress={addLipSealEntry} style={[styles.addBtn, { backgroundColor: C.accent }]} accessibilityLabel={t('lipSeal.saveEntry') || 'Save lip seal entry'}>
                 <Text style={styles.addBtnText}>{t('common.save') || 'Save'}</Text>
               </TouchableOpacity>
             </View>
@@ -393,7 +393,7 @@ export default function LipSealNavigator() {
                 ))}
               </View>
 
-              <TouchableOpacity onPress={addNasalEntry} style={[styles.addBtn, { backgroundColor: C.accent }]}>
+              <TouchableOpacity onPress={addNasalEntry} style={[styles.addBtn, { backgroundColor: C.accent }]} accessibilityLabel={t('lipSeal.saveNasalEntry') || 'Save nasal breathing entry'}>
                 <Text style={styles.addBtnText}>{t('common.save') || 'Save'}</Text>
               </TouchableOpacity>
             </View>

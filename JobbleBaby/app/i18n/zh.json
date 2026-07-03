@@ -5654,6 +5654,8 @@
     "alertMilestonesDelayed": "面部發育里程碑延遲",
     "alertMilestonesBody": "9個月以上所有面部發育里程碑仍未達成。請諮詢兒科醫生進行評估。",
     "alertLipTieScreening": "建議進行唇繫帶篩查",
-    "alertLipTieBody": "下次就診時考慮進行唇繫帶篩查，特別是如有母乳餵養困難。"
+    "alertLipTieBody": "下次就診時考慮進行唇繫帶篩查，特別是如有母乳餵養困難。",
+    "saveEntry": "儲存記錄",
+    "saveNasalEntry": "儲存鼻腔呼吸記錄"
   }
 }

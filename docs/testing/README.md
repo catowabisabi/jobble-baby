@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-> 最後更新：2026-07-02 (Cycle 602)
+|> 最後更新：2026-07-03 (Cycle 607)
 
 ## 📋 項目概覽
 
@@ -41,8 +41,8 @@ runtime/logs/tests/   # 測試報告輸出
 |------|----------|------|---------|----------|
 | A | 煙霧測試 | shell script + tsc | N/A | 7 tests — 7/7 ✅ |
 | B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 129 tests — 129/129 ✅ (+17 PolyvagalDashboardScreen, Cycle 599) |
-| H | 回歸測試 | Jest | mock | 26 tests — 26/26 ✅ |
+| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 144 tests — 144/144 ✅ (+15 AutonomicResonanceScreen + others, Cycle 607) |
+| H | 回歸測試 | Jest | mock | 50 tests — 50/50 ✅ (+24 new regression tests, Cycle 607) |
 | J | 無障礙測試 | jest-a11y + manual | N/A | 17 tests — 17/17 ✅ |
 | F | E2E 流程測試 | Detox | N/A | Template (8 cases) ⚠️ BLOCKED |
 | E | Non-Mocked Mode B | Expo + Jest | mock AsyncStorage | 0 tests ❌ GAP |
@@ -52,7 +52,7 @@ runtime/logs/tests/   # 測試報告輸出
 - C (後端 API 整合測試) — 無後端
 - G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 602 — 231 PASS (7 Smoke + 52 Unit + 129 Mocked + 26 Regression + 17 A11y), 0 FAIL, 0 BLOCKED (runnable suite)**
+**最新測試結果：Cycle 607 — 253 PASS (7 Smoke + 52 Unit + 144 Mocked + 50 Regression + 17 A11y), 0 FAIL, 0 BLOCKED (runnable suite)**
 
 ---
 

@@ -1,0 +1,88 @@
+#!/bin/bash
+# Cycle 1106 — Dispatch todo #413: Social-Emotional Sentinel Navigator
+set -e
+
+REPO="/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby"
+AUTOLOOP="/mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/.hermes/autoloop"
+
+cat > "$AUTOLOOP/sisyphus_task_1106.txt" << 'TASK_EOF'
+# Task #413 — Social-Emotional Sentinel Navigator (idea #96)
+
+## Context
+- REPO: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+- New tab file: app/(tabs)/social-emotional-sentinel.tsx
+- i18n files: app/i18n/en.json + app/i18n/zh.json
+- Register in: app/(tabs)/_layout.tsx
+- Keywords: social_reference_12mo, empathy_concern_18mo, joint_attention_9mo
+- Storage key: @jobble/social_emotional_log
+
+## What to build (5 sections)
+
+### Section 1 — Jealousy Episode Logger
+- Title: "Jealousy Tracker" (i18n: socialEmotional.jealousyTitle)
+- Context selector: "Sibling arrives" / "Parent attention diverted" / "Toy taken" / "Other" (socialEmotional.contextSibling / contextDiverted / contextToy / contextOther)
+- Intensity slider: 1-5 (socialEmotional.intensity)
+- Notes text input (optional)
+- Save button → stores to @jobble/social_emotional_log
+
+### Section 2 — Social Referencing Tracker
+- Title: "Social Referencing" (i18n: socialEmotional.socialRefTitle)
+- Trigger selector: "New food" / "New person" / "New object" / "Stranger" / "Unfamiliar place"
+- Baby's response: "Approached" / "Hesitated" / "Rejected" (socialEmotional.approached / hesitated / rejected)
+- "Did baby look at caregiver's face?" toggle: Yes/No
+- Log button
+
+### Section 3 — Joint Attention & Empathy Logger
+- Title: "Joint Attention & Empathy" (i18n: socialEmotional.jointTitle)
+- Type toggle: "Joint Attention" / "Empathy Expression" / "Triadic Engagement"
+- Joint Attention: "Point to object" / "Eye gaze to same object" / "Show object to caregiver"
+- Empathy: "Comforted distressed person" / "Showed concern facial expression" / "Attempted to help"
+- Triadic: "Reached for object caregiver reached for" / "Shared object with caregiver"
+- Age note if baby < 9mo (show socialEmotional.under9moNote)
+
+### Section 4 — Frustration Tolerance Gauge
+- Title: "Frustration Tolerance" (i18n: socialEmotional.frustrationTitle)
+- Weekly slider 0-5 with labels: 0=Instant meltdown / 1=Needs immediate soothe / 2=Cries but calms <2min / 3=Calms 2-5min / 4=Self-soothes <2min / 5=High tolerance
+- Text input for context (optional)
+- Log button
+
+### Section 5 — Social-Emotional Timeline & Alerts
+- Title: "Social-Emotional Timeline" (i18n: socialEmotional.timelineTitle)
+- 14-day horizontal bar chart: jealousy episodes, social referencing taps, joint attention logs per day
+- Color: orange=jealousy, blue=social referencing, green=joint attention/empathy
+- Alert: if baby >= 12mo and 0 social referencing logs → "Social referencing milestone may be delayed — discuss with pediatrician" (socialEmotional.alertSocialRefDelay)
+- Alert: if baby >= 14mo and 0 joint attention logs → "Joint attention milestone may be delayed — discuss with pediatrician" (socialEmotional.alertJointDelay)
+
+## Data Model
+- @jobble/social_emotional_log: Array of {id, timestamp, type: 'jealousy'|'socialRef'|'jointEmpathy'|'frustration', data: {...}, babyAgeAtEntry: {years, months, days}}
+
+## i18n Keys (add to both en.json + zh.json under socialEmotional.*)
+jealousyTitle, socialRefTitle, jointTitle, frustrationTitle, timelineTitle
+contextSibling, contextDiverted, contextToy, contextOther
+approached, hesitated, rejected, under9moNote
+alertSocialRefDelay, alertJointDelay
+tabs.socialEmotional (tab bar name)
+entriesSaved, logEntry (generic)
+
+## Steps
+1. cat app/(tabs)/milestones.tsx | head -40  (study existing milestone tab pattern)
+2. cat app/(tabs)/polyvagal-dashboard.tsx | head -40  (study情绪/navigator pattern)
+3. Add SOCIAL_EMOTIONAL_LOG: "@jobble/social_emotional_log" to store/storage-keys.ts
+4. Add socialEmotional i18n keys to en.json and zh.json under socialEmotional.*
+5. Create app/(tabs)/social-emotional-sentinel.tsx (follow patterns from step 1+2)
+6. Register tab in app/(tabs)/_layout.tsx (add to tabs array + import)
+7. npx tsc --noEmit  (must pass 0 errors)
+8. node scripts/pre-submission-audit.js  (9/9 PASS required)
+9. git add -A && git commit -m "feat: Social-Emotional Sentinel Navigator tab (#413)"
+10. echo "Task #413 DONE"
+
+ULW
+TASK_EOF
+
+# Send to tmux
+tmux send-keys -t jobble-baby "cat > /tmp/sisyphus_task_1106.txt << 'EOF'" C-m
+tmux send-keys -t jobble-baby "$(cat "$AUTOLOOP/sisyphus_task_1106.txt")" C-m
+tmux send-keys -t jobble-baby "EOF" C-m
+tmux send-keys -t jobble-baby "cat /tmp/sisyphus_task_1106.txt | opencode run --dir /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby -m minimax-coding-plan/MiniMax-M2.7 -- > /tmp/opencode_1106.log 2>&1 &" C-m
+
+echo "Dispatched cycle 1106"

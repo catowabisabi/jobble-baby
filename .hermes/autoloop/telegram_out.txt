@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 06:00
-✅ Done: #413 Social-Emotional Sentinel Navigator (cycle 1107 revert verified, 313 test count restored)
-🔧 Dispatched: #478 Gut Resilience Index Navigator (gut-microbiome-skin axis tracker)
-📋 TODO: 1 pending · 0 new
-📦 Commit: cf12518 → pushed
-📝 Desc: cycle 596 · brainstorm sparks新idea：Gut Resilience Index Navigator（microbiome-gut-skin axis追蹤：Bifido Support Score、TEWL proxy、sIgA活動、atopic march風險警示）。所有代碼已完成，pre-submission audit 9/9 PASS，TSC 0，SUBMISSION-READY。等待用戶：EAS credentials + App Store Connect + Play Console。
+🍼 Jobble Baby · 07:11
+✅ Done: #478 Gut Resilience Index Navigator — i18n tabs corruption fix (9/9 PASS)
+🔧 Dispatched: —
+📋 TODO: 0 pending · 0 new
+📦 Commit: fa0d6fb → pushed
+📝 Desc: 發現 Gut Resilience commit (2f8bcb3) 意外覆蓋 en.json/zh.json tabs 物件（145 keys → 1 key）。已還原完整 tabs 段並加入 gutResilience 入口。Audit 9/9 PASS，TSC 0。Project SUBMISSION-READY。

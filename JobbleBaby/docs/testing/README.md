@@ -1,7 +1,7 @@
 # Jobble Baby 測試體系文檔
 
-> 根據 `universal-testing-system-agent-prompt.zh-TW.md` 建立
-> 最後更新: 2026-07-04 (cycle 1109 — 330/330 pass, social-emotional-sentinel 0-test gap CLOSED)
+|> 根據 `universal-testing-system-agent-prompt.zh-TW.md` 建立
+|> 最後更新: 2026-07-04 (cycle 1110 — 313/313 pass + 7 smoke, social-emotional-sentinel gap CLOSED)
 
 ## 📁 測試架構
 
@@ -78,14 +78,14 @@ JobbleBaby/
 |  | E | 前端非模擬測試 (Mode B) | Jest | — | ❌ 未實現 | 0% |
 |  | F | 用戶流程 E2E 測試 | Detox | `__tests__/e2e/` | ❌ 未配置 | 0% |
 |  | G | 外部 API/Provider 測試 | — | — | ❌ N/A | N/A (無外部 API) |
-|  | H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 50/50 | RT-004 + RT-005 + RT-006 + RT-009 |
+|  | H | 回歸測試 | Jest | `__tests__/regression/` | ✅ 50/50 | RT-004 + RT-005 + RT-006 + RT-009 + RT-010 |
 |  | I | 效能/穩定性測試 | — | — | ❌ doc only | 0% |
 |  | J | 無障礙/UX 測試 | Jest | `__tests__/a11y/` | ⚠️ placeholder | 0% real a11y |
 
-**Overall: 330/330 tests pass (100%)**
-**Layers Implemented: 5.5/10 (50%)**
-**Last full run: Cycle 1109 — 330/330 PASS (2026-07-04)**
-**Commit tested: 5d7da18** (docs(testing): update README.md cycle ref + add test-database-strategy.md)
+**Overall: 313/313 tests pass (100%)**
+**Layers Implemented: 5/10 (50%)**
+**Last full run: Cycle 1110 — 313/313 PASS + 7/7 Smoke (2026-07-04)**
+**Commit tested: bc9c5b8** (docs(testing): update cycle ref + test counts — 204 mocked, 69 screens uncovered)
 
 ## ⚙️ Jest 配置
 
@@ -108,21 +108,21 @@ setupFiles: ['./__tests__/setup.ts'],
 npm test                    # 所有 Jest 測試（排除 smoke/e2e）
 npm run test:smoke          # 煙霧測試（tsx）✅ 7/7 PASS
 npm run test:unit           # 單元測試 ✅ 52/52 PASS
-npm run test:mocked         # Mocked 前端測試 ✅ 112/112 PASS
-npm run test:a11y           # 無障礙測試 ⚠️ placeholder
+npm run test:mocked         # Mocked 前端測試 ✅ 204/204 PASS (20 suites)
+npm run test:a11y           # 無障礙測試 ⚠️ placeholder (hangs — blocked)
 npm run test:e2e            # E2E 測試（需先配置 Detox）❌ 未配置
-npx jest --testPathPattern='__tests__/regression'  # 回歸測試 ✅ 26/26 PASS
-npm run test:all            # smoke + unit + mocked
-npm run test:report         # smoke + unit + mocked + 輸出報告
+npx jest --testPathPattern='__tests__/regression'  # 回歸測試 ✅ 50/50 PASS
+npm run test:all            # smoke + unit + mocked + regression
+npm run test:report         # smoke + unit + mocked + regression + 輸出報告
 ```
 
 ## ⚠️ 仍需關注
 
-1. **Screen Coverage Gap (~81%)** — 103 screens, only 20 have mocked tests
+1. **Screen Coverage Gap (~80%)** — 102 tab screens, only 20 have mocked tests
 2. **E2E 無測試覆蓋** — Detox 配置存在但無測試文件
-3. **a11y tests 是 Placeholder** — 17 tests pass but do not render real components
+3. **a11y tests 是 Placeholder** — tests hang >60s, do not render real components
 4. **Mode B 未實現** — 前端非模擬測試無基礎設施
-5. **效能測試無基礎設施** — `docs/testing/PERFORMANCE.md` 只有文檔
+5. **效能測試無基礎設施** — `docs/testing/performance-tests.md` 只有文檔
 6. **RT-GAP-001 social-emotional-sentinel** — ✅ 已修復 (29 tests, cycle 1109)
 
 ## 🔴 關鍵風險
@@ -130,24 +130,25 @@ npm run test:report         # smoke + unit + mocked + 輸出報告
 | 風險 | 影響 | 原因 |
 |------|------|------|
 | **social-emotional-sentinel 零測試** | ✅ **已修復** | 29 tests added in cycle 1109 |
-| Screen Coverage Gap | ~81% screens untested | 99 screens, 19 tested |
-| E2E 無測試覆蓋 | 99 tabs 關鍵路徑未驗證 | Detox 未配置 |
+| Screen Coverage Gap | ~80% screens untested | 102 tab screens, only 20 have mocked tests |
+| E2E 無測試覆蓋 | 102 tabs 關鍵路徑未驗證 | Detox 未配置 |
 | 效能測試缺失 | 大列表/streaming 場景未知 | 無負載測試 |
 | a11y placeholder | 無法發現真實無障礙問題 | 測試不渲染真實組件 |
 | `getDecilePercentile` boundary | p50 時返回 62 而非 50 | `velocity < p50` 用了 `<` 而非 `<=` |
 | Duplicate key `18` in HomeScreen | React list rendering warning | List item key collision — non-blocking |
 | `act()` wrapper missing in async tests | Flaky tests, state update warnings | VelocityDecile + Profile async setState |
 
-## 📊 Cycle 1109 成果 (2026-07-04)
+## 📊 Cycle 1110 成果 (2026-07-04)
 
-- **330/330 tests pass — Zero failures**
-- Commit 5d7da18: docs(testing): update README.md cycle ref + add test-database-strategy.md
+- **313/313 tests pass — Zero failures** (7 smoke + 52 unit + 204 mocked + 50 regression)
+- Commit bc9c5b8: docs(testing): update cycle ref + test counts — 204 mocked, 69 screens uncovered
 - Smoke tests: 7/7 ✅ PASS (TypeScript 0 errors)
-- Unit tests: 52/52 ✅ PASS
+- Unit tests: 52/52 ✅ PASS (5 suites)
 - Mocked tests: 204/204 ✅ PASS (20 suites, 20 screens covered)
-- Regression: 50/50 ✅ PASS
-- A11y: 17/17 ⚠️ PASS (placeholder)
+- Regression: 50/50 ✅ PASS (5 suites)
+- A11y: ⚠️ placeholder (hangs >60s — blocked)
+- Screen coverage: 20/102 tab screens (~19.6%)
 - **social-emotional-sentinel (657 lines) — CRITICAL GAP CLOSED** ✅
 - RT-GAP-001: social-emotional-sentinel zero-test → 29 tests added
 - RT-007 (act() wrapper) 和 RT-008 (duplicate key) 仍待修復
-- 新建 `docs/testing/test-database-strategy.md`
+- **Doc corrections made in Cycle 1110**: Fixed incorrect test counts (330→313), corrected mocked suite count (112→204), regression (26→50), corrected screen counts (103→102, 20/89→20/102)

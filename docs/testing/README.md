@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-|||||||> 最後更新：2026-07-04 (Cycle 1214)
+|||||||> 最後更新：2026-07-04 (Cycle 1215)
 
 ## 📋 項目概覽
 
@@ -50,9 +50,9 @@ runtime/logs/tests/   # 測試報告輸出
 
 **不適用於此項目：** C (後端 API 整合測試) — 無後端 · G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 1214 — 336 PASS (7 Smoke + 52 Unit + 227 Mocked + 50 Regression), 0 FAIL, 1 BLOCKED (A11y timeout), 4 SKIPPED (GutResilience modal), 3 CRITICAL GAPS (Mode B 0, E2E 0, Performance 0), 82 screens uncovered (79.6%)**
+**最新測試結果：Cycle 1215 — 336 PASS (7 Smoke + 52 Unit + 227 Mocked + 50 Regression), 0 FAIL, 1 BLOCKED (A11y timeout), 4 SKIPPED (GutResilience modal), 3 CRITICAL GAPS (Mode B 0, E2E 0, Performance 0), 82 screens uncovered (79.6%)**
 
-> ✅ 注意 (Cycle 1214)：所有 Smoke、Unit、Mocked (227 tests)、Regression 測試均通過。新增 `GutResilienceNavigatorScreen.test.tsx` 覆蓋 Gut Resilience Index Navigator（23 PASS, 4 SKIPPED modal interaction tests）。Mocked tests升至227 (from 204)，新增 Gut Resilience 覆蓋。
+> ✅ 注意 (Cycle 1215)：所有 Smoke、Unit、Mocked (227 tests)、Regression 測試均通過。Cycle 1214 的 GutResilienceNavigator 新增測試（23 PASS, 4 SKIPPED）已納入。測試體系保持 336 PASS，0 FAIL。
 
 > ⚠️ 注意：4個 GutResilienceNavigator modal/save 測試被跳過（`it.skip`）— accessibilityLabel 在 section header button 和 modal button 間衝突。需要修復後移除 `.skip`。
 

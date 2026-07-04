@@ -5734,5 +5734,125 @@
       "socialRefLabel": "Social Ref",
       "jointLabel": "Joint/Empathy"
     }
+  },
+  "gutResilience": {
+    "title": "Gut Resilience Index",
+    "subtitle": "Track your baby's gut microbiome and skin barrier health",
+    "stoolLogger": {
+      "title": "Stool Biome Proxy",
+      "date": "Date",
+      "frequency": "Frequency",
+      "timesPerDay": "times/day",
+      "consistency": "Consistency",
+      "consistencyOptions": {
+        "watery": "Watery",
+        "soft": "Soft",
+        "normal": "Normal",
+        "formed": "Formed",
+        "hard": "Hard"
+      },
+      "color": "Color",
+      "colorOptions": {
+        "yellow": "Yellow",
+        "green": "Green",
+        "brown": "Brown",
+        "black": "Black",
+        "white": "White",
+        "red": "Red"
+      },
+      "smell": "Smell",
+      "smellOptions": {
+        "normal": "Normal",
+        "sour": "Sour",
+        "foul": "Foul",
+        "other": "Other"
+      },
+      "antibioticExposure": "Antibiotic Exposure",
+      "yes": "Yes",
+      "no": "No",
+      "feedingType": "Feeding Type",
+      "feedingTypeOptions": {
+        "breast": "Breast",
+        "formula": "Formula",
+        "mixed": "Mixed",
+        "solid": "Solid"
+      },
+      "last14Days": "Last 14 Days",
+      "noEntries": "No entries yet",
+      "addEntry": "Add Entry"
+    },
+    "bifido": {
+      "title": "Bifido Support Score",
+      "score": "Score",
+      "breastfedDirect": "Direct Breastfeeds",
+      "breastfedPumped": "Pumped Breastmilk (ml)",
+      "formulaFeeds": "Formula Feeds",
+      "probioticDrops": "Probiotic Drops",
+      "frequency": "Frequency",
+      "deliveryMode": "Delivery Mode",
+      "deliveryModeOptions": {
+        "vaginal": "Vaginal",
+        "cesarean": "Cesarean"
+      },
+      "antibiotics14d": "Antibiotics (14 days)",
+      "calculateScore": "Calculate Score",
+      "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
+      "poor": "Poor"
+    },
+    "gutBarrier": {
+      "title": "Gut Barrier Integrity",
+      "cheekSkin": "Cheek Skin Condition",
+      "conditionOptions": {
+        "smooth": "Smooth",
+        "normal": "Normal",
+        "dry": "Dry",
+        "flaking": "Flaking"
+      },
+      "skinSensitivity": "Skin Sensitivity Rating",
+      "riskLevel": "Risk Level",
+      "riskLevels": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
+    },
+    "siga": {
+      "title": "Secretory IgA Activity",
+      "mucusQuality": "Mucus Quality",
+      "mucusQualityOptions": {
+        "thinClear": "Thin & Clear",
+        "thickWhite": "Thick & White",
+        "yellow": "Yellow",
+        "green": "Green"
+      },
+      "respiratoryInfections": "Respiratory Infections (30d)",
+      "diarrheaEpisodes": "Diarrhea Episodes (30d)",
+      "earInfections": "Ear Infections (30d)",
+      "latestEntry": "Latest Entry",
+      "noEntries": "No entries yet",
+      "trend30Days": "30-Day Trend"
+    },
+    "dashboard": {
+      "title": "Gut-Skin Correlation",
+      "stoolQuality": "Stool Quality",
+      "rashFrequency": "Rash/Eczema Frequency",
+      "bifidoScore": "Bifido Score",
+      "noData": "Not enough data for chart"
+    },
+    "alert": {
+      "title": "Atopic March Risk",
+      "message": "Gut-Immune Consultation Recommended",
+      "description": "Multiple risk factors for atopic march detected. Consider pediatrician consultation.",
+      "triggers": "Triggering Factors",
+      "bifidoLow": "Low Bifido Support Score",
+      "stoolDeclining": "Declining Stool Quality",
+      "permeabilityHigh": "High Gut Permeability",
+      "rashFrequency": "Frequent Rashes"
+    }
+  },
+  "tabs": {
+    "gutResilience": "Gut Resilience"
   }
 }

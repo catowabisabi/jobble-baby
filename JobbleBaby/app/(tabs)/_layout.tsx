@@ -326,6 +326,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="gut-resilience-navigator"
+        options={{
+          title: t('tabs.gutResilience'),
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="chart-line" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
         name="circadian"
         options={{
           title: t('tabs.circadian'),

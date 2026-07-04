@@ -5738,5 +5738,125 @@
       "socialRefLabel": "社交參照",
       "jointLabel": "共同/同理心"
     }
+  },
+  "gutResilience": {
+    "title": "腸道復原力指數",
+    "subtitle": "追蹤寶寶的腸道微生物群和皮膚屏障健康",
+    "stoolLogger": {
+      "title": "糞便微生物代理指標",
+      "date": "日期",
+      "frequency": "頻率",
+      "timesPerDay": "次/天",
+      "consistency": "稠度",
+      "consistencyOptions": {
+        "watery": "水狀",
+        "soft": "軟便",
+        "normal": "正常",
+        "formed": "成形",
+        "hard": "硬便"
+      },
+      "color": "顏色",
+      "colorOptions": {
+        "yellow": "黃色",
+        "green": "綠色",
+        "brown": "棕色",
+        "black": "黑色",
+        "white": "白色",
+        "red": "紅色"
+      },
+      "smell": "氣味",
+      "smellOptions": {
+        "normal": "正常",
+        "sour": "酸味",
+        "foul": "臭味",
+        "other": "其他"
+      },
+      "antibioticExposure": "抗生素接觸",
+      "yes": "是",
+      "no": "否",
+      "feedingType": "餵養類型",
+      "feedingTypeOptions": {
+        "breast": "母乳",
+        "formula": "配方奶",
+        "mixed": "混合",
+        "solid": "固體食物"
+      },
+      "last14Days": "過去14天",
+      "noEntries": "尚無記錄",
+      "addEntry": "新增記錄"
+    },
+    "bifido": {
+      "title": "雙歧桿菌支持分數",
+      "score": "分數",
+      "breastfedDirect": "直接母乳餵養",
+      "breastfedPumped": "母乳擠出（毫升）",
+      "formulaFeeds": "配方奶餵養",
+      "probioticDrops": "益生菌滴劑",
+      "frequency": "頻率",
+      "deliveryMode": "分娩方式",
+      "deliveryModeOptions": {
+        "vaginal": "陰道分娩",
+        "cesarean": "剖腹產"
+      },
+      "antibiotics14d": "過去14天抗生素",
+      "calculateScore": "計算分數",
+      "excellent": "極佳",
+      "good": "良好",
+      "fair": "一般",
+      "poor": "較差"
+    },
+    "gutBarrier": {
+      "title": "腸道屏障完整性",
+      "cheekSkin": "臉頰皮膚狀況",
+      "conditionOptions": {
+        "smooth": "光滑",
+        "normal": "正常",
+        "dry": "乾燥",
+        "flaking": "脫屑"
+      },
+      "skinSensitivity": "皮膚敏感度評分",
+      "riskLevel": "風險等級",
+      "riskLevels": {
+        "low": "低",
+        "medium": "中",
+        "high": "高"
+      }
+    },
+    "siga": {
+      "title": "分泌型免疫球蛋白A活性",
+      "mucusQuality": "黏液品質",
+      "mucusQualityOptions": {
+        "thinClear": "稀薄透明",
+        "thickWhite": "濃稠白色",
+        "yellow": "黃色",
+        "green": "綠色"
+      },
+      "respiratoryInfections": "過去30天呼吸道感染",
+      "diarrheaEpisodes": "過去30天腹瀉次數",
+      "earInfections": "過去30天耳部感染",
+      "latestEntry": "最新記錄",
+      "noEntries": "尚無記錄",
+      "trend30Days": "30天趨勢"
+    },
+    "dashboard": {
+      "title": "腸道-皮膚相關性",
+      "stoolQuality": "糞便品質",
+      "rashFrequency": "皮疹/濕疹頻率",
+      "bifidoScore": "雙歧桿菌分數",
+      "noData": "數據不足以生成圖表"
+    },
+    "alert": {
+      "title": "異位性進程風險",
+      "message": "建議諮詢腸道免疫",
+      "description": "檢測到多項異位性進程風險因素。建議諮詢兒科醫生。",
+      "triggers": "觸發因素",
+      "bifidoLow": "雙歧桿菌支持分數過低",
+      "stoolDeclining": "糞便品質下降",
+      "permeabilityHigh": "腸道通透性過高",
+      "rashFrequency": "皮疹頻發"
+    }
+  },
+  "tabs": {
+    "gutResilience": "腸道復原力"
   }
 }

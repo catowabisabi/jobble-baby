@@ -1,6 +1,6 @@
-🍼 Jobble Baby · 07:11
-✅ Done: #478 Gut Resilience Index Navigator — i18n tabs corruption fix (9/9 PASS)
+🍼 Jobble Baby · 08:04
+✅ Done: #596 Gut Resilience Index Navigator (2f8bcb3)
 🔧 Dispatched: —
 📋 TODO: 0 pending · 0 new
-📦 Commit: fa0d6fb → pushed
-📝 Desc: 發現 Gut Resilience commit (2f8bcb3) 意外覆蓋 en.json/zh.json tabs 物件（145 keys → 1 key）。已還原完整 tabs 段並加入 gutResilience 入口。Audit 9/9 PASS，TSC 0。Project SUBMISSION-READY。
+📦 Commit: cd999ea → pushed
+📝 Desc: Project SUBMISSION-READY。Gut Resilience Navigator committed (2f8bcb3)。DB housekeeping: idea #97 + concept #67 marked implemented。Awaiting user action: privacy policy URL (#39) + macOS env for iOS native build (#1)。

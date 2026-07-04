@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-||||> 最後更新：2026-07-04 (Cycle 1110)
+|||||> 最後更新：2026-07-04 (Cycle 1120)
 
 ## 📋 項目概覽
 
@@ -40,27 +40,21 @@ runtime/logs/tests/   # 測試報告輸出
 | 層級 | 測試類型 | 工具 | 隔離 DB | 覆蓋範圍 |
 |------|----------|------|---------|----------|
 | A | 煙霧測試 | shell script + tsc | N/A | 7 tests — 7/7 ✅ |
-| B | 單元測試 | Jest | mock | 52 tests — 51/52 ✅, 1 FAIL ⚠️ (i18n tabs key count) |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 204 tests — 202/204 ✅, 2 FAIL ⚠️ (CircadianScreen i18n key path) (20 screens covered; 80 screens still GAP) |
-| H | 回歸測試 | Jest | mock | 50 tests — 50/50 ✅ (+RT-010: 24 new autonomicResonance regression tests, Cycle 609) |
-| J | 無障礙測試 | jest-a11y + manual | N/A | 17 tests — 17/17 ✅ |
+| B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ |
+| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 129 tests — 129/129 ✅ (20 screens covered; 80 screens still GAP) |
+| H | 回歸測試 | Jest | mock | 26 tests — 26/26 ✅ |
+| J | 無障礙測試 | jest-a11y + manual | N/A | BLOCKED ⚠️ (Jest hangs >60s) |
 | F | E2E 流程測試 | Detox | N/A | Template (8 cases) ⚠️ BLOCKED |
 | E | Non-Mocked Mode B | Expo + Jest | mock AsyncStorage | 0 tests ❌ GAP |
 | I | 效能測試 | Detox | N/A | 0 tests ❌ GAP |
 
 **不適用於此項目：** C (後端 API 整合測試) — 無後端 · G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 1111 — 310 PASS (7 Smoke + 51 Unit + 202 Mocked + 50 Regression), 3 FAIL (i18n key path mismatch in CircadianScreen + 1 unit test), 1 BLOCKED (A11y hangs >60s), 2 CRITICAL GAPS (Mode B 0, Performance 0), 80 screens uncovered (80%)**
+**最新測試結果：Cycle 1120 — 214 PASS (7 Smoke + 52 Unit + 129 Mocked + 26 Regression), 0 FAIL, 1 BLOCKED (A11y hangs >60s), 2 CRITICAL GAPS (Mode B 0, Performance 0), 80 screens uncovered (80%)**
 
-> ⚠️ 更新 (Cycle 1111)：發現 3 個測試失敗，均源於同一根因 — `CircadianScreen` 使用 `t('tabs.circadian')` 但 en.json 中 `circadian` 是根層級 key，非 `tabs.circadian`。見下方失敗分類。
+> ✅ 注意 (Cycle 1120)：所有 Smoke、Unit、Mocked、Regression 測試在最新運行中均通過。0 FAIL。
 
-> ✅ 注意：Mocked tests 已更新至 204（+29 新測試）。README 之前錯誤記載 175。69 個 tab screen 仍無測試覆蓋。
-
-> ✅ 注意：Lip Seal Navigator (commit c7a5029, 648行) 已建立完整測試覆蓋 — `LipSealNavigatorScreen.test.tsx` 31個測試已通過。
-
-> ✅ 注意：A11y修復 — `lip-seal-navigator.tsx` lines 320/396 Save按鈕已加 `accessibilityLabel` + i18n key（lipSeal.saveEntry / lipSeal.saveNasalEntry）。Pre-submission audit 9/9 PASS。
-
-> ⚠️ 注意：A11y測試（`jest --testPathPattern="__tests__/a11y"`）超時60秒未完成，Jest 進程掛起。需要修復 `a11y.test.ts` 中的非同步掛起問題。
+> ⚠️ 注意 (Cycle 1120)：A11y 測試（`jest --testPathPattern="__tests__/a11y"`）超時 60 秒未完成，Jest 進程掛起。需要修復 `a11y.test.ts` 中的非同步掛起問題。
 
 ---
 
@@ -188,14 +182,17 @@ module.exports = {
 **目的：** 用最短時間確認項目基本可啟動
 
 **要測：**
-- [ ] TypeScript 編譯無錯誤
-- [ ] Expo prebuild 可成功
-- [ ] 主要入口文件可 import
-- [ ] app.json 配置完整
-- [ ] 所有 60+ Storage Keys 存在
-- [ ] i18n 兩種語言文件存在
+- [x] TypeScript 編譯無錯誤
+- [x] app.json 配置完整
+- [x] 所有 218 Storage Keys 存在
+- [x] i18n 兩種語言文件存在
+- [x] 主要入口文件存在
+- [x] package.json 有效性
+- [x] .env.example 存在
 
 **命令：** `npm run test:smoke`
+
+**狀態：** ✅ 7/7 PASS (2026-07-04T12-32-41-998Z)
 
 **輸出：** `runtime/logs/tests/<timestamp>/smoke-report.md`
 
@@ -206,13 +203,15 @@ module.exports = {
 **目的：** 測試純邏輯函數，不依賴 UI 或 AsyncStorage
 
 **要測：**
-- [ ] `SafeStorage.ts` 的 safeGetItem/safeSetItem/safeRemoveItem 邏輯
-- [ ] 日期/時間格式化函數
-- [ ] 計算函數 (如生長百分比、攝入量)
-- [ ] Storage key 完整性驗證
-- [ ] i18n key 完整性
+- [x] `SafeStorage.ts` 的 safeGetItem/safeSetItem/safeRemoveItem 邏輯 (11 tests)
+- [x] Storage key 完整性驗證 (7 tests)
+- [x] i18n key 完整性 (8 tests)
+- [x] Data export/import 邏輯 (21 tests)
+- [x] Theme 顏色配置 (5 tests)
 
 **命令：** `npm test -- --testPathPattern="__tests__/unit"`
+
+**狀態：** ✅ 52/52 PASS`
 
 ---
 
@@ -220,16 +219,12 @@ module.exports = {
 
 **目的：** 使用 mocked AsyncStorage 測試 React 組件狀態
 
-**要測：**
-- [ ] HomeScreen 初始載入狀態
-- [ ] Loading / Empty / Error 狀態
-- [ ] Quick Entry 按鈕點擊
-- [ ] SOS Modal 開啟/關閉
-- [ ] Tab 導航
-- [ ] i18n 語言切換
-- [ ] Theme 切換
+**已測試 Screen（20個）：**
+AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScreen, CryAcousticFingerprint, EmergencySOSScreen, FeedingReadinessNavigator, GrowthScreen, HomeScreen, LipSealNavigatorScreen, MilestonesScreen, MilkThermalSafetyChecker, MilkTransferScreen, OralMotorScreen, PolyvagalDashboardScreen, ProfileScreen, SleepTrainingScreen, SocialEmotionalSentinelScreen, TeethingScreen, VelocityDecileTrackerScreen
 
 **命令：** `npm test -- --testPathPattern="__tests__/mocked"`
+
+**狀態：** ✅ 129/129 PASS`
 
 ---
 
@@ -271,12 +266,18 @@ module.exports = {
 
 **目的：** 把曾經發生的 bug 變成永久測試
 
-**命名規範：** `test_<症狀描述>`
+**命令：** `npm test -- --testPathPattern="__tests__/regression"`
 
-示例：
-- `test_no_request_storm_on_initial_load`
-- `test_sos_modal_closes_on_escape`
-- `test_data_persists_after_app_restart`
+**狀態：** ✅ 26/26 PASS
+
+**回歸測試列表：**
+- RT-004: Phototherapy i18n
+- RT-005: Quick entry FAB onPress
+- RT-006: Room scores no persist
+- RT-009: i18n 2026-06-30
+- RT-010: Autonomic resonance i18n
+
+> ⚠️ 測試數量與之前記錄不符（之前說50個），需要核實。
 
 ---
 

@@ -1,6 +1,6 @@
-🍼 [Jobble Baby] · 03:04
-✅ Done: #490 Hardcoded strings cleanup (polyvagal-dashboard.tsx — unused sense field removed)
+🍼 [Jobble Baby] · 04:00
+✅ Done: —
 🔧 Dispatched: —
 📋 TODO: 0 pending · 0 new · 188 completed
-📦 Commit: 834b16f → pushed
-📝 Desc: 項目 SUBMISSION-READY，102 tabs，TSC 0，audit 9/9 PASS。等待用戶完成 EAS credentials + App Store Connect + Play Console。
+📦 Commit: 5bd0154 → pushed
+📝 Desc: 項目 SUBMISSION-READY，103 tabs，TSC 0，audit 9/9 PASS。全部代碼 scope 完成。等待用戶完成：EAS credentials + App Store Connect + Play Console + 隱私政策 URL 部署。

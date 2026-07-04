@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-||> 最後更新：2026-07-03 (Cycle 1105)
+|||> 最後更新：2026-07-04 (Cycle 1108)
 
 ## 📋 項目概覽
 
@@ -41,7 +41,7 @@ runtime/logs/tests/   # 測試報告輸出
 |------|----------|------|---------|----------|
 | A | 煙霧測試 | shell script + tsc | N/A | 7 tests — 7/7 ✅ |
 | B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 175 tests — 175/175 ✅ (+31 new: LipSealNavigatorScreen, Cycle 1105) |
+| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 204 tests — 204/204 ✅ (20 screens covered; 69 screens still GAP) |
 | H | 回歸測試 | Jest | mock | 50 tests — 50/50 ✅ (+RT-010: 24 new autonomicResonance regression tests, Cycle 609) |
 | J | 無障礙測試 | jest-a11y + manual | N/A | 17 tests — 17/17 ✅ |
 | F | E2E 流程測試 | Detox | N/A | Template (8 cases) ⚠️ BLOCKED |
@@ -50,7 +50,9 @@ runtime/logs/tests/   # 測試報告輸出
 
 **不適用於此項目：** C (後端 API 整合測試) — 無後端 · G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 1105 — 284 PASS (7 Smoke + 52 Unit + 175 Mocked + 50 Regression), 0 FAIL, 1 BLOCKED (A11y timeout), CRITICAL GAP RESOLVED (LipSealNavigator 31 new tests)**
+**最新測試結果：Cycle 1108 — 313 PASS (7 Smoke + 52 Unit + 204 Mocked + 50 Regression), 0 FAIL, 1 BLOCKED (A11y timeout), 2 CRITICAL GAPS (Mode B 0, Performance 0), 69 screens uncovered**
+
+> ✅ 注意：Mocked tests 已更新至 204（+29 新測試）。README 之前錯誤記載 175。69 個 tab screen 仍無測試覆蓋。
 
 > ✅ 注意：Lip Seal Navigator (commit c7a5029, 648行) 已建立完整測試覆蓋 — `LipSealNavigatorScreen.test.tsx` 31個測試已通過。
 

@@ -1,184 +1,137 @@
-# 前端非模擬測試 (Frontend Non-Mocked / Mode B)
+# E. 前端非模擬測試 — Mode B (Non-Mocked Tests)
 
-> 目的：使用 Expo 測試運行器 + mocked AsyncStorage，測試前後端整條鏈
+> **目的：** 啟動真實 Expo 環境 + real AsyncStorage，測試 Navigation Flow、Screen 間數據傳遞、Deep Link 處理
+>
+> **狀態：** ❌ 未建立 — 0 tests — CRITICAL GAP
 
 ## 概述
 
-Mode B 測試是 Mocked 測試（D層）的進階版本。主要區別：
+Mode B 測試區別於 Mocked (D) 測試的關鍵：
+- Mocked: Jest + RTL + mocked AsyncStorage，純組件單元測試
+- Mode B: Expo Test Runner + real AsyncStorage in-memory，測試 Navigation 鏈 + Storage 持久化
 
-| 特性 | D. Mocked Tests | E. Mode B Tests |
-|------|----------------|-----------------|
-| AsyncStorage | Mock | Mock |
-| React Native 組件 | Shallow render | Full render |
-| Navigation | Mocked router | Real expo-router |
-| Context Providers | Mocked | Real providers |
-| 速度 | 快 | 中等 |
-| 隔離性 | 高 | 中 |
+## 為何需要 Mode B
 
-## 運行方式
+當前面臨的風險：
+1. **Navigation 斷裂：** 69 個 screen 沒有任何測試。Mocked 測試只測單一組件，Navigation 跳轉鏈完全未知。
+2. **AsyncStorage 持久化：** Mocked 測試用 mock，無法驗證真實 AsyncStorage 的序列化/反序列化問題。
+3. **Deep Link：** Expo Router 的 deep link 行為在 mocked 環境無法測試。
+
+## 目標測試場景
+
+### 1. Onboarding → Home 完整 Flow
+
+```
+OnboardingScreen 
+  → BabyProfileSetup 
+  → HomeScreen
+```
+
+要驗證：
+- [ ] Onboarding 完成後，`@jobble_baby_profile` 正確寫入
+- [ ] `hasCompletedOnboarding` flag 正確設定
+- [ ] HomeScreen 根據 profile 顯示正確月齡
+
+### 2. Tab Navigation Flow
+
+```
+HomeScreen 
+  → Tracking Tab 
+  → Add Entry 
+  → Save → Back
+```
+
+要驗證：
+- [ ] Tab 切換不丟失 context
+- [ ] 新增 entry 寫入 AsyncStorage
+- [ ] 返回 HomeScreen 後數據仍在
+
+### 3. Deep Link 處理
+
+要驗證：
+- [ ] `jobblebaby://tracking/123` 正確開啟對應 screen
+- [ ] `jobblebaby://profile/edit` 正確開啟 profile 編輯
+
+### 4. Screen 間數據傳遞
+
+要驗證：
+- [ ] `FeedingTimerScreen` 的計時結果正確傳給 `BottleFeedingScreen`
+- [ ] `OnboardingScreen` 的 profile 正確傳給所有需要月齡的 screen
+
+## 技術方案
+
+### 工具：`npx expo test`
+
+Expo 提供 `expo test` CLI，運行 `app.test.tsx` 文件。與 Jest 不同，Expo Test Runner 真正加載 Expo 環境。
+
+```typescript
+// app.test.tsx 示例
+import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import { useRouter } from 'expo-router';
+
+describe('Mode B: Navigation + Real Storage', () => {
+  beforeEach(() => {
+    // 清理 in-memory AsyncStorage
+    require('@react-native-async-storage/async-storage').clear();
+  });
+
+  it('should persist baby profile after onboarding', async () => {
+    const router = require('expo-router').useRouter();
+    
+    // 導航到 onboarding
+    router.push('/onboarding');
+    
+    // 填寫表單
+    const nameInput = await waitFor(() => document.getElementById('baby-name'));
+    fireEvent.changeText(nameInput, 'TestBaby');
+    
+    const saveBtn = await waitFor(() => document.getElementById('save-profile'));
+    fireEvent.press(saveBtn);
+    
+    // 驗證寫入
+    const storage = require('@react-native-async-storage/async-storage');
+    const profile = await storage.getItem('@jobble_baby_profile');
+    expect(JSON.parse(profile).name).toBe('TestBaby');
+    
+    // 驗證導航到 Home
+    expect(router.push).toHaveBeenCalledWith('/');
+  });
+});
+```
+
+## 命令
 
 ```bash
 cd JobbleBaby
 npx expo test
-# 或
-npm run test:mode-b
 ```
 
-## 測試目標
-
-### 1. 真實 Navigation 流程
-
-測試 Tab 導航是否正確切換 screen：
-
-```typescript
-describe('Navigation Integration', () => {
-  it('should navigate between tabs correctly', async () => {
-    const { getByText } = renderWithProviders(<HomeScreen />);
-    
-    // 點擊 Tracking Tab
-    const trackingTab = getByText('Tracking');
-    fireEvent.press(trackingTab);
-    
-    // 確認路由變化
-    await waitFor(() => {
-      expect(useRouter().push).toHaveBeenCalledWith('/tracking');
-    });
-  });
-});
-```
-
-### 2. Screen 之間數據傳遞
-
-測試上一個 screen 的資料是否正確傳遞到下一個 screen：
-
-```typescript
-describe('Data Passing Between Screens', () => {
-  it('should pass baby profile to tracking screen', async () => {
-    // 設定 profile data
-    await AsyncStorage.setItem('@jobble_baby_profile', JSON.stringify({
-      name: 'TestBaby',
-      birthDate: '2024-01-01',
-    }));
-    
-    renderWithProviders(<TrackingScreen />);
-    
-    await waitFor(() => {
-      expect(screen.getByText('TestBaby')).toBeTruthy();
-    });
-  });
-});
-```
-
-### 3. Deep Link 處理
-
-測試 app 能否正確處理 deep link：
-
-```typescript
-describe('Deep Link Handling', () => {
-  it('should handle jobblebaby://tracking/123', async () => {
-    // Simulate deep link
-    jest.mock('expo-linking', () => ({
-      getInitialURL: jest.fn(() => Promise.resolve('jobblebaby://tracking/123')),
-    }));
-    
-    // App should navigate to tracking entry 123
-    await device.launchApp({ url: 'jobblebaby://tracking/123' });
-    
-    await expect(element(by.text('Entry #123'))).toBeVisible();
-  });
-});
-```
-
-### 4. 完整的用戶流程
-
-測試從 Home → Tracking → Save → 返回 Home 的完整流程：
-
-```typescript
-describe('Full User Flow', () => {
-  it('should complete tracking entry and return to home', async () => {
-    // 1. Home Screen
-    const { getByText } = renderWithProviders(<HomeScreen />);
-    
-    // 2. 點擊 Tracking Tab
-    fireEvent.press(getByText('Tracking'));
-    
-    // 3. 添加記錄
-    const addBtn = getById('addEntryBtn');
-    fireEvent.press(addBtn);
-    
-    // 4. 選擇類型
-    fireEvent.press(getByText('Diaper'));
-    
-    // 5. 保存
-    fireEvent.press(getByText('Save'));
-    
-    // 6. 返回 Home
-    fireEvent.press(getByText('Home'));
-    
-    // 7. 確認記錄出現在 timeline
-    await waitFor(() => {
-      expect(getByText('Diaper')).toBeTruthy();
-    });
-  });
-});
-```
-
-## Mock 策略
-
-Mode B 測試仍使用 AsyncStorage mock，但使用真實的 Context Providers：
-
-```typescript
-// Mode B 使用真實 providers，不是 mock
-import { ThemeProvider } from '../../app/context/ThemeContext';
-import { LanguageProvider } from '../../app/context/LanguageContext';
-
-function renderModeB(ui: ReactElement) {
-  return render(
-    <LanguageProvider>
-      <ThemeProvider>
-        {ui}
-      </ThemeProvider>
-    </LanguageProvider>
-  );
-}
-```
-
-## 測試隔離
-
-每個 Mode B 測試都會在 `beforeEach` 中清理 AsyncStorage：
-
-```typescript
-beforeEach(async () => {
-  await AsyncStorage.clear();
-  jest.clearAllMocks();
-});
-```
-
-## 輸出位置
+## 輸出
 
 ```
 runtime/logs/tests/<timestamp>/
 ├── mode-b-report.md
-├── console.log
 ├── navigation-trace.json
+├── storage-snapshots/
 └── screenshots/
 ```
+
+## 實現步驟
+
+1. [ ] 建立 `app.test.tsx` 入口文件
+2. [ ] 建立 Mode B helper functions (real AsyncStorage)
+3. [ ] 實現 Onboarding → Home flow 測試
+4. [ ] 實現 Tab Navigation 測試
+5. [ ] 實現 Deep Link 測試
+6. [ ] 整合進 `npm run test:all`
 
 ## 失敗處理
 
 如果 Mode B 測試失敗：
+1. **AsyncStorage 錯誤** → 檢查 `jest.setup.ts` 是否正確 mock，Mode B 應該使用 real AsyncStorage
+2. **Navigation 錯誤** → 檢查 Expo Router 版本兼容性
+3. **Deep Link 不工作** → 檢查 `app.json` linking 配置
 
-1. **Navigation 錯誤** → 檢查 `expo-router` 是否正確 mock
-2. **AsyncStorage 資料不存在** → 確認 `beforeEach` 有調用 `clear()`
-3. **Provider 錯誤** → 檢查 `renderModeB` wrapper 是否完整
+## 負責人
 
-## 創建新的 Mode B 測試
-
-```bash
-# 在 __tests__/mode-b/ 目錄下創建
-touch __tests__/mode-b/TrackingScreen.test.tsx
-```
-
----
-
-*最後更新：2026-06-22*
+此 GAP 需要新的 Expo Test Runner 實現。現有 Jest 環境無法完整模擬 Expo 環境。

@@ -40,8 +40,8 @@ runtime/logs/tests/   # 測試報告輸出
 | 層級 | 測試類型 | 工具 | 隔離 DB | 覆蓋範圍 |
 |------|----------|------|---------|----------|
 | A | 煙霧測試 | shell script + tsc | N/A | 7 tests — 7/7 ✅ |
-| B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 204 tests — 204/204 ✅ (20 screens covered; 69 screens still GAP) |
+| B | 單元測試 | Jest | mock | 52 tests — 51/52 ✅, 1 FAIL ⚠️ (i18n tabs key count) |
+| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 204 tests — 202/204 ✅, 2 FAIL ⚠️ (CircadianScreen i18n key path) (20 screens covered; 80 screens still GAP) |
 | H | 回歸測試 | Jest | mock | 50 tests — 50/50 ✅ (+RT-010: 24 new autonomicResonance regression tests, Cycle 609) |
 | J | 無障礙測試 | jest-a11y + manual | N/A | 17 tests — 17/17 ✅ |
 | F | E2E 流程測試 | Detox | N/A | Template (8 cases) ⚠️ BLOCKED |
@@ -50,7 +50,9 @@ runtime/logs/tests/   # 測試報告輸出
 
 **不適用於此項目：** C (後端 API 整合測試) — 無後端 · G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 1110 — 313 PASS (7 Smoke + 52 Unit + 204 Mocked + 50 Regression), 0 FAIL, 1 BLOCKED (A11y hangs >60s), 2 CRITICAL GAPS (Mode B 0, Performance 0), 82 screens uncovered (80%)**
+**最新測試結果：Cycle 1111 — 310 PASS (7 Smoke + 51 Unit + 202 Mocked + 50 Regression), 3 FAIL (i18n key path mismatch in CircadianScreen + 1 unit test), 1 BLOCKED (A11y hangs >60s), 2 CRITICAL GAPS (Mode B 0, Performance 0), 80 screens uncovered (80%)**
+
+> ⚠️ 更新 (Cycle 1111)：發現 3 個測試失敗，均源於同一根因 — `CircadianScreen` 使用 `t('tabs.circadian')` 但 en.json 中 `circadian` 是根層級 key，非 `tabs.circadian`。見下方失敗分類。
 
 > ✅ 注意：Mocked tests 已更新至 204（+29 新測試）。README 之前錯誤記載 175。69 個 tab screen 仍無測試覆蓋。
 

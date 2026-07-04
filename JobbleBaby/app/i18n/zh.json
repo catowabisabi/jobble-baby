@@ -133,9 +133,6 @@
     "behavioralRehearsal": "行為排練",
     "protoconversation": "前語言溝通",
     "interoceptive": "內感",
-    "tabs": {
-      "cryAcoustic": "哭聲指紋"
-    },
     "bilateralCoordination": "Bilateral [TODO]",
     "bonding": "Bonding [TODO]",
     "bottleReflux": "Reflux [TODO]",
@@ -155,7 +152,8 @@
     "whiteNoise": "White Noise [TODO]",
     "zoneRegulation": "Zone [TODO]",
     "feedingReadinessNavigator": "加固準備",
-    "lipSealNavigator": "嘴唇閉合"
+    "lipSealNavigator": "嘴唇閉合",
+    "gutResilience": "腸道復原力指數"
   },
   "neuroplasticity": {
     "title": "神經可塑性",
@@ -5855,8 +5853,5 @@
       "permeabilityHigh": "腸道通透性過高",
       "rashFrequency": "皮疹頻發"
     }
-  },
-  "tabs": {
-    "gutResilience": "腸道復原力"
   }
 }

@@ -152,7 +152,8 @@
     "wetDryAnalysis": "Wet/Dry",
     "whiteNoise": "White Noise",
     "zoneRegulation": "Zone",
-    "lipSealNavigator": "Lip Seal"
+    "lipSealNavigator": "Lip Seal",
+    "gutResilience": "Gut Resilience"
   },
   "neuroplasticity": {
     "title": "Neuroplasticity",
@@ -5851,8 +5852,5 @@
       "permeabilityHigh": "High Gut Permeability",
       "rashFrequency": "Frequent Rashes"
     }
-  },
-  "tabs": {
-    "gutResilience": "Gut Resilience"
   }
 }

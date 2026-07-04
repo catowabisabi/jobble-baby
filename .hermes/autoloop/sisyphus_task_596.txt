@@ -1,0 +1,122 @@
+TASK #596 — URGENT — Gut Resilience Index Navigator
+
+Project: Jobble Baby (Expo/React Native, TypeScript)
+Repo: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+Keywords: gut_microbiome_succession, bifidobacterium_dominance, tewl_measurement
+
+## Objective
+Implement the Gut Resilience Index Navigator — a new tab that tracks the microbiome-gut-skin axis for infants.
+
+## Background
+Bifidobacterium dominance (70-90% of infant gut flora in first 6 months) is the keystone for immune education. When it declines (antibiotics, formula, C-section), gut barrier weakens, TEWL increases, atopic dermatitis risk rises. The app currently tracks allergens but not the underlying gut microbiome proxies.
+
+## Task
+Create app/(tabs)/gut-resilience-navigator.tsx
+
+### Sections Required
+
+**1. Stool Biome Proxy Logger**
+- Log entries: date, frequency (times/day), consistency (5 options: watery/soft/normal/formed/hard), color (6 options: yellow/green/brown/black/white/red), smell (4 options: normal/sour/foul/其他), antibiotic_exposure (yes/no), feeding_type (breast/formula/mixed/solid)
+- Store key: @jobble/stool_biome_proxy
+- Show last 14 days as a scrollable card list
+
+**2. Bifido Dominance Tracker**
+- Input fields: breastfed_direct (times/day), breastfed_pumped (ml), formula_feeds (times/day), probiotic_drops (yes/no + frequency), delivery_mode (vaginal/C-section), antibiotics_last_14d (yes/no)
+- Calculated "Bifido Support Score" (0-100):
+  - +30 if exclusively breastfed
+  - +20 if ≥4 breastfeeds/day
+  - +15 if probiotic drops used
+  - +15 if vaginal delivery
+  - -25 if C-section
+  - -20 if antibiotics in last 14 days
+  - -10 per formula feed >2/day
+  - Min 0, max 100
+- Store key: @jobble/bifido_support_score
+- Display score as a large circular gauge (color: green >60, yellow 30-60, red <30)
+
+**3. Gut Barrier Integrity Index**
+- TEWL proxy input: cheek skin condition (smooth/normal/dry/flaking), parent-reported "skin sensitivity" rating 1-5
+- Color-coded gut permeability risk: green (low), yellow (medium), red (high)
+- Formula: if cheek=flaking AND sensitivity≥4 → HIGH risk; if cheek=dry OR sensitivity≥3 → MEDIUM; else LOW
+- Store key: @jobble/gut_barrier_index
+- Show as color-coded card with explanatory text
+
+**4. Secretory IgA Activity Log**
+- Log entries: date, mucus_quality (thin-clear/thick-white/yellow/green), respiratory_infections_last_30d (count), diarrhea_episodes_last_30d (count), ear_infections_last_30d (count)
+- Store key: @jobble/siga_activity_log
+- Show latest entry + 30-day trend line for each metric
+
+**5. Gut-Skin Axis Correlation Dashboard**
+- Line chart (Recharts) showing 30-day trend:
+  - Line 1: Stool quality score (watery=1, soft=2, normal=3, formed=4, hard=5)
+  - Line 2: Rash/eczema frequency (incidents per week, from skin-thermal-regulation data if available, else manual entry)
+  - Line 3: Bifido Support Score
+- Color legend and annotations for correlation insights
+
+**6. Atopic March Risk Alert**
+- Triggers when ALL of: Bifido Support Score <40 + stool quality declining (trend) + gut permeability HIGH + rash frequency ≥2/week
+- Alert card: red border, icon, message "Gut-Immune Consultation Recommended — Multiple risk factors for atopic march detected. Consider pediatrician consultation."
+- Store key: @jobble/atopic_risk_flag
+
+## Storage Keys to Add (store/storage-keys.ts)
+- STOOL_BIOME_PROXY: "@jobble/stool_biome_proxy"
+- BIFIDO_SUPPORT_SCORE: "@jobble/bifido_support_score"
+- GUT_BARRIER_INDEX: "@jobble/gut_barrier_index"
+- SIGA_ACTIVITY_LOG: "@jobble/siga_activity_log"
+- ATOPIC_RISK_FLAG: "@jobble/atopic_risk_flag"
+
+## i18n Keys to Add (app/i18n/en.json + zh.json)
+- gutResilience.title: "Gut Resilience Index"
+- gutResilience.stoolLogger.title: "Stool Biome Proxy"
+- gutResilience.stoolLogger.frequency: "Frequency"
+- gutResilience.stoolLogger.consistency: "Consistency"
+- gutResilience.stoolLogger.color: "Color"
+- gutResilience.stoolLogger.smell: "Smell"
+- gutResilience.stoolLogger.antibioticExposure: "Antibiotic Exposure"
+- gutResilience.stoolLogger.feedingType: "Feeding Type"
+- gutResilience.bifido.title: "Bifido Support Score"
+- gutResilience.bifido.score: "Score"
+- gutResilience.bifido.breastfedDirect: "Direct Breastfeeds"
+- gutResilience.bifido.breastfedPumped: "Pumped Breastmilk (ml)"
+- gutResilience.bifido.formulaFeeds: "Formula Feeds"
+- gutResilience.bifido.probioticDrops: "Probiotic Drops"
+- gutResilience.bifido.deliveryMode: "Delivery Mode"
+- gutResilience.bifido.antibiotics14d: "Antibiotics (14 days)"
+- gutResilience.gutBarrier.title: "Gut Barrier Integrity"
+- gutResilience.gutBarrier.cheekSkin: "Cheek Skin Condition"
+- gutResilience.gutBarrier.skinSensitivity: "Skin Sensitivity Rating"
+- gutResilience.gutBarrier.riskLevel: "Risk Level"
+- gutResilience.siga.title: "Secretory IgA Activity"
+- gutResilience.siga.mucusQuality: "Mucus Quality"
+- gutResilience.siga.respiratoryInfections: "Respiratory Infections (30d)"
+- gutResilience.siga.diarrheaEpisodes: "Diarrhea Episodes (30d)"
+- gutResilience.siga.earInfections: "Ear Infections (30d)"
+- gutResilience.dashboard.title: "Gut-Skin Correlation"
+- gutResilience.alert.title: "Atopic March Risk"
+- gutResilience.alert.message: "Gut-Immune Consultation Recommended"
+- Plus all enum values (consistency options, color options, smell options, skin conditions)
+
+## Registration
+Add to app/(tabs)/_layout.tsx:
+```
+<Stack.Screen name="gut-resilience" options={ title: t('gutResilience.title'), headerShown: true } />
+```
+
+## Implementation Requirements
+1. Run: npx tsc --noEmit — MUST pass 0 errors
+2. Run: node scripts/pre-submission-audit.js — MUST pass 9/9
+3. All user-visible strings MUST use i18n t() — NO hardcoded English
+4. Use Recharts for line chart dashboard
+5. All AsyncStorage keys must follow @jobble/ naming convention
+6. Accessibility: all TouchableOpacity must have accessibilityLabel
+
+## Deliver
+- app/(tabs)/gut-resilience-navigator.tsx (new file)
+- Updated store/storage-keys.ts (add 5 new keys)
+- Updated app/i18n/en.json (add gutResilience.* keys)
+- Updated app/i18n/zh.json (add gutResilience.* Chinese translations)
+- Updated app/(tabs)/_layout.tsx (register new tab)
+- Git commit: feat(gut-resilience): Gut Resilience Index Navigator
+- Report: TSC errors count, audit score, files changed
+
+ULW

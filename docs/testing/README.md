@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-|||||> 最後更新：2026-07-04 (Cycle 1120)
+||||||> 最後更新：2026-07-04 (Cycle 1213)
 
 ## 📋 項目概覽
 
@@ -41,8 +41,8 @@ runtime/logs/tests/   # 測試報告輸出
 |------|----------|------|---------|----------|
 | A | 煙霧測試 | shell script + tsc | N/A | 7 tests — 7/7 ✅ |
 | B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 129 tests — 129/129 ✅ (20 screens covered; 80 screens still GAP) |
-| H | 回歸測試 | Jest | mock | 26 tests — 26/26 ✅ |
+| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 204 tests — 204/204 ✅ (20 screens covered; 83 screens still GAP) |
+| H | 回歸測試 | Jest | mock | 50 tests — 50/50 ✅ |
 | J | 無障礙測試 | jest-a11y + manual | N/A | BLOCKED ⚠️ (Jest hangs >60s) |
 | F | E2E 流程測試 | Detox | N/A | Template (8 cases) ⚠️ BLOCKED |
 | E | Non-Mocked Mode B | Expo + Jest | mock AsyncStorage | 0 tests ❌ GAP |
@@ -50,11 +50,11 @@ runtime/logs/tests/   # 測試報告輸出
 
 **不適用於此項目：** C (後端 API 整合測試) — 無後端 · G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 1120 — 214 PASS (7 Smoke + 52 Unit + 129 Mocked + 26 Regression), 0 FAIL, 1 BLOCKED (A11y hangs >60s), 2 CRITICAL GAPS (Mode B 0, Performance 0), 80 screens uncovered (80%)**
+**最新測試結果：Cycle 1213 — 313 PASS (7 Smoke + 52 Unit + 204 Mocked + 50 Regression), 0 FAIL, 1 BLOCKED (A11y hangs >60s), 3 CRITICAL GAPS (Mode B 0, E2E 0, Performance 0), 83 screens uncovered (80.6%)**
 
-> ✅ 注意 (Cycle 1120)：所有 Smoke、Unit、Mocked、Regression 測試在最新運行中均通過。0 FAIL。
+> ✅ 注意 (Cycle 1213)：所有 Smoke、Unit、Mocked、Regression 測試在最新運行中均通過。0 FAIL。Mocked tests 升至 204 (from 129)，Regression 升至 50 (from 26)。
 
-> ⚠️ 注意 (Cycle 1120)：A11y 測試（`jest --testPathPattern="__tests__/a11y"`）超時 60 秒未完成，Jest 進程掛起。需要修復 `a11y.test.ts` 中的非同步掛起問題。
+> ⚠️ 注意 (Cycle 1213)：A11y 測試（`jest --testPathPattern="__tests__/a11y"`）超時 60 秒未完成，Jest 進程掛起。需要修復 `a11y.test.ts` 中的非同步掛起問題。
 
 ---
 
@@ -192,7 +192,7 @@ module.exports = {
 
 **命令：** `npm run test:smoke`
 
-**狀態：** ✅ 7/7 PASS (2026-07-04T12-32-41-998Z)
+**狀態：** ✅ 7/7 PASS (2026-07-04T14-32-20-003Z)
 
 **輸出：** `runtime/logs/tests/<timestamp>/smoke-report.md`
 
@@ -224,7 +224,7 @@ AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScr
 
 **命令：** `npm test -- --testPathPattern="__tests__/mocked"`
 
-**狀態：** ✅ 129/129 PASS`
+**狀態：** ✅ 204/204 PASS`
 
 ---
 
@@ -268,7 +268,7 @@ AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScr
 
 **命令：** `npm test -- --testPathPattern="__tests__/regression"`
 
-**狀態：** ✅ 26/26 PASS
+**狀態：** ✅ 50/50 PASS
 
 **回歸測試列表：**
 - RT-004: Phototherapy i18n
@@ -277,7 +277,7 @@ AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScr
 - RT-009: i18n 2026-06-30
 - RT-010: Autonomic resonance i18n
 
-> ⚠️ 測試數量與之前記錄不符（之前說50個），需要核實。
+
 
 ---
 

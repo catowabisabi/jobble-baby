@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-|||||||> 最後更新：2026-07-04 (Cycle 1215)
+|||||||> 最後更新：2026-07-05 (Cycle 1217)
 
 ## 📋 項目概覽
 
@@ -39,24 +39,23 @@ runtime/logs/tests/   # 測試報告輸出
 
 | 層級 | 測試類型 | 工具 | 隔離 DB | 覆蓋範圍 |
 |------|----------|------|---------|----------|
-| A | 煙霧測試 | shell script + tsc | N/A | 7 tests — 7/7 ✅ |
+| A | 煙霧測試 | tsx script | N/A | 7 tests — 7/7 ✅ |
 | B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 227 tests — 227/227 ✅ (21 screens covered; 82 screens still GAP) |
+| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 227 tests + 4 SKIPPED — 21 screens covered; 83 screens still GAP |
 | H | 回歸測試 | Jest | mock | 50 tests — 50/50 ✅ |
-| J | 無障礙測試 | jest-a11y + manual | N/A | BLOCKED ⚠️ (Jest hangs >60s) |
-| F | E2E 流程測試 | Detox | N/A | Template (8 cases) ⚠️ BLOCKED |
+| J | 無障礙測試 | Jest | N/A | 17 tests — 17/17 ✅ (FIXED — previously BLOCKED) |
+| F | E2E 流程測試 | Detox | N/A | 0 tests ❌ GAP |
 | E | Non-Mocked Mode B | Expo + Jest | mock AsyncStorage | 0 tests ❌ GAP |
 | I | 效能測試 | Detox | N/A | 0 tests ❌ GAP |
 
 **不適用於此項目：** C (後端 API 整合測試) — 無後端 · G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 1215 — 336 PASS (7 Smoke + 52 Unit + 227 Mocked + 50 Regression), 0 FAIL, 1 BLOCKED (A11y timeout), 4 SKIPPED (GutResilience modal), 3 CRITICAL GAPS (Mode B 0, E2E 0, Performance 0), 82 screens uncovered (79.6%)**
+**最新測試結果：Cycle 1217 — 353 PASS (7 Smoke + 52 Unit + 227 Mocked + 50 Regression + 17 A11y), 0 FAIL, 4 PENDING (skipped), 32 Jest suites, 83/104 screens uncovered (79.8%)**
 
-> ✅ 注意 (Cycle 1215)：所有 Smoke、Unit、Mocked (227 tests)、Regression 測試均通過。Cycle 1214 的 GutResilienceNavigator 新增測試（23 PASS, 4 SKIPPED）已納入。測試體系保持 336 PASS，0 FAIL。
+> ✅ 注意 (Cycle 1217)：所有 Smoke、Unit、Mocked (227 tests)、Regression (50)、A11y (17 — previously BLOCKED, now FIXED) 測試均通過。共 346 Jest PASS + 7 Smoke PASS = 353 PASS。
+>
+> ⚠️ 注意：4個 GutResilienceNavigatorScreen modal/save 測試處於 PENDING 狀態（`it.skip`）— accessibilityLabel 在 section header button 和 modal button 間衝突。需要修復後移除 `.skip`。
 
-> ⚠️ 注意：4個 GutResilienceNavigator modal/save 測試被跳過（`it.skip`）— accessibilityLabel 在 section header button 和 modal button 間衝突。需要修復後移除 `.skip`。
-
-> ⚠️ 注意 (Cycle 1213)：A11y 測試（`jest --testPathPattern="__tests__/a11y"`）超時 60 秒未完成，Jest 進程掛起。需要修復 `a11y.test.ts` 中的非同步掛起問題。
 
 ---
 

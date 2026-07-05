@@ -1,0 +1,44 @@
+# Task #479 — Final Pre-Submission Verification
+
+## Context
+- REPO: /mnt/c/Users/enoma/Desktop/opencode-work/agent-works/jobble-baby/JobbleBaby
+- App is SUBMISSION-READY with 31+ tabs implemented
+- Keywords: mitochondrial_dynamics, food_texture_learning, feeding_bottle_weakness
+
+## What to do
+
+### 1. Run TSC Check
+```
+npx tsc --noEmit
+```
+Must report 0 errors.
+
+### 2. Run Pre-Submission Audit
+```
+node scripts/pre-submission-audit.js
+```
+Must show 9/9 PASS.
+
+### 3. Write User Onboarding Guide
+Create `docs/USER_ONBOARDING.md`:
+- How to set up baby profile (first launch)
+- How to navigate the 31+ tabs
+- How to interpret growth charts (WHO percentile)
+- How to use the Sleep Training methods
+- How to export Doctor Visit summaries
+- How data is stored (local AsyncStorage, no cloud/account needed)
+- How to contact support
+
+### 4. Commit
+```
+git add -A && git commit -m "docs: add User Onboarding Guide + final verification (#479)"
+git push
+```
+
+### 5. Report
+Print:
+- TSC result: X errors
+- Audit result: X/9 PASS
+- Onboarding guide: created (Y lines)
+
+ULW

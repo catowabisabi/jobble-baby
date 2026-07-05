@@ -2388,7 +2388,109 @@
       "refuse": "Refuses"
     },
     "saveFeeding": "Save Feeding Log",
-    "saveMedication": "Save Medication Log"
+    "saveMedication": "Save Medication Log",
+    "painTracker": {
+      "title": "Pain Response Tracker",
+      "procedureTypes": {
+        "vaccination": "Vaccination",
+        "blood_draw": "Blood Draw",
+        "lumbar_puncture": "Lumbar Puncture",
+        "catheter": "Catheter",
+        "eye_exam": "Eye Exam"
+      },
+      "painScale": "Pain Scale",
+      "preProcedure": "Pre-Procedure",
+      "post15min": "15 min post",
+      "post1hr": "1 hr post",
+      "post4hr": "4 hr post",
+      "post24hr": "24 hr post",
+      "painTrigger": "Pain Trigger",
+      "triggers": {
+        "needle": "Needle",
+        "positioning": "Positioning",
+        "restraint": "Restraint",
+        "fasting": "Fasting",
+        "anesthesia_wearoff": "Anesthesia Wear-off"
+      },
+      "savePain": "Save Pain Log"
+    },
+    "interoceptiveLog": {
+      "title": "Interoceptive State",
+      "hunger": "Hunger",
+      "thirst": "Thirst",
+      "temperature": "Temperature",
+      "bladder": "Bladder",
+      "gut": "Gut",
+      "fatigue": "Fatigue",
+      "sessionNotes": "Session Notes",
+      "notesPlaceholder": "Additional observations...",
+      "saveSession": "Save Session"
+    },
+    "moroReflexLog": {
+      "title": "Moro Reflex Monitor",
+      "intensity": "Intensity (0-4)",
+      "duration": "Duration (seconds)",
+      "recoveryTime": "Recovery Time (seconds)",
+      "integrationStatus": "Integration Status",
+      "statusOptions": {
+        "present": "Present",
+        "diminished": "Diminished",
+        "absent": "Absent",
+        "exaggerated": "Exaggerated"
+      },
+      "saveReflex": "Save Reflex Log"
+    },
+    "analgesiaLog": {
+      "title": "Analgesia Effectiveness",
+      "method": "Method",
+      "methods": {
+        "sucrose": "Sucrose",
+        "breastfeeding": "Breastfeeding",
+        "skin_to_skin": "Skin-to-Skin",
+        "swaddling": "Swaddling",
+        "acetaminophen": "Acetaminophen",
+        "ibuprofen": "Ibuprofen",
+        "holistic": "Holistic",
+        "none": "None"
+      },
+      "prePain": "Pre-Procedure Pain Score",
+      "postPain": "Post-Procedure Pain Score",
+      "onsetTime": "Onset Time (minutes)",
+      "duration": "Duration (hours)",
+      "sideEffects": "Side Effects",
+      "effects": {
+        "none": "None",
+        "drowsiness": "Drowsiness",
+        "vomiting": "Vomiting",
+        "rash": "Rash"
+      },
+      "saveAnalgesia": "Save Analgesia Log"
+    },
+    "comfortTips": {
+      "title": "Comfort Techniques",
+      "fiveS": {
+        "title": "The 5 S's for Procedural Comfort",
+        "swaddle": "Swaddle — snug wrapping provides security",
+        "sideStomach": "Side/Stomach — hold on side or stomach",
+        "shush": "Shush — white noise or shushing sounds",
+        "swing": "Swing — gentle rhythmic motion",
+        "suck": "Suck — pacifier or finger for non-nutritive sucking"
+      },
+      "distraction": {
+        "title": "Distraction by Age",
+        "range03": "0-3 months: Singing, gentle touch, eye contact",
+        "range36": "3-6 months: Rattles, mirrors, bubbles",
+        "range612": "6-12 months: Toy peek-a-boo, favorite toy"
+      },
+      "whenToCall": {
+        "title": "When to Call the Doctor",
+        "fever": "Fever above 38°C",
+        "excessiveCrying": "Excessive crying for more than 3 hours",
+        "notEating": "Refusing to eat for more than 24 hours",
+        "lethargy": "Lethargy or unusual sleepiness"
+      },
+      "cdcSchedule": "CDC Vaccine Schedule: cdc.gov/vaccines/schedules"
+    }
   },
   "iotSecurity": {
     "networkScore": "Network Security Score",

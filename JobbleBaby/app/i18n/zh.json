@@ -2266,7 +2266,109 @@
       "refuse": "拒絕"
     },
     "saveFeeding": "儲存餵奶記錄",
-    "saveMedication": "儲存藥物記錄"
+    "saveMedication": "儲存藥物記錄",
+    "painTracker": {
+      "title": "疼痛反應追蹤",
+      "procedureTypes": {
+        "vaccination": "疫苗注射",
+        "blood_draw": "抽血",
+        "lumbar_puncture": "腰椎穿刺",
+        "catheter": "導尿管",
+        "eye_exam": "眼睛檢查"
+      },
+      "painScale": "疼痛指數",
+      "preProcedure": "手術前",
+      "post15min": "術後15分鐘",
+      "post1hr": "術後1小時",
+      "post4hr": "術後4小時",
+      "post24hr": "術後24小時",
+      "painTrigger": "疼痛觸發因素",
+      "triggers": {
+        "needle": "針頭",
+        "positioning": "姿勢",
+        "restraint": "約束",
+        "fasting": "禁食",
+        "anesthesia_wearoff": "麻醉退去"
+      },
+      "savePain": "儲存疼痛記錄"
+    },
+    "interoceptiveLog": {
+      "title": "內感覺狀態",
+      "hunger": "飢餓",
+      "thirst": "口渴",
+      "temperature": "體溫",
+      "bladder": "膀胱",
+      "gut": "腸道",
+      "fatigue": "疲勞",
+      "sessionNotes": "環節備註",
+      "notesPlaceholder": "其他觀察...",
+      "saveSession": "儲存環節"
+    },
+    "moroReflexLog": {
+      "title": "莫羅反射監測",
+      "intensity": "強度 (0-4)",
+      "duration": "持續時間（秒）",
+      "recoveryTime": "恢復時間（秒）",
+      "integrationStatus": "整合狀態",
+      "statusOptions": {
+        "present": "存在",
+        "diminished": "減弱",
+        "absent": "消失",
+        "exaggerated": "誇張"
+      },
+      "saveReflex": "儲存反射記錄"
+    },
+    "analgesiaLog": {
+      "title": "止痛效果",
+      "method": "方法",
+      "methods": {
+        "sucrose": "蔗糖",
+        "breastfeeding": "母乳餵養",
+        "skin_to_skin": "肌膚接觸",
+        "swaddling": "包巾",
+        "acetaminophen": "acetaminophen",
+        "ibuprofen": "ibuprofen",
+        "holistic": "整體療法",
+        "none": "無"
+      },
+      "prePain": "術前疼痛指數",
+      "postPain": "術後疼痛指數",
+      "onsetTime": "起效時間（分鐘）",
+      "duration": "持續時間（小時）",
+      "sideEffects": "副作用",
+      "effects": {
+        "none": "無",
+        "drowsiness": "嗜睡",
+        "vomiting": "嘔吐",
+        "rash": "皮疹"
+      },
+      "saveAnalgesia": "儲存止痛記錄"
+    },
+    "comfortTips": {
+      "title": "舒緩技巧",
+      "fiveS": {
+        "title": "手術舒緩5S方法",
+        "swaddle": "包巾 — 緊密包裹提供安全感",
+        "sideStomach": "側躺/俯臥 — 側臥或俯臥抱持",
+        "shush": "噓聲 — 白噪音或噓聲",
+        "swing": "搖擺 — 溫和有節奏的動作",
+        "suck": "吸吮 — 安撫奶嘴或手指"
+      },
+      "distraction": {
+        "title": "按年齡分散注意力",
+        "range03": "0-3個月：唱歌、溫柔觸摸、眼神接觸",
+        "range36": "3-6個月：搖鈴、鏡子、泡泡",
+        "range612": "6-12個月：玩具躲貓貓、最喜歡的玩具"
+      },
+      "whenToCall": {
+        "title": "何時致電醫生",
+        "fever": "發燒超過38°C",
+        "excessiveCrying": "哭鬧超過3小時",
+        "notEating": "拒絕進食超過24小時",
+        "lethargy": "嗜睡或異常睏倦"
+      },
+      "cdcSchedule": "CDC疫苗時間表：cdc.gov/vaccines/schedules"
+    }
   },
   "iotSecurity": {
     "networkScore": "網絡安全評分",

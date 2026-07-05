@@ -10,6 +10,10 @@ const STORAGE_KEY_PROCEDURE = '@jobble/procedure_log';
 const STORAGE_KEY_FEEDING = '@jobble/feeding_recovery';
 const STORAGE_KEY_MEDICATION = '@jobble/medication_log';
 const STORAGE_KEY_WOUND = '@jobble/wound_photo';
+const STORAGE_KEY_PAIN = '@jobble/procedure_pain_log';
+const STORAGE_KEY_INTEROCEPTIVE = '@jobble/interoceptive_log';
+const STORAGE_KEY_MORO = '@jobble/moro_reflex_log';
+const STORAGE_KEY_ANALGESIA = '@jobble/analgesia_log';
 
 interface ProcedureEntry {
   id: string; date: string; procedureType: string; clinic: string; surgeon: string;
@@ -23,6 +27,23 @@ interface MedicationEntry {
 }
 interface WoundEntry {
   id: string; date: string; healingStatus: string; notes: string;
+}
+interface PainEntry {
+  id: string; date: string; procedureType: string;
+  painPre: number; pain15min: number; pain1hr: number; pain4hr: number; pain24hr: number;
+  painTrigger: string; notes: string;
+}
+interface InteroceptiveEntry {
+  id: string; date: string; hunger: number; thirst: number; temperature: number;
+  bladder: number; gut: number; fatigue: number; notes: string;
+}
+interface MoroEntry {
+  id: string; date: string; intensity: number; durationSec: number;
+  recoverySec: number; integrationStatus: string;
+}
+interface AnalgesiaEntry {
+  id: string; date: string; method: string; prePain: number; postPain: number;
+  onsetMin: number; durationHrs: number; sideEffects: string;
 }
 
 const PROCEDURE_TYPES = [
@@ -43,6 +64,42 @@ const BOTTLE_OPTIONS = [
   { value: 'accept', labelKey: 'procedureRecovery.bottleOptions.accept' },
   { value: 'partial', labelKey: 'procedureRecovery.bottleOptions.partial' },
   { value: 'refuse', labelKey: 'procedureRecovery.bottleOptions.refuse' },
+];
+const PAIN_PROCEDURE_TYPES = [
+  { value: 'vaccination', labelKey: 'procedureRecovery.painTracker.procedureTypes.vaccination' },
+  { value: 'blood_draw', labelKey: 'procedureRecovery.painTracker.procedureTypes.blood_draw' },
+  { value: 'lumbar_puncture', labelKey: 'procedureRecovery.painTracker.procedureTypes.lumbar_puncture' },
+  { value: 'catheter', labelKey: 'procedureRecovery.painTracker.procedureTypes.catheter' },
+  { value: 'eye_exam', labelKey: 'procedureRecovery.painTracker.procedureTypes.eye_exam' },
+];
+const PAIN_TRIGGERS = [
+  { value: 'needle', labelKey: 'procedureRecovery.painTracker.triggers.needle' },
+  { value: 'positioning', labelKey: 'procedureRecovery.painTracker.triggers.positioning' },
+  { value: 'restraint', labelKey: 'procedureRecovery.painTracker.triggers.restraint' },
+  { value: 'fasting', labelKey: 'procedureRecovery.painTracker.triggers.fasting' },
+  { value: 'anesthesia_wearoff', labelKey: 'procedureRecovery.painTracker.triggers.anesthesia_wearoff' },
+];
+const MORO_STATUS_OPTIONS = [
+  { value: 'present', labelKey: 'procedureRecovery.moroReflexLog.statusOptions.present' },
+  { value: 'diminished', labelKey: 'procedureRecovery.moroReflexLog.statusOptions.diminished' },
+  { value: 'absent', labelKey: 'procedureRecovery.moroReflexLog.statusOptions.absent' },
+  { value: 'exaggerated', labelKey: 'procedureRecovery.moroReflexLog.statusOptions.exaggerated' },
+];
+const ANALGESIA_METHODS = [
+  { value: 'sucrose', labelKey: 'procedureRecovery.analgesiaLog.methods.sucrose' },
+  { value: 'breastfeeding', labelKey: 'procedureRecovery.analgesiaLog.methods.breastfeeding' },
+  { value: 'skin_to_skin', labelKey: 'procedureRecovery.analgesiaLog.methods.skin_to_skin' },
+  { value: 'swaddling', labelKey: 'procedureRecovery.analgesiaLog.methods.swaddling' },
+  { value: 'acetaminophen', labelKey: 'procedureRecovery.analgesiaLog.methods.acetaminophen' },
+  { value: 'ibuprofen', labelKey: 'procedureRecovery.analgesiaLog.methods.ibuprofen' },
+  { value: 'holistic', labelKey: 'procedureRecovery.analgesiaLog.methods.holistic' },
+  { value: 'none', labelKey: 'procedureRecovery.analgesiaLog.methods.none' },
+];
+const SIDE_EFFECTS = [
+  { value: 'none', labelKey: 'procedureRecovery.analgesiaLog.effects.none' },
+  { value: 'drowsiness', labelKey: 'procedureRecovery.analgesiaLog.effects.drowsiness' },
+  { value: 'vomiting', labelKey: 'procedureRecovery.analgesiaLog.effects.vomiting' },
+  { value: 'rash', labelKey: 'procedureRecovery.analgesiaLog.effects.rash' },
 ];
 
 export default function ProcedureRecoveryScreen() {
@@ -66,21 +123,62 @@ export default function ProcedureRecoveryScreen() {
   const [drug, setDrug] = useState('acetaminophen');
   const [doseMg, setDoseMg] = useState('');
   const [weightKg, setWeightKg] = useState('');
+  // Section A: Pain Tracker
+  const [painLog, setPainLog] = useState<PainEntry[]>([]);
+  const [painProcedureType, setPainProcedureType] = useState('vaccination');
+  const [painPre, setPainPre] = useState(0);
+  const [pain15min, setPain15min] = useState(0);
+  const [pain1hr, setPain1hr] = useState(0);
+  const [pain4hr, setPain4hr] = useState(0);
+  const [pain24hr, setPain24hr] = useState(0);
+  const [painTrigger, setPainTrigger] = useState('needle');
+  const [painNotes, setPainNotes] = useState('');
+  // Section B: Interoceptive
+  const [interoLog, setInteroLog] = useState<InteroceptiveEntry[]>([]);
+  const [hunger, setHunger] = useState(0);
+  const [thirst, setThirst] = useState(0);
+  const [tempSig, setTempSig] = useState(0);
+  const [bladder, setBladder] = useState(0);
+  const [gut, setGut] = useState(0);
+  const [fatigue, setFatigue] = useState(0);
+  const [interoNotes, setInteroNotes] = useState('');
+  // Section C: Moro Reflex
+  const [moroLog, setMoroLog] = useState<MoroEntry[]>([]);
+  const [moroIntensity, setMoroIntensity] = useState(0);
+  const [moroDuration, setMoroDuration] = useState('');
+  const [moroRecovery, setMoroRecovery] = useState('');
+  const [moroStatus, setMoroStatus] = useState('present');
+  // Section D: Analgesia
+  const [analgesiaLog, setAnalgesiaLog] = useState<AnalgesiaEntry[]>([]);
+  const [analgesiaMethod, setAnalgesiaMethod] = useState('none');
+  const [analgesiaPrePain, setAnalgesiaPrePain] = useState(0);
+  const [analgesiaPostPain, setAnalgesiaPostPain] = useState(0);
+  const [analgesiaOnset, setAnalgesiaOnset] = useState('');
+  const [analgesiaDuration, setAnalgesiaDuration] = useState('');
+  const [analgesiaSideEffects, setAnalgesiaSideEffects] = useState('none');
 
   useEffect(() => { loadAll(); }, []);
 
   async function loadAll() {
     try {
-      const [proc, feed, med, wound] = await Promise.all([
+      const [proc, feed, med, wound, pain, intero, moro, analgesia] = await Promise.all([
         safeGetItem(STORAGE_KEY_PROCEDURE),
         safeGetItem(STORAGE_KEY_FEEDING),
         safeGetItem(STORAGE_KEY_MEDICATION),
         safeGetItem(STORAGE_KEY_WOUND),
+        safeGetItem(STORAGE_KEY_PAIN),
+        safeGetItem(STORAGE_KEY_INTEROCEPTIVE),
+        safeGetItem(STORAGE_KEY_MORO),
+        safeGetItem(STORAGE_KEY_ANALGESIA),
       ]);
       if (proc) setProcedure(JSON.parse(proc));
       if (feed) setFeedingLog(JSON.parse(feed));
       if (med) setMedicationLog(JSON.parse(med));
       if (wound) setWoundLog(JSON.parse(wound));
+      if (pain) setPainLog(JSON.parse(pain));
+      if (intero) setInteroLog(JSON.parse(intero));
+      if (moro) setMoroLog(JSON.parse(moro));
+      if (analgesia) setAnalgesiaLog(JSON.parse(analgesia));
     } catch (_) { /* silent fail */ }
   }
 
@@ -125,12 +223,71 @@ export default function ProcedureRecoveryScreen() {
     if (highPainDays >= 3) Alert.alert(t('procedureRecovery.callDoctor') || 'Call Doctor', t('procedureRecovery.painAlert') || 'Pain > 3 for 3+ days');
   }
 
+  async function savePain() {
+    const entry: PainEntry = {
+      id: Date.now().toString(), date: new Date().toISOString(), procedureType: painProcedureType,
+      painPre: painPre, pain15min: pain15min, pain1hr: pain1hr, pain4hr: pain4hr, pain24hr: pain24hr,
+      painTrigger, notes: painNotes,
+    };
+    const updated = [entry, ...painLog].slice(0, 100);
+    setPainLog(updated);
+    await safeSetItem(STORAGE_KEY_PAIN, JSON.stringify(updated));
+    setPainNotes('');
+    Alert.alert(t('procedureRecovery.saved') || 'Saved', t('procedureRecovery.painTracker.savePain') || 'Pain log saved');
+  }
+
+  async function saveIntero() {
+    const entry: InteroceptiveEntry = {
+      id: Date.now().toString(), date: new Date().toISOString(),
+      hunger, thirst, temperature: tempSig, bladder, gut, fatigue, notes: interoNotes,
+    };
+    const updated = [entry, ...interoLog].slice(0, 100);
+    setInteroLog(updated);
+    await safeSetItem(STORAGE_KEY_INTEROCEPTIVE, JSON.stringify(updated));
+    setInteroNotes('');
+    Alert.alert(t('procedureRecovery.saved') || 'Saved', t('procedureRecovery.interoceptiveLog.saveSession') || 'Session saved');
+  }
+
+  async function saveMoro() {
+    const entry: MoroEntry = {
+      id: Date.now().toString(), date: new Date().toISOString(),
+      intensity: moroIntensity, durationSec: parseInt(moroDuration) || 0,
+      recoverySec: parseInt(moroRecovery) || 0, integrationStatus: moroStatus,
+    };
+    const updated = [entry, ...moroLog].slice(0, 100);
+    setMoroLog(updated);
+    await safeSetItem(STORAGE_KEY_MORO, JSON.stringify(updated));
+    setMoroDuration('');
+    setMoroRecovery('');
+    Alert.alert(t('procedureRecovery.saved') || 'Saved', t('procedureRecovery.moroReflexLog.saveReflex') || 'Reflex log saved');
+  }
+
+  async function saveAnalgesia() {
+    const entry: AnalgesiaEntry = {
+      id: Date.now().toString(), date: new Date().toISOString(), method: analgesiaMethod,
+      prePain: analgesiaPrePain, postPain: analgesiaPostPain,
+      onsetMin: parseInt(analgesiaOnset) || 0, durationHrs: parseFloat(analgesiaDuration) || 0,
+      sideEffects: analgesiaSideEffects,
+    };
+    const updated = [entry, ...analgesiaLog].slice(0, 100);
+    setAnalgesiaLog(updated);
+    await safeSetItem(STORAGE_KEY_ANALGESIA, JSON.stringify(updated));
+    setAnalgesiaOnset('');
+    setAnalgesiaDuration('');
+    Alert.alert(t('procedureRecovery.saved') || 'Saved', t('procedureRecovery.analgesiaLog.saveAnalgesia') || 'Analgesia log saved');
+  }
+
   const sections = [
     { key: 'procedure', label: t('procedureRecovery.procedureLog') || 'Procedure' },
     { key: 'feeding', label: t('procedureRecovery.feedingRecovery') || 'Feeding' },
     { key: 'medication', label: t('procedureRecovery.medication') || 'Medication' },
     { key: 'wound', label: t('procedureRecovery.wound') || 'Wound' },
     { key: 'timeline', label: t('procedureRecovery.timeline') || 'Timeline' },
+    { key: 'pain', label: t('procedureRecovery.painTracker.title') || 'Pain' },
+    { key: 'interoceptive', label: t('procedureRecovery.interoceptiveLog.title') || 'Interoceptive' },
+    { key: 'reflex', label: t('procedureRecovery.moroReflexLog.title') || 'Reflex' },
+    { key: 'analgesia', label: t('procedureRecovery.analgesiaLog.title') || 'Analgesia' },
+    { key: 'comfort', label: t('procedureRecovery.comfortTips.title') || 'Comfort Tips' },
   ];
 
   return (
@@ -265,6 +422,258 @@ export default function ProcedureRecoveryScreen() {
             <TouchableOpacity style={[styles.alertButton, { backgroundColor: '#EF4444' }]} onPress={checkDoctorAlerts} accessibilityLabel={t('procedureRecovery.checkAlerts') || 'Check doctor alerts'} accessibilityRole="button">
               <Text style={styles.alertButtonText}>{t('procedureRecovery.checkAlerts') || 'Check Doctor Alerts'}</Text>
             </TouchableOpacity>
+          </View>
+        )}
+
+        {activeSection === 'pain' && (
+          <View style={[styles.card, { backgroundColor: C.card }]}>
+            <Text style={[styles.cardTitle, { color: C.text }]}>{t('procedureRecovery.painTracker.title') || 'Pain Response Tracker'}</Text>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painTracker.procedureTypes.vaccination') || 'Procedure Type'}</Text>
+            <View style={styles.optionRow}>
+              {PAIN_PROCEDURE_TYPES.map(pt => (
+                <TouchableOpacity key={pt.value} style={[styles.optionChip, painProcedureType === pt.value && { backgroundColor: C.accent }]} onPress={() => setPainProcedureType(pt.value)} accessibilityLabel={t(pt.labelKey)} accessibilityRole="button">
+                  <Text style={[styles.optionChipText, { color: painProcedureType === pt.value ? '#fff' : C.text }]}>{t(pt.labelKey)}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painTracker.painScale') || 'Pain Scale (0-10)'}</Text>
+            <View style={styles.ratingRow}>
+              {['😄','😐','😟','😣','😖','😰'].map((emoji, i) => (
+                <TouchableOpacity key={i} onPress={() => { const val = i * 2; setPainPre(val); setPain15min(val); setPain1hr(val); setPain4hr(val); setPain24hr(val); }} accessibilityLabel={`Pain ${i*2}`} accessibilityRole="button">
+                  <Text style={styles.ratingStar}>{emoji}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painTracker.preProcedure') || 'Pre-Procedure'}: {painPre}</Text>
+            <View style={styles.ratingRow}>
+              {[0,2,4,6,8,10].map(n => (
+                <TouchableOpacity key={n} onPress={() => setPainPre(n)} accessibilityLabel={`Pre pain ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= painPre ? '#EF4444' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painTracker.post15min') || '15 min post'}: {pain15min}</Text>
+            <View style={styles.ratingRow}>
+              {[0,2,4,6,8,10].map(n => (
+                <TouchableOpacity key={n} onPress={() => setPain15min(n)} accessibilityLabel={`15min pain ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= pain15min ? '#EF4444' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painTracker.post1hr') || '1 hr post'}: {pain1hr}</Text>
+            <View style={styles.ratingRow}>
+              {[0,2,4,6,8,10].map(n => (
+                <TouchableOpacity key={n} onPress={() => setPain1hr(n)} accessibilityLabel={`1hr pain ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= pain1hr ? '#EF4444' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painTracker.post4hr') || '4 hr post'}: {pain4hr}</Text>
+            <View style={styles.ratingRow}>
+              {[0,2,4,6,8,10].map(n => (
+                <TouchableOpacity key={n} onPress={() => setPain4hr(n)} accessibilityLabel={`4hr pain ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= pain4hr ? '#EF4444' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painTracker.post24hr') || '24 hr post'}: {pain24hr}</Text>
+            <View style={styles.ratingRow}>
+              {[0,2,4,6,8,10].map(n => (
+                <TouchableOpacity key={n} onPress={() => setPain24hr(n)} accessibilityLabel={`24hr pain ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= pain24hr ? '#EF4444' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.painTracker.painTrigger') || 'Pain Trigger'}</Text>
+            <View style={styles.optionRow}>
+              {PAIN_TRIGGERS.map(pt => (
+                <TouchableOpacity key={pt.value} style={[styles.optionChip, painTrigger === pt.value && { backgroundColor: C.accent }]} onPress={() => setPainTrigger(pt.value)} accessibilityLabel={t(pt.labelKey)} accessibilityRole="button">
+                  <Text style={[styles.optionChipText, { color: painTrigger === pt.value ? '#fff' : C.text }]}>{t(pt.labelKey)}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={painNotes} onChangeText={setPainNotes} placeholder={t('procedureRecovery.notesPlaceholder') || 'Notes'} multiline />
+            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={savePain} accessibilityLabel={t('procedureRecovery.painTracker.savePain') || 'Save pain log'} accessibilityRole="button">
+              <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {activeSection === 'interoceptive' && (
+          <View style={[styles.card, { backgroundColor: C.card }]}>
+            <Text style={[styles.cardTitle, { color: C.text }]}>{t('procedureRecovery.interoceptiveLog.title') || 'Interoceptive State'}</Text>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.interoceptiveLog.hunger') || 'Hunger'}: {hunger}</Text>
+            <View style={styles.ratingRow}>
+              {[0,1,2,3,4,5].map(n => (
+                <TouchableOpacity key={n} onPress={() => setHunger(n)} accessibilityLabel={`Hunger ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= hunger ? '#F59E0B' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.interoceptiveLog.thirst') || 'Thirst'}: {thirst}</Text>
+            <View style={styles.ratingRow}>
+              {[0,1,2,3,4,5].map(n => (
+                <TouchableOpacity key={n} onPress={() => setThirst(n)} accessibilityLabel={`Thirst ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= thirst ? '#F59E0B' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.interoceptiveLog.temperature') || 'Temperature'}: {tempSig}</Text>
+            <View style={styles.ratingRow}>
+              {[0,1,2,3,4,5].map(n => (
+                <TouchableOpacity key={n} onPress={() => setTempSig(n)} accessibilityLabel={`Temperature ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= tempSig ? '#F59E0B' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.interoceptiveLog.bladder') || 'Bladder'}: {bladder}</Text>
+            <View style={styles.ratingRow}>
+              {[0,1,2,3,4,5].map(n => (
+                <TouchableOpacity key={n} onPress={() => setBladder(n)} accessibilityLabel={`Bladder ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= bladder ? '#F59E0B' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.interoceptiveLog.gut') || 'Gut'}: {gut}</Text>
+            <View style={styles.ratingRow}>
+              {[0,1,2,3,4,5].map(n => (
+                <TouchableOpacity key={n} onPress={() => setGut(n)} accessibilityLabel={`Gut ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= gut ? '#F59E0B' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.interoceptiveLog.fatigue') || 'Fatigue'}: {fatigue}</Text>
+            <View style={styles.ratingRow}>
+              {[0,1,2,3,4,5].map(n => (
+                <TouchableOpacity key={n} onPress={() => setFatigue(n)} accessibilityLabel={`Fatigue ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= fatigue ? '#F59E0B' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={interoNotes} onChangeText={setInteroNotes} placeholder={t('procedureRecovery.interoceptiveLog.notesPlaceholder') || 'Notes'} multiline />
+            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveIntero} accessibilityLabel={t('procedureRecovery.interoceptiveLog.saveSession') || 'Save session'} accessibilityRole="button">
+              <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {activeSection === 'reflex' && (
+          <View style={[styles.card, { backgroundColor: C.card }]}>
+            <Text style={[styles.cardTitle, { color: C.text }]}>{t('procedureRecovery.moroReflexLog.title') || 'Moro Reflex Monitor'}</Text>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.moroReflexLog.intensity') || 'Intensity (0-4)'}: {moroIntensity}</Text>
+            <View style={styles.ratingRow}>
+              {[0,1,2,3,4].map(n => (
+                <TouchableOpacity key={n} onPress={() => setMoroIntensity(n)} accessibilityLabel={`Intensity ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= moroIntensity ? '#8B5CF6' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.moroReflexLog.duration') || 'Duration (seconds)'}</Text>
+            <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={moroDuration} onChangeText={setMoroDuration} keyboardType="numeric" placeholder="0" />
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.moroReflexLog.recoveryTime') || 'Recovery Time (seconds)'}</Text>
+            <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={moroRecovery} onChangeText={setMoroRecovery} keyboardType="numeric" placeholder="0" />
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.moroReflexLog.integrationStatus') || 'Integration Status'}</Text>
+            <View style={styles.optionRow}>
+              {MORO_STATUS_OPTIONS.map(ms => (
+                <TouchableOpacity key={ms.value} style={[styles.optionChip, moroStatus === ms.value && { backgroundColor: C.accent }]} onPress={() => setMoroStatus(ms.value)} accessibilityLabel={t(ms.labelKey)} accessibilityRole="button">
+                  <Text style={[styles.optionChipText, { color: moroStatus === ms.value ? '#fff' : C.text }]}>{t(ms.labelKey)}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveMoro} accessibilityLabel={t('procedureRecovery.moroReflexLog.saveReflex') || 'Save reflex log'} accessibilityRole="button">
+              <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {activeSection === 'analgesia' && (
+          <View style={[styles.card, { backgroundColor: C.card }]}>
+            <Text style={[styles.cardTitle, { color: C.text }]}>{t('procedureRecovery.analgesiaLog.title') || 'Analgesia Effectiveness'}</Text>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.analgesiaLog.method') || 'Method'}</Text>
+            <View style={styles.optionRow}>
+              {ANALGESIA_METHODS.map(am => (
+                <TouchableOpacity key={am.value} style={[styles.optionChip, analgesiaMethod === am.value && { backgroundColor: C.accent }]} onPress={() => setAnalgesiaMethod(am.value)} accessibilityLabel={t(am.labelKey)} accessibilityRole="button">
+                  <Text style={[styles.optionChipText, { color: analgesiaMethod === am.value ? '#fff' : C.text }]}>{t(am.labelKey)}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.analgesiaLog.prePain') || 'Pre-Procedure Pain Score'}: {analgesiaPrePain}</Text>
+            <View style={styles.ratingRow}>
+              {[0,2,4,6,8,10].map(n => (
+                <TouchableOpacity key={n} onPress={() => setAnalgesiaPrePain(n)} accessibilityLabel={`Pre pain ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= analgesiaPrePain ? '#EF4444' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.analgesiaLog.postPain') || 'Post-Procedure Pain Score'}: {analgesiaPostPain}</Text>
+            <View style={styles.ratingRow}>
+              {[0,2,4,6,8,10].map(n => (
+                <TouchableOpacity key={n} onPress={() => setAnalgesiaPostPain(n)} accessibilityLabel={`Post pain ${n}`} accessibilityRole="button">
+                  <Text style={[styles.ratingStar, { color: n <= analgesiaPostPain ? '#EF4444' : '#D1D5DB' }]}>{n}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.analgesiaLog.onsetTime') || 'Onset Time (minutes)'}</Text>
+            <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={analgesiaOnset} onChangeText={setAnalgesiaOnset} keyboardType="numeric" placeholder="0" />
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.analgesiaLog.duration') || 'Duration (hours)'}</Text>
+            <TextInput style={[styles.input, { backgroundColor: C.background, color: C.text }]} value={analgesiaDuration} onChangeText={setAnalgesiaDuration} keyboardType="numeric" placeholder="0" />
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.analgesiaLog.sideEffects') || 'Side Effects'}</Text>
+            <View style={styles.optionRow}>
+              {SIDE_EFFECTS.map(se => (
+                <TouchableOpacity key={se.value} style={[styles.optionChip, analgesiaSideEffects === se.value && { backgroundColor: C.accent }]} onPress={() => setAnalgesiaSideEffects(se.value)} accessibilityLabel={t(se.labelKey)} accessibilityRole="button">
+                  <Text style={[styles.optionChipText, { color: analgesiaSideEffects === se.value ? '#fff' : C.text }]}>{t(se.labelKey)}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <TouchableOpacity style={[styles.saveButton, { backgroundColor: C.accent }]} onPress={saveAnalgesia} accessibilityLabel={t('procedureRecovery.analgesiaLog.saveAnalgesia') || 'Save analgesia log'} accessibilityRole="button">
+              <Text style={styles.saveButtonText}>{t('common.save') || 'Save'}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {activeSection === 'comfort' && (
+          <View style={[styles.card, { backgroundColor: C.card }]}>
+            <Text style={[styles.cardTitle, { color: C.text }]}>{t('procedureRecovery.comfortTips.title') || 'Comfort Techniques'}</Text>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.comfortTips.fiveS.title') || "The 5 S's for Procedural Comfort"}</Text>
+            <View style={[styles.timelineStep, { borderLeftColor: C.accent }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>Swaddle: {t('procedureRecovery.comfortTips.fiveS.swaddle') || 'Snug wrapping provides security'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: C.accent }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>Side/Stomach: {t('procedureRecovery.comfortTips.fiveS.sideStomach') || 'Hold on side or stomach'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: C.accent }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>Shush: {t('procedureRecovery.comfortTips.fiveS.shush') || 'White noise or shushing sounds'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: C.accent }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>Swing: {t('procedureRecovery.comfortTips.fiveS.swing') || 'Gentle rhythmic motion'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: C.accent }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>Suck: {t('procedureRecovery.comfortTips.fiveS.suck') || 'Pacifier or finger for non-nutritive sucking'}</Text>
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.comfortTips.distraction.title') || 'Distraction by Age'}</Text>
+            <View style={[styles.timelineStep, { borderLeftColor: C.accent }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>{t('procedureRecovery.comfortTips.distraction.range03') || '0-3 months: Singing, gentle touch, eye contact'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: C.accent }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>{t('procedureRecovery.comfortTips.distraction.range36') || '3-6 months: Rattles, mirrors, bubbles'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: C.accent }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>{t('procedureRecovery.comfortTips.distraction.range612') || '6-12 months: Toy peek-a-boo, favorite toy'}</Text>
+            </View>
+            <Text style={[styles.fieldLabel, { color: C.text }]}>{t('procedureRecovery.comfortTips.whenToCall.title') || 'When to Call the Doctor'}</Text>
+            <View style={[styles.timelineStep, { borderLeftColor: '#EF4444' }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>{t('procedureRecovery.comfortTips.whenToCall.fever') || 'Fever above 38°C'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: '#EF4444' }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>{t('procedureRecovery.comfortTips.whenToCall.excessiveCrying') || 'Excessive crying for more than 3 hours'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: '#EF4444' }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>{t('procedureRecovery.comfortTips.whenToCall.notEating') || 'Refusing to eat for more than 24 hours'}</Text>
+            </View>
+            <View style={[styles.timelineStep, { borderLeftColor: '#EF4444' }]}>
+              <Text style={[styles.timelineText, { color: C.text }]}>{t('procedureRecovery.comfortTips.whenToCall.lethargy') || 'Lethargy or unusual sleepiness'}</Text>
+            </View>
+            <Text style={[styles.note, { color: C.muted }]}>{t('procedureRecovery.comfortTips.cdcSchedule') || 'CDC Vaccine Schedule: cdc.gov/vaccines/schedules'}</Text>
           </View>
         )}
       </ScrollView>

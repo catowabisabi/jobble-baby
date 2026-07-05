@@ -1,49 +1,70 @@
-Task #475 — Add Sentry crash reporting + GitHub Actions CI/CD pipeline
+Task #476 — Pain & Procedure Comfort Navigator
 
 ## Context
-Jobble Baby is an Expo (React Native) app in /JobbleBaby/. All 9 pre-submission audit checks PASS. TSC 0 errors. 89 features implemented. You are adding DevOps infrastructure — crash reporting and CI pipeline — before App Store submission.
+Jobble Baby is an Expo (React Native) app in /JobbleBaby/. TSC 0 errors. You are enhancing the existing procedure-recovery.tsx tab with new medical procedure pain tracking capabilities.
+
+## Existing Code
+- /JobbleBaby/app/(tabs)/procedure-recovery.tsx — exists, 306 lines, covers: procedure log, feeding recovery, medication, wound healing, timeline
+- /JobbleBaby/app/i18n/en.json + zh.json — i18n keys exist under procedureRecovery.*
+- /JobbleBaby/store/storage-keys.ts — 60+ storage keys already defined
 
 ## Your Task
-Implement BOTH of the following in the JobbleBaby/ project root:
+Enhance procedure-recovery.tsx with the following NEW sections/features:
 
-### A. Sentry Crash Reporting
-1. Install: npm install --save-dev @sentry/react-native (in JobbleBaby/)
-2. Create docs/SENTRY_SETUP.md with:
-   - Instructions for user to create Sentry account at sentry.io
-   - Steps to create a new React Native project in Sentry dashboard
-   - How to get the DSN
-   - How to set SENTRY_DSN in app.json or .env (as EXPO_PUBLIC_SENTRY_DSN)
-   - How to test crash reporting (throw test error, verify in Sentry dashboard)
-3. Modify app.json: add "expo": { "plugins": [["@sentry/react-native", {"EXPO_PUBLIC_SENTRY_DSN": "YOUR_DSN_HERE"}]] } or similar placeholder
-4. Add sentry init to app/_layout.tsx or a dedicated sentry.ts file:
-   ```
-   import * as Sentry from '@sentry/react-native';
-   Sentry.init({ dsn: process.env.EXPO_PUBLIC_SENTRY_DSN });
-   ```
-5. Ensure TSC passes after changes
+### A. Procedure Pain Response Tracker (NEW subsection)
+Add to the procedure log a section that tracks pain BEFORE, DURING, and AFTER medical procedures:
+1. Procedure types to ADD: vaccination, blood_draw, lumbar_puncture, catheter, eye_exam
+2. Pain scale input: 0-10 visual analog scale with emoji indicators (😄😐😟😣😖😰)
+3. Track pain at: pre-procedure, 15min post, 1hr post, 4hr post, 24hr post
+4. Pain trigger dropdown: needle, positioning, restraint, fasting, anesthesia_wearoff
+5. Store in new storage key: @jobble/procedure_pain_log (array of pain entries)
 
-### B. GitHub Actions CI/CD
-1. Create .github/workflows/ci.yml:
-   - trigger: [push, pull_request]
-   - runs-on: ubuntu-latest
-   - steps: actions/checkout@v4, actions/setup-node@v4 (node 18), npm ci, npx tsc --noEmit, npm run lint (if exists)
-2. Create docs/CI_CD_SETUP.md with:
-   - How to enable GitHub Actions (just push .github/ directory)
-   - How to add EAS credentials as GitHub Secrets for automated builds
-   - How to set up Telegram notifications on build failure (bot token + chat ID)
-   - EAS build workflow file (.github/workflows/eas-build.yml) as a template
-3. Add to package.json: a "lint" script if missing (can be echo 'no lint')
+### B. Interoceptive State Overlay (NEW subsection)
+Add an interoceptive awareness tracker:
+1. Body awareness selector: "How baby seems to feel": internal_signals_0-5 (0=unaware, 5=highly attuned)
+2. Internal signal tags (multi-select): hunger_sensation, thirst_sensation, temperature, bladder_fullness, gut_sensation, fatigue_level
+3. Session note: free text for parent to describe baby's internal state
+4. Store in: @jobble/interoceptive_log
+
+### C. Reflex Response Monitor (NEW subsection)
+Specifically track Moro reflex during/after procedures:
+1. Moro reflex intensity: 0-4 scale (0=none, 4=exaggerated/startle)
+2. Duration in seconds (timer input)
+3. Recovery time: how long to calm after startle (seconds)
+4. Integration status: present, diminished, absent, exaggerated
+5. Store in: @jobble/moro_reflex_log
+
+### D. Analgesia Effectiveness Log (NEW subsection)
+Track pain relief effectiveness:
+1. Method: sucrose, breastfeeding, skin_to_skin, swaddling, acetaminophen, ibuprofen, holistic, none
+2. Pre/post pain score (before and after intervention)
+3. Onset time: how many minutes until effect felt
+4. Duration: how many hours relief lasted
+5. Side effects: none, drowsiness, vomiting, rash
+6. Store in: @jobble/analgesia_log
+
+### E. Parental Comfort Technique Library (static reference)
+Add a static reference section (read-only tips):
+1. 5S's for procedural comfort: Swaddle, Side/Stomach position, Shush, Swing, Suck
+2. Distraction techniques by age group (0-3mo, 3-6mo, 6-12mo)
+3. When to call doctor after procedure
+4. Vaccine schedule reference (CDC recommended 0-12mo)
+5. This section needs NO storage — just display static content from i18n
 
 ## Keywords
-sentry, github_actions, ci_cd
+lumbar_puncture_baby, interoceptive_overlay, moro_reflex_duration
 
 ## Quality Gates
 - npx tsc --noEmit → 0 errors
-- All new files must have proper structure
-- docs/*.md must be complete and actionable
+- All new storage keys must be added to store/storage-keys.ts
+- All new UI strings must be added to en.json + zh.json under new keys (e.g., painNavigator.*)
+- New it.skip test for PainNavigatorScreen in __tests__/mocked/
 
-## TSC Fix Rule
-If you get TSC errors from @sentry/react-native types, add to tsconfig.json:
-  "skipLibCheck": true
+## Implementation Notes
+- Use the same pattern as existing procedure-recovery.tsx: useState, useEffect, safeGetItem/safeSetItem
+- Match the existing visual style (color scheme, card layout, section tabs)
+- Add new section tabs: "Pain", "Interoceptive", "Reflex", "Analgesia", "Comfort Tips" alongside existing 5 sections
+- i18n keys must be in BOTH en.json AND zh.json — do not leave any key English-only
+- The pain score should use emoji scale: 😄(0) 😐(2) 😟(4) 😣(6) 😖(8) 😰(10)
 
 ULW

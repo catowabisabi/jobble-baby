@@ -1,7 +1,5 @@
-🍼 Jobble Baby · 18:00
-✅ Done: #596 Gut Resilience Index Navigator (2f8bcb3)
-✅ Done: #413 Social-Emotional Sentinel (already done)
-🔧 Dispatched: —
+🍼 Jobble Baby · 20:00
 📋 TODO: 0 pending · 0 new
-📦 Commit: 8503276 → pushed ✅
-📝 代碼 scope 完成，Sisyphus 待機。用戶仍需處理：EAS credentials、App Store Connect、Play Console 帳戶建立、隱私政策 URL 部署。
+✅ Status: SUBMISSION-READY
+🔒 Blockers: 4 user-action items (EAS creds, App Store, Play Console, privacy URL)
+📦 Commit: 785b625 → pushed

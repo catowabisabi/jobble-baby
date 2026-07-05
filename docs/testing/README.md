@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-||||||||> 最後更新：2026-07-05 (Cycle 1218) — Smoke + Jest Verified
+||||||||> 最後更新：2026-07-05 (Cycle 1222) — Smoke + Jest Verified
 
 ## 📋 項目概覽
 
@@ -50,9 +50,9 @@ runtime/logs/tests/   # 測試報告輸出
 
 **不適用於此項目：** C (後端 API 整合測試) — 無後端 · G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 1217 — 353 PASS (7 Smoke + 52 Unit + 227 Mocked + 50 Regression + 17 A11y), 0 FAIL, 4 PENDING (skipped), 32 Jest suites, 83/104 screens uncovered (79.8%)**
+**最新測試結果：Cycle 1222 — 353 PASS (7 Smoke + 52 Unit + 227 Mocked + 50 Regression + 17 A11y), 0 FAIL, 4 PENDING (skipped), 32 Jest suites, 83/104 screens uncovered (79.8%)**
 
-> ✅ 注意 (Cycle 1217)：所有 Smoke、Unit、Mocked (227 tests)、Regression (50)、A11y (17 — previously BLOCKED, now FIXED) 測試均通過。共 346 Jest PASS + 7 Smoke PASS = 353 PASS。
+> ✅ 注意 (Cycle 1222)：所有 Smoke、Unit、Mocked (227 tests)、Regression (50)、A11y (17 — previously BLOCKED, now FIXED) 測試均通過。共 346 Jest PASS + 7 Smoke PASS = 353 PASS。
 >
 > ⚠️ 注意：4個 GutResilienceNavigatorScreen modal/save 測試處於 PENDING 狀態（`it.skip`）— accessibilityLabel 在 section header button 和 modal button 間衝突。需要修復後移除 `.skip`。
 

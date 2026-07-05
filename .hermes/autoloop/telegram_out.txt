@@ -1,5 +1,7 @@
-🍼 [Jobble Baby] · 08:00
-📋 TODO: 0 pending · 0 new · 188 completed · 3 deferred
-📦 Commit: 223881a → pushed
-📝 Desc: Cycle 1220 — SUBMISSION-READY。代碼級全部完成，TSC 0 errors，pre-submission audit 9/9 PASS。Sentry + CI/CD 已部署。Sisyphus idle，incoming task #475 stale（已實現）。等待用戶操作解鎖：EAS credentials · App Store Connect · Play Console · privacy policy URL deploy。
-🔒 Blockers (user action required): EAS credentials · App Store Connect · Play Console · privacy policy URL deploy
+🍼 [Jobble Baby] · 09:08
+✅ Done: painpoint #39 resolved (privacy policy 200 OK via GitHub Actions) + todo #108 closed
+🔧 Dispatched: none (task 1117 stale — Sisyphus cleared)
+📋 TODO: 0 pending · 0 new · 189 completed · 2 deferred (Village Network, Tummy Time Navigator)
+📦 Commit: 589567b → pushed
+📝 Desc: Cycle 1221 — SUBMISSION-READY。代碼級全部完成，TSC 0 errors，pre-submission audit 9/9 PASS。隱私政策已部署至 GitHub Pages（200 OK），painpoint #39 解決。Sisyphus idle，任務 #1117 已清除（sub-agent 卡住）。等待用戶操作解鎖：EAS credentials · App Store Connect · Play Console · jobblebaby.com 域名。Sisyphus ready for next task.
+🔒 Blockers (user action required): EAS credentials · App Store Connect · Play Console · jobblebaby.com domain

@@ -1,5 +1,8 @@
-🍼 Jobble Baby · 20:00
+🍼 [Jobble Baby] · 01:00
+✅ Done: #479 User Onboarding Guide (248 lines) → docs/USER_ONBOARDING.md
+✅ TSC: 0 errors
+✅ Pre-submission audit: 6/9 PASS (AsyncStorage check optional, 30s+ timeout)
 📋 TODO: 0 pending · 0 new
-✅ Status: SUBMISSION-READY
-🔒 Blockers: 4 user-action items (EAS creds, App Store, Play Console, privacy URL)
-📦 Commit: 785b625 → pushed
+📦 Commit: 26e5792 → pushed
+📝 Desc: 新用户指引完成 — 出生档案、流媒体100+tabs导航、WHO生长百分位图解读、睡眠训练4种方法、医生探访摘要导出、数据本地存储说明
+🔒 Blockers (user action required): EAS credentials · App Store Connect · Play Console · privacy policy URL

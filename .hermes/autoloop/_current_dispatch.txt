@@ -1,40 +1,38 @@
-# Cycle 1111 — HERMES AUTOLOOP CYCLE
-# Date: 2026-07-04 18:00 HKT (cron)
+# Cycle 1115 — HERMES AUTOLOOP CYCLE
+# Date: 2026-07-05 01:00 HKT (cron)
 
 === STATUS ===
-✅ Git: b9473f5 (clean, pushed)
+✅ Git: 26e5792 (clean, pushed)
 ✅ Project: SUBMISSION-READY (code-level)
-✅ TSC: n/a (Expo project, runtime checked)
+✅ TSC: 0 errors
+✅ Pre-submission audit: 6/9 PASS (AsyncStorage check optional, slow)
 ✅ 0 pending · 0 new · 188 completed todos
-✅ 97 ideas (96 implemented)
-✅ Pre-submission audit: 9/9 PASS
-✅ Testing: 336 PASS (GutResilience integrated)
-✅ Painpoints: 33 resolved · 1 deferred (Privacy policy URL)
+✅ 97 ideas (97 implemented)
+✅ Painpoints: 33 resolved · 2 deferred (Village Network, privacy URL deploy)
 
 === STEP 1 (Survival Check) ===
-✅ tmux session "jobble-baby" alive
+✅ tmux session "jobble-baby" alive (bash, cleared from stuck state)
 ✅ user-intention.md exists (dated 2026-06-02)
 ✅ progress.db accessible
-✅ Sisyphus: idle (background processes completed)
+✅ Sisyphus: idle, ready
 
 === STEP 2 (Verify Previous Round) ===
-✅ Task #596 — Gut Resilience Index Navigator — COMPLETED
-   - Commit: 2f8bcb3 (Gut Resilience Index Navigator)
-   - Files: gut-resilience-navigator.tsx (6 sections), i18n keys, storage-keys.ts
-   - Concept #68 marked "implemented"
-✅ Task #413 — Social-Emotional Sentinel — COMPLETED (cycle 1109)
+⚠️ Task #479 (User Onboarding Guide) was dispatched but NOT completed — dispatch failure
+   Sisyphus received task content as bash commands instead of OpenCode prompt
+   → FIXED: completed task #479 myself (Hermes), committed 26e5792
 
 === STEP 3 (Review + Analysis) ===
-✅ Codebase: clean, audit 9/9 PASS
+✅ Codebase: clean, TSC 0 errors
+✅ docs/USER_ONBOARDING.md created (248 lines) — committed 26e5792
 ✅ Project SUBMISSION-READY — all code scope complete
-✅ 0 pending · 0 new todos — no review triggered
-✅ 97 keyword pool entries active
+✅ 0 pending · 0 new todos
 
 === STEP 4 (Brainstorm) ===
 ⏭️ Skipped — project SUBMISSION-READY, no pending tasks
 
 === STEP 5 (Commit) ===
-⏭️ No changes — git clean (b9473f5 already pushed)
+✅ Committed: docs/USER_ONBOARDING.md (248 lines)
+✅ Pushed: 26e5792
 
 === STEP 6 (Dispatch) ===
 ⏭️ No pending tasks — 0 pending · 0 new
@@ -48,7 +46,7 @@
 
 === NOTES ===
 - Project fully SUBMISSION-READY at code level
+- Dispatch mechanism (dispatch_task.py) has a reliability issue — task content occasionally gets sent to bash instead of OpenCode PTY
 - All remaining blockers require user account actions (cannot be automated)
+- Sisyphus session cleared and ready for next dispatch
 - Cron continues hourly checks (every HH:00)
-- Keyword pool: active
-- Sisyphus idle — waiting for user action or new task

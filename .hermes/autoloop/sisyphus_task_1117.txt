@@ -1,0 +1,30 @@
+TASK: Implement Tummy Time Quality Navigator tab.
+
+FILE: JobbleBaby/app/(tabs)/tummy-time-quality.tsx
+
+KEYWORDS: tummy_time_duration_logging, primitive_reflex_integration_timeline, developmental_coordination_disorder_early_signs
+
+FEATURES:
+1. Tummy Time Quality Logger — log duration (min), head lift quality (symmetric/asymmetric/favoring right/favoring left), arm position, leg kick quality. Generate a quality score 0-100.
+2. Primitive Reflex Integration Timeline — track ATNR, Moro, Landau, TLR with expected integration age windows. Alert if reflex persists beyond expected age.
+3. Motor Readiness Milestone Overlay — cross-reference tummy time quality with motor milestones: push-up (2-3mo), chest lift (3-4mo), extended arm push-up (4-6mo).
+4. Symmetry Assessment — photo guide for prone symmetry checklist, longitudinal trend view.
+5. DCD Early Risk Screen — 6-question screener adapted from DCDQ-R for infants 4-18mo. Flag if 3+ risk factors present.
+6. Achievement Streaks — daily streak counter, achievement badges.
+7. Physiotherapy Referral Prompt — trigger when quality score <40 sustained 4+ weeks, persistent asymmetry, reflex persistence beyond age.
+
+DATA MODEL:
+- @jobble/tummy_time_quality_log: {date, duration_min, headLiftQuality, armPosition, legKickQuality, qualityScore, notes}
+- @jobble/primitive_reflex_tracker: {date, reflex, status, notes} — reflex: ATNR|Moro|Landau|TLR; status: present_strong|present_weak|integrating|integrated
+- @jobble/motor_readiness_checklist: {date, checklistItems}
+
+REQUIREMENTS:
+- Follow existing tab patterns (e.g., reflex-visual-motor.tsx, developmental-radar.tsx)
+- Register tab in JobbleBaby/app/(tabs)/_layout.tsx
+- Add i18n keys tummyTimeQuality.* to JobbleBaby/app/i18n/en.json and zh.json
+- Add storage keys to JobbleBaby/store/storage-keys.ts
+- TSC 0 errors: npx tsc --noEmit (run from JobbleBaby/)
+- Pre-submission audit PASS: node scripts/pre-submission-audit.js (run from JobbleBaby/)
+- Demo mode: generate realistic mock data for all charts
+
+Output: new file tummy-time-quality.tsx registered and working. ULW

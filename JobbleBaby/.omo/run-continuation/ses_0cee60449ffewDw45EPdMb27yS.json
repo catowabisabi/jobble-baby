@@ -1,0 +1,11 @@
+{
+  "sessionID": "ses_0cee60449ffewDw45EPdMb27yS",
+  "updatedAt": "2026-07-05T07:07:41.786Z",
+  "sources": {
+    "background-task": {
+      "state": "active",
+      "reason": "background completion wake pending",
+      "updatedAt": "2026-07-05T07:07:41.786Z"
+    }
+  }
+}

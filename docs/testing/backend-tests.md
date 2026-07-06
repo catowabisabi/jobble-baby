@@ -23,7 +23,7 @@ npm run test:unit
 
 | 測試案例 | 期望 |
 |---------|------|
-| 總 key 數量 | ≥ 180 |
+| 總 key 數量 | ≥ 220 |
 | 所有 key 前綴 | `@jobble/` |
 | 無重複 value | true |
 | 核心 keys 存在 | BABY_BIRTHDATE, ALLERGEN_LOG, GROWTH_ENTRIES 等 |

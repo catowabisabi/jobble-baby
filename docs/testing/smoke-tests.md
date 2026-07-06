@@ -26,7 +26,7 @@ npx ts-node --project tsconfig.test.json __tests__/smoke/smoke-tests.ts
 
 ### 3. Storage Keys 數量
 - 期望：60+ keys
-- 實際：約 190 keys
+- 實際：約 221 keys
 
 ### 4. i18n 文件
 - `app/i18n/en.json` 存在

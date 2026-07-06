@@ -1,6 +1,6 @@
 # Jobble Baby 測試體系
 
-||||||||> 最後更新：2026-07-05 (Cycle 1223) — All 336 Tests PASS + 4 PENDING
+|> 最後更新：2026-07-06 (Cycle 1229) — 386 Tests PASS + 4 SKIPPED
 
 ## 📋 項目概覽
 
@@ -9,7 +9,7 @@
 | 框架 | Expo SDK 56 / React Native 0.85.3 |
 | 語言 | TypeScript 5.3 (strict) |
 | 導航 | Expo Router (file-based) |
-| 數據層 | React Context + AsyncStorage (60+ keys) |
+| 數據層 | React Context + AsyncStorage (221 keys) |
 | 圖表 | React Native SVG |
 | i18n | react-i18next (en.json + zh.json) |
 | 構建 | EAS Build + Expo prebuild |
@@ -26,8 +26,9 @@ JobbleBaby/__tests__/
 ├── smoke/           # A. 煙霧測試 — 基本啟動確認
 ├── unit/            # B. 單元測試 — 純邏輯函數
 ├── mocked/          # D. 前端 Mocked 測試 — mocked AsyncStorage
-├── e2e/             # F. E2E 用戶流程測試 (Detox)
-└── a11y/            # J. 無障礙/UX 測試
+├── regression/      # H. 回歸測試 — 曾經的 bug 變成永久測試
+├── a11y/            # J. 無障礙/UX 測試
+└── e2e/             # F. E2E 用戶流程測試 (Detox) — 已配置但無測試
 
 docs/testing/        # 測試文檔
 runtime/logs/tests/   # 測試報告輸出
@@ -37,139 +38,58 @@ runtime/logs/tests/   # 測試報告輸出
 
 ## 📊 測試矩陣
 
-| 層級 | 測試類型 | 工具 | 隔離 DB | 覆蓋範圍 |
-|------|----------|------|---------|----------|
-| A | 煙霧測試 | tsx script | N/A | 7 tests — 7/7 ✅ |
-| B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ |
-| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 227 tests + 4 SKIPPED — 21 screens covered; 83 screens still GAP |
-| H | 回歸測試 | Jest | mock | 50 tests — 50/50 ✅ |
-| J | 無障礙測試 | Jest | N/A | 17 tests — 17/17 ✅ (FIXED — previously BLOCKED) |
-| F | E2E 流程測試 | Detox | N/A | 0 tests ❌ GAP |
-| E | Non-Mocked Mode B | Expo + Jest | mock AsyncStorage | 0 tests ❌ GAP |
-| I | 效能測試 | Detox | N/A | 0 tests ❌ GAP |
+| 層級 | 測試類型 | 工具 | 隔離 DB | 覆蓋範圍 | 狀態 |
+|------|----------|------|---------|----------|------|
+| A | 煙霧測試 | tsx script | N/A | 7 tests — 7/7 ✅ | 2026-07-06 |
+| B | 單元測試 | Jest | mock | 52 tests — 52/52 ✅ | 5 suites |
+| D | Mocked 組件測試 | Jest + RTL | mock AsyncStorage | 260 tests + 4 SKIPPED — 22 screens | ✅ | 22 suites |
+| H | 回歸測試 | Jest | mock | 50 tests — 50/50 ✅ | 5 suites |
+| J | 無障礙/UX 測試 | Jest | N/A | 17 tests — 17/17 ✅ | 1 suite |
+| E | Non-Mocked Mode B | Expo + Jest | mock AsyncStorage | 0 tests ❌ | GAP |
+| F | E2E 流程測試 | Detox | N/A | 0 tests ❌ | GAP |
+| I | 效能測試 | Detox | N/A | 0 tests ❌ | GAP |
 
 **不適用於此項目：** C (後端 API 整合測試) — 無後端 · G (外部 API 測試) — 無外部 API
 
-**最新測試結果：Cycle 1223 — 336 PASS (7 Smoke + 52 Unit + 227 Mocked + 50 Regression + 17 A11y), 0 FAIL, 4 PENDING (skipped), 31 Jest suites, 83/104 screens uncovered (79.8%)**
+**最新測試結果：Cycle 1229 — 386 PASS + 4 SKIPPED, 0 FAIL, 34 Jest suites**
 
-> ✅ 注意 (Cycle 1223)：所有 Smoke、Unit、Mocked (227 tests)、Regression (50)、A11y (17) 測試均通過。336 Jest PASS + 7 Smoke PASS = 343 active tests. 4 GutResilienceNavigatorScreen modal/save 測試處於 PENDING 狀態（`it.skip`）— accessibilityLabel 在 section header button 和 modal button 間衝突。
+---
 
+## 📱 Screen 覆蓋率
+
+**總 Screen 數：107 個**
+- Tab Screens: 104 個 (app/(tabs)/)
+- Modal Screens: 3 個 (app/screens/: DaycareViewScreen, FeedingTimerScreen, OnboardingScreen)
+
+**已覆蓋：22 個 (20.6%)**
+- AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScreen
+- CryAcousticFingerprint, EmergencySOSScreen, FeedingReadinessNavigator, GrowthScreen
+- GutResilienceNavigatorScreen, HomeScreen, LipSealNavigatorScreen, MilestonesScreen
+- MilkThermalSafetyChecker, MilkTransferScreen, OralMotorScreen, PolyvagalDashboardScreen
+- ProcedureRecoveryScreen, ProfileScreen, SleepTrainingScreen, SocialEmotionalSentinelScreen
+- TeethingScreen, VelocityDecileTrackerScreen
+
+**未覆蓋：85 個 (79.4%)** — 見下方清單
 
 ---
 
 ## 🚀 快速開始
 
-### 1. 安裝測試依賴
+### 1. 運行所有測試
 
 ```bash
 cd JobbleBaby
-npm install --save-dev jest @testing-library/react-native @testing-library/jest-native jest-expo @types/jest detox
-npx expo install jest
-```
-
-### 2. 運行所有測試
-
-```bash
-cd JobbleBaby
-npm test                    # 單元 + mocked 測試
 npm run test:smoke          # 煙霧測試
-npm run test:e2e            # E2E 測試 (需 iOS/Android 模擬器)
-npm run test:a11y           # 無障礙測試
-npm run test:all            # 全部測試
+npm run test:unit            # 單元測試
+npm run test:mocked          # Mocked 組件測試
+npm run test:a11y            # 無障礙測試
+npm run test:all             # 全部測試 (smoke + unit + a11y)
 ```
 
-### 3. 生成測試報告
+### 2. 生成測試報告
 
 ```bash
 npm run test:report         # 生成 report.md 到 runtime/logs/tests/
-```
-
----
-
-## 📁 關鍵文件
-
-| 文件 | 描述 |
-|------|------|
-| `store/storage-keys.ts` | 60+ AsyncStorage key 定義 |
-| `app/utils/SafeStorage.ts` | AsyncStorage 封裝 |
-| `app/_layout.tsx` | 根佈局，決定首次啟動流程 |
-| `app/(tabs)/index.tsx` | HomeScreen 主儀表板 |
-| `app/screens/OnboardingScreen.tsx` | 首次啟動引導 |
-| `app/i18n/en.json` + `zh.json` | 國際化字符串 |
-| `.env.example` | 環境變量示例 |
-
----
-
-## 🗄️ 測試數據庫策略
-
-### 環境隔離
-
-此項目使用 AsyncStorage 作為數據存儲，測試時必須隔離：
-
-```typescript
-// 测试配置 (jest/setup.ts)
-jest.mock('@react-native-async-storage/async-storage', () =>
-  require('@react-native-async-storage/async-storage/jest/async-storage-mock')
-);
-```
-
-### Mock AsyncStorage 工廠
-
-每個測試套件使用獨立的 mock storage：
-
-```typescript
-import { mockAsyncStorage } from '../__tests__/helpers/mockAsyncStorage';
-
-beforeEach(() => {
-  mockAsyncStorage.clear();
-});
-```
-
-### 測試隔離原則
-
-- ✅ 每個測試文件獨立 mock storage
-- ✅ 測試後自動清理
-- ✅ 失敗時保留 snapshot 在 `runtime/logs/tests/<timestamp>/`
-- ❌ 不可使用真實設備的 AsyncStorage
-- ❌ 不可依賴模糊的默認值
-
----
-
-## 🔧 測試配置
-
-### Jest 配置 (jest.config.js)
-
-```javascript
-module.exports = {
-  preset: 'jest-expo',
-  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts'],
-  transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
-  ],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  collectCoverageFrom: [
-    'app/**/*.{ts,tsx}',
-    '!app/**/*.d.ts',
-  ],
-};
-```
-
-### Detox 配置 (.detoxrc.js)
-
-```javascript
-module.exports = {
-  testRunner: 'jest',
-  runnerConfig: '__tests__/e2e/jest.config.js',
-  artifacts: false,
-  apps: {
-    ios: { type: 'ios.app', binaryPath: '...' },
-    android: { type: 'android.apk', binaryPath: '...' },
-  },
-  devices: {
-    simulator: { type: 'ios.simulator', bootTimeout: 60000 },
-    emulator: { type: 'android.emulator', headless: true },
-  },
-};
 ```
 
 ---
@@ -182,18 +102,16 @@ module.exports = {
 
 **要測：**
 - [x] TypeScript 編譯無錯誤
-- [x] app.json 配置完整
-- [x] 所有 218 Storage Keys 存在
-- [x] i18n 兩種語言文件存在
+- [x] app.json 配置完整 (name, bundleId, package)
+- [x] 所有 221 Storage Keys 存在
+- [x] i18n 兩種語言文件存在 (en.json, zh.json)
 - [x] 主要入口文件存在
 - [x] package.json 有效性
 - [x] .env.example 存在
 
 **命令：** `npm run test:smoke`
 
-**狀態：** ✅ 7/7 PASS (2026-07-04T14-32-20-003Z)
-
-**輸出：** `runtime/logs/tests/<timestamp>/smoke-report.md`
+**狀態：** ✅ 7/7 PASS (2026-07-06T00:32:11)
 
 ---
 
@@ -202,15 +120,15 @@ module.exports = {
 **目的：** 測試純邏輯函數，不依賴 UI 或 AsyncStorage
 
 **要測：**
-- [x] `SafeStorage.ts` 的 safeGetItem/safeSetItem/safeRemoveItem 邏輯 (11 tests)
-- [x] Storage key 完整性驗證 (7 tests)
-- [x] i18n key 完整性 (8 tests)
-- [x] Data export/import 邏輯 (21 tests)
-- [x] Theme 顏色配置 (5 tests)
+- [x] `SafeStorage.ts` 的 safeGetItem/safeSetItem/safeRemoveItem 邏輯
+- [x] Storage key 完整性驗證
+- [x] i18n key 完整性
+- [x] Data export/import 邏輯
+- [x] Theme 顏色配置
 
-**命令：** `npm test -- --testPathPattern="__tests__/unit"`
+**命令：** `npm run test:unit`
 
-**狀態：** ✅ 52/52 PASS`
+**狀態：** ✅ 52/52 PASS (5 suites)
 
 ---
 
@@ -218,33 +136,35 @@ module.exports = {
 
 **目的：** 使用 mocked AsyncStorage 測試 React 組件狀態
 
-**已測試 Screen（21個）：**
-AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScreen, CryAcousticFingerprint, EmergencySOSScreen, FeedingReadinessNavigator, GrowthScreen, GutResilienceNavigatorScreen, HomeScreen, LipSealNavigatorScreen, MilestonesScreen, MilkThermalSafetyChecker, MilkTransferScreen, OralMotorScreen, PolyvagalDashboardScreen, ProfileScreen, SleepTrainingScreen, SocialEmotionalSentinelScreen, TeethingScreen, VelocityDecileTrackerScreen
+**已測試 Screen（22個）：**
+AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScreen, CryAcousticFingerprint, EmergencySOSScreen, FeedingReadinessNavigator, GrowthScreen, GutResilienceNavigatorScreen, HomeScreen, LipSealNavigatorScreen, MilestonesScreen, MilkThermalSafetyChecker, MilkTransferScreen, OralMotorScreen, PolyvagalDashboardScreen, ProcedureRecoveryScreen, ProfileScreen, SleepTrainingScreen, SocialEmotionalSentinelScreen, TeethingScreen, VelocityDecileTrackerScreen
 
-**命令：** `npm test -- --testPathPattern="__tests__/mocked"`
+**命令：** `npm run test:mocked`
 
-**狀態：** ✅ 227/227 PASS + 4 SKIPPED (GutResilienceNavigator modal/save — accessibilityLabel conflict)
+**狀態：** ✅ 260 PASS + 4 SKIPPED (22 suites)
 
 ---
 
-### E. 前端 Non-Mocked 測試 (Mode B)
+### E. 前端 Non-Mocked 測試 (Mode B) — GAP
 
 **目的：** 使用 Expo 測試運行器 + mocked AsyncStorage，測試前後端整條鏈
 
-**要測：**
-- [ ] 真實 Navigation 流程
-- [ ] Screen 之間數據傳遞
-- [ ] Deep link 處理
+**狀態：** ❌ 0 tests — GAP
 
-**命令：** `npx expo test`
+**需建立：**
+- [ ] 真實 Navigation 流程測試
+- [ ] Screen 之間數據傳遞測試
+- [ ] Deep link 處理測試
 
 ---
 
-### F. E2E 用戶流程測試 (User Workflow E2E)
+### F. E2E 用戶流程測試 (User Workflow E2E) — GAP
 
 **目的：** 用真實用戶角度走完整流程
 
-**核心流程：**
+**狀態：** ❌ 0 tests — GAP (Detox 已配置但無測試文件)
+
+**需建立核心流程：**
 1. 首次開啟 App → Onboarding 流程
 2. 完成 Onboarding → 進入 Home
 3. 添加 Baby Profile
@@ -255,9 +175,13 @@ AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScr
 8. 進入 Profile 編輯設置
 9. 刷新後數據仍在
 
-**命令：** `npm run test:e2e`
-
 **環境要求：** iOS Simulator 或 Android Emulator
+
+---
+
+### G. 外部 API / Provider / Agent 測試 — N/A
+
+**原因：** 此項目為純客戶端，無外部 API 依賴
 
 ---
 
@@ -267,22 +191,17 @@ AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScr
 
 **命令：** `npm test -- --testPathPattern="__tests__/regression"`
 
-**狀態：** ✅ 50/50 PASS
-
-**回歸測試列表：**
-- RT-004: Phototherapy i18n
-- RT-005: Quick entry FAB onPress
-- RT-006: Room scores no persist
-- RT-009: i18n 2026-06-30
-- RT-010: Autonomic resonance i18n
-
-
+**狀態：** ✅ 50/50 PASS (5 suites)
 
 ---
 
-### I. 效能/穩定性測試 (Performance Tests)
+### I. 效能/穩定性測試 (Performance Tests) — GAP
 
-**要測：**
+**目的：** 找出卡死、request storm、過慢、memory leak
+
+**狀態：** ❌ 0 tests — GAP
+
+**需建立：**
 - [ ] 初始載入 request count (應為 0，純本地)
 - [ ] 大量數據寫入後 render performance
 - [ ] 快速切換 Tab 的響應
@@ -306,15 +225,62 @@ AutonomicResonanceScreen, BottleFeedingScreen, BottleRefusalScreen, CircadianScr
 - [x] Loading indicator 明確
 - [x] 重要操作有確認
 
-**工具：** `@testing-library/jest-native` + manual audit
+**命令：** `npm run test:a11y`
 
-**狀態：** ✅ 17/17 PASS (Cycle 1223 — previously BLOCKED, now resolved)
+**狀態：** ✅ 17/17 PASS (1 suite)
+
+---
+
+## 📁 關鍵文件
+
+| 文件 | 描述 |
+|------|------|
+| `store/storage-keys.ts` | 221 AsyncStorage key 定義 |
+| `app/utils/SafeStorage.ts` | AsyncStorage 封裝 |
+| `app/_layout.tsx` | 根佈局，決定首次啟動流程 |
+| `app/(tabs)/index.tsx` | HomeScreen 主儀表板 |
+| `app/screens/OnboardingScreen.tsx` | 首次啟動引導 |
+| `app/i18n/en.json` + `zh.json` | 國際化字符串 |
+| `jest.config.js` | Jest 配置 |
+| `.detoxrc.js` | Detox E2E 配置 |
+
+---
+
+## ❌ 未覆蓋 Screen 清單 (85個)
+
+### Tab Screens (82個未覆蓋)
+
+**護理類 (11):**
+allergens, appstore-checklist, caregiver-fatigue, clinician-portal, colic-relief, lactation, milk-prep, products, shift-handoff, stress-cascade, village-network
+
+**發育類 (21):**
+asymmetric-growth, behavioral-rehearsal, bilateral-coordination, bonding-journal, coregulation-resonance, critical-periods, development-radar, eight-month-storm, feeding-progression, feeding-readiness, fontanelle-hydration, fontanelle, galant-latch-navigator, gear-check, gesture-milestone, gut-brain-axis, habit-reset, hip-click, home-safety, indoor-air-navigator, interoceptive
+
+**生長類 (4):**
+growth-montage, jaundice-threshold, jaundice, phototherapy-comfort
+
+**反射類 (12):**
+cortisol-skin-navigator, landau-reflex, moro-reflex, pincer-grasp, reflex-integration, reflex-tracker, reflex-visual-motor, regulatory-fitness, rsa-thoracic-navigator, sensory-integration, suckle-to-chew-bridge, vestibular-assessment
+
+**睡眠類 (8):**
+jet-lag, monitor-correlation, sleep-architecture, sleep-association, sleep-debt, solid-food, thermal-metabolic, thermal-regulation
+
+**口腔/餵養類 (4):**
+cup-feeding, cry-analyzer, gravity-feeding, tongue-tie
+
+**安全類 (5):**
+constellation, iot-security, pre-submission-qa, safety-audit, stranger-danger
+
+**其他 (6):**
+autonomic-readiness, launch-checklist, medicine-dose, neuroplasticity, pediatric-report, projection, protoconversation, regression-navigator, schedule, tracking, tummy-time, vestibular-motor, weaning-rash, window-of-tolerance
+
+### Modal Screens (3個未覆蓋)
+
+DaycareViewScreen, FeedingTimerScreen, OnboardingScreen
 
 ---
 
 ## 🔍 故障分類
-
-所有 failure 要分類：
 
 | 類別 | 描述 |
 |------|------|

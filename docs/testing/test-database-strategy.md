@@ -6,7 +6,7 @@
 
 Jobble Baby 是一款純客戶端移動應用，**無後端服務器**。所有數據存儲在設備本地：
 
-- **主要存儲：** AsyncStorage (60+ keys)
+- **主要存儲：** AsyncStorage (221 keys)
 - **安全存儲：** expo-secure-store (敏感信息)
 - **文件系統：** expo-file-system (照片等)
 
